@@ -1,247 +1,354 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="utf-8">
-    <title>DIGIY BOUTIQUE — Vitrine Pro (12 500 F / mois)</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="description" content="Ouvre ta boutique en ligne DIGIY — vitrine professionnelle avec catalogue, WhatsApp direct et 0% commission.">
+  <meta charset="utf-8">
+  <title>DIGIY POS — Vitrine des Boutiques</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="DIGIY POS CLIENT — Vitrines de boutiques locales • Présentation • Photos • Contact WhatsApp.">
 
-    <style>
-        :root{
-            --bg:#020617;
-            --bg2:#0a0f1f;
-            --card:#0f172a;
-            --gold:#facc15;
-            --gold-soft:#fcd34d;
-            --orange:#f97316;
-            --green:#22c55e;
-            --ink:#f8fafc;
-            --muted:#cbd5e1;
-        }
+  <style>
+    :root{
+      --bg:#020617;
+      --card:#030712;
+      --accent:#facc15;
+      --accent2:#22c55e;
+      --ink:#f9fafb;
+      --muted:#cbd5e1;
+    }
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;
+    }
+    body{
+      background:#020617;
+      color:var(--ink);
+      padding:12px;
+      display:flex;
+      justify-content:center;
+    }
+    .app{
+      width:100%;
+      max-width:1100px;
+      min-height:100vh;
+    }
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:18px;
+      gap:10px;
+    }
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .brand-logo{
+      width:50px;
+      height:50px;
+      border-radius:16px;
+      background:radial-gradient(circle at 30% 0%,#facc15,#f97316);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:24px;
+      box-shadow:0 10px 24px rgba(250,204,21,0.55);
+    }
+    .brand-title{
+      font-size:24px;
+      font-weight:900;
+      color:var(--accent);
+      text-transform:uppercase;
+      letter-spacing:0.08em;
+    }
+    .brand-sub{
+      font-size:15px;
+      color:var(--muted);
+      font-weight:600;
+    }
+    .back-link{
+      font-size:13px;
+      color:var(--muted);
+      text-decoration:none;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.5);
+      background:rgba(15,23,42,0.9);
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
 
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
-        }
+    .grid{
+      margin-top:10px;
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+    }
+    @media(max-width:900px){
+      .grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+    }
+    @media(max-width:640px){
+      .grid{
+        grid-template-columns:1fr;
+      }
+    }
 
-        body{
-            background:#020617;
-            color:var(--ink);
-            padding:14px;
-            display:flex;
-            justify-content:center;
-        }
-
-        .app{
-            width:100%;
-            max-width:1100px;
-            background:linear-gradient(135deg, #020617, #0a0f1f 60%, #020617);
-            border:1px solid rgba(250, 204, 21, 0.2);
-            border-radius:24px;
-            padding:20px;
-            position:relative;
-            overflow:hidden;
-            box-shadow:0 20px 45px rgba(0,0,0,0.5);
-        }
-
-        .app::before{
-            content:"";
-            position:absolute;
-            inset:-40%;
-            background:
-                radial-gradient(circle at 0% 0%,rgba(250,204,21,0.12),transparent 60%),
-                radial-gradient(circle at 100% 100%,rgba(249,115,22,0.14),transparent 50%);
-            opacity:0.7;
-            pointer-events:none;
-        }
-
-        header{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            margin-bottom:20px;
-        }
-
-        .brand{
-            display:flex;
-            align-items:center;
-            gap:12px;
-        }
-
-        .logo{
-            width:48px;
-            height:48px;
-            border-radius:14px;
-            background:radial-gradient(circle at 30% 0%, var(--gold), var(--orange));
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            font-size:26px;
-            box-shadow:0 12px 30px rgba(250,204,21,0.4);
-        }
-
-        .title{
-            font-size:22px;
-            font-weight:900;
-            letter-spacing:0.06em;
-            color:var(--gold);
-            text-transform:uppercase;
-        }
-
-        .subtitle{
-            font-size:14px;
-            color:var(--muted);
-            margin-top:-1px;
-        }
-
-        .back{
-            text-decoration:none;
-            padding:10px 16px;
-            background:rgba(10,15,31,0.9);
-            border:1px solid rgba(250,204,21,0.4);
-            border-radius:999px;
-            color:var(--gold);
-            font-weight:700;
-            font-size:13px;
-        }
-
-        .hero{
-            background:radial-gradient(circle at top left, rgba(250,204,21,0.18), rgba(10,15,31,0.95));
-            border:1px solid rgba(250,204,21,0.4);
-            border-radius:20px;
-            padding:18px;
-            box-shadow:0 12px 30px rgba(0,0,0,0.55);
-            margin-bottom:20px;
-        }
-
-        .hero h1{
-            font-size:26px;
-            font-weight:900;
-            color:var(--gold);
-        }
-
-        .hero p{
-            margin-top:8px;
-            line-height:1.6;
-            font-size:15px;
-            color:var(--ink);
-        }
-
-        .pricing-card{
-            background:var(--card);
-            border-radius:20px;
-            border:1px solid rgba(250,204,21,0.4);
-            padding:18px;
-            margin-bottom:22px;
-        }
-
-        .pricing-title{
-            font-size:20px;
-            font-weight:800;
-            color:var(--gold);
-        }
-
-        .price{
-            font-size:28px;
-            margin-top:6px;
-            color:var(--green);
-            font-weight:900;
-        }
-
-        .price span{
-            font-size:14px;
-            color:var(--muted);
-        }
-
-        .line{
-            margin-top:8px;
-            display:flex;
-            gap:6px;
-            font-size:14px;
-            color:var(--ink);
-        }
-
-        .line::before{
-            content:"•";
-            color:var(--orange);
-        }
-
-        .cta{
-            margin-top:14px;
-            display:flex;
-            gap:10px;
-            flex-wrap:wrap;
-        }
-
-        .btn{
-            padding:10px 16px;
-            border-radius:999px;
-            text-decoration:none;
-            font-weight:800;
-            font-size:14px;
-            flex-grow:1;
-            text-align:center;
-        }
-
-        .btn-main{
-            background:linear-gradient(135deg, var(--gold), var(--orange));
-            color:#111;
-            box-shadow:0 8px 20px rgba(250,204,21,0.45);
-        }
-
-        .btn-alt{
-            background:rgba(10,15,31,0.9);
-            color:var(--gold);
-            border:1px solid rgba(250,204,21,0.6);
-        }
-
-    </style>
+    .card{
+      background:var(--card);
+      border-radius:22px;
+      border:1px solid rgba(148,163,184,0.35);
+      padding:14px;
+      box-shadow:0 14px 32px rgba(0,0,0,0.55);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      overflow:hidden;
+    }
+    .photo{
+      width:100%;
+      height:220px;
+      border-radius:16px;
+      overflow:hidden;
+      border:2px solid var(--accent2);
+    }
+    .photo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .name{
+      font-size:22px;
+      font-weight:900;
+      color:var(--accent);
+    }
+    .type{
+      font-size:15px;
+      font-weight:700;
+      color:var(--accent2);
+    }
+    .desc{
+      font-size:16px;
+      line-height:1.5;
+      color:var(--ink);
+    }
+    .city{
+      font-size:14px;
+      color:var(--muted);
+      font-weight:600;
+    }
+    .actions{
+      display:flex;
+      gap:10px;
+      margin-top:8px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      flex:1;
+      padding:11px 16px;
+      border-radius:999px;
+      border:none;
+      font-size:15px;
+      font-weight:900;
+      cursor:pointer;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-decoration:none;
+      text-align:center;
+      white-space:nowrap;
+    }
+    .btn-view{
+      background:linear-gradient(135deg,#facc15,#f97316);
+      color:#111827;
+      box-shadow:0 7px 18px rgba(250,204,21,0.55);
+    }
+    .btn-wa{
+      background:rgba(34,197,94,0.2);
+      border:1px solid var(--accent2);
+      color:#bbf7d0;
+    }
+    footer{
+      margin-top:22px;
+      font-size:12px;
+      color:var(--muted);
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:6px;
+    }
+    footer span{
+      color:var(--accent);
+      font-weight:800;
+    }
+  </style>
 </head>
 <body>
-
 <div class="app">
 
-    <header>
-        <div class="brand">
-            <div class="logo">🛒</div>
-            <div>
-                <div class="title">DIGIY BOUTIQUE</div>
-                <div class="subtitle">Vitrine Professionnelle</div>
-            </div>
-        </div>
-        <a href="index.html" class="back">← Retour DIGIY HUB</a>
-    </header>
+  <header>
+    <div class="brand">
+      <div class="brand-logo">🏪</div>
+      <div>
+        <div class="brand-title">DIGIY POS</div>
+        <div class="brand-sub">Vitrine des Boutiques Partenaires</div>
+      </div>
+    </div>
 
-    <section class="hero">
-        <h1>Ouvre ta Boutique en Ligne DIGIY</h1>
-        <p>
-            Transforme ton activité : une vitrine digitale simple, rapide, puissante.
-            Catalogue, photos, WhatsApp direct, paiement au vendeur — tout en
-            <strong>0% commission</strong>.  
-            Accessible partout, visible en 1 clic.
-        </p>
-    </section>
+    <a href="index.html" class="back-link">
+      <span>←</span> DIGIY HUB
+    </a>
+  </header>
 
-    <section class="pricing-card">
-        <div class="pricing-title">Pack Boutique en Ligne</div>
-        <div class="price">12 500 F CFA <span>/ mois</span></div>
+  <section class="grid">
 
-        <div class="line">Boutique en ligne complète (vitrine + catalogue produits)</div>
-        <div class="line">Lien personnalisé partageable (bio WhatsApp, réseaux, QR code)</div>
-        <div class="line">WhatsApp direct sur chaque produit</div>
-        <div class="line">Album photo + description détaillée</div>
-        <div class="line">Connexion possible à DIGIY BONNE AFFAIRE</div>
-        <div class="line">Support DIGIY pour t’aider à démarrer</div>
+    <!-- 1) CASA LUXE -->
+    <div class="card">
+      <div class="photo">
+        <img src="https://images.unsplash.com/photo-1615874959474-d609352df32c?auto=format&fit=crop&w=800&q=80" alt="Salon moderne et déco intérieure">
+      </div>
+      <div class="name">Casa Luxe</div>
+      <div class="type">Meubles & Déco</div>
+      <div class="city">Saly • Dakar</div>
+      <div class="desc">
+        Canapés, tables, luminaires, déco intérieure moderne pour salon, chambre et terrasse.
+        Livraison rapide sur la Petite Côte et Dakar.
+      </div>
+      <div class="actions">
+        <a class="btn btn-view" href="boutique-casa-luxe.html">Voir la boutique</a>
+        <button class="btn btn-wa"
+                onclick="wa('+221771111111','Bonjour Casa Luxe, je suis intéressé par vos meubles (DIGIY POS).');">
+          WhatsApp
+        </button>
+      </div>
+    </div>
 
-        <div class="cta">
-            <a href="#" class="btn btn-main">Ouvrir ma Boutique à 12 500 F</a>
-            <a href="#" class="btn btn-alt">Parler avec DIGIY</a>
-        </div>
-    </section>
+    <!-- 2) KAWTAL FASHION -->
+    <div class="card">
+      <div class="photo">
+        <img src="https://images.unsplash.com/photo-1556906781-9a412961c28c?auto=format&fit=crop&w=800&q=80" alt="Mode femme africaine moderne">
+      </div>
+      <div class="name">Kawtal Fashion</div>
+      <div class="type">Mode Femme</div>
+      <div class="city">Dakar</div>
+      <div class="desc">
+        Robes, ensembles, tenues africaines revisitées, couture sur mesure.
+        Nouveaux modèles chaque semaine.
+      </div>
+      <div class="actions">
+        <a class="btn btn-view" href="boutique-kawtal-fashion.html">Voir la boutique</a>
+        <button class="btn btn-wa"
+                onclick="wa('+221772222222','Bonjour Kawtal Fashion, je veux des infos sur vos tenues (DIGIY POS).');">
+          WhatsApp
+        </button>
+      </div>
+    </div>
+
+    <!-- 3) GOUY GUI MARKET -->
+    <div class="card">
+      <div class="photo">
+        <img src="https://images.unsplash.com/photo-1542838132-92a5d855d10d?auto=format&fit=crop&w=800&q=80" alt="Marché de fruits et légumes frais">
+      </div>
+      <div class="name">Gouy Gui Market</div>
+      <div class="type">Fruits & Légumes</div>
+      <div class="city">Mbour • Petite Côte</div>
+      <div class="desc">
+        Paniers de fruits et légumes frais, jus naturels, produits de saison.
+        Livraison quotidienne à domicile.
+      </div>
+      <div class="actions">
+        <a class="btn btn-view" href="boutique-gouy-gui-market.html">Voir la boutique</a>
+        <button class="btn btn-wa"
+                onclick="wa('+221773333333','Bonjour Gouy Gui Market, je souhaite commander un panier (DIGIY POS).');">
+          WhatsApp
+        </button>
+      </div>
+    </div>
+
+    <!-- 4) SÉNÉ TECH PRO -->
+    <div class="card">
+      <div class="photo">
+        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80" alt="Téléphones et matériel informatique">
+      </div>
+      <div class="name">Séné Tech Pro</div>
+      <div class="type">Informatique & Téléphones</div>
+      <div class="city">Dakar</div>
+      <div class="desc">
+        Smartphones, accessoires, ordinateurs, écrans, matériel pro.
+        Produits garantis, service après-vente sérieux.
+      </div>
+      <div class="actions">
+        <a class="btn btn-view" href="boutique-sene-tech-pro.html">Voir la boutique</a>
+        <button class="btn btn-wa"
+                onclick="wa('+221774444444','Bonjour Séné Tech Pro, je cherche du matériel informatique (DIGIY POS).');">
+          WhatsApp
+        </button>
+      </div>
+    </div>
+
+    <!-- 5) WAX EMPIRE -->
+    <div class="card">
+      <div class="photo">
+        <img src="https://images.unsplash.com/photo-1524845332060-d21fde4da904?auto=format&fit=crop&w=800&q=80" alt="Tissus wax colorés">
+      </div>
+      <div class="name">Wax Empire</div>
+      <div class="type">Tissus & Couture</div>
+      <div class="city">Saly • Dakar</div>
+      <div class="desc">
+        Wax premium, bazin riche, broderies, tenues traditionnelles.
+        Packs mariage, cérémonies, évènements.
+      </div>
+      <div class="actions">
+        <a class="btn btn-view" href="boutique-wax-empire.html">Voir la boutique</a>
+        <button class="btn btn-wa"
+                onclick="wa('+221775555555','Bonjour Wax Empire, je veux des infos sur vos tissus (DIGIY POS).');">
+          WhatsApp
+        </button>
+      </div>
+    </div>
+
+    <!-- 6) YOFF BEAUTÉ -->
+    <div class="card">
+      <div class="photo">
+        <img src="https://images.unsplash.com/photo-1600185365483-26d7a4c12c80?auto=format&fit=crop&w=800&q=80" alt="Produits cosmétiques et soins">
+      </div>
+      <div class="name">Yoff Beauté</div>
+      <div class="type">Cosmétiques & Bien-être</div>
+      <div class="city">Yoff • Dakar</div>
+      <div class="desc">
+        Soins visage et cheveux, huiles naturelles, parfums, produits pour peaux noires & métissées.
+      </div>
+      <div class="actions">
+        <a class="btn btn-view" href="boutique-yoff-beaute.html">Voir la boutique</a>
+        <button class="btn btn-wa"
+                onclick="wa('+221776666666','Bonjour Yoff Beauté, je veux des infos sur vos produits (DIGIY POS).');">
+          WhatsApp
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    <div>DIGIY POS • <span>Super App DIGIYLYFE</span> — Sénégal → Afrique</div>
+    <div>0% commission • Contact direct WhatsApp avec chaque boutique.</div>
+  </footer>
 
 </div>
+
+<script>
+function wa(phone, msg){
+  const clean = phone.replace(/\s+/g,"").replace("+","");
+  const txt = encodeURIComponent(msg || "");
+  const url = "https://wa.me/" + clean + (txt ? ("?text="+txt) : "");
+  window.open(url, "_blank");
+}
+</script>
 
 </body>
 </html>
