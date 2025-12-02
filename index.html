@@ -1,569 +1,247 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <title>DIGIY MARKET — DIGIY Bonnes Affaires</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="DIGIY Bonnes Affaires — Annonces locales sans intermédiaire, 0% commission, visibilité renforcée pour particuliers et pros.">
+    <meta charset="utf-8">
+    <title>DIGIY BOUTIQUE — Vitrine Pro (12 500 F / mois)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Ouvre ta boutique en ligne DIGIY — vitrine professionnelle avec catalogue, WhatsApp direct et 0% commission.">
 
-  <style>
-    :root{
-      --bg:#020617;
-      --bg-soft:#020818;
-      --card:#030712;
-      --accent:#facc15;
-      --accent-soft:#f97316;
-      --accent-green:#22c55e;
-      --ink:#f9fafb;
-      --muted:#9ca3af;
-      --line:#1f2937;
-      --shadow-soft:0 22px 45px rgba(15,23,42,0.95);
-      --radius-xl:24px;
-      --radius-lg:18px;
-      --radius-md:12px;
-    }
+    <style>
+        :root{
+            --bg:#020617;
+            --bg2:#0a0f1f;
+            --card:#0f172a;
+            --gold:#facc15;
+            --gold-soft:#fcd34d;
+            --orange:#f97316;
+            --green:#22c55e;
+            --ink:#f8fafc;
+            --muted:#cbd5e1;
+        }
 
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;
-    }
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+        }
 
-    body{
-      min-height:100vh;
-      background:
-        radial-gradient(circle at top,rgba(250,204,21,0.18),transparent 60%),
-        radial-gradient(circle at bottom,rgba(34,197,94,0.18),transparent 55%),
-        var(--bg);
-      color:var(--ink);
-      display:flex;
-      justify-content:center;
-      padding:10px;
-    }
+        body{
+            background:#020617;
+            color:var(--ink);
+            padding:14px;
+            display:flex;
+            justify-content:center;
+        }
 
-    .app{
-      width:100%;
-      max-width:1100px;
-      min-height:100vh;
-      background:linear-gradient(135deg,#020617 0%,#020818 45%,#020617 100%);
-      border-radius:var(--radius-xl);
-      border:1px solid rgba(148,163,184,0.35);
-      box-shadow:var(--shadow-soft);
-      padding:16px 16px 20px;
-      position:relative;
-      overflow:hidden;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
+        .app{
+            width:100%;
+            max-width:1100px;
+            background:linear-gradient(135deg, #020617, #0a0f1f 60%, #020617);
+            border:1px solid rgba(250, 204, 21, 0.2);
+            border-radius:24px;
+            padding:20px;
+            position:relative;
+            overflow:hidden;
+            box-shadow:0 20px 45px rgba(0,0,0,0.5);
+        }
 
-    .app::before{
-      content:"";
-      position:absolute;
-      inset:-40%;
-      background:
-        radial-gradient(circle at 0% 0%,rgba(250,204,21,0.18),transparent 55%),
-        radial-gradient(circle at 100% 100%,rgba(56,189,248,0.16),transparent 45%);
-      opacity:0.9;
-      pointer-events:none;
-    }
+        .app::before{
+            content:"";
+            position:absolute;
+            inset:-40%;
+            background:
+                radial-gradient(circle at 0% 0%,rgba(250,204,21,0.12),transparent 60%),
+                radial-gradient(circle at 100% 100%,rgba(249,115,22,0.14),transparent 50%);
+            opacity:0.7;
+            pointer-events:none;
+        }
 
-    @media(max-width:700px){
-      .app{
-        border-radius:0;
-        border:none;
-        box-shadow:none;
-      }
-    }
+        header{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:20px;
+        }
 
-    /* HEADER */
-    header{
-      position:relative;
-      z-index:2;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-    }
+        .brand{
+            display:flex;
+            align-items:center;
+            gap:12px;
+        }
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
+        .logo{
+            width:48px;
+            height:48px;
+            border-radius:14px;
+            background:radial-gradient(circle at 30% 0%, var(--gold), var(--orange));
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:26px;
+            box-shadow:0 12px 30px rgba(250,204,21,0.4);
+        }
 
-    .brand-logo{
-      width:40px;
-      height:40px;
-      border-radius:14px;
-      background:radial-gradient(circle at 30% 0%,#facc15,#f97316);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:22px;
-      box-shadow:0 12px 28px rgba(234,179,8,0.7);
-      font-weight:800;
-    }
+        .title{
+            font-size:22px;
+            font-weight:900;
+            letter-spacing:0.06em;
+            color:var(--gold);
+            text-transform:uppercase;
+        }
 
-    .brand-text-title{
-      font-size:18px;
-      font-weight:900;
-      letter-spacing:0.1em;
-      text-transform:uppercase;
-      color:var(--accent);
-    }
+        .subtitle{
+            font-size:14px;
+            color:var(--muted);
+            margin-top:-1px;
+        }
 
-    .brand-text-sub{
-      font-size:12px;
-      color:var(--muted);
-      font-weight:600;
-    }
+        .back{
+            text-decoration:none;
+            padding:10px 16px;
+            background:rgba(10,15,31,0.9);
+            border:1px solid rgba(250,204,21,0.4);
+            border-radius:999px;
+            color:var(--gold);
+            font-weight:700;
+            font-size:13px;
+        }
 
-    .back-link{
-      text-decoration:none;
-      font-size:13px;
-      color:var(--muted);
-      border-radius:999px;
-      border:1px solid rgba(148,163,184,0.7);
-      padding:7px 13px;
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      background:rgba(15,23,42,0.96);
-      font-weight:600;
-    }
+        .hero{
+            background:radial-gradient(circle at top left, rgba(250,204,21,0.18), rgba(10,15,31,0.95));
+            border:1px solid rgba(250,204,21,0.4);
+            border-radius:20px;
+            padding:18px;
+            box-shadow:0 12px 30px rgba(0,0,0,0.55);
+            margin-bottom:20px;
+        }
 
-    /* HERO */
-    main{
-      position:relative;
-      z-index:2;
-      display:flex;
-      flex-direction:column;
-      gap:16px;
-    }
+        .hero h1{
+            font-size:26px;
+            font-weight:900;
+            color:var(--gold);
+        }
 
-    .hero{
-      display:grid;
-      grid-template-columns:1.8fr 1.4fr;
-      gap:16px;
-      padding:16px 14px 14px;
-      border-radius:var(--radius-xl);
-      border:1px solid rgba(148,163,184,0.6);
-      background:
-        radial-gradient(circle at top left,rgba(250,204,21,0.22),rgba(3,7,18,0.96));
-      box-shadow:0 18px 44px rgba(15,23,42,1);
-    }
+        .hero p{
+            margin-top:8px;
+            line-height:1.6;
+            font-size:15px;
+            color:var(--ink);
+        }
 
-    @media(max-width:900px){
-      .hero{
-        grid-template-columns:1fr;
-      }
-    }
+        .pricing-card{
+            background:var(--card);
+            border-radius:20px;
+            border:1px solid rgba(250,204,21,0.4);
+            padding:18px;
+            margin-bottom:22px;
+        }
 
-    .hero-left{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
+        .pricing-title{
+            font-size:20px;
+            font-weight:800;
+            color:var(--gold);
+        }
 
-    .hero-pill{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      border-radius:999px;
-      border:1px solid rgba(250,204,21,0.9);
-      padding:4px 10px;
-      font-size:11px;
-      background:rgba(15,23,42,0.95);
-      color:#e5e7eb;
-      font-weight:600;
-      width:max-content;
-    }
+        .price{
+            font-size:28px;
+            margin-top:6px;
+            color:var(--green);
+            font-weight:900;
+        }
 
-    .hero-pill span.dot{
-      width:8px;
-      height:8px;
-      border-radius:999px;
-      background:radial-gradient(circle,var(--accent),#f97316);
-      box-shadow:0 0 10px rgba(250,204,21,0.9);
-    }
+        .price span{
+            font-size:14px;
+            color:var(--muted);
+        }
 
-    .hero-title{
-      font-size:26px;
-      font-weight:900;
-      line-height:1.25;
-      max-width:520px;
-    }
+        .line{
+            margin-top:8px;
+            display:flex;
+            gap:6px;
+            font-size:14px;
+            color:var(--ink);
+        }
 
-    .hero-title span{
-      color:var(--accent);
-    }
+        .line::before{
+            content:"•";
+            color:var(--orange);
+        }
 
-    .hero-sub{
-      font-size:14px;
-      color:#e5e7eb;
-      max-width:520px;
-      line-height:1.7;
-      font-weight:500;
-    }
+        .cta{
+            margin-top:14px;
+            display:flex;
+            gap:10px;
+            flex-wrap:wrap;
+        }
 
-    .hero-sub strong{
-      color:var(--accent-green);
-      font-weight:700;
-    }
+        .btn{
+            padding:10px 16px;
+            border-radius:999px;
+            text-decoration:none;
+            font-weight:800;
+            font-size:14px;
+            flex-grow:1;
+            text-align:center;
+        }
 
-    .hero-bullets{
-      display:flex;
-      flex-wrap:wrap;
-      gap:6px;
-      margin-top:4px;
-    }
+        .btn-main{
+            background:linear-gradient(135deg, var(--gold), var(--orange));
+            color:#111;
+            box-shadow:0 8px 20px rgba(250,204,21,0.45);
+        }
 
-    .hero-badge{
-      font-size:11px;
-      padding:4px 9px;
-      border-radius:999px;
-      border:1px solid rgba(148,163,184,0.7);
-      background:rgba(15,23,42,0.96);
-      color:#e5e7eb;
-      font-weight:600;
-    }
+        .btn-alt{
+            background:rgba(10,15,31,0.9);
+            color:var(--gold);
+            border:1px solid rgba(250,204,21,0.6);
+        }
 
-    .hero-actions{
-      margin-top:8px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-    }
-
-    .btn{
-      border:none;
-      border-radius:999px;
-      padding:9px 15px;
-      font-size:13px;
-      font-weight:800;
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      text-decoration:none;
-      white-space:nowrap;
-    }
-
-    .btn-primary{
-      background:linear-gradient(135deg,#facc15,#f97316);
-      color:#111827;
-      box-shadow:0 8px 20px rgba(250,204,21,0.6);
-    }
-
-    .btn-primary:hover{
-      transform:translateY(-1px);
-      box-shadow:0 11px 28px rgba(250,204,21,0.9);
-    }
-
-    .btn-ghost{
-      background:rgba(15,23,42,0.96);
-      border:1px solid rgba(148,163,184,0.8);
-      color:#e5e7eb;
-    }
-
-    .btn-ghost:hover{
-      border-color:var(--accent);
-    }
-
-    .hero-note{
-      margin-top:4px;
-      font-size:11px;
-      color:var(--muted);
-      font-weight:500;
-    }
-
-    /* HERO RIGHT : PLANS */
-    .hero-right{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-
-    .plans-title{
-      font-size:13px;
-      color:#e5e7eb;
-      font-weight:700;
-      text-transform:uppercase;
-      letter-spacing:0.08em;
-    }
-
-    .plans{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-
-    .plan{
-      border-radius:var(--radius-lg);
-      border:1px solid rgba(148,163,184,0.55);
-      background:radial-gradient(circle at top,rgba(15,23,42,0.98),#020617);
-      padding:10px 10px 9px;
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-    }
-
-    .plan-header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:8px;
-    }
-
-    .plan-name{
-      font-size:13px;
-      font-weight:800;
-      color:#f9fafb;
-    }
-
-    .plan-tag{
-      font-size:10px;
-      padding:3px 7px;
-      border-radius:999px;
-      border:1px solid rgba(148,163,184,0.7);
-      color:#e5e7eb;
-      font-weight:600;
-      background:rgba(15,23,42,0.96);
-      white-space:nowrap;
-    }
-
-    .plan-price{
-      font-size:13px;
-      font-weight:800;
-      color:var(--accent);
-      white-space:nowrap;
-    }
-
-    .plan-body{
-      font-size:11px;
-      color:#e5e7eb;
-      line-height:1.5;
-      font-weight:500;
-    }
-
-    .plan-body strong{
-      color:var(--accent-green);
-      font-weight:700;
-    }
-
-    .plan-foot{
-      margin-top:4px;
-      font-size:10px;
-      color:var(--muted);
-      display:flex;
-      justify-content:space-between;
-      gap:6px;
-      flex-wrap:wrap;
-    }
-
-    .plan-premium{
-      border-color:rgba(250,204,21,0.9);
-      box-shadow:0 0 18px rgba(250,204,21,0.35);
-      position:relative;
-    }
-
-    .plan-premium::before{
-      content:"Bonnes Affaires";
-      position:absolute;
-      top:-10px;
-      left:12px;
-      font-size:10px;
-      padding:3px 7px;
-      border-radius:999px;
-      background:linear-gradient(135deg,#facc15,#f97316);
-      color:#111827;
-      font-weight:800;
-      box-shadow:0 0 12px rgba(250,204,21,0.8);
-    }
-
-    /* LISTE BASIQUE */
-    .section-list{
-      margin-top:6px;
-      padding:12px 10px 8px;
-      border-radius:var(--radius-xl);
-      border:1px solid rgba(148,163,184,0.5);
-      background:rgba(15,23,42,0.96);
-      box-shadow:0 10px 28px rgba(15,23,42,0.9);
-      font-size:11px;
-      color:#e5e7eb;
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px 16px;
-      justify-content:space-between;
-      align-items:center;
-    }
-
-    .section-list strong{
-      color:var(--accent);
-      font-weight:800;
-    }
-
-    .tags-inline{
-      display:flex;
-      flex-wrap:wrap;
-      gap:6px;
-    }
-
-    .tag-mini{
-      padding:3px 7px;
-      border-radius:999px;
-      border:1px solid rgba(148,163,184,0.6);
-      font-size:10px;
-      color:#e5e7eb;
-      background:rgba(2,6,23,0.95);
-    }
-
-    footer{
-      position:relative;
-      z-index:2;
-      margin-top:8px;
-      font-size:11px;
-      color:#e5e7eb;
-      display:flex;
-      justify-content:space-between;
-      gap:8px;
-      flex-wrap:wrap;
-      font-weight:500;
-    }
-
-    footer span{
-      color:var(--accent);
-      font-weight:800;
-    }
-  </style>
+    </style>
 </head>
 <body>
+
 <div class="app">
 
-  <header>
-    <div class="brand">
-      <div class="brand-logo">🛒</div>
-      <div>
-        <div class="brand-text-title">DIGIY MARKET</div>
-        <div class="brand-text-sub">Annonces locales • DIGIY Bonnes Affaires</div>
-      </div>
-    </div>
+    <header>
+        <div class="brand">
+            <div class="logo">🛒</div>
+            <div>
+                <div class="title">DIGIY BOUTIQUE</div>
+                <div class="subtitle">Vitrine Professionnelle</div>
+            </div>
+        </div>
+        <a href="index.html" class="back">← Retour DIGIY HUB</a>
+    </header>
 
-    <a href="index.html" class="back-link">
-      <span>←</span> Retour DIGIY HUB
-    </a>
-  </header>
-
-  <main>
-    <!-- HERO PREMIUM DIGIY BONNES AFFAIRES -->
     <section class="hero">
-      <div class="hero-left">
-        <div class="hero-pill">
-          <span class="dot"></span> DIGIY Bonnes Affaires
-        </div>
-
-        <h1 class="hero-title">
-          <span>Votre annonce,</span> votre liberté.
-        </h1>
-
-        <p class="hero-sub">
-          Contact direct : appel ou WhatsApp. <br>
-          Pas d’intermédiaire, pas de commission. <br>
-          <strong>DIGIY Bonnes Affaires</strong> — l’espace des particuliers et professionnels qui veulent être vus,
-          localement et simplement. Local, souverain, efficace.
+        <h1>Ouvre ta Boutique en Ligne DIGIY</h1>
+        <p>
+            Transforme ton activité : une vitrine digitale simple, rapide, puissante.
+            Catalogue, photos, WhatsApp direct, paiement au vendeur — tout en
+            <strong>0% commission</strong>.  
+            Accessible partout, visible en 1 clic.
         </p>
-
-        <div class="hero-bullets">
-          <span class="hero-badge">0% commission • Paiement direct</span>
-          <span class="hero-badge">Annonces locales (services, biens, jobs)</span>
-          <span class="hero-badge">Pro ou particulier</span>
-        </div>
-
-        <div class="hero-actions">
-          <a href="#publier" class="btn btn-primary">
-            ✍️ Publier une annonce
-          </a>
-          <a href="#bonnes-affaires" class="btn btn-ghost">
-            ⭐ Voir DIGIY Bonnes Affaires
-          </a>
-        </div>
-
-        <div class="hero-note">
-          Annonce simple gratuite possible (texte + 1 visuel). Options “Bonnes Affaires” pour ceux qui veulent plus de visibilité.
-        </div>
-      </div>
-
-      <div class="hero-right" id="bonnes-affaires">
-        <div class="plans-title">Formules actuelles</div>
-        <div class="plans">
-          <!-- Plan gratuit -->
-          <article class="plan">
-            <div class="plan-header">
-              <div>
-                <div class="plan-name">Annonce simple</div>
-                <div class="plan-tag">Entrée gratuite</div>
-              </div>
-              <div class="plan-price">0 F</div>
-            </div>
-            <div class="plan-body">
-              1 photo, description courte, contact direct par téléphone ou WhatsApp.
-              Idéal pour une petite annonce locale sans engagement.
-            </div>
-            <div class="plan-foot">
-              <span>Parfait pour tester DIGIY MARKET.</span>
-              <span>Limité en visibilité & contenu.</span>
-            </div>
-          </article>
-
-          <!-- Plan Bonnes Affaires -->
-          <article class="plan plan-premium">
-            <div class="plan-header">
-              <div>
-                <div class="plan-name">DIGIY Bonnes Affaires</div>
-                <div class="plan-tag">Visibilité renforcée</div>
-              </div>
-              <div class="plan-price">9 900 F / mois</div>
-            </div>
-            <div class="plan-body">
-              Jusqu’à 6 photos, description détaillée, meilleur placement dans la liste
-              et mise en avant visuelle. <strong>Parfait pour voitures, électroménager, gros biens…</strong>
-            </div>
-            <div class="plan-foot">
-              <span>Pro & particulier sérieux.</span>
-              <span>Activation après validation & paiement.</span>
-            </div>
-          </article>
-        </div>
-      </div>
     </section>
 
-    <!-- BANDEAU INFOS -->
-    <section class="section-list" id="publier">
-      <div>
-        <strong>Comment ça marche&nbsp;?</strong> Vous publiez votre annonce, les gens vous contactent directement.
-        DIGIY ne s’interpose pas entre vous et vos clients.
-      </div>
-      <div class="tags-inline">
-        <span class="tag-mini">Local & souverain</span>
-        <span class="tag-mini">Téléphone & WhatsApp</span>
-        <span class="tag-mini">Sans OTA, sans plateforme de racket</span>
-      </div>
+    <section class="pricing-card">
+        <div class="pricing-title">Pack Boutique en Ligne</div>
+        <div class="price">12 500 F CFA <span>/ mois</span></div>
+
+        <div class="line">Boutique en ligne complète (vitrine + catalogue produits)</div>
+        <div class="line">Lien personnalisé partageable (bio WhatsApp, réseaux, QR code)</div>
+        <div class="line">WhatsApp direct sur chaque produit</div>
+        <div class="line">Album photo + description détaillée</div>
+        <div class="line">Connexion possible à DIGIY BONNE AFFAIRE</div>
+        <div class="line">Support DIGIY pour t’aider à démarrer</div>
+
+        <div class="cta">
+            <a href="#" class="btn btn-main">Ouvrir ma Boutique à 12 500 F</a>
+            <a href="#" class="btn btn-alt">Parler avec DIGIY</a>
+        </div>
     </section>
 
-    <!-- ICI tu peux ensuite ajouter ta grille d’annonces existante -->
-  </main>
-
-  <footer>
-    <div>
-      DIGIY MARKET • <span>Super App DIGIYLYFE</span> — Sénégal → Afrique
-    </div>
-    <div>
-      0% commission • Paiement direct aux vendeurs • Visibilité pour ceux qui jouent le jeu.
-    </div>
-  </footer>
 </div>
+
 </body>
 </html>
