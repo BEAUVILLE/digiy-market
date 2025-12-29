@@ -2,9 +2,9 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>DIGIY POS — Vitrine des Boutiques</title>
+  <title>DIGIY MARKET — Boutiques Partenaires Saly</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="DIGIY POS CLIENT — Vitrines de boutiques locales • Présentation • Photos • Contact WhatsApp.">
+  <meta name="description" content="DIGIY MARKET — Boutiques partenaires Saly • 0% commission • Contact WhatsApp direct.">
 
   <style>
     :root{
@@ -39,6 +39,7 @@
       align-items:center;
       margin-bottom:18px;
       gap:10px;
+      flex-wrap:wrap;
     }
     .brand{
       display:flex;
@@ -81,6 +82,38 @@
       gap:6px;
     }
 
+    .hero{
+      background:linear-gradient(135deg,rgba(250,204,21,0.15),rgba(249,115,22,0.1));
+      border:1px solid rgba(250,204,21,0.3);
+      border-radius:20px;
+      padding:20px;
+      margin-bottom:20px;
+      text-align:center;
+    }
+    .hero h2{
+      font-size:28px;
+      font-weight:900;
+      color:var(--accent);
+      margin-bottom:8px;
+    }
+    .hero p{
+      font-size:16px;
+      color:var(--muted);
+      line-height:1.5;
+    }
+    .hero .stats{
+      display:flex;
+      gap:20px;
+      justify-content:center;
+      margin-top:16px;
+      flex-wrap:wrap;
+    }
+    .stat-item{
+      font-size:14px;
+      font-weight:800;
+      color:var(--accent2);
+    }
+
     .grid{
       margin-top:10px;
       display:grid;
@@ -96,6 +129,12 @@
       .grid{
         grid-template-columns:1fr;
       }
+      .hero h2{
+        font-size:22px;
+      }
+      .hero p{
+        font-size:14px;
+      }
     }
 
     .card{
@@ -108,19 +147,37 @@
       flex-direction:column;
       gap:10px;
       overflow:hidden;
+      transition:all 0.3s ease;
+    }
+    .card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 18px 40px rgba(250,204,21,0.3);
     }
     .photo{
       width:100%;
       height:220px;
       border-radius:16px;
       overflow:hidden;
-      border:2px solid var(--accent2);
+      border:2px solid var(--accent);
+      position:relative;
     }
     .photo img{
       width:100%;
       height:100%;
       object-fit:cover;
       display:block;
+    }
+    .hub-badge{
+      position:absolute;
+      top:10px;
+      right:10px;
+      background:var(--accent);
+      color:#111;
+      padding:6px 12px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:900;
+      box-shadow:0 4px 12px rgba(250,204,21,0.6);
     }
     .name{
       font-size:22px;
@@ -141,6 +198,18 @@
       font-size:14px;
       color:var(--muted);
       font-weight:600;
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+    .price{
+      font-size:15px;
+      font-weight:800;
+      color:var(--accent2);
+      padding:8px 12px;
+      background:rgba(34,197,94,0.15);
+      border-radius:10px;
+      text-align:center;
     }
     .actions{
       display:flex;
@@ -162,29 +231,50 @@
       text-decoration:none;
       text-align:center;
       white-space:nowrap;
+      transition:all 0.2s ease;
     }
     .btn-view{
       background:linear-gradient(135deg,#facc15,#f97316);
       color:#111827;
       box-shadow:0 7px 18px rgba(250,204,21,0.55);
     }
+    .btn-view:hover{
+      transform:translateY(-2px);
+      box-shadow:0 10px 24px rgba(250,204,21,0.7);
+    }
     .btn-wa{
       background:rgba(34,197,94,0.2);
       border:1px solid var(--accent2);
       color:#bbf7d0;
     }
+    .btn-wa:hover{
+      background:rgba(34,197,94,0.3);
+      transform:translateY(-2px);
+    }
     footer{
-      margin-top:22px;
+      margin-top:30px;
+      padding-top:20px;
+      border-top:1px solid rgba(148,163,184,0.3);
       font-size:12px;
       color:var(--muted);
       display:flex;
       justify-content:space-between;
       flex-wrap:wrap;
-      gap:6px;
+      gap:10px;
     }
     footer span{
       color:var(--accent);
       font-weight:800;
+    }
+    .empty-state{
+      text-align:center;
+      padding:60px 20px;
+      color:var(--muted);
+    }
+    .empty-state h3{
+      font-size:24px;
+      margin-bottom:12px;
+      color:var(--accent);
     }
   </style>
 </head>
@@ -193,10 +283,10 @@
 
   <header>
     <div class="brand">
-      <div class="brand-logo">🏪</div>
+      <div class="brand-logo">🛒</div>
       <div>
-        <div class="brand-title">DIGIY POS</div>
-        <div class="brand-sub">Vitrine des Boutiques Partenaires</div>
+        <div class="brand-title">DIGIY MARKET</div>
+        <div class="brand-sub">Boutiques Partenaires • Saly QG Centre</div>
       </div>
     </div>
 
@@ -205,137 +295,160 @@
     </a>
   </header>
 
+  <!-- HERO SECTION -->
+  <div class="hero">
+    <h2>🏪 QG Saly Centre • Market & Style</h2>
+    <p>
+      Nos partenaires boutiques locaux • Contact direct WhatsApp<br>
+      <strong>0% commission</strong> • Vous payez le vrai prix • Pierre par pierre ∞
+    </p>
+    <div class="stats">
+      <div class="stat-item">✅ 3 Boutiques actives</div>
+      <div class="stat-item">🚀 2 Bientôt disponibles</div>
+      <div class="stat-item">💬 WhatsApp direct</div>
+      <div class="stat-item">🏪 QG Centre Saly</div>
+    </div>
+  </div>
+
   <section class="grid">
 
-    <!-- 1) CASA LUXE -->
+    <!-- 1) ASTOU - HUB CENTRE -->
     <div class="card">
       <div class="photo">
-        <img src="https://images.unsplash.com/photo-1615874959474-d609352df32c?auto=format&fit=crop&w=800&q=80" alt="Salon moderne et déco intérieure">
+        <img src="https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=800&q=80" alt="Boutique textile Astou - Linge de maison Saly">
+        <div class="hub-badge">🏪 HUB CENTRE</div>
       </div>
-      <div class="name">Casa Luxe</div>
-      <div class="type">Meubles & Déco</div>
-      <div class="city">Saly • Dakar</div>
+      <div class="name">🧵 Astou</div>
+      <div class="type">Linge de maison & Couture</div>
+      <div class="city">📍 QG Saly Centre</div>
       <div class="desc">
-        Canapés, tables, luminaires, déco intérieure moderne pour salon, chambre et terrasse.
-        Livraison rapide sur la Petite Côte et Dakar.
+        Linge de maison premium, couture sur mesure, serviettes, torchons, draps.
+        Textile authentique et qualité locale garantie.
       </div>
+      <div class="price">💰 Promo locale • Stock disponible</div>
       <div class="actions">
-        <a class="btn btn-view" href="boutique-casa-luxe.html">Voir la boutique</a>
+        <a class="btn btn-view" href="https://digiylyfe.com/partenaires-astou/" target="_blank">Voir la fiche</a>
         <button class="btn btn-wa"
-                onclick="wa('+221771111111','Bonjour Casa Luxe, je suis intéressé par vos meubles (DIGIY POS).');">
-          WhatsApp
+                onclick="wa('+221778765785','Salam Astou, je viens de DIGIY MARKET et je suis intéressé par vos produits.');">
+          💬 WhatsApp
         </button>
       </div>
     </div>
 
-    <!-- 2) KAWTAL FASHION -->
+    <!-- 2) TONTON ELHADJI -->
     <div class="card">
       <div class="photo">
-        <img src="https://images.unsplash.com/photo-1556906781-9a412961c28c?auto=format&fit=crop&w=800&q=80" alt="Mode femme africaine moderne">
+        <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=800&q=80" alt="Boutique Tonton Elhadji - Sacs et montres Saly">
       </div>
-      <div class="name">Kawtal Fashion</div>
-      <div class="type">Mode Femme</div>
-      <div class="city">Dakar</div>
+      <div class="name">👜 Tonton Elhadji</div>
+      <div class="type">Sacs & Montres • Accessoires</div>
+      <div class="city">📍 QG Saly Centre</div>
       <div class="desc">
-        Robes, ensembles, tenues africaines revisitées, couture sur mesure.
-        Nouveaux modèles chaque semaine.
+        Sélection premium de sacs, montres et accessoires de qualité.
+        Stock limité, produits soigneusement choisis pour vous.
       </div>
+      <div class="price">💰 Produits qualité • Stock limité</div>
       <div class="actions">
-        <a class="btn btn-view" href="boutique-kawtal-fashion.html">Voir la boutique</a>
+        <a class="btn btn-view" href="https://digiylyfe.com/partenaire-tonton-elhadji/" target="_blank">Voir la fiche</a>
         <button class="btn btn-wa"
-                onclick="wa('+221772222222','Bonjour Kawtal Fashion, je veux des infos sur vos tenues (DIGIY POS).');">
-          WhatsApp
+                onclick="wa('+221778329612','Salam Tonton, je viens de DIGIY MARKET pour vos sacs et montres.');">
+          💬 WhatsApp
         </button>
       </div>
     </div>
 
-    <!-- 3) GOUY GUI MARKET -->
+    <!-- 3) MICHEL STYLISTE -->
     <div class="card">
       <div class="photo">
-        <img src="https://images.unsplash.com/photo-1542838132-92a5d855d10d?auto=format&fit=crop&w=800&q=80" alt="Marché de fruits et légumes frais">
+        <img src="https://images.unsplash.com/photo-1591561954557-26941169b49e?auto=format&fit=crop&w=800&q=80" alt="Michel Styliste - Robes africaines mode">
       </div>
-      <div class="name">Gouy Gui Market</div>
-      <div class="type">Fruits & Légumes</div>
-      <div class="city">Mbour • Petite Côte</div>
+      <div class="name">✂️ Michel</div>
+      <div class="type">Styliste & Couture Mode</div>
+      <div class="city">📍 Saly - Thiès</div>
       <div class="desc">
-        Paniers de fruits et légumes frais, jus naturels, produits de saison.
-        Livraison quotidienne à domicile.
+        Robes personnalisées, créations sur mesure, mode femme africaine revisitée.
+        Du design à la confection, chaque pièce est unique.
       </div>
+      <div class="price">💰 Sur mesure • Créations exclusives</div>
       <div class="actions">
-        <a class="btn btn-view" href="boutique-gouy-gui-market.html">Voir la boutique</a>
+        <a class="btn btn-view" href="https://digiylyfe.com/page-partenaire-michel/" target="_blank">Voir la fiche</a>
         <button class="btn btn-wa"
-                onclick="wa('+221773333333','Bonjour Gouy Gui Market, je souhaite commander un panier (DIGIY POS).');">
-          WhatsApp
+                onclick="wa('+221783718492','Salam Michel, je viens de DIGIY MARKET et je veux une création personnalisée.');">
+          💬 WhatsApp
         </button>
       </div>
     </div>
 
-    <!-- 4) SÉNÉ TECH PRO -->
-    <div class="card">
+    <!-- 4) PLACEHOLDER - TÉLÉPHONES & INFORMATIQUE -->
+    <div class="card" style="opacity:0.7;position:relative;">
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(250,204,21,0.95);color:#111;padding:12px 24px;border-radius:12px;font-weight:900;font-size:14px;z-index:10;box-shadow:0 8px 24px rgba(0,0,0,0.4);">
+        🚀 BIENTÔT DISPONIBLE
+      </div>
       <div class="photo">
         <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80" alt="Téléphones et matériel informatique">
       </div>
-      <div class="name">Séné Tech Pro</div>
-      <div class="type">Informatique & Téléphones</div>
-      <div class="city">Dakar</div>
+      <div class="name">📱 [Nom de la boutique]</div>
+      <div class="type">Téléphones & Informatique</div>
+      <div class="city">📍 QG Saly Centre</div>
       <div class="desc">
-        Smartphones, accessoires, ordinateurs, écrans, matériel pro.
+        Smartphones, accessoires, ordinateurs, écrans, matériel professionnel.
         Produits garantis, service après-vente sérieux.
       </div>
+      <div class="price">💰 Prix compétitifs • Garantie</div>
       <div class="actions">
-        <a class="btn btn-view" href="boutique-sene-tech-pro.html">Voir la boutique</a>
-        <button class="btn btn-wa"
-                onclick="wa('+221774444444','Bonjour Séné Tech Pro, je cherche du matériel informatique (DIGIY POS).');">
-          WhatsApp
-        </button>
+        <button class="btn btn-view" disabled style="opacity:0.5;cursor:not-allowed;">Bientôt disponible</button>
+        <button class="btn btn-wa" disabled style="opacity:0.5;cursor:not-allowed;">Bientôt</button>
       </div>
     </div>
 
-    <!-- 5) WAX EMPIRE -->
-    <div class="card">
+    <!-- 5) PLACEHOLDER - CHAUSSURES & MODE -->
+    <div class="card" style="opacity:0.7;position:relative;">
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(250,204,21,0.95);color:#111;padding:12px 24px;border-radius:12px;font-weight:900;font-size:14px;z-index:10;box-shadow:0 8px 24px rgba(0,0,0,0.4);">
+        🚀 BIENTÔT DISPONIBLE
+      </div>
       <div class="photo">
-        <img src="https://images.unsplash.com/photo-1524845332060-d21fde4da904?auto=format&fit=crop&w=800&q=80" alt="Tissus wax colorés">
+        <img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=800&q=80" alt="Boutique de chaussures">
       </div>
-      <div class="name">Wax Empire</div>
-      <div class="type">Tissus & Couture</div>
-      <div class="city">Saly • Dakar</div>
+      <div class="name">👟 [Nom de la boutique]</div>
+      <div class="type">Chaussures & Accessoires Mode</div>
+      <div class="city">📍 QG Saly Centre</div>
       <div class="desc">
-        Wax premium, bazin riche, broderies, tenues traditionnelles.
-        Packs mariage, cérémonies, évènements.
+        Chaussures pour homme et femme, sandales, baskets, chaussures de ville.
+        Collection variée, dernières tendances mode.
       </div>
+      <div class="price">💰 Nouveautés régulières</div>
       <div class="actions">
-        <a class="btn btn-view" href="boutique-wax-empire.html">Voir la boutique</a>
-        <button class="btn btn-wa"
-                onclick="wa('+221775555555','Bonjour Wax Empire, je veux des infos sur vos tissus (DIGIY POS).');">
-          WhatsApp
-        </button>
-      </div>
-    </div>
-
-    <!-- 6) YOFF BEAUTÉ -->
-    <div class="card">
-      <div class="photo">
-        <img src="https://images.unsplash.com/photo-1600185365483-26d7a4c12c80?auto=format&fit=crop&w=800&q=80" alt="Produits cosmétiques et soins">
-      </div>
-      <div class="name">Yoff Beauté</div>
-      <div class="type">Cosmétiques & Bien-être</div>
-      <div class="city">Yoff • Dakar</div>
-      <div class="desc">
-        Soins visage et cheveux, huiles naturelles, parfums, produits pour peaux noires & métissées.
-      </div>
-      <div class="actions">
-        <a class="btn btn-view" href="boutique-yoff-beaute.html">Voir la boutique</a>
-        <button class="btn btn-wa"
-                onclick="wa('+221776666666','Bonjour Yoff Beauté, je veux des infos sur vos produits (DIGIY POS).');">
-          WhatsApp
-        </button>
+        <button class="btn btn-view" disabled style="opacity:0.5;cursor:not-allowed;">Bientôt disponible</button>
+        <button class="btn btn-wa" disabled style="opacity:0.5;cursor:not-allowed;">Bientôt</button>
       </div>
     </div>
 
   </section>
 
+  <!-- EMPTY STATE (si besoin d'ajouter plus tard) -->
+  <!-- <div class="empty-state">
+    <h3>🚀 Bientôt plus de boutiques</h3>
+    <p>D'autres partenaires MARKET rejoindront bientôt le QG Centre Saly.<br>Pierre par pierre, l'écosystème grandit ∞</p>
+  </div> -->
+
   <footer>
-    <div>DIGIY POS • <span>Super App DIGIYLYFE</span> — Sénégal → Afrique</div>
+    <div>DIGIY MARKET • <span>Module DIGIYLYFE</span> — Saly → Sénégal → Afrique ∞</div>
+    <div>0% commission • Contact direct WhatsApp • Vrai prix pour chaque produit</div>
+  </footer>
+
+</div>
+
+<script>
+function wa(phone, msg){
+  const clean = phone.replace(/\s+/g,"").replace("+","");
+  const txt = encodeURIComponent(msg || "");
+  const url = "https://wa.me/" + clean + (txt ? ("?text="+txt) : "");
+  window.open(url, "_blank");
+}
+</script>
+
+</body>
+</html>
     <div>0% commission • Contact direct WhatsApp avec chaque boutique.</div>
   </footer>
 
