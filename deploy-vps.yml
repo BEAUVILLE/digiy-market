@@ -1,0 +1,29 @@
+name: Deploy MARKET to VPS
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT }}
+          script: |
+            set -e
+            sudo mkdir -p /var/www/digiy-market
+            sudo rsync -av --delete --exclude ".git" --exclude ".github" ${{ github.workspace }}/ /var/www/digiy-market/
+            sudo chown -R www-data:www-data /var/www/digiy-market
+            sudo nginx -t
+            sudo systemctl reload nginx
+            echo "{\"module\":\"market\",\"status\":\"deployed\",\"time\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"commit\":\"${GITHUB_SHA}\"}" | sudo tee /var/www/digiy-market/deploy.json >/dev/null
+            echo "✅ MARKET deployed"
