@@ -22,7 +22,7 @@
       font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;
     }
     body{
-      background:#020617;
+      background:var(--bg);
       color:var(--ink);
       padding:12px;
       display:flex;
@@ -121,20 +121,12 @@
       gap:18px;
     }
     @media(max-width:900px){
-      .grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-      }
+      .grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
     }
     @media(max-width:640px){
-      .grid{
-        grid-template-columns:1fr;
-      }
-      .hero h2{
-        font-size:22px;
-      }
-      .hero p{
-        font-size:14px;
-      }
+      .grid{ grid-template-columns:1fr; }
+      .hero h2{ font-size:22px; }
+      .hero p{ font-size:14px; }
     }
 
     .card{
@@ -251,6 +243,7 @@
       background:rgba(34,197,94,0.3);
       transform:translateY(-2px);
     }
+
     footer{
       margin-top:30px;
       padding-top:20px;
@@ -266,18 +259,9 @@
       color:var(--accent);
       font-weight:800;
     }
-    .empty-state{
-      text-align:center;
-      padding:60px 20px;
-      color:var(--muted);
-    }
-    .empty-state h3{
-      font-size:24px;
-      margin-bottom:12px;
-      color:var(--accent);
-    }
   </style>
 </head>
+
 <body>
 <div class="app">
 
@@ -290,7 +274,8 @@
       </div>
     </div>
 
-    <a href="index.html" class="back-link">
+    <!-- ✅ Vrai lien HUB -->
+    <a href="https://beauville.github.io/digiy-hub/" class="back-link" target="_blank" rel="noopener">
       <span>←</span> DIGIY HUB
     </a>
   </header>
@@ -327,7 +312,8 @@
       </div>
       <div class="price">💰 Promo locale • Stock disponible</div>
       <div class="actions">
-        <a class="btn btn-view" href="https://digiylyfe.com/partenaires-astou/" target="_blank">Voir la fiche</a>
+        <!-- ✅ Corrigé: pointe vers la fiche MARKET -->
+        <a class="btn btn-view" href="partners/astou5785.html" target="_blank" rel="noopener">Voir la fiche</a>
         <button class="btn btn-wa"
                 onclick="wa('+221778765785','Salam Astou, je viens de DIGIY MARKET et je suis intéressé par vos produits.');">
           💬 WhatsApp
@@ -349,7 +335,7 @@
       </div>
       <div class="price">💰 Produits qualité • Stock limité</div>
       <div class="actions">
-        <a class="btn btn-view" href="https://digiylyfe.com/partenaire-tonton-elhadji/" target="_blank">Voir la fiche</a>
+        <a class="btn btn-view" href="https://digiylyfe.com/partenaire-tonton-elhadji/" target="_blank" rel="noopener">Voir la fiche</a>
         <button class="btn btn-wa"
                 onclick="wa('+221778329612','Salam Tonton, je viens de DIGIY MARKET pour vos sacs et montres.');">
           💬 WhatsApp
@@ -371,7 +357,7 @@
       </div>
       <div class="price">💰 Sur mesure • Créations exclusives</div>
       <div class="actions">
-        <a class="btn btn-view" href="https://digiylyfe.com/page-partenaire-michel/" target="_blank">Voir la fiche</a>
+        <a class="btn btn-view" href="https://digiylyfe.com/page-partenaire-michel/" target="_blank" rel="noopener">Voir la fiche</a>
         <button class="btn btn-wa"
                 onclick="wa('+221783718492','Salam Michel, je viens de DIGIY MARKET et je veux une création personnalisée.');">
           💬 WhatsApp
@@ -425,12 +411,6 @@
 
   </section>
 
-  <!-- EMPTY STATE (si besoin d'ajouter plus tard) -->
-  <!-- <div class="empty-state">
-    <h3>🚀 Bientôt plus de boutiques</h3>
-    <p>D'autres partenaires MARKET rejoindront bientôt le QG Centre Saly.<br>Pierre par pierre, l'écosystème grandit ∞</p>
-  </div> -->
-
   <footer>
     <div>DIGIY MARKET • <span>Module DIGIYLYFE</span> — Saly → Sénégal → Afrique ∞</div>
     <div>0% commission • Contact direct WhatsApp • Vrai prix pour chaque produit</div>
@@ -440,26 +420,10 @@
 
 <script>
 function wa(phone, msg){
-  const clean = phone.replace(/\s+/g,"").replace("+","");
+  const clean = String(phone || "").replace(/\s+/g,"").replace("+","");
   const txt = encodeURIComponent(msg || "");
   const url = "https://wa.me/" + clean + (txt ? ("?text="+txt) : "");
-  window.open(url, "_blank");
-}
-</script>
-
-</body>
-</html>
-    <div>0% commission • Contact direct WhatsApp avec chaque boutique.</div>
-  </footer>
-
-</div>
-
-<script>
-function wa(phone, msg){
-  const clean = phone.replace(/\s+/g,"").replace("+","");
-  const txt = encodeURIComponent(msg || "");
-  const url = "https://wa.me/" + clean + (txt ? ("?text="+txt) : "");
-  window.open(url, "_blank");
+  window.open(url, "_blank", "noopener");
 }
 </script>
 
