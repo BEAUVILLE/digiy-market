@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>PARTNER_NAME — Commander direct | DIGIY MARKET ∞</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="PARTNER_NAME à CITY : CATEGORY. WhatsApp direct, 0% commission." />
+  <meta name="theme-color" content="#facc15" />
+
+  <style>
+    :root{
+      --bg:#060b10;
+      --card:#0b1220;
+      --line:rgba(255,255,255,.10);
+      --text:#f8fafc;
+      --muted:rgba(248,250,252,.75);
+      --gold:#facc15;
+      --gold2:#f59e0b;
+      --green:#22c55e;
+      --blue:#0ea5e9;
+      --radius:22px;
+      --shadow:0 18px 50px rgba(0,0,0,.55);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100vh;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 10% -10%, rgba(34,197,94,.18), transparent 60%),
+        radial-gradient(900px 500px at 110% 0%, rgba(250,204,21,.10), transparent 55%),
+        var(--bg);
+      padding:14px;
+      display:flex;
+      justify-content:center;
+    }
+    .wrap{width:100%; max-width:860px}
+    .top{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; flex-wrap:wrap; margin-bottom:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; min-width:0;
+    }
+    .mark{
+      width:44px; height:44px; border-radius:16px;
+      display:grid; place-items:center;
+      background:linear-gradient(135deg, rgba(250,204,21,.95), rgba(245,158,11,.85));
+      color:#111; font-weight:1000; font-size:20px;
+      box-shadow:0 10px 28px rgba(250,204,21,.25);
+    }
+    .brand b{
+      display:block; font-weight:1000; letter-spacing:.4px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .brand small{display:block; color:var(--muted); font-weight:800}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 14px; border-radius:999px; border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text); text-decoration:none;
+      font-weight:950; cursor:pointer;
+      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+      user-select:none;
+    }
+    .btn:hover{transform:translateY(-2px); border-color:rgba(250,204,21,.35); box-shadow:0 12px 24px rgba(0,0,0,.35)}
+    .btn.gold{background:linear-gradient(135deg, var(--gold), var(--gold2)); color:#111; border-color:rgba(250,204,21,.35)}
+    .btn.wa{background:linear-gradient(135deg, #25D366, var(--green)); color:#052e16; border-color:rgba(34,197,94,.35)}
+    .btn.call{background:linear-gradient(135deg, var(--blue), #0284c7); color:#fff; border-color:rgba(14,165,233,.35)}
+    .hero{
+      border:1px solid rgba(250,204,21,.18);
+      border-radius:var(--radius);
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow:var(--shadow);
+    }
+    .cover{
+      position:relative;
+      height:300px;
+      background:#0b1220;
+    }
+    .cover img{
+      width:100%; height:100%; object-fit:cover; display:block;
+      filter:saturate(1.05) contrast(1.05);
+    }
+    .badge{
+      position:absolute; top:14px; right:14px;
+      background:linear-gradient(135deg, rgba(250,204,21,.95), rgba(245,158,11,.90));
+      color:#111; font-weight:1000; font-size:12px;
+      padding:8px 12px; border-radius:999px;
+      box-shadow:0 10px 24px rgba(250,204,21,.20);
+    }
+    .body{padding:16px}
+    h1{
+      margin:0 0 8px;
+      font-size:clamp(22px, 4.5vw, 32px);
+      font-weight:1000;
+    }
+    .meta{
+      display:flex; gap:10px; flex-wrap:wrap;
+      color:var(--muted); font-weight:800; font-size:13px;
+      margin-bottom:10px;
+    }
+    .chips{display:flex; gap:10px; flex-wrap:wrap; margin:12px 0 6px}
+    .chip{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      padding:8px 12px; border-radius:999px;
+      font-weight:900; font-size:12px; color:var(--muted);
+    }
+    .desc{
+      color:rgba(248,250,252,.86);
+      font-weight:750; line-height:1.6; font-size:14px;
+      margin-top:10px;
+    }
+    .cta{
+      display:grid; grid-template-columns:1fr 1fr; gap:10px;
+      margin-top:14px;
+    }
+    .cta .btn{width:100%}
+    @media (max-width:640px){
+      .cover{height:240px}
+      .cta{grid-template-columns:1fr}
+    }
+    .panel{
+      margin-top:12px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:rgba(0,0,0,.20);
+      padding:14px;
+    }
+    .panel b{font-weight:1000}
+    .panel .muted{color:var(--muted); font-weight:800; font-size:12px; margin-top:6px; line-height:1.5}
+    .foot{
+      margin-top:14px;
+      text-align:center;
+      color:rgba(248,250,252,.55);
+      font-weight:800;
+      font-size:12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="top">
+      <div class="brand">
+        <div class="mark">∞</div>
+        <div style="min-width:0">
+          <b>DIGIY MARKET · Fiche rapide</b>
+          <small>0% commission · Direct au pro</small>
+        </div>
+      </div>
+
+      <!-- ✅ Retour vers index du repo MARKET -->
+      <a class="btn" href="../index.html">← Retour Market</a>
+    </div>
+
+    <section class="hero">
+      <div class="cover">
+        <div class="badge">✅ Partenaire DIGIY</div>
+        <img src="HERO_IMAGE_URL" alt="PARTNER_NAME à CITY" loading="eager" decoding="async" />
+      </div>
+
+      <div class="body">
+        <h1>PARTNER_EMOJI PARTNER_NAME</h1>
+
+        <div class="meta">
+          <span>📍 CITY</span>
+          <span>•</span>
+          <span>🏷️ CATEGORY</span>
+          <span>•</span>
+          <span>♾️ 0% commission</span>
+        </div>
+
+        <div class="chips">
+          <span class="chip">⚡ Réponse rapide</span>
+          <span class="chip">💬 WhatsApp direct</span>
+          <span class="chip">📦 Commande simple</span>
+          <span class="chip">🧾 Vrai prix</span>
+        </div>
+
+        <p class="desc">
+          SHORT_PITCH_1<br><br>
+          SHORT_PITCH_2
+        </p>
+
+        <div class="cta">
+          <a class="btn wa" id="btn_wa" href="#" target="_blank" rel="noopener">💬 Commander WhatsApp</a>
+          <a class="btn call" id="btn_call" href="#">📞 Appeler</a>
+          <a class="btn gold" id="btn_maps" href="#" target="_blank" rel="noopener">🗺️ Voir sur Maps</a>
+          <a class="btn" id="btn_copy" href="javascript:void(0)">📎 Copier contact</a>
+        </div>
+
+        <div class="panel">
+          <b>📌 Repère</b>
+          <div class="muted" id="address_hint">ADDRESS_HINT</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="foot">
+      © DIGIYLYFE ∞ — paiement direct au pro — pierre par pierre
+    </div>
+
+  </div>
+
+  <script>
+  (function(){
+    "use strict";
+
+    // ✅ À REMPLACER (7 champs)
+    const P = {
+      name: "PARTNER_NAME",
+      phone: "+221XXXXXXXXX",
+      city: "CITY",
+      category: "CATEGORY",
+      addressHint: "ADDRESS_HINT",
+      mapsQuery: "MAPS_QUERY", // ex: "Astou Boutique Teranga Saly"
+      whatsappText: "Salam, je viens de DIGIY MARKET. Je veux commander / infos."
+    };
+
+    function cleanPhone(p){ return String(p||"").replace(/\s+/g,"").replace("+",""); }
+    const wa = "https://wa.me/" + cleanPhone(P.phone) + "?text=" + encodeURIComponent(P.whatsappText);
+    const maps = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(P.mapsQuery || (P.name + " " + P.city));
+
+    document.getElementById("btn_wa").href = wa;
+    document.getElementById("btn_call").href = "tel:" + P.phone;
+    document.getElementById("btn_maps").href = maps;
+    document.getElementById("address_hint").textContent = P.addressHint || "";
+
+    // Copier contact
+    document.getElementById("btn_copy").addEventListener("click", async ()=>{
+      const txt = `${P.name} — ${P.phone}\n${P.addressHint || ""}\n${maps}`;
+      try{
+        await navigator.clipboard.writeText(txt);
+        alert("✅ Contact copié !");
+      }catch(e){
+        prompt("Copie :", txt);
+      }
+    });
+  })();
+  </script>
+</body>
+</html>
