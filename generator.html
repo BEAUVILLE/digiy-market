@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <meta name="theme-color" content="#020617"/>
+  <title>DIGIY POS PRO — Générateur de fiche (RPC)</title>
+  <meta name="description" content="Générateur de fiche commerce DIGIY POS / CAISSE PRO. Export HTML + Publish RPC sécurisé." />
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Guard (ton fichier) -->
+  <script src="./guard.js?v=20260208-generator-rpc"></script>
+
+  <style>
+    :root{
+      --bg:#020617;
+      --card:#0B1120;
+      --card2:#030712;
+      --ink:#F9FAFB;
+      --muted:#CBD5E1;
+      --line:rgba(148,163,184,.22);
+      --gold:#facc15;
+      --green:#22c55e;
+      --orange:#f97316;
+      --red:#ef4444;
+      --r:20px;
+      --shadow:0 18px 55px rgba(0,0,0,.45);
+    }
+    *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+    body{
+      min-height:100vh;
+      background:
+        radial-gradient(circle at top, rgba(250,204,21,.10) 0, transparent 55%),
+        radial-gradient(circle at 18% 10%, rgba(34,197,94,.10) 0, transparent 55%),
+        radial-gradient(circle at top,#0b1120 0,#020617 50%,#000 100%);
+      color:var(--ink);
+      padding:16px;
+    }
+    .wrap{max-width:1200px;margin:0 auto;}
+    .top{
+      display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(11,17,32,.55);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      padding:14px 14px;
+    }
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}
+    .logo{
+      width:44px;height:44px;border-radius:16px;
+      background:radial-gradient(circle at 30% 20%,var(--gold),var(--orange));
+      display:grid;place-items:center;
+      color:#020617;font-weight:1000;font-size:18px;
+      box-shadow:0 10px 26px rgba(250,204,21,0.40);
+      flex:0 0 auto;
+    }
+    .title{min-width:0}
+    .title h1{font-size:15px;font-weight:1000;letter-spacing:.10em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80vw}
+    .title p{margin-top:4px;font-size:12px;color:var(--muted);font-weight:850}
+    .pills{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .pill{
+      border-radius:999px;padding:7px 10px;
+      border:1px solid rgba(203,213,225,0.24);
+      background:rgba(2,6,23,.35);
+      color:rgba(234,255,241,.92);
+      font-size:12px;font-weight:950;white-space:nowrap;
+    }
+    .pill b{color:var(--gold);font-weight:1000}
+    .btns{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .btn{
+      border-radius:999px;
+      padding:10px 14px;
+      font-size:13px;font-weight:950;
+      border:1px solid rgba(203,213,225,0.30);
+      background:rgba(15,23,42,0.55);
+      color:var(--ink);
+      text-decoration:none;
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      cursor:pointer;user-select:none;
+    }
+    .btn.primary{
+      border:none;
+      background:linear-gradient(135deg,var(--gold),var(--orange));
+      color:#020617;
+      box-shadow:0 10px 26px rgba(250,204,21,0.28);
+    }
+    .btn.green{
+      border:none;
+      background:linear-gradient(135deg, rgba(34,197,94,.95), rgba(34,197,94,.65));
+      color:#061b14;
+    }
+    .btn.red{
+      border:none;
+      background:linear-gradient(135deg, rgba(239,68,68,.95), rgba(239,68,68,.65));
+      color:#0b0b0b;
+    }
+
+    .grid{display:grid;gap:14px;margin-top:14px;}
+    @media(min-width:1000px){ .grid{grid-template-columns: 1.05fr .95fr;} }
+
+    .card{
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(11,17,32,.55);
+      box-shadow:0 14px 40px rgba(0,0,0,.35);
+      padding:14px;
+    }
+    .card h2{
+      font-size:13px;font-weight:1000;letter-spacing:.10em;text-transform:uppercase;
+      color:rgba(234,255,241,.90);
+      margin-bottom:10px;
+    }
+    .muted{color:var(--muted);font-weight:850;line-height:1.5;font-size:13px}
+    label{display:block;margin:10px 0 6px;font-size:12px;color:rgba(203,213,225,.95);font-weight:950}
+    input, textarea, select{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(203,213,225,0.20);
+      background:rgba(2,6,23,.55);
+      color:var(--ink);
+      padding:12px 12px;
+      outline:none;
+      font-weight:900;
+      font-size:14px;
+    }
+    textarea{min-height:110px;resize:vertical;font-weight:800;line-height:1.45}
+    input:focus, textarea:focus, select:focus{
+      border-color: rgba(250,204,21,.55);
+      box-shadow:0 0 0 3px rgba(250,204,21,.12);
+    }
+    .row{display:grid;gap:10px}
+    @media(min-width:620px){ .row.two{grid-template-columns:1fr 1fr} }
+    @media(min-width:900px){ .row.three{grid-template-columns:1fr 1fr 1fr} }
+
+    .mini{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
+    .mini .btn{flex:1;min-width:190px}
+
+    .note{
+      margin-top:10px;
+      border-radius:16px;
+      border:1px solid rgba(203,213,225,0.14);
+      background:rgba(2,6,23,.45);
+      padding:12px;
+      font-size:13px;font-weight:900;color:var(--muted);
+      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+    }
+    .note b{color:var(--gold);font-weight:1000}
+
+    /* Preview style */
+    .prevWrap{display:flex;flex-direction:column;gap:12px}
+    .prevCard{
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(11,17,32,.55);
+      box-shadow:0 14px 40px rgba(0,0,0,.35);
+      overflow:hidden;
+    }
+    .prevPhoto{
+      position:relative;width:100%;height:230px;
+      background:rgba(0,0,0,.25);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      overflow:hidden;
+    }
+    .prevPhoto img{
+      width:100%;height:100%;object-fit:cover;display:block;
+      filter:saturate(1.05);transform:scale(1.01);
+    }
+    .badgeTop{
+      position:absolute;top:10px;left:10px;
+      display:flex;gap:8px;flex-wrap:wrap;align-items:center;
+      max-width: calc(100% - 20px);
+    }
+    .chip{
+      border-radius:999px;padding:6px 10px;font-size:11px;font-weight:1000;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(2,6,23,.55);
+      color:rgba(234,255,241,.92);
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;
+    }
+    .chip.gold{border-color:rgba(250,204,21,.30)}
+    .chip.green{border-color:rgba(34,197,94,.30)}
+    .prevBody{padding:14px;display:flex;flex-direction:column;gap:10px}
+    .prevName{font-size:18px;font-weight:1000;color:var(--gold);line-height:1.15}
+    .prevMeta{display:flex;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--muted);font-weight:850}
+    .prevBio{font-size:14px;color:rgba(234,255,241,.90);font-weight:850;line-height:1.45}
+    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
+    .tag{
+      border-radius:999px;padding:6px 10px;
+      border:1px solid rgba(203,213,225,0.22);
+      color:var(--muted);
+      background:rgba(2,6,23,.35);
+      font-size:11px;font-weight:950;
+    }
+    .prevActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+    .prevActions a{
+      flex:1;min-width:140px;border-radius:999px;
+      padding:12px 14px;font-size:14px;font-weight:1000;border:0;
+      text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      line-height:1;white-space:nowrap;
+    }
+    .aPrimary{
+      background:linear-gradient(135deg,var(--gold),var(--orange));
+      color:#020617;
+      box-shadow:0 10px 24px rgba(250,204,21,.25);
+    }
+    .aSecondary{
+      background:rgba(34,197,94,.15);
+      border:1px solid rgba(34,197,94,.30);
+      color:#bbf7d0;
+    }
+    .small{font-size:12px;color:rgba(203,213,225,.90);font-weight:850;line-height:1.45}
+
+    .toast{
+      position:fixed;left:50%;bottom:18px;transform:translateX(-50%);
+      background:rgba(2,6,23,.88);
+      border:1px solid rgba(255,255,255,.12);
+      color:#fff;padding:10px 14px;border-radius:14px;font-weight:950;font-size:13px;
+      display:none;z-index:9999;box-shadow:var(--shadow);max-width:92vw;text-align:center;
+    }
+    .toast.show{display:block}
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <div class="logo">💳</div>
+      <div class="title">
+        <h1>DIGIY POS PRO — Générateur de fiche (RPC)</h1>
+        <p>Tu remplis • preview • export HTML • publish via RPC (token)</p>
+      </div>
+    </div>
+    <div class="pills">
+      <span class="pill">SLUG: <b id="slugTxt">—</b></span>
+      <span class="pill">OWNER: <b id="ownerTxt">—</b></span>
+      <span class="pill">STATUT: <b id="statTxt">boot…</b></span>
+    </div>
+    <div class="btns">
+      <a class="btn" href="../index.html">↩️ Retour</a>
+      <button class="btn red" id="btnLogout">🚪 Logout</button>
+    </div>
+  </header>
+
+  <div class="grid">
+
+    <!-- FORM -->
+    <section class="card">
+      <h2>✍️ Infos de la fiche</h2>
+      <div class="muted">
+        Ici tu peux préparer la fiche d’un commerce. <b style="color:var(--gold)">Publish</b> passe par <b style="color:var(--green)">RPC</b> (token).
+      </div>
+
+      <div class="row two">
+        <div>
+          <label>Nom affiché (display_name)</label>
+          <input id="display_name" placeholder="Ex: Boutique Ndiaye / Chez Awa" />
+        </div>
+        <div>
+          <label>Catégorie</label>
+          <input id="category" placeholder="Ex: Alimentation, Mode, Salon, Quincaillerie…" />
+        </div>
+      </div>
+
+      <div class="row three">
+        <div>
+          <label>Ville</label>
+          <input id="city" placeholder="Ex: Dakar, Saly, Thiès…" />
+        </div>
+        <div>
+          <label>Adresse (optionnel)</label>
+          <input id="address" placeholder="Ex: Rue 10, Keur Massar…" />
+        </div>
+        <div>
+          <label>WhatsApp (format +221…)</label>
+          <input id="whatsapp" placeholder="+221771234567" />
+        </div>
+      </div>
+
+      <div class="row two">
+        <div>
+          <label>Photo URL (photo_url)</label>
+          <input id="photo_url" placeholder="https://…" />
+          <div class="small" style="margin-top:6px;">Photo claire = confiance direct.</div>
+        </div>
+        <div>
+          <label>Lien fiche (profile_url) — si tu as une page dédiée</label>
+          <input id="profile_url" placeholder="https://beauville.github.io/…/fiche.html" />
+          <div class="small" style="margin-top:6px;">Sinon vide : la vitrine enverra sur “commencer à payer”.</div>
+        </div>
+      </div>
+
+      <label>Bio (description courte)</label>
+      <textarea id="bio" placeholder="Ex: Boutique familiale — épicerie, produits frais, dépôt Wave…"></textarea>
+
+      <div class="row three">
+        <div>
+          <label>Badge (badge)</label>
+          <input id="badge" placeholder="🏪 PARTENAIRE" />
+        </div>
+        <div>
+          <label>Badge HUB (hub_badge)</label>
+          <input id="hub_badge" placeholder="💳 POS" />
+        </div>
+        <div>
+          <label>Label prix (price_label)</label>
+          <input id="price_label" placeholder="Paiement direct" />
+        </div>
+      </div>
+
+      <div class="row two">
+        <div>
+          <label>Tags (séparés par virgule)</label>
+          <input id="tags" placeholder="Ex: Wave, Orange Money, Livraison, Ouvert 7/7" />
+        </div>
+        <div>
+          <label>Priorité (priority)</label>
+          <input id="priority" inputmode="numeric" placeholder="Ex: 10" />
+        </div>
+      </div>
+
+      <div class="row three">
+        <div>
+          <label>Actif (is_active)</label>
+          <select id="is_active">
+            <option value="true">✅ Oui</option>
+            <option value="false">⛔ Non</option>
+          </select>
+        </div>
+        <div>
+          <label>Publié (is_published)</label>
+          <select id="is_published">
+            <option value="true">✅ Oui</option>
+            <option value="false">⛔ Non</option>
+          </select>
+        </div>
+        <div>
+          <label>Vérifié (is_verified)</label>
+          <select id="is_verified">
+            <option value="false">—</option>
+            <option value="true">✅ Oui</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mini">
+        <button class="btn" id="btnSaveLocal">💾 Sauver (local)</button>
+        <button class="btn green" id="btnExportHtml">🧾 Export HTML (fiche)</button>
+        <button class="btn primary" id="btnPublish">🚀 Publier via RPC</button>
+      </div>
+
+      <div class="note">
+        <span>🧠 <b>Mode sûr</b> : export HTML marche toujours.</span>
+        <span>🛡️ Publish : RPC valide token + owner_id.</span>
+      </div>
+    </section>
+
+    <!-- PREVIEW -->
+    <section class="card prevWrap">
+      <h2>👁️ Aperçu (live)</h2>
+      <div class="muted">Photo • badges • tags • WhatsApp direct, comme ta vitrine.</div>
+
+      <article class="prevCard" id="preview">
+        <div class="prevPhoto">
+          <img id="pPhoto" alt="Photo" src="https://images.unsplash.com/photo-1528690873152-4cbd29d2c9c8?auto=format&fit=crop&w=1400&q=80">
+          <div class="badgeTop">
+            <span class="chip gold" id="pBadge">🏪 PARTENAIRE</span>
+            <span class="chip green" id="pHub">💳 POS</span>
+          </div>
+        </div>
+
+        <div class="prevBody">
+          <div class="prevName" id="pName">Commerce</div>
+          <div class="prevMeta" id="pMeta">
+            <span>🏷️ —</span>
+            <span>📍 —</span>
+          </div>
+          <div class="prevBio" id="pBio">Commerce équipé DIGIY POS.</div>
+          <div class="tags" id="pTags"></div>
+
+          <div class="prevActions">
+            <a class="aPrimary" id="pFiche" href="#" target="_blank" rel="noopener">📄 Voir la fiche</a>
+            <a class="aSecondary" id="pWa" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+          </div>
+
+          <div class="small">
+            Slug = <b id="pSlug">—</b> • Public = <b id="pPub">—</b> • Actif = <b id="pAct">—</b>
+          </div>
+        </div>
+      </article>
+
+      <div class="muted" style="margin-top:6px">
+        🦅 Terrain tip : 1 photo claire + 1 phrase simple + WhatsApp nickel.
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+/* ===========================
+   CONFIG SUPABASE
+=========================== */
+const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
+const SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indlc3Ftd2pqdHNlZnlqbmx1b3NqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUxNzg4ODIsImV4cCI6MjA4MDc1NDg4Mn0.dZfYOc2iL2_wRYL3zExZFsFSBK6AbMeOid2LrIjcTdA";
+
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  auth: { persistSession: false },
+  global: { headers: { "X-Client-Info": "digiy-pos-pro-generator-rpc" } }
+});
+
+/* ===========================
+   RPC NAMES (A TOI)
+   Mets le NOM EXACT de ta RPC ici.
+   Format conseillé: (p_token text, p_profile jsonb) -> json/jsonb ou text(json)
+=========================== */
+const RPC_UPSERT_NAME = "pos_profile_upsert_v1";     // <<< CHANGE ICI SI BESOIN
+const RPC_GET_NAME    = "pos_profile_get_v1";        // optionnel (si tu as)
+
+/* ===========================
+   UI helpers
+=========================== */
+function toast(msg){
+  const t = document.getElementById("toast");
+  if(!t) return;
+  t.textContent = msg || "";
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"), 2200);
+}
+function esc(s){
+  return String(s ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+function cleanPhone(p){
+  return String(p||"").replace(/\s+/g,"").replace(/^\+/,"").replace(/[^\d]/g,"");
+}
+function waLink(phone, msg){
+  const p = cleanPhone(phone);
+  const t = encodeURIComponent(msg || "");
+  return "https://wa.me/" + p + (t ? ("?text=" + t) : "");
+}
+function tagsToArray(s){
+  if(Array.isArray(s)) return s.filter(Boolean).map(String);
+  const x = String(s||"").trim();
+  if(!x) return [];
+  return x.split(",").map(v=>v.trim()).filter(Boolean);
+}
+function numOr(v, d=0){
+  const n = Number(String(v||"").replace(/[^\d]/g,""));
+  return Number.isFinite(n) ? n : d;
+}
+function safeJson(x){
+  if(x == null) return null;
+  if(typeof x === "object") return x;
+  const s = String(x);
+  try{ return JSON.parse(s); }catch(_){ return { ok:false, error:s }; }
+}
+
+/* ===========================
+   SESSION (Guard)
+=========================== */
+let SESSION = null;
+let SLUG = "";
+let OWNER = "";
+let TOKEN = "";
+
+(async function boot(){
+  try{
+    if(window.DIGIY_GUARD?.boot){
+      const r = await window.DIGIY_GUARD.boot({ login:"./pin.html" });
+      if(!r?.ok) return;
+    }
+  }catch(_){}
+
+  SESSION = window.DIGIY_GUARD?.getSession?.() || null;
+
+  SLUG = String(SESSION?.slug || "").toLowerCase().trim();
+  OWNER = String(SESSION?.owner_id || "").trim();
+  TOKEN = String(SESSION?.token || "").trim(); // ✅ important en RPC
+
+  document.getElementById("slugTxt").textContent = SLUG || "—";
+  document.getElementById("ownerTxt").textContent = OWNER || "—";
+  document.getElementById("statTxt").textContent = (SLUG && OWNER && TOKEN) ? "session OK" : "session ?";
+
+  await loadLocal();
+  await loadFromRpcSafe(); // ✅ si tu as la RPC GET, sinon ça ignore
+  bind();
+  syncPreview();
+  toast("✅ Prêt (RPC)");
+})();
+
+/* ===========================
+   STORAGE
+=========================== */
+const KEY_LOCAL = "DIGIY_POS_PROFILE_DRAFT::" + (SLUG || "noslug");
+
+function getFormData(){
+  const d = {
+    owner_id: OWNER || null,
+    slug: SLUG || "",
+    display_name: document.getElementById("display_name").value.trim(),
+    category: document.getElementById("category").value.trim(),
+    city: document.getElementById("city").value.trim(),
+    address: document.getElementById("address").value.trim(),
+    whatsapp: document.getElementById("whatsapp").value.trim(),
+    photo_url: document.getElementById("photo_url").value.trim(),
+    bio: document.getElementById("bio").value.trim(),
+    tags: tagsToArray(document.getElementById("tags").value),
+    profile_url: document.getElementById("profile_url").value.trim(),
+    badge: document.getElementById("badge").value.trim(),
+    hub_badge: document.getElementById("hub_badge").value.trim(),
+    price_label: document.getElementById("price_label").value.trim(),
+    priority: numOr(document.getElementById("priority").value, 10),
+    is_active: document.getElementById("is_active").value === "true",
+    is_published: document.getElementById("is_published").value === "true",
+    is_verified: document.getElementById("is_verified").value === "true",
+    updated_at: new Date().toISOString()
+  };
+
+  if(!d.badge) d.badge = "🏪 PARTENAIRE";
+  if(!d.hub_badge) d.hub_badge = "💳 POS";
+  if(!d.price_label) d.price_label = "Paiement direct";
+  if(!d.photo_url) d.photo_url = "https://images.unsplash.com/photo-1528690873152-4cbd29d2c9c8?auto=format&fit=crop&w=1400&q=80";
+
+  return d;
+}
+
+function setFormData(d){
+  d = d || {};
+  document.getElementById("display_name").value = d.display_name || "";
+  document.getElementById("category").value = d.category || "";
+  document.getElementById("city").value = d.city || "";
+  document.getElementById("address").value = d.address || "";
+  document.getElementById("whatsapp").value = d.whatsapp || "";
+  document.getElementById("photo_url").value = d.photo_url || "";
+  document.getElementById("bio").value = d.bio || "";
+  document.getElementById("tags").value = Array.isArray(d.tags) ? d.tags.join(", ") : (d.tags || "");
+  document.getElementById("profile_url").value = d.profile_url || "";
+  document.getElementById("badge").value = d.badge || "🏪 PARTENAIRE";
+  document.getElementById("hub_badge").value = d.hub_badge || "💳 POS";
+  document.getElementById("price_label").value = d.price_label || "Paiement direct";
+  document.getElementById("priority").value = (d.priority ?? 10);
+  document.getElementById("is_active").value = (d.is_active === false) ? "false" : "true";
+  document.getElementById("is_published").value = (d.is_published === false) ? "false" : "true";
+  document.getElementById("is_verified").value = (d.is_verified === true) ? "true" : "false";
+}
+
+async function loadLocal(){
+  try{
+    const raw = localStorage.getItem(KEY_LOCAL);
+    if(!raw) return;
+    const d = JSON.parse(raw);
+    if(d && typeof d === "object"){
+      setFormData(d);
+      toast("🧠 Draft local chargé");
+    }
+  }catch(_){}
+}
+
+function saveLocal(){
+  const d = getFormData();
+  localStorage.setItem(KEY_LOCAL, JSON.stringify(d));
+  toast("💾 Draft sauvé (local)");
+}
+
+/* ===========================
+   LOAD via RPC GET (safe)
+   - optionnel : si tu n'as pas la RPC GET, ça ne casse rien
+=========================== */
+async function loadFromRpcSafe(){
+  if(!TOKEN || !SLUG) return;
+  if(!RPC_GET_NAME) return;
+  try{
+    const { data, error } = await sb.rpc(RPC_GET_NAME, { p_token: TOKEN, p_slug: SLUG });
+    if(error) throw error;
+
+    const r = safeJson(data);
+    if(r?.ok && r?.profile){
+      // merge soft
+      const current = getFormData();
+      const sup = r.profile || {};
+      const merged = { ...sup, ...current };
+
+      function preferSup(key){
+        const v = (current[key] ?? "");
+        const isEmpty = (Array.isArray(v) ? v.length===0 : String(v).trim()==="");
+        if(isEmpty && (sup[key] != null)) merged[key] = sup[key];
+      }
+      ["display_name","category","city","address","whatsapp","photo_url","bio","profile_url","badge","hub_badge","price_label"].forEach(preferSup);
+      if(Array.isArray(sup.tags) && (!Array.isArray(current.tags) || current.tags.length===0)) merged.tags = sup.tags;
+      if(sup.priority != null && (current.priority==null || String(current.priority).trim()==="")) merged.priority = sup.priority;
+
+      if(typeof sup.is_active === "boolean") merged.is_active = sup.is_active;
+      if(typeof sup.is_published === "boolean") merged.is_published = sup.is_published;
+      if(typeof sup.is_verified === "boolean") merged.is_verified = sup.is_verified;
+
+      setFormData(merged);
+      toast("✅ Fiche chargée (RPC GET)");
+    }else{
+      // pas de fiche existante
+    }
+  }catch(e){
+    console.warn("RPC GET ignored:", e?.message || e);
+  }
+}
+
+/* ===========================
+   PREVIEW
+=========================== */
+function syncPreview(){
+  const d = getFormData();
+
+  document.getElementById("pPhoto").src = d.photo_url || "https://images.unsplash.com/photo-1528690873152-4cbd29d2c9c8?auto=format&fit=crop&w=1400&q=80";
+  document.getElementById("pBadge").textContent = d.badge || "🏪 PARTENAIRE";
+  document.getElementById("pHub").textContent = d.hub_badge || "💳 POS";
+
+  document.getElementById("pName").textContent = d.display_name || "Commerce";
+  const cat = d.category || "—";
+  const city = d.city || "—";
+  const addr = d.address ? (" • " + d.address) : "";
+  document.getElementById("pMeta").innerHTML = `
+    <span>🏷️ ${esc(cat)}</span>
+    <span>📍 ${esc(city)}${esc(addr)}</span>
+  `;
+
+  document.getElementById("pBio").textContent = d.bio || "Commerce équipé DIGIY POS.";
+
+  const tags = (Array.isArray(d.tags) ? d.tags : []).slice(0,6);
+  const pTags = document.getElementById("pTags");
+  pTags.innerHTML = "";
+  for(const t of tags){
+    const el = document.createElement("span");
+    el.className = "tag";
+    el.textContent = String(t);
+    pTags.appendChild(el);
+  }
+  if(d.price_label){
+    const el = document.createElement("span");
+    el.className = "tag";
+    el.style.borderColor = "rgba(250,204,21,.22)";
+    el.style.color = "#fde68a";
+    el.textContent = d.price_label;
+    pTags.appendChild(el);
+  }
+
+  const ficheHref = d.profile_url || "https://beauville.github.io/commencer-a-payer/?module=CAISSE&offre=CAISSE";
+  document.getElementById("pFiche").href = ficheHref;
+
+  const wa = cleanPhone(d.whatsapp || "");
+  const waMsg = `Salam ${d.display_name || "DIGIY POS"}, je viens de la vitrine DIGIY POS. J'aimerais avoir des infos.`;
+  document.getElementById("pWa").href = wa
+    ? waLink(wa, waMsg)
+    : ("https://wa.me/221771342889?text=" + encodeURIComponent("Salut DIGIY POS, je n'ai pas le WhatsApp du commerce " + (d.display_name||SLUG||"") + "."));
+
+  document.getElementById("pSlug").textContent = d.slug || "—";
+  document.getElementById("pPub").textContent = d.is_published ? "true" : "false";
+  document.getElementById("pAct").textContent = d.is_active ? "true" : "false";
+}
+
+/* ===========================
+   EXPORT HTML (fiche statique)
+=========================== */
+function buildProfileHtml(d){
+  const title = esc(d.display_name || ("Commerce " + (d.slug||"")));
+  const photo = esc(d.photo_url || "");
+  const badge = esc(d.badge || "🏪 PARTENAIRE");
+  const hub = esc(d.hub_badge || "💳 POS");
+  const cat = esc(d.category || "—");
+  const city = esc(d.city || "—");
+  const address = esc(d.address || "");
+  const bio = esc(d.bio || "");
+  const tags = (Array.isArray(d.tags) ? d.tags : []).slice(0,10).map(x=>esc(x));
+  const price = esc(d.price_label || "Paiement direct");
+  const wa = cleanPhone(d.whatsapp || "");
+  const waMsg = encodeURIComponent(`Salam ${d.display_name || "DIGIY POS"}, je viens de ta fiche DIGIY. Je veux des infos.`);
+  const waHref = wa ? (`https://wa.me/${wa}?text=${waMsg}`) : `https://wa.me/221771342889?text=${encodeURIComponent("Salut DIGIY POS, je n'ai pas le WhatsApp du commerce " + (d.display_name||d.slug||"") + ".")}`;
+
+  return `<!doctype html>
+<html lang="fr"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="theme-color" content="#020617"/>
+<title>${title} — DIGIY POS</title>
+<meta name="description" content="Fiche commerce DIGIY POS — contact direct WhatsApp — 0% commission."/>
+<style>
+:root{--bg:#020617;--card:#0B1120;--ink:#F9FAFB;--muted:#CBD5E1;--gold:#facc15;--green:#22c55e;--orange:#f97316;--shadow:0 18px 55px rgba(0,0,0,.45);}
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+body{min-height:100vh;background:
+radial-gradient(circle at top, rgba(250,204,21,.10) 0, transparent 55%),
+radial-gradient(circle at 18% 10%, rgba(34,197,94,.10) 0, transparent 55%),
+radial-gradient(circle at top,#0b1120 0,#020617 50%,#000 100%);
+color:var(--ink);padding:16px;}
+.wrap{max-width:820px;margin:0 auto;}
+.card{border-radius:22px;border:1px solid rgba(255,255,255,.10);background:rgba(11,17,32,.55);box-shadow:var(--shadow);overflow:hidden;}
+.photo{position:relative;height:260px;background:rgba(0,0,0,.25);border-bottom:1px solid rgba(255,255,255,.08);overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.05);transform:scale(1.01);}
+.badgeTop{position:absolute;top:10px;left:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-width:calc(100% - 20px);}
+.chip{border-radius:999px;padding:6px 10px;font-size:11px;font-weight:1000;border:1px solid rgba(255,255,255,.14);background:rgba(2,6,23,.55);color:rgba(234,255,241,.92);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
+.chip.gold{border-color:rgba(250,204,21,.30)} .chip.green{border-color:rgba(34,197,94,.30)}
+.body{padding:14px;display:flex;flex-direction:column;gap:10px}
+.name{font-size:22px;font-weight:1000;color:var(--gold);line-height:1.15}
+.meta{display:flex;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--muted);font-weight:850}
+.bio{font-size:14px;color:rgba(234,255,241,.90);font-weight:850;line-height:1.45}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
+.tag{border-radius:999px;padding:6px 10px;border:1px solid rgba(203,213,225,0.22);color:var(--muted);background:rgba(2,6,23,.35);font-size:11px;font-weight:950}
+.tag.gold{border-color:rgba(250,204,21,.22);color:#fde68a}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+a.btn{flex:1;min-width:160px;border-radius:999px;padding:12px 14px;font-size:14px;font-weight:1000;border:0;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap}
+.btn.primary{background:linear-gradient(135deg,var(--gold),var(--orange));color:#020617;box-shadow:0 10px 24px rgba(250,204,21,.25)}
+.btn.secondary{background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.30);color:#bbf7d0}
+.small{margin-top:10px;font-size:12px;color:rgba(203,213,225,.88);font-weight:850;line-height:1.5}
+</style></head>
+<body><div class="wrap"><div class="card">
+<div class="photo"><img src="${photo}" alt="${title}" loading="lazy"/>
+  <div class="badgeTop"><span class="chip gold">${badge}</span><span class="chip green">${hub}</span></div>
+</div>
+<div class="body">
+  <div class="name">${title}</div>
+  <div class="meta"><span>🏷️ ${cat}</span><span>📍 ${city}${address ? " • " + address : ""}</span></div>
+  ${bio ? `<div class="bio">${bio}</div>` : `<div class="bio" style="color:var(--muted)">Commerce équipé DIGIY POS.</div>`}
+  <div class="tags">
+    ${(tags || []).map(t=>`<span class="tag">${t}</span>`).join("")}
+    ${price ? `<span class="tag gold">${price}</span>` : ""}
+  </div>
+  <div class="actions">
+    <a class="btn primary" href="https://beauville.github.io/commencer-a-payer/?module=CAISSE&offre=CAISSE" target="_blank" rel="noopener">💳 Équiper mon commerce</a>
+    <a class="btn secondary" href="${waHref}" target="_blank" rel="noopener">💬 WhatsApp</a>
+  </div>
+  <div class="small">DIGIY POS • 0% commission • paiement direct au commerçant ∞</div>
+</div>
+</div></div></body></html>`;
+}
+
+function exportHtml(){
+  const d = getFormData();
+  if(!d.slug){
+    alert("Slug manquant (session). Reconnecte-toi via PIN.");
+    return;
+  }
+  const html = buildProfileHtml(d);
+  const blob = new Blob([html], { type:"text/html;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "fiche-pos-" + d.slug + ".html";
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 800);
+  toast("🧾 HTML exporté");
+}
+
+/* ===========================
+   PUBLISH via RPC (TOKEN + JSONB)
+=========================== */
+async function publishRpc(){
+  const d = getFormData();
+
+  if(!TOKEN){
+    alert("Token manquant. Reconnecte-toi via PIN.");
+    return;
+  }
+  if(!d.slug || !d.owner_id){
+    alert("Session/Slug/Owner manquant. Reconnecte-toi via PIN.");
+    return;
+  }
+
+  saveLocal();
+
+  // payload envoyée au SQL
+  const profile = {
+    owner_id: d.owner_id,
+    slug: d.slug,
+    display_name: d.display_name,
+    category: d.category,
+    city: d.city,
+    address: d.address,
+    whatsapp: d.whatsapp,
+    photo_url: d.photo_url,
+    bio: d.bio,
+    tags: Array.isArray(d.tags) ? d.tags : [],
+    profile_url: d.profile_url,
+    is_active: d.is_active,
+    is_published: d.is_published,
+    is_verified: d.is_verified,
+    priority: d.priority,
+    badge: d.badge,
+    hub_badge: d.hub_badge,
+    price_label: d.price_label
+  };
+
+  try{
+    const { data, error } = await sb.rpc(RPC_UPSERT_NAME, {
+      p_token: TOKEN,
+      p_profile: profile
+    });
+
+    if(error) throw error;
+
+    const r = safeJson(data);
+
+    if(r?.ok){
+      toast("🚀 Publié (RPC) OK");
+      console.log("RPC OK:", r);
+      return;
+    }
+
+    // si ta RPC renvoie direct la ligne sans wrapper ok
+    if(r && (r.slug || r.id)){
+      toast("🚀 Publié (RPC) OK");
+      console.log("RPC row:", r);
+      return;
+    }
+
+    alert("⚠️ RPC réponse inattendue:\n" + JSON.stringify(r, null, 2));
+  }catch(e){
+    console.error("publishRpc error:", e);
+    alert("❌ Publish RPC échoué.\n\nDétail: " + (e?.message || e) + "\n\n➡️ Export HTML reste dispo.");
+  }
+}
+
+/* ===========================
+   EVENTS
+=========================== */
+function bind(){
+  ["display_name","category","city","address","whatsapp","photo_url","bio","tags","profile_url","badge","hub_badge","price_label","priority","is_active","is_published","is_verified"]
+    .forEach(id=>{
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.addEventListener("input", syncPreview);
+      el.addEventListener("change", syncPreview);
+    });
+
+  document.getElementById("btnSaveLocal").onclick = saveLocal;
+  document.getElementById("btnExportHtml").onclick = exportHtml;
+  document.getElementById("btnPublish").onclick = publishRpc;
+
+  document.getElementById("btnLogout").onclick = ()=>{
+    if(window.DIGIY_GUARD?.logout) return window.DIGIY_GUARD.logout("./pin.html");
+    localStorage.removeItem("DIGIY_SESSION");
+    location.href = "./pin.html";
+  };
+}
+</script>
+
+</body>
+</html>
