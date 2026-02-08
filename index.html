@@ -5,6 +5,10 @@
   <title>DIGIY MARKET — Boutiques Partenaires Saly</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="DIGIY MARKET — Boutiques partenaires Saly • 0% commission • Contact WhatsApp direct.">
+  <meta name="theme-color" content="#020617">
+
+  <!-- ✅ Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
     :root{
@@ -14,6 +18,7 @@
       --accent2:#22c55e;
       --ink:#f9fafb;
       --muted:#cbd5e1;
+      --line: rgba(148,163,184,0.35);
     }
     *{
       margin:0;
@@ -87,7 +92,7 @@
       border:1px solid rgba(250,204,21,0.3);
       border-radius:20px;
       padding:20px;
-      margin-bottom:20px;
+      margin-bottom:14px;
       text-align:center;
     }
     .hero h2{
@@ -103,15 +108,50 @@
     }
     .hero .stats{
       display:flex;
-      gap:20px;
+      gap:14px;
       justify-content:center;
       margin-top:16px;
       flex-wrap:wrap;
     }
     .stat-item{
       font-size:14px;
-      font-weight:800;
+      font-weight:900;
       color:var(--accent2);
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(34,197,94,0.35);
+      background:rgba(34,197,94,0.12);
+    }
+
+    /* Tools */
+    .tools{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin:12px 0 6px;
+    }
+    .search{
+      flex:1;
+      min-width:240px;
+      padding:12px 14px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.45);
+      background:rgba(15,23,42,0.65);
+      color:var(--ink);
+      font-weight:800;
+      outline:none;
+    }
+    .search::placeholder{color:rgba(203,213,225,.70)}
+    .chip{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.45);
+      background:rgba(15,23,42,0.65);
+      color:var(--muted);
+      font-weight:900;
+      font-size:13px;
+      white-space:nowrap;
     }
 
     .grid{
@@ -132,7 +172,7 @@
     .card{
       background:var(--card);
       border-radius:22px;
-      border:1px solid rgba(148,163,184,0.35);
+      border:1px solid var(--line);
       padding:14px;
       box-shadow:0 14px 32px rgba(0,0,0,0.55);
       display:flex;
@@ -140,6 +180,7 @@
       gap:10px;
       overflow:hidden;
       transition:all 0.3s ease;
+      position:relative;
     }
     .card:hover{
       transform:translateY(-4px);
@@ -152,6 +193,7 @@
       overflow:hidden;
       border:2px solid var(--accent);
       position:relative;
+      background:rgba(250,204,21,0.06);
     }
     .photo img{
       width:100%;
@@ -178,25 +220,26 @@
     }
     .type{
       font-size:15px;
-      font-weight:700;
+      font-weight:800;
       color:var(--accent2);
     }
     .desc{
       font-size:16px;
       line-height:1.5;
       color:var(--ink);
+      opacity:.95;
     }
     .city{
       font-size:14px;
       color:var(--muted);
-      font-weight:600;
+      font-weight:700;
       display:flex;
       align-items:center;
       gap:6px;
     }
     .price{
       font-size:15px;
-      font-weight:800;
+      font-weight:900;
       color:var(--accent2);
       padding:8px 12px;
       background:rgba(34,197,94,0.15);
@@ -244,6 +287,36 @@
       transform:translateY(-2px);
     }
 
+    .soon{
+      opacity:0.7;
+    }
+    .soon .soon-badge{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      background:rgba(250,204,21,0.95);
+      color:#111;
+      padding:12px 24px;
+      border-radius:12px;
+      font-weight:900;
+      font-size:14px;
+      z-index:10;
+      box-shadow:0 8px 24px rgba(0,0,0,0.4);
+    }
+    .soon .btn{opacity:.55;cursor:not-allowed;pointer-events:none}
+
+    .empty{
+      margin-top:14px;
+      padding:14px;
+      border-radius:16px;
+      border:1px dashed rgba(148,163,184,0.45);
+      background:rgba(15,23,42,0.55);
+      color:var(--muted);
+      font-weight:900;
+      display:none;
+    }
+
     footer{
       margin-top:30px;
       padding-top:20px;
@@ -257,7 +330,7 @@
     }
     footer span{
       color:var(--accent);
-      font-weight:800;
+      font-weight:900;
     }
   </style>
 </head>
@@ -287,89 +360,29 @@
       Nos partenaires boutiques locaux • Contact direct WhatsApp<br>
       <strong>0% commission</strong> • Vous payez le vrai prix • Pierre par pierre ∞
     </p>
-    <div class="stats">
-      <div class="stat-item">✅ 3 Boutiques actives</div>
-      <div class="stat-item">🚀 2 Bientôt disponibles</div>
+    <div class="stats" id="stats">
+      <div class="stat-item" id="statActive">✅ 0 Boutique active</div>
       <div class="stat-item">💬 WhatsApp direct</div>
       <div class="stat-item">🏪 QG Centre Saly</div>
     </div>
   </div>
 
-  <section class="grid">
+  <!-- Tools -->
+  <div class="tools">
+    <input id="q" class="search" type="search" placeholder="Rechercher : Astou, sacs, couture, Saly, etc." />
+    <div class="chip" id="chipCount">0 résultats</div>
+  </div>
 
-    <!-- 1) ASTOU - HUB CENTRE -->
-    <div class="card">
-      <div class="photo">
-        <img src="https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=800&q=80" alt="Boutique textile Astou - Linge de maison Saly">
-        <div class="hub-badge">🏪 HUB CENTRE</div>
-      </div>
-      <div class="name">🧵 Astou</div>
-      <div class="type">Linge de maison & Couture</div>
-      <div class="city">📍 QG Saly Centre</div>
-      <div class="desc">
-        Linge de maison premium, couture sur mesure, serviettes, torchons, draps.
-        Textile authentique et qualité locale garantie.
-      </div>
-      <div class="price">💰 Promo locale • Stock disponible</div>
-      <div class="actions">
-        <!-- ✅ Corrigé: pointe vers la fiche MARKET -->
-        <a class="btn btn-view" href="partners/astou5785.html" target="_blank" rel="noopener">Voir la fiche</a>
-        <button class="btn btn-wa"
-                onclick="wa('+221778765785','Salam Astou, je viens de DIGIY MARKET et je suis intéressé par vos produits.');">
-          💬 WhatsApp
-        </button>
-      </div>
-    </div>
+  <!-- ✅ Listing Supabase -->
+  <section class="grid" id="grid"></section>
+  <div class="empty" id="empty">Aucune boutique publiée pour le moment.</div>
 
-    <!-- 2) TONTON ELHADJI -->
-    <div class="card">
-      <div class="photo">
-        <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=800&q=80" alt="Boutique Tonton Elhadji - Sacs et montres Saly">
-      </div>
-      <div class="name">👜 Tonton Elhadji</div>
-      <div class="type">Sacs & Montres • Accessoires</div>
-      <div class="city">📍 QG Saly Centre</div>
-      <div class="desc">
-        Sélection premium de sacs, montres et accessoires de qualité.
-        Stock limité, produits soigneusement choisis pour vous.
-      </div>
-      <div class="price">💰 Produits qualité • Stock limité</div>
-      <div class="actions">
-        <a class="btn btn-view" href="https://digiylyfe.com/partenaire-tonton-elhadji/" target="_blank" rel="noopener">Voir la fiche</a>
-        <button class="btn btn-wa"
-                onclick="wa('+221778329612','Salam Tonton, je viens de DIGIY MARKET pour vos sacs et montres.');">
-          💬 WhatsApp
-        </button>
-      </div>
-    </div>
-
-    <!-- 3) MICHEL STYLISTE -->
-    <div class="card">
-      <div class="photo">
-        <img src="https://images.unsplash.com/photo-1591561954557-26941169b49e?auto=format&fit=crop&w=800&q=80" alt="Michel Styliste - Robes africaines mode">
-      </div>
-      <div class="name">✂️ Michel</div>
-      <div class="type">Styliste & Couture Mode</div>
-      <div class="city">📍 Saly - Thiès</div>
-      <div class="desc">
-        Robes personnalisées, créations sur mesure, mode femme africaine revisitée.
-        Du design à la confection, chaque pièce est unique.
-      </div>
-      <div class="price">💰 Sur mesure • Créations exclusives</div>
-      <div class="actions">
-        <a class="btn btn-view" href="https://digiylyfe.com/page-partenaire-michel/" target="_blank" rel="noopener">Voir la fiche</a>
-        <button class="btn btn-wa"
-                onclick="wa('+221783718492','Salam Michel, je viens de DIGIY MARKET et je veux une création personnalisée.');">
-          💬 WhatsApp
-        </button>
-      </div>
-    </div>
+  <!-- ✅ Tes placeholders restent (bientôt) -->
+  <section class="grid" style="margin-top:18px">
 
     <!-- 4) PLACEHOLDER - TÉLÉPHONES & INFORMATIQUE -->
-    <div class="card" style="opacity:0.7;position:relative;">
-      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(250,204,21,0.95);color:#111;padding:12px 24px;border-radius:12px;font-weight:900;font-size:14px;z-index:10;box-shadow:0 8px 24px rgba(0,0,0,0.4);">
-        🚀 BIENTÔT DISPONIBLE
-      </div>
+    <div class="card soon">
+      <div class="soon-badge">🚀 BIENTÔT DISPONIBLE</div>
       <div class="photo">
         <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80" alt="Téléphones et matériel informatique">
       </div>
@@ -382,16 +395,14 @@
       </div>
       <div class="price">💰 Prix compétitifs • Garantie</div>
       <div class="actions">
-        <button class="btn btn-view" disabled style="opacity:0.5;cursor:not-allowed;">Bientôt disponible</button>
-        <button class="btn btn-wa" disabled style="opacity:0.5;cursor:not-allowed;">Bientôt</button>
+        <button class="btn btn-view" disabled>Bientôt disponible</button>
+        <button class="btn btn-wa" disabled>Bientôt</button>
       </div>
     </div>
 
     <!-- 5) PLACEHOLDER - CHAUSSURES & MODE -->
-    <div class="card" style="opacity:0.7;position:relative;">
-      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(250,204,21,0.95);color:#111;padding:12px 24px;border-radius:12px;font-weight:900;font-size:14px;z-index:10;box-shadow:0 8px 24px rgba(0,0,0,0.4);">
-        🚀 BIENTÔT DISPONIBLE
-      </div>
+    <div class="card soon">
+      <div class="soon-badge">🚀 BIENTÔT DISPONIBLE</div>
       <div class="photo">
         <img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=800&q=80" alt="Boutique de chaussures">
       </div>
@@ -404,8 +415,8 @@
       </div>
       <div class="price">💰 Nouveautés régulières</div>
       <div class="actions">
-        <button class="btn btn-view" disabled style="opacity:0.5;cursor:not-allowed;">Bientôt disponible</button>
-        <button class="btn btn-wa" disabled style="opacity:0.5;cursor:not-allowed;">Bientôt</button>
+        <button class="btn btn-view" disabled>Bientôt disponible</button>
+        <button class="btn btn-wa" disabled>Bientôt</button>
       </div>
     </div>
 
@@ -413,18 +424,138 @@
 
   <footer>
     <div>DIGIY MARKET • <span>Module DIGIYLYFE</span> — Saly → Sénégal → Afrique ∞</div>
-    <div>0% commission • Contact direct WhatsApp • Vrai prix pour chaque produit</div>
+    <div>0% commission • Contact direct WhatsApp • Vrai prix</div>
   </footer>
 
 </div>
 
 <script>
-function wa(phone, msg){
-  const clean = String(phone || "").replace(/\s+/g,"").replace("+","");
-  const txt = encodeURIComponent(msg || "");
-  const url = "https://wa.me/" + clean + (txt ? ("?text="+txt) : "");
-  window.open(url, "_blank", "noopener");
-}
+  // ✅ WhatsApp helper
+  function wa(phone, msg){
+    const clean = String(phone || "").replace(/[^\d]/g,"");
+    const txt = encodeURIComponent(msg || "");
+    const url = "https://wa.me/" + clean + (txt ? ("?text="+txt) : "");
+    window.open(url, "_blank", "noopener");
+  }
+
+  // ✅ Escape
+  function esc(s){
+    return String(s ?? "")
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#39;");
+  }
+
+  // ✅ Card render
+  function renderCard(p){
+    const photo = p.photo_url
+      ? `<img src="${esc(p.photo_url)}" alt="${esc(p.display_name || "Boutique")}">`
+      : `<img src="https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=800&q=80" alt="${esc(p.display_name || "Boutique")}">`;
+
+    const badge = (p.badge || p.hub_badge || "").trim();
+    const badgeHtml = badge ? `<div class="hub-badge">${esc(badge)}</div>` : "";
+
+    const name = p.display_name || "Boutique";
+    const cat = p.category || p.type || "Commerce";
+    const city = [p.city, p.address].filter(Boolean).join(" • ") || "Saly";
+
+    const desc = p.bio || p.description || "Boutique partenaire DIGIY MARKET.";
+    const price = p.price_label || "💰 Contact direct • Vrai prix";
+
+    // ✅ fiche URL: profile_url sinon partners/{slug}.html
+    const href = (p.profile_url && String(p.profile_url).trim())
+      ? String(p.profile_url).trim()
+      : (p.slug ? ("partners/" + p.slug + ".html") : "#");
+
+    const msg = `Salam ${name}, je viens de DIGIY MARKET et je suis intéressé par vos produits.`;
+
+    const waBtn = p.whatsapp
+      ? `<button class="btn btn-wa" onclick="wa('${esc(p.whatsapp)}','${esc(msg)}')">💬 WhatsApp</button>`
+      : `<button class="btn btn-wa" disabled style="opacity:.55;cursor:not-allowed;">💬 WhatsApp</button>`;
+
+    return `
+      <div class="card" data-search="${esc((name+" "+cat+" "+city+" "+desc+" "+(p.tags||[]).join(" ")).toLowerCase())}">
+        <div class="photo">
+          ${photo}
+          ${badgeHtml}
+        </div>
+        <div class="name">${esc(name)}</div>
+        <div class="type">${esc(cat)}</div>
+        <div class="city">📍 ${esc(city)}</div>
+        <div class="desc">${esc(desc)}</div>
+        <div class="price">${esc(price)}</div>
+        <div class="actions">
+          <a class="btn btn-view" href="${esc(href)}" target="_blank" rel="noopener">Voir la fiche</a>
+          ${waBtn}
+        </div>
+      </div>
+    `;
+  }
+
+  (async function(){
+    "use strict";
+
+    // ✅ SUPABASE (TES VALEURS)
+    const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
+    const SUPABASE_ANON_KEY =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indlc3Ftd2pqdHNlZnlqbmx1b3NqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUxNzg4ODIsImV4cCI6MjA4MDc1NDg4Mn0.dZfYOc2iL2_wRYL3zExZFsFSBK6AbMeOid2LrIjcTdA";
+
+    const TABLE = "digiy_market_public_profiles"; // ✅ MARKET (public)
+
+    const grid = document.getElementById("grid");
+    const empty = document.getElementById("empty");
+    const q = document.getElementById("q");
+    const chipCount = document.getElementById("chipCount");
+    const statActive = document.getElementById("statActive");
+
+    if(!window.supabase?.createClient){
+      console.error("Supabase JS non chargé.");
+      return;
+    }
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // ✅ fetch published+active (RLS doit autoriser)
+    const { data, error } = await sb
+      .from(TABLE)
+      .select("slug, display_name, category, city, address, whatsapp, photo_url, profile_url, bio, tags, badge, hub_badge, price_label, priority, updated_at")
+      .order("priority", { ascending: true })
+      .order("updated_at", { ascending: false })
+      .limit(80);
+
+    if(error){
+      console.error("[MARKET LIST] error:", error);
+    }
+
+    const list = Array.isArray(data) ? data : [];
+    if(statActive) statActive.textContent = `✅ ${list.length} Boutique${list.length>1?"s":""} active${list.length>1?"s":""}`;
+
+    if(!list.length){
+      if(empty) empty.style.display = "block";
+      if(chipCount) chipCount.textContent = "0 résultat";
+      return;
+    }
+
+    // render
+    grid.innerHTML = list.map(renderCard).join("");
+    if(empty) empty.style.display = "none";
+
+    function applyFilter(){
+      const s = (q.value || "").trim().toLowerCase();
+      let shown = 0;
+      grid.querySelectorAll(".card").forEach(el=>{
+        const hay = el.getAttribute("data-search") || "";
+        const ok = (!s || hay.includes(s));
+        el.style.display = ok ? "" : "none";
+        if(ok) shown++;
+      });
+      chipCount.textContent = `${shown} résultat${shown>1?"s":""}`;
+    }
+
+    applyFilter();
+    q.addEventListener("input", applyFilter);
+  })();
 </script>
 
 </body>
