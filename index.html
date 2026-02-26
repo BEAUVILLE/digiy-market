@@ -259,7 +259,7 @@
       min-width:160px;
     }
 
-    /* GRID */
+    /* SECTION */
     .section{
       margin-top:18px;
     }
@@ -271,6 +271,7 @@
     }
     .muted{ color:var(--muted); font-weight:850; line-height:var(--lh); }
 
+    /* GRID */
     .grid{
       margin-top:10px;
       display:grid;
@@ -449,6 +450,80 @@
       flex-wrap:wrap;
     }
 
+    /* BOOST */
+    .boostWrap{
+      margin-top:14px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(11,17,32,.55);
+      box-shadow:var(--shadow);
+      padding:14px 14px;
+      overflow:hidden;
+      position:relative;
+    }
+    .boostWrap:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(700px 360px at 10% 0%, rgba(249,115,22,.12), transparent 60%),
+        radial-gradient(700px 360px at 90% 90%, rgba(250,204,21,.12), transparent 60%);
+      pointer-events:none;
+    }
+    .boostInner{ position:relative; }
+    .boostTitle{
+      font-size:16px;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+      margin-bottom:6px;
+    }
+    .boostSub{
+      color:var(--muted);
+      font-weight:850;
+      line-height:1.5;
+      font-size:13px;
+      margin-bottom:10px;
+    }
+    .boostGrid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      margin-top:10px;
+    }
+    @media(max-width:980px){ .boostGrid{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media(max-width:640px){ .boostGrid{ grid-template-columns:1fr; } }
+
+    .boostCard{
+      border-radius:18px;
+      border:1px solid rgba(203,213,225,0.14);
+      background:rgba(2,6,23,.45);
+      padding:12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .boostHead{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+    .boostPlan{ font-weight:1000; color:var(--gold); }
+    .boostPrice{ font-weight:1000; color:rgba(234,255,241,.92); }
+    .boostTxt{ color:var(--muted); font-weight:850; line-height:1.45; font-size:13px; }
+    .boostBtn{
+      border-radius:999px;
+      padding:12px 14px;
+      font-size:13px;
+      font-weight:1000;
+      border:0;
+      cursor:pointer;
+      background:linear-gradient(135deg,var(--gold),var(--orange));
+      color:#020617;
+      box-shadow:0 10px 24px rgba(250,204,21,0.28);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      line-height:1;
+      margin-top:auto;
+      text-decoration:none;
+    }
+
     .footer{
       margin-top:26px;
       border-top:1px solid rgba(255,255,255,.08);
@@ -499,20 +574,6 @@
     .sk-photo{ height:210px; }
     .sk-line{ height:12px; border-radius:999px; margin-top:10px; }
   </style>
-
-  <script>
-    // ✅ GitHub Pages safe base path (ex: /digiy-pos/)
-    function digiyBasePath(){
-      const parts = location.pathname.split("/").filter(Boolean);
-      const isGh = /\.github\.io$/i.test(location.hostname);
-      if(isGh && parts.length > 0) return "/" + parts[0] + "/";
-      return "/";
-    }
-    function digiyLocal(path){
-      path = String(path||"").replace(/^\/+/,"");
-      return digiyBasePath() + path;
-    }
-  </script>
 </head>
 
 <body>
@@ -593,6 +654,19 @@
           <a class="btn-small" id="btnSupport" href="#" target="_blank" rel="noopener">💬 Support</a>
         </div>
       </div>
+
+      <!-- ✅ BOOST GRID (ready) -->
+      <div id="boostWrap" class="boostWrap" style="display:none;">
+        <div class="boostInner">
+          <div class="boostTitle">🔥 BOOST POS — Mise en avant (option)</div>
+          <div class="boostSub">
+            Pour les commerces qui veulent être en haut de la vitrine (badge + priorité).
+            Paiement direct, 0% commission — c’est juste de la <b style="color:var(--gold)">visibilité</b>.
+          </div>
+
+          <div class="boostGrid" id="boostGrid"></div>
+        </div>
+      </div>
     </section>
 
     <!-- LIST -->
@@ -612,6 +686,51 @@
 
   <script>
     /* ===========================
+       CONFIG BOOST (ON/OFF)
+    ============================ */
+    const BOOST_ENABLED = true;
+
+    // Ici tu peux aligner sur ton backbone PAY
+    // Option A (simple) : page commencer-a-payer
+    // Option B (propre) : ABOS direct (si tu veux)
+    const PAY_URL_FALLBACK = "https://beauville.github.io/commencer-a-payer/";
+    function buildBoostPayUrl(planCode){
+      // Exemple : on passe module=POS_BOOST + plan=local/standard/premium
+      // À toi de matcher avec digiy_pricing_plans plus tard.
+      const u = new URL(PAY_URL_FALLBACK);
+      u.searchParams.set("module", "POS_BOOST");
+      u.searchParams.set("plan", planCode);
+      return u.toString();
+    }
+
+    const BOOST_PLANS = [
+      { code:"local",    label:"LOCAL",    price:"5 000 FCFA / mois",   desc:"Badge + petite priorité locale (ville).", icon:"🥉" },
+      { code:"standard", label:"STANDARD", price:"10 000 FCFA / mois",  desc:"Priorité vitrine + meilleure position.", icon:"🥈" },
+      { code:"premium",  label:"PREMIUM",  price:"20 000 FCFA / mois",  desc:"Top vitrine + priorité renforcée.", icon:"🥇" }
+    ];
+
+    function renderBoost(){
+      if(!BOOST_ENABLED) return;
+      const wrap = document.getElementById("boostWrap");
+      const grid = document.getElementById("boostGrid");
+      if(!wrap || !grid) return;
+
+      wrap.style.display = "block";
+      grid.innerHTML = BOOST_PLANS.map(p => `
+        <div class="boostCard">
+          <div class="boostHead">
+            <div class="boostPlan">${p.icon} ${p.label}</div>
+            <div class="boostPrice">${p.price}</div>
+          </div>
+          <div class="boostTxt">${p.desc}</div>
+          <a class="boostBtn" href="${buildBoostPayUrl(p.code)}" target="_blank" rel="noopener">
+            ⚡ Activer
+          </a>
+        </div>
+      `).join("");
+    }
+
+    /* ===========================
        SUPABASE CONFIG (DIGIY)
     ============================ */
     const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
@@ -627,13 +746,9 @@
        LINKS (repo-friendly)
     ============================ */
     (function initLinks(){
-      // HUB (si tu as une vitrine hub ailleurs, change ici)
       document.getElementById("btnHub").href = "https://beauville.github.io/digiy-hub/";
-      // Paiement -> module CAISSE
-      document.getElementById("btnPay").href = "https://beauville.github.io/commencer-a-payer/?module=CAISSE&offre=CAISSE";
-      // Support WhatsApp (JB)
+      document.getElementById("btnPay").href = "https://beauville.github.io/commencer-a-payer/?module=POS&plan=standard";
       document.getElementById("btnSupport").href = "https://wa.me/221771342889?text=" + encodeURIComponent("Salut DIGIY POS, j'ai une question sur la Caisse Pro.");
-      // Refresh
       document.getElementById("btnRefresh").addEventListener("click", (e)=>{ e.preventDefault(); load(); });
     })();
 
@@ -678,9 +793,7 @@
     }
 
     function tagsToArray(tags){
-      // tags vient de Postgres text[] => supabase renvoie souvent array JS (nickel)
       if(Array.isArray(tags)) return tags.filter(Boolean).map(String);
-      // fallback si string
       const s = String(tags||"").trim();
       if(!s) return [];
       return s.split(",").map(x=>x.trim()).filter(Boolean);
@@ -719,7 +832,6 @@
       const n = (list || []).length;
       if(kCount) kCount.textContent = String(n);
 
-      // ville dominante
       const m = {};
       for(const r of (list || [])){
         const c = String(r.city || "").trim();
@@ -740,7 +852,6 @@
       const cities = pick(ROWS, "city");
       const cats   = pick(ROWS, "category");
 
-      // reset but keep first
       citySel.innerHTML = `<option value="">Toutes les villes</option>` + cities.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
       catSel.innerHTML  = `<option value="">Toutes les catégories</option>` + cats.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
     }
@@ -774,7 +885,7 @@
           <div class="status" style="grid-column:1/-1;">
             <span>⚠️ Aucun commerce trouvé.</span>
             <div class="right">
-              <a class="btn-small primary" href="https://beauville.github.io/commencer-a-payer/?module=CAISSE&offre=CAISSE">💳 Équiper mon commerce</a>
+              <a class="btn-small primary" href="https://beauville.github.io/commencer-a-payer/?module=POS&plan=standard">💳 Équiper mon commerce</a>
             </div>
           </div>
         `;
@@ -798,7 +909,7 @@
         const waHref = wa ? waLink(wa, waMsg) : "";
 
         const profileUrl = String(r.profile_url || "").trim();
-        const ficheHref = profileUrl || "https://beauville.github.io/commencer-a-payer/?module=CAISSE&offre=CAISSE";
+        const ficheHref = profileUrl || "https://beauville.github.io/commencer-a-payer/?module=POS&plan=standard";
 
         return `
           <article class="card" data-slug="${esc(r.slug || "")}">
@@ -849,7 +960,7 @@
       try{
         const { data, error } = await sb
           .from("digiy_pos_public_profiles")
-          .select("id, owner_id, slug, display_name, category, city, address, whatsapp, photo_url, bio, tags, profile_url, is_published, is_active, is_verified, priority, badge, hub_badge, price_label")
+          .select("id, owner_id, slug, display_name, category, city, address, whatsapp, photo_url, bio, tags, profile_url, is_published, is_active, is_verified, priority, badge, hub_badge, price_label, created_at")
           .eq("is_active", true)
           .eq("is_published", true)
           .order("priority", { ascending: true })
@@ -896,7 +1007,8 @@
       cat.addEventListener("change", applyFilters);
     })();
 
-    // GO
+    // BOOT
+    renderBoost();
     load();
   </script>
 </body>
