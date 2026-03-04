@@ -858,13 +858,10 @@
       try{
         // ✅ digiy_market_public_profiles : schema que tu m’as montré
         const { data, error } = await sb
-          .from("digiy_market_public_profiles")
-          .select("id, slug, display_name, category, city, address, whatsapp, photo_url, profile_url, bio, tags, badge, hub_badge, price_label, is_published, is_active, priority, created_at, updated_at")
-          .eq("is_active", true)
-          .eq("is_published", true)
-          .eq("city", CITY_LOCK)
-          .order("priority", { ascending: true })
-          .order("created_at", { ascending: false });
+  .from("digiy_market_vitrine_saly")
+  .select("*")
+  .order("priority", { ascending: true })
+  .order("created_at", { ascending: false });
 
         if(error) throw error;
 
