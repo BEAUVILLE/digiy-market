@@ -4,10 +4,11 @@
   <meta charset="utf-8" />
   <title>DIGIY MARKET — Pros référencés (0% commission)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="description" content="DIGIY MARKET — Vitrine des pros abonnés. Cartes publiques, contact WhatsApp direct. 0% commission." />
+  <meta name="description" content="DIGIY MARKET — Vitrine des pros abonnés. Cartes publiques, photo, WhatsApp direct. 0% commission." />
   <meta name="theme-color" content="#020617" />
   <meta name="robots" content="index,follow" />
 
+  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
@@ -49,7 +50,9 @@
       padding:16px 14px 42px;
     }
 
-    @media(max-width:860px){ :root{ --fs-hero: 32px; } }
+    @media(max-width:860px){
+      :root{ --fs-hero: 32px; }
+    }
     @media(max-width:600px){
       :root{ --fs-hero: 28px; --fs-sub: 15px; }
       .page{ padding:14px 12px 38px; }
@@ -386,7 +389,7 @@
       flex-wrap:wrap;
       margin-top:auto;
     }
-    a.btn, button.btn{
+    a.btn{
       flex:1;
       min-width:140px;
       border-radius:999px;
@@ -438,7 +441,12 @@
       flex-wrap:wrap;
     }
     .status b{ color:var(--gold); font-weight:1000; }
-    .status .right{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+    .status .right{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
 
     /* Toast */
     .toast{
@@ -481,37 +489,38 @@
 
 <body>
   <div class="page">
+    <!-- NAV -->
     <header class="nav">
       <div class="nav-left">
         <div class="logo-badge">🏪</div>
         <div class="logo-text">
           <div class="logo-title">DIGIY MARKET • VITRINE PRO</div>
-          <div class="logo-sub">Pros abonnés • Carte publique • Contact direct • 0% commission</div>
+          <div class="logo-sub">Pros abonnés • Contact direct • 0% commission</div>
         </div>
       </div>
 
       <div class="nav-right">
         <div class="pill"><span class="dot"></span> 0% commission</div>
         <a class="btn-small" id="btnHub" href="#" rel="noopener">🦅 DIGIY HUB</a>
-        <a class="btn-small primary" id="btnJoin" href="#" rel="noopener">➕ Ajouter ma carte</a>
+        <a class="btn-small primary" id="btnPay" href="#" rel="noopener">➕ Ajouter ma carte</a>
       </div>
     </header>
 
+    <!-- HERO -->
     <section class="hero">
       <div class="hero-inner">
         <div>
           <h1>
-            La <span class="hl">Place</span> des pros<br />
+            Les pros <span class="hl">référencés</span><br />
             DIGIY <span class="hl">MARKET</span>
           </h1>
           <p>
-            Ici, chaque abonné pose sa <b style="color:var(--gold);font-weight:1000;">carte pro</b> :
-            coordonnées, activité, zone, WhatsApp.
-            Le contact est <b style="color:var(--green);font-weight:1000;">direct</b>. DIGIY = <b>0% commission</b>.
+            Ici tu vois les pros déjà branchés sur DIGIY.
+            Contact direct WhatsApp, et paiement <b style="color:var(--green);font-weight:1000;">direct au pro</b>.
           </p>
 
           <div class="hero-badges">
-            <div class="hero-badge">✅ <b>Annuaire public</b></div>
+            <div class="hero-badge">✅ <b>Public</b> (vitrine)</div>
             <div class="hero-badge">💬 WhatsApp direct</div>
             <div class="hero-badge">📍 Local & terrain</div>
           </div>
@@ -525,7 +534,7 @@
               <span class="v" id="kpiCount">—</span>
             </div>
             <div class="chip">
-              <span>Zone</span>
+              <span>Ville</span>
               <span class="v" id="kpiCity">—</span>
             </div>
           </div>
@@ -540,14 +549,15 @@
         </aside>
       </div>
 
+      <!-- CONTROLS -->
       <div class="controls">
         <div class="searchRow">
-          <input id="q" class="input" type="search" placeholder="Rechercher (nom, activité, ville…)" autocomplete="off" />
-          <select id="city" class="select" title="Filtrer par zone">
-            <option value="">Toutes les zones</option>
+          <input id="q" class="input" type="search" placeholder="Rechercher (nom, ville, catégorie…)" autocomplete="off" />
+          <select id="city" class="select" title="Filtrer par ville">
+            <option value="">Toutes les villes</option>
           </select>
-          <select id="cat" class="select" title="Filtrer par activité">
-            <option value="">Toutes les activités</option>
+          <select id="cat" class="select" title="Filtrer par catégorie">
+            <option value="">Toutes les catégories</option>
           </select>
         </div>
         <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
@@ -557,10 +567,11 @@
       </div>
     </section>
 
+    <!-- LIST -->
     <section class="section">
-      <div class="section-title">📍 Cartes Pro (public)</div>
+      <div class="section-title">📍 Cartes pro (public)</div>
       <div class="muted">
-        Les cartes affichées sont celles que ta base expose publiquement via RLS (ex: published/active).
+        Les profils affichés sont ceux qui ont <b style="color:var(--gold)">is_published=true</b> et <b style="color:var(--green)">is_active=true</b>.
       </div>
 
       <div id="grid" class="grid" style="margin-top:12px;"></div>
@@ -591,8 +602,8 @@
     ============================ */
     (function initLinks(){
       document.getElementById("btnHub").href = "https://beauville.github.io/digiy-hub/";
-      // 👉 “Ajouter ma carte” : tu peux mettre ici ton module PRO ou ton ABOS
-      document.getElementById("btnJoin").href = "https://beauville.github.io/commencer-a-payer/?module=MARKET&plan=standard";
+      // 👉 si tu as une page “market-pro / créer ma carte”, mets-là ici
+      document.getElementById("btnPay").href = "https://beauville.github.io/commencer-a-payer/?module=MARKET&plan=standard";
       document.getElementById("btnSupport").href = "https://wa.me/221771342889?text=" + encodeURIComponent("Salut DIGIY MARKET, j'ai une question sur la vitrine / ma carte pro.");
       document.getElementById("btnRefresh").addEventListener("click", (e)=>{ e.preventDefault(); load(); });
     })();
@@ -645,45 +656,6 @@
     }
 
     /* ===========================
-       Normalisation row (tolérant)
-       -> adapte aux colonnes réelles sans casser
-    ============================ */
-    function normRow(r){
-      const display_name = r.display_name ?? r.name ?? r.business_name ?? r.shop_name ?? r.title ?? "Pro";
-      const category = r.category ?? r.category_norm ?? r.activity ?? r.kind ?? r.sector ?? "—";
-      const city = r.city ?? r.zone ?? r.area ?? r.location_city ?? r.commune ?? "—";
-      const address = r.address ?? r.location ?? r.quartier ?? "";
-      const bio = r.bio ?? r.description ?? r.about ?? "";
-      const tags = r.tags ?? r.keywords ?? [];
-      const whatsapp = r.whatsapp ?? r.to_whatsapp ?? r.phone ?? r.owner_phone ?? r.contact_phone ?? "";
-      const photo_url = r.photo_url ?? r.avatar_url ?? r.logo_url ?? r.cover_url ?? "";
-      const profile_url = r.profile_url ?? r.public_url ?? r.website ?? "";
-      const slug = r.slug ?? r.public_slug ?? r.code ?? "";
-
-      // status flags (si présents)
-      const is_active = (r.is_active ?? r.active ?? true) === true;
-      const is_published = (r.is_published ?? r.published ?? (r.status ? (String(r.status).toLowerCase()==='published') : true)) === true;
-
-      return {
-        raw:r,
-        slug,
-        display_name,
-        category,
-        city,
-        address,
-        bio,
-        tags,
-        whatsapp,
-        photo_url,
-        profile_url,
-        is_active,
-        is_published,
-        priority: Number(r.priority ?? 999999),
-        created_at: r.created_at ?? null
-      };
-    }
-
-    /* ===========================
        DATA + FILTERS
     ============================ */
     let ROWS = [];
@@ -695,7 +667,8 @@
 
       const filtered = (ROWS || []).filter(r => {
         const hay = [
-          r.display_name, r.category, r.city, r.address, r.bio, ...(tagsToArray(r.tags))
+          r.display_name, r.category, r.city, r.address, r.bio, r.badge, r.hub_badge, r.price_label,
+          ...tagsToArray(r.tags)
         ].join(" ").toLowerCase();
 
         const okQ = !q || hay.includes(q);
@@ -735,8 +708,8 @@
       const cities = pick(ROWS, "city");
       const cats   = pick(ROWS, "category");
 
-      citySel.innerHTML = `<option value="">Toutes les zones</option>` + cities.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
-      catSel.innerHTML  = `<option value="">Toutes les activités</option>` + cats.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
+      citySel.innerHTML = `<option value="">Toutes les villes</option>` + cities.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
+      catSel.innerHTML  = `<option value="">Toutes les catégories</option>` + cats.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
     }
 
     function renderSkeleton(){
@@ -785,21 +758,17 @@
           r.photo_url ||
           "https://images.unsplash.com/photo-1528690873152-4cbd29d2c9c8?auto=format&fit=crop&w=1200&q=80"
         );
-
-        // badges génériques (tu peux enrichir plus tard)
-        const badge = "✅ ABONNÉ DIGIY";
-        const hub = "🏪 MARKET";
-
+        const badge = esc(r.badge || "✅ ABONNÉ");
+        const hub = esc(r.hub_badge || "🏪 MARKET");
+        const price = esc(r.price_label || "Paiement direct");
         const tags = tagsToArray(r.tags).slice(0, 6);
 
         const wa = cleanPhone(r.whatsapp || "");
-        const waMsg = `Salam ${r.display_name || "DIGIY"}, je viens de la vitrine DIGIY MARKET. J'aimerais te contacter.`;
+        const waMsg = `Salam ${r.display_name || "DIGIY"}, je viens de la vitrine DIGIY MARKET.`;
         const waHref = wa ? waLink(wa, waMsg) : "";
 
-        // fiche : si le profil a une URL publique, sinon on met une URL par défaut
-        const ficheHref =
-          (String(r.profile_url || "").trim()) ||
-          "https://beauville.github.io/digiy-hub/";
+        const profileUrl = String(r.profile_url || "").trim();
+        const ficheHref = profileUrl || "https://beauville.github.io/digiy-hub/";
 
         return `
           <article class="card" data-slug="${esc(r.slug || "")}">
@@ -823,6 +792,7 @@
 
               <div class="tags">
                 ${tags.map(t => `<span class="tag">${esc(t)}</span>`).join("")}
+                ${price ? `<span class="tag" style="border-color:rgba(250,204,21,.22);color:#fde68a;">${price}</span>` : ""}
               </div>
 
               <div class="actions">
@@ -840,60 +810,38 @@
     }
 
     /* ===========================
-       LOAD from Supabase (2 passes)
+       LOAD from Supabase
     ============================ */
-    async function fetchProfiles(){
-      // Pass 1: essaye la version “propre” si colonnes existent
+    async function load(){
+      renderSkeleton();
+      setStatus("🔎 Chargement depuis Supabase…");
+
       try{
         const { data, error } = await sb
           .from("digiy_market_public_profiles")
-          .select("*")
+          .select("id, slug, display_name, category, city, address, whatsapp, photo_url, bio, tags, profile_url, is_published, is_active, priority, badge, hub_badge, price_label, created_at")
           .eq("is_active", true)
           .eq("is_published", true)
           .order("priority", { ascending: true })
           .order("created_at", { ascending: false });
 
         if(error) throw error;
-        return Array.isArray(data) ? data : [];
-      }catch(e1){
-        // Pass 2: fallback si colonnes (is_active/is_published/priority) n’existent pas
-        const { data, error } = await sb
-          .from("digiy_market_public_profiles")
-          .select("*")
-          .order("created_at", { ascending: false });
 
-        if(error) throw error;
-        return Array.isArray(data) ? data : [];
-      }
-    }
-
-    async function load(){
-      renderSkeleton();
-      setStatus("🔎 Chargement depuis Supabase…");
-
-      try{
-        const raw = await fetchProfiles();
-        const normalized = raw.map(normRow);
-
-        // sécurité côté front (au cas où) : on n’affiche que published + active
-        ROWS = normalized
-          .filter(r => r.is_active && r.is_published)
-          .sort((a,b) => (a.priority - b.priority) || (String(b.created_at||"").localeCompare(String(a.created_at||""))));
-
+        ROWS = Array.isArray(data) ? data : [];
         fillSelects();
         applyFilters();
 
         toast("✅ Vitrine chargée");
       }catch(e){
         console.error(e);
-        setStatus("❌ Erreur chargement (RLS/policy SELECT ou table vide).");
+        setStatus("❌ Erreur chargement (vérifie RLS/policy SELECT).");
         const grid = document.getElementById("grid");
         if(grid){
           grid.innerHTML = `
             <div class="status" style="grid-column:1/-1;">
               <span>❌ Impossible de charger la vitrine. <b>Détail :</b> ${esc(e?.message || e)}</span>
               <div class="right">
-                <a class="btn-small" href="https://wa.me/221771342889?text=${encodeURIComponent("Salut DIGIY MARKET, ma vitrine publique ne charge pas. Peux-tu vérifier RLS/policy ?")}" target="_blank" rel="noopener">💬 Support</a>
+                <a class="btn-small" href="https://wa.me/221771342889?text=${encodeURIComponent("Salut DIGIY MARKET, ma vitrine publique ne charge pas (RLS/policy). Peux-tu vérifier ?")}" target="_blank" rel="noopener">💬 Support</a>
               </div>
             </div>
           `;
