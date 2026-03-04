@@ -349,6 +349,7 @@
     .photo img{
       width:100%; height:100%;
       object-fit:cover;
+      object-position:center;
       display:block;
       filter:saturate(1.05);
       transform:scale(1.01);
@@ -670,8 +671,8 @@
     const CITY_LOCK = "Saly";
     const NEW_DAYS = 7;
 
-    // ✅ Patch #1 : fallback photo stable (plus de 404 Unsplash)
-    const FALLBACK_PHOTO = "https://picsum.photos/seed/digiy-market-fallback/1200/700";
+    // ✅ fallback officiel (ta médiathèque)
+    const FALLBACK_PHOTO = "https://orange-pig-270004.hostingersite.com/wp-content/uploads/2026/02/afrique-infini-baobab-3.webp";
 
     const HUB_URL = "https://beauville.github.io/digiy-hub/";
     const MARKET_PRO_URL = "https://pro-market.digiylyfe.com/";
@@ -755,7 +756,7 @@
     }
 
     /* ===========================
-       STATS BAR (via view digiy_market_stats_saly)
+       STATS BAR (digiy_market_stats_saly)
     ============================ */
     async function loadStatsBar(){
       const bar = document.getElementById("marketStatsBar");
@@ -886,9 +887,12 @@
 
         const isNewCard = isNew(r.created_at);
 
-        // ✅ Patch #2 : fallback photo + onerror
+        // ✅ PHOTO SAFE : pro photo -> sinon fallback baobab
         const rawPhoto = String(r.photo_url || "").trim();
-        const FALLBACK_PHOTO = "https://orange-pig-270004.hostingersite.com/wp-content/uploads/2026/02/afrique-infini-baobab-3.webp";
+        const basePhoto = rawPhoto || FALLBACK_PHOTO;
+
+        // anti-cache soft
+        const photoFinal = esc(basePhoto + (basePhoto.includes("?") ? "&" : "?") + "v=1");
 
         const wa = cleanPhone(r.whatsapp || "");
         const waMsg = `Salam ${r.display_name || "DIGIY MARKET"}, je viens de la vitrine DIGIY MARKET (Saly).`;
@@ -901,7 +905,7 @@
           <article class="card" data-slug="${esc(r.slug || "")}">
             <div class="photo">
               <img
-                src="${photo}"
+                src="${photoFinal}"
                 alt="${name}"
                 loading="lazy"
                 onerror="this.onerror=null; this.src='${esc(FALLBACK_PHOTO)}';"
@@ -949,11 +953,10 @@
       renderSkeleton();
       setStatus("🔎 Chargement depuis Supabase…");
 
-      // bandeau stats (soft)
+      // stats bar (soft)
       loadStatsBar();
 
       try{
-        // ✅ Fix : plus de priority (évite 42703)
         const { data, error } = await sb
           .from("digiy_market_vitrine_saly")
           .select("*")
