@@ -257,7 +257,6 @@
     }
     .stats-pill.good{ border-color: rgba(34,197,94,.30); color:#bfffe0; }
     .stats-pill.warn{ border-color: rgba(249,115,22,.30); color:#ffe0c2; }
-    .stats-pill.gold{ border-color: rgba(250,204,21,.28); color:#fff2b8; }
 
     /* CONTROLS */
     .controls{
@@ -587,7 +586,7 @@
             <div class="hero-badge">🆕 Nouveaux en avant</div>
           </div>
 
-          <!-- ✅ BANDEAU COMPTEUR -->
+          <!-- ✅ BANDEAU COMPTEUR (stats) -->
           <div class="statsbar" id="marketStatsBar" aria-label="Compteur marché">
             <div class="left">
               <span>🛒 Marché <span style="color:var(--gold)">Saly</span> :</span>
@@ -668,9 +667,11 @@
     /* ===========================
        CONFIG (MARKET)
     ============================ */
-    const CITY_LOCK = "Saly";            // ✅ 1 ville à la fois
-    const NEW_DAYS = 7;                  // badge 🆕
-    const FALLBACK_PHOTO = "https://images.unsplash.com/photo-1528690873152-4cbd29d2c9c8?auto=format&fit=crop&w=1200&q=80";
+    const CITY_LOCK = "Saly";
+    const NEW_DAYS = 7;
+
+    // ✅ Patch #1 : fallback photo stable (plus de 404 Unsplash)
+    const FALLBACK_PHOTO = "https://picsum.photos/seed/digiy-market-fallback/1200/700";
 
     const HUB_URL = "https://beauville.github.io/digiy-hub/";
     const MARKET_PRO_URL = "https://pro-market.digiylyfe.com/";
@@ -692,7 +693,9 @@
     ============================ */
     (function initLinks(){
       document.getElementById("btnHub").href = HUB_URL;
-      document.getElementById("btnSupport").href = "https://wa.me/" + SUPPORT_WA + "?text=" + encodeURIComponent("Salut DIGIY MARKET, j'ai une question sur la vitrine de Saly.");
+      document.getElementById("btnSupport").href =
+        "https://wa.me/" + SUPPORT_WA + "?text=" +
+        encodeURIComponent("Salut DIGIY MARKET, j'ai une question sur la vitrine de Saly.");
       document.getElementById("btnRefresh").addEventListener("click", (e)=>{ e.preventDefault(); load(); });
     })();
 
@@ -773,7 +776,6 @@
         document.getElementById("msExpired").textContent = String(data.essai_expire ?? 0);
       }catch(e){
         console.warn("statsbar error:", e);
-        // fallback soft
         bar.style.display = "none";
       }
     }
@@ -830,7 +832,9 @@
     function fillSelects(){
       const catSel  = document.getElementById("cat");
       const cats   = pick(ROWS, "category");
-      catSel.innerHTML  = `<option value="">Toutes les catégories</option>` + cats.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
+      catSel.innerHTML =
+        `<option value="">Toutes les catégories</option>` +
+        cats.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
     }
 
     function renderSkeleton(){
@@ -875,13 +879,17 @@
         const city = esc(r.city || CITY_LOCK);
         const address = esc(r.address || "");
         const bio = esc(r.bio || "");
-        const photo = esc(r.photo_url || FALLBACK_PHOTO);
         const badge = esc(r.badge || "🏪 PARTENAIRE");
         const hub = esc(r.hub_badge || "🛍️ MARKET");
         const price = esc(r.price_label || "Prix à discuter");
         const tags = tagsToArray(r.tags).slice(0, 6);
 
         const isNewCard = isNew(r.created_at);
+
+        // ✅ Patch #2 : fallback photo + onerror
+        const rawPhoto = String(r.photo_url || "").trim();
+        const photo = esc(rawPhoto || FALLBACK_PHOTO);
+
         const wa = cleanPhone(r.whatsapp || "");
         const waMsg = `Salam ${r.display_name || "DIGIY MARKET"}, je viens de la vitrine DIGIY MARKET (Saly).`;
         const waHref = wa ? waLink(wa, waMsg) : "";
@@ -892,7 +900,12 @@
         return `
           <article class="card" data-slug="${esc(r.slug || "")}">
             <div class="photo">
-              <img src="${photo}" alt="${name}" loading="lazy" />
+              <img
+                src="${photo}"
+                alt="${name}"
+                loading="lazy"
+                onerror="this.onerror=null; this.src='${esc(FALLBACK_PHOTO)}';"
+              />
               <div class="badgeTop">
                 <span class="chip gold">${badge}</span>
                 <span class="chip green">${hub}</span>
@@ -929,56 +942,51 @@
       }).join("");
     }
 
-   /* ===========================
-   LOAD from Supabase
-=========================== */
-async function load(){
-  renderSkeleton();
-  setStatus("🔎 Chargement depuis Supabase…");
+    /* ===========================
+       LOAD from Supabase (SAFE)
+    ============================ */
+    async function load(){
+      renderSkeleton();
+      setStatus("🔎 Chargement depuis Supabase…");
 
-  // charge le bandeau stats
-  loadStatsBar();
+      // bandeau stats (soft)
+      loadStatsBar();
 
-  try{
-    const { data, error } = await sb
-      .from("digiy_market_vitrine_saly")
-      .select("*")
-      .order("created_at", { ascending: false });
+      try{
+        // ✅ Fix : plus de priority (évite 42703)
+        const { data, error } = await sb
+          .from("digiy_market_vitrine_saly")
+          .select("*")
+          .order("created_at", { ascending: false });
 
-    if(error) throw error;
+        if(error) throw error;
 
-    ROWS = Array.isArray(data) ? data : [];
-    fillSelects();
-    applyFilters();
+        ROWS = Array.isArray(data) ? data : [];
+        fillSelects();
+        applyFilters();
 
-    toast("✅ Vitrine chargée");
-  }catch(e){
-    console.error(e);
-    setStatus("❌ Erreur chargement (RLS/policy SELECT).");
+        toast("✅ Vitrine chargée");
+      }catch(e){
+        console.error(e);
+        setStatus("❌ Erreur chargement (RLS/policy SELECT).");
 
-    const grid = document.getElementById("grid");
-
-    if(grid){
-      grid.innerHTML = `
-        <div class="status" style="grid-column:1/-1;">
-          <span>
-            ❌ Impossible de charger la vitrine.
-            <b>Détail :</b> ${esc(e?.message || e)}
-          </span>
-
-          <div class="right">
-            <a class="btn-small"
-               href="https://wa.me/${SUPPORT_WA}?text=${encodeURIComponent("Salut DIGIY MARKET, la vitrine Saly ne charge pas (RLS/policy). Peux-tu vérifier ?")}"
-               target="_blank"
-               rel="noopener">
-               💬 Support
-            </a>
-          </div>
-        </div>
-      `;
+        const grid = document.getElementById("grid");
+        if(grid){
+          grid.innerHTML = `
+            <div class="status" style="grid-column:1/-1;">
+              <span>❌ Impossible de charger la vitrine. <b>Détail :</b> ${esc(e?.message || e)}</span>
+              <div class="right">
+                <a class="btn-small"
+                   href="https://wa.me/${SUPPORT_WA}?text=${encodeURIComponent("Salut DIGIY MARKET, la vitrine Saly ne charge pas (RLS/policy). Peux-tu vérifier ?")}"
+                   target="_blank"
+                   rel="noopener">💬 Support</a>
+              </div>
+            </div>
+          `;
+        }
+      }
     }
-  }
-}
+
     /* ===========================
        EVENTS
     ============================ */
