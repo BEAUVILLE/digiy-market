@@ -2,9 +2,9 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <title>DIGIY MARKET — Pros référencés (0% commission)</title>
+  <title>DIGIY POS — Commerces équipés (0% commission)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="description" content="DIGIY MARKET — Vitrine des pros abonnés. Cartes publiques, photo, WhatsApp direct. 0% commission." />
+  <meta name="description" content="DIGIY POS — Vitrine des commerces équipés (Caisse Pro). Contact WhatsApp direct. 0% commission." />
   <meta name="theme-color" content="#020617" />
   <meta name="robots" content="index,follow" />
 
@@ -260,7 +260,9 @@
     }
 
     /* SECTION */
-    .section{ margin-top:18px; }
+    .section{
+      margin-top:18px;
+    }
     .section-title{
       font-size:18px;
       font-weight:1000;
@@ -389,7 +391,7 @@
       flex-wrap:wrap;
       margin-top:auto;
     }
-    a.btn{
+    a.btn, button.btn{
       flex:1;
       min-width:140px;
       border-radius:999px;
@@ -448,6 +450,93 @@
       flex-wrap:wrap;
     }
 
+    /* BOOST */
+    .boostWrap{
+      margin-top:14px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(11,17,32,.55);
+      box-shadow:var(--shadow);
+      padding:14px 14px;
+      overflow:hidden;
+      position:relative;
+    }
+    .boostWrap:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(700px 360px at 10% 0%, rgba(249,115,22,.12), transparent 60%),
+        radial-gradient(700px 360px at 90% 90%, rgba(250,204,21,.12), transparent 60%);
+      pointer-events:none;
+    }
+    .boostInner{ position:relative; }
+    .boostTitle{
+      font-size:16px;
+      font-weight:1000;
+      letter-spacing:-0.01em;
+      margin-bottom:6px;
+    }
+    .boostSub{
+      color:var(--muted);
+      font-weight:850;
+      line-height:1.5;
+      font-size:13px;
+      margin-bottom:10px;
+    }
+    .boostGrid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      margin-top:10px;
+    }
+    @media(max-width:980px){ .boostGrid{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media(max-width:640px){ .boostGrid{ grid-template-columns:1fr; } }
+
+    .boostCard{
+      border-radius:18px;
+      border:1px solid rgba(203,213,225,0.14);
+      background:rgba(2,6,23,.45);
+      padding:12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .boostHead{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+    .boostPlan{ font-weight:1000; color:var(--gold); }
+    .boostPrice{ font-weight:1000; color:rgba(234,255,241,.92); }
+    .boostTxt{ color:var(--muted); font-weight:850; line-height:1.45; font-size:13px; }
+    .boostBtn{
+      border-radius:999px;
+      padding:12px 14px;
+      font-size:13px;
+      font-weight:1000;
+      border:0;
+      cursor:pointer;
+      background:linear-gradient(135deg,var(--gold),var(--orange));
+      color:#020617;
+      box-shadow:0 10px 24px rgba(250,204,21,0.28);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      line-height:1;
+      margin-top:auto;
+      text-decoration:none;
+    }
+
+    .footer{
+      margin-top:26px;
+      border-top:1px solid rgba(255,255,255,.08);
+      padding-top:14px;
+      font-size:12px;
+      color:var(--muted);
+      text-align:center;
+      font-weight:850;
+      line-height:1.5;
+    }
+    .footer .brand{ color:var(--gold); font-weight:1000; }
+    .footer .zero{ color:var(--green); font-weight:1000; }
+
     /* Toast */
     .toast{
       position:fixed;
@@ -492,17 +581,17 @@
     <!-- NAV -->
     <header class="nav">
       <div class="nav-left">
-        <div class="logo-badge">🏪</div>
+        <div class="logo-badge">💳</div>
         <div class="logo-text">
-          <div class="logo-title">DIGIY MARKET • VITRINE PRO</div>
-          <div class="logo-sub">Pros abonnés • Contact direct • 0% commission</div>
+          <div class="logo-title">DIGIY POS • CAISSE PRO</div>
+          <div class="logo-sub">Commerces équipés • Contact direct • 0% commission</div>
         </div>
       </div>
 
       <div class="nav-right">
         <div class="pill"><span class="dot"></span> 0% commission</div>
         <a class="btn-small" id="btnHub" href="#" rel="noopener">🦅 DIGIY HUB</a>
-        <a class="btn-small primary" id="btnPay" href="#" rel="noopener">➕ Ajouter ma carte</a>
+        <a class="btn-small primary" id="btnPay" href="#" rel="noopener">💳 Équiper mon commerce</a>
       </div>
     </header>
 
@@ -511,18 +600,18 @@
       <div class="hero-inner">
         <div>
           <h1>
-            Les pros <span class="hl">référencés</span><br />
-            DIGIY <span class="hl">MARKET</span>
+            Les commerces <span class="hl">équipés</span><br />
+            DIGIY <span class="hl">POS</span>
           </h1>
           <p>
-            Ici tu vois les pros déjà branchés sur DIGIY.
-            Contact direct WhatsApp, et paiement <b style="color:var(--green);font-weight:1000;">direct au pro</b>.
+            Ici tu vois les boutiques déjà branchées sur la <b style="color:var(--gold);font-weight:1000;">Caisse Pro</b>.
+            Contact direct WhatsApp, et paiement <b style="color:var(--green);font-weight:1000;">direct au commerçant</b>.
           </p>
 
           <div class="hero-badges">
             <div class="hero-badge">✅ <b>Public</b> (vitrine)</div>
             <div class="hero-badge">💬 WhatsApp direct</div>
-            <div class="hero-badge">📍 Local & terrain</div>
+            <div class="hero-badge">🧾 Tickets & synchro</div>
           </div>
         </div>
 
@@ -530,7 +619,7 @@
           <div class="muted" style="font-weight:1000;">📊 Stats vitrine</div>
           <div class="kpi">
             <div class="chip">
-              <span>Pros</span>
+              <span>Commerces</span>
               <span class="v" id="kpiCount">—</span>
             </div>
             <div class="chip">
@@ -565,26 +654,82 @@
           <a class="btn-small" id="btnSupport" href="#" target="_blank" rel="noopener">💬 Support</a>
         </div>
       </div>
+
+      <!-- ✅ BOOST GRID (ready) -->
+      <div id="boostWrap" class="boostWrap" style="display:none;">
+        <div class="boostInner">
+          <div class="boostTitle">🔥 BOOST POS — Mise en avant (option)</div>
+          <div class="boostSub">
+            Pour les commerces qui veulent être en haut de la vitrine (badge + priorité).
+            Paiement direct, 0% commission — c’est juste de la <b style="color:var(--gold)">visibilité</b>.
+          </div>
+
+          <div class="boostGrid" id="boostGrid"></div>
+        </div>
+      </div>
     </section>
 
     <!-- LIST -->
     <section class="section">
-      <div class="section-title">📍 Cartes pro (public)</div>
-      <div class="muted">
-        Les profils affichés sont ceux qui ont <b style="color:var(--gold)">is_published=true</b> et <b style="color:var(--green)">is_active=true</b>.
-      </div>
+      <div class="section-title">📍 Listing (public)</div>
+      <div class="muted">Les profils affichés sont ceux qui ont <b style="color:var(--gold)">is_published=true</b> et <b style="color:var(--green)">is_active=true</b>.</div>
 
       <div id="grid" class="grid" style="margin-top:12px;"></div>
     </section>
 
-    <footer class="footer" style="margin-top:26px;border-top:1px solid rgba(255,255,255,.08);padding-top:14px;font-size:12px;color:var(--muted);text-align:center;font-weight:850;line-height:1.5;">
-      DIGIY MARKET • Sénégal • <span style="color:var(--green);font-weight:1000;">0% commission</span> • <span style="color:var(--gold);font-weight:1000;">Paiement direct au pro</span> ∞
+    <footer class="footer">
+      DIGIY POS • Sénégal • <span class="zero">0% commission</span> • <span class="brand">Paiement direct au pro</span> ∞
     </footer>
   </div>
 
   <div id="toast" class="toast"></div>
 
   <script>
+    /* ===========================
+       CONFIG BOOST (ON/OFF)
+    ============================ */
+    const BOOST_ENABLED = true;
+
+    // Ici tu peux aligner sur ton backbone PAY
+    // Option A (simple) : page commencer-a-payer
+    // Option B (propre) : ABOS direct (si tu veux)
+    const PAY_URL_FALLBACK = "https://beauville.github.io/commencer-a-payer/";
+    function buildBoostPayUrl(planCode){
+      // Exemple : on passe module=POS_BOOST + plan=local/standard/premium
+      // À toi de matcher avec digiy_pricing_plans plus tard.
+      const u = new URL(PAY_URL_FALLBACK);
+      u.searchParams.set("module", "POS_BOOST");
+      u.searchParams.set("plan", planCode);
+      return u.toString();
+    }
+
+    const BOOST_PLANS = [
+      { code:"local",    label:"LOCAL",    price:"5 000 FCFA / mois",   desc:"Badge + petite priorité locale (ville).", icon:"🥉" },
+      { code:"standard", label:"STANDARD", price:"10 000 FCFA / mois",  desc:"Priorité vitrine + meilleure position.", icon:"🥈" },
+      { code:"premium",  label:"PREMIUM",  price:"20 000 FCFA / mois",  desc:"Top vitrine + priorité renforcée.", icon:"🥇" }
+    ];
+
+    function renderBoost(){
+      if(!BOOST_ENABLED) return;
+      const wrap = document.getElementById("boostWrap");
+      const grid = document.getElementById("boostGrid");
+      if(!wrap || !grid) return;
+
+      wrap.style.display = "block";
+      grid.innerHTML = BOOST_PLANS.map(p => `
+        <div class="boostCard">
+          <div class="boostHead">
+            <div class="boostPlan">${p.icon} ${p.label}</div>
+            <div class="boostPrice">${p.price}</div>
+          </div>
+          <div class="boostTxt">${p.desc}</div>
+          <a class="boostBtn" href="${buildBoostPayUrl(p.code)}" target="_blank" rel="noopener">
+            ⚡ Activer
+          </a>
+        </div>
+      `).join("");
+    }
+
     /* ===========================
        SUPABASE CONFIG (DIGIY)
     ============================ */
@@ -594,7 +739,7 @@
 
     const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
       auth: { persistSession: false },
-      global: { headers: { "X-Client-Info": "digiy-market-public" } }
+      global: { headers: { "X-Client-Info": "digiy-pos-public" } }
     });
 
     /* ===========================
@@ -602,9 +747,8 @@
     ============================ */
     (function initLinks(){
       document.getElementById("btnHub").href = "https://beauville.github.io/digiy-hub/";
-      // 👉 si tu as une page “market-pro / créer ma carte”, mets-là ici
-      document.getElementById("btnPay").href = "https://beauville.github.io/commencer-a-payer/?module=MARKET&plan=standard";
-      document.getElementById("btnSupport").href = "https://wa.me/221771342889?text=" + encodeURIComponent("Salut DIGIY MARKET, j'ai une question sur la vitrine / ma carte pro.");
+      document.getElementById("btnPay").href = "https://beauville.github.io/commencer-a-payer/?module=POS&plan=standard";
+      document.getElementById("btnSupport").href = "https://wa.me/221771342889?text=" + encodeURIComponent("Salut DIGIY POS, j'ai une question sur la Caisse Pro.");
       document.getElementById("btnRefresh").addEventListener("click", (e)=>{ e.preventDefault(); load(); });
     })();
 
@@ -698,7 +842,7 @@
       for(const k in m){ if(m[k] > bestN){ bestN = m[k]; best = k; } }
       if(kCity) kCity.textContent = best;
 
-      setStatus(n ? `✅ ${n} pro(s) affiché(s)` : "⚠️ Aucun pro (filtre ou vide)");
+      setStatus(n ? `✅ ${n} commerce(s) affiché(s)` : "⚠️ Aucun commerce (filtre ou vide)");
     }
 
     function fillSelects(){
@@ -739,9 +883,9 @@
       if(!list || !list.length){
         grid.innerHTML = `
           <div class="status" style="grid-column:1/-1;">
-            <span>⚠️ Aucun pro trouvé.</span>
+            <span>⚠️ Aucun commerce trouvé.</span>
             <div class="right">
-              <a class="btn-small primary" href="https://beauville.github.io/commencer-a-payer/?module=MARKET&plan=standard">➕ Ajouter ma carte</a>
+              <a class="btn-small primary" href="https://beauville.github.io/commencer-a-payer/?module=POS&plan=standard">💳 Équiper mon commerce</a>
             </div>
           </div>
         `;
@@ -749,26 +893,23 @@
       }
 
       grid.innerHTML = list.map(r => {
-        const name = esc(r.display_name || "Pro");
+        const name = esc(r.display_name || "Commerce");
         const category = esc(r.category || "—");
         const city = esc(r.city || "—");
         const address = esc(r.address || "");
         const bio = esc(r.bio || "");
-        const photo = esc(
-          r.photo_url ||
-          "https://images.unsplash.com/photo-1528690873152-4cbd29d2c9c8?auto=format&fit=crop&w=1200&q=80"
-        );
-        const badge = esc(r.badge || "✅ ABONNÉ");
-        const hub = esc(r.hub_badge || "🏪 MARKET");
+        const photo = esc(r.photo_url || "https://images.unsplash.com/photo-1528690873152-4cbd29d2c9c8?auto=format&fit=crop&w=1200&q=80");
+        const badge = esc(r.badge || "🏪 PARTENAIRE");
+        const hub = esc(r.hub_badge || "💳 POS");
         const price = esc(r.price_label || "Paiement direct");
         const tags = tagsToArray(r.tags).slice(0, 6);
 
         const wa = cleanPhone(r.whatsapp || "");
-        const waMsg = `Salam ${r.display_name || "DIGIY"}, je viens de la vitrine DIGIY MARKET.`;
+        const waMsg = `Salam ${r.display_name || "DIGIY POS"}, je viens de la vitrine DIGIY POS. J'aimerais avoir des infos.`;
         const waHref = wa ? waLink(wa, waMsg) : "";
 
         const profileUrl = String(r.profile_url || "").trim();
-        const ficheHref = profileUrl || "https://beauville.github.io/digiy-hub/";
+        const ficheHref = profileUrl || "https://beauville.github.io/commencer-a-payer/?module=POS&plan=standard";
 
         return `
           <article class="card" data-slug="${esc(r.slug || "")}">
@@ -788,7 +929,7 @@
                 <span>📍 ${city}${address ? " • " + address : ""}</span>
               </div>
 
-              ${bio ? `<div class="bio">${bio}</div>` : `<div class="bio" style="color:var(--muted)">Pro référencé sur DIGIY MARKET.</div>`}
+              ${bio ? `<div class="bio">${bio}</div>` : `<div class="bio" style="color:var(--muted)">Commerce équipé DIGIY POS.</div>`}
 
               <div class="tags">
                 ${tags.map(t => `<span class="tag">${esc(t)}</span>`).join("")}
@@ -800,7 +941,7 @@
                 ${
                   wa
                     ? `<a class="btn secondary" href="${esc(waHref)}" target="_blank" rel="noopener">💬 WhatsApp</a>`
-                    : `<a class="btn ghost" href="https://wa.me/221771342889?text=${encodeURIComponent("Salut DIGIY MARKET, je veux contacter ce pro mais je n'ai pas son WhatsApp.")}" target="_blank" rel="noopener">📩 Demander contact</a>`
+                    : `<a class="btn ghost" href="https://wa.me/221771342889?text=${encodeURIComponent("Salut DIGIY POS, je veux contacter ce commerce mais je n'ai pas son WhatsApp.")}" target="_blank" rel="noopener">📩 Demander contact</a>`
                 }
               </div>
             </div>
@@ -818,8 +959,8 @@
 
       try{
         const { data, error } = await sb
-          .from("digiy_market_public_profiles")
-          .select("id, slug, display_name, category, city, address, whatsapp, photo_url, bio, tags, profile_url, is_published, is_active, priority, badge, hub_badge, price_label, created_at")
+          .from("digiy_pos_public_profiles")
+          .select("id, owner_id, slug, display_name, category, city, address, whatsapp, photo_url, bio, tags, profile_url, is_published, is_active, is_verified, priority, badge, hub_badge, price_label, created_at")
           .eq("is_active", true)
           .eq("is_published", true)
           .order("priority", { ascending: true })
@@ -841,7 +982,7 @@
             <div class="status" style="grid-column:1/-1;">
               <span>❌ Impossible de charger la vitrine. <b>Détail :</b> ${esc(e?.message || e)}</span>
               <div class="right">
-                <a class="btn-small" href="https://wa.me/221771342889?text=${encodeURIComponent("Salut DIGIY MARKET, ma vitrine publique ne charge pas (RLS/policy). Peux-tu vérifier ?")}" target="_blank" rel="noopener">💬 Support</a>
+                <a class="btn-small" href="https://wa.me/221771342889?text=${encodeURIComponent("Salut DIGIY POS, ma vitrine publique ne charge pas (RLS/policy). Peux-tu vérifier ?")}" target="_blank" rel="noopener">💬 Support</a>
               </div>
             </div>
           `;
@@ -866,6 +1007,8 @@
       cat.addEventListener("change", applyFilters);
     })();
 
+    // BOOT
+    renderBoost();
     load();
   </script>
 </body>
