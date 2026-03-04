@@ -929,61 +929,56 @@
       }).join("");
     }
 
-    /* ===========================
-       LOAD from Supabase
-    ============================ */
-    async function load(){
-      renderSkeleton();
-      setStatus("🔎 Chargement depuis Supabase…");
+   /* ===========================
+   LOAD from Supabase
+=========================== */
+async function load(){
+  renderSkeleton();
+  setStatus("🔎 Chargement depuis Supabase…");
 
-      // charge le bandeau stats en parallèle (soft)
-      loadStatsBar();
+  // charge le bandeau stats
+  loadStatsBar();
 
-      try{
-        // ✅ vue vitrine
-        let q = sb
-          .from("digiy_market_vitrine_saly")
-          .select("*");
+  try{
+    const { data, error } = await sb
+      .from("digiy_market_vitrine_saly")
+      .select("*")
+      .order("created_at", { ascending: false });
 
-        // si la vue expose priority, on trie (sinon on fera juste created_at)
-        // on tente priority en premier, et on catch si erreur
-        let data = null;
+    if(error) throw error;
 
-        try{
-          const res = await q
-            .order("priority", { ascending: true })
-            .order("created_at", { ascending: false });
+    ROWS = Array.isArray(data) ? data : [];
+    fillSelects();
+    applyFilters();
 
-          if(res.error) throw res.error;
-          data = res.data;
-        }catch(_e){
-          const res2 = await q.order("created_at", { ascending: false });
-          if(res2.error) throw res2.error;
-          data = res2.data;
-        }
+    toast("✅ Vitrine chargée");
+  }catch(e){
+    console.error(e);
+    setStatus("❌ Erreur chargement (RLS/policy SELECT).");
 
-        ROWS = Array.isArray(data) ? data : [];
-        fillSelects();
-        applyFilters();
+    const grid = document.getElementById("grid");
 
-        toast("✅ Vitrine chargée");
-      }catch(e){
-        console.error(e);
-        setStatus("❌ Erreur chargement (RLS/policy SELECT).");
-        const grid = document.getElementById("grid");
-        if(grid){
-          grid.innerHTML = `
-            <div class="status" style="grid-column:1/-1;">
-              <span>❌ Impossible de charger la vitrine. <b>Détail :</b> ${esc(e?.message || e)}</span>
-              <div class="right">
-                <a class="btn-small" href="https://wa.me/${SUPPORT_WA}?text=${encodeURIComponent("Salut DIGIY MARKET, la vitrine Saly ne charge pas (RLS/policy). Peux-tu vérifier ?")}" target="_blank" rel="noopener">💬 Support</a>
-              </div>
-            </div>
-          `;
-        }
-      }
+    if(grid){
+      grid.innerHTML = `
+        <div class="status" style="grid-column:1/-1;">
+          <span>
+            ❌ Impossible de charger la vitrine.
+            <b>Détail :</b> ${esc(e?.message || e)}
+          </span>
+
+          <div class="right">
+            <a class="btn-small"
+               href="https://wa.me/${SUPPORT_WA}?text=${encodeURIComponent("Salut DIGIY MARKET, la vitrine Saly ne charge pas (RLS/policy). Peux-tu vérifier ?")}"
+               target="_blank"
+               rel="noopener">
+               💬 Support
+            </a>
+          </div>
+        </div>
+      `;
     }
-
+  }
+}
     /* ===========================
        EVENTS
     ============================ */
