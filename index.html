@@ -888,7 +888,7 @@
 
         // ✅ Patch #2 : fallback photo + onerror
         const rawPhoto = String(r.photo_url || "").trim();
-        const photo = esc(rawPhoto || FALLBACK_PHOTO);
+        const FALLBACK_PHOTO = "https://orange-pig-270004.hostingersite.com/wp-content/uploads/2026/02/afrique-infini-baobab-3.webp";
 
         const wa = cleanPhone(r.whatsapp || "");
         const waMsg = `Salam ${r.display_name || "DIGIY MARKET"}, je viens de la vitrine DIGIY MARKET (Saly).`;
