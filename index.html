@@ -521,7 +521,7 @@
         <div class="pill"><span class="dot"></span> Paiement direct au pro</div>
         <div class="pill">📍 Saly</div>
         <a class="btn-small" id="btnHub" href="#" rel="noopener">🦅 DIGIY HUB</a>
-        <a class="btn-small primary" id="btnPro" href="#" rel="noopener">🧾 Poser ma carte</a>
+        <a class="btn-small primary" href="https://pro-market.digiylyfe.com/">🧾 Poser ma carte</a>
       </div>
     </header>
 
@@ -616,7 +616,7 @@
 
     // 👉 Mets ici tes URLs (prod) si besoin
     const HUB_URL = "https://beauville.github.io/digiy-hub/";
-    const MARKET_PRO_URL = "https://market-pro.digiylyfe.com/"; // ou GH pages si tu veux
+    const MARKET_PRO_URL = "https://pro-market.digiylyfe.com/"; // ou GH pages si tu veux
     const SUPPORT_WA = "221771342889";
 
     /* ===========================
@@ -636,7 +636,7 @@
     ============================ */
     (function initLinks(){
       document.getElementById("btnHub").href = HUB_URL;
-      document.getElementById("btnPro").href = MARKET_PRO_URL;
+     document.getElementById("btnPro").href = MARKET_PRO_URL;
       document.getElementById("btnSupport").href = "https://wa.me/" + SUPPORT_WA + "?text=" + encodeURIComponent("Salut DIGIY MARKET, j'ai une question sur la vitrine de Saly.");
       document.getElementById("btnRefresh").addEventListener("click", (e)=>{ e.preventDefault(); load(); });
     })();
