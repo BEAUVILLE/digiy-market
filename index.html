@@ -8,34 +8,6 @@
   <meta name="theme-color" content="#020617" />
   <meta name="robots" content="index,follow" />
 
-  <!-- Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <style>
-    :root{
-      --bg:#020617;
-      --card:#0B1120;
-      --card2:#030712;
-      --ink:#F9FAFB;
-      --muted:#CBD5E1;
-      --line:rgba(148,163,184,.22);
-      --gold:#facc15;
-      --green:#22c55e;
-      --orange:#f97316;
-
-      --r:20px;
-      --shadow:0 18px 55px rgba(0,0,0,.45);
-
-      --fs-hero: 38px;<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8" />
-  <title>DIGIY MARKET — Vitrine Saly (0% commission)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="description" content="DIGIY MARKET — Vitrine des commerces & pros à Saly. Contact WhatsApp direct. 0% commission. Paiement direct au pro." />
-  <meta name="theme-color" content="#020617" />
-  <meta name="robots" content="index,follow" />
-
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
@@ -228,7 +200,7 @@
       box-shadow:0 18px 48px rgba(0,0,0,.45);
     }
 
-    /* ✅ PHOTO PREMIUM */
+    /* ✅ PHOTO PREMIUM HYBRIDE (profondeur + lisibilité) */
     .photo{
       position:relative;
       width:100%;
@@ -237,25 +209,53 @@
       border-bottom:1px solid rgba(255,255,255,.08);
       background:rgba(0,0,0,.25);
     }
-    .photo img{
+    .photo .bg{
+      position:absolute;
+      inset:-10px;
+      background-size:cover;
+      background-position:center;
+      filter: blur(14px) saturate(1.15) contrast(1.05);
+      transform: scale(1.08);
+      opacity:.55;
+    }
+    .photo .veil{
+      position:absolute;
+      inset:0;
+      background: linear-gradient(to bottom, rgba(0,0,0,.20), rgba(0,0,0,.62));
+    }
+    .photo img.fg{
+      position:relative;
+      z-index:1;
       width:100%;
       height:100%;
-      display:block;
       object-fit:cover;            /* default */
       object-position:center;
+      display:block;
       transform:scale(1.01);
       transition: transform .25s ease, filter .25s ease;
       filter:saturate(1.05);
     }
-    .card:hover .photo img{
+    .card:hover .photo img.fg{
       transform:scale(1.04);
       filter:saturate(1.10) contrast(1.02);
+    }
+    /* mode affiche verticale : foreground en contain */
+    .photo.poster img.fg{
+      object-fit:contain;
+      padding:10px;
+      transform:none;
+      filter:none;
+    }
+    .card:hover .photo.poster img.fg{
+      transform:none;
+      filter:none;
     }
 
     .badgeTop{
       position:absolute; top:10px; left:10px;
       display:flex; gap:8px; flex-wrap:wrap; align-items:center;
       max-width: calc(100% - 20px);
+      z-index:2;
     }
     .chip{
       border-radius:999px; padding:6px 10px;
@@ -673,20 +673,12 @@
         const tags = tagsToArray(r.tags).slice(0, 6);
         const isNewCard = isNew(r.created_at);
 
-        // ✅ PHOTO SOURCE
         const rawPhoto = String(r.photo_url || "").trim();
         const basePhoto = rawPhoto || FALLBACK_PHOTO;
-        const photoFinal = esc(basePhoto + (basePhoto.includes("?") ? "&" : "?") + "v=3");
+        const photoFinal = esc(basePhoto + (basePhoto.includes("?") ? "&" : "?") + "v=9");
 
-        // ✅ AUTO "contain" for product-ish categories
-        const catRaw = String(r.category || "").toLowerCase();
-       const looksLikeProduct =
-  /(sac|montre|accessoire|produit|bijou|cosm|parfum|lunette|chauss|linge|article|mode|styliste)/i.test(catRaw)
-  || (r.slug === "test-saly");;
-
-        const fitMode = looksLikeProduct ? "contain" : "cover";
-        const pad = looksLikeProduct ? "10px" : "0";
-        const bgMode = looksLikeProduct ? "rgba(2,6,23,.78)" : "rgba(0,0,0,.25)";
+        // ✅ affiche verticale : ici on force pour test-saly (tu peux élargir après)
+        const isPoster = (String(r.slug || "") === "test-saly");
 
         const wa = cleanPhone(r.whatsapp || "");
         const waMsg = `Salam ${r.display_name || "DIGIY MARKET"}, je viens de la vitrine DIGIY MARKET (Saly).`;
@@ -697,14 +689,18 @@
 
         return `
           <article class="card" data-slug="${esc(r.slug || "")}">
-            <div class="photo" style="background:${bgMode}">
+            <div class="photo ${isPoster ? "poster" : ""}">
+              <div class="bg" style="background-image:url('${photoFinal}')"></div>
+              <div class="veil"></div>
+
               <img
+                class="fg"
                 src="${photoFinal}"
                 alt="${name}"
                 loading="lazy"
-                style="object-fit:${fitMode}; padding:${pad};"
-                onerror="this.onerror=null; this.src='${esc(FALLBACK_PHOTO)}'; this.style.objectFit='cover'; this.style.padding='0';"
+                onerror="this.onerror=null; this.src='${esc(FALLBACK_PHOTO)}';"
               />
+
               <div class="badgeTop">
                 <span class="chip gold">${badge}</span>
                 <span class="chip green">${hub}</span>
