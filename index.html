@@ -235,17 +235,25 @@
       transition: transform .25s ease, filter .25s ease;
       filter:saturate(1.05);
     }
-    .card:hover .photo img.fg{
+    /* photos normales = plus ciné */
+.photo:not(.poster) img.fg{
+  object-position:center 35%;
+}    
+  .card:hover .photo img.fg{
       transform:scale(1.04);
       filter:saturate(1.10) contrast(1.02);
     }
     /* mode affiche verticale : foreground en contain */
     .photo.poster img.fg{
-      object-fit:contain;
-      padding:10px;
-      transform:none;
-      filter:none;
-    }
+  object-fit:contain;
+  /* ✅ plus grand, moins de “cadre” */
+  padding:4px;
+  height:100%;
+  width:100%;
+  transform: scale(1.06);   /* ✅ punch */
+  transform-origin:center;
+  filter:none;
+}
     .card:hover .photo.poster img.fg{
       transform:none;
       filter:none;
@@ -379,7 +387,7 @@
       background-size: 200% 100%;
     }
     @keyframes shimmer{ 0%{ background-position: 200% 0; } 100%{ background-position: -200% 0; } }
-    .sk-photo{ height:210px; }
+    .sk-photo{ height:250px; }
     .sk-line{ height:12px; border-radius:999px; margin-top:10px; }
   </style>
 </head>
