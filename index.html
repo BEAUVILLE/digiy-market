@@ -680,8 +680,9 @@
 
         // ✅ AUTO "contain" for product-ish categories
         const catRaw = String(r.category || "").toLowerCase();
-        const looksLikeProduct =
-          /(sac|montre|accessoire|produit|bijou|cosm|parfum|lunette|chauss|linge|article|mode|styliste)/i.test(catRaw);
+       const looksLikeProduct =
+  /(sac|montre|accessoire|produit|bijou|cosm|parfum|lunette|chauss|linge|article|mode|styliste)/i.test(catRaw)
+  || (r.slug === "test-saly");;
 
         const fitMode = looksLikeProduct ? "contain" : "cover";
         const pad = looksLikeProduct ? "10px" : "0";
