@@ -37,7 +37,6 @@
     @media(max-width:860px){ :root{ --fs-hero: 32px; } }
     @media(max-width:600px){ :root{ --fs-hero: 28px; --fs-sub: 15px; } .page{ padding:14px 12px 38px; } }
 
-    /* NAV */
     .nav{
       display:flex; align-items:center; justify-content:space-between;
       gap:12px; padding:10px 0 14px;
@@ -87,7 +86,6 @@
       box-shadow:0 10px 26px rgba(250,204,21,0.35);
     }
 
-    /* HERO */
     .hero{
       margin-top:16px; border-radius:24px;
       border:1px solid rgba(255,255,255,.10);
@@ -128,7 +126,6 @@
     }
     .kpi .chip .v{ color:var(--gold); font-weight:1000; white-space:nowrap; }
 
-    /* STATS BAR */
     .statsbar{
       margin-top:12px; border-radius:18px;
       border:1px solid rgba(203,213,225,0.14);
@@ -149,7 +146,6 @@
     .stats-pill.good{ border-color: rgba(34,197,94,.30); color:#bfffe0; }
     .stats-pill.warn{ border-color: rgba(249,115,22,.30); color:#ffe0c2; }
 
-    /* CONTROLS */
     .controls{ margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between; }
     .searchRow{ display:flex; gap:10px; flex:1; min-width:260px; }
     .input{
@@ -168,7 +164,6 @@
       font-weight:900; font-size:14px; min-width:190px;
     }
 
-    /* GRID */
     .section{ margin-top:18px; }
     .section-title{ font-size:18px; font-weight:1000; margin:12px 0 10px; letter-spacing:-0.01em; }
     .muted{ color:var(--muted); font-weight:850; line-height:var(--lh); }
@@ -200,7 +195,6 @@
       box-shadow:0 18px 48px rgba(0,0,0,.45);
     }
 
-    /* ✅ PHOTO PREMIUM */
     .photo{
       position:relative;
       width:100%;
@@ -213,7 +207,7 @@
       width:100%;
       height:100%;
       display:block;
-      object-fit:cover;            /* default */
+      object-fit:cover;
       object-position:center;
       transform:scale(1.01);
       transition: transform .25s ease, filter .25s ease;
@@ -380,7 +374,7 @@
         <div>
           <h1>La vitrine <span class="hl">MARKET</span><br/>de <span class="hl">Saly</span></h1>
           <p>
-            Ici tu vois les pros et commerces visibles publiquement.
+            Ici tu vois les commerces visibles publiquement.
             Contact <b style="color:var(--gold);font-weight:1000;">WhatsApp direct</b>, et paiement
             <b style="color:var(--green);font-weight:1000;">direct au commerçant</b>.
           </p>
@@ -401,8 +395,8 @@
               <span>+<span id="ms24h">—</span>/24h</span>
             </div>
             <div class="right">
-              <span class="stats-pill good">Essai: <span id="msTrial">—</span></span>
-              <span class="stats-pill warn">Expiré: <span id="msExpired">—</span></span>
+              <span class="stats-pill good">Publics: <span id="msPublic">—</span></span>
+              <span class="stats-pill warn">Catégories: <span id="msCats">—</span></span>
             </div>
           </div>
         </div>
@@ -420,7 +414,7 @@
           </div>
 
           <div class="status" style="margin-top:10px;">
-            <span class="muted">Dernier inscrit :</span>
+            <span class="muted">Dernier publié :</span>
             <b id="kpiLast">—</b>
           </div>
         </aside>
@@ -428,7 +422,7 @@
 
       <div class="controls">
         <div class="searchRow">
-          <input id="q" class="input" type="search" placeholder="Rechercher (nom, catégorie, tags…)" autocomplete="off" />
+          <input id="q" class="input" type="search" placeholder="Rechercher (nom, catégorie, ville…)" autocomplete="off" />
           <select id="cat" class="select" title="Filtrer par catégorie">
             <option value="">Toutes les catégories</option>
           </select>
@@ -443,7 +437,7 @@
     <section class="section">
       <div class="section-title">📍 Vitrine (public)</div>
       <div class="muted">
-        Profils affichés : <b style="color:var(--gold)">is_published=true</b> et <b style="color:var(--green)">is_active=true</b> • Ville : <b>Saly</b>
+        Profils affichés : <b style="color:var(--gold)">publiés</b> • Ville : <b>Saly</b>
       </div>
       <div id="grid" class="grid" style="margin-top:12px;"></div>
     </section>
@@ -459,7 +453,6 @@
     const CITY_LOCK = "Saly";
     const NEW_DAYS = 7;
 
-    // ✅ fallback officiel (baobab)
     const FALLBACK_PHOTO = "https://orange-pig-270004.hostingersite.com/wp-content/uploads/2026/03/chatgpt-image-4-mars-2026-23_40_53.png";
 
     const HUB_URL = "https://beauville.github.io/digiy-hub/";
@@ -474,12 +467,17 @@
       global: { headers: { "X-Client-Info": "digiy-market-public" } }
     });
 
+    let ROWS = [];
+
     (function initLinks(){
       document.getElementById("btnHub").href = HUB_URL;
       document.getElementById("btnSupport").href =
         "https://wa.me/" + SUPPORT_WA + "?text=" +
         encodeURIComponent("Salut DIGIY MARKET, j'ai une question sur la vitrine de Saly.");
-      document.getElementById("btnRefresh").addEventListener("click", (e)=>{ e.preventDefault(); load(); });
+      document.getElementById("btnRefresh").addEventListener("click", (e) => {
+        e.preventDefault();
+        load();
+      });
     })();
 
     function toast(msg){
@@ -487,12 +485,14 @@
       if(!t) return;
       t.textContent = msg || "";
       t.classList.add("show");
-      setTimeout(()=>t.classList.remove("show"), 2200);
+      setTimeout(() => t.classList.remove("show"), 2200);
     }
+
     function setStatus(msg){
       const el = document.getElementById("statusText");
       if(el) el.textContent = msg || "";
     }
+
     function esc(s){
       return String(s ?? "")
         .replaceAll("&","&amp;")
@@ -501,69 +501,62 @@
         .replaceAll('"',"&quot;")
         .replaceAll("'","&#039;");
     }
+
     function cleanPhone(p){
       return String(p || "").replace(/\s+/g,"").replace(/^\+/,"").replace(/[^\d]/g,"");
     }
+
     function waLink(phone, msg){
       const p = cleanPhone(phone);
       const t = encodeURIComponent(msg || "");
       return "https://wa.me/" + p + (t ? ("?text=" + t) : "");
     }
+
     function pick(arr, key){
       const v = (arr || []).map(x => (x?.[key] ?? "")).filter(Boolean);
       return Array.from(new Set(v)).sort((a,b)=>String(a).localeCompare(String(b)));
     }
+
     function tagsToArray(tags){
       if(Array.isArray(tags)) return tags.filter(Boolean).map(String);
-      const s = String(tags||"").trim();
+      const s = String(tags || "").trim();
       if(!s) return [];
-      return s.split(",").map(x=>x.trim()).filter(Boolean);
+      return s.split(",").map(x => x.trim()).filter(Boolean);
     }
-    function isNew(createdAtIso){
-      if(!createdAtIso) return false;
-      const t = Date.parse(createdAtIso);
+
+    function isNew(dateIso){
+      if(!dateIso) return false;
+      const t = Date.parse(dateIso);
       if(!Number.isFinite(t)) return false;
-      const days = (Date.now() - t) / (1000*60*60*24);
+      const days = (Date.now() - t) / (1000 * 60 * 60 * 24);
       return days <= NEW_DAYS;
     }
 
-    async function loadStatsBar(){
-      const bar = document.getElementById("marketStatsBar");
-      if(!bar) return;
-      try{
-        const { data, error } = await sb.from("digiy_market_stats_saly").select("*").single();
-        if(error) throw error;
-
-        document.getElementById("msTotal").textContent = String(data.total_commerces ?? 0);
-        document.getElementById("ms7d").textContent = String(data.nouveaux_7j ?? 0);
-        document.getElementById("ms24h").textContent = String(data.nouveaux_24h ?? 0);
-        document.getElementById("msTrial").textContent = String(data.en_essai ?? 0);
-        document.getElementById("msExpired").textContent = String(data.essai_expire ?? 0);
-      }catch(e){
-        console.warn("statsbar error:", e);
-        bar.style.display = "none";
-      }
+    function sameCity(a, b){
+      return String(a || "").trim().toLowerCase() === String(b || "").trim().toLowerCase();
     }
 
-    let ROWS = [];
+    function updateStatsBar(rows){
+      const list = Array.isArray(rows) ? rows : [];
+      const now = Date.now();
 
-    function applyFilters(){
-      const q = (document.getElementById("q").value || "").trim().toLowerCase();
-      const cat = (document.getElementById("cat").value || "").trim().toLowerCase();
+      const new7d = list.filter(r => {
+        const t = Date.parse(r.created_at || "");
+        return Number.isFinite(t) && ((now - t) / (1000*60*60*24) <= 7);
+      }).length;
 
-      const filtered = (ROWS || []).filter(r => {
-        const hay = [
-          r.display_name, r.category, r.city, r.address, r.bio, r.badge, r.hub_badge, r.price_label,
-          ...tagsToArray(r.tags)
-        ].join(" ").toLowerCase();
+      const new24h = list.filter(r => {
+        const t = Date.parse(r.created_at || "");
+        return Number.isFinite(t) && ((now - t) / (1000*60*60) <= 24);
+      }).length;
 
-        const okQ = !q || hay.includes(q);
-        const okCat = !cat || String(r.category||"").toLowerCase() === cat;
-        return okQ && okCat;
-      });
+      const cats = new Set(list.map(r => String(r.category || "").trim()).filter(Boolean)).size;
 
-      render(filtered);
-      updateKpi();
+      document.getElementById("msTotal").textContent = String(list.length);
+      document.getElementById("ms7d").textContent = String(new7d);
+      document.getElementById("ms24h").textContent = String(new24h);
+      document.getElementById("msPublic").textContent = String(list.length);
+      document.getElementById("msCats").textContent = String(cats);
     }
 
     function updateKpi(){
@@ -584,9 +577,14 @@
         if(!last) last = r;
         else if(Date.parse(r.created_at) > Date.parse(last.created_at)) last = r;
       }
-      if(kLast) kLast.textContent = last ? `${last.display_name || "—"} (${last.slug || ""})` : "—";
 
-      setStatus(total ? `✅ ${total} profil(s) affiché(s) — ${new7d} nouveau(x) / 7j` : "⚠️ Aucun profil (Saly)");
+      if(kLast){
+        kLast.textContent = last
+          ? `${last.display_name || "—"} (${last.slug || ""})`
+          : "—";
+      }
+
+      setStatus(total ? `✅ ${total} profil(s) affiché(s) — ${new7d} nouveau(x) / 7j` : "⚠️ Aucun profil public (Saly)");
     }
 
     function fillSelects(){
@@ -600,7 +598,7 @@
     function renderSkeleton(){
       const grid = document.getElementById("grid");
       if(!grid) return;
-      grid.innerHTML = Array.from({length:6}).map(()=>`
+      grid.innerHTML = Array.from({length:6}).map(() => `
         <div class="card">
           <div class="photo skeleton sk-photo"></div>
           <div class="body">
@@ -641,16 +639,14 @@
         const bio = esc(r.bio || "");
         const badge = esc(r.badge || "🏪 PARTENAIRE");
         const hub = esc(r.hub_badge || "🛍️ MARKET");
-        const price = esc(r.price_label || "Prix à discuter");
+        const price = esc(r.price_label || "");
         const tags = tagsToArray(r.tags).slice(0, 6);
         const isNewCard = isNew(r.created_at);
 
-        // ✅ PHOTO SOURCE
         const rawPhoto = String(r.photo_url || "").trim();
         const basePhoto = rawPhoto || FALLBACK_PHOTO;
         const photoFinal = esc(basePhoto + (basePhoto.includes("?") ? "&" : "?") + "v=3");
 
-        // ✅ AUTO "contain" for product-ish categories
         const catRaw = String(r.category || "").toLowerCase();
         const looksLikeProduct =
           /(sac|montre|accessoire|produit|bijou|cosm|parfum|lunette|chauss|linge|article|mode|styliste)/i.test(catRaw);
@@ -663,8 +659,7 @@
         const waMsg = `Salam ${r.display_name || "DIGIY MARKET"}, je viens de la vitrine DIGIY MARKET (Saly).`;
         const waHref = wa ? waLink(wa, waMsg) : "";
 
-        const profileUrl = String(r.profile_url || "").trim();
-        const ficheHref = profileUrl || MARKET_PRO_URL;
+        const ficheHref = `./boutique.html?slug=${encodeURIComponent(r.slug || "")}`;
 
         return `
           <article class="card" data-slug="${esc(r.slug || "")}">
@@ -690,7 +685,9 @@
                 <span>📍 ${city}${address ? " • " + address : ""}</span>
               </div>
 
-              ${bio ? `<div class="bio">${bio}</div>` : `<div class="bio" style="color:var(--muted)">Profil public DIGIY MARKET.</div>`}
+              ${bio
+                ? `<div class="bio">${bio}</div>`
+                : `<div class="bio" style="color:var(--muted)">Profil public DIGIY MARKET.</div>`}
 
               <div class="tags">
                 ${tags.map(t => `<span class="tag">${esc(t)}</span>`).join("")}
@@ -698,7 +695,7 @@
               </div>
 
               <div class="actions">
-                <a class="btn primary" href="${esc(ficheHref)}" target="_blank" rel="noopener">📄 Voir</a>
+                <a class="btn primary" href="${esc(ficheHref)}">📄 Voir</a>
                 ${
                   wa
                     ? `<a class="btn secondary" href="${esc(waHref)}" target="_blank" rel="noopener">💬 WhatsApp</a>`
@@ -711,26 +708,78 @@
       }).join("");
     }
 
+    function applyFilters(){
+      const q = (document.getElementById("q").value || "").trim().toLowerCase();
+      const cat = (document.getElementById("cat").value || "").trim().toLowerCase();
+
+      const filtered = (ROWS || []).filter(r => {
+        const hay = [
+          r.display_name,
+          r.category,
+          r.city,
+          r.address,
+          r.bio,
+          r.badge,
+          r.hub_badge,
+          r.price_label,
+          ...tagsToArray(r.tags)
+        ].join(" ").toLowerCase();
+
+        const okQ = !q || hay.includes(q);
+        const okCat = !cat || String(r.category || "").toLowerCase() === cat;
+        return okQ && okCat;
+      });
+
+      render(filtered);
+      updateKpi();
+    }
+
     async function load(){
       renderSkeleton();
       setStatus("🔎 Chargement depuis Supabase…");
-      loadStatsBar();
 
       try{
         const { data, error } = await sb
-          .from("digiy_market_vitrine_saly")
+          .from("digiy_market_public_profiles_v2")
           .select("*")
-          .order("created_at", { ascending: false });
+          .order("updated_at", { ascending: false });
 
         if(error) throw error;
 
-        ROWS = Array.isArray(data) ? data : [];
+        const raw = Array.isArray(data) ? data : [];
+
+        ROWS = raw
+          .filter(r => sameCity(r.city, CITY_LOCK))
+          .map(r => ({
+            slug: r.slug,
+            display_name: r.business_name || "Commerce",
+            category: r.category || "",
+            city: r.city || "",
+            address: r.address_text || "",
+            bio: r.description || "",
+            badge: "🏪 PARTENAIRE",
+            hub_badge: "🛍️ MARKET",
+            price_label: r.delivery_note || "",
+            tags: [
+              r.category || "",
+              r.city || "",
+              r.open_hours ? `Horaires: ${r.open_hours}` : ""
+            ].filter(Boolean),
+            photo_url: r.cover_image_url || r.logo_url || "",
+            whatsapp: r.whatsapp || "",
+            created_at: r.published_at || r.updated_at || null
+          }));
+
         fillSelects();
+        updateStatsBar(ROWS);
         applyFilters();
         toast("✅ Vitrine chargée");
       }catch(e){
         console.error(e);
-        setStatus("❌ Erreur chargement (RLS/policy SELECT).");
+        setStatus("❌ Erreur chargement vitrine.");
+        const bar = document.getElementById("marketStatsBar");
+        if(bar) bar.style.display = "none";
+
         const grid = document.getElementById("grid");
         if(grid){
           grid.innerHTML = `
@@ -738,7 +787,7 @@
               <span>❌ Impossible de charger la vitrine. <b>Détail :</b> ${esc(e?.message || e)}</span>
               <div class="right">
                 <a class="btn-small"
-                   href="https://wa.me/${SUPPORT_WA}?text=${encodeURIComponent("Salut DIGIY MARKET, la vitrine Saly ne charge pas (RLS/policy). Peux-tu vérifier ?")}"
+                   href="https://wa.me/${SUPPORT_WA}?text=${encodeURIComponent("Salut DIGIY MARKET, la vitrine Saly ne charge pas.")}"
                    target="_blank" rel="noopener">💬 Support</a>
               </div>
             </div>
@@ -751,7 +800,12 @@
       const q = document.getElementById("q");
       const cat = document.getElementById("cat");
       let t = null;
-      q.addEventListener("input", () => { clearTimeout(t); t = setTimeout(applyFilters, 120); });
+
+      q.addEventListener("input", () => {
+        clearTimeout(t);
+        t = setTimeout(applyFilters, 120);
+      });
+
       cat.addEventListener("change", applyFilters);
     })();
 
