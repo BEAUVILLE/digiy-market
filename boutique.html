@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <title>DIGIY MARKET — Boutique</title>
+  <meta name="theme-color" content="#07140f"/>
+  <meta name="description" content="Découvrez une boutique DIGIY MARKET et passez votre commande simplement."/>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    :root{
+      --bg:#07140f;
+      --bg2:#0b1d15;
+      --card:#10241b;
+      --card2:#0d2018;
+      --line:rgba(255,255,255,.10);
+      --text:#ecfff4;
+      --muted:rgba(236,255,244,.72);
+      --primary:#22c55e;
+      --primary2:#16a34a;
+      --gold:#facc15;
+      --goldSoft:rgba(250,204,21,.12);
+      --accent:#38bdf8;
+      --shadow:0 20px 60px rgba(0,0,0,.38);
+      --r:24px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      background:
+        radial-gradient(900px 520px at 10% -10%, rgba(34,197,94,.14), transparent 60%),
+        radial-gradient(900px 520px at 110% 0%, rgba(250,204,21,.10), transparent 55%),
+        linear-gradient(180deg, #07140f, #05100c 55%, #040b08 100%);
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      padding:16px;
+    }
+
+    a{color:inherit;text-decoration:none}
+
+    .wrap{
+      max-width:var(--max);
+      margin:auto;
+      display:grid;
+      gap:14px;
+    }
+
+    .hero,
+    .card{
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.018));
+      box-shadow:var(--shadow);
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      padding:14px 18px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand-mark{
+      width:48px;
+      height:48px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(34,197,94,.18), rgba(250,204,21,.14));
+      border:1px solid rgba(255,255,255,.10);
+      font-size:22px;
+      flex:0 0 auto;
+    }
+
+    .brand-copy{
+      min-width:0;
+    }
+
+    .eyebrow{
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--gold);
+      font-weight:950;
+      margin-bottom:3px;
+    }
+
+    .brand-title{
+      font-size:clamp(16px,2vw,20px);
+      font-weight:950;
+      line-height:1.1;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .brand-sub{
+      color:var(--muted);
+      font-size:13px;
+      font-weight:800;
+      margin-top:3px;
+    }
+
+    .top-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      min-height:46px;
+      padding:11px 15px;
+      border-radius:14px;
+      font-weight:950;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      cursor:pointer;
+      transition:.18s ease;
+      box-shadow:var(--shadow);
+    }
+
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{
+      background:linear-gradient(135deg, var(--primary), var(--primary2));
+      color:#041b12;
+      border-color:transparent;
+      box-shadow:0 12px 28px rgba(34,197,94,.22);
+    }
+    .btn.gold{
+      background:rgba(250,204,21,.12);
+      color:var(--gold);
+      border-color:rgba(250,204,21,.24);
+    }
+    .btn.ghost{
+      background:rgba(255,255,255,.04);
+      color:var(--muted);
+    }
+
+    .hero{
+      overflow:hidden;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      min-height:420px;
+    }
+
+    @media(max-width:980px){
+      .hero-grid{grid-template-columns:1fr}
+    }
+
+    .hero-media{
+      position:relative;
+      min-height:320px;
+      background:#0a1712;
+      overflow:hidden;
+    }
+
+    .hero-media::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 24% 22%, rgba(250,204,21,.22), transparent 24%),
+        radial-gradient(circle at 78% 20%, rgba(34,197,94,.18), transparent 22%),
+        linear-gradient(180deg, #0d1726, #09111c);
+    }
+
+    .hero-visual{
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      z-index:1;
+      font-size:84px;
+      font-weight:1000;
+    }
+
+    .hero-badge{
+      position:absolute;
+      left:16px;
+      bottom:16px;
+      z-index:2;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(7,20,15,.72);
+      color:#fff6c9;
+      font-size:12px;
+      font-weight:950;
+      backdrop-filter:blur(8px);
+    }
+
+    .hero-badge .dot{
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:var(--primary);
+      box-shadow:0 0 0 4px rgba(34,197,94,.14);
+    }
+
+    .hero-body{
+      padding:24px;
+      display:grid;
+      gap:18px;
+      align-content:start;
+    }
+
+    .mode{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 13px;
+      border-radius:999px;
+      border:1px solid rgba(250,204,21,.24);
+      background:rgba(250,204,21,.10);
+      color:#fff1a8;
+      font-size:12px;
+      font-weight:950;
+      width:max-content;
+    }
+
+    .mode.live{
+      border-color:rgba(34,197,94,.24);
+      background:rgba(34,197,94,.10);
+      color:#bbf7d0;
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(30px,4vw,46px);
+      line-height:1.04;
+      letter-spacing:-.02em;
+    }
+
+    .subtitle{
+      color:var(--muted);
+      font-size:16px;
+      font-weight:800;
+      line-height:1.55;
+    }
+
+    .pills{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.18);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:900;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .layout{
+      display:grid;
+      gap:14px;
+    }
+
+    @media(min-width:980px){
+      .layout{grid-template-columns:1.05fr .95fr}
+    }
+
+    .panel{
+      padding:18px;
+    }
+
+    .panel h2{
+      margin:0 0 8px;
+      font-size:22px;
+    }
+
+    .muted{
+      color:var(--muted);
+      font-size:14px;
+      font-weight:800;
+      line-height:1.55;
+    }
+
+    .info-grid{
+      display:grid;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .fact{
+      padding:14px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.09);
+      background:rgba(0,0,0,.16);
+    }
+
+    .fact .k{
+      font-size:12px;
+      color:var(--muted);
+      font-weight:800;
+      margin-bottom:6px;
+    }
+
+    .fact .v{
+      font-size:15px;
+      font-weight:900;
+      line-height:1.5;
+      word-break:break-word;
+    }
+
+    .desc{
+      margin-top:16px;
+      padding:16px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,.09);
+      background:rgba(0,0,0,.16);
+      color:var(--text);
+      font-weight:800;
+      line-height:1.7;
+    }
+
+    .notice{
+      margin-top:16px;
+      padding:12px 14px;
+      border-radius:16px;
+      border:1px solid rgba(250,204,21,.22);
+      background:rgba(250,204,21,.08);
+      color:#fde68a;
+      font-weight:900;
+      line-height:1.45;
+    }
+
+    .empty{
+      padding:24px 18px;
+      border-radius:20px;
+      border:1px dashed rgba(255,255,255,.12);
+      color:var(--muted);
+      text-align:center;
+      font-weight:800;
+    }
+
+    .footer{
+      text-align:center;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      padding:6px 0 2px;
+    }
+
+    .loading{
+      opacity:.72;
+      pointer-events:none;
+    }
+
+    @media(max-width:640px){
+      .top-actions,.hero-actions{width:100%}
+      .top-actions > *, .hero-actions > *{flex:1 1 auto}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="app">
+    <section class="card topbar">
+      <div class="brand">
+        <div class="brand-mark">🛍️</div>
+        <div class="brand-copy">
+          <div class="eyebrow">DIGIY MARKET</div>
+          <div class="brand-title" id="brandTitle">Boutique publique</div>
+          <div class="brand-sub" id="brandSub">Chargement de la boutique…</div>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <a class="btn ghost" href="./index.html">← Retour vitrine</a>
+        <a class="btn" id="btnOrderTop" href="./commander.html">Commander</a>
+      </div>
+    </section>
+
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-media">
+          <div class="hero-visual" id="heroVisual">🧴</div>
+          <div class="hero-badge"><span class="dot"></span> Boutique terrain DIGIY</div>
+        </div>
+
+        <div class="hero-body">
+          <div class="mode" id="modeBadge">Mode aperçu</div>
+
+          <div>
+            <h1 id="shopName">Astou Market</h1>
+            <div class="subtitle" id="shopSubtitle">
+              Produits utiles, commandes simples, contact direct.
+            </div>
+          </div>
+
+          <div class="pills">
+            <div class="pill" id="pillCategory">🏷️ Catégorie</div>
+            <div class="pill" id="pillCity">📍 Ville</div>
+            <div class="pill" id="pillHours">🕒 Horaires</div>
+          </div>
+
+          <div class="hero-actions">
+            <a class="btn primary" id="btnOrderHero" href="./commander.html">🛒 Commander maintenant</a>
+            <a class="btn gold" id="btnWhatsapp" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+            <a class="btn ghost" id="btnCall" href="#">📞 Appeler</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="layout">
+      <section class="card panel">
+        <h2>À propos</h2>
+        <div class="muted" id="aboutLead">
+          Cette boutique présente ses produits et prend les commandes simplement.
+        </div>
+
+        <div class="desc" id="shopDescription">
+          Boutique locale, produits utiles, contact direct, service simple.
+        </div>
+
+        <div class="notice" id="deliveryNote">
+          Livraison locale selon zone.
+        </div>
+      </section>
+
+      <section class="card panel">
+        <h2>Repères utiles</h2>
+        <div class="muted">
+          Les informations ci-dessous aident le client à commander sans tourner en rond.
+        </div>
+
+        <div class="info-grid">
+          <div class="fact">
+            <div class="k">Téléphone</div>
+            <div class="v" id="publicPhone">—</div>
+          </div>
+
+          <div class="fact">
+            <div class="k">WhatsApp</div>
+            <div class="v" id="whatsappText">—</div>
+          </div>
+
+          <div class="fact">
+            <div class="k">Adresse</div>
+            <div class="v" id="addressText">—</div>
+          </div>
+
+          <div class="fact">
+            <div class="k">Horaires</div>
+            <div class="v" id="hoursText">—</div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <div class="footer" id="footerText">
+      DIGIY MARKET • Boutique publique
+    </div>
+  </div>
+
+  <script>
+    const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJIUzI1NiIsInJlZiI6Indlc3Ftd2pqdHNlZnlqbmx1b3NqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUxNzg4ODIsImV4cCI6MjA4MDc1NDg4Mn0.dZfYOc2iL2_wRYL3zExZFsFSBK6AbMeOid2LrIjcTdA";
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const qs = new URLSearchParams(location.search);
+    const slug = (qs.get("slug") || "").trim();
+
+    const $ = (id) => document.getElementById(id);
+
+    let IS_PREVIEW = !slug;
+
+    function normalizePhone(v){
+      return String(v || "").replace(/[^\d]/g, "");
+    }
+
+    function formatPhone(v){
+      const p = normalizePhone(v);
+      return p || "—";
+    }
+
+    function whatsappUrl(phone, shopName){
+      const p = normalizePhone(phone);
+      const text = encodeURIComponent(`Salut ${shopName || "DIGIY MARKET"}, je veux des infos sur vos produits.`);
+      return p ? `https://wa.me/${p}?text=${text}` : "#";
+    }
+
+    function telUrl(phone){
+      const p = normalizePhone(phone);
+      return p ? `tel:${p}` : "#";
+    }
+
+    function orderUrl(targetSlug){
+      return targetSlug
+        ? `./commander.html?slug=${encodeURIComponent(targetSlug)}`
+        : "./commander.html";
+    }
+
+    function previewData(){
+      return {
+        slug: "",
+        business_name: "Astou Market",
+        category: "Cosmétiques / Produits naturels",
+        city: "Saly",
+        public_phone: "221771342889",
+        whatsapp: "221771342889",
+        address_text: "Saly centre",
+        description: "Boutique locale, produits utiles et bons. Ici on commande simplement, on parle vrai, et on avance sans usine à gaz.",
+        open_hours: "08h - 20h",
+        delivery_note: "Livraison locale selon zone.",
+        cover_image_url: null,
+        logo_url: null
+      };
+    }
+
+    function applyData(profile, liveMode){
+      const p = profile || previewData();
+      const shopName = p.business_name || "Boutique DIGIY";
+      const category = p.category || "Boutique locale";
+      const city = p.city || "Terrain local";
+      const hours = p.open_hours || "Horaires à confirmer";
+      const publicPhone = formatPhone(p.public_phone);
+      const whatsapp = formatPhone(p.whatsapp || p.public_phone);
+      const address = p.address_text || "Adresse à confirmer";
+      const desc = p.description || "Boutique locale, produits utiles, contact direct.";
+      const delivery = p.delivery_note || "Commande simple selon disponibilité.";
+
+      $("brandTitle").textContent = shopName;
+      $("brandSub").textContent = liveMode
+        ? `Boutique publique • ${p.slug || slug}`
+        : "Aperçu de boutique publique";
+      $("shopName").textContent = shopName;
+      $("shopSubtitle").textContent = `${category} • ${city}`;
+      $("pillCategory").textContent = `🏷️ ${category}`;
+      $("pillCity").textContent = `📍 ${city}`;
+      $("pillHours").textContent = `🕒 ${hours}`;
+
+      $("aboutLead").textContent = liveMode
+        ? "Cette boutique est publiée et visible côté public."
+        : "Aperçu public d’une boutique MARKET avant chargement réel.";
+      $("shopDescription").textContent = desc;
+      $("deliveryNote").textContent = delivery;
+
+      $("publicPhone").textContent = publicPhone;
+      $("whatsappText").textContent = whatsapp;
+      $("addressText").textContent = address;
+      $("hoursText").textContent = hours;
+
+      $("modeBadge").className = liveMode ? "mode live" : "mode";
+      $("modeBadge").textContent = liveMode ? "Mode vivant" : "Mode aperçu";
+
+      const targetSlug = liveMode ? (p.slug || slug) : slug;
+      const orderHref = orderUrl(targetSlug);
+      const waHref = whatsappUrl(p.whatsapp || p.public_phone, shopName);
+      const callHref = telUrl(p.public_phone);
+
+      $("btnOrderTop").href = orderHref;
+      $("btnOrderHero").href = orderHref;
+      $("btnWhatsapp").href = waHref;
+      $("btnCall").href = callHref;
+
+      $("footerText").textContent = liveMode
+        ? `DIGIY MARKET • ${shopName} • Boutique publique vivante`
+        : "DIGIY MARKET • Aperçu boutique publique";
+
+      $("heroVisual").textContent = category.toLowerCase().includes("cosm")
+        ? "🧴"
+        : category.toLowerCase().includes("aliment")
+        ? "🛒"
+        : "🛍️";
+    }
+
+    async function loadLive(){
+      const { data, error } = await sb.rpc("market_public_profile_by_slug", { p_slug: slug });
+      if(error) throw error;
+      if(!data?.ok || !data?.profile) throw new Error(data?.error || "not_found");
+      return data.profile;
+    }
+
+    async function boot(){
+      document.body.classList.add("loading");
+
+      try{
+        if(!slug){
+          IS_PREVIEW = true;
+          applyData(previewData(), false);
+          return;
+        }
+
+        const profile = await loadLive();
+        IS_PREVIEW = false;
+        applyData(profile, true);
+      }catch(err){
+        console.error(err);
+        IS_PREVIEW = true;
+        applyData(previewData(), false);
+        $("brandSub").textContent = "Boutique introuvable, aperçu affiché";
+        $("modeBadge").className = "mode";
+        $("modeBadge").textContent = "Aperçu de secours";
+      }finally{
+        document.body.classList.remove("loading");
+      }
+    }
+
+    boot();
+  </script>
+</body>
+</html>
