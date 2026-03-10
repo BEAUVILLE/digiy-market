@@ -11,6 +11,7 @@
 :root{
   --bg:#fdf6ec;
   --bg-2:#fffaf2;
+  --card:#fffdf9;
   --ink:#1a1208;
   --muted:#7a6a54;
   --line:#e8d8be;
@@ -18,14 +19,24 @@
   --orange:#e86820;
   --red:#c83830;
   --green:#28885a;
+  --blue:#4d7cff;
   --shadow:0 18px 52px rgba(26,18,8,.13);
+  --shadow-soft:0 10px 28px rgba(26,18,8,.08);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+body{
+  font-family:'Nunito',sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(232,104,32,.06), transparent 28%),
+    radial-gradient(circle at top right, rgba(40,136,90,.05), transparent 22%),
+    var(--bg);
+  color:var(--ink);
+  overflow-x:hidden;
+}
 a{color:inherit;text-decoration:none}
-button,input{font:inherit}
-.wrap{width:min(1240px,calc(100% - 28px));margin:0 auto}
+button,input,select{font:inherit}
+.wrap{width:min(1260px,calc(100% - 28px));margin:0 auto}
 
 /* TOPBAR */
 .topbar{
@@ -39,7 +50,7 @@ button,input{font:inherit}
   grid-template-columns:auto 1fr auto;
   gap:12px;
   align-items:center;
-  min-height:72px;
+  min-height:74px;
 }
 .brand{
   display:flex;align-items:center;gap:10px;
@@ -55,7 +66,7 @@ button,input{font:inherit}
 .brand small{
   display:block;
   font-family:'Nunito',sans-serif;
-  font-weight:700;font-size:.72rem;color:var(--muted);margin-top:1px
+  font-weight:800;font-size:.72rem;color:var(--muted);margin-top:1px
 }
 .top-search{
   display:flex;align-items:center;background:#fff;border:2px solid var(--line);
@@ -84,8 +95,8 @@ button,input{font:inherit}
 
 /* HERO */
 .hero-band{
-  background:linear-gradient(135deg,#1a1208 0%,#2e1e0a 50%,#1f2d12 100%);
-  color:#fff;padding:38px 0 30px;position:relative;overflow:hidden
+  background:linear-gradient(135deg,#1a1208 0%,#2e1e0a 48%,#1d2f14 100%);
+  color:#fff;padding:38px 0 32px;position:relative;overflow:hidden
 }
 .hero-band::before{
   content:"";position:absolute;inset:0;
@@ -94,10 +105,14 @@ button,input{font:inherit}
     radial-gradient(circle at 88% 30%,rgba(40,136,90,.18),transparent 36%),
     radial-gradient(circle at 65% 80%,rgba(255,255,255,.06),transparent 28%);
 }
+.hero-band::after{
+  content:"";position:absolute;right:-80px;bottom:-80px;width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle, rgba(255,255,255,.12), transparent 70%);
+}
 .hero-inner{position:relative;z-index:1}
 .hero-grid{
   display:grid;
-  grid-template-columns:1.05fr .95fr;
+  grid-template-columns:1.04fr .96fr;
   gap:20px;
   align-items:center;
 }
@@ -105,19 +120,19 @@ button,input{font:inherit}
   display:inline-flex;align-items:center;gap:7px;
   padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.1);
   border:1px solid rgba(255,255,255,.16);
-  font-size:.78rem;font-weight:800;letter-spacing:.07em;color:rgba(255,255,255,.82);
+  font-size:.78rem;font-weight:900;letter-spacing:.07em;color:rgba(255,255,255,.82);
   margin-bottom:12px;text-transform:uppercase
 }
 .hero-band h1{
   font-family:'Playfair Display',serif;font-weight:900;
-  font-size:clamp(2rem,4.3vw,4rem);line-height:.94;letter-spacing:-.02em;margin-bottom:10px
+  font-size:clamp(2rem,4.3vw,4.2rem);line-height:.92;letter-spacing:-.02em;margin-bottom:10px
 }
 .hero-band h1 em{
   font-style:normal;background:linear-gradient(90deg,#f8a040,#f06040);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text
 }
 .hero-band p{
-  color:rgba(255,255,255,.7);font-size:1rem;line-height:1.68;max-width:55ch
+  color:rgba(255,255,255,.74);font-size:1rem;line-height:1.68;max-width:56ch
 }
 .hero-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
 .chip{
@@ -127,16 +142,17 @@ button,input{font:inherit}
 .hero-card{
   background:rgba(255,255,255,.08);
   border:1px solid rgba(255,255,255,.12);
-  border-radius:26px;
+  border-radius:28px;
   padding:18px;
   backdrop-filter:blur(10px);
+  box-shadow:0 14px 40px rgba(0,0,0,.12);
 }
 .hero-card h3{
   font-family:'Playfair Display',serif;
-  font-size:1.25rem;
+  font-size:1.32rem;
   margin-bottom:8px;
 }
-.hero-card p{font-size:.92rem;color:rgba(255,255,255,.74);line-height:1.65}
+.hero-card p{font-size:.92rem;color:rgba(255,255,255,.76);line-height:1.68}
 .hero-card .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 .hero-btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
@@ -145,8 +161,31 @@ button,input{font:inherit}
 .hero-btn.primary{background:#fff;color:var(--ink)}
 .hero-btn.soft{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);color:#fff}
 
+/* FILTERS */
+.filters{
+  padding:18px 0 10px;
+}
+.filters-shell{
+  display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;
+  background:var(--card);border:1.5px solid var(--line);border-radius:22px;padding:14px;box-shadow:var(--shadow-soft)
+}
+.filter-group{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.filter-pill{
+  display:inline-flex;align-items:center;gap:8px;padding:10px 13px;border-radius:999px;
+  background:#fff;border:1.5px solid var(--line);font-weight:900;font-size:.82rem
+}
+.filter-select{
+  appearance:none;background:#fff;border:1.5px solid var(--line);border-radius:999px;
+  padding:11px 16px;font-weight:900;color:var(--ink);min-width:160px;cursor:pointer
+}
+.filter-reset{
+  border:none;border-radius:999px;padding:11px 14px;background:#fff;border:1.5px solid var(--line);
+  font-weight:900;cursor:pointer
+}
+.filter-reset:hover{background:#fff3df}
+
 /* SECTION */
-.cats-section{padding:30px 0 0}
+.cats-section{padding:14px 0 0}
 .section-head{
   display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap
 }
@@ -176,7 +215,7 @@ button,input{font:inherit}
 .cat-rail.grabbing{cursor:grabbing;scroll-behavior:auto}
 
 .cat-tile{
-  flex-shrink:0;width:122px;border-radius:18px;overflow:hidden;border:2.5px solid transparent;
+  flex-shrink:0;width:124px;border-radius:18px;overflow:hidden;border:2.5px solid transparent;
   cursor:pointer;transition:transform .22s,box-shadow .22s,border-color .18s;background:#fff;
   box-shadow:0 4px 14px rgba(26,18,8,.09);user-select:none
 }
@@ -186,7 +225,7 @@ button,input{font:inherit}
   transform:translateY(-3px) scale(1.03)
 }
 .cat-img{
-  height:82px;display:flex;align-items:center;justify-content:center;font-size:2.1rem;position:relative;overflow:hidden
+  height:84px;display:flex;align-items:center;justify-content:center;font-size:2.1rem;position:relative;overflow:hidden
 }
 .cat-bg-txt{
   position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
@@ -201,15 +240,15 @@ button,input{font:inherit}
   min-width:18px;height:18px;border-radius:50%;font-size:.6rem;margin-left:4px;padding:0 4px
 }
 
-/* VENDOR PANEL */
+/* PANEL */
 .vendor-panel{
   max-height:0;overflow:hidden;
   transition:max-height .55s cubic-bezier(.4,0,.2,1),opacity .4s,margin .4s;
   opacity:0;margin-top:0
 }
-.vendor-panel.open{max-height:1800px;opacity:1;margin-top:20px}
+.vendor-panel.open{max-height:2200px;opacity:1;margin-top:20px}
 .vendor-panel-inner{
-  background:#fff;border:2px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow)
+  background:#fff;border:2px solid var(--line);border-radius:26px;overflow:hidden;box-shadow:var(--shadow)
 }
 .panel-header{
   display:flex;align-items:center;justify-content:space-between;padding:16px 20px 14px;
@@ -225,17 +264,17 @@ button,input{font:inherit}
 }
 .panel-close:hover{background:var(--red);color:#fff}
 .vendor-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;padding:18px
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:14px;padding:18px
 }
 
-/* VENDOR CARD */
+/* VENDOR */
 .vendor{
   border-radius:18px;border:1.5px solid var(--line);overflow:hidden;background:#fdfaf5;
   transition:transform .22s,box-shadow .22s;cursor:pointer
 }
 .vendor:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(26,18,8,.12)}
 .vendor-top{
-  height:100px;display:flex;align-items:center;justify-content:center;font-size:2.3rem;position:relative
+  height:108px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;position:relative
 }
 .vendor-example{
   position:absolute;left:10px;top:10px;background:rgba(255,255,255,.95);color:var(--orange);
@@ -281,20 +320,20 @@ button,input{font:inherit}
 .empty-state .big{font-size:2.8rem;margin-bottom:10px}
 .empty-state p{font-size:.93rem;line-height:1.6}
 
-/* STRIP CTA */
+/* CTA BAND */
 .cta-band{
   margin-top:24px;
   background:linear-gradient(135deg,#fffaf3,#fff4e4);
   border:2px solid var(--line);
-  border-radius:26px;
+  border-radius:28px;
   padding:18px;
   box-shadow:var(--shadow);
 }
 .cta-band-grid{
-  display:grid;grid-template-columns:1.1fr .9fr;gap:14px;align-items:center
+  display:grid;grid-template-columns:1.08fr .92fr;gap:14px;align-items:center
 }
 .cta-band h3{
-  font-family:'Playfair Display',serif;font-size:1.35rem;margin-bottom:8px
+  font-family:'Playfair Display',serif;font-size:1.38rem;margin-bottom:8px
 }
 .cta-band p{color:var(--muted);line-height:1.7}
 .cta-band-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
@@ -327,17 +366,15 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
 }
 .footer-links a:hover{background:#fef0d8;border-color:var(--gold)}
 
-/* MOBILE */
 @media(max-width:980px){
-  .topbar-inner{grid-template-columns:1fr}
-  .hero-grid,.cta-band-grid{grid-template-columns:1fr}
+  .topbar-inner,.hero-grid,.cta-band-grid,.filters-shell{grid-template-columns:1fr}
+  .top-actions{justify-content:flex-start}
 }
 @media(max-width:700px){
-  .cat-tile{width:102px}
-  .cat-img{height:68px;font-size:1.8rem}
+  .cat-tile{width:104px}
+  .cat-img{height:70px;font-size:1.8rem}
   .vendor-grid{grid-template-columns:1fr 1fr}
   .panel-header{padding:12px 14px}
-  .top-actions{justify-content:flex-start}
 }
 @media(max-width:440px){
   .vendor-grid{grid-template-columns:1fr}
@@ -372,8 +409,8 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
         <div class="hero-kicker">🌍 DIGIYLYFE ∞ · Sénégal · Afrique</div>
         <h1>Le marché qui <em>bouge</em><br/>comme la rue.</h1>
         <p>
-          Clique sur une catégorie. Les vendeurs exemples s’ouvrent. Clique sur une fiche.
-          Tu montres déjà le niveau. Là, on sent le vaiseau royal qui veut marcher fort.
+          Catégories qui glissent, fiches qui respirent, contact direct, entrée PRO visible.
+          Là, le visiteur comprend que le marché digital peut être beau, humain et sérieux.
         </p>
         <div class="hero-chips">
           <span class="chip">🛒 Neuf</span>
@@ -388,16 +425,34 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
       </div>
 
       <div class="hero-card">
-        <h3>Une vitrine qui parle fort</h3>
+        <h3>Un hall qui convertit</h3>
         <p>
-          Tous les vendeurs ci-dessous sont des <strong>exemples guidants</strong>.
-          Le clic ouvre une fiche personnalisée. Et tous les boutons contact renvoient vers ton WhatsApp DIGIY.
+          Tous les exemples ci-dessous servent à guider les commerçants.
+          Le bouton <strong>Je veux mon module</strong> pointe directement vers ton entrée PRO officielle.
         </p>
         <div class="cta-row">
           <a id="heroModuleBtn" class="hero-btn primary" href="#" target="_blank" rel="noopener">🚀 Je veux mon module</a>
           <a id="heroWaBtn" class="hero-btn soft" href="#" target="_blank" rel="noopener">💬 Parler à DIGIY</a>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="filters">
+  <div class="wrap">
+    <div class="filters-shell">
+      <div class="filter-group">
+        <span class="filter-pill">🎯 Index MARKET V3</span>
+        <span class="filter-pill">🧭 Fiches exemples guidantes</span>
+        <span class="filter-pill">🏪 Entrée PRO visible</span>
+      </div>
+
+      <select id="cityFilter" class="filter-select">
+        <option value="">Toutes les villes</option>
+      </select>
+
+      <button id="resetFilters" class="filter-reset" type="button">Réinitialiser</button>
     </div>
   </div>
 </section>
@@ -538,19 +593,20 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
         <div>
           <h3>Tu veux ta vitrine comme ça ?</h3>
           <p>
-            Ici tu montres directement la puissance du rail : fiche propre, galerie, contact WhatsApp,
-            bouton module, ambiance premium. Celui qui voit ça comprend vite.
+            Fiche boutique, galerie, WhatsApp, présence terrain, entrée PRO.  
+            Le visiteur comprend vite que tu peux lui poser un vrai module, pas une page morte.
           </p>
           <div class="cta-band-row">
             <span class="cta-pill">🛍️ Fiche boutique</span>
             <span class="cta-pill">🖼️ Galerie</span>
             <span class="cta-pill">💬 WhatsApp</span>
-            <span class="cta-pill">📍 Présence terrain</span>
+            <span class="cta-pill">📍 Maps</span>
+            <span class="cta-pill">🔥 Entrée PRO</span>
           </div>
         </div>
 
         <div class="cta-main">
-          <a id="ctaModuleBtn" class="big-cta" href="#" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+          <a id="ctaModuleBtn" class="big-cta" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
           <a id="ctaWaBtn" class="big-cta soft" href="#" target="_blank" rel="noopener">💬 Parler sur WhatsApp</a>
         </div>
       </div>
@@ -566,7 +622,7 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
       <div class="footer-sub">Neuf • Deuxième main • Brocante • Vêtements • Beauté • Services • Quotidien</div>
     </div>
     <div class="footer-links">
-      <a id="footerModuleBtn" href="#" target="_blank" rel="noopener">Je veux mon module</a>
+      <a href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">Je veux mon module</a>
       <a href="http://digiylyfe.com" target="_blank" rel="noopener">digiylyfe.com</a>
     </div>
   </div>
@@ -576,7 +632,7 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
 const DIGIY_CONFIG = {
   whatsapp: "221771342889",
   siteUrl: "http://digiylyfe.com",
-  moduleText: "Bonjour DIGIY 👋 Je veux mon module MARKET PRO avec galerie, WhatsApp, fiche boutique et présence terrain."
+  proUrl: "https://commencer-a-payer.digiylyfe.com/"
 };
 
 const VENDORS = {
@@ -670,16 +726,8 @@ function waLink(text){
   return `https://wa.me/${DIGIY_CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
 }
 
-function initGlobalButtons(){
-  const moduleLink = waLink(DIGIY_CONFIG.moduleText);
-  ['waTopBtn','heroWaBtn','ctaWaBtn'].forEach(id => {
-    const el = document.getElementById(id);
-    if(el) el.href = waLink("Bonjour DIGIY 👋 Je veux des informations sur DIGIY MARKET.");
-  });
-  ['moduleTopBtn','heroModuleBtn','ctaModuleBtn','footerModuleBtn'].forEach(id => {
-    const el = document.getElementById(id);
-    if(el) el.href = moduleLink;
-  });
+function parseCity(loc=''){
+  return (loc.split('·')[0] || loc).trim();
 }
 
 function buildVendor(cat, v){
@@ -690,6 +738,7 @@ function buildVendor(cat, v){
     categoryLabel: meta.label || cat,
     categoryIcon: meta.icon || '🛍️',
     categorySub: meta.sub || '',
+    city: parseCity(v.loc),
     slug: `${cat}-${slugify(v.name)}`,
     isExample: true
   };
@@ -700,7 +749,7 @@ function buildCatalog(){
 }
 
 function saveCatalog(){
-  localStorage.setItem('digiy_market_catalog_v2', JSON.stringify({
+  localStorage.setItem('digiy_market_catalog_v3', JSON.stringify({
     config: DIGIY_CONFIG,
     meta: META,
     vendors: buildCatalog()
@@ -715,13 +764,46 @@ function updateCounts(){
   });
 }
 
+function initButtons(){
+  const generalWa = waLink("Bonjour DIGIY 👋 Je veux des informations sur DIGIY MARKET.");
+  ['waTopBtn','heroWaBtn','ctaWaBtn'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.href = generalWa;
+  });
+  ['moduleTopBtn','heroModuleBtn','ctaModuleBtn'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.href = DIGIY_CONFIG.proUrl;
+  });
+}
+
+function fillCityFilter(){
+  const select = document.getElementById('cityFilter');
+  const cities = [...new Set(buildCatalog().map(v => v.city))].sort((a,b)=>a.localeCompare(b,'fr'));
+  cities.forEach(city => {
+    const opt = document.createElement('option');
+    opt.value = city;
+    opt.textContent = city;
+    select.appendChild(opt);
+  });
+}
+
+function getCityFilter(){
+  return document.getElementById('cityFilter').value.trim();
+}
+
+function applyCityFilter(list){
+  const city = getCityFilter();
+  if(!city) return list;
+  return list.filter(v => v.city === city);
+}
+
 function renderVendorCards(list){
   const grid = document.getElementById('vendorGrid');
   if(!list.length){
     grid.innerHTML = `
       <div class="empty-state">
         <div class="big">🏗️</div>
-        <p>Aucun vendeur exemple trouvé pour cette recherche.<br/>Essaie un autre mot ou une autre catégorie.</p>
+        <p>Aucun vendeur exemple trouvé pour ce filtre.<br/>Essaie une autre ville ou une autre recherche.</p>
       </div>
     `;
     return;
@@ -751,8 +833,10 @@ function renderVendorCards(list){
 }
 
 function renderVendorsByCategory(cat){
-  const list = (VENDORS[cat] || []).map(v => buildVendor(cat, v));
   const meta = META[cat] || {};
+  let list = (VENDORS[cat] || []).map(v => buildVendor(cat, v));
+  list = applyCityFilter(list);
+
   document.getElementById('panelIcon').textContent = meta.icon || '🛍️';
   document.getElementById('panelTitle').textContent = meta.label || cat;
   document.getElementById('panelSub').textContent = `${meta.sub || ''} • ${list.length} vendeur(s) exemple`;
@@ -761,18 +845,29 @@ function renderVendorsByCategory(cat){
 
 function renderSearch(q){
   const query = q.trim().toLowerCase();
-  const all = buildCatalog();
-  const list = all.filter(v =>
+  let list = buildCatalog().filter(v =>
     v.name.toLowerCase().includes(query) ||
     v.what.toLowerCase().includes(query) ||
     v.loc.toLowerCase().includes(query) ||
+    v.city.toLowerCase().includes(query) ||
     v.categoryLabel.toLowerCase().includes(query)
   );
+
+  list = applyCityFilter(list);
 
   document.getElementById('panelIcon').textContent = '🔎';
   document.getElementById('panelTitle').textContent = `Recherche : ${q}`;
   document.getElementById('panelSub').textContent = `${list.length} résultat(s) exemple`;
   renderVendorCards(list);
+}
+
+function rerenderCurrent(){
+  if(currentMode === 'search'){
+    const q = document.getElementById('topSearchInput').value.trim();
+    if(q) renderSearch(q);
+  } else if(currentMode === 'cat' && currentKey){
+    renderVendorsByCategory(currentKey);
+  }
 }
 
 function openVendor(slug){
@@ -781,7 +876,6 @@ function openVendor(slug){
 }
 
 function contactVendor(slug){
-  saveCatalog();
   const vendor = buildCatalog().find(v => v.slug === slug);
   const name = vendor ? vendor.name : "cette vitrine";
   window.open(
@@ -790,27 +884,31 @@ function contactVendor(slug){
   );
 }
 
-initGlobalButtons();
+initButtons();
 saveCatalog();
 updateCounts();
+fillCityFilter();
 
-let current = null;
+let currentMode = null; // 'cat' | 'search'
+let currentKey = null;
 const panel = document.getElementById('vendorPanel');
 
 document.querySelectorAll('.cat-tile').forEach(tile => {
   tile.addEventListener('click', () => {
     const cat = tile.dataset.cat;
 
-    if(current === cat){
+    if(currentMode === 'cat' && currentKey === cat){
       panel.classList.remove('open');
       tile.classList.remove('active');
-      current = null;
+      currentMode = null;
+      currentKey = null;
       return;
     }
 
     document.querySelectorAll('.cat-tile').forEach(x => x.classList.remove('active'));
     tile.classList.add('active');
-    current = cat;
+    currentMode = 'cat';
+    currentKey = cat;
 
     renderVendorsByCategory(cat);
     if(!panel.classList.contains('open')) panel.classList.add('open');
@@ -821,14 +919,16 @@ document.querySelectorAll('.cat-tile').forEach(tile => {
 document.getElementById('panelClose').addEventListener('click', () => {
   panel.classList.remove('open');
   document.querySelectorAll('.cat-tile').forEach(x => x.classList.remove('active'));
-  current = null;
+  currentMode = null;
+  currentKey = null;
 });
 
 document.getElementById('topSearchBtn').addEventListener('click', () => {
   const q = document.getElementById('topSearchInput').value.trim();
   if(!q) return;
   document.querySelectorAll('.cat-tile').forEach(x => x.classList.remove('active'));
-  current = null;
+  currentMode = 'search';
+  currentKey = q;
   renderSearch(q);
   panel.classList.add('open');
   setTimeout(() => panel.scrollIntoView({behavior:'smooth', block:'nearest'}), 180);
@@ -836,6 +936,23 @@ document.getElementById('topSearchBtn').addEventListener('click', () => {
 
 document.getElementById('topSearchInput').addEventListener('keydown', e => {
   if(e.key === 'Enter') document.getElementById('topSearchBtn').click();
+});
+
+document.getElementById('cityFilter').addEventListener('change', () => {
+  rerenderCurrent();
+});
+
+document.getElementById('resetFilters').addEventListener('click', () => {
+  document.getElementById('cityFilter').value = '';
+  document.getElementById('topSearchInput').value = '';
+  if(currentMode === 'cat' && currentKey){
+    renderVendorsByCategory(currentKey);
+  } else {
+    panel.classList.remove('open');
+    currentMode = null;
+    currentKey = null;
+    document.querySelectorAll('.cat-tile').forEach(x => x.classList.remove('active'));
+  }
 });
 
 const rail = document.getElementById('catRail');
