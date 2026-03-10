@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>DIGIY MARKET — Fiche vendeur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#fdf6ec;
+  --card:#fffdf9;
+  --ink:#1a1208;
+  --muted:#7a6a54;
+  --line:#e8d8be;
+  --gold:#c8860a;
+  --orange:#e86820;
+  --red:#c83830;
+  --green:#28885a;
+  --shadow:0 18px 52px rgba(26,18,8,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{font:inherit}
+.wrap{width:min(1180px,calc(100% - 28px));margin:0 auto}
+
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:rgba(253,246,236,.93);
+  backdrop-filter:blur(16px);
+  border-bottom:2px solid var(--line);
+}
+.topbar-inner{
+  min-height:66px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap
+}
+.brand{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Playfair Display',serif;font-weight:900;font-size:1.18rem
+}
+.brand-icon{
+  width:40px;height:40px;border-radius:11px;
+  background:linear-gradient(135deg,#e86820,#c83830);
+  display:grid;place-items:center;font-size:1.05rem;
+  box-shadow:0 5px 16px rgba(232,104,32,.3)
+}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{
+  border:none;cursor:pointer;border-radius:999px;
+  padding:11px 15px;font-weight:800;transition:.18s ease
+}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 10px 20px rgba(232,104,32,.22)}
+.btn-primary:hover{background:var(--red)}
+.btn-soft{background:#fff;border:1.5px solid var(--line);color:var(--ink)}
+.btn-soft:hover{background:#fef0d8;border-color:var(--gold)}
+
+.page{padding:24px 0 40px}
+.hero{
+  display:grid;grid-template-columns:1.04fr .96fr;gap:18px;align-items:stretch
+}
+.cover-card,.info-card,.section-card{
+  background:var(--card);border:1.5px solid var(--line);border-radius:26px;box-shadow:var(--shadow)
+}
+.cover-card{overflow:hidden}
+.cover-media{
+  aspect-ratio:16/10;background:#f6ead9;position:relative
+}
+.cover-media img{width:100%;height:100%;object-fit:cover}
+.cover-badges{
+  position:absolute;left:16px;top:16px;display:flex;gap:8px;flex-wrap:wrap
+}
+.badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 11px;border-radius:999px;font-size:.74rem;font-weight:900;letter-spacing:.04em
+}
+.badge.example{background:rgba(255,255,255,.95);border:1px solid rgba(232,104,32,.2);color:var(--orange)}
+.badge.live{background:rgba(40,136,90,.92);color:#fff}
+.badge.category{background:rgba(26,18,8,.8);color:#fff}
+
+.cover-foot{
+  padding:16px 18px 18px;border-top:1px solid var(--line)
+}
+.cover-foot h1{
+  font-family:'Playfair Display',serif;font-weight:900;
+  font-size:clamp(1.7rem,3.5vw,3rem);line-height:.96;margin-bottom:8px
+}
+.cover-foot p{color:var(--muted);line-height:1.65}
+
+.info-card{padding:18px}
+.kicker{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:7px 12px;border-radius:999px;
+  background:#fff;border:1.5px solid var(--line);
+  font-size:.76rem;font-weight:900;color:var(--orange);margin-bottom:12px
+}
+.info-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px
+}
+.mini{
+  background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px
+}
+.mini-label{font-size:.72rem;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.mini-value{font-weight:800;line-height:1.4}
+.cta-row{
+  display:flex;gap:10px;flex-wrap:wrap;margin-top:16px
+}
+.note{
+  margin-top:14px;padding:12px 14px;border-radius:18px;
+  background:#fff8ed;border:1px solid #f6d7a3;color:#8d5a00;font-size:.86rem;line-height:1.6
+}
+
+.layout{
+  display:grid;grid-template-columns:1fr 330px;gap:18px;margin-top:18px
+}
+.left-col,.right-col{display:grid;gap:18px}
+
+.section-card{padding:18px}
+.section-card h2{
+  font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;margin-bottom:12px
+}
+.section-card p{color:var(--muted);line-height:1.7}
+
+.gallery{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px
+}
+.photo{
+  border-radius:20px;overflow:hidden;background:#f4ece0;border:1px solid var(--line)
+}
+.photo img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.photo-caption{padding:10px 12px;font-size:.82rem;font-weight:800;color:var(--muted)}
+
+.products{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px
+}
+.product{
+  border:1px solid var(--line);border-radius:18px;background:#fff;padding:14px
+}
+.product h3{font-size:1rem;margin-bottom:6px}
+.product p{font-size:.88rem;line-height:1.6;margin-bottom:10px}
+.product .price{
+  display:inline-flex;padding:6px 10px;border-radius:999px;background:#fef0d8;color:var(--gold);
+  border:1px solid #f8d8a0;font-weight:900;font-size:.78rem
+}
+
+.side-list{display:grid;gap:10px}
+.side-item{
+  border:1px solid var(--line);border-radius:18px;background:#fff;padding:13px
+}
+.side-item .label{font-size:.72rem;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.side-item .value{font-weight:800;line-height:1.5}
+
+.empty-box{
+  text-align:center;padding:32px 20px
+}
+.empty-box h2{font-family:'Playfair Display',serif;font-size:1.7rem;margin-bottom:8px}
+.empty-box p{color:var(--muted);line-height:1.7}
+
+@media(max-width:980px){
+  .hero,.layout{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .info-grid,.gallery,.products{grid-template-columns:1fr}
+  .topbar-inner{padding:10px 0}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-icon">🛍️</span>
+      <span>DIGIY MARKET</span>
+    </a>
+    <div class="actions">
+      <a class="btn btn-soft" href="index.html">← Retour au marché</a>
+      <button class="btn btn-primary" type="button" id="contactBtnTop">💬 Contacter</button>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+  <div class="wrap" id="app"></div>
+</main>
+
+<script>
+function readCatalog(){
+  try{
+    const raw = localStorage.getItem('digiy_market_catalog_v1');
+    if(!raw) return null;
+    return JSON.parse(raw);
+  }catch(e){
+    return null;
+  }
+}
+
+function getParam(name){
+  return new URLSearchParams(window.location.search).get(name);
+}
+
+function safe(str=''){
+  return String(str)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+
+function slugify(str){
+  return str
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/&/g,'-et-')
+    .replace(/[^a-z0-9]+/g,'-')
+    .replace(/^-+|-+$/g,'');
+}
+
+function parsePriceBase(price=''){
+  const digits = price.match(/\d+/g);
+  if(!digits || !digits.length) return null;
+  return parseInt(digits[0],10);
+}
+
+function makePrice(base, n){
+  if(!base) return "Prix à définir";
+  const value = Math.round(base * n / 1000) * 1000;
+  return `${value.toLocaleString('fr-FR').replace(/\s/g,' ')} F`;
+}
+
+function splitOffer(what=''){
+  return what.split(',')
+    .map(x => x.trim())
+    .filter(Boolean)
+    .slice(0,4);
+}
+
+function makeSvgData(title, subtitle, icon, c1, c2){
+  const svg = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+    <defs>
+      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="${c1}"/>
+        <stop offset="100%" stop-color="${c2}"/>
+      </linearGradient>
+      <filter id="f" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="rgba(0,0,0,.18)"/>
+      </filter>
+    </defs>
+    <rect width="1200" height="900" fill="url(#g)"/>
+    <circle cx="1030" cy="120" r="160" fill="rgba(255,255,255,.12)"/>
+    <circle cx="170" cy="760" r="180" fill="rgba(255,255,255,.12)"/>
+    <text x="95" y="220" font-size="180" filter="url(#f)">${icon}</text>
+    <rect x="70" y="610" width="1060" height="170" rx="32" fill="rgba(255,255,255,.88)"/>
+    <text x="120" y="685" font-family="Arial, sans-serif" font-size="56" font-weight="700" fill="#1a1208">${title}</text>
+    <text x="120" y="740" font-family="Arial, sans-serif" font-size="30" fill="#6f624f">${subtitle}</text>
+  </svg>`;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
+function photoPalette(bg){
+  const map = {
+    "#c8deff":["#bdd8ff","#8cb7ff"],
+    "#ffe0cb":["#ffd9c5","#ffb88a"],
+    "#ffeaaa":["#fff0b8","#ffd56d"],
+    "#ffd0e0":["#ffd8e5","#ffb1cb"],
+    "#eadfff":["#eee2ff","#d2beff"],
+    "#dbfff6":["#ddfff5","#afe9d5"],
+    "#f4ead7":["#f6ead9","#ddc9a3"],
+    "#dbf5ea":["#dff7ec","#b8e0ca"]
+  };
+  return map[bg] || ["#f4ead7","#d8bf96"];
+}
+
+function buildGallery(v){
+  const [c1,c2] = photoPalette(v.bg);
+  const items = [
+    {title:"Devanture", sub:`${v.name} · accueil`, icon:v.icon},
+    {title:"Produits", sub:v.categoryLabel, icon:"🛍️"},
+    {title:"Ambiance", sub:v.loc, icon:"✨"},
+    {title:"Détail", sub:"vitrine démo DIGIY", icon:"📸"}
+  ];
+
+  return items.map((item, i) => ({
+    src: makeSvgData(item.title, item.sub, item.icon, i % 2 ? c2 : c1, i % 2 ? c1 : c2),
+    caption: `${item.title} — visuel démo`
+  }));
+}
+
+function buildProducts(v){
+  const base = parsePriceBase(v.price);
+  const parts = splitOffer(v.what);
+
+  if(!parts.length){
+    return [
+      {title:"Produit exemple 1", desc:"À personnaliser plus tard.", price:"Prix à définir"},
+      {title:"Produit exemple 2", desc:"À personnaliser plus tard.", price:"Prix à définir"},
+      {title:"Produit exemple 3", desc:"À personnaliser plus tard.", price:"Prix à définir"},
+      {title:"Produit exemple 4", desc:"À personnaliser plus tard.", price:"Prix à définir"},
+    ];
+  }
+
+  return parts.map((part, i) => ({
+    title: part,
+    desc: `Exemple de présentation produit / service pour ${v.name}.`,
+    price: makePrice(base, 0.35 + (i * 0.18))
+  }));
+}
+
+function renderVendor(v){
+  const app = document.getElementById('app');
+  const gallery = buildGallery(v);
+  const products = buildProducts(v);
+
+  document.title = `${v.name} — DIGIY MARKET`;
+
+  app.innerHTML = `
+    <section class="hero">
+      <article class="cover-card">
+        <div class="cover-media">
+          <img src="${gallery[0].src}" alt="${safe(v.name)}">
+          <div class="cover-badges">
+            <span class="badge example">EXEMPLE DIGIY</span>
+            ${v.live ? '<span class="badge live">EN LIGNE</span>' : ''}
+            <span class="badge category">${safe(v.categoryIcon)} ${safe(v.categoryLabel)}</span>
+          </div>
+        </div>
+        <div class="cover-foot">
+          <h1>${safe(v.name)}</h1>
+          <p>${safe(v.what)}</p>
+        </div>
+      </article>
+
+      <aside class="info-card">
+        <div class="kicker">${safe(v.categoryIcon)} Fiche vendeur personnalisée</div>
+        <p style="color:var(--muted);line-height:1.7">
+          Cette vitrine est un <strong>modèle de départ</strong>. Elle sert à guider les commerçants et à montrer
+          le niveau de présentation possible dans DIGIY MARKET.
+        </p>
+
+        <div class="info-grid">
+          <div class="mini">
+            <div class="mini-label">Catégorie</div>
+            <div class="mini-value">${safe(v.categoryLabel)}</div>
+          </div>
+          <div class="mini">
+            <div class="mini-label">Zone</div>
+            <div class="mini-value">${safe(v.loc)}</div>
+          </div>
+          <div class="mini">
+            <div class="mini-label">Positionnement</div>
+            <div class="mini-value">${safe(v.price)}</div>
+          </div>
+          <div class="mini">
+            <div class="mini-label">Statut</div>
+            <div class="mini-value">${v.live ? 'Disponible / en ligne' : 'Visible dans la vitrine'}</div>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <button class="btn btn-primary" type="button" id="contactBtnMain">💬 Contacter</button>
+          <a class="btn btn-soft" href="index.html">← Retour au marché</a>
+        </div>
+
+        <div class="note">
+          Plus tard, cette zone peut recevoir :
+          WhatsApp, appel direct, lien Google Maps, galerie réelle, horaires, promos, DIGIY PAY et ouverture vers MARKET PRO.
+        </div>
+      </aside>
+    </section>
+
+    <section class="layout">
+      <div class="left-col">
+        <article class="section-card">
+          <h2>Galerie de présentation</h2>
+          <p>Voici une galerie démo pour montrer comment une vraie boutique pourra afficher ses photos.</p>
+          <div class="gallery" style="margin-top:14px">
+            ${gallery.map(g => `
+              <figure class="photo">
+                <img src="${g.src}" alt="${safe(g.caption)}">
+                <figcaption class="photo-caption">${safe(g.caption)}</figcaption>
+              </figure>
+            `).join('')}
+          </div>
+        </article>
+
+        <article class="section-card">
+          <h2>Produits / services mis en avant</h2>
+          <p>Tu peux utiliser ce bloc pour montrer les points forts de la boutique ou les services les plus demandés.</p>
+          <div class="products" style="margin-top:14px">
+            ${products.map(p => `
+              <div class="product">
+                <h3>${safe(p.title)}</h3>
+                <p>${safe(p.desc)}</p>
+                <span class="price">${safe(p.price)}</span>
+              </div>
+            `).join('')}
+          </div>
+        </article>
+
+        <article class="section-card">
+          <h2>Présentation de la boutique</h2>
+          <p>
+            <strong>${safe(v.name)}</strong> est ici présenté comme une
+            <strong>vitrine exemple</strong> pour guider les commerçants du terrain.
+            L’idée est simple : montrer une boutique claire, humaine, visuelle, avec sa galerie, son style, sa zone
+            et ses produits mis en avant. Ensuite, tu remplaces cette fiche exemple par une vraie fiche commerçant.
+          </p>
+        </article>
+      </div>
+
+      <aside class="right-col">
+        <article class="section-card">
+          <h2>Repères rapides</h2>
+          <div class="side-list">
+            <div class="side-item">
+              <div class="label">Nom</div>
+              <div class="value">${safe(v.name)}</div>
+            </div>
+            <div class="side-item">
+              <div class="label">Activité</div>
+              <div class="value">${safe(v.what)}</div>
+            </div>
+            <div class="side-item">
+              <div class="label">Ville / zone</div>
+              <div class="value">${safe(v.loc)}</div>
+            </div>
+            <div class="side-item">
+              <div class="label">Univers</div>
+              <div class="value">${safe(v.categoryLabel)}</div>
+            </div>
+            <div class="side-item">
+              <div class="label">Badge</div>
+              <div class="value">Vitrine exemple DIGIY</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="section-card">
+          <h2>Ce que tu peux brancher plus tard</h2>
+          <div class="side-list">
+            <div class="side-item"><div class="value">WhatsApp direct</div></div>
+            <div class="side-item"><div class="value">Appel téléphone</div></div>
+            <div class="side-item"><div class="value">Lien Google Maps</div></div>
+            <div class="side-item"><div class="value">Galerie réelle du commerçant</div></div>
+            <div class="side-item"><div class="value">Paiement direct / DIGIY PAY</div></div>
+            <div class="side-item"><div class="value">Passage vers MARKET PRO</div></div>
+          </div>
+        </article>
+      </aside>
+    </section>
+  `;
+
+  const contactMsg = () => {
+    alert(`💬 ${v.name}\n\nIci tu brancheras plus tard :\n- WhatsApp\n- appel direct\n- formulaire simple\n- DIGIY PAY`);
+  };
+
+  document.getElementById('contactBtnTop').addEventListener('click', contactMsg);
+  document.getElementById('contactBtnMain').addEventListener('click', contactMsg);
+}
+
+function renderMissing(){
+  const app = document.getElementById('app');
+  app.innerHTML = `
+    <div class="empty-box section-card">
+      <h2>Fiche introuvable</h2>
+      <p>
+        Ouvre d’abord la fiche depuis <strong>index.html</strong>, ou recharge le marché pour réinjecter le catalogue démo.
+      </p>
+      <div style="margin-top:16px">
+        <a class="btn btn-primary" href="index.html">Retour au marché</a>
+      </div>
+    </div>
+  `;
+}
+
+const catalog = readCatalog();
+const slug = getParam('v');
+
+if(!catalog || !catalog.vendors || !slug){
+  renderMissing();
+}else{
+  const vendor = catalog.vendors.find(v => v.slug === slug);
+  if(!vendor){
+    renderMissing();
+  }else{
+    renderVendor(vendor);
+  }
+}
+</script>
+</body>
+</html>
