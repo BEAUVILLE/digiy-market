@@ -3,14 +3,13 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>DIGIY MARKET — Fiche vendeur</title>
+<title>DIGIY MARKET — Le marché vivant</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
 <style>
 :root{
   --bg:#fdf6ec;
-  --card:#fffdf9;
   --ink:#1a1208;
   --muted:#7a6a54;
   --line:#e8d8be;
@@ -18,152 +17,228 @@
   --orange:#e86820;
   --red:#c83830;
   --green:#28885a;
-  --shadow:0 18px 52px rgba(26,18,8,.12);
+  --shadow:0 18px 52px rgba(26,18,8,.13);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink)}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
-button{font:inherit}
-.wrap{width:min(1180px,calc(100% - 28px));margin:0 auto}
+button,input{font:inherit}
+.wrap{width:min(1240px,calc(100% - 28px));margin:0 auto}
 
+/* TOPBAR */
 .topbar{
   position:sticky;top:0;z-index:100;
-  background:rgba(253,246,236,.93);
-  backdrop-filter:blur(16px);
+  background:rgba(253,246,236,.93);backdrop-filter:blur(16px);
   border-bottom:2px solid var(--line);
 }
-.topbar-inner{
-  min-height:66px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap
-}
-.brand{
-  display:flex;align-items:center;gap:10px;
-  font-family:'Playfair Display',serif;font-weight:900;font-size:1.18rem
-}
+.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:900;font-size:1.22rem}
 .brand-icon{
   width:40px;height:40px;border-radius:11px;
   background:linear-gradient(135deg,#e86820,#c83830);
   display:grid;place-items:center;font-size:1.05rem;
   box-shadow:0 5px 16px rgba(232,104,32,.3)
 }
-.actions{display:flex;gap:8px;flex-wrap:wrap}
-.btn{
-  border:none;cursor:pointer;border-radius:999px;
-  padding:11px 15px;font-weight:800;transition:.18s ease
+.brand small{
+  font-family:'Nunito',sans-serif;font-weight:600;
+  font-size:.74rem;color:var(--muted);display:block;margin-top:1px
 }
-.btn:hover{transform:translateY(-1px)}
-.btn-primary{background:var(--orange);color:#fff;box-shadow:0 10px 20px rgba(232,104,32,.22)}
-.btn-primary:hover{background:var(--red)}
-.btn-soft{background:#fff;border:1.5px solid var(--line);color:var(--ink)}
-.btn-soft:hover{background:#fef0d8;border-color:var(--gold)}
+.top-search{
+  flex:1;max-width:420px;display:flex;align-items:center;
+  background:#fff;border:2px solid var(--line);border-radius:999px;
+  overflow:hidden;padding:0 5px 0 15px
+}
+.top-search input{
+  flex:1;border:none;outline:none;background:transparent;
+  font-size:.9rem;color:var(--ink);padding:10px 0
+}
+.top-search input::placeholder{color:var(--muted)}
+.top-search button{
+  width:36px;height:36px;border-radius:50%;background:var(--orange);
+  color:#fff;border:none;cursor:pointer;font-size:.95rem;
+  display:grid;place-items:center;flex-shrink:0;transition:background .2s
+}
+.top-search button:hover{background:var(--red)}
 
-.page{padding:24px 0 40px}
-.hero{
-  display:grid;grid-template-columns:1.04fr .96fr;gap:18px;align-items:stretch
+/* HERO */
+.hero-band{
+  background:linear-gradient(135deg,#1a1208 0%,#2e1e0a 55%,#1a2808 100%);
+  color:#fff;padding:34px 0 30px;position:relative;overflow:hidden
 }
-.cover-card,.info-card,.section-card{
-  background:var(--card);border:1.5px solid var(--line);border-radius:26px;box-shadow:var(--shadow)
+.hero-band::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 12% 55%,rgba(232,104,32,.22),transparent 40%),
+    radial-gradient(circle at 88% 30%,rgba(40,136,90,.18),transparent 36%)
 }
-.cover-card{overflow:hidden}
-.cover-media{
-  aspect-ratio:16/10;background:#f6ead9;position:relative
-}
-.cover-media img{width:100%;height:100%;object-fit:cover}
-.cover-badges{
-  position:absolute;left:16px;top:16px;display:flex;gap:8px;flex-wrap:wrap
-}
-.badge{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:8px 11px;border-radius:999px;font-size:.74rem;font-weight:900;letter-spacing:.04em
-}
-.badge.example{background:rgba(255,255,255,.95);border:1px solid rgba(232,104,32,.2);color:var(--orange)}
-.badge.live{background:rgba(40,136,90,.92);color:#fff}
-.badge.category{background:rgba(26,18,8,.8);color:#fff}
-
-.cover-foot{
-  padding:16px 18px 18px;border-top:1px solid var(--line)
-}
-.cover-foot h1{
-  font-family:'Playfair Display',serif;font-weight:900;
-  font-size:clamp(1.7rem,3.5vw,3rem);line-height:.96;margin-bottom:8px
-}
-.cover-foot p{color:var(--muted);line-height:1.65}
-
-.info-card{padding:18px}
-.kicker{
+.hero-inner{position:relative;z-index:1}
+.hero-kicker{
   display:inline-flex;align-items:center;gap:7px;
-  padding:7px 12px;border-radius:999px;
-  background:#fff;border:1.5px solid var(--line);
-  font-size:.76rem;font-weight:900;color:var(--orange);margin-bottom:12px
+  padding:6px 13px;border-radius:999px;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.16);
+  font-size:.78rem;font-weight:700;letter-spacing:.07em;
+  color:rgba(255,255,255,.8);margin-bottom:12px;text-transform:uppercase
 }
-.info-grid{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px
+.hero-band h1{
+  font-family:'Playfair Display',serif;font-weight:900;
+  font-size:clamp(1.9rem,4.2vw,3.8rem);line-height:.96;
+  letter-spacing:-.02em;margin-bottom:9px
 }
-.mini{
-  background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px
+.hero-band h1 em{
+  font-style:normal;
+  background:linear-gradient(90deg,#f8a040,#f06040);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text
 }
-.mini-label{font-size:.72rem;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
-.mini-value{font-weight:800;line-height:1.4}
-.cta-row{
-  display:flex;gap:10px;flex-wrap:wrap;margin-top:16px
-}
-.note{
-  margin-top:14px;padding:12px 14px;border-radius:18px;
-  background:#fff8ed;border:1px solid #f6d7a3;color:#8d5a00;font-size:.86rem;line-height:1.6
-}
-
-.layout{
-  display:grid;grid-template-columns:1fr 330px;gap:18px;margin-top:18px
-}
-.left-col,.right-col{display:grid;gap:18px}
-
-.section-card{padding:18px}
-.section-card h2{
-  font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;margin-bottom:12px
-}
-.section-card p{color:var(--muted);line-height:1.7}
-
-.gallery{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px
-}
-.photo{
-  border-radius:20px;overflow:hidden;background:#f4ece0;border:1px solid var(--line)
-}
-.photo img{width:100%;aspect-ratio:4/3;object-fit:cover}
-.photo-caption{padding:10px 12px;font-size:.82rem;font-weight:800;color:var(--muted)}
-
-.products{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px
-}
-.product{
-  border:1px solid var(--line);border-radius:18px;background:#fff;padding:14px
-}
-.product h3{font-size:1rem;margin-bottom:6px}
-.product p{font-size:.88rem;line-height:1.6;margin-bottom:10px}
-.product .price{
-  display:inline-flex;padding:6px 10px;border-radius:999px;background:#fef0d8;color:var(--gold);
-  border:1px solid #f8d8a0;font-weight:900;font-size:.78rem
+.hero-band p{color:rgba(255,255,255,.66);font-size:.97rem;line-height:1.65;max-width:54ch}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.chip{
+  padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.13);font-size:.78rem;font-weight:700;color:rgba(255,255,255,.8)
 }
 
-.side-list{display:grid;gap:10px}
-.side-item{
-  border:1px solid var(--line);border-radius:18px;background:#fff;padding:13px
+/* SECTION */
+.cats-section{padding:30px 0 0}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.section-head h2{font-family:'Playfair Display',serif;font-weight:900;font-size:1.55rem;letter-spacing:-.02em}
+.section-head p{color:var(--muted);font-size:.88rem}
+.rail-controls{display:flex;gap:8px}
+.arr{
+  width:42px;height:42px;border-radius:12px;background:#fff;border:2px solid var(--line);
+  display:grid;place-items:center;cursor:pointer;font-size:1.08rem;font-weight:700;transition:all .18s
 }
-.side-item .label{font-size:.72rem;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
-.side-item .value{font-weight:800;line-height:1.5}
+.arr:hover{background:var(--ink);color:#fff;border-color:var(--ink);transform:scale(1.06)}
+.arr:active{transform:scale(.94)}
 
-.empty-box{
-  text-align:center;padding:32px 20px
+.rail-wrap{overflow:hidden;position:relative}
+.rail-wrap::before,.rail-wrap::after{
+  content:"";position:absolute;top:0;bottom:0;width:32px;z-index:2;pointer-events:none
 }
-.empty-box h2{font-family:'Playfair Display',serif;font-size:1.7rem;margin-bottom:8px}
-.empty-box p{color:var(--muted);line-height:1.7}
+.rail-wrap::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
+.rail-wrap::after{right:0;background:linear-gradient(270deg,var(--bg),transparent)}
 
-@media(max-width:980px){
-  .hero,.layout{grid-template-columns:1fr}
+.cat-rail{
+  display:flex;gap:10px;overflow-x:auto;scroll-behavior:smooth;
+  scrollbar-width:none;padding:8px 4px 14px;cursor:grab
 }
-@media(max-width:620px){
-  .info-grid,.gallery,.products{grid-template-columns:1fr}
-  .topbar-inner{padding:10px 0}
+.cat-rail::-webkit-scrollbar{display:none}
+.cat-rail.grabbing{cursor:grabbing;scroll-behavior:auto}
+
+/* CATEGORY TILE */
+.cat-tile{
+  flex-shrink:0;width:118px;border-radius:18px;overflow:hidden;
+  border:2.5px solid transparent;cursor:pointer;transition:transform .22s,box-shadow .22s,border-color .18s;
+  background:#fff;box-shadow:0 4px 14px rgba(26,18,8,.09);user-select:none
+}
+.cat-tile:hover{transform:translateY(-4px) scale(1.04);box-shadow:var(--shadow)}
+.cat-tile.active{border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,104,32,.2),var(--shadow);transform:translateY(-3px) scale(1.03)}
+.cat-img{height:80px;display:flex;align-items:center;justify-content:center;font-size:2.1rem;position:relative;overflow:hidden}
+.cat-bg-txt{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
+  opacity:.1;font-size:.85rem;letter-spacing:1px;line-height:1.5;padding:4px;word-break:break-all;pointer-events:none
+}
+.cat-icon{position:relative;z-index:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.22))}
+.cat-body{padding:8px 10px 10px}
+.cat-name{font-family:'Playfair Display',serif;font-weight:700;font-size:.84rem;margin-bottom:3px;line-height:1.2}
+.cat-count{font-size:.68rem;font-weight:700;color:var(--muted);letter-spacing:.02em}
+.cat-count span{
+  display:inline-flex;align-items:center;justify-content:center;background:var(--orange);color:#fff;
+  min-width:16px;height:16px;border-radius:50%;font-size:.58rem;margin-left:3px;padding:0 4px;vertical-align:middle
+}
+
+/* VENDOR PANEL */
+.vendor-panel{
+  max-height:0;overflow:hidden;
+  transition:max-height .5s cubic-bezier(.4,0,.2,1),opacity .4s,margin .4s;
+  opacity:0;margin-top:0
+}
+.vendor-panel.open{max-height:1500px;opacity:1;margin-top:20px}
+.vendor-panel-inner{
+  background:#fff;border:2px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow)
+}
+.panel-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 20px 14px;border-bottom:1.5px solid var(--line);flex-wrap:wrap;gap:10px
+}
+.panel-title{display:flex;align-items:center;gap:10px}
+.panel-title .icon{font-size:1.5rem}
+.panel-title h3{font-family:'Playfair Display',serif;font-weight:900;font-size:1.2rem}
+.panel-title p{color:var(--muted);font-size:.82rem;margin-top:2px}
+.panel-close{
+  width:34px;height:34px;border-radius:9px;background:#f4ece0;border:none;cursor:pointer;
+  font-size:.95rem;display:grid;place-items:center;transition:background .2s;flex-shrink:0
+}
+.panel-close:hover{background:var(--red);color:#fff}
+.vendor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:14px;padding:18px}
+
+/* VENDOR CARD */
+.vendor{
+  border-radius:16px;border:1.5px solid var(--line);overflow:hidden;background:#fdfaf5;
+  transition:transform .22s,box-shadow .22s;cursor:pointer
+}
+.vendor:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(26,18,8,.12)}
+.vendor-top{height:92px;display:flex;align-items:center;justify-content:center;font-size:2.3rem;position:relative}
+.vendor-live{
+  position:absolute;top:9px;right:9px;display:flex;align-items:center;gap:4px;
+  background:rgba(40,136,90,.9);color:#fff;padding:3px 8px;border-radius:999px;
+  font-size:.65rem;font-weight:800;letter-spacing:.04em
+}
+.vendor-live::before{
+  content:"";width:5px;height:5px;border-radius:50%;background:#7effc0;animation:pulse 1.4s ease-in-out infinite
+}
+.vendor-example{
+  position:absolute;left:9px;top:9px;
+  background:rgba(255,255,255,.94);color:var(--orange);
+  border:1px solid rgba(232,104,32,.22);
+  padding:3px 8px;border-radius:999px;font-size:.62rem;font-weight:900;letter-spacing:.05em
+}
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.5;transform:scale(.8)}
+}
+.vendor-body{padding:11px 13px 13px}
+.vendor-name{font-family:'Playfair Display',serif;font-weight:700;font-size:.97rem;margin-bottom:3px;line-height:1.1}
+.vendor-what{font-size:.78rem;color:var(--muted);line-height:1.44;margin-bottom:9px;min-height:44px}
+.vendor-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:5px}
+.vendor-loc{display:flex;align-items:center;gap:3px;font-size:.72rem;font-weight:700;color:var(--muted)}
+.vendor-price{font-size:.74rem;font-weight:800;padding:3px 9px;border-radius:999px;background:#fef0d8;color:var(--gold);border:1px solid #f8d8a0}
+.vendor-cta{display:flex;gap:7px;margin-top:10px}
+.vendor-btn{
+  flex:1;padding:8px 9px;border-radius:10px;font-size:.76rem;font-weight:800;border:none;
+  cursor:pointer;transition:all .18s;font-family:'Nunito',sans-serif
+}
+.vendor-btn.primary{background:var(--orange);color:#fff;box-shadow:0 4px 12px rgba(232,104,32,.26)}
+.vendor-btn.primary:hover{background:var(--red)}
+.vendor-btn.ghost{background:#f4ece0;color:var(--ink)}
+.vendor-btn.ghost:hover{background:var(--line)}
+
+.empty-state{text-align:center;padding:38px 20px;color:var(--muted);grid-column:1/-1}
+.empty-state .big{font-size:2.8rem;margin-bottom:10px}
+.empty-state p{font-size:.93rem;line-height:1.6}
+
+/* FOOTER */
+footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:44px}
+.footer-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.footer-brand{font-family:'Playfair Display',serif;font-weight:900;font-size:1.06rem}
+.footer-sub{color:var(--muted);font-size:.8rem;margin-top:3px}
+.footer-links{display:flex;flex-wrap:wrap;gap:7px}
+.footer-links a{
+  padding:8px 13px;border-radius:999px;background:#fff;border:1.5px solid var(--line);
+  font-size:.8rem;font-weight:700;transition:border-color .2s,background .2s
+}
+.footer-links a:hover{background:#fef0d8;border-color:var(--gold)}
+
+@media(max-width:700px){
+  .topbar-inner{flex-direction:column;align-items:flex-start;padding:10px 0;gap:8px}
+  .top-search{max-width:100%;width:100%}
+  .cat-tile{width:100px}
+  .cat-img{height:68px;font-size:1.8rem}
+  .vendor-grid{grid-template-columns:1fr 1fr}
+  .panel-header{padding:12px 14px}
+}
+@media(max-width:440px){
+  .vendor-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -171,43 +246,304 @@ button{font:inherit}
 
 <header class="topbar">
   <div class="wrap topbar-inner">
-    <a class="brand" href="index.html">
-      <span class="brand-icon">🛍️</span>
-      <span>DIGIY MARKET</span>
-    </a>
-    <div class="actions">
-      <a class="btn btn-soft" href="index.html">← Retour au marché</a>
-      <button class="btn btn-primary" type="button" id="contactBtnTop">💬 Contacter</button>
+    <a class="brand" href="#"><span class="brand-icon">🛍️</span><span>DIGIY MARKET<small>Le marché vivant du quotidien</small></span></a>
+    <div class="top-search">
+      <input id="topSearchInput" type="text" placeholder="Chercher un vendeur, un produit, une ville…"/>
+      <button id="topSearchBtn" type="button">🔍</button>
     </div>
   </div>
 </header>
 
-<main class="page">
-  <div class="wrap" id="app"></div>
-</main>
+<div class="hero-band">
+  <div class="wrap hero-inner">
+    <div class="hero-kicker">🌍 DIGIYLYFE ∞ · Sénégal · Afrique</div>
+    <h1>Le marché qui <em>bouge</em><br/>comme la rue.</h1>
+    <p>
+      Clique sur une catégorie. Les vendeurs exemples s'ouvrent. Puis clique sur <strong>Voir la fiche</strong> :
+      chaque vendeur a sa page personnalisée, propre, guidante, prête à être remplacée plus tard par les vraies boutiques.
+    </p>
+    <div class="hero-chips">
+      <span class="chip">🛒 Neuf</span>
+      <span class="chip">♻️ Deuxième main</span>
+      <span class="chip">👗 Vêtements</span>
+      <span class="chip">🌸 Parfum</span>
+      <span class="chip">✂️ Coiffeur</span>
+      <span class="chip">💅 Onglerie</span>
+      <span class="chip">🏺 Brocante</span>
+      <span class="chip">🧺 Bana-bana</span>
+    </div>
+  </div>
+</div>
+
+<section class="cats-section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Les univers du marché</h2>
+        <p>Clique sur un pavé → les vendeurs s'ouvrent</p>
+      </div>
+      <div class="rail-controls">
+        <button class="arr" id="arrL" type="button">‹</button>
+        <button class="arr" id="arrR" type="button">›</button>
+      </div>
+    </div>
+
+    <div class="rail-wrap">
+      <div class="cat-rail" id="catRail">
+
+        <div class="cat-tile" data-cat="neuf">
+          <div class="cat-img" style="background:linear-gradient(135deg,#ffeaaa,#ffd070)">
+            <span class="cat-bg-txt">⭐🆕📦✨🛒⭐🆕📦✨🛒⭐🆕📦✨🛒⭐🆕📦</span>
+            <span class="cat-icon">🛒</span>
+          </div>
+          <div class="cat-body"><div class="cat-name">Neuf</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
+        </div>
+
+        <div class="cat-tile" data-cat="deuxiemain">
+          <div class="cat-img" style="background:linear-gradient(135deg,#c8deff,#90b8ff)">
+            <span class="cat-bg-txt">♻️💡🔄💎♻️💡🔄💎♻️💡🔄💎♻️💡🔄</span>
+            <span class="cat-icon">♻️</span>
+          </div>
+          <div class="cat-body"><div class="cat-name">Deuxième main</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
+        </div>
+
+        <div class="cat-tile" data-cat="vetements">
+          <div class="cat-img" style="background:linear-gradient(135deg,#ffd0e0,#ffaac8)">
+            <span class="cat-bg-txt">👗👕👖🧣👗👕👖🧣👗👕👖🧣👗👕👖</span>
+            <span class="cat-icon">👗</span>
+          </div>
+          <div class="cat-body"><div class="cat-name">Vêtements</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
+        </div>
+
+        <div class="cat-tile" data-cat="parfum">
+          <div class="cat-img" style="background:linear-gradient(135deg,#eadfff,#d4c2ff)">
+            <span class="cat-bg-txt">🌸✨💜🌺🌸✨💜🌺🌸✨💜🌺🌸✨💜</span>
+            <span class="cat-icon">🌸</span>
+          </div>
+          <div class="cat-body"><div class="cat-name">Parfum</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
+        </div>
+
+        <div class="cat-tile" data-cat="coiffeur">
+          <div class="cat-img" style="background:linear-gradient(135deg,#dbfff6,#b9f1e0)">
+            <span class="cat-bg-txt">✂️💈🪒💇✂️💈🪒💇✂️💈🪒💇✂️💈🪒</span>
+            <span class="cat-icon">✂️</span>
+          </div>
+          <div class="cat-body"><div class="cat-name">Coiffeur</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
+        </div>
+
+        <div class="cat-tile" data-cat="onglerie">
+          <div class="cat-img" style="background:linear-gradient(135deg,#ffd0e0,#ffb8d0)">
+            <span class="cat-bg-txt">💅💎✨🌸💅💎✨🌸💅💎✨🌸💅💎✨</span>
+            <span class="cat-icon">💅</span>
+          </div>
+          <div class="cat-body"><div class="cat-name">Onglerie</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
+        </div>
+
+        <div class="cat-tile" data-cat="brocante">
+          <div class="cat-img" style="background:linear-gradient(135deg,#f4ead7,#ead6b2)">
+            <span class="cat-bg-txt">🪑🏺🖼️🪞🪑🏺🖼️🪞🪑🏺🖼️🪞🪑🏺</span>
+            <span class="cat-icon">🏺</span>
+          </div>
+          <div class="cat-body"><div class="cat-name">Brocante</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
+        </div>
+
+        <div class="cat-tile" data-cat="banabana">
+          <div class="cat-img" style="background:linear-gradient(135deg,#ffe0cb,#ffc391)">
+            <span class="cat-bg-txt">🧺🛒🏪🎪🧺🛒🏪🎪🧺🛒🏪🎪🧺🛒</span>
+            <span class="cat-icon">🧺</span>
+          </div>
+          <div class="cat-body"><div class="cat-name">Bana-bana</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
+        </div>
+
+        <div class="cat-tile" data-cat="quotidien">
+          <div class="cat-img" style="background:linear-gradient(135deg,#dbf5ea,#bfe8d4)">
+            <span class="cat-bg-txt">🏠🧴🥫🧹🏠🧴🥫🧹🏠🧴🥫🧹🏠🧴</span>
+            <span class="cat-icon">🏠</span>
+          </div>
+          <div class="cat-body"><div class="cat-name">Quotidien</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
+        </div>
+
+        <div class="cat-tile" data-cat="phones">
+          <div class="cat-img" style="background:linear-gradient(135deg,#c8deff,#90b8ff)">
+            <span class="cat-bg-txt">📱💻⌨️🖥️📱💻⌨️🖥️📱💻⌨️🖥️📱💻</span>
+            <span class="cat-icon">📱</span>
+          </div>
+          <div class="cat-body"><div class="cat-name">Téléphones</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
+        </div>
+
+        <div class="cat-tile" data-cat="alimentaire">
+          <div class="cat-img" style="background:linear-gradient(135deg,#ffeaaa,#ffd070)">
+            <span class="cat-bg-txt">🥜🌽🥘🫘🥜🌽🥘🫘🥜🌽🥘🫘🥜🌽</span>
+            <span class="cat-icon">🥜</span>
+          </div>
+          <div class="cat-body"><div class="cat-name">Alimentaire</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
+        </div>
+
+        <div class="cat-tile" data-cat="chaussures">
+          <div class="cat-img" style="background:linear-gradient(135deg,#ffe0cb,#ffc391)">
+            <span class="cat-bg-txt">👟👠👞🥿👟👠👞🥿👟👠👞🥿👟👠</span>
+            <span class="cat-icon">👟</span>
+          </div>
+          <div class="cat-body"><div class="cat-name">Chaussures</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="vendor-panel" id="vendorPanel">
+      <div class="vendor-panel-inner">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span class="icon" id="panelIcon">🛒</span>
+            <div>
+              <h3 id="panelTitle">Catégorie</h3>
+              <p id="panelSub">Vendeurs exemples</p>
+            </div>
+          </div>
+          <button class="panel-close" id="panelClose" type="button" title="Fermer">✕</button>
+        </div>
+        <div class="vendor-grid" id="vendorGrid"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div>
+      <div class="footer-brand">DIGIY MARKET ∞</div>
+      <div class="footer-sub">Neuf • Deuxième main • Brocante • Vêtements • Beauté • Services • Quotidien</div>
+    </div>
+    <div class="footer-links">
+      <a href="#">Devenir vendeur</a>
+      <a href="http://digiylyfe.com" target="_blank" rel="noopener">digiylyfe.com</a>
+    </div>
+  </div>
+</footer>
 
 <script>
-function readCatalog(){
-  try{
-    const raw = localStorage.getItem('digiy_market_catalog_v1');
-    if(!raw) return null;
-    return JSON.parse(raw);
-  }catch(e){
-    return null;
-  }
-}
+const VENDORS = {
+  neuf:[
+    {icon:"📱",bg:"#c8deff",name:"Tech Dakar Shop",what:"Téléphones neufs, accessoires, batteries, câbles",loc:"Dakar · Plateau",price:"5 000–250 000 F",live:true},
+    {icon:"👟",bg:"#ffe0cb",name:"Sneakers Mbaye",what:"Jordan, Nike, Adidas — arrivage chaque semaine",loc:"Mbour · Marché Central",price:"15 000–85 000 F",live:true},
+    {icon:"🛒",bg:"#ffeaaa",name:"Boutique Awa Neuf",what:"Produits ménagers neufs, ustensiles, déco",loc:"Saly · Ngaparou",price:"2 000–35 000 F",live:false},
+    {icon:"💻",bg:"#c8deff",name:"Diallo Informatique",what:"PC neufs et reconditionnés, imprimantes",loc:"Dakar · Parcelles",price:"80 000–450 000 F",live:true},
+    {icon:"👗",bg:"#ffd0e0",name:"Fashion Halima",what:"Robes soirée, tenues cérémonie, prêt-à-porter",loc:"Thiès · Mbambey",price:"8 000–45 000 F",live:true},
+    {icon:"🏋️",bg:"#dbf5ea",name:"Sport & Style SN",what:"Équipements sportifs, maillots, sacs de sport",loc:"Dakar · Grand Yoff",price:"5 000–60 000 F",live:false},
+    {icon:"🧴",bg:"#eadfff",name:"Beauté Premium",what:"Cosmétiques neufs, crèmes, soins, maquillage",loc:"Saly · Portudal",price:"3 000–25 000 F",live:true},
+    {icon:"📚",bg:"#ffeaaa",name:"Librairie Diongue",what:"Manuels scolaires, romans, cahiers, stylos",loc:"Kaolack · Centre",price:"500–8 000 F",live:true},
+  ],
+  deuxiemain:[
+    {icon:"📺",bg:"#f4ead7",name:"Mamadou Électro",what:"TV, réfrigérateurs, machines à laver d'occasion",loc:"Dakar · Colobane",price:"20 000–150 000 F",live:true},
+    {icon:"📱",bg:"#c8deff",name:"Phones Occasion SN",what:"iPhones, Samsungs, Tecno — bon état garanti",loc:"Dakar · Sandaga",price:"30 000–200 000 F",live:true},
+    {icon:"🪑",bg:"#ffeaaa",name:"Meublerie Diallo",what:"Canapés, tables, armoires rénovés",loc:"Mbour · Mbour 2",price:"15 000–120 000 F",live:false},
+    {icon:"🚲",bg:"#dbf5ea",name:"Vélos & Motos SN",what:"Bicyclettes, scooters d'occasion, pièces",loc:"Saint-Louis",price:"25 000–300 000 F",live:true},
+    {icon:"👕",bg:"#ffd0e0",name:"Frip Sénégal",what:"Friperie sélectionnée, marques, prix juste",loc:"Dakar · Sicap",price:"500–5 000 F",live:true},
+    {icon:"🎮",bg:"#eadfff",name:"GameZone Dakar",what:"Consoles, jeux PS4/PS5, manettes",loc:"Dakar · Yoff",price:"15 000–120 000 F",live:true},
+    {icon:"🛠️",bg:"#ffe0cb",name:"Outillage Occasion",what:"Outils de chantier, électroportatif, matériel pro",loc:"Thiès · Centre",price:"5 000–80 000 F",live:false},
+  ],
+  vetements:[
+    {icon:"👘",bg:"#ffeaaa",name:"Boubous Cheikh",what:"Boubous brocart, bazin, grand boubou cérémonie",loc:"Dakar · HLM",price:"8 000–60 000 F",live:true},
+    {icon:"👗",bg:"#ffd0e0",name:"Robes Fatou",what:"Robes africaines, wax, tenues soirée et bureau",loc:"Saly · Centre",price:"5 000–35 000 F",live:true},
+    {icon:"👕",bg:"#c8deff",name:"T-shirts Urbains",what:"Tees graphiques, hoodies, streetwear Dakar",loc:"Dakar · Almadies",price:"3 000–12 000 F",live:false},
+    {icon:"🧕",bg:"#dbfff6",name:"Voiles & Abaya Rama",what:"Hidjabs, abayas, voiles longues qualité",loc:"Touba · Centre",price:"4 000–22 000 F",live:true},
+    {icon:"👔",bg:"#c8deff",name:"Costumes Lamine",what:"Costumes homme, chemises, tenues bureau",loc:"Dakar · Plateau",price:"12 000–75 000 F",live:true},
+    {icon:"🧒",bg:"#ffd0e0",name:"Mode Enfant Awa",what:"Vêtements bébé, tenues baptême",loc:"Mbour · Saly",price:"2 500–15 000 F",live:false},
+    {icon:"🥻",bg:"#ffeaaa",name:"Tissu & Wax Ndèye",what:"Tissus au mètre, wax hollandais, bazin riche",loc:"Dakar · HLM",price:"1 500–8 000 F/m",live:true},
+    {icon:"🧣",bg:"#eadfff",name:"Accessoires Mode",what:"Ceintures, sacs, bijoux fantaisie, foulards",loc:"Saint-Louis",price:"1 000–12 000 F",live:true},
+    {icon:"🩳",bg:"#ffe0cb",name:"Prêt-à-Porter Youssou",what:"Short, pantalon casual, tenues quotidiennes homme",loc:"Dakar · Parcelles",price:"3 000–18 000 F",live:true},
+  ],
+  parfum:[
+    {icon:"🕌",bg:"#eadfff",name:"Thiouraye Ndèye",what:"Thiouraye naturel, encens, encens de Djeddah",loc:"Dakar · Médina",price:"1 500–15 000 F",live:true},
+    {icon:"🌸",bg:"#ffd0e0",name:"Parfums Orientaux",what:"Attars, musc, oud, huiles de parfum sans alcool",loc:"Dakar · Sandaga",price:"3 000–35 000 F",live:true},
+    {icon:"✨",bg:"#ffeaaa",name:"Sira Beauty",what:"Parfums grandes marques, coffrets, mini-formats",loc:"Mbour · Saly",price:"5 000–45 000 F",live:false},
+    {icon:"🌺",bg:"#dbfff6",name:"Essences Locales",what:"Extraits de fleurs, ylang-ylang, jasmin sénégal",loc:"Ziguinchor",price:"2 000–12 000 F",live:true},
+    {icon:"🧴",bg:"#c8deff",name:"Corps & Senteur",what:"Savons, lotions, gels douche parfumés artisanaux",loc:"Dakar · Grand Dakar",price:"1 000–8 000 F",live:true},
+    {icon:"🎁",bg:"#ffd0e0",name:"Coffrets Mariama",what:"Coffrets mariage, baptême, kits parfum cadeaux",loc:"Dakar · Pikine",price:"8 000–50 000 F",live:false},
+  ],
+  coiffeur:[
+    {icon:"💇",bg:"#dbfff6",name:"Salon Aicha",what:"Tresses africaines, tissage, défrisage, soin",loc:"Dakar · Medina",price:"2 000–25 000 F",live:true},
+    {icon:"✂️",bg:"#c8deff",name:"Barber Moussa",what:"Coupe homme, dégradé américain, barbe sculptée",loc:"Saly · Portudal",price:"1 500–5 000 F",live:true},
+    {icon:"💁",bg:"#ffd0e0",name:"Beauty House Fatou",what:"Pose tissage, perruques, lissage brésilien",loc:"Dakar · Almadies",price:"5 000–35 000 F",live:false},
+    {icon:"🪒",bg:"#ffeaaa",name:"Coiffeur Abdou",what:"Coupe classique, afro, dégradé, coloration",loc:"Mbour · Centre",price:"1 000–8 000 F",live:true},
+    {icon:"💆",bg:"#dbf5ea",name:"Soin Cheveux Rama",what:"Masques kératine, soin naturel, hydratation",loc:"Dakar · Sacré-Cœur",price:"5 000–20 000 F",live:true},
+  ],
+  onglerie:[
+    {icon:"💅",bg:"#ffd0e0",name:"Ongles by Aminata",what:"Pose gel, faux ongles, nail art, manucure",loc:"Dakar · Plateau",price:"4 000–20 000 F",live:true},
+    {icon:"✨",bg:"#eadfff",name:"Luxury Nails Saly",what:"Nail art 3D, extension, dégradé, brillants",loc:"Saly · Ngaparou",price:"6 000–30 000 F",live:true},
+    {icon:"💎",bg:"#c8deff",name:"Ongles Prestige",what:"Pose résine, vernis semi-permanent, pédicure",loc:"Dakar · Mermoz",price:"5 000–18 000 F",live:false},
+    {icon:"🌸",bg:"#ffeaaa",name:"Beauty Corner Rokhaya",what:"Manucure naturelle, soin des mains, vernis",loc:"Thiès",price:"2 500–10 000 F",live:true},
+  ],
+  brocante:[
+    {icon:"🪑",bg:"#f4ead7",name:"Brocante Sénégal",what:"Meubles anciens, chaises bois, buffets vintage",loc:"Dakar · Colobane",price:"5 000–80 000 F",live:true},
+    {icon:"🏺",bg:"#ffeaaa",name:"Poteries & Artisanat",what:"Poteries, statuettes, objets africains authentiques",loc:"Saly · Village artisanat",price:"2 000–40 000 F",live:true},
+    {icon:"🖼️",bg:"#ffe0cb",name:"Art & Déco Diallo",what:"Tableaux locaux, masques, peintures, déco murale",loc:"Dakar · Ouakam",price:"3 000–60 000 F",live:false},
+    {icon:"📻",bg:"#c8deff",name:"Électro Vintage",what:"Radios rétro, platines, appareils anciens",loc:"Dakar · Medina",price:"5 000–35 000 F",live:true},
+    {icon:"🧸",bg:"#ffd0e0",name:"Jouets & Curiosités",what:"Jouets anciens, collections, objets curiosités",loc:"Mbour",price:"500–12 000 F",live:false},
+  ],
+  banabana:[
+    {icon:"🧺",bg:"#ffe0cb",name:"Bana-bana Alassane",what:"Légumes frais, fruits de saison, livraison quartier",loc:"Dakar · Parcelles",price:"200–5 000 F",live:true},
+    {icon:"🧁",bg:"#ffd0e0",name:"Pâtisserie Mobile",what:"Gâteaux maison, thiakry, bissap, jus locaux",loc:"Saly · Route principale",price:"500–3 500 F",live:true},
+    {icon:"👜",bg:"#eadfff",name:"Sacs & Accessoires",what:"Sacs tressés, porte-monnaie, accessoires artisanaux",loc:"Mbour · Plage",price:"1 000–8 000 F",live:false},
+    {icon:"🌶️",bg:"#ffe0cb",name:"Épices du Marché",what:"Yett, soumbala, poivre, épices sénégalaises",loc:"Kaolack · Marché",price:"500–3 000 F",live:true},
+    {icon:"📿",bg:"#dbf5ea",name:"Bijoux Artisanaux",what:"Colliers perles, bracelets, boucles d'oreilles",loc:"Dakar · Plateau",price:"1 500–12 000 F",live:true},
+    {icon:"🥭",bg:"#ffeaaa",name:"Fruits Exotiques",what:"Mangues, papayes, goyaves, noix de cajou",loc:"Ziguinchor",price:"300–2 000 F",live:false},
+    {icon:"🧃",bg:"#dbfff6",name:"Jus Naturels Aminata",what:"Bissap, gingembre, ditax, tamarin, bouye maison",loc:"Dakar · Medina",price:"250–1 500 F",live:true},
+    {icon:"🎪",bg:"#ffe0cb",name:"Artisan Mobile Omar",what:"Réparation chaussures, maroquinerie, couture",loc:"Dakar · Grand Yoff",price:"500–5 000 F",live:true},
+    {icon:"🎀",bg:"#ffd0e0",name:"Tissus & Rubans",what:"Rubans, dentelles, broderies, vente au mètre",loc:"Dakar · HLM",price:"200–3 000 F/m",live:true},
+    {icon:"🪬",bg:"#ffeaaa",name:"Artisanat Traditions",what:"Objets artisanaux, herbes, accessoires locaux",loc:"Touba",price:"1 000–10 000 F",live:true},
+  ],
+  quotidien:[
+    {icon:"🧹",bg:"#dbf5ea",name:"Ménage & Entretien",what:"Détergents, balais, produits nettoyants",loc:"Dakar · Pikine",price:"500–8 000 F",live:true},
+    {icon:"🕯️",bg:"#ffeaaa",name:"Éclairage & Piles",what:"Bougies, lampes solaires, piles, chargeurs",loc:"Mbour",price:"1 000–25 000 F",live:true},
+    {icon:"🪣",bg:"#c8deff",name:"Matériel Maison Cheikh",what:"Seaux, bassines, ustensiles, vaisselle plastique",loc:"Dakar · Colobane",price:"500–6 000 F",live:false},
+    {icon:"🛏️",bg:"#f4ead7",name:"Literie & Maison",what:"Draps, oreillers, couvertures, nattes tressées",loc:"Kaolack",price:"3 000–30 000 F",live:true},
+    {icon:"🍳",bg:"#ffe0cb",name:"Cuisine Équipée",what:"Marmites, casseroles, poêles, mortiers bois",loc:"Dakar · Sandaga",price:"2 000–20 000 F",live:true},
+    {icon:"🧴",bg:"#eadfff",name:"Hygiène Quotidienne",what:"Savons, shampooings, déodorants, soins corps",loc:"Dakar · Medina",price:"300–5 000 F",live:true},
+    {icon:"🌿",bg:"#dbf5ea",name:"Plantes & Jardinage",what:"Plantes d'intérieur, pots, engrais naturels",loc:"Saly",price:"1 000–12 000 F",live:false},
+    {icon:"💡",bg:"#ffeaaa",name:"Électricité Mamadou",what:"Prises, câbles, ampoules LED, matériel électrique",loc:"Thiès",price:"500–15 000 F",live:true},
+  ],
+  phones:[
+    {icon:"📱",bg:"#c8deff",name:"iDakar Phones",what:"iPhone 12/13/14 reconditionné, garantie 3 mois",loc:"Dakar · Plateau",price:"120 000–450 000 F",live:true},
+    {icon:"🤳",bg:"#ffeaaa",name:"Samsung Sénégal",what:"Galaxy A, M et S series neufs et occasion",loc:"Dakar · Sacré-Cœur",price:"60 000–380 000 F",live:true},
+    {icon:"📲",bg:"#dbf5ea",name:"Tecno & Infinix Store",what:"Téléphones abordables, grande batterie, dual SIM",loc:"Mbour",price:"30 000–95 000 F",live:false},
+    {icon:"🔋",bg:"#ffe0cb",name:"Accessoires GSM Omar",what:"Batteries, coques, chargeurs, câbles, protège-écrans",loc:"Dakar · Medina",price:"500–8 000 F",live:true},
+    {icon:"💻",bg:"#c8deff",name:"Laptops & Tablettes",what:"PC portables neufs et occasion, tablettes, iPad",loc:"Dakar · Almadies",price:"80 000–400 000 F",live:true},
+    {icon:"🎧",bg:"#eadfff",name:"Son & Audio Mobile",what:"AirPods, Bluetooth, enceintes, casques audio",loc:"Dakar · Yoff",price:"5 000–65 000 F",live:true},
+  ],
+  alimentaire:[
+    {icon:"🥜",bg:"#ffeaaa",name:"Arachides Baye",what:"Arachides grillées, huile d'arachide artisanale",loc:"Kaolack · Marché",price:"500–5 000 F",live:true},
+    {icon:"🌾",bg:"#f4ead7",name:"Céréales du Terroir",what:"Mil, sorgho, fonio, riz local, maïs — sacs et détail",loc:"Tambacounda",price:"1 000–25 000 F",live:true},
+    {icon:"🐠",bg:"#dbfff6",name:"Poisson Séché Samba",what:"Kétiakh, guedj, yett — poissons séchés tradition",loc:"Saint-Louis",price:"500–8 000 F",live:false},
+    {icon:"🥦",bg:"#dbf5ea",name:"Maraîchage Fatou",what:"Légumes frais jardin, tomates, oignons, aubergines",loc:"Thiès · Pout",price:"200–3 000 F",live:true},
+    {icon:"🫙",bg:"#ffeaaa",name:"Conserves Locales",what:"Confitures, chutneys, sauces locales artisanales",loc:"Saly",price:"1 500–6 000 F",live:true},
+    {icon:"🍯",bg:"#ffe0cb",name:"Miel du Sénégal",what:"Miel naturel apiculture locale, propolis, pollen",loc:"Kolda",price:"3 000–15 000 F",live:false},
+    {icon:"🥭",bg:"#ffd0e0",name:"Épicerie Moussa",what:"Biscuits, conserves, épices, produits épicerie",loc:"Dakar · Ouakam",price:"200–5 000 F",live:true},
+  ],
+  chaussures:[
+    {icon:"👡",bg:"#ffd0e0",name:"Sandales Aicha",what:"Sandales artisanales cuir, babouches colorées",loc:"Dakar · Médina",price:"3 000–18 000 F",live:true},
+    {icon:"👟",bg:"#ffe0cb",name:"Baskets Papito",what:"Nike, Adidas, Puma — arrivage hebdomadaire",loc:"Dakar · Parcelles",price:"15 000–85 000 F",live:true},
+    {icon:"👠",bg:"#ffd0e0",name:"Chaussures Soirée",what:"Talons, mules, escarpins pour cérémonies",loc:"Mbour · Centre",price:"8 000–35 000 F",live:false},
+    {icon:"🥿",bg:"#f4ead7",name:"Chaussures Lamine",what:"Mocassins, slippers, chaussures bureau confort",loc:"Dakar · Almadies",price:"5 000–25 000 F",live:true},
+    {icon:"👞",bg:"#c8deff",name:"Chaussures Homme SN",what:"Derby, bottes, chaussures ville qualité cuir",loc:"Dakar · Plateau",price:"12 000–55 000 F",live:true},
+  ],
+};
 
-function getParam(name){
-  return new URLSearchParams(window.location.search).get(name);
-}
-
-function safe(str=''){
-  return String(str)
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;');
-}
+const META = {
+  neuf:{label:"Neuf",icon:"🛒",sub:"Produits récents, prix clairs, vendeurs exemples guidants"},
+  deuxiemain:{label:"Deuxième main",icon:"♻️",sub:"La valeur continue, le bon prix circule"},
+  vetements:{label:"Vêtements",icon:"👗",sub:"Style terrain, cérémonie ou quotidien"},
+  parfum:{label:"Parfum & Senteur",icon:"🌸",sub:"Essences, thiouraye, attars et cadeaux olfactifs"},
+  coiffeur:{label:"Coiffeur",icon:"✂️",sub:"Coupes, tresses, barbe — service de proximité"},
+  onglerie:{label:"Onglerie",icon:"💅",sub:"Pose, nail art, manucure, beauté fine"},
+  brocante:{label:"Brocante",icon:"🏺",sub:"Pièces rares, vintage, objets de caractère"},
+  banabana:{label:"Bana-bana",icon:"🧺",sub:"Commerce mobile, souple, ancré dans le réel"},
+  quotidien:{label:"Quotidien",icon:"🏠",sub:"Ce qu'on cherche vite, ce qui sert tous les jours"},
+  phones:{label:"Téléphones",icon:"📱",sub:"Neufs, reconditionnés, accessoires — tech terrain"},
+  alimentaire:{label:"Alimentaire",icon:"🥜",sub:"Produits locaux, céréales, épices, conserves"},
+  chaussures:{label:"Chaussures",icon:"👟",sub:"Sandales, baskets, mocassins — toutes occasions"},
+};
 
 function slugify(str){
   return str
@@ -218,277 +554,198 @@ function slugify(str){
     .replace(/^-+|-+$/g,'');
 }
 
-function parsePriceBase(price=''){
-  const digits = price.match(/\d+/g);
-  if(!digits || !digits.length) return null;
-  return parseInt(digits[0],10);
+function categoryCount(cat){
+  return (VENDORS[cat] || []).length;
 }
 
-function makePrice(base, n){
-  if(!base) return "Prix à définir";
-  const value = Math.round(base * n / 1000) * 1000;
-  return `${value.toLocaleString('fr-FR').replace(/\s/g,' ')} F`;
-}
-
-function splitOffer(what=''){
-  return what.split(',')
-    .map(x => x.trim())
-    .filter(Boolean)
-    .slice(0,4);
-}
-
-function makeSvgData(title, subtitle, icon, c1, c2){
-  const svg = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
-    <defs>
-      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="${c1}"/>
-        <stop offset="100%" stop-color="${c2}"/>
-      </linearGradient>
-      <filter id="f" x="-20%" y="-20%" width="140%" height="140%">
-        <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="rgba(0,0,0,.18)"/>
-      </filter>
-    </defs>
-    <rect width="1200" height="900" fill="url(#g)"/>
-    <circle cx="1030" cy="120" r="160" fill="rgba(255,255,255,.12)"/>
-    <circle cx="170" cy="760" r="180" fill="rgba(255,255,255,.12)"/>
-    <text x="95" y="220" font-size="180" filter="url(#f)">${icon}</text>
-    <rect x="70" y="610" width="1060" height="170" rx="32" fill="rgba(255,255,255,.88)"/>
-    <text x="120" y="685" font-family="Arial, sans-serif" font-size="56" font-weight="700" fill="#1a1208">${title}</text>
-    <text x="120" y="740" font-family="Arial, sans-serif" font-size="30" fill="#6f624f">${subtitle}</text>
-  </svg>`;
-  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-}
-
-function photoPalette(bg){
-  const map = {
-    "#c8deff":["#bdd8ff","#8cb7ff"],
-    "#ffe0cb":["#ffd9c5","#ffb88a"],
-    "#ffeaaa":["#fff0b8","#ffd56d"],
-    "#ffd0e0":["#ffd8e5","#ffb1cb"],
-    "#eadfff":["#eee2ff","#d2beff"],
-    "#dbfff6":["#ddfff5","#afe9d5"],
-    "#f4ead7":["#f6ead9","#ddc9a3"],
-    "#dbf5ea":["#dff7ec","#b8e0ca"]
+function buildVendor(cat, v){
+  const meta = META[cat] || {};
+  return {
+    ...v,
+    category: cat,
+    categoryLabel: meta.label || cat,
+    categoryIcon: meta.icon || '🛍️',
+    categorySub: meta.sub || '',
+    slug: `${cat}-${slugify(v.name)}`,
+    isExample: true
   };
-  return map[bg] || ["#f4ead7","#d8bf96"];
 }
 
-function buildGallery(v){
-  const [c1,c2] = photoPalette(v.bg);
-  const items = [
-    {title:"Devanture", sub:`${v.name} · accueil`, icon:v.icon},
-    {title:"Produits", sub:v.categoryLabel, icon:"🛍️"},
-    {title:"Ambiance", sub:v.loc, icon:"✨"},
-    {title:"Détail", sub:"vitrine démo DIGIY", icon:"📸"}
-  ];
-
-  return items.map((item, i) => ({
-    src: makeSvgData(item.title, item.sub, item.icon, i % 2 ? c2 : c1, i % 2 ? c1 : c2),
-    caption: `${item.title} — visuel démo`
-  }));
+function buildCatalog(){
+  return Object.entries(VENDORS).flatMap(([cat, list]) => list.map(v => buildVendor(cat, v)));
 }
 
-function buildProducts(v){
-  const base = parsePriceBase(v.price);
-  const parts = splitOffer(v.what);
+function saveCatalog(){
+  const payload = {
+    meta: META,
+    vendors: buildCatalog()
+  };
+  localStorage.setItem('digiy_market_catalog_v1', JSON.stringify(payload));
+}
 
-  if(!parts.length){
-    return [
-      {title:"Produit exemple 1", desc:"À personnaliser plus tard.", price:"Prix à définir"},
-      {title:"Produit exemple 2", desc:"À personnaliser plus tard.", price:"Prix à définir"},
-      {title:"Produit exemple 3", desc:"À personnaliser plus tard.", price:"Prix à définir"},
-      {title:"Produit exemple 4", desc:"À personnaliser plus tard.", price:"Prix à définir"},
-    ];
+function updateCounts(){
+  document.querySelectorAll('.cat-tile').forEach(tile => {
+    const cat = tile.dataset.cat;
+    const countEl = tile.querySelector('.cat-count span');
+    if(countEl) countEl.textContent = categoryCount(cat);
+  });
+}
+
+function renderVendorCards(list){
+  const grid = document.getElementById('vendorGrid');
+  if(!list.length){
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="big">🏗️</div>
+        <p>Aucun vendeur exemple trouvé pour cette recherche.<br/>Essaie un autre mot ou une autre catégorie.</p>
+      </div>
+    `;
+    return;
   }
 
-  return parts.map((part, i) => ({
-    title: part,
-    desc: `Exemple de présentation produit / service pour ${v.name}.`,
-    price: makePrice(base, 0.35 + (i * 0.18))
-  }));
-}
-
-function renderVendor(v){
-  const app = document.getElementById('app');
-  const gallery = buildGallery(v);
-  const products = buildProducts(v);
-
-  document.title = `${v.name} — DIGIY MARKET`;
-
-  app.innerHTML = `
-    <section class="hero">
-      <article class="cover-card">
-        <div class="cover-media">
-          <img src="${gallery[0].src}" alt="${safe(v.name)}">
-          <div class="cover-badges">
-            <span class="badge example">EXEMPLE DIGIY</span>
-            ${v.live ? '<span class="badge live">EN LIGNE</span>' : ''}
-            <span class="badge category">${safe(v.categoryIcon)} ${safe(v.categoryLabel)}</span>
-          </div>
-        </div>
-        <div class="cover-foot">
-          <h1>${safe(v.name)}</h1>
-          <p>${safe(v.what)}</p>
-        </div>
-      </article>
-
-      <aside class="info-card">
-        <div class="kicker">${safe(v.categoryIcon)} Fiche vendeur personnalisée</div>
-        <p style="color:var(--muted);line-height:1.7">
-          Cette vitrine est un <strong>modèle de départ</strong>. Elle sert à guider les commerçants et à montrer
-          le niveau de présentation possible dans DIGIY MARKET.
-        </p>
-
-        <div class="info-grid">
-          <div class="mini">
-            <div class="mini-label">Catégorie</div>
-            <div class="mini-value">${safe(v.categoryLabel)}</div>
-          </div>
-          <div class="mini">
-            <div class="mini-label">Zone</div>
-            <div class="mini-value">${safe(v.loc)}</div>
-          </div>
-          <div class="mini">
-            <div class="mini-label">Positionnement</div>
-            <div class="mini-value">${safe(v.price)}</div>
-          </div>
-          <div class="mini">
-            <div class="mini-label">Statut</div>
-            <div class="mini-value">${v.live ? 'Disponible / en ligne' : 'Visible dans la vitrine'}</div>
-          </div>
-        </div>
-
-        <div class="cta-row">
-          <button class="btn btn-primary" type="button" id="contactBtnMain">💬 Contacter</button>
-          <a class="btn btn-soft" href="index.html">← Retour au marché</a>
-        </div>
-
-        <div class="note">
-          Plus tard, cette zone peut recevoir :
-          WhatsApp, appel direct, lien Google Maps, galerie réelle, horaires, promos, DIGIY PAY et ouverture vers MARKET PRO.
-        </div>
-      </aside>
-    </section>
-
-    <section class="layout">
-      <div class="left-col">
-        <article class="section-card">
-          <h2>Galerie de présentation</h2>
-          <p>Voici une galerie démo pour montrer comment une vraie boutique pourra afficher ses photos.</p>
-          <div class="gallery" style="margin-top:14px">
-            ${gallery.map(g => `
-              <figure class="photo">
-                <img src="${g.src}" alt="${safe(g.caption)}">
-                <figcaption class="photo-caption">${safe(g.caption)}</figcaption>
-              </figure>
-            `).join('')}
-          </div>
-        </article>
-
-        <article class="section-card">
-          <h2>Produits / services mis en avant</h2>
-          <p>Tu peux utiliser ce bloc pour montrer les points forts de la boutique ou les services les plus demandés.</p>
-          <div class="products" style="margin-top:14px">
-            ${products.map(p => `
-              <div class="product">
-                <h3>${safe(p.title)}</h3>
-                <p>${safe(p.desc)}</p>
-                <span class="price">${safe(p.price)}</span>
-              </div>
-            `).join('')}
-          </div>
-        </article>
-
-        <article class="section-card">
-          <h2>Présentation de la boutique</h2>
-          <p>
-            <strong>${safe(v.name)}</strong> est ici présenté comme une
-            <strong>vitrine exemple</strong> pour guider les commerçants du terrain.
-            L’idée est simple : montrer une boutique claire, humaine, visuelle, avec sa galerie, son style, sa zone
-            et ses produits mis en avant. Ensuite, tu remplaces cette fiche exemple par une vraie fiche commerçant.
-          </p>
-        </article>
+  grid.innerHTML = list.map(v => `
+    <article class="vendor" onclick="openVendor('${v.slug}')">
+      <div class="vendor-top" style="background:${v.bg}">
+        <span class="vendor-example">EXEMPLE</span>
+        <span style="font-size:2.3rem;filter:drop-shadow(0 2px 6px rgba(0,0,0,.2))">${v.icon}</span>
+        ${v.live ? '<div class="vendor-live">EN LIGNE</div>' : ''}
       </div>
-
-      <aside class="right-col">
-        <article class="section-card">
-          <h2>Repères rapides</h2>
-          <div class="side-list">
-            <div class="side-item">
-              <div class="label">Nom</div>
-              <div class="value">${safe(v.name)}</div>
-            </div>
-            <div class="side-item">
-              <div class="label">Activité</div>
-              <div class="value">${safe(v.what)}</div>
-            </div>
-            <div class="side-item">
-              <div class="label">Ville / zone</div>
-              <div class="value">${safe(v.loc)}</div>
-            </div>
-            <div class="side-item">
-              <div class="label">Univers</div>
-              <div class="value">${safe(v.categoryLabel)}</div>
-            </div>
-            <div class="side-item">
-              <div class="label">Badge</div>
-              <div class="value">Vitrine exemple DIGIY</div>
-            </div>
-          </div>
-        </article>
-
-        <article class="section-card">
-          <h2>Ce que tu peux brancher plus tard</h2>
-          <div class="side-list">
-            <div class="side-item"><div class="value">WhatsApp direct</div></div>
-            <div class="side-item"><div class="value">Appel téléphone</div></div>
-            <div class="side-item"><div class="value">Lien Google Maps</div></div>
-            <div class="side-item"><div class="value">Galerie réelle du commerçant</div></div>
-            <div class="side-item"><div class="value">Paiement direct / DIGIY PAY</div></div>
-            <div class="side-item"><div class="value">Passage vers MARKET PRO</div></div>
-          </div>
-        </article>
-      </aside>
-    </section>
-  `;
-
-  const contactMsg = () => {
-    alert(`💬 ${v.name}\n\nIci tu brancheras plus tard :\n- WhatsApp\n- appel direct\n- formulaire simple\n- DIGIY PAY`);
-  };
-
-  document.getElementById('contactBtnTop').addEventListener('click', contactMsg);
-  document.getElementById('contactBtnMain').addEventListener('click', contactMsg);
-}
-
-function renderMissing(){
-  const app = document.getElementById('app');
-  app.innerHTML = `
-    <div class="empty-box section-card">
-      <h2>Fiche introuvable</h2>
-      <p>
-        Ouvre d’abord la fiche depuis <strong>index.html</strong>, ou recharge le marché pour réinjecter le catalogue démo.
-      </p>
-      <div style="margin-top:16px">
-        <a class="btn btn-primary" href="index.html">Retour au marché</a>
+      <div class="vendor-body">
+        <div class="vendor-name">${v.name}</div>
+        <div class="vendor-what">${v.what}</div>
+        <div class="vendor-meta">
+          <span class="vendor-loc">📍 ${v.loc}</span>
+          <span class="vendor-price">${v.price}</span>
+        </div>
+        <div class="vendor-cta">
+          <button class="vendor-btn primary" type="button" onclick="event.stopPropagation();openVendor('${v.slug}')">👁 Voir la fiche</button>
+          <button class="vendor-btn ghost" type="button" onclick="event.stopPropagation();contactVendor('${v.slug}')">💬 Contacter</button>
+        </div>
       </div>
-    </div>
-  `;
+    </article>
+  `).join('');
 }
 
-const catalog = readCatalog();
-const slug = getParam('v');
+function renderVendorsByCategory(cat){
+  const list = (VENDORS[cat] || []).map(v => buildVendor(cat, v));
+  const meta = META[cat] || {};
+  document.getElementById('panelIcon').textContent = meta.icon || '🛍️';
+  document.getElementById('panelTitle').textContent = meta.label || cat;
+  document.getElementById('panelSub').textContent = `${meta.sub || ''} • ${list.length} vendeur(s) exemple`;
+  renderVendorCards(list);
+}
 
-if(!catalog || !catalog.vendors || !slug){
-  renderMissing();
-}else{
-  const vendor = catalog.vendors.find(v => v.slug === slug);
-  if(!vendor){
-    renderMissing();
-  }else{
-    renderVendor(vendor);
+function renderSearch(q){
+  const query = q.trim().toLowerCase();
+  const all = buildCatalog();
+  const list = all.filter(v =>
+    v.name.toLowerCase().includes(query) ||
+    v.what.toLowerCase().includes(query) ||
+    v.loc.toLowerCase().includes(query) ||
+    v.categoryLabel.toLowerCase().includes(query)
+  );
+
+  document.getElementById('panelIcon').textContent = '🔎';
+  document.getElementById('panelTitle').textContent = `Recherche : ${q}`;
+  document.getElementById('panelSub').textContent = `${list.length} résultat(s) exemple`;
+  renderVendorCards(list);
+}
+
+function openVendor(slug){
+  saveCatalog();
+  window.location.href = `vendeur.html?v=${encodeURIComponent(slug)}`;
+}
+
+function contactVendor(slug){
+  saveCatalog();
+  const all = buildCatalog();
+  const vendor = all.find(v => v.slug === slug);
+  const name = vendor ? vendor.name : 'ce vendeur';
+  alert(`💬 ${name}\n\nIci tu brancheras plus tard :\n- WhatsApp\n- Appel direct\n- DIGIY PAY\n- formulaire simple`);
+}
+
+saveCatalog();
+updateCounts();
+
+let current = null;
+const panel = document.getElementById('vendorPanel');
+
+document.querySelectorAll('.cat-tile').forEach(tile => {
+  tile.addEventListener('click', () => {
+    const cat = tile.dataset.cat;
+    if(current === cat){
+      panel.classList.remove('open');
+      tile.classList.remove('active');
+      current = null;
+      return;
+    }
+
+    document.querySelectorAll('.cat-tile').forEach(x => x.classList.remove('active'));
+    tile.classList.add('active');
+    current = cat;
+
+    renderVendorsByCategory(cat);
+    if(!panel.classList.contains('open')) panel.classList.add('open');
+    setTimeout(() => panel.scrollIntoView({behavior:'smooth', block:'nearest'}), 180);
+  });
+});
+
+document.getElementById('panelClose').addEventListener('click', () => {
+  panel.classList.remove('open');
+  document.querySelectorAll('.cat-tile').forEach(x => x.classList.remove('active'));
+  current = null;
+});
+
+document.getElementById('topSearchBtn').addEventListener('click', () => {
+  const q = document.getElementById('topSearchInput').value.trim();
+  if(!q) return;
+  document.querySelectorAll('.cat-tile').forEach(x => x.classList.remove('active'));
+  current = null;
+  renderSearch(q);
+  panel.classList.add('open');
+  setTimeout(() => panel.scrollIntoView({behavior:'smooth', block:'nearest'}), 180);
+});
+
+document.getElementById('topSearchInput').addEventListener('keydown', (e) => {
+  if(e.key === 'Enter'){
+    document.getElementById('topSearchBtn').click();
   }
+});
+
+const rail = document.getElementById('catRail');
+document.getElementById('arrL').addEventListener('click', () => rail.scrollBy({left:-280, behavior:'smooth'}));
+document.getElementById('arrR').addEventListener('click', () => rail.scrollBy({left:280, behavior:'smooth'}));
+
+let isDown = false, startX = 0, startScroll = 0;
+
+function dragStart(x){
+  isDown = true;
+  startX = x;
+  startScroll = rail.scrollLeft;
+  rail.classList.add('grabbing');
 }
+function dragMove(x){
+  if(!isDown) return;
+  rail.scrollLeft = startScroll - (x - startX);
+}
+function dragEnd(){
+  isDown = false;
+  rail.classList.remove('grabbing');
+}
+
+rail.addEventListener('mousedown', e => dragStart(e.pageX));
+window.addEventListener('mouseup', dragEnd);
+window.addEventListener('mousemove', e => dragMove(e.pageX));
+
+rail.addEventListener('touchstart', e => {
+  if(e.touches[0]) dragStart(e.touches[0].pageX);
+}, {passive:true});
+
+rail.addEventListener('touchmove', e => {
+  if(e.touches[0]) dragMove(e.touches[0].pageX);
+}, {passive:true});
+
+rail.addEventListener('touchend', dragEnd);
 </script>
 </body>
 </html>
