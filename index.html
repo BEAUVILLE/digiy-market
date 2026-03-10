@@ -36,6 +36,7 @@ body{
 }
 a{color:inherit;text-decoration:none}
 button,input,select{font:inherit}
+img{display:block;max-width:100%}
 .wrap{width:min(1260px,calc(100% - 28px));margin:0 auto}
 
 /* TOPBAR */
@@ -52,6 +53,9 @@ button,input,select{font:inherit}
   align-items:center;
   min-height:76px;
 }
+.brand-stack{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap
+}
 .brand{
   display:flex;align-items:center;gap:10px;
   font-family:'Playfair Display',serif;
@@ -61,15 +65,19 @@ button,input,select{font:inherit}
   width:42px;height:42px;border-radius:12px;
   background:linear-gradient(135deg,#e86820,#c83830);
   display:grid;place-items:center;font-size:1.1rem;
-  box-shadow:0 5px 16px rgba(232,104,32,.3)
+  box-shadow:0 5px 16px rgba(232,104,32,.3);
+  overflow:hidden;
+  flex:0 0 auto;
+}
+.brand-icon img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 .brand small{
   display:block;
   font-family:'Nunito',sans-serif;
   font-weight:800;font-size:.72rem;color:var(--muted);margin-top:1px
-}
-.brand-stack{
-  display:flex;align-items:center;gap:10px;flex-wrap:wrap
 }
 .live-count{
   display:inline-flex;align-items:center;gap:8px;
@@ -173,10 +181,8 @@ button,input,select{font:inherit}
 .hero-btn.primary{background:#fff;color:var(--ink)}
 .hero-btn.soft{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);color:#fff}
 
-/* PRESTIGE STRIP */
-.prestige{
-  padding:18px 0 10px;
-}
+/* PRESTIGE */
+.prestige{padding:18px 0 10px}
 .prestige-shell{
   display:grid;grid-template-columns:1.1fr .9fr;gap:14px;align-items:center;
   background:linear-gradient(135deg,#fff8ed,#fff3e1);
@@ -190,21 +196,14 @@ button,input,select{font:inherit}
   font-size:1.45rem;
   margin-bottom:6px
 }
-.prestige p{
-  color:#7c5a12;
-  line-height:1.68
-}
-.prestige-row{
-  display:flex;gap:10px;flex-wrap:wrap;margin-top:12px
-}
+.prestige p{color:#7c5a12;line-height:1.68}
+.prestige-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
 .prestige-pill{
   display:inline-flex;align-items:center;gap:8px;
   padding:10px 14px;border-radius:999px;background:#fff;border:1.5px solid #f0d0a0;
   font-weight:900;font-size:.82rem
 }
-.prestige-cta{
-  display:flex;flex-direction:column;gap:10px
-}
+.prestige-cta{display:flex;flex-direction:column;gap:10px}
 .prestige-link{
   display:flex;align-items:center;justify-content:center;gap:10px;
   padding:15px 18px;border-radius:18px;font-weight:900
@@ -216,10 +215,8 @@ button,input,select{font:inherit}
   background:#fff;border:1.5px solid #f0d0a0;color:var(--ink)
 }
 
-/* TRUST BAND */
-.trust{
-  padding:12px 0 0;
-}
+/* TRUST */
+.trust{padding:12px 0 0}
 .trust-shell{
   background:var(--card);
   border:1.5px solid var(--line);
@@ -234,10 +231,7 @@ button,input,select{font:inherit}
   font-family:'Playfair Display',serif;
   font-size:1.26rem
 }
-.trust-head p{
-  color:var(--muted);
-  font-size:.9rem
-}
+.trust-head p{color:var(--muted);font-size:.9rem}
 .trust-grid{
   display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px
 }
@@ -251,12 +245,8 @@ button,input,select{font:inherit}
   width:42px;height:42px;border-radius:14px;display:grid;place-items:center;margin-bottom:10px;
   background:#fff3df;border:1px solid #f2d2a6;font-size:1.1rem
 }
-.trust-card h4{
-  font-size:.96rem;margin-bottom:5px
-}
-.trust-card p{
-  color:var(--muted);font-size:.84rem;line-height:1.58
-}
+.trust-card h4{font-size:.96rem;margin-bottom:5px}
+.trust-card p{color:var(--muted);font-size:.84rem;line-height:1.58}
 
 /* FILTERS */
 .filters{padding:18px 0 10px}
@@ -369,15 +359,20 @@ button,input,select{font:inherit}
 }
 .vendor:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(26,18,8,.12)}
 .vendor-top{
-  height:108px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;position:relative
+  height:108px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;position:relative;overflow:hidden
+}
+.vendor-top img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 .vendor-example{
   position:absolute;left:10px;top:10px;background:rgba(255,255,255,.95);color:var(--orange);
-  border:1px solid rgba(232,104,32,.22);padding:4px 8px;border-radius:999px;font-size:.62rem;font-weight:900
+  border:1px solid rgba(232,104,32,.22);padding:4px 8px;border-radius:999px;font-size:.62rem;font-weight:900;z-index:2
 }
 .vendor-live{
   position:absolute;right:10px;top:10px;display:flex;align-items:center;gap:4px;
-  background:rgba(40,136,90,.92);color:#fff;padding:4px 8px;border-radius:999px;font-size:.62rem;font-weight:900
+  background:rgba(40,136,90,.92);color:#fff;padding:4px 8px;border-radius:999px;font-size:.62rem;font-weight:900;z-index:2
 }
 .vendor-live::before{
   content:"";width:6px;height:6px;border-radius:50%;background:#8ff7c5;animation:pulse 1.4s ease-in-out infinite
@@ -449,18 +444,6 @@ button,input,select{font:inherit}
   background:#fff;color:var(--ink);border:1.5px solid var(--line);box-shadow:none
 }
 
-/* FOOTER */
-footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
-.footer-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
-.footer-brand{font-family:'Playfair Display',serif;font-weight:900;font-size:1.06rem}
-.footer-sub{color:var(--muted);font-size:.8rem;margin-top:3px}
-.footer-links{display:flex;flex-wrap:wrap;gap:7px}
-.footer-links a{
-  padding:8px 13px;border-radius:999px;background:#fff;border:1.5px solid var(--line);
-  font-size:.8rem;font-weight:800;transition:border-color .2s,background .2s
-}
-.footer-links a:hover{background:#fef0d8;border-color:var(--gold)}
-
 /* FLOAT CTA */
 .float-cta{
   position:fixed;right:14px;bottom:14px;z-index:120;
@@ -481,7 +464,7 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
 @media(max-width:700px){
   .cat-tile{width:104px}
   .cat-img{height:70px;font-size:1.8rem}
-  .vendor-grid{grid-template-columns:1fr 1fr}
+  .vendor-grid,.trust-grid{grid-template-columns:1fr 1fr}
   .panel-header{padding:12px 14px}
   .float-cta{left:12px;right:12px}
   .float-btn{min-width:0;width:100%}
@@ -497,7 +480,7 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
   <div class="wrap topbar-inner">
     <div class="brand-stack">
       <a class="brand" href="#">
-        <span class="brand-icon">🛍️</span>
+        <span class="brand-icon" id="brandIcon">🛍️</span>
         <span>DIGIY MARKET<small>Le marché vivant du quotidien</small></span>
       </a>
       <div class="live-count">Vendeurs exemples <strong id="totalCount">0</strong></div>
@@ -540,7 +523,7 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
       <div class="hero-card">
         <h3>Un hall qui convertit</h3>
         <p>
-          Tous les exemples ci-dessous servent à guider les commerçants.  
+          Tous les exemples servent à guider les commerçants.  
           Le bouton <strong>Je veux mon module</strong> pointe directement vers ton entrée PRO officielle.
         </p>
         <div class="cta-row">
@@ -552,27 +535,20 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
   </div>
 </section>
 
-<section class="prestige">
+<section class="filters">
   <div class="wrap">
-    <div class="prestige-shell">
-      <div>
-        <h2>Le rail qui dit déjà “niveau premium”</h2>
-        <p>
-          Galerie, fiches, WhatsApp, Maps, entrée PRO, ambiance marché vivant.
-          Même en démo, le visiteur comprend qu’ici on peut lui poser quelque chose de sérieux.
-        </p>
-        <div class="prestige-row">
-          <span class="prestige-pill">👑 Présence</span>
-          <span class="prestige-pill">🖼️ Galerie</span>
-          <span class="prestige-pill">📍 Maps</span>
-          <span class="prestige-pill">🏪 Module PRO</span>
-        </div>
+    <div class="filters-shell">
+      <div class="filter-group">
+        <span class="filter-pill">🎯 Index MARKET V5</span>
+        <span class="filter-pill">🧭 Fiches exemples guidantes</span>
+        <span class="filter-pill">🔥 Entrée PRO visible</span>
       </div>
 
-      <div class="prestige-cta">
-        <a class="prestige-link primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
-        <a id="prestigeWaBtn" class="prestige-link soft" href="#" target="_blank" rel="noopener">💬 Parler sur WhatsApp</a>
-      </div>
+      <select id="cityFilter" class="filter-select">
+        <option value="">Toutes les villes</option>
+      </select>
+
+      <button id="resetFilters" class="filter-reset" type="button">Réinitialiser</button>
     </div>
   </div>
 </section>
@@ -609,24 +585,6 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
           <p>Ville, zone, repère terrain et visibilité orientée action.</p>
         </article>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="filters">
-  <div class="wrap">
-    <div class="filters-shell">
-      <div class="filter-group">
-        <span class="filter-pill">🎯 Index MARKET V4</span>
-        <span class="filter-pill">🧭 Fiches exemples guidantes</span>
-        <span class="filter-pill">🔥 Entrée PRO visible</span>
-      </div>
-
-      <select id="cityFilter" class="filter-select">
-        <option value="">Toutes les villes</option>
-      </select>
-
-      <button id="resetFilters" class="filter-reset" type="button">Réinitialiser</button>
     </div>
   </div>
 </section>
@@ -811,71 +769,405 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
 const DIGIY_CONFIG = {
   whatsapp: "221771342889",
   siteUrl: "http://digiylyfe.com",
-  proUrl: "https://commencer-a-payer.digiylyfe.com/"
+  proUrl: "https://commencer-a-payer.digiylyfe.com/",
+  logoUrl: ""
 };
 
 const VENDORS = {
   neuf:[
-    {icon:"📱",bg:"#c8deff",name:"Tech Dakar Shop",what:"Téléphones neufs, accessoires, batteries, câbles",loc:"Dakar · Plateau",price:"5 000–250 000 F",live:true},
-    {icon:"👟",bg:"#ffe0cb",name:"Sneakers Mbaye",what:"Jordan, Nike, Adidas — arrivage chaque semaine",loc:"Mbour · Marché Central",price:"15 000–85 000 F",live:true},
-    {icon:"🛒",bg:"#ffeaaa",name:"Boutique Awa Neuf",what:"Produits ménagers neufs, ustensiles, déco",loc:"Saly · Ngaparou",price:"2 000–35 000 F",live:false},
-    {icon:"💻",bg:"#c8deff",name:"Diallo Informatique",what:"PC neufs et reconditionnés, imprimantes",loc:"Dakar · Parcelles",price:"80 000–450 000 F",live:true},
+    {
+      icon:"📱",
+      bg:"#c8deff",
+      name:"Tech Dakar Shop",
+      what:"Téléphones neufs, accessoires, batteries, câbles",
+      loc:"Dakar · Plateau",
+      price:"5 000–250 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"👟",
+      bg:"#ffe0cb",
+      name:"Sneakers Mbaye",
+      what:"Jordan, Nike, Adidas — arrivage chaque semaine",
+      loc:"Mbour · Marché Central",
+      price:"15 000–85 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"🛒",
+      bg:"#ffeaaa",
+      name:"Boutique Awa Neuf",
+      what:"Produits ménagers neufs, ustensiles, déco",
+      loc:"Saly · Ngaparou",
+      price:"2 000–35 000 F",
+      live:false,
+      images:[]
+    },
+    {
+      icon:"💻",
+      bg:"#c8deff",
+      name:"Diallo Informatique",
+      what:"PC neufs et reconditionnés, imprimantes",
+      loc:"Dakar · Parcelles",
+      price:"80 000–450 000 F",
+      live:true,
+      images:[]
+    }
   ],
   deuxiemain:[
-    {icon:"📺",bg:"#f4ead7",name:"Mamadou Électro",what:"TV, réfrigérateurs, machines à laver d'occasion",loc:"Dakar · Colobane",price:"20 000–150 000 F",live:true},
-    {icon:"👕",bg:"#ffd0e0",name:"Frip Sénégal",what:"Friperie sélectionnée, marques, prix juste",loc:"Dakar · Sicap",price:"500–5 000 F",live:true},
-    {icon:"🎮",bg:"#eadfff",name:"GameZone Dakar",what:"Consoles, jeux PS4/PS5, manettes",loc:"Dakar · Yoff",price:"15 000–120 000 F",live:true},
+    {
+      icon:"📺",
+      bg:"#f4ead7",
+      name:"Mamadou Électro",
+      what:"TV, réfrigérateurs, machines à laver d'occasion",
+      loc:"Dakar · Colobane",
+      price:"20 000–150 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"👕",
+      bg:"#ffd0e0",
+      name:"Frip Sénégal",
+      what:"Friperie sélectionnée, marques, prix juste",
+      loc:"Dakar · Sicap",
+      price:"500–5 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"🎮",
+      bg:"#eadfff",
+      name:"GameZone Dakar",
+      what:"Consoles, jeux PS4/PS5, manettes",
+      loc:"Dakar · Yoff",
+      price:"15 000–120 000 F",
+      live:true,
+      images:[]
+    }
   ],
   vetements:[
-    {icon:"👘",bg:"#ffeaaa",name:"Boubous Cheikh",what:"Boubous brocart, bazin, grand boubou cérémonie",loc:"Dakar · HLM",price:"8 000–60 000 F",live:true},
-    {icon:"👗",bg:"#ffd0e0",name:"Robes Fatou",what:"Robes africaines, wax, tenues soirée et bureau",loc:"Saly · Centre",price:"5 000–35 000 F",live:true},
-    {icon:"🧣",bg:"#eadfff",name:"Accessoires Mode",what:"Ceintures, sacs, bijoux fantaisie, foulards",loc:"Saint-Louis",price:"1 000–12 000 F",live:true},
+    {
+      icon:"👘",
+      bg:"#ffeaaa",
+      name:"Boubous Cheikh",
+      what:"Boubous brocart, bazin, grand boubou cérémonie",
+      loc:"Dakar · HLM",
+      price:"8 000–60 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"👗",
+      bg:"#ffd0e0",
+      name:"Robes Fatou",
+      what:"Robes africaines, wax, tenues soirée et bureau",
+      loc:"Saly · Centre",
+      price:"5 000–35 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"🧣",
+      bg:"#eadfff",
+      name:"Accessoires Mode",
+      what:"Ceintures, sacs, bijoux fantaisie, foulards",
+      loc:"Saint-Louis",
+      price:"1 000–12 000 F",
+      live:true,
+      images:[]
+    }
   ],
   parfum:[
-    {icon:"🕌",bg:"#eadfff",name:"Thiouraye Ndèye",what:"Thiouraye naturel, encens, encens de Djeddah",loc:"Dakar · Médina",price:"1 500–15 000 F",live:true},
-    {icon:"🌸",bg:"#ffd0e0",name:"Parfums Orientaux",what:"Attars, musc, oud, huiles de parfum",loc:"Dakar · Sandaga",price:"3 000–35 000 F",live:true},
-    {icon:"🎁",bg:"#ffeaaa",name:"Coffrets Mariama",what:"Coffrets mariage, baptême, kits parfum cadeaux",loc:"Dakar · Pikine",price:"8 000–50 000 F",live:false},
+    {
+      icon:"🕌",
+      bg:"#eadfff",
+      name:"Thiouraye Ndèye",
+      what:"Thiouraye naturel, encens, encens de Djeddah",
+      loc:"Dakar · Médina",
+      price:"1 500–15 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"🌸",
+      bg:"#ffd0e0",
+      name:"Parfums Orientaux",
+      what:"Attars, musc, oud, huiles de parfum",
+      loc:"Dakar · Sandaga",
+      price:"3 000–35 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"🎁",
+      bg:"#ffeaaa",
+      name:"Coffrets Mariama",
+      what:"Coffrets mariage, baptême, kits parfum cadeaux",
+      loc:"Dakar · Pikine",
+      price:"8 000–50 000 F",
+      live:false,
+      images:[]
+    }
   ],
   coiffeur:[
-    {icon:"💇",bg:"#dbfff6",name:"Salon Aicha",what:"Tresses africaines, tissage, défrisage, soin",loc:"Dakar · Medina",price:"2 000–25 000 F",live:true},
-    {icon:"✂️",bg:"#c8deff",name:"Barber Moussa",what:"Coupe homme, dégradé américain, barbe sculptée",loc:"Saly · Portudal",price:"1 500–5 000 F",live:true},
-    {icon:"💆",bg:"#dbf5ea",name:"Soin Cheveux Rama",what:"Masques kératine, soin naturel, hydratation",loc:"Dakar · Sacré-Cœur",price:"5 000–20 000 F",live:true},
+    {
+      icon:"💇",
+      bg:"#dbfff6",
+      name:"Salon Aicha",
+      what:"Tresses africaines, tissage, défrisage, soin",
+      loc:"Dakar · Medina",
+      price:"2 000–25 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"✂️",
+      bg:"#c8deff",
+      name:"Barber Moussa",
+      what:"Coupe homme, dégradé américain, barbe sculptée",
+      loc:"Saly · Portudal",
+      price:"1 500–5 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"💆",
+      bg:"#dbf5ea",
+      name:"Soin Cheveux Rama",
+      what:"Masques kératine, soin naturel, hydratation",
+      loc:"Dakar · Sacré-Cœur",
+      price:"5 000–20 000 F",
+      live:true,
+      images:[]
+    }
   ],
   onglerie:[
-    {icon:"💅",bg:"#ffd0e0",name:"Ongles by Aminata",what:"Pose gel, faux ongles, nail art, manucure",loc:"Dakar · Plateau",price:"4 000–20 000 F",live:true},
-    {icon:"✨",bg:"#eadfff",name:"Luxury Nails Saly",what:"Nail art 3D, extension, dégradé, brillants",loc:"Saly · Ngaparou",price:"6 000–30 000 F",live:true},
-    {icon:"🌸",bg:"#ffeaaa",name:"Beauty Corner Rokhaya",what:"Manucure naturelle, soin des mains, vernis",loc:"Thiès",price:"2 500–10 000 F",live:true},
+    {
+      icon:"💅",
+      bg:"#ffd0e0",
+      name:"Ongles by Aminata",
+      what:"Pose gel, faux ongles, nail art, manucure",
+      loc:"Dakar · Plateau",
+      price:"4 000–20 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"✨",
+      bg:"#eadfff",
+      name:"Luxury Nails Saly",
+      what:"Nail art 3D, extension, dégradé, brillants",
+      loc:"Saly · Ngaparou",
+      price:"6 000–30 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"🌸",
+      bg:"#ffeaaa",
+      name:"Beauty Corner Rokhaya",
+      what:"Manucure naturelle, soin des mains, vernis",
+      loc:"Thiès",
+      price:"2 500–10 000 F",
+      live:true,
+      images:[]
+    }
   ],
   brocante:[
-    {icon:"🪑",bg:"#f4ead7",name:"Brocante Sénégal",what:"Meubles anciens, chaises bois, buffets vintage",loc:"Dakar · Colobane",price:"5 000–80 000 F",live:true},
-    {icon:"🏺",bg:"#ffeaaa",name:"Poteries & Artisanat",what:"Poteries, statuettes, objets africains authentiques",loc:"Saly · Village artisanat",price:"2 000–40 000 F",live:true},
-    {icon:"🖼️",bg:"#ffe0cb",name:"Art & Déco Diallo",what:"Tableaux locaux, masques, peintures, déco murale",loc:"Dakar · Ouakam",price:"3 000–60 000 F",live:false},
+    {
+      icon:"🪑",
+      bg:"#f4ead7",
+      name:"Brocante Sénégal",
+      what:"Meubles anciens, chaises bois, buffets vintage",
+      loc:"Dakar · Colobane",
+      price:"5 000–80 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"🏺",
+      bg:"#ffeaaa",
+      name:"Poteries & Artisanat",
+      what:"Poteries, statuettes, objets africains authentiques",
+      loc:"Saly · Village artisanat",
+      price:"2 000–40 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"🖼️",
+      bg:"#ffe0cb",
+      name:"Art & Déco Diallo",
+      what:"Tableaux locaux, masques, peintures, déco murale",
+      loc:"Dakar · Ouakam",
+      price:"3 000–60 000 F",
+      live:false,
+      images:[]
+    }
   ],
   banabana:[
-    {icon:"🧺",bg:"#ffe0cb",name:"Bana-bana Alassane",what:"Légumes frais, fruits de saison, livraison quartier",loc:"Dakar · Parcelles",price:"200–5 000 F",live:true},
-    {icon:"🧃",bg:"#dbfff6",name:"Jus Naturels Aminata",what:"Bissap, gingembre, ditax, tamarin, bouye maison",loc:"Dakar · Medina",price:"250–1 500 F",live:true},
-    {icon:"🎀",bg:"#ffd0e0",name:"Tissus & Rubans",what:"Rubans, dentelles, broderies, vente au mètre",loc:"Dakar · HLM",price:"200–3 000 F/m",live:true},
+    {
+      icon:"🧺",
+      bg:"#ffe0cb",
+      name:"Bana-bana Alassane",
+      what:"Légumes frais, fruits de saison, livraison quartier",
+      loc:"Dakar · Parcelles",
+      price:"200–5 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"🧃",
+      bg:"#dbfff6",
+      name:"Jus Naturels Aminata",
+      what:"Bissap, gingembre, ditax, tamarin, bouye maison",
+      loc:"Dakar · Medina",
+      price:"250–1 500 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"🎀",
+      bg:"#ffd0e0",
+      name:"Tissus & Rubans",
+      what:"Rubans, dentelles, broderies, vente au mètre",
+      loc:"Dakar · HLM",
+      price:"200–3 000 F/m",
+      live:true,
+      images:[]
+    }
   ],
   quotidien:[
-    {icon:"🧹",bg:"#dbf5ea",name:"Ménage & Entretien",what:"Détergents, balais, produits nettoyants",loc:"Dakar · Pikine",price:"500–8 000 F",live:true},
-    {icon:"🍳",bg:"#ffe0cb",name:"Cuisine Équipée",what:"Marmites, casseroles, poêles, mortiers bois",loc:"Dakar · Sandaga",price:"2 000–20 000 F",live:true},
-    {icon:"💡",bg:"#ffeaaa",name:"Électricité Mamadou",what:"Prises, câbles, ampoules LED, matériel électrique",loc:"Thiès",price:"500–15 000 F",live:true},
+    {
+      icon:"🧹",
+      bg:"#dbf5ea",
+      name:"Ménage & Entretien",
+      what:"Détergents, balais, produits nettoyants",
+      loc:"Dakar · Pikine",
+      price:"500–8 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"🍳",
+      bg:"#ffe0cb",
+      name:"Cuisine Équipée",
+      what:"Marmites, casseroles, poêles, mortiers bois",
+      loc:"Dakar · Sandaga",
+      price:"2 000–20 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"💡",
+      bg:"#ffeaaa",
+      name:"Électricité Mamadou",
+      what:"Prises, câbles, ampoules LED, matériel électrique",
+      loc:"Thiès",
+      price:"500–15 000 F",
+      live:true,
+      images:[]
+    }
   ],
   phones:[
-    {icon:"📱",bg:"#c8deff",name:"iDakar Phones",what:"iPhone reconditionné, garantie 3 mois",loc:"Dakar · Plateau",price:"120 000–450 000 F",live:true},
-    {icon:"🤳",bg:"#ffeaaa",name:"Samsung Sénégal",what:"Galaxy A, M et S series neufs et occasion",loc:"Dakar · Sacré-Cœur",price:"60 000–380 000 F",live:true},
-    {icon:"🎧",bg:"#eadfff",name:"Son & Audio Mobile",what:"AirPods, Bluetooth, enceintes, casques audio",loc:"Dakar · Yoff",price:"5 000–65 000 F",live:true},
+    {
+      icon:"📱",
+      bg:"#c8deff",
+      name:"iDakar Phones",
+      what:"iPhone reconditionné, garantie 3 mois",
+      loc:"Dakar · Plateau",
+      price:"120 000–450 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"🤳",
+      bg:"#ffeaaa",
+      name:"Samsung Sénégal",
+      what:"Galaxy A, M et S series neufs et occasion",
+      loc:"Dakar · Sacré-Cœur",
+      price:"60 000–380 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"🎧",
+      bg:"#eadfff",
+      name:"Son & Audio Mobile",
+      what:"AirPods, Bluetooth, enceintes, casques audio",
+      loc:"Dakar · Yoff",
+      price:"5 000–65 000 F",
+      live:true,
+      images:[]
+    }
   ],
   alimentaire:[
-    {icon:"🥜",bg:"#ffeaaa",name:"Arachides Baye",what:"Arachides grillées, huile d'arachide artisanale",loc:"Kaolack · Marché",price:"500–5 000 F",live:true},
-    {icon:"🌾",bg:"#f4ead7",name:"Céréales du Terroir",what:"Mil, sorgho, fonio, riz local, maïs",loc:"Tambacounda",price:"1 000–25 000 F",live:true},
-    {icon:"🥦",bg:"#dbf5ea",name:"Maraîchage Fatou",what:"Légumes frais jardin, tomates, oignons, aubergines",loc:"Thiès · Pout",price:"200–3 000 F",live:true},
+    {
+      icon:"🥜",
+      bg:"#ffeaaa",
+      name:"Arachides Baye",
+      what:"Arachides grillées, huile d'arachide artisanale",
+      loc:"Kaolack · Marché",
+      price:"500–5 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"🌾",
+      bg:"#f4ead7",
+      name:"Céréales du Terroir",
+      what:"Mil, sorgho, fonio, riz local, maïs",
+      loc:"Tambacounda",
+      price:"1 000–25 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"🥦",
+      bg:"#dbf5ea",
+      name:"Maraîchage Fatou",
+      what:"Légumes frais jardin, tomates, oignons, aubergines",
+      loc:"Thiès · Pout",
+      price:"200–3 000 F",
+      live:true,
+      images:[]
+    }
   ],
   chaussures:[
-    {icon:"👡",bg:"#ffd0e0",name:"Sandales Aicha",what:"Sandales artisanales cuir, babouches colorées",loc:"Dakar · Médina",price:"3 000–18 000 F",live:true},
-    {icon:"👟",bg:"#ffe0cb",name:"Baskets Papito",what:"Nike, Adidas, Puma — arrivage hebdomadaire",loc:"Dakar · Parcelles",price:"15 000–85 000 F",live:true},
-    {icon:"👞",bg:"#c8deff",name:"Chaussures Homme SN",what:"Derby, bottes, chaussures ville qualité cuir",loc:"Dakar · Plateau",price:"12 000–55 000 F",live:true},
-  ],
+    {
+      icon:"👡",
+      bg:"#ffd0e0",
+      name:"Sandales Aicha",
+      what:"Sandales artisanales cuir, babouches colorées",
+      loc:"Dakar · Médina",
+      price:"3 000–18 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"👟",
+      bg:"#ffe0cb",
+      name:"Baskets Papito",
+      what:"Nike, Adidas, Puma — arrivage hebdomadaire",
+      loc:"Dakar · Parcelles",
+      price:"15 000–85 000 F",
+      live:true,
+      images:[]
+    },
+    {
+      icon:"👞",
+      bg:"#c8deff",
+      name:"Chaussures Homme SN",
+      what:"Derby, bottes, chaussures ville qualité cuir",
+      loc:"Dakar · Plateau",
+      price:"12 000–55 000 F",
+      live:true,
+      images:[]
+    }
+  ]
 };
 
 const META = {
@@ -890,7 +1182,7 @@ const META = {
   quotidien:{label:"Quotidien",icon:"🏠",sub:"Ce qu'on cherche vite, ce qui sert tous les jours"},
   phones:{label:"Téléphones",icon:"📱",sub:"Neufs, reconditionnés, accessoires — tech terrain"},
   alimentaire:{label:"Alimentaire",icon:"🥜",sub:"Produits locaux, céréales, épices, conserves"},
-  chaussures:{label:"Chaussures",icon:"👟",sub:"Sandales, baskets, mocassins — toutes occasions"},
+  chaussures:{label:"Chaussures",icon:"👟",sub:"Sandales, baskets, mocassins — toutes occasions"}
 };
 
 function slugify(str){
@@ -909,8 +1201,51 @@ function parseCity(loc=''){
   return (loc.split('·')[0] || loc).trim();
 }
 
+function makeSvgData(title, subtitle, icon, c1, c2){
+  const svg = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+    <defs>
+      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="${c1}"/>
+        <stop offset="100%" stop-color="${c2}"/>
+      </linearGradient>
+      <filter id="f" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="rgba(0,0,0,.18)"/>
+      </filter>
+    </defs>
+    <rect width="1200" height="900" fill="url(#g)"/>
+    <circle cx="1030" cy="120" r="160" fill="rgba(255,255,255,.12)"/>
+    <circle cx="190" cy="760" r="180" fill="rgba(255,255,255,.12)"/>
+    <text x="100" y="230" font-size="190" filter="url(#f)">${icon}</text>
+    <rect x="70" y="605" width="1060" height="180" rx="32" fill="rgba(255,255,255,.9)"/>
+    <text x="120" y="680" font-family="Arial, sans-serif" font-size="60" font-weight="700" fill="#1a1208">${title}</text>
+    <text x="120" y="740" font-family="Arial, sans-serif" font-size="30" fill="#6f624f">${subtitle}</text>
+  </svg>`;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
+function palette(bg){
+  const map = {
+    "#c8deff":["#bdd8ff","#8cb7ff"],
+    "#ffe0cb":["#ffd9c5","#ffb88a"],
+    "#ffeaaa":["#fff0b8","#ffd56d"],
+    "#ffd0e0":["#ffd8e5","#ffb1cb"],
+    "#eadfff":["#eee2ff","#d2beff"],
+    "#dbfff6":["#ddfff5","#afe9d5"],
+    "#f4ead7":["#f6ead9","#ddc9a3"],
+    "#dbf5ea":["#dff7ec","#b8e0ca"]
+  };
+  return map[bg] || ["#f4ead7","#d8bf96"];
+}
+
+function fallbackVendorImage(v){
+  const [c1,c2] = palette(v.bg || '#f4ead7');
+  return makeSvgData(v.name, v.loc, v.icon || '🛍️', c1, c2);
+}
+
 function buildVendor(cat, v){
   const meta = META[cat] || {};
+  const images = Array.isArray(v.images) ? v.images.filter(Boolean) : [];
   return {
     ...v,
     category: cat,
@@ -919,7 +1254,9 @@ function buildVendor(cat, v){
     categorySub: meta.sub || '',
     city: parseCity(v.loc),
     slug: `${cat}-${slugify(v.name)}`,
-    isExample: true
+    isExample: true,
+    coverImage: images[0] || fallbackVendorImage(v),
+    images
   };
 }
 
@@ -928,7 +1265,7 @@ function buildCatalog(){
 }
 
 function saveCatalog(){
-  localStorage.setItem('digiy_market_catalog_v4', JSON.stringify({
+  localStorage.setItem('digiy_market_catalog_v5', JSON.stringify({
     config: DIGIY_CONFIG,
     meta: META,
     vendors: buildCatalog()
@@ -946,10 +1283,15 @@ function updateCounts(){
 
 function initButtons(){
   const generalWa = waLink("Bonjour DIGIY 👋 Je veux des informations sur DIGIY MARKET.");
-  ['waTopBtn','heroWaBtn','prestigeWaBtn','ctaWaBtn','floatWaBtn'].forEach(id => {
+  ['waTopBtn','heroWaBtn','ctaWaBtn','floatWaBtn'].forEach(id => {
     const el = document.getElementById(id);
     if(el) el.href = generalWa;
   });
+
+  const brandIcon = document.getElementById('brandIcon');
+  if(DIGIY_CONFIG.logoUrl){
+    brandIcon.innerHTML = `<img src="${DIGIY_CONFIG.logoUrl}" alt="DIGIY">`;
+  }
 }
 
 function fillCityFilter(){
@@ -988,8 +1330,8 @@ function renderVendorCards(list){
   grid.innerHTML = list.map(v => `
     <article class="vendor" onclick="openVendor('${v.slug}')">
       <div class="vendor-top" style="background:${v.bg}">
+        <img src="${v.coverImage}" alt="${v.name}">
         <span class="vendor-example">EXEMPLE</span>
-        <span style="font-size:2.3rem;filter:drop-shadow(0 2px 6px rgba(0,0,0,.2))">${v.icon}</span>
         ${v.live ? '<div class="vendor-live">EN LIGNE</div>' : ''}
       </div>
       <div class="vendor-body">
