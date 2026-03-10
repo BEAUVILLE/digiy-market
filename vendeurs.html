@@ -28,13 +28,11 @@ button{font:inherit}
 .wrap{width:min(1180px,calc(100% - 28px));margin:0 auto}
 
 .topbar{
-  position:sticky;top:0;z-index:100;
-  background:rgba(253,246,236,.93);
-  backdrop-filter:blur(16px);
-  border-bottom:2px solid var(--line);
+  position:sticky;top:0;z-index:100;background:rgba(253,246,236,.93);
+  backdrop-filter:blur(16px);border-bottom:2px solid var(--line)
 }
 .topbar-inner{
-  min-height:66px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap
+  min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap
 }
 .brand{
   display:flex;align-items:center;gap:10px;
@@ -48,26 +46,23 @@ button{font:inherit}
 }
 .actions{display:flex;gap:8px;flex-wrap:wrap}
 .btn{
-  border:none;cursor:pointer;border-radius:999px;
-  padding:11px 15px;font-weight:800;transition:.18s ease
+  border:none;cursor:pointer;border-radius:999px;padding:11px 15px;font-weight:900;transition:.18s ease
 }
 .btn:hover{transform:translateY(-1px)}
 .btn-primary{background:var(--orange);color:#fff;box-shadow:0 10px 20px rgba(232,104,32,.22)}
 .btn-primary:hover{background:var(--red)}
 .btn-soft{background:#fff;border:1.5px solid var(--line);color:var(--ink)}
-.btn-soft:hover{background:#fef0d8;border-color:var(--gold)}
+.btn-soft:hover{background:#fff3df}
 
-.page{padding:24px 0 40px}
+.page{padding:24px 0 44px}
 .hero{
-  display:grid;grid-template-columns:1.04fr .96fr;gap:18px;align-items:stretch
+  display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:stretch
 }
-.cover-card,.info-card,.section-card{
-  background:var(--card);border:1.5px solid var(--line);border-radius:26px;box-shadow:var(--shadow)
+.card{
+  background:var(--card);border:1.5px solid var(--line);border-radius:28px;box-shadow:var(--shadow)
 }
 .cover-card{overflow:hidden}
-.cover-media{
-  aspect-ratio:16/10;background:#f6ead9;position:relative
-}
+.cover-media{position:relative;aspect-ratio:16/10;background:#f4ece0}
 .cover-media img{width:100%;height:100%;object-fit:cover}
 .cover-badges{
   position:absolute;left:16px;top:16px;display:flex;gap:8px;flex-wrap:wrap
@@ -78,59 +73,63 @@ button{font:inherit}
 }
 .badge.example{background:rgba(255,255,255,.95);border:1px solid rgba(232,104,32,.2);color:var(--orange)}
 .badge.live{background:rgba(40,136,90,.92);color:#fff}
-.badge.category{background:rgba(26,18,8,.8);color:#fff}
-
-.cover-foot{
-  padding:16px 18px 18px;border-top:1px solid var(--line)
-}
+.badge.cat{background:rgba(26,18,8,.82);color:#fff}
+.cover-foot{padding:18px 20px}
 .cover-foot h1{
-  font-family:'Playfair Display',serif;font-weight:900;
-  font-size:clamp(1.7rem,3.5vw,3rem);line-height:.96;margin-bottom:8px
+  font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.9rem,4vw,3.2rem);
+  line-height:.95;margin-bottom:8px
 }
-.cover-foot p{color:var(--muted);line-height:1.65}
+.cover-foot p{color:var(--muted);line-height:1.7}
 
 .info-card{padding:18px}
 .kicker{
-  display:inline-flex;align-items:center;gap:7px;
-  padding:7px 12px;border-radius:999px;
-  background:#fff;border:1.5px solid var(--line);
-  font-size:.76rem;font-weight:900;color:var(--orange);margin-bottom:12px
+  display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:999px;
+  background:#fff;border:1.5px solid var(--line);font-size:.76rem;font-weight:900;color:var(--orange)
 }
+.info-lead{margin-top:12px;color:var(--muted);line-height:1.72}
 .info-grid{
   display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px
 }
 .mini{
   background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px
 }
-.mini-label{font-size:.72rem;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
-.mini-value{font-weight:800;line-height:1.4}
-.cta-row{
-  display:flex;gap:10px;flex-wrap:wrap;margin-top:16px
+.mini-label{
+  font-size:.72rem;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px
 }
+.mini-value{font-weight:900;line-height:1.45}
+.cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
 .note{
-  margin-top:14px;padding:12px 14px;border-radius:18px;
-  background:#fff8ed;border:1px solid #f6d7a3;color:#8d5a00;font-size:.86rem;line-height:1.6
+  margin-top:14px;padding:13px 14px;border-radius:18px;background:#fff8ed;border:1px solid #f6d7a3;
+  color:#8d5a00;font-size:.86rem;line-height:1.65
 }
 
 .layout{
   display:grid;grid-template-columns:1fr 330px;gap:18px;margin-top:18px
 }
 .left-col,.right-col{display:grid;gap:18px}
-
 .section-card{padding:18px}
 .section-card h2{
-  font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;margin-bottom:12px
+  font-family:'Playfair Display',serif;font-size:1.34rem;font-weight:900;margin-bottom:12px
 }
-.section-card p{color:var(--muted);line-height:1.7}
+.section-card p{color:var(--muted);line-height:1.72}
 
-.gallery{
+.gallery-main{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:12px
+}
+.hero-photo{
+  border-radius:24px;overflow:hidden;border:1px solid var(--line);background:#f4ece0
+}
+.hero-photo img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
+.thumb-grid{
   display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px
 }
-.photo{
-  border-radius:20px;overflow:hidden;background:#f4ece0;border:1px solid var(--line)
+.thumb{
+  border-radius:20px;overflow:hidden;border:1px solid var(--line);background:#f4ece0
 }
-.photo img{width:100%;aspect-ratio:4/3;object-fit:cover}
-.photo-caption{padding:10px 12px;font-size:.82rem;font-weight:800;color:var(--muted)}
+.thumb img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.thumb small{
+  display:block;padding:8px 10px;background:#fff;font-weight:800;color:var(--muted)
+}
 
 .products{
   display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px
@@ -139,8 +138,8 @@ button{font:inherit}
   border:1px solid var(--line);border-radius:18px;background:#fff;padding:14px
 }
 .product h3{font-size:1rem;margin-bottom:6px}
-.product p{font-size:.88rem;line-height:1.6;margin-bottom:10px}
-.product .price{
+.product p{font-size:.88rem;line-height:1.6;margin-bottom:10px;color:var(--muted)}
+.price{
   display:inline-flex;padding:6px 10px;border-radius:999px;background:#fef0d8;color:var(--gold);
   border:1px solid #f8d8a0;font-weight:900;font-size:.78rem
 }
@@ -149,21 +148,46 @@ button{font:inherit}
 .side-item{
   border:1px solid var(--line);border-radius:18px;background:#fff;padding:13px
 }
-.side-item .label{font-size:.72rem;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
-.side-item .value{font-weight:800;line-height:1.5}
-
-.empty-box{
-  text-align:center;padding:32px 20px
+.side-item .label{
+  font-size:.72rem;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px
 }
+.side-item .value{font-weight:900;line-height:1.5}
+
+.module-box{
+  padding:18px;border-radius:22px;
+  background:linear-gradient(135deg,#fff8ed,#fff1dd);
+  border:1.5px solid #f0d0a0
+}
+.module-box h3{
+  font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:8px
+}
+.module-box p{color:#7c5a12;line-height:1.65}
+.module-box .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+
+.empty-box{text-align:center;padding:32px 20px}
 .empty-box h2{font-family:'Playfair Display',serif;font-size:1.7rem;margin-bottom:8px}
 .empty-box p{color:var(--muted);line-height:1.7}
 
+.float-cta{
+  position:fixed;right:14px;bottom:14px;z-index:120;
+  display:flex;flex-direction:column;gap:10px
+}
+.float-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  min-width:210px;padding:13px 16px;border-radius:999px;color:#fff;font-weight:900;
+  box-shadow:0 16px 28px rgba(0,0,0,.18)
+}
+.float-btn.wa{background:#0b8f59}
+.float-btn.module{background:linear-gradient(135deg,var(--orange),var(--red))}
+
 @media(max-width:980px){
-  .hero,.layout{grid-template-columns:1fr}
+  .hero,.layout,.gallery-main{grid-template-columns:1fr}
 }
 @media(max-width:620px){
-  .info-grid,.gallery,.products{grid-template-columns:1fr}
+  .info-grid,.products,.thumb-grid{grid-template-columns:1fr}
   .topbar-inner{padding:10px 0}
+  .float-cta{left:12px;right:12px}
+  .float-btn{min-width:0;width:100%}
 }
 </style>
 </head>
@@ -177,7 +201,8 @@ button{font:inherit}
     </a>
     <div class="actions">
       <a class="btn btn-soft" href="index.html">← Retour au marché</a>
-      <button class="btn btn-primary" type="button" id="contactBtnTop">💬 Contacter</button>
+      <a class="btn btn-soft" id="topWaBtn" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+      <a class="btn btn-primary" id="topModuleBtn" href="#" target="_blank" rel="noopener">🔥 Je veux mon module</a>
     </div>
   </div>
 </header>
@@ -186,21 +211,24 @@ button{font:inherit}
   <div class="wrap" id="app"></div>
 </main>
 
+<div class="float-cta" id="floatCtas" style="display:none">
+  <a class="float-btn wa" id="floatWaBtn" href="#" target="_blank" rel="noopener">💬 WhatsApp DIGIY</a>
+  <a class="float-btn module" id="floatModuleBtn" href="#" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+</div>
+
 <script>
 function readCatalog(){
   try{
-    const raw = localStorage.getItem('digiy_market_catalog_v1');
+    const raw = localStorage.getItem('digiy_market_catalog_v2');
     if(!raw) return null;
     return JSON.parse(raw);
   }catch(e){
     return null;
   }
 }
-
 function getParam(name){
   return new URLSearchParams(window.location.search).get(name);
 }
-
 function safe(str=''){
   return String(str)
     .replace(/&/g,'&amp;')
@@ -208,35 +236,19 @@ function safe(str=''){
     .replace(/>/g,'&gt;')
     .replace(/"/g,'&quot;');
 }
-
-function slugify(str){
-  return str
-    .toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-    .replace(/&/g,'-et-')
-    .replace(/[^a-z0-9]+/g,'-')
-    .replace(/^-+|-+$/g,'');
-}
-
 function parsePriceBase(price=''){
   const digits = price.match(/\d+/g);
   if(!digits || !digits.length) return null;
   return parseInt(digits[0],10);
 }
-
 function makePrice(base, n){
   if(!base) return "Prix à définir";
   const value = Math.round(base * n / 1000) * 1000;
   return `${value.toLocaleString('fr-FR').replace(/\s/g,' ')} F`;
 }
-
 function splitOffer(what=''){
-  return what.split(',')
-    .map(x => x.trim())
-    .filter(Boolean)
-    .slice(0,4);
+  return what.split(',').map(x => x.trim()).filter(Boolean).slice(0,4);
 }
-
 function makeSvgData(title, subtitle, icon, c1, c2){
   const svg = `
   <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
@@ -251,16 +263,16 @@ function makeSvgData(title, subtitle, icon, c1, c2){
     </defs>
     <rect width="1200" height="900" fill="url(#g)"/>
     <circle cx="1030" cy="120" r="160" fill="rgba(255,255,255,.12)"/>
-    <circle cx="170" cy="760" r="180" fill="rgba(255,255,255,.12)"/>
-    <text x="95" y="220" font-size="180" filter="url(#f)">${icon}</text>
-    <rect x="70" y="610" width="1060" height="170" rx="32" fill="rgba(255,255,255,.88)"/>
-    <text x="120" y="685" font-family="Arial, sans-serif" font-size="56" font-weight="700" fill="#1a1208">${title}</text>
+    <circle cx="190" cy="760" r="180" fill="rgba(255,255,255,.12)"/>
+    <circle cx="860" cy="660" r="110" fill="rgba(255,255,255,.12)"/>
+    <text x="100" y="230" font-size="190" filter="url(#f)">${icon}</text>
+    <rect x="70" y="605" width="1060" height="180" rx="32" fill="rgba(255,255,255,.9)"/>
+    <text x="120" y="680" font-family="Arial, sans-serif" font-size="60" font-weight="700" fill="#1a1208">${title}</text>
     <text x="120" y="740" font-family="Arial, sans-serif" font-size="30" fill="#6f624f">${subtitle}</text>
   </svg>`;
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
 }
-
-function photoPalette(bg){
+function palette(bg){
   const map = {
     "#c8deff":["#bdd8ff","#8cb7ff"],
     "#ffe0cb":["#ffd9c5","#ffb88a"],
@@ -273,58 +285,66 @@ function photoPalette(bg){
   };
   return map[bg] || ["#f4ead7","#d8bf96"];
 }
-
 function buildGallery(v){
-  const [c1,c2] = photoPalette(v.bg);
+  const [c1,c2] = palette(v.bg);
   const items = [
-    {title:"Devanture", sub:`${v.name} · accueil`, icon:v.icon},
-    {title:"Produits", sub:v.categoryLabel, icon:"🛍️"},
+    {title:"Vitrine", sub:`${v.name} · accueil`, icon:v.icon},
+    {title:"Produit phare", sub:v.categoryLabel, icon:"🛍️"},
     {title:"Ambiance", sub:v.loc, icon:"✨"},
-    {title:"Détail", sub:"vitrine démo DIGIY", icon:"📸"}
+    {title:"Détail", sub:"galerie démo DIGIY", icon:"📸"},
+    {title:"Style", sub:"présentation soignée", icon:"🌟"}
   ];
-
   return items.map((item, i) => ({
     src: makeSvgData(item.title, item.sub, item.icon, i % 2 ? c2 : c1, i % 2 ? c1 : c2),
     caption: `${item.title} — visuel démo`
   }));
 }
-
 function buildProducts(v){
   const base = parsePriceBase(v.price);
   const parts = splitOffer(v.what);
-
   if(!parts.length){
     return [
       {title:"Produit exemple 1", desc:"À personnaliser plus tard.", price:"Prix à définir"},
       {title:"Produit exemple 2", desc:"À personnaliser plus tard.", price:"Prix à définir"},
       {title:"Produit exemple 3", desc:"À personnaliser plus tard.", price:"Prix à définir"},
-      {title:"Produit exemple 4", desc:"À personnaliser plus tard.", price:"Prix à définir"},
+      {title:"Produit exemple 4", desc:"À personnaliser plus tard.", price:"Prix à définir"}
     ];
   }
-
   return parts.map((part, i) => ({
     title: part,
-    desc: `Exemple de présentation produit / service pour ${v.name}.`,
+    desc: `Exemple de mise en avant pour ${v.name}.`,
     price: makePrice(base, 0.35 + (i * 0.18))
   }));
 }
+function waLink(phone, text){
+  return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+}
 
-function renderVendor(v){
+function renderVendor(v, cfg){
   const app = document.getElementById('app');
   const gallery = buildGallery(v);
   const products = buildProducts(v);
 
   document.title = `${v.name} — DIGIY MARKET`;
 
+  const waGeneral = waLink(cfg.whatsapp, `Bonjour DIGIY 👋 Je veux une vitrine comme l'exemple "${v.name}" sur DIGIY MARKET.`);
+  const waModule = waLink(cfg.whatsapp, `Bonjour DIGIY 👋 Je veux mon module comme la fiche "${v.name}" avec galerie, WhatsApp et vitrine pro.`);
+
+  document.getElementById('topWaBtn').href = waGeneral;
+  document.getElementById('topModuleBtn').href = waModule;
+  document.getElementById('floatWaBtn').href = waGeneral;
+  document.getElementById('floatModuleBtn').href = waModule;
+  document.getElementById('floatCtas').style.display = 'flex';
+
   app.innerHTML = `
     <section class="hero">
-      <article class="cover-card">
+      <article class="cover-card card">
         <div class="cover-media">
           <img src="${gallery[0].src}" alt="${safe(v.name)}">
           <div class="cover-badges">
             <span class="badge example">EXEMPLE DIGIY</span>
             ${v.live ? '<span class="badge live">EN LIGNE</span>' : ''}
-            <span class="badge category">${safe(v.categoryIcon)} ${safe(v.categoryLabel)}</span>
+            <span class="badge cat">${safe(v.categoryIcon)} ${safe(v.categoryLabel)}</span>
           </div>
         </div>
         <div class="cover-foot">
@@ -333,11 +353,12 @@ function renderVendor(v){
         </div>
       </article>
 
-      <aside class="info-card">
+      <aside class="info-card card">
         <div class="kicker">${safe(v.categoryIcon)} Fiche vendeur personnalisée</div>
-        <p style="color:var(--muted);line-height:1.7">
-          Cette vitrine est un <strong>modèle de départ</strong>. Elle sert à guider les commerçants et à montrer
-          le niveau de présentation possible dans DIGIY MARKET.
+        <p class="info-lead">
+          Cette fiche montre le niveau possible pour une boutique DIGIY MARKET :
+          galerie, vitrine, contact WhatsApp, présentation propre, et bouton
+          <strong>Je veux mon module</strong>.
         </p>
 
         <div class="info-grid">
@@ -355,40 +376,55 @@ function renderVendor(v){
           </div>
           <div class="mini">
             <div class="mini-label">Statut</div>
-            <div class="mini-value">${v.live ? 'Disponible / en ligne' : 'Visible dans la vitrine'}</div>
+            <div class="mini-value">${v.live ? 'Visible / en ligne' : 'Vitrine exemple'}</div>
           </div>
         </div>
 
         <div class="cta-row">
-          <button class="btn btn-primary" type="button" id="contactBtnMain">💬 Contacter</button>
+          <a class="btn btn-primary" href="${waGeneral}" target="_blank" rel="noopener">💬 WhatsApp DIGIY</a>
+          <a class="btn btn-primary" style="background:linear-gradient(135deg,var(--orange),var(--red))" href="${waModule}" target="_blank" rel="noopener">🔥 Je veux mon module</a>
           <a class="btn btn-soft" href="index.html">← Retour au marché</a>
         </div>
 
         <div class="note">
-          Plus tard, cette zone peut recevoir :
-          WhatsApp, appel direct, lien Google Maps, galerie réelle, horaires, promos, DIGIY PAY et ouverture vers MARKET PRO.
+          Ici, tous les contacts partent vers <strong>ton WhatsApp DIGIY</strong>.
+          Comme ça, même les vitrines exemples travaillent pour toi dès le départ.
         </div>
       </aside>
     </section>
 
     <section class="layout">
       <div class="left-col">
-        <article class="section-card">
-          <h2>Galerie de présentation</h2>
-          <p>Voici une galerie démo pour montrer comment une vraie boutique pourra afficher ses photos.</p>
-          <div class="gallery" style="margin-top:14px">
-            ${gallery.map(g => `
-              <figure class="photo">
-                <img src="${g.src}" alt="${safe(g.caption)}">
-                <figcaption class="photo-caption">${safe(g.caption)}</figcaption>
-              </figure>
-            `).join('')}
+        <article class="section-card card">
+          <h2>Belle galerie de présentation</h2>
+          <p>
+            Cette galerie sert à montrer comment un commerçant peut exposer sa boutique,
+            ses produits et son ambiance visuelle.
+          </p>
+
+          <div class="gallery-main" style="margin-top:14px">
+            <figure class="hero-photo">
+              <img src="${gallery[0].src}" alt="${safe(gallery[0].caption)}">
+            </figure>
+
+            <div class="thumb-grid">
+              ${gallery.slice(1).map(g => `
+                <figure class="thumb">
+                  <img src="${g.src}" alt="${safe(g.caption)}">
+                  <small>${safe(g.caption)}</small>
+                </figure>
+              `).join('')}
+            </div>
           </div>
         </article>
 
-        <article class="section-card">
+        <article class="section-card card">
           <h2>Produits / services mis en avant</h2>
-          <p>Tu peux utiliser ce bloc pour montrer les points forts de la boutique ou les services les plus demandés.</p>
+          <p>
+            Tu peux montrer ici les meilleurs produits, les prix d’appel,
+            les services phares ou les spécialités du commerçant.
+          </p>
+
           <div class="products" style="margin-top:14px">
             ${products.map(p => `
               <div class="product">
@@ -400,19 +436,20 @@ function renderVendor(v){
           </div>
         </article>
 
-        <article class="section-card">
-          <h2>Présentation de la boutique</h2>
+        <article class="section-card card">
+          <h2>Pourquoi cette fiche frappe fort</h2>
           <p>
-            <strong>${safe(v.name)}</strong> est ici présenté comme une
-            <strong>vitrine exemple</strong> pour guider les commerçants du terrain.
-            L’idée est simple : montrer une boutique claire, humaine, visuelle, avec sa galerie, son style, sa zone
-            et ses produits mis en avant. Ensuite, tu remplaces cette fiche exemple par une vraie fiche commerçant.
+            Parce qu’elle ne montre pas juste un nom. Elle montre une
+            <strong>présence</strong>. On comprend le style, la catégorie,
+            la zone, la galerie, le contact, et la possibilité d’ouvrir sa propre vitrine.
+            C’est exactement ce qui fait sentir au visiteur que DIGIY n’est pas un simple tableau,
+            mais un vrai rail vivant.
           </p>
         </article>
       </div>
 
       <aside class="right-col">
-        <article class="section-card">
+        <article class="section-card card">
           <h2>Repères rapides</h2>
           <div class="side-list">
             <div class="side-item">
@@ -432,43 +469,45 @@ function renderVendor(v){
               <div class="value">${safe(v.categoryLabel)}</div>
             </div>
             <div class="side-item">
-              <div class="label">Badge</div>
+              <div class="label">Type</div>
               <div class="value">Vitrine exemple DIGIY</div>
             </div>
           </div>
         </article>
 
-        <article class="section-card">
-          <h2>Ce que tu peux brancher plus tard</h2>
+        <article class="module-box">
+          <h3>🔥 Je veux mon module</h3>
+          <p>
+            Ce bouton est là pour transformer la démo en demande réelle.
+            Le visiteur comprend directement qu’il peut avoir sa propre vitrine.
+          </p>
+          <div class="row">
+            <a class="btn btn-primary" href="${waModule}" target="_blank" rel="noopener">Je veux mon module</a>
+            <a class="btn btn-soft" href="${waGeneral}" target="_blank" rel="noopener">WhatsApp DIGIY</a>
+          </div>
+        </article>
+
+        <article class="section-card card">
+          <h2>Ce que tu peux brancher ensuite</h2>
           <div class="side-list">
-            <div class="side-item"><div class="value">WhatsApp direct</div></div>
-            <div class="side-item"><div class="value">Appel téléphone</div></div>
-            <div class="side-item"><div class="value">Lien Google Maps</div></div>
-            <div class="side-item"><div class="value">Galerie réelle du commerçant</div></div>
-            <div class="side-item"><div class="value">Paiement direct / DIGIY PAY</div></div>
-            <div class="side-item"><div class="value">Passage vers MARKET PRO</div></div>
+            <div class="side-item"><div class="value">📸 Galerie réelle du commerçant</div></div>
+            <div class="side-item"><div class="value">📍 Lien Google Maps</div></div>
+            <div class="side-item"><div class="value">💬 WhatsApp direct</div></div>
+            <div class="side-item"><div class="value">📞 Appel téléphone</div></div>
+            <div class="side-item"><div class="value">💳 DIGIY PAY</div></div>
+            <div class="side-item"><div class="value">🏪 Passage vers MARKET PRO</div></div>
           </div>
         </article>
       </aside>
     </section>
   `;
-
-  const contactMsg = () => {
-    alert(`💬 ${v.name}\n\nIci tu brancheras plus tard :\n- WhatsApp\n- appel direct\n- formulaire simple\n- DIGIY PAY`);
-  };
-
-  document.getElementById('contactBtnTop').addEventListener('click', contactMsg);
-  document.getElementById('contactBtnMain').addEventListener('click', contactMsg);
 }
 
 function renderMissing(){
-  const app = document.getElementById('app');
-  app.innerHTML = `
-    <div class="empty-box section-card">
+  document.getElementById('app').innerHTML = `
+    <div class="empty-box card">
       <h2>Fiche introuvable</h2>
-      <p>
-        Ouvre d’abord la fiche depuis <strong>index.html</strong>, ou recharge le marché pour réinjecter le catalogue démo.
-      </p>
+      <p>Ouvre d’abord une fiche depuis <strong>index.html</strong> pour charger la vitrine démo.</p>
       <div style="margin-top:16px">
         <a class="btn btn-primary" href="index.html">Retour au marché</a>
       </div>
@@ -486,7 +525,7 @@ if(!catalog || !catalog.vendors || !slug){
   if(!vendor){
     renderMissing();
   }else{
-    renderVendor(vendor);
+    renderVendor(vendor, catalog.config || {whatsapp:"221771342889"});
   }
 }
 </script>
