@@ -18,10 +18,18 @@
   --orange:#e86820;
   --red:#c83830;
   --green:#28885a;
+  --blue:#4d7cff;
   --shadow:0 18px 52px rgba(26,18,8,.12);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink)}
+body{
+  font-family:'Nunito',sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(232,104,32,.06), transparent 28%),
+    radial-gradient(circle at top right, rgba(40,136,90,.05), transparent 22%),
+    var(--bg);
+  color:var(--ink)
+}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 button{font:inherit}
@@ -32,7 +40,7 @@ button{font:inherit}
   backdrop-filter:blur(16px);border-bottom:2px solid var(--line)
 }
 .topbar-inner{
-  min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap
+  min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap
 }
 .brand{
   display:flex;align-items:center;gap:10px;
@@ -56,7 +64,7 @@ button{font:inherit}
 
 .page{padding:24px 0 44px}
 .hero{
-  display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:stretch
+  display:grid;grid-template-columns:1.06fr .94fr;gap:18px;align-items:stretch
 }
 .card{
   background:var(--card);border:1.5px solid var(--line);border-radius:28px;box-shadow:var(--shadow)
@@ -114,7 +122,7 @@ button{font:inherit}
 .section-card p{color:var(--muted);line-height:1.72}
 
 .gallery-main{
-  display:grid;grid-template-columns:1.1fr .9fr;gap:12px
+  display:grid;grid-template-columns:1.12fr .88fr;gap:12px
 }
 .hero-photo{
   border-radius:24px;overflow:hidden;border:1px solid var(--line);background:#f4ece0
@@ -164,6 +172,15 @@ button{font:inherit}
 .module-box p{color:#7c5a12;line-height:1.65}
 .module-box .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 
+.map-box{
+  display:grid;gap:12px
+}
+.fake-map{
+  border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#f4ece0
+}
+.fake-map img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.map-actions{display:flex;gap:10px;flex-wrap:wrap}
+
 .empty-box{text-align:center;padding:32px 20px}
 .empty-box h2{font-family:'Playfair Display',serif;font-size:1.7rem;margin-bottom:8px}
 .empty-box p{color:var(--muted);line-height:1.7}
@@ -174,7 +191,7 @@ button{font:inherit}
 }
 .float-btn{
   display:flex;align-items:center;justify-content:center;gap:8px;
-  min-width:210px;padding:13px 16px;border-radius:999px;color:#fff;font-weight:900;
+  min-width:220px;padding:13px 16px;border-radius:999px;color:#fff;font-weight:900;
   box-shadow:0 16px 28px rgba(0,0,0,.18)
 }
 .float-btn.wa{background:#0b8f59}
@@ -202,7 +219,7 @@ button{font:inherit}
     <div class="actions">
       <a class="btn btn-soft" href="index.html">← Retour au marché</a>
       <a class="btn btn-soft" id="topWaBtn" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
-      <a class="btn btn-primary" id="topModuleBtn" href="#" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+      <a class="btn btn-primary" id="topModuleBtn" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
     </div>
   </div>
 </header>
@@ -213,13 +230,13 @@ button{font:inherit}
 
 <div class="float-cta" id="floatCtas" style="display:none">
   <a class="float-btn wa" id="floatWaBtn" href="#" target="_blank" rel="noopener">💬 WhatsApp DIGIY</a>
-  <a class="float-btn module" id="floatModuleBtn" href="#" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+  <a class="float-btn module" id="floatModuleBtn" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
 </div>
 
 <script>
 function readCatalog(){
   try{
-    const raw = localStorage.getItem('digiy_market_catalog_v2');
+    const raw = localStorage.getItem('digiy_market_catalog_v3');
     if(!raw) return null;
     return JSON.parse(raw);
   }catch(e){
@@ -272,6 +289,23 @@ function makeSvgData(title, subtitle, icon, c1, c2){
   </svg>`;
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
 }
+function makeMapSvg(title, subtitle){
+  const svg = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750">
+    <rect width="1200" height="750" fill="#e9f1e7"/>
+    <path d="M0 160 C240 120 340 240 560 200 C740 170 870 70 1200 120" stroke="#c6d8c2" stroke-width="90" fill="none"/>
+    <path d="M-20 500 C180 430 360 560 620 510 C840 470 1000 310 1220 360" stroke="#d7cbb5" stroke-width="80" fill="none"/>
+    <path d="M200 0 L260 750" stroke="#fff" stroke-width="18" opacity=".7"/>
+    <path d="M760 0 L700 750" stroke="#fff" stroke-width="18" opacity=".7"/>
+    <circle cx="610" cy="360" r="34" fill="#e86820"/>
+    <path d="M610 410 C650 470 710 520 610 630 C510 520 570 470 610 410 Z" fill="#c83830"/>
+    <circle cx="610" cy="360" r="15" fill="#fff"/>
+    <rect x="70" y="540" width="1060" height="140" rx="28" fill="rgba(255,255,255,.92)"/>
+    <text x="110" y="605" font-family="Arial, sans-serif" font-size="46" font-weight="700" fill="#1a1208">${title}</text>
+    <text x="110" y="646" font-family="Arial, sans-serif" font-size="26" fill="#6f624f">${subtitle}</text>
+  </svg>`;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
 function palette(bg){
   const map = {
     "#c8deff":["#bdd8ff","#8cb7ff"],
@@ -319,6 +353,9 @@ function buildProducts(v){
 function waLink(phone, text){
   return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
 }
+function mapsSearchUrl(query){
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+}
 
 function renderVendor(v, cfg){
   const app = document.getElementById('app');
@@ -329,11 +366,13 @@ function renderVendor(v, cfg){
 
   const waGeneral = waLink(cfg.whatsapp, `Bonjour DIGIY 👋 Je veux une vitrine comme l'exemple "${v.name}" sur DIGIY MARKET.`);
   const waModule = waLink(cfg.whatsapp, `Bonjour DIGIY 👋 Je veux mon module comme la fiche "${v.name}" avec galerie, WhatsApp et vitrine pro.`);
+  const mapsUrl = mapsSearchUrl(`${v.name} ${v.loc}`);
+  const mapImg = makeMapSvg(v.name, v.loc);
 
   document.getElementById('topWaBtn').href = waGeneral;
-  document.getElementById('topModuleBtn').href = waModule;
+  document.getElementById('topModuleBtn').href = cfg.proUrl || 'https://commencer-a-payer.digiylyfe.com/';
   document.getElementById('floatWaBtn').href = waGeneral;
-  document.getElementById('floatModuleBtn').href = waModule;
+  document.getElementById('floatModuleBtn').href = cfg.proUrl || 'https://commencer-a-payer.digiylyfe.com/';
   document.getElementById('floatCtas').style.display = 'flex';
 
   app.innerHTML = `
@@ -357,8 +396,7 @@ function renderVendor(v, cfg){
         <div class="kicker">${safe(v.categoryIcon)} Fiche vendeur personnalisée</div>
         <p class="info-lead">
           Cette fiche montre le niveau possible pour une boutique DIGIY MARKET :
-          galerie, vitrine, contact WhatsApp, présentation propre, et bouton
-          <strong>Je veux mon module</strong>.
+          galerie, vitrine, contact WhatsApp, présence Maps et ouverture vers le module PRO.
         </p>
 
         <div class="info-grid">
@@ -382,13 +420,14 @@ function renderVendor(v, cfg){
 
         <div class="cta-row">
           <a class="btn btn-primary" href="${waGeneral}" target="_blank" rel="noopener">💬 WhatsApp DIGIY</a>
-          <a class="btn btn-primary" style="background:linear-gradient(135deg,var(--orange),var(--red))" href="${waModule}" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+          <a class="btn btn-primary" style="background:linear-gradient(135deg,var(--orange),var(--red))" href="${cfg.proUrl || 'https://commencer-a-payer.digiylyfe.com/'}" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+          <a class="btn btn-soft" href="${mapsUrl}" target="_blank" rel="noopener">📍 Voir sur Maps</a>
           <a class="btn btn-soft" href="index.html">← Retour au marché</a>
         </div>
 
         <div class="note">
-          Ici, tous les contacts partent vers <strong>ton WhatsApp DIGIY</strong>.
-          Comme ça, même les vitrines exemples travaillent pour toi dès le départ.
+          Ici, les boutons de contact renvoient vers <strong>ton WhatsApp DIGIY</strong>.
+          Le bouton module envoie vers <strong>ton entrée PRO officielle</strong>.
         </div>
       </aside>
     </section>
@@ -437,13 +476,28 @@ function renderVendor(v, cfg){
         </article>
 
         <article class="section-card card">
+          <h2>Présence terrain & Maps</h2>
+          <p>
+            Ce bloc sert à montrer que la fiche peut aussi guider vers une présence locale,
+            même si au départ le commerçant nourrit surtout sa galerie sur Google ou dans DIGIY.
+          </p>
+
+          <div class="map-box" style="margin-top:14px">
+            <figure class="fake-map">
+              <img src="${mapImg}" alt="Carte de ${safe(v.name)}">
+            </figure>
+            <div class="map-actions">
+              <a class="btn btn-soft" href="${mapsUrl}" target="_blank" rel="noopener">📍 Ouvrir sur Google Maps</a>
+              <a class="btn btn-primary" href="${waGeneral}" target="_blank" rel="noopener">💬 Demander ma présence terrain</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="section-card card">
           <h2>Pourquoi cette fiche frappe fort</h2>
           <p>
-            Parce qu’elle ne montre pas juste un nom. Elle montre une
-            <strong>présence</strong>. On comprend le style, la catégorie,
-            la zone, la galerie, le contact, et la possibilité d’ouvrir sa propre vitrine.
-            C’est exactement ce qui fait sentir au visiteur que DIGIY n’est pas un simple tableau,
-            mais un vrai rail vivant.
+            Parce qu’elle montre une présence complète : visuel, catégorie, zone, galerie, contact,
+            Maps, et ouverture PRO. Le commerçant voit tout de suite ce qu’il peut devenir dans le rail DIGIY.
           </p>
         </article>
       </div>
@@ -478,11 +532,11 @@ function renderVendor(v, cfg){
         <article class="module-box">
           <h3>🔥 Je veux mon module</h3>
           <p>
-            Ce bouton est là pour transformer la démo en demande réelle.
-            Le visiteur comprend directement qu’il peut avoir sa propre vitrine.
+            Ce bouton transforme la démo en demande réelle.
+            La vitrine exemple devient une porte d’entrée commerciale.
           </p>
           <div class="row">
-            <a class="btn btn-primary" href="${waModule}" target="_blank" rel="noopener">Je veux mon module</a>
+            <a class="btn btn-primary" href="${cfg.proUrl || 'https://commencer-a-payer.digiylyfe.com/'}" target="_blank" rel="noopener">Je veux mon module</a>
             <a class="btn btn-soft" href="${waGeneral}" target="_blank" rel="noopener">WhatsApp DIGIY</a>
           </div>
         </article>
@@ -491,8 +545,8 @@ function renderVendor(v, cfg){
           <h2>Ce que tu peux brancher ensuite</h2>
           <div class="side-list">
             <div class="side-item"><div class="value">📸 Galerie réelle du commerçant</div></div>
-            <div class="side-item"><div class="value">📍 Lien Google Maps</div></div>
-            <div class="side-item"><div class="value">💬 WhatsApp direct</div></div>
+            <div class="side-item"><div class="value">📍 Lien Google Maps réel</div></div>
+            <div class="side-item"><div class="value">💬 WhatsApp direct commerçant</div></div>
             <div class="side-item"><div class="value">📞 Appel téléphone</div></div>
             <div class="side-item"><div class="value">💳 DIGIY PAY</div></div>
             <div class="side-item"><div class="value">🏪 Passage vers MARKET PRO</div></div>
@@ -525,7 +579,10 @@ if(!catalog || !catalog.vendors || !slug){
   if(!vendor){
     renderMissing();
   }else{
-    renderVendor(vendor, catalog.config || {whatsapp:"221771342889"});
+    renderVendor(vendor, catalog.config || {
+      whatsapp:"221771342889",
+      proUrl:"https://commencer-a-payer.digiylyfe.com/"
+    });
   }
 }
 </script>
