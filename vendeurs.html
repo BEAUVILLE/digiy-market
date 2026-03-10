@@ -181,6 +181,24 @@ button{font:inherit}
 .fake-map img{width:100%;aspect-ratio:16/10;object-fit:cover}
 .map-actions{display:flex;gap:10px;flex-wrap:wrap}
 
+.trust-box{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:14px
+}
+.trust-list{
+  display:grid;gap:10px
+}
+.trust-item{
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:12px;
+  background:#fffdf9
+}
+.trust-item strong{display:block;margin-bottom:4px}
+.trust-item span{color:var(--muted);font-size:.86rem;line-height:1.55}
+
 .empty-box{text-align:center;padding:32px 20px}
 .empty-box h2{font-family:'Playfair Display',serif;font-size:1.7rem;margin-bottom:8px}
 .empty-box p{color:var(--muted);line-height:1.7}
@@ -236,7 +254,7 @@ button{font:inherit}
 <script>
 function readCatalog(){
   try{
-    const raw = localStorage.getItem('digiy_market_catalog_v3');
+    const raw = localStorage.getItem('digiy_market_catalog_v4');
     if(!raw) return null;
     return JSON.parse(raw);
   }catch(e){
@@ -365,7 +383,6 @@ function renderVendor(v, cfg){
   document.title = `${v.name} — DIGIY MARKET`;
 
   const waGeneral = waLink(cfg.whatsapp, `Bonjour DIGIY 👋 Je veux une vitrine comme l'exemple "${v.name}" sur DIGIY MARKET.`);
-  const waModule = waLink(cfg.whatsapp, `Bonjour DIGIY 👋 Je veux mon module comme la fiche "${v.name}" avec galerie, WhatsApp et vitrine pro.`);
   const mapsUrl = mapsSearchUrl(`${v.name} ${v.loc}`);
   const mapImg = makeMapSvg(v.name, v.loc);
 
@@ -426,8 +443,8 @@ function renderVendor(v, cfg){
         </div>
 
         <div class="note">
-          Ici, les boutons de contact renvoient vers <strong>ton WhatsApp DIGIY</strong>.
-          Le bouton module envoie vers <strong>ton entrée PRO officielle</strong>.
+          Tous les boutons contact renvoient vers <strong>ton WhatsApp DIGIY</strong>.  
+          Le bouton module renvoie vers <strong>ton entrée PRO officielle</strong>.
         </div>
       </aside>
     </section>
@@ -533,11 +550,29 @@ function renderVendor(v, cfg){
           <h3>🔥 Je veux mon module</h3>
           <p>
             Ce bouton transforme la démo en demande réelle.
-            La vitrine exemple devient une porte d’entrée commerciale.
+            La vitrine exemple devient une vraie porte d’entrée commerciale.
           </p>
           <div class="row">
             <a class="btn btn-primary" href="${cfg.proUrl || 'https://commencer-a-payer.digiylyfe.com/'}" target="_blank" rel="noopener">Je veux mon module</a>
             <a class="btn btn-soft" href="${waGeneral}" target="_blank" rel="noopener">WhatsApp DIGIY</a>
+          </div>
+        </article>
+
+        <article class="trust-box">
+          <h2 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:10px;">Ils nous font confiance</h2>
+          <div class="trust-list">
+            <div class="trust-item">
+              <strong>Vendeurs terrain</strong>
+              <span>Présence simple, forte, visible et humaine.</span>
+            </div>
+            <div class="trust-item">
+              <strong>Beauté & service</strong>
+              <span>Coiffure, onglerie, soin, tout peut vivre ici.</span>
+            </div>
+            <div class="trust-item">
+              <strong>Commerçants du quotidien</strong>
+              <span>De la maison au textile, chacun peut respirer.</span>
+            </div>
           </div>
         </article>
 
