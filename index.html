@@ -10,6 +10,7 @@
 <style>
 :root{
   --bg:#fdf6ec;
+  --bg-2:#fffaf2;
   --ink:#1a1208;
   --muted:#7a6a54;
   --line:#e8d8be;
@@ -29,79 +30,129 @@ button,input{font:inherit}
 /* TOPBAR */
 .topbar{
   position:sticky;top:0;z-index:100;
-  background:rgba(253,246,236,.93);backdrop-filter:blur(16px);
+  background:rgba(253,246,236,.93);
+  backdrop-filter:blur(16px);
   border-bottom:2px solid var(--line);
 }
-.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px}
-.brand{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:900;font-size:1.22rem}
+.topbar-inner{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:12px;
+  align-items:center;
+  min-height:72px;
+}
+.brand{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Playfair Display',serif;
+  font-weight:900;font-size:1.22rem
+}
 .brand-icon{
-  width:40px;height:40px;border-radius:11px;
+  width:42px;height:42px;border-radius:12px;
   background:linear-gradient(135deg,#e86820,#c83830);
-  display:grid;place-items:center;font-size:1.05rem;
+  display:grid;place-items:center;font-size:1.1rem;
   box-shadow:0 5px 16px rgba(232,104,32,.3)
 }
 .brand small{
-  font-family:'Nunito',sans-serif;font-weight:600;
-  font-size:.74rem;color:var(--muted);display:block;margin-top:1px
+  display:block;
+  font-family:'Nunito',sans-serif;
+  font-weight:700;font-size:.72rem;color:var(--muted);margin-top:1px
 }
 .top-search{
-  flex:1;max-width:420px;display:flex;align-items:center;
-  background:#fff;border:2px solid var(--line);border-radius:999px;
-  overflow:hidden;padding:0 5px 0 15px
+  display:flex;align-items:center;background:#fff;border:2px solid var(--line);
+  border-radius:999px;overflow:hidden;padding:0 6px 0 15px;min-width:0
 }
 .top-search input{
   flex:1;border:none;outline:none;background:transparent;
-  font-size:.9rem;color:var(--ink);padding:10px 0
+  font-size:.92rem;color:var(--ink);padding:11px 0;min-width:0
 }
 .top-search input::placeholder{color:var(--muted)}
 .top-search button{
-  width:36px;height:36px;border-radius:50%;background:var(--orange);
-  color:#fff;border:none;cursor:pointer;font-size:.95rem;
-  display:grid;place-items:center;flex-shrink:0;transition:background .2s
+  width:38px;height:38px;border-radius:50%;background:var(--orange);color:#fff;border:none;
+  cursor:pointer;font-size:.95rem;display:grid;place-items:center;transition:background .18s
 }
 .top-search button:hover{background:var(--red)}
+.top-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.btn-top{
+  border:none;cursor:pointer;border-radius:999px;padding:11px 14px;font-weight:900;
+  transition:.18s ease;font-size:.84rem
+}
+.btn-top:hover{transform:translateY(-1px)}
+.btn-top.primary{background:var(--orange);color:#fff;box-shadow:0 10px 20px rgba(232,104,32,.22)}
+.btn-top.primary:hover{background:var(--red)}
+.btn-top.soft{background:#fff;border:1.5px solid var(--line)}
+.btn-top.soft:hover{background:#fff3df}
 
 /* HERO */
 .hero-band{
-  background:linear-gradient(135deg,#1a1208 0%,#2e1e0a 55%,#1a2808 100%);
-  color:#fff;padding:34px 0 30px;position:relative;overflow:hidden
+  background:linear-gradient(135deg,#1a1208 0%,#2e1e0a 50%,#1f2d12 100%);
+  color:#fff;padding:38px 0 30px;position:relative;overflow:hidden
 }
 .hero-band::before{
   content:"";position:absolute;inset:0;
   background:
-    radial-gradient(circle at 12% 55%,rgba(232,104,32,.22),transparent 40%),
-    radial-gradient(circle at 88% 30%,rgba(40,136,90,.18),transparent 36%)
+    radial-gradient(circle at 12% 55%,rgba(232,104,32,.24),transparent 40%),
+    radial-gradient(circle at 88% 30%,rgba(40,136,90,.18),transparent 36%),
+    radial-gradient(circle at 65% 80%,rgba(255,255,255,.06),transparent 28%);
 }
 .hero-inner{position:relative;z-index:1}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:20px;
+  align-items:center;
+}
 .hero-kicker{
   display:inline-flex;align-items:center;gap:7px;
-  padding:6px 13px;border-radius:999px;
-  background:rgba(255,255,255,.1);
+  padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.1);
   border:1px solid rgba(255,255,255,.16);
-  font-size:.78rem;font-weight:700;letter-spacing:.07em;
-  color:rgba(255,255,255,.8);margin-bottom:12px;text-transform:uppercase
+  font-size:.78rem;font-weight:800;letter-spacing:.07em;color:rgba(255,255,255,.82);
+  margin-bottom:12px;text-transform:uppercase
 }
 .hero-band h1{
   font-family:'Playfair Display',serif;font-weight:900;
-  font-size:clamp(1.9rem,4.2vw,3.8rem);line-height:.96;
-  letter-spacing:-.02em;margin-bottom:9px
+  font-size:clamp(2rem,4.3vw,4rem);line-height:.94;letter-spacing:-.02em;margin-bottom:10px
 }
 .hero-band h1 em{
-  font-style:normal;
-  background:linear-gradient(90deg,#f8a040,#f06040);
+  font-style:normal;background:linear-gradient(90deg,#f8a040,#f06040);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text
 }
-.hero-band p{color:rgba(255,255,255,.66);font-size:.97rem;line-height:1.65;max-width:54ch}
+.hero-band p{
+  color:rgba(255,255,255,.7);font-size:1rem;line-height:1.68;max-width:55ch
+}
 .hero-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
 .chip{
-  padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.13);font-size:.78rem;font-weight:700;color:rgba(255,255,255,.8)
+  padding:8px 13px;border-radius:999px;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.13);font-size:.78rem;font-weight:800;color:rgba(255,255,255,.84)
 }
+.hero-card{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:26px;
+  padding:18px;
+  backdrop-filter:blur(10px);
+}
+.hero-card h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.25rem;
+  margin-bottom:8px;
+}
+.hero-card p{font-size:.92rem;color:rgba(255,255,255,.74);line-height:1.65}
+.hero-card .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.hero-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 15px;border-radius:999px;font-weight:900;font-size:.86rem
+}
+.hero-btn.primary{background:#fff;color:var(--ink)}
+.hero-btn.soft{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);color:#fff}
 
 /* SECTION */
 .cats-section{padding:30px 0 0}
-.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
-.section-head h2{font-family:'Playfair Display',serif;font-weight:900;font-size:1.55rem;letter-spacing:-.02em}
+.section-head{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap
+}
+.section-head h2{
+  font-family:'Playfair Display',serif;font-weight:900;font-size:1.55rem;letter-spacing:-.02em
+}
 .section-head p{color:var(--muted);font-size:.88rem}
 .rail-controls{display:flex;gap:8px}
 .arr{
@@ -110,7 +161,6 @@ button,input{font:inherit}
 }
 .arr:hover{background:var(--ink);color:#fff;border-color:var(--ink);transform:scale(1.06)}
 .arr:active{transform:scale(.94)}
-
 .rail-wrap{overflow:hidden;position:relative}
 .rail-wrap::before,.rail-wrap::after{
   content:"";position:absolute;top:0;bottom:0;width:32px;z-index:2;pointer-events:none
@@ -125,15 +175,19 @@ button,input{font:inherit}
 .cat-rail::-webkit-scrollbar{display:none}
 .cat-rail.grabbing{cursor:grabbing;scroll-behavior:auto}
 
-/* CATEGORY TILE */
 .cat-tile{
-  flex-shrink:0;width:118px;border-radius:18px;overflow:hidden;
-  border:2.5px solid transparent;cursor:pointer;transition:transform .22s,box-shadow .22s,border-color .18s;
-  background:#fff;box-shadow:0 4px 14px rgba(26,18,8,.09);user-select:none
+  flex-shrink:0;width:122px;border-radius:18px;overflow:hidden;border:2.5px solid transparent;
+  cursor:pointer;transition:transform .22s,box-shadow .22s,border-color .18s;background:#fff;
+  box-shadow:0 4px 14px rgba(26,18,8,.09);user-select:none
 }
 .cat-tile:hover{transform:translateY(-4px) scale(1.04);box-shadow:var(--shadow)}
-.cat-tile.active{border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,104,32,.2),var(--shadow);transform:translateY(-3px) scale(1.03)}
-.cat-img{height:80px;display:flex;align-items:center;justify-content:center;font-size:2.1rem;position:relative;overflow:hidden}
+.cat-tile.active{
+  border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,104,32,.2),var(--shadow);
+  transform:translateY(-3px) scale(1.03)
+}
+.cat-img{
+  height:82px;display:flex;align-items:center;justify-content:center;font-size:2.1rem;position:relative;overflow:hidden
+}
 .cat-bg-txt{
   position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
   opacity:.1;font-size:.85rem;letter-spacing:1px;line-height:1.5;padding:4px;word-break:break-all;pointer-events:none
@@ -141,25 +195,25 @@ button,input{font:inherit}
 .cat-icon{position:relative;z-index:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.22))}
 .cat-body{padding:8px 10px 10px}
 .cat-name{font-family:'Playfair Display',serif;font-weight:700;font-size:.84rem;margin-bottom:3px;line-height:1.2}
-.cat-count{font-size:.68rem;font-weight:700;color:var(--muted);letter-spacing:.02em}
+.cat-count{font-size:.68rem;font-weight:800;color:var(--muted);letter-spacing:.02em}
 .cat-count span{
   display:inline-flex;align-items:center;justify-content:center;background:var(--orange);color:#fff;
-  min-width:16px;height:16px;border-radius:50%;font-size:.58rem;margin-left:3px;padding:0 4px;vertical-align:middle
+  min-width:18px;height:18px;border-radius:50%;font-size:.6rem;margin-left:4px;padding:0 4px
 }
 
 /* VENDOR PANEL */
 .vendor-panel{
   max-height:0;overflow:hidden;
-  transition:max-height .5s cubic-bezier(.4,0,.2,1),opacity .4s,margin .4s;
+  transition:max-height .55s cubic-bezier(.4,0,.2,1),opacity .4s,margin .4s;
   opacity:0;margin-top:0
 }
-.vendor-panel.open{max-height:1500px;opacity:1;margin-top:20px}
+.vendor-panel.open{max-height:1800px;opacity:1;margin-top:20px}
 .vendor-panel-inner{
   background:#fff;border:2px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow)
 }
 .panel-header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:16px 20px 14px;border-bottom:1.5px solid var(--line);flex-wrap:wrap;gap:10px
+  display:flex;align-items:center;justify-content:space-between;padding:16px 20px 14px;
+  border-bottom:1.5px solid var(--line);flex-wrap:wrap;gap:10px
 }
 .panel-title{display:flex;align-items:center;gap:10px}
 .panel-title .icon{font-size:1.5rem}
@@ -167,75 +221,123 @@ button,input{font:inherit}
 .panel-title p{color:var(--muted);font-size:.82rem;margin-top:2px}
 .panel-close{
   width:34px;height:34px;border-radius:9px;background:#f4ece0;border:none;cursor:pointer;
-  font-size:.95rem;display:grid;place-items:center;transition:background .2s;flex-shrink:0
+  font-size:.95rem;display:grid;place-items:center;transition:background .2s
 }
 .panel-close:hover{background:var(--red);color:#fff}
-.vendor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:14px;padding:18px}
+.vendor-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;padding:18px
+}
 
 /* VENDOR CARD */
 .vendor{
-  border-radius:16px;border:1.5px solid var(--line);overflow:hidden;background:#fdfaf5;
+  border-radius:18px;border:1.5px solid var(--line);overflow:hidden;background:#fdfaf5;
   transition:transform .22s,box-shadow .22s;cursor:pointer
 }
 .vendor:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(26,18,8,.12)}
-.vendor-top{height:92px;display:flex;align-items:center;justify-content:center;font-size:2.3rem;position:relative}
-.vendor-live{
-  position:absolute;top:9px;right:9px;display:flex;align-items:center;gap:4px;
-  background:rgba(40,136,90,.9);color:#fff;padding:3px 8px;border-radius:999px;
-  font-size:.65rem;font-weight:800;letter-spacing:.04em
-}
-.vendor-live::before{
-  content:"";width:5px;height:5px;border-radius:50%;background:#7effc0;animation:pulse 1.4s ease-in-out infinite
+.vendor-top{
+  height:100px;display:flex;align-items:center;justify-content:center;font-size:2.3rem;position:relative
 }
 .vendor-example{
-  position:absolute;left:9px;top:9px;
-  background:rgba(255,255,255,.94);color:var(--orange);
-  border:1px solid rgba(232,104,32,.22);
-  padding:3px 8px;border-radius:999px;font-size:.62rem;font-weight:900;letter-spacing:.05em
+  position:absolute;left:10px;top:10px;background:rgba(255,255,255,.95);color:var(--orange);
+  border:1px solid rgba(232,104,32,.22);padding:4px 8px;border-radius:999px;font-size:.62rem;font-weight:900
+}
+.vendor-live{
+  position:absolute;right:10px;top:10px;display:flex;align-items:center;gap:4px;
+  background:rgba(40,136,90,.92);color:#fff;padding:4px 8px;border-radius:999px;font-size:.62rem;font-weight:900
+}
+.vendor-live::before{
+  content:"";width:6px;height:6px;border-radius:50%;background:#8ff7c5;animation:pulse 1.4s ease-in-out infinite
 }
 @keyframes pulse{
   0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:.5;transform:scale(.8)}
+  50%{opacity:.45;transform:scale(.8)}
 }
-.vendor-body{padding:11px 13px 13px}
-.vendor-name{font-family:'Playfair Display',serif;font-weight:700;font-size:.97rem;margin-bottom:3px;line-height:1.1}
-.vendor-what{font-size:.78rem;color:var(--muted);line-height:1.44;margin-bottom:9px;min-height:44px}
-.vendor-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:5px}
-.vendor-loc{display:flex;align-items:center;gap:3px;font-size:.72rem;font-weight:700;color:var(--muted)}
-.vendor-price{font-size:.74rem;font-weight:800;padding:3px 9px;border-radius:999px;background:#fef0d8;color:var(--gold);border:1px solid #f8d8a0}
+.vendor-body{padding:12px 13px 13px}
+.vendor-name{
+  font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;line-height:1.1;margin-bottom:4px
+}
+.vendor-what{
+  font-size:.78rem;color:var(--muted);line-height:1.5;margin-bottom:10px;min-height:46px
+}
+.vendor-meta{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px
+}
+.vendor-loc{font-size:.72rem;font-weight:800;color:var(--muted)}
+.vendor-price{
+  font-size:.74rem;font-weight:900;padding:4px 9px;border-radius:999px;background:#fef0d8;color:var(--gold);
+  border:1px solid #f8d8a0
+}
 .vendor-cta{display:flex;gap:7px;margin-top:10px}
 .vendor-btn{
-  flex:1;padding:8px 9px;border-radius:10px;font-size:.76rem;font-weight:800;border:none;
-  cursor:pointer;transition:all .18s;font-family:'Nunito',sans-serif
+  flex:1;padding:9px 10px;border-radius:11px;font-size:.75rem;font-weight:900;border:none;
+  cursor:pointer;transition:all .18s
 }
 .vendor-btn.primary{background:var(--orange);color:#fff;box-shadow:0 4px 12px rgba(232,104,32,.26)}
 .vendor-btn.primary:hover{background:var(--red)}
 .vendor-btn.ghost{background:#f4ece0;color:var(--ink)}
-.vendor-btn.ghost:hover{background:var(--line)}
+.vendor-btn.ghost:hover{background:#eadfce}
 
 .empty-state{text-align:center;padding:38px 20px;color:var(--muted);grid-column:1/-1}
 .empty-state .big{font-size:2.8rem;margin-bottom:10px}
 .empty-state p{font-size:.93rem;line-height:1.6}
 
+/* STRIP CTA */
+.cta-band{
+  margin-top:24px;
+  background:linear-gradient(135deg,#fffaf3,#fff4e4);
+  border:2px solid var(--line);
+  border-radius:26px;
+  padding:18px;
+  box-shadow:var(--shadow);
+}
+.cta-band-grid{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:14px;align-items:center
+}
+.cta-band h3{
+  font-family:'Playfair Display',serif;font-size:1.35rem;margin-bottom:8px
+}
+.cta-band p{color:var(--muted);line-height:1.7}
+.cta-band-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.cta-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 14px;border-radius:999px;background:#fff;border:1.5px solid var(--line);
+  font-weight:900;font-size:.84rem
+}
+.cta-main{
+  display:flex;flex-direction:column;gap:10px
+}
+.big-cta{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:16px 18px;border-radius:18px;background:linear-gradient(135deg,var(--orange),var(--red));
+  color:#fff;font-weight:900;font-size:.98rem;box-shadow:0 14px 28px rgba(232,104,32,.25)
+}
+.big-cta.soft{
+  background:#fff;color:var(--ink);border:1.5px solid var(--line);box-shadow:none
+}
+
 /* FOOTER */
-footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:44px}
+footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
 .footer-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
 .footer-brand{font-family:'Playfair Display',serif;font-weight:900;font-size:1.06rem}
 .footer-sub{color:var(--muted);font-size:.8rem;margin-top:3px}
 .footer-links{display:flex;flex-wrap:wrap;gap:7px}
 .footer-links a{
   padding:8px 13px;border-radius:999px;background:#fff;border:1.5px solid var(--line);
-  font-size:.8rem;font-weight:700;transition:border-color .2s,background .2s
+  font-size:.8rem;font-weight:800;transition:border-color .2s,background .2s
 }
 .footer-links a:hover{background:#fef0d8;border-color:var(--gold)}
 
+/* MOBILE */
+@media(max-width:980px){
+  .topbar-inner{grid-template-columns:1fr}
+  .hero-grid,.cta-band-grid{grid-template-columns:1fr}
+}
 @media(max-width:700px){
-  .topbar-inner{flex-direction:column;align-items:flex-start;padding:10px 0;gap:8px}
-  .top-search{max-width:100%;width:100%}
-  .cat-tile{width:100px}
+  .cat-tile{width:102px}
   .cat-img{height:68px;font-size:1.8rem}
   .vendor-grid{grid-template-columns:1fr 1fr}
   .panel-header{padding:12px 14px}
+  .top-actions{justify-content:flex-start}
 }
 @media(max-width:440px){
   .vendor-grid{grid-template-columns:1fr}
@@ -246,41 +348,66 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:44px}
 
 <header class="topbar">
   <div class="wrap topbar-inner">
-    <a class="brand" href="#"><span class="brand-icon">🛍️</span><span>DIGIY MARKET<small>Le marché vivant du quotidien</small></span></a>
+    <a class="brand" href="#">
+      <span class="brand-icon">🛍️</span>
+      <span>DIGIY MARKET<small>Le marché vivant du quotidien</small></span>
+    </a>
+
     <div class="top-search">
       <input id="topSearchInput" type="text" placeholder="Chercher un vendeur, un produit, une ville…"/>
       <button id="topSearchBtn" type="button">🔍</button>
     </div>
+
+    <div class="top-actions">
+      <a class="btn-top soft" id="waTopBtn" href="#" target="_blank" rel="noopener">💬 WhatsApp DIGIY</a>
+      <a class="btn-top primary" id="moduleTopBtn" href="#" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+    </div>
   </div>
 </header>
 
-<div class="hero-band">
+<section class="hero-band">
   <div class="wrap hero-inner">
-    <div class="hero-kicker">🌍 DIGIYLYFE ∞ · Sénégal · Afrique</div>
-    <h1>Le marché qui <em>bouge</em><br/>comme la rue.</h1>
-    <p>
-      Clique sur une catégorie. Les vendeurs exemples s'ouvrent. Puis clique sur <strong>Voir la fiche</strong> :
-      chaque vendeur a sa page personnalisée, propre, guidante, prête à être remplacée plus tard par les vraies boutiques.
-    </p>
-    <div class="hero-chips">
-      <span class="chip">🛒 Neuf</span>
-      <span class="chip">♻️ Deuxième main</span>
-      <span class="chip">👗 Vêtements</span>
-      <span class="chip">🌸 Parfum</span>
-      <span class="chip">✂️ Coiffeur</span>
-      <span class="chip">💅 Onglerie</span>
-      <span class="chip">🏺 Brocante</span>
-      <span class="chip">🧺 Bana-bana</span>
+    <div class="hero-grid">
+      <div>
+        <div class="hero-kicker">🌍 DIGIYLYFE ∞ · Sénégal · Afrique</div>
+        <h1>Le marché qui <em>bouge</em><br/>comme la rue.</h1>
+        <p>
+          Clique sur une catégorie. Les vendeurs exemples s’ouvrent. Clique sur une fiche.
+          Tu montres déjà le niveau. Là, on sent le vaiseau royal qui veut marcher fort.
+        </p>
+        <div class="hero-chips">
+          <span class="chip">🛒 Neuf</span>
+          <span class="chip">♻️ Deuxième main</span>
+          <span class="chip">👗 Vêtements</span>
+          <span class="chip">🌸 Parfum</span>
+          <span class="chip">✂️ Coiffeur</span>
+          <span class="chip">💅 Onglerie</span>
+          <span class="chip">🏺 Brocante</span>
+          <span class="chip">🧺 Bana-bana</span>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h3>Une vitrine qui parle fort</h3>
+        <p>
+          Tous les vendeurs ci-dessous sont des <strong>exemples guidants</strong>.
+          Le clic ouvre une fiche personnalisée. Et tous les boutons contact renvoient vers ton WhatsApp DIGIY.
+        </p>
+        <div class="cta-row">
+          <a id="heroModuleBtn" class="hero-btn primary" href="#" target="_blank" rel="noopener">🚀 Je veux mon module</a>
+          <a id="heroWaBtn" class="hero-btn soft" href="#" target="_blank" rel="noopener">💬 Parler à DIGIY</a>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
 <section class="cats-section">
   <div class="wrap">
     <div class="section-head">
       <div>
         <h2>Les univers du marché</h2>
-        <p>Clique sur un pavé → les vendeurs s'ouvrent</p>
+        <p>Clique sur un pavé → les vendeurs s’ouvrent</p>
       </div>
       <div class="rail-controls">
         <button class="arr" id="arrL" type="button">‹</button>
@@ -400,9 +527,32 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:44px}
               <p id="panelSub">Vendeurs exemples</p>
             </div>
           </div>
-          <button class="panel-close" id="panelClose" type="button" title="Fermer">✕</button>
+          <button class="panel-close" id="panelClose" type="button">✕</button>
         </div>
         <div class="vendor-grid" id="vendorGrid"></div>
+      </div>
+    </div>
+
+    <div class="cta-band">
+      <div class="cta-band-grid">
+        <div>
+          <h3>Tu veux ta vitrine comme ça ?</h3>
+          <p>
+            Ici tu montres directement la puissance du rail : fiche propre, galerie, contact WhatsApp,
+            bouton module, ambiance premium. Celui qui voit ça comprend vite.
+          </p>
+          <div class="cta-band-row">
+            <span class="cta-pill">🛍️ Fiche boutique</span>
+            <span class="cta-pill">🖼️ Galerie</span>
+            <span class="cta-pill">💬 WhatsApp</span>
+            <span class="cta-pill">📍 Présence terrain</span>
+          </div>
+        </div>
+
+        <div class="cta-main">
+          <a id="ctaModuleBtn" class="big-cta" href="#" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+          <a id="ctaWaBtn" class="big-cta soft" href="#" target="_blank" rel="noopener">💬 Parler sur WhatsApp</a>
+        </div>
       </div>
     </div>
 
@@ -416,116 +566,79 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:44px}
       <div class="footer-sub">Neuf • Deuxième main • Brocante • Vêtements • Beauté • Services • Quotidien</div>
     </div>
     <div class="footer-links">
-      <a href="#">Devenir vendeur</a>
+      <a id="footerModuleBtn" href="#" target="_blank" rel="noopener">Je veux mon module</a>
       <a href="http://digiylyfe.com" target="_blank" rel="noopener">digiylyfe.com</a>
     </div>
   </div>
 </footer>
 
 <script>
+const DIGIY_CONFIG = {
+  whatsapp: "221771342889",
+  siteUrl: "http://digiylyfe.com",
+  moduleText: "Bonjour DIGIY 👋 Je veux mon module MARKET PRO avec galerie, WhatsApp, fiche boutique et présence terrain."
+};
+
 const VENDORS = {
   neuf:[
     {icon:"📱",bg:"#c8deff",name:"Tech Dakar Shop",what:"Téléphones neufs, accessoires, batteries, câbles",loc:"Dakar · Plateau",price:"5 000–250 000 F",live:true},
     {icon:"👟",bg:"#ffe0cb",name:"Sneakers Mbaye",what:"Jordan, Nike, Adidas — arrivage chaque semaine",loc:"Mbour · Marché Central",price:"15 000–85 000 F",live:true},
     {icon:"🛒",bg:"#ffeaaa",name:"Boutique Awa Neuf",what:"Produits ménagers neufs, ustensiles, déco",loc:"Saly · Ngaparou",price:"2 000–35 000 F",live:false},
     {icon:"💻",bg:"#c8deff",name:"Diallo Informatique",what:"PC neufs et reconditionnés, imprimantes",loc:"Dakar · Parcelles",price:"80 000–450 000 F",live:true},
-    {icon:"👗",bg:"#ffd0e0",name:"Fashion Halima",what:"Robes soirée, tenues cérémonie, prêt-à-porter",loc:"Thiès · Mbambey",price:"8 000–45 000 F",live:true},
-    {icon:"🏋️",bg:"#dbf5ea",name:"Sport & Style SN",what:"Équipements sportifs, maillots, sacs de sport",loc:"Dakar · Grand Yoff",price:"5 000–60 000 F",live:false},
-    {icon:"🧴",bg:"#eadfff",name:"Beauté Premium",what:"Cosmétiques neufs, crèmes, soins, maquillage",loc:"Saly · Portudal",price:"3 000–25 000 F",live:true},
-    {icon:"📚",bg:"#ffeaaa",name:"Librairie Diongue",what:"Manuels scolaires, romans, cahiers, stylos",loc:"Kaolack · Centre",price:"500–8 000 F",live:true},
   ],
   deuxiemain:[
     {icon:"📺",bg:"#f4ead7",name:"Mamadou Électro",what:"TV, réfrigérateurs, machines à laver d'occasion",loc:"Dakar · Colobane",price:"20 000–150 000 F",live:true},
-    {icon:"📱",bg:"#c8deff",name:"Phones Occasion SN",what:"iPhones, Samsungs, Tecno — bon état garanti",loc:"Dakar · Sandaga",price:"30 000–200 000 F",live:true},
-    {icon:"🪑",bg:"#ffeaaa",name:"Meublerie Diallo",what:"Canapés, tables, armoires rénovés",loc:"Mbour · Mbour 2",price:"15 000–120 000 F",live:false},
-    {icon:"🚲",bg:"#dbf5ea",name:"Vélos & Motos SN",what:"Bicyclettes, scooters d'occasion, pièces",loc:"Saint-Louis",price:"25 000–300 000 F",live:true},
     {icon:"👕",bg:"#ffd0e0",name:"Frip Sénégal",what:"Friperie sélectionnée, marques, prix juste",loc:"Dakar · Sicap",price:"500–5 000 F",live:true},
     {icon:"🎮",bg:"#eadfff",name:"GameZone Dakar",what:"Consoles, jeux PS4/PS5, manettes",loc:"Dakar · Yoff",price:"15 000–120 000 F",live:true},
-    {icon:"🛠️",bg:"#ffe0cb",name:"Outillage Occasion",what:"Outils de chantier, électroportatif, matériel pro",loc:"Thiès · Centre",price:"5 000–80 000 F",live:false},
   ],
   vetements:[
     {icon:"👘",bg:"#ffeaaa",name:"Boubous Cheikh",what:"Boubous brocart, bazin, grand boubou cérémonie",loc:"Dakar · HLM",price:"8 000–60 000 F",live:true},
     {icon:"👗",bg:"#ffd0e0",name:"Robes Fatou",what:"Robes africaines, wax, tenues soirée et bureau",loc:"Saly · Centre",price:"5 000–35 000 F",live:true},
-    {icon:"👕",bg:"#c8deff",name:"T-shirts Urbains",what:"Tees graphiques, hoodies, streetwear Dakar",loc:"Dakar · Almadies",price:"3 000–12 000 F",live:false},
-    {icon:"🧕",bg:"#dbfff6",name:"Voiles & Abaya Rama",what:"Hidjabs, abayas, voiles longues qualité",loc:"Touba · Centre",price:"4 000–22 000 F",live:true},
-    {icon:"👔",bg:"#c8deff",name:"Costumes Lamine",what:"Costumes homme, chemises, tenues bureau",loc:"Dakar · Plateau",price:"12 000–75 000 F",live:true},
-    {icon:"🧒",bg:"#ffd0e0",name:"Mode Enfant Awa",what:"Vêtements bébé, tenues baptême",loc:"Mbour · Saly",price:"2 500–15 000 F",live:false},
-    {icon:"🥻",bg:"#ffeaaa",name:"Tissu & Wax Ndèye",what:"Tissus au mètre, wax hollandais, bazin riche",loc:"Dakar · HLM",price:"1 500–8 000 F/m",live:true},
     {icon:"🧣",bg:"#eadfff",name:"Accessoires Mode",what:"Ceintures, sacs, bijoux fantaisie, foulards",loc:"Saint-Louis",price:"1 000–12 000 F",live:true},
-    {icon:"🩳",bg:"#ffe0cb",name:"Prêt-à-Porter Youssou",what:"Short, pantalon casual, tenues quotidiennes homme",loc:"Dakar · Parcelles",price:"3 000–18 000 F",live:true},
   ],
   parfum:[
     {icon:"🕌",bg:"#eadfff",name:"Thiouraye Ndèye",what:"Thiouraye naturel, encens, encens de Djeddah",loc:"Dakar · Médina",price:"1 500–15 000 F",live:true},
-    {icon:"🌸",bg:"#ffd0e0",name:"Parfums Orientaux",what:"Attars, musc, oud, huiles de parfum sans alcool",loc:"Dakar · Sandaga",price:"3 000–35 000 F",live:true},
-    {icon:"✨",bg:"#ffeaaa",name:"Sira Beauty",what:"Parfums grandes marques, coffrets, mini-formats",loc:"Mbour · Saly",price:"5 000–45 000 F",live:false},
-    {icon:"🌺",bg:"#dbfff6",name:"Essences Locales",what:"Extraits de fleurs, ylang-ylang, jasmin sénégal",loc:"Ziguinchor",price:"2 000–12 000 F",live:true},
-    {icon:"🧴",bg:"#c8deff",name:"Corps & Senteur",what:"Savons, lotions, gels douche parfumés artisanaux",loc:"Dakar · Grand Dakar",price:"1 000–8 000 F",live:true},
-    {icon:"🎁",bg:"#ffd0e0",name:"Coffrets Mariama",what:"Coffrets mariage, baptême, kits parfum cadeaux",loc:"Dakar · Pikine",price:"8 000–50 000 F",live:false},
+    {icon:"🌸",bg:"#ffd0e0",name:"Parfums Orientaux",what:"Attars, musc, oud, huiles de parfum",loc:"Dakar · Sandaga",price:"3 000–35 000 F",live:true},
+    {icon:"🎁",bg:"#ffeaaa",name:"Coffrets Mariama",what:"Coffrets mariage, baptême, kits parfum cadeaux",loc:"Dakar · Pikine",price:"8 000–50 000 F",live:false},
   ],
   coiffeur:[
     {icon:"💇",bg:"#dbfff6",name:"Salon Aicha",what:"Tresses africaines, tissage, défrisage, soin",loc:"Dakar · Medina",price:"2 000–25 000 F",live:true},
     {icon:"✂️",bg:"#c8deff",name:"Barber Moussa",what:"Coupe homme, dégradé américain, barbe sculptée",loc:"Saly · Portudal",price:"1 500–5 000 F",live:true},
-    {icon:"💁",bg:"#ffd0e0",name:"Beauty House Fatou",what:"Pose tissage, perruques, lissage brésilien",loc:"Dakar · Almadies",price:"5 000–35 000 F",live:false},
-    {icon:"🪒",bg:"#ffeaaa",name:"Coiffeur Abdou",what:"Coupe classique, afro, dégradé, coloration",loc:"Mbour · Centre",price:"1 000–8 000 F",live:true},
     {icon:"💆",bg:"#dbf5ea",name:"Soin Cheveux Rama",what:"Masques kératine, soin naturel, hydratation",loc:"Dakar · Sacré-Cœur",price:"5 000–20 000 F",live:true},
   ],
   onglerie:[
     {icon:"💅",bg:"#ffd0e0",name:"Ongles by Aminata",what:"Pose gel, faux ongles, nail art, manucure",loc:"Dakar · Plateau",price:"4 000–20 000 F",live:true},
     {icon:"✨",bg:"#eadfff",name:"Luxury Nails Saly",what:"Nail art 3D, extension, dégradé, brillants",loc:"Saly · Ngaparou",price:"6 000–30 000 F",live:true},
-    {icon:"💎",bg:"#c8deff",name:"Ongles Prestige",what:"Pose résine, vernis semi-permanent, pédicure",loc:"Dakar · Mermoz",price:"5 000–18 000 F",live:false},
     {icon:"🌸",bg:"#ffeaaa",name:"Beauty Corner Rokhaya",what:"Manucure naturelle, soin des mains, vernis",loc:"Thiès",price:"2 500–10 000 F",live:true},
   ],
   brocante:[
     {icon:"🪑",bg:"#f4ead7",name:"Brocante Sénégal",what:"Meubles anciens, chaises bois, buffets vintage",loc:"Dakar · Colobane",price:"5 000–80 000 F",live:true},
     {icon:"🏺",bg:"#ffeaaa",name:"Poteries & Artisanat",what:"Poteries, statuettes, objets africains authentiques",loc:"Saly · Village artisanat",price:"2 000–40 000 F",live:true},
     {icon:"🖼️",bg:"#ffe0cb",name:"Art & Déco Diallo",what:"Tableaux locaux, masques, peintures, déco murale",loc:"Dakar · Ouakam",price:"3 000–60 000 F",live:false},
-    {icon:"📻",bg:"#c8deff",name:"Électro Vintage",what:"Radios rétro, platines, appareils anciens",loc:"Dakar · Medina",price:"5 000–35 000 F",live:true},
-    {icon:"🧸",bg:"#ffd0e0",name:"Jouets & Curiosités",what:"Jouets anciens, collections, objets curiosités",loc:"Mbour",price:"500–12 000 F",live:false},
   ],
   banabana:[
     {icon:"🧺",bg:"#ffe0cb",name:"Bana-bana Alassane",what:"Légumes frais, fruits de saison, livraison quartier",loc:"Dakar · Parcelles",price:"200–5 000 F",live:true},
-    {icon:"🧁",bg:"#ffd0e0",name:"Pâtisserie Mobile",what:"Gâteaux maison, thiakry, bissap, jus locaux",loc:"Saly · Route principale",price:"500–3 500 F",live:true},
-    {icon:"👜",bg:"#eadfff",name:"Sacs & Accessoires",what:"Sacs tressés, porte-monnaie, accessoires artisanaux",loc:"Mbour · Plage",price:"1 000–8 000 F",live:false},
-    {icon:"🌶️",bg:"#ffe0cb",name:"Épices du Marché",what:"Yett, soumbala, poivre, épices sénégalaises",loc:"Kaolack · Marché",price:"500–3 000 F",live:true},
-    {icon:"📿",bg:"#dbf5ea",name:"Bijoux Artisanaux",what:"Colliers perles, bracelets, boucles d'oreilles",loc:"Dakar · Plateau",price:"1 500–12 000 F",live:true},
-    {icon:"🥭",bg:"#ffeaaa",name:"Fruits Exotiques",what:"Mangues, papayes, goyaves, noix de cajou",loc:"Ziguinchor",price:"300–2 000 F",live:false},
     {icon:"🧃",bg:"#dbfff6",name:"Jus Naturels Aminata",what:"Bissap, gingembre, ditax, tamarin, bouye maison",loc:"Dakar · Medina",price:"250–1 500 F",live:true},
-    {icon:"🎪",bg:"#ffe0cb",name:"Artisan Mobile Omar",what:"Réparation chaussures, maroquinerie, couture",loc:"Dakar · Grand Yoff",price:"500–5 000 F",live:true},
     {icon:"🎀",bg:"#ffd0e0",name:"Tissus & Rubans",what:"Rubans, dentelles, broderies, vente au mètre",loc:"Dakar · HLM",price:"200–3 000 F/m",live:true},
-    {icon:"🪬",bg:"#ffeaaa",name:"Artisanat Traditions",what:"Objets artisanaux, herbes, accessoires locaux",loc:"Touba",price:"1 000–10 000 F",live:true},
   ],
   quotidien:[
     {icon:"🧹",bg:"#dbf5ea",name:"Ménage & Entretien",what:"Détergents, balais, produits nettoyants",loc:"Dakar · Pikine",price:"500–8 000 F",live:true},
-    {icon:"🕯️",bg:"#ffeaaa",name:"Éclairage & Piles",what:"Bougies, lampes solaires, piles, chargeurs",loc:"Mbour",price:"1 000–25 000 F",live:true},
-    {icon:"🪣",bg:"#c8deff",name:"Matériel Maison Cheikh",what:"Seaux, bassines, ustensiles, vaisselle plastique",loc:"Dakar · Colobane",price:"500–6 000 F",live:false},
-    {icon:"🛏️",bg:"#f4ead7",name:"Literie & Maison",what:"Draps, oreillers, couvertures, nattes tressées",loc:"Kaolack",price:"3 000–30 000 F",live:true},
     {icon:"🍳",bg:"#ffe0cb",name:"Cuisine Équipée",what:"Marmites, casseroles, poêles, mortiers bois",loc:"Dakar · Sandaga",price:"2 000–20 000 F",live:true},
-    {icon:"🧴",bg:"#eadfff",name:"Hygiène Quotidienne",what:"Savons, shampooings, déodorants, soins corps",loc:"Dakar · Medina",price:"300–5 000 F",live:true},
-    {icon:"🌿",bg:"#dbf5ea",name:"Plantes & Jardinage",what:"Plantes d'intérieur, pots, engrais naturels",loc:"Saly",price:"1 000–12 000 F",live:false},
     {icon:"💡",bg:"#ffeaaa",name:"Électricité Mamadou",what:"Prises, câbles, ampoules LED, matériel électrique",loc:"Thiès",price:"500–15 000 F",live:true},
   ],
   phones:[
-    {icon:"📱",bg:"#c8deff",name:"iDakar Phones",what:"iPhone 12/13/14 reconditionné, garantie 3 mois",loc:"Dakar · Plateau",price:"120 000–450 000 F",live:true},
+    {icon:"📱",bg:"#c8deff",name:"iDakar Phones",what:"iPhone reconditionné, garantie 3 mois",loc:"Dakar · Plateau",price:"120 000–450 000 F",live:true},
     {icon:"🤳",bg:"#ffeaaa",name:"Samsung Sénégal",what:"Galaxy A, M et S series neufs et occasion",loc:"Dakar · Sacré-Cœur",price:"60 000–380 000 F",live:true},
-    {icon:"📲",bg:"#dbf5ea",name:"Tecno & Infinix Store",what:"Téléphones abordables, grande batterie, dual SIM",loc:"Mbour",price:"30 000–95 000 F",live:false},
-    {icon:"🔋",bg:"#ffe0cb",name:"Accessoires GSM Omar",what:"Batteries, coques, chargeurs, câbles, protège-écrans",loc:"Dakar · Medina",price:"500–8 000 F",live:true},
-    {icon:"💻",bg:"#c8deff",name:"Laptops & Tablettes",what:"PC portables neufs et occasion, tablettes, iPad",loc:"Dakar · Almadies",price:"80 000–400 000 F",live:true},
     {icon:"🎧",bg:"#eadfff",name:"Son & Audio Mobile",what:"AirPods, Bluetooth, enceintes, casques audio",loc:"Dakar · Yoff",price:"5 000–65 000 F",live:true},
   ],
   alimentaire:[
     {icon:"🥜",bg:"#ffeaaa",name:"Arachides Baye",what:"Arachides grillées, huile d'arachide artisanale",loc:"Kaolack · Marché",price:"500–5 000 F",live:true},
-    {icon:"🌾",bg:"#f4ead7",name:"Céréales du Terroir",what:"Mil, sorgho, fonio, riz local, maïs — sacs et détail",loc:"Tambacounda",price:"1 000–25 000 F",live:true},
-    {icon:"🐠",bg:"#dbfff6",name:"Poisson Séché Samba",what:"Kétiakh, guedj, yett — poissons séchés tradition",loc:"Saint-Louis",price:"500–8 000 F",live:false},
+    {icon:"🌾",bg:"#f4ead7",name:"Céréales du Terroir",what:"Mil, sorgho, fonio, riz local, maïs",loc:"Tambacounda",price:"1 000–25 000 F",live:true},
     {icon:"🥦",bg:"#dbf5ea",name:"Maraîchage Fatou",what:"Légumes frais jardin, tomates, oignons, aubergines",loc:"Thiès · Pout",price:"200–3 000 F",live:true},
-    {icon:"🫙",bg:"#ffeaaa",name:"Conserves Locales",what:"Confitures, chutneys, sauces locales artisanales",loc:"Saly",price:"1 500–6 000 F",live:true},
-    {icon:"🍯",bg:"#ffe0cb",name:"Miel du Sénégal",what:"Miel naturel apiculture locale, propolis, pollen",loc:"Kolda",price:"3 000–15 000 F",live:false},
-    {icon:"🥭",bg:"#ffd0e0",name:"Épicerie Moussa",what:"Biscuits, conserves, épices, produits épicerie",loc:"Dakar · Ouakam",price:"200–5 000 F",live:true},
   ],
   chaussures:[
     {icon:"👡",bg:"#ffd0e0",name:"Sandales Aicha",what:"Sandales artisanales cuir, babouches colorées",loc:"Dakar · Médina",price:"3 000–18 000 F",live:true},
     {icon:"👟",bg:"#ffe0cb",name:"Baskets Papito",what:"Nike, Adidas, Puma — arrivage hebdomadaire",loc:"Dakar · Parcelles",price:"15 000–85 000 F",live:true},
-    {icon:"👠",bg:"#ffd0e0",name:"Chaussures Soirée",what:"Talons, mules, escarpins pour cérémonies",loc:"Mbour · Centre",price:"8 000–35 000 F",live:false},
-    {icon:"🥿",bg:"#f4ead7",name:"Chaussures Lamine",what:"Mocassins, slippers, chaussures bureau confort",loc:"Dakar · Almadies",price:"5 000–25 000 F",live:true},
     {icon:"👞",bg:"#c8deff",name:"Chaussures Homme SN",what:"Derby, bottes, chaussures ville qualité cuir",loc:"Dakar · Plateau",price:"12 000–55 000 F",live:true},
   ],
 };
@@ -534,7 +647,7 @@ const META = {
   neuf:{label:"Neuf",icon:"🛒",sub:"Produits récents, prix clairs, vendeurs exemples guidants"},
   deuxiemain:{label:"Deuxième main",icon:"♻️",sub:"La valeur continue, le bon prix circule"},
   vetements:{label:"Vêtements",icon:"👗",sub:"Style terrain, cérémonie ou quotidien"},
-  parfum:{label:"Parfum & Senteur",icon:"🌸",sub:"Essences, thiouraye, attars et cadeaux olfactifs"},
+  parfum:{label:"Parfum & senteur",icon:"🌸",sub:"Essences, thiouraye, attars et cadeaux"},
   coiffeur:{label:"Coiffeur",icon:"✂️",sub:"Coupes, tresses, barbe — service de proximité"},
   onglerie:{label:"Onglerie",icon:"💅",sub:"Pose, nail art, manucure, beauté fine"},
   brocante:{label:"Brocante",icon:"🏺",sub:"Pièces rares, vintage, objets de caractère"},
@@ -546,16 +659,27 @@ const META = {
 };
 
 function slugify(str){
-  return str
-    .toLowerCase()
+  return str.toLowerCase()
     .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
     .replace(/&/g,'-et-')
     .replace(/[^a-z0-9]+/g,'-')
     .replace(/^-+|-+$/g,'');
 }
 
-function categoryCount(cat){
-  return (VENDORS[cat] || []).length;
+function waLink(text){
+  return `https://wa.me/${DIGIY_CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
+}
+
+function initGlobalButtons(){
+  const moduleLink = waLink(DIGIY_CONFIG.moduleText);
+  ['waTopBtn','heroWaBtn','ctaWaBtn'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.href = waLink("Bonjour DIGIY 👋 Je veux des informations sur DIGIY MARKET.");
+  });
+  ['moduleTopBtn','heroModuleBtn','ctaModuleBtn','footerModuleBtn'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.href = moduleLink;
+  });
 }
 
 function buildVendor(cat, v){
@@ -576,18 +700,18 @@ function buildCatalog(){
 }
 
 function saveCatalog(){
-  const payload = {
+  localStorage.setItem('digiy_market_catalog_v2', JSON.stringify({
+    config: DIGIY_CONFIG,
     meta: META,
     vendors: buildCatalog()
-  };
-  localStorage.setItem('digiy_market_catalog_v1', JSON.stringify(payload));
+  }));
 }
 
 function updateCounts(){
   document.querySelectorAll('.cat-tile').forEach(tile => {
     const cat = tile.dataset.cat;
     const countEl = tile.querySelector('.cat-count span');
-    if(countEl) countEl.textContent = categoryCount(cat);
+    if(countEl) countEl.textContent = (VENDORS[cat] || []).length;
   });
 }
 
@@ -619,7 +743,7 @@ function renderVendorCards(list){
         </div>
         <div class="vendor-cta">
           <button class="vendor-btn primary" type="button" onclick="event.stopPropagation();openVendor('${v.slug}')">👁 Voir la fiche</button>
-          <button class="vendor-btn ghost" type="button" onclick="event.stopPropagation();contactVendor('${v.slug}')">💬 Contacter</button>
+          <button class="vendor-btn ghost" type="button" onclick="event.stopPropagation();contactVendor('${v.slug}')">💬 WhatsApp</button>
         </div>
       </div>
     </article>
@@ -658,12 +782,15 @@ function openVendor(slug){
 
 function contactVendor(slug){
   saveCatalog();
-  const all = buildCatalog();
-  const vendor = all.find(v => v.slug === slug);
-  const name = vendor ? vendor.name : 'ce vendeur';
-  alert(`💬 ${name}\n\nIci tu brancheras plus tard :\n- WhatsApp\n- Appel direct\n- DIGIY PAY\n- formulaire simple`);
+  const vendor = buildCatalog().find(v => v.slug === slug);
+  const name = vendor ? vendor.name : "cette vitrine";
+  window.open(
+    waLink(`Bonjour DIGIY 👋 Je veux une vitrine comme l'exemple "${name}" sur DIGIY MARKET.`),
+    '_blank'
+  );
 }
 
+initGlobalButtons();
 saveCatalog();
 updateCounts();
 
@@ -673,6 +800,7 @@ const panel = document.getElementById('vendorPanel');
 document.querySelectorAll('.cat-tile').forEach(tile => {
   tile.addEventListener('click', () => {
     const cat = tile.dataset.cat;
+
     if(current === cat){
       panel.classList.remove('open');
       tile.classList.remove('active');
@@ -706,10 +834,8 @@ document.getElementById('topSearchBtn').addEventListener('click', () => {
   setTimeout(() => panel.scrollIntoView({behavior:'smooth', block:'nearest'}), 180);
 });
 
-document.getElementById('topSearchInput').addEventListener('keydown', (e) => {
-  if(e.key === 'Enter'){
-    document.getElementById('topSearchBtn').click();
-  }
+document.getElementById('topSearchInput').addEventListener('keydown', e => {
+  if(e.key === 'Enter') document.getElementById('topSearchBtn').click();
 });
 
 const rail = document.getElementById('catRail');
@@ -717,34 +843,15 @@ document.getElementById('arrL').addEventListener('click', () => rail.scrollBy({l
 document.getElementById('arrR').addEventListener('click', () => rail.scrollBy({left:280, behavior:'smooth'}));
 
 let isDown = false, startX = 0, startScroll = 0;
-
-function dragStart(x){
-  isDown = true;
-  startX = x;
-  startScroll = rail.scrollLeft;
-  rail.classList.add('grabbing');
-}
-function dragMove(x){
-  if(!isDown) return;
-  rail.scrollLeft = startScroll - (x - startX);
-}
-function dragEnd(){
-  isDown = false;
-  rail.classList.remove('grabbing');
-}
+function dragStart(x){ isDown = true; startX = x; startScroll = rail.scrollLeft; rail.classList.add('grabbing'); }
+function dragMove(x){ if(!isDown) return; rail.scrollLeft = startScroll - (x - startX); }
+function dragEnd(){ isDown = false; rail.classList.remove('grabbing'); }
 
 rail.addEventListener('mousedown', e => dragStart(e.pageX));
 window.addEventListener('mouseup', dragEnd);
 window.addEventListener('mousemove', e => dragMove(e.pageX));
-
-rail.addEventListener('touchstart', e => {
-  if(e.touches[0]) dragStart(e.touches[0].pageX);
-}, {passive:true});
-
-rail.addEventListener('touchmove', e => {
-  if(e.touches[0]) dragMove(e.touches[0].pageX);
-}, {passive:true});
-
+rail.addEventListener('touchstart', e => { if(e.touches[0]) dragStart(e.touches[0].pageX); }, {passive:true});
+rail.addEventListener('touchmove', e => { if(e.touches[0]) dragMove(e.touches[0].pageX); }, {passive:true});
 rail.addEventListener('touchend', dragEnd);
 </script>
 </body>
