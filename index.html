@@ -50,7 +50,7 @@ button,input,select{font:inherit}
   grid-template-columns:auto 1fr auto;
   gap:12px;
   align-items:center;
-  min-height:74px;
+  min-height:76px;
 }
 .brand{
   display:flex;align-items:center;gap:10px;
@@ -67,6 +67,18 @@ button,input,select{font:inherit}
   display:block;
   font-family:'Nunito',sans-serif;
   font-weight:800;font-size:.72rem;color:var(--muted);margin-top:1px
+}
+.brand-stack{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap
+}
+.live-count{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 11px;border-radius:999px;background:#fff;border:1.5px solid var(--line);
+  font-size:.76rem;font-weight:900;color:var(--orange)
+}
+.live-count strong{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:22px;height:22px;padding:0 8px;border-radius:999px;background:var(--orange);color:#fff
 }
 .top-search{
   display:flex;align-items:center;background:#fff;border:2px solid var(--line);
@@ -161,10 +173,93 @@ button,input,select{font:inherit}
 .hero-btn.primary{background:#fff;color:var(--ink)}
 .hero-btn.soft{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);color:#fff}
 
-/* FILTERS */
-.filters{
+/* PRESTIGE STRIP */
+.prestige{
   padding:18px 0 10px;
 }
+.prestige-shell{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:14px;align-items:center;
+  background:linear-gradient(135deg,#fff8ed,#fff3e1);
+  border:1.5px solid #f0d0a0;
+  border-radius:26px;
+  padding:16px;
+  box-shadow:var(--shadow-soft)
+}
+.prestige h2{
+  font-family:'Playfair Display',serif;
+  font-size:1.45rem;
+  margin-bottom:6px
+}
+.prestige p{
+  color:#7c5a12;
+  line-height:1.68
+}
+.prestige-row{
+  display:flex;gap:10px;flex-wrap:wrap;margin-top:12px
+}
+.prestige-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 14px;border-radius:999px;background:#fff;border:1.5px solid #f0d0a0;
+  font-weight:900;font-size:.82rem
+}
+.prestige-cta{
+  display:flex;flex-direction:column;gap:10px
+}
+.prestige-link{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:15px 18px;border-radius:18px;font-weight:900
+}
+.prestige-link.primary{
+  background:linear-gradient(135deg,var(--orange),var(--red));color:#fff;box-shadow:0 14px 28px rgba(232,104,32,.25)
+}
+.prestige-link.soft{
+  background:#fff;border:1.5px solid #f0d0a0;color:var(--ink)
+}
+
+/* TRUST BAND */
+.trust{
+  padding:12px 0 0;
+}
+.trust-shell{
+  background:var(--card);
+  border:1.5px solid var(--line);
+  border-radius:24px;
+  padding:16px;
+  box-shadow:var(--shadow-soft)
+}
+.trust-head{
+  display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px
+}
+.trust-head h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.26rem
+}
+.trust-head p{
+  color:var(--muted);
+  font-size:.9rem
+}
+.trust-grid{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px
+}
+.trust-card{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:14px;
+  background:#fff;
+}
+.trust-card .icon{
+  width:42px;height:42px;border-radius:14px;display:grid;place-items:center;margin-bottom:10px;
+  background:#fff3df;border:1px solid #f2d2a6;font-size:1.1rem
+}
+.trust-card h4{
+  font-size:.96rem;margin-bottom:5px
+}
+.trust-card p{
+  color:var(--muted);font-size:.84rem;line-height:1.58
+}
+
+/* FILTERS */
+.filters{padding:18px 0 10px}
 .filters-shell{
   display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;
   background:var(--card);border:1.5px solid var(--line);border-radius:22px;padding:14px;box-shadow:var(--shadow-soft)
@@ -366,8 +461,21 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
 }
 .footer-links a:hover{background:#fef0d8;border-color:var(--gold)}
 
+/* FLOAT CTA */
+.float-cta{
+  position:fixed;right:14px;bottom:14px;z-index:120;
+  display:flex;flex-direction:column;gap:10px
+}
+.float-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  min-width:220px;padding:13px 16px;border-radius:999px;color:#fff;font-weight:900;
+  box-shadow:0 16px 28px rgba(0,0,0,.18)
+}
+.float-btn.wa{background:#0b8f59}
+.float-btn.module{background:linear-gradient(135deg,var(--orange),var(--red))}
+
 @media(max-width:980px){
-  .topbar-inner,.hero-grid,.cta-band-grid,.filters-shell{grid-template-columns:1fr}
+  .topbar-inner,.hero-grid,.prestige-shell,.trust-grid,.cta-band-grid,.filters-shell{grid-template-columns:1fr}
   .top-actions{justify-content:flex-start}
 }
 @media(max-width:700px){
@@ -375,9 +483,11 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
   .cat-img{height:70px;font-size:1.8rem}
   .vendor-grid{grid-template-columns:1fr 1fr}
   .panel-header{padding:12px 14px}
+  .float-cta{left:12px;right:12px}
+  .float-btn{min-width:0;width:100%}
 }
 @media(max-width:440px){
-  .vendor-grid{grid-template-columns:1fr}
+  .vendor-grid,.trust-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -385,10 +495,13 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
 
 <header class="topbar">
   <div class="wrap topbar-inner">
-    <a class="brand" href="#">
-      <span class="brand-icon">🛍️</span>
-      <span>DIGIY MARKET<small>Le marché vivant du quotidien</small></span>
-    </a>
+    <div class="brand-stack">
+      <a class="brand" href="#">
+        <span class="brand-icon">🛍️</span>
+        <span>DIGIY MARKET<small>Le marché vivant du quotidien</small></span>
+      </a>
+      <div class="live-count">Vendeurs exemples <strong id="totalCount">0</strong></div>
+    </div>
 
     <div class="top-search">
       <input id="topSearchInput" type="text" placeholder="Chercher un vendeur, un produit, une ville…"/>
@@ -397,7 +510,7 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
 
     <div class="top-actions">
       <a class="btn-top soft" id="waTopBtn" href="#" target="_blank" rel="noopener">💬 WhatsApp DIGIY</a>
-      <a class="btn-top primary" id="moduleTopBtn" href="#" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+      <a class="btn-top primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
     </div>
   </div>
 </header>
@@ -410,7 +523,7 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
         <h1>Le marché qui <em>bouge</em><br/>comme la rue.</h1>
         <p>
           Catégories qui glissent, fiches qui respirent, contact direct, entrée PRO visible.
-          Là, le visiteur comprend que le marché digital peut être beau, humain et sérieux.
+          Ici on ne montre pas juste des cases. On montre une présence.
         </p>
         <div class="hero-chips">
           <span class="chip">🛒 Neuf</span>
@@ -427,13 +540,74 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
       <div class="hero-card">
         <h3>Un hall qui convertit</h3>
         <p>
-          Tous les exemples ci-dessous servent à guider les commerçants.
+          Tous les exemples ci-dessous servent à guider les commerçants.  
           Le bouton <strong>Je veux mon module</strong> pointe directement vers ton entrée PRO officielle.
         </p>
         <div class="cta-row">
-          <a id="heroModuleBtn" class="hero-btn primary" href="#" target="_blank" rel="noopener">🚀 Je veux mon module</a>
+          <a class="hero-btn primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🚀 Je veux mon module</a>
           <a id="heroWaBtn" class="hero-btn soft" href="#" target="_blank" rel="noopener">💬 Parler à DIGIY</a>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="prestige">
+  <div class="wrap">
+    <div class="prestige-shell">
+      <div>
+        <h2>Le rail qui dit déjà “niveau premium”</h2>
+        <p>
+          Galerie, fiches, WhatsApp, Maps, entrée PRO, ambiance marché vivant.
+          Même en démo, le visiteur comprend qu’ici on peut lui poser quelque chose de sérieux.
+        </p>
+        <div class="prestige-row">
+          <span class="prestige-pill">👑 Présence</span>
+          <span class="prestige-pill">🖼️ Galerie</span>
+          <span class="prestige-pill">📍 Maps</span>
+          <span class="prestige-pill">🏪 Module PRO</span>
+        </div>
+      </div>
+
+      <div class="prestige-cta">
+        <a class="prestige-link primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+        <a id="prestigeWaBtn" class="prestige-link soft" href="#" target="_blank" rel="noopener">💬 Parler sur WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap">
+    <div class="trust-shell">
+      <div class="trust-head">
+        <div>
+          <h3>Ils nous font confiance</h3>
+          <p>Bloc vitrine pour rassurer, inspirer et montrer la portée terrain.</p>
+        </div>
+      </div>
+
+      <div class="trust-grid">
+        <article class="trust-card">
+          <div class="icon">🏪</div>
+          <h4>Boutiques terrain</h4>
+          <p>Vitrines simples, visibles et compréhensibles par tout le monde.</p>
+        </article>
+        <article class="trust-card">
+          <div class="icon">🧺</div>
+          <h4>Bana-bana & vendeurs mobiles</h4>
+          <p>Présence légère, rapide à poser, prête à circuler.</p>
+        </article>
+        <article class="trust-card">
+          <div class="icon">💇</div>
+          <h4>Beauté & services</h4>
+          <p>Coiffure, onglerie, soin, tout peut respirer dans une vraie fiche.</p>
+        </article>
+        <article class="trust-card">
+          <div class="icon">📍</div>
+          <h4>Présence locale</h4>
+          <p>Ville, zone, repère terrain et visibilité orientée action.</p>
+        </article>
       </div>
     </div>
   </div>
@@ -443,9 +617,9 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
   <div class="wrap">
     <div class="filters-shell">
       <div class="filter-group">
-        <span class="filter-pill">🎯 Index MARKET V3</span>
+        <span class="filter-pill">🎯 Index MARKET V4</span>
         <span class="filter-pill">🧭 Fiches exemples guidantes</span>
-        <span class="filter-pill">🏪 Entrée PRO visible</span>
+        <span class="filter-pill">🔥 Entrée PRO visible</span>
       </div>
 
       <select id="cityFilter" class="filter-select">
@@ -593,8 +767,8 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
         <div>
           <h3>Tu veux ta vitrine comme ça ?</h3>
           <p>
-            Fiche boutique, galerie, WhatsApp, présence terrain, entrée PRO.  
-            Le visiteur comprend vite que tu peux lui poser un vrai module, pas une page morte.
+            Fiche boutique, galerie, WhatsApp, présence terrain, entrée PRO.
+            La démo donne envie, et derrière tu récupères la demande réelle.
           </p>
           <div class="cta-band-row">
             <span class="cta-pill">🛍️ Fiche boutique</span>
@@ -606,7 +780,7 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
         </div>
 
         <div class="cta-main">
-          <a id="ctaModuleBtn" class="big-cta" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+          <a class="big-cta" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
           <a id="ctaWaBtn" class="big-cta soft" href="#" target="_blank" rel="noopener">💬 Parler sur WhatsApp</a>
         </div>
       </div>
@@ -627,6 +801,11 @@ footer{border-top:2px solid var(--line);padding:26px 0 36px;margin-top:42px}
     </div>
   </div>
 </footer>
+
+<div class="float-cta">
+  <a id="floatWaBtn" class="float-btn wa" href="#" target="_blank" rel="noopener">💬 WhatsApp DIGIY</a>
+  <a class="float-btn module" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+</div>
 
 <script>
 const DIGIY_CONFIG = {
@@ -749,7 +928,7 @@ function buildCatalog(){
 }
 
 function saveCatalog(){
-  localStorage.setItem('digiy_market_catalog_v3', JSON.stringify({
+  localStorage.setItem('digiy_market_catalog_v4', JSON.stringify({
     config: DIGIY_CONFIG,
     meta: META,
     vendors: buildCatalog()
@@ -762,17 +941,14 @@ function updateCounts(){
     const countEl = tile.querySelector('.cat-count span');
     if(countEl) countEl.textContent = (VENDORS[cat] || []).length;
   });
+  document.getElementById('totalCount').textContent = buildCatalog().length;
 }
 
 function initButtons(){
   const generalWa = waLink("Bonjour DIGIY 👋 Je veux des informations sur DIGIY MARKET.");
-  ['waTopBtn','heroWaBtn','ctaWaBtn'].forEach(id => {
+  ['waTopBtn','heroWaBtn','prestigeWaBtn','ctaWaBtn','floatWaBtn'].forEach(id => {
     const el = document.getElementById(id);
     if(el) el.href = generalWa;
-  });
-  ['moduleTopBtn','heroModuleBtn','ctaModuleBtn'].forEach(id => {
-    const el = document.getElementById(id);
-    if(el) el.href = DIGIY_CONFIG.proUrl;
   });
 }
 
@@ -889,7 +1065,7 @@ saveCatalog();
 updateCounts();
 fillCityFilter();
 
-let currentMode = null; // 'cat' | 'search'
+let currentMode = null;
 let currentKey = null;
 const panel = document.getElementById('vendorPanel');
 
