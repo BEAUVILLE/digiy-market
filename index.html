@@ -1,1399 +1,494 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>DIGIY MARKET — Le marché vivant du quotidien</title>
-  <meta name="description" content="DIGIY MARKET — neuf, deuxième main, brocante, vêtements, parfum, coiffure, onglerie et produits du quotidien." />
-  <meta name="theme-color" content="#0f172a" />
-
-  <style>
-    :root{
-      --bg:#f7f1e7;
-      --bg-2:#fff9ef;
-      --sand:#eadbc2;
-      --line:#e5d1b2;
-      --ink:#152235;
-      --muted:#6c7480;
-      --card:#ffffffd9;
-      --card-strong:#ffffff;
-      --gold:#d9a441;
-      --gold-2:#f0bd63;
-      --red:#cc5b43;
-      --green:#1f8f68;
-      --navy:#132238;
-      --shadow:0 12px 34px rgba(15,23,42,.10);
-      --radius:22px;
-      --radius-sm:16px;
-      --max:1180px;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      color:var(--ink);
-      background:
-        radial-gradient(circle at top left, #fff6df 0%, transparent 32%),
-        radial-gradient(circle at top right, #f9edd8 0%, transparent 24%),
-        linear-gradient(180deg, #f8f4ec 0%, #f6efe2 100%);
-      min-height:100vh;
-      overflow-x:hidden;
-    }
-
-    a{color:inherit;text-decoration:none}
-    button,input{font:inherit}
-    img{max-width:100%;display:block}
-
-    .shell{
-      width:min(calc(100% - 28px), var(--max));
-      margin:0 auto;
-      position:relative;
-      z-index:2;
-    }
-
-    .topbar{
-      position:sticky;
-      top:0;
-      z-index:30;
-      backdrop-filter:blur(10px);
-      background:rgba(247,241,231,.72);
-      border-bottom:1px solid rgba(229,209,178,.6);
-    }
-
-    .topbar-inner{
-      width:min(calc(100% - 28px), var(--max));
-      margin:0 auto;
-      min-height:72px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-width:0;
-    }
-
-    .brand-mark{
-      width:46px;
-      height:46px;
-      border-radius:14px;
-      background:
-        linear-gradient(135deg, #16273f 0%, #20385d 100%);
-      display:grid;
-      place-items:center;
-      color:#fff;
-      font-size:22px;
-      box-shadow:var(--shadow);
-      flex:0 0 auto;
-    }
-
-    .brand-text{
-      min-width:0;
-    }
-
-    .brand-text strong{
-      display:block;
-      font-size:1rem;
-      line-height:1.1;
-      letter-spacing:.02em;
-    }
-
-    .brand-text span{
-      display:block;
-      color:var(--muted);
-      font-size:.84rem;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .top-actions{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-
-    .btn{
-      border:0;
-      border-radius:999px;
-      padding:12px 16px;
-      font-weight:700;
-      cursor:pointer;
-      transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
-      white-space:nowrap;
-    }
-
-    .btn:hover{transform:translateY(-1px)}
-    .btn:active{transform:translateY(0)}
-
-    .btn-ghost{
-      background:#ffffffb5;
-      color:var(--navy);
-      border:1px solid #eadcc5;
-    }
-
-    .btn-main{
-      background:linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 100%);
-      color:#1f1b14;
-      box-shadow:0 8px 18px rgba(217,164,65,.28);
-    }
-
-    .hero{
-      padding:24px 0 18px;
-      position:relative;
-    }
-
-    .hero-card{
-      position:relative;
-      overflow:hidden;
-      border:1px solid rgba(229,209,178,.85);
-      border-radius:34px;
-      background:
-        linear-gradient(180deg, rgba(255,251,243,.96) 0%, rgba(250,242,227,.94) 100%);
-      box-shadow:var(--shadow);
-      padding:28px 18px 22px;
-      min-height:360px;
-      isolation:isolate;
-    }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.15fr .85fr;
-      gap:18px;
-      align-items:end;
-      position:relative;
-      z-index:2;
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      border-radius:999px;
-      padding:9px 14px;
-      background:#fff7e7;
-      border:1px solid #f0ddb8;
-      font-size:.85rem;
-      font-weight:800;
-      color:#7b5a21;
-      margin-bottom:14px;
-    }
-
-    h1{
-      margin:0 0 10px;
-      font-size:clamp(2rem, 4vw, 4rem);
-      line-height:.96;
-      letter-spacing:-.04em;
-      max-width:11ch;
-    }
-
-    .hero p{
-      margin:0;
-      color:var(--muted);
-      font-size:1rem;
-      line-height:1.6;
-      max-width:60ch;
-    }
-
-    .hero-copy{
-      padding:8px 4px 4px;
-      position:relative;
-      z-index:3;
-    }
-
-    .searchbox{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns:1fr auto auto;
-      gap:10px;
-      background:#ffffffd8;
-      border:1px solid #eadcc4;
-      border-radius:22px;
-      padding:10px;
-      box-shadow:0 12px 28px rgba(20,34,53,.08);
-      max-width:760px;
-    }
-
-    .searchbox input{
-      width:100%;
-      border:0;
-      background:transparent;
-      outline:none;
-      padding:12px 14px;
-      color:var(--ink);
-      font-size:1rem;
-    }
-
-    .searchbox .mini{
-      border:0;
-      background:#f7eedb;
-      color:#775622;
-      padding:0 14px;
-      border-radius:16px;
-      font-weight:700;
-      min-height:48px;
-    }
-
-    .quick-pills{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:14px;
-    }
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 14px;
-      border-radius:999px;
-      background:#fff;
-      border:1px solid #ead8bb;
-      color:#233248;
-      font-size:.92rem;
-      font-weight:700;
-      box-shadow:0 8px 18px rgba(21,34,53,.05);
-    }
-
-    .hero-side{
-      display:grid;
-      gap:12px;
-      align-self:stretch;
-      min-width:0;
-    }
-
-    .mini-panel{
-      border-radius:24px;
-      background:rgba(255,255,255,.7);
-      border:1px solid rgba(229,209,178,.9);
-      padding:16px;
-      box-shadow:0 10px 24px rgba(21,34,53,.06);
-      backdrop-filter:blur(6px);
-    }
-
-    .mini-panel h3{
-      margin:0 0 8px;
-      font-size:1rem;
-      letter-spacing:-.02em;
-    }
-
-    .mini-list{
-      display:grid;
-      gap:10px;
-      margin:0;
-      padding:0;
-      list-style:none;
-    }
-
-    .mini-list li{
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      align-items:center;
-      padding:10px 12px;
-      border-radius:16px;
-      background:#fff;
-      border:1px solid #f0e2ca;
-    }
-
-    .mini-list strong{
-      display:block;
-      font-size:.95rem;
-    }
-
-    .mini-list span{
-      display:block;
-      font-size:.8rem;
-      color:var(--muted);
-      margin-top:2px;
-    }
-
-    .tag{
-      border-radius:999px;
-      padding:7px 10px;
-      font-size:.78rem;
-      font-weight:800;
-      white-space:nowrap;
-    }
-
-    .tag-hot{background:#fff1d4;color:#8b5a14}
-    .tag-fast{background:#e9fff4;color:#106847}
-    .tag-soft{background:#eef4ff;color:#28497b}
-
-    .canopy{
-      position:absolute;
-      inset:0;
-      z-index:1;
-      pointer-events:none;
-      overflow:hidden;
-    }
-
-    .parasol{
-      position:absolute;
-      width:150px;
-      height:78px;
-      border-radius:150px 150px 0 0;
-      transform-origin:center bottom;
-      opacity:.95;
-      filter:drop-shadow(0 10px 14px rgba(23,34,51,.08));
-      animation:sway var(--dur, 6s) ease-in-out infinite;
-    }
-
-    .parasol::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      border-radius:inherit;
-      background:
-        repeating-linear-gradient(
-          90deg,
-          rgba(255,255,255,.05) 0 14px,
-          rgba(255,255,255,.35) 14px 28px
-        );
-      mix-blend-mode:screen;
-    }
-
-    .parasol::after{
-      content:"";
-      position:absolute;
-      left:50%;
-      bottom:-50px;
-      width:4px;
-      height:56px;
-      transform:translateX(-50%);
-      background:rgba(79,63,43,.34);
-      border-radius:10px;
-    }
-
-    .p1{left:-10px;top:18px;background:linear-gradient(180deg,#d4513e,#be4332);--dur:6.2s;animation-delay:-.5s}
-    .p2{left:88px;top:8px;background:linear-gradient(180deg,#ebb24a,#cc8f2a);--dur:7.4s}
-    .p3{left:212px;top:26px;background:linear-gradient(180deg,#197f68,#106d58);--dur:6.8s;animation-delay:-1.1s}
-    .p4{left:340px;top:16px;background:linear-gradient(180deg,#244061,#132238);--dur:7s}
-    .p5{left:470px;top:24px;background:linear-gradient(180deg,#d46c49,#bd4d33);--dur:6.3s;animation-delay:-.8s}
-    .p6{left:610px;top:12px;background:linear-gradient(180deg,#f0c15e,#d79e33);--dur:7.2s}
-    .p7{left:742px;top:28px;background:linear-gradient(180deg,#18876b,#106c58);--dur:5.9s}
-    .p8{left:868px;top:18px;background:linear-gradient(180deg,#233a59,#132238);--dur:6.6s;animation-delay:-1.3s}
-    .p9{left:992px;top:30px;background:linear-gradient(180deg,#db5a46,#c44933);--dur:7.5s}
-    .p10{left:1108px;top:10px;background:linear-gradient(180deg,#f4c96c,#dca33a);--dur:6.9s}
-    .p11{left:1234px;top:24px;background:linear-gradient(180deg,#1d8b6d,#106c58);--dur:5.8s}
-    .p12{left:1360px;top:14px;background:linear-gradient(180deg,#274261,#16273f);--dur:7.7s;animation-delay:-1.1s}
-
-    @keyframes sway{
-      0%,100%{transform:rotate(-2deg) translateY(0)}
-      50%{transform:rotate(2.2deg) translateY(4px)}
-    }
-
-    .market-strip{
-      margin-top:18px;
-      display:flex;
-      gap:10px;
-      overflow:auto;
-      padding-bottom:4px;
-      scrollbar-width:none;
-    }
-
-    .market-strip::-webkit-scrollbar{display:none}
-
-    .market-note{
-      min-width:max-content;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid #ead9bc;
-      background:#fff;
-      font-weight:700;
-      font-size:.9rem;
-      color:#223249;
-    }
-
-    .section{
-      padding:14px 0 10px;
-    }
-
-    .section-head{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:14px;
-      margin-bottom:12px;
-    }
-
-    .section-head h2{
-      margin:0;
-      font-size:clamp(1.25rem, 2vw, 1.7rem);
-      letter-spacing:-.03em;
-    }
-
-    .section-head p{
-      margin:6px 0 0;
-      color:var(--muted);
-      max-width:60ch;
-      line-height:1.5;
-      font-size:.94rem;
-    }
-
-    .section-actions{
-      display:flex;
-      gap:8px;
-      flex:0 0 auto;
-    }
-
-    .scroll-btn{
-      width:42px;
-      height:42px;
-      border-radius:50%;
-      border:1px solid #e8d8bd;
-      background:#fff;
-      color:#20324c;
-      font-size:1.1rem;
-      font-weight:900;
-      cursor:pointer;
-      box-shadow:0 8px 18px rgba(20,34,53,.06);
-    }
-
-    .rail{
-      display:flex;
-      gap:12px;
-      overflow:auto;
-      scroll-behavior:smooth;
-      padding-bottom:8px;
-      scrollbar-width:none;
-    }
-
-    .rail::-webkit-scrollbar{display:none}
-
-    .tile{
-      flex:0 0 230px;
-      min-width:230px;
-      background:var(--card);
-      border:1px solid rgba(229,209,178,.95);
-      border-radius:24px;
-      padding:14px;
-      box-shadow:var(--shadow);
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      backdrop-filter:blur(6px);
-      transition:transform .18s ease, box-shadow .18s ease;
-    }
-
-    .tile:hover{
-      transform:translateY(-2px);
-      box-shadow:0 16px 36px rgba(20,34,53,.12);
-    }
-
-    .tile-top{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-    }
-
-    .tile-icon{
-      width:44px;
-      height:44px;
-      border-radius:14px;
-      display:grid;
-      place-items:center;
-      font-size:1.25rem;
-      background:#fff2d8;
-      border:1px solid #efddb7;
-      flex:0 0 auto;
-    }
-
-    .tile-flag{
-      padding:7px 10px;
-      border-radius:999px;
-      background:#f6eddb;
-      color:#80591e;
-      font-size:.74rem;
-      font-weight:800;
-      white-space:nowrap;
-      border:1px solid #edd9af;
-    }
-
-    .tile h3{
-      margin:0;
-      font-size:1rem;
-      letter-spacing:-.02em;
-      line-height:1.2;
-    }
-
-    .tile p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.5;
-      font-size:.9rem;
-      min-height:42px;
-    }
-
-    .chip-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-    }
-
-    .chip{
-      padding:8px 10px;
-      border-radius:999px;
-      font-size:.77rem;
-      font-weight:700;
-      background:#fff;
-      border:1px solid #e8dcc5;
-      color:#314154;
-    }
-
-    .tile-bottom{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-top:auto;
-    }
-
-    .price{
-      font-weight:900;
-      letter-spacing:-.02em;
-    }
-
-    .mini-link{
-      color:#183153;
-      font-weight:800;
-      font-size:.88rem;
-    }
-
-    .duo{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-      margin-top:10px;
-    }
-
-    .panel{
-      border-radius:28px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.86) 0%, rgba(255,255,255,.74) 100%);
-      border:1px solid rgba(229,209,178,.95);
-      box-shadow:var(--shadow);
-      padding:18px;
-    }
-
-    .panel h3{
-      margin:0 0 8px;
-      font-size:1.1rem;
-      letter-spacing:-.02em;
-    }
-
-    .panel p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.55;
-    }
-
-    .steps{
-      margin-top:14px;
-      display:grid;
-      gap:10px;
-    }
-
-    .step{
-      display:grid;
-      grid-template-columns:auto 1fr;
-      gap:12px;
-      align-items:start;
-      padding:12px;
-      border-radius:18px;
-      background:#fff;
-      border:1px solid #efdfc1;
-    }
-
-    .step-num{
-      width:32px;
-      height:32px;
-      border-radius:50%;
-      display:grid;
-      place-items:center;
-      background:#183153;
-      color:#fff;
-      font-weight:900;
-      font-size:.86rem;
-    }
-
-    .cta-band{
-      margin:18px 0 40px;
-      border-radius:30px;
-      padding:18px;
-      background:linear-gradient(135deg, #16273f 0%, #203a61 100%);
-      color:#fff;
-      box-shadow:0 18px 38px rgba(20,34,53,.18);
-      display:grid;
-      grid-template-columns:1.2fr .8fr;
-      gap:14px;
-      align-items:center;
-    }
-
-    .cta-band h2{
-      margin:0 0 8px;
-      font-size:clamp(1.45rem,2.4vw,2.2rem);
-      letter-spacing:-.03em;
-    }
-
-    .cta-band p{
-      margin:0;
-      color:rgba(255,255,255,.78);
-      line-height:1.6;
-    }
-
-    .cta-box{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      justify-content:flex-end;
-    }
-
-    footer{
-      padding:6px 0 30px;
-      color:var(--muted);
-      font-size:.92rem;
-    }
-
-    @media (max-width: 980px){
-      .hero-grid,
-      .duo,
-      .cta-band{
-        grid-template-columns:1fr;
-      }
-
-      .hero-card{
-        min-height:auto;
-      }
-
-      .hero-side{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .cta-box{
-        justify-content:flex-start;
-      }
-    }
-
-    @media (max-width: 720px){
-      .topbar-inner{
-        align-items:flex-start;
-        padding:12px 0;
-        min-height:auto;
-        flex-direction:column;
-      }
-
-      .top-actions{
-        width:100%;
-        justify-content:stretch;
-      }
-
-      .top-actions .btn{
-        flex:1 1 auto;
-        text-align:center;
-      }
-
-      .hero-card{
-        padding:22px 14px 18px;
-        border-radius:26px;
-      }
-
-      .searchbox{
-        grid-template-columns:1fr;
-      }
-
-      .searchbox .mini,
-      .searchbox .btn-main{
-        min-height:46px;
-      }
-
-      .hero-side{
-        grid-template-columns:1fr;
-      }
-
-      .section-head{
-        flex-direction:column;
-        align-items:flex-start;
-      }
-
-      .tile{
-        flex-basis:82vw;
-        min-width:82vw;
-      }
-
-      .cta-band{
-        border-radius:24px;
-      }
-
-      .parasol{
-        width:108px;
-        height:56px;
-      }
-
-      .parasol::after{
-        height:44px;
-        bottom:-38px;
-      }
-    }
-  </style>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>DIGIY MARKET — Fiche vendeur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#fdf6ec;
+  --card:#fffdf9;
+  --ink:#1a1208;
+  --muted:#7a6a54;
+  --line:#e8d8be;
+  --gold:#c8860a;
+  --orange:#e86820;
+  --red:#c83830;
+  --green:#28885a;
+  --shadow:0 18px 52px rgba(26,18,8,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{font:inherit}
+.wrap{width:min(1180px,calc(100% - 28px));margin:0 auto}
+
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:rgba(253,246,236,.93);
+  backdrop-filter:blur(16px);
+  border-bottom:2px solid var(--line);
+}
+.topbar-inner{
+  min-height:66px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap
+}
+.brand{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Playfair Display',serif;font-weight:900;font-size:1.18rem
+}
+.brand-icon{
+  width:40px;height:40px;border-radius:11px;
+  background:linear-gradient(135deg,#e86820,#c83830);
+  display:grid;place-items:center;font-size:1.05rem;
+  box-shadow:0 5px 16px rgba(232,104,32,.3)
+}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{
+  border:none;cursor:pointer;border-radius:999px;
+  padding:11px 15px;font-weight:800;transition:.18s ease
+}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 10px 20px rgba(232,104,32,.22)}
+.btn-primary:hover{background:var(--red)}
+.btn-soft{background:#fff;border:1.5px solid var(--line);color:var(--ink)}
+.btn-soft:hover{background:#fef0d8;border-color:var(--gold)}
+
+.page{padding:24px 0 40px}
+.hero{
+  display:grid;grid-template-columns:1.04fr .96fr;gap:18px;align-items:stretch
+}
+.cover-card,.info-card,.section-card{
+  background:var(--card);border:1.5px solid var(--line);border-radius:26px;box-shadow:var(--shadow)
+}
+.cover-card{overflow:hidden}
+.cover-media{
+  aspect-ratio:16/10;background:#f6ead9;position:relative
+}
+.cover-media img{width:100%;height:100%;object-fit:cover}
+.cover-badges{
+  position:absolute;left:16px;top:16px;display:flex;gap:8px;flex-wrap:wrap
+}
+.badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 11px;border-radius:999px;font-size:.74rem;font-weight:900;letter-spacing:.04em
+}
+.badge.example{background:rgba(255,255,255,.95);border:1px solid rgba(232,104,32,.2);color:var(--orange)}
+.badge.live{background:rgba(40,136,90,.92);color:#fff}
+.badge.category{background:rgba(26,18,8,.8);color:#fff}
+
+.cover-foot{
+  padding:16px 18px 18px;border-top:1px solid var(--line)
+}
+.cover-foot h1{
+  font-family:'Playfair Display',serif;font-weight:900;
+  font-size:clamp(1.7rem,3.5vw,3rem);line-height:.96;margin-bottom:8px
+}
+.cover-foot p{color:var(--muted);line-height:1.65}
+
+.info-card{padding:18px}
+.kicker{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:7px 12px;border-radius:999px;
+  background:#fff;border:1.5px solid var(--line);
+  font-size:.76rem;font-weight:900;color:var(--orange);margin-bottom:12px
+}
+.info-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px
+}
+.mini{
+  background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px
+}
+.mini-label{font-size:.72rem;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.mini-value{font-weight:800;line-height:1.4}
+.cta-row{
+  display:flex;gap:10px;flex-wrap:wrap;margin-top:16px
+}
+.note{
+  margin-top:14px;padding:12px 14px;border-radius:18px;
+  background:#fff8ed;border:1px solid #f6d7a3;color:#8d5a00;font-size:.86rem;line-height:1.6
+}
+
+.layout{
+  display:grid;grid-template-columns:1fr 330px;gap:18px;margin-top:18px
+}
+.left-col,.right-col{display:grid;gap:18px}
+
+.section-card{padding:18px}
+.section-card h2{
+  font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;margin-bottom:12px
+}
+.section-card p{color:var(--muted);line-height:1.7}
+
+.gallery{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px
+}
+.photo{
+  border-radius:20px;overflow:hidden;background:#f4ece0;border:1px solid var(--line)
+}
+.photo img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.photo-caption{padding:10px 12px;font-size:.82rem;font-weight:800;color:var(--muted)}
+
+.products{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px
+}
+.product{
+  border:1px solid var(--line);border-radius:18px;background:#fff;padding:14px
+}
+.product h3{font-size:1rem;margin-bottom:6px}
+.product p{font-size:.88rem;line-height:1.6;margin-bottom:10px}
+.product .price{
+  display:inline-flex;padding:6px 10px;border-radius:999px;background:#fef0d8;color:var(--gold);
+  border:1px solid #f8d8a0;font-weight:900;font-size:.78rem
+}
+
+.side-list{display:grid;gap:10px}
+.side-item{
+  border:1px solid var(--line);border-radius:18px;background:#fff;padding:13px
+}
+.side-item .label{font-size:.72rem;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.side-item .value{font-weight:800;line-height:1.5}
+
+.empty-box{
+  text-align:center;padding:32px 20px
+}
+.empty-box h2{font-family:'Playfair Display',serif;font-size:1.7rem;margin-bottom:8px}
+.empty-box p{color:var(--muted);line-height:1.7}
+
+@media(max-width:980px){
+  .hero,.layout{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .info-grid,.gallery,.products{grid-template-columns:1fr}
+  .topbar-inner{padding:10px 0}
+}
+</style>
 </head>
 <body>
 
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="brand" href="#">
-        <div class="brand-mark">🛍️</div>
-        <div class="brand-text">
-          <strong>DIGIY MARKET</strong>
-          <span>Le marché vivant du quotidien</span>
-        </div>
-      </a>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-icon">🛍️</span>
+      <span>DIGIY MARKET</span>
+    </a>
+    <div class="actions">
+      <a class="btn btn-soft" href="index.html">← Retour au marché</a>
+      <button class="btn btn-primary" type="button" id="contactBtnTop">💬 Contacter</button>
+    </div>
+  </div>
+</header>
 
-      <div class="top-actions">
-        <a class="btn btn-ghost" href="#explorer">Explorer</a>
-        <a class="btn btn-ghost" href="#vendre">Vendre</a>
-        <a class="btn btn-main" href="#publier">Publier une annonce</a>
+<main class="page">
+  <div class="wrap" id="app"></div>
+</main>
+
+<script>
+function readCatalog(){
+  try{
+    const raw = localStorage.getItem('digiy_market_catalog_v1');
+    if(!raw) return null;
+    return JSON.parse(raw);
+  }catch(e){
+    return null;
+  }
+}
+
+function getParam(name){
+  return new URLSearchParams(window.location.search).get(name);
+}
+
+function safe(str=''){
+  return String(str)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+
+function slugify(str){
+  return str
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/&/g,'-et-')
+    .replace(/[^a-z0-9]+/g,'-')
+    .replace(/^-+|-+$/g,'');
+}
+
+function parsePriceBase(price=''){
+  const digits = price.match(/\d+/g);
+  if(!digits || !digits.length) return null;
+  return parseInt(digits[0],10);
+}
+
+function makePrice(base, n){
+  if(!base) return "Prix à définir";
+  const value = Math.round(base * n / 1000) * 1000;
+  return `${value.toLocaleString('fr-FR').replace(/\s/g,' ')} F`;
+}
+
+function splitOffer(what=''){
+  return what.split(',')
+    .map(x => x.trim())
+    .filter(Boolean)
+    .slice(0,4);
+}
+
+function makeSvgData(title, subtitle, icon, c1, c2){
+  const svg = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+    <defs>
+      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="${c1}"/>
+        <stop offset="100%" stop-color="${c2}"/>
+      </linearGradient>
+      <filter id="f" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="rgba(0,0,0,.18)"/>
+      </filter>
+    </defs>
+    <rect width="1200" height="900" fill="url(#g)"/>
+    <circle cx="1030" cy="120" r="160" fill="rgba(255,255,255,.12)"/>
+    <circle cx="170" cy="760" r="180" fill="rgba(255,255,255,.12)"/>
+    <text x="95" y="220" font-size="180" filter="url(#f)">${icon}</text>
+    <rect x="70" y="610" width="1060" height="170" rx="32" fill="rgba(255,255,255,.88)"/>
+    <text x="120" y="685" font-family="Arial, sans-serif" font-size="56" font-weight="700" fill="#1a1208">${title}</text>
+    <text x="120" y="740" font-family="Arial, sans-serif" font-size="30" fill="#6f624f">${subtitle}</text>
+  </svg>`;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
+function photoPalette(bg){
+  const map = {
+    "#c8deff":["#bdd8ff","#8cb7ff"],
+    "#ffe0cb":["#ffd9c5","#ffb88a"],
+    "#ffeaaa":["#fff0b8","#ffd56d"],
+    "#ffd0e0":["#ffd8e5","#ffb1cb"],
+    "#eadfff":["#eee2ff","#d2beff"],
+    "#dbfff6":["#ddfff5","#afe9d5"],
+    "#f4ead7":["#f6ead9","#ddc9a3"],
+    "#dbf5ea":["#dff7ec","#b8e0ca"]
+  };
+  return map[bg] || ["#f4ead7","#d8bf96"];
+}
+
+function buildGallery(v){
+  const [c1,c2] = photoPalette(v.bg);
+  const items = [
+    {title:"Devanture", sub:`${v.name} · accueil`, icon:v.icon},
+    {title:"Produits", sub:v.categoryLabel, icon:"🛍️"},
+    {title:"Ambiance", sub:v.loc, icon:"✨"},
+    {title:"Détail", sub:"vitrine démo DIGIY", icon:"📸"}
+  ];
+
+  return items.map((item, i) => ({
+    src: makeSvgData(item.title, item.sub, item.icon, i % 2 ? c2 : c1, i % 2 ? c1 : c2),
+    caption: `${item.title} — visuel démo`
+  }));
+}
+
+function buildProducts(v){
+  const base = parsePriceBase(v.price);
+  const parts = splitOffer(v.what);
+
+  if(!parts.length){
+    return [
+      {title:"Produit exemple 1", desc:"À personnaliser plus tard.", price:"Prix à définir"},
+      {title:"Produit exemple 2", desc:"À personnaliser plus tard.", price:"Prix à définir"},
+      {title:"Produit exemple 3", desc:"À personnaliser plus tard.", price:"Prix à définir"},
+      {title:"Produit exemple 4", desc:"À personnaliser plus tard.", price:"Prix à définir"},
+    ];
+  }
+
+  return parts.map((part, i) => ({
+    title: part,
+    desc: `Exemple de présentation produit / service pour ${v.name}.`,
+    price: makePrice(base, 0.35 + (i * 0.18))
+  }));
+}
+
+function renderVendor(v){
+  const app = document.getElementById('app');
+  const gallery = buildGallery(v);
+  const products = buildProducts(v);
+
+  document.title = `${v.name} — DIGIY MARKET`;
+
+  app.innerHTML = `
+    <section class="hero">
+      <article class="cover-card">
+        <div class="cover-media">
+          <img src="${gallery[0].src}" alt="${safe(v.name)}">
+          <div class="cover-badges">
+            <span class="badge example">EXEMPLE DIGIY</span>
+            ${v.live ? '<span class="badge live">EN LIGNE</span>' : ''}
+            <span class="badge category">${safe(v.categoryIcon)} ${safe(v.categoryLabel)}</span>
+          </div>
+        </div>
+        <div class="cover-foot">
+          <h1>${safe(v.name)}</h1>
+          <p>${safe(v.what)}</p>
+        </div>
+      </article>
+
+      <aside class="info-card">
+        <div class="kicker">${safe(v.categoryIcon)} Fiche vendeur personnalisée</div>
+        <p style="color:var(--muted);line-height:1.7">
+          Cette vitrine est un <strong>modèle de départ</strong>. Elle sert à guider les commerçants et à montrer
+          le niveau de présentation possible dans DIGIY MARKET.
+        </p>
+
+        <div class="info-grid">
+          <div class="mini">
+            <div class="mini-label">Catégorie</div>
+            <div class="mini-value">${safe(v.categoryLabel)}</div>
+          </div>
+          <div class="mini">
+            <div class="mini-label">Zone</div>
+            <div class="mini-value">${safe(v.loc)}</div>
+          </div>
+          <div class="mini">
+            <div class="mini-label">Positionnement</div>
+            <div class="mini-value">${safe(v.price)}</div>
+          </div>
+          <div class="mini">
+            <div class="mini-label">Statut</div>
+            <div class="mini-value">${v.live ? 'Disponible / en ligne' : 'Visible dans la vitrine'}</div>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <button class="btn btn-primary" type="button" id="contactBtnMain">💬 Contacter</button>
+          <a class="btn btn-soft" href="index.html">← Retour au marché</a>
+        </div>
+
+        <div class="note">
+          Plus tard, cette zone peut recevoir :
+          WhatsApp, appel direct, lien Google Maps, galerie réelle, horaires, promos, DIGIY PAY et ouverture vers MARKET PRO.
+        </div>
+      </aside>
+    </section>
+
+    <section class="layout">
+      <div class="left-col">
+        <article class="section-card">
+          <h2>Galerie de présentation</h2>
+          <p>Voici une galerie démo pour montrer comment une vraie boutique pourra afficher ses photos.</p>
+          <div class="gallery" style="margin-top:14px">
+            ${gallery.map(g => `
+              <figure class="photo">
+                <img src="${g.src}" alt="${safe(g.caption)}">
+                <figcaption class="photo-caption">${safe(g.caption)}</figcaption>
+              </figure>
+            `).join('')}
+          </div>
+        </article>
+
+        <article class="section-card">
+          <h2>Produits / services mis en avant</h2>
+          <p>Tu peux utiliser ce bloc pour montrer les points forts de la boutique ou les services les plus demandés.</p>
+          <div class="products" style="margin-top:14px">
+            ${products.map(p => `
+              <div class="product">
+                <h3>${safe(p.title)}</h3>
+                <p>${safe(p.desc)}</p>
+                <span class="price">${safe(p.price)}</span>
+              </div>
+            `).join('')}
+          </div>
+        </article>
+
+        <article class="section-card">
+          <h2>Présentation de la boutique</h2>
+          <p>
+            <strong>${safe(v.name)}</strong> est ici présenté comme une
+            <strong>vitrine exemple</strong> pour guider les commerçants du terrain.
+            L’idée est simple : montrer une boutique claire, humaine, visuelle, avec sa galerie, son style, sa zone
+            et ses produits mis en avant. Ensuite, tu remplaces cette fiche exemple par une vraie fiche commerçant.
+          </p>
+        </article>
+      </div>
+
+      <aside class="right-col">
+        <article class="section-card">
+          <h2>Repères rapides</h2>
+          <div class="side-list">
+            <div class="side-item">
+              <div class="label">Nom</div>
+              <div class="value">${safe(v.name)}</div>
+            </div>
+            <div class="side-item">
+              <div class="label">Activité</div>
+              <div class="value">${safe(v.what)}</div>
+            </div>
+            <div class="side-item">
+              <div class="label">Ville / zone</div>
+              <div class="value">${safe(v.loc)}</div>
+            </div>
+            <div class="side-item">
+              <div class="label">Univers</div>
+              <div class="value">${safe(v.categoryLabel)}</div>
+            </div>
+            <div class="side-item">
+              <div class="label">Badge</div>
+              <div class="value">Vitrine exemple DIGIY</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="section-card">
+          <h2>Ce que tu peux brancher plus tard</h2>
+          <div class="side-list">
+            <div class="side-item"><div class="value">WhatsApp direct</div></div>
+            <div class="side-item"><div class="value">Appel téléphone</div></div>
+            <div class="side-item"><div class="value">Lien Google Maps</div></div>
+            <div class="side-item"><div class="value">Galerie réelle du commerçant</div></div>
+            <div class="side-item"><div class="value">Paiement direct / DIGIY PAY</div></div>
+            <div class="side-item"><div class="value">Passage vers MARKET PRO</div></div>
+          </div>
+        </article>
+      </aside>
+    </section>
+  `;
+
+  const contactMsg = () => {
+    alert(`💬 ${v.name}\n\nIci tu brancheras plus tard :\n- WhatsApp\n- appel direct\n- formulaire simple\n- DIGIY PAY`);
+  };
+
+  document.getElementById('contactBtnTop').addEventListener('click', contactMsg);
+  document.getElementById('contactBtnMain').addEventListener('click', contactMsg);
+}
+
+function renderMissing(){
+  const app = document.getElementById('app');
+  app.innerHTML = `
+    <div class="empty-box section-card">
+      <h2>Fiche introuvable</h2>
+      <p>
+        Ouvre d’abord la fiche depuis <strong>index.html</strong>, ou recharge le marché pour réinjecter le catalogue démo.
+      </p>
+      <div style="margin-top:16px">
+        <a class="btn btn-primary" href="index.html">Retour au marché</a>
       </div>
     </div>
-  </header>
+  `;
+}
 
-  <main class="shell">
-    <section class="hero">
-      <div class="hero-card">
-        <div class="canopy" aria-hidden="true">
-          <div class="parasol p1"></div>
-          <div class="parasol p2"></div>
-          <div class="parasol p3"></div>
-          <div class="parasol p4"></div>
-          <div class="parasol p5"></div>
-          <div class="parasol p6"></div>
-          <div class="parasol p7"></div>
-          <div class="parasol p8"></div>
-          <div class="parasol p9"></div>
-          <div class="parasol p10"></div>
-          <div class="parasol p11"></div>
-          <div class="parasol p12"></div>
-        </div>
+const catalog = readCatalog();
+const slug = getParam('v');
 
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <div class="eyebrow">📍 Saly • Dakar • Quartiers • Terrain</div>
-            <h1>Le market qui sent la vraie vie.</h1>
-            <p>
-              Neuf, deuxième main, brocante, vêtements, parfum, coiffure, onglerie, maison et petits besoins du quotidien.
-              Ici, même le téléphone a l’air d’aller au marché.
-            </p>
-
-            <div class="searchbox">
-              <input
-                type="text"
-                placeholder="Chercher : robe femme, parfum Dubai, téléphone occasion, tresses, pose ongles..."
-                aria-label="Rechercher dans le market"
-              />
-              <button class="mini" type="button">📍 Ma zone</button>
-              <button class="btn btn-main" type="button">Rechercher</button>
-            </div>
-
-            <div class="quick-pills">
-              <a class="pill" href="#mode">👗 Vêtements</a>
-              <a class="pill" href="#beaute">💄 Beauté</a>
-              <a class="pill" href="#secondemain">♻️ Deuxième main</a>
-              <a class="pill" href="#quotidien">🧺 Quotidien</a>
-              <a class="pill" href="#brocante">🪑 Brocante</a>
-              <a class="pill" href="#vendre">📦 Je vends aussi</a>
-            </div>
-          </div>
-
-          <div class="hero-side">
-            <div class="mini-panel">
-              <h3>Ce qui tourne aujourd’hui</h3>
-              <ul class="mini-list">
-                <li>
-                  <div>
-                    <strong>Robe femme wax</strong>
-                    <span>Neuf • Livraison quartier</span>
-                  </div>
-                  <span class="tag tag-hot">ça bouge</span>
-                </li>
-                <li>
-                  <div>
-                    <strong>Parfum Dubai</strong>
-                    <span>Petit stock • paiement direct</span>
-                  </div>
-                  <span class="tag tag-fast">rapide</span>
-                </li>
-                <li>
-                  <div>
-                    <strong>Tresses + coiffure</strong>
-                    <span>Service terrain • rendez-vous</span>
-                  </div>
-                  <span class="tag tag-soft">proche</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="mini-panel">
-              <h3>Exemples d’intentions</h3>
-              <div class="chip-row">
-                <span class="chip">Sac femme</span>
-                <span class="chip">Chaussures homme</span>
-                <span class="chip">Téléphone occasion</span>
-                <span class="chip">Pose ongles</span>
-                <span class="chip">Crème visage</span>
-                <span class="chip">Ventilateur</span>
-                <span class="chip">Montre</span>
-                <span class="chip">Brocante maison</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="market-strip" aria-label="ambiance marché">
-          <span class="market-note">🟡 Bana-bana bienvenus</span>
-          <span class="market-note">🧵 Petite mode du quartier</span>
-          <span class="market-note">💈 Coiffeur & beauté</span>
-          <span class="market-note">📱 Occasion & petits appareils</span>
-          <span class="market-note">🧼 Produits du quotidien</span>
-          <span class="market-note">🪑 Brocante & maison</span>
-          <span class="market-note">💳 Paiement direct au vendeur</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="explorer" class="section">
-      <div class="section-head">
-        <div>
-          <h2>Explorer le marché</h2>
-          <p>Des pavés plus petits, plus nerveux, qu’on fait glisser à la main. Tu vois, ça respire mieux.</p>
-        </div>
-        <div class="section-actions">
-          <button class="scroll-btn" type="button" data-target="rail-mode" aria-label="Défiler à gauche">‹</button>
-          <button class="scroll-btn" type="button" data-target="rail-mode" data-dir="next" aria-label="Défiler à droite">›</button>
-        </div>
-      </div>
-
-      <div class="rail" id="rail-mode">
-        <article class="tile">
-          <div class="tile-top">
-            <div class="tile-icon">👗</div>
-            <div class="tile-flag">Neuf</div>
-          </div>
-          <h3>Robe femme élégante</h3>
-          <p>Placeholder pour guider : tissu léger, sortie, cérémonie, quartier ou livraison.</p>
-          <div class="chip-row">
-            <span class="chip">Tailles S à XL</span>
-            <span class="chip">Mode femme</span>
-          </div>
-          <div class="tile-bottom">
-            <div class="price">à partir de 8 000 FCFA</div>
-            <a class="mini-link" href="#">Voir →</a>
-          </div>
-        </article>
-
-        <article class="tile">
-          <div class="tile-top">
-            <div class="tile-icon">👟</div>
-            <div class="tile-flag">Tendance</div>
-          </div>
-          <h3>Chaussures homme</h3>
-          <p>Ville, sortie, bureau, marché. Exemple simple pour montrer que tout le monde peut publier.</p>
-          <div class="chip-row">
-            <span class="chip">42 • 43 • 44</span>
-            <span class="chip">Livraison possible</span>
-          </div>
-          <div class="tile-bottom">
-            <div class="price">à partir de 12 000 FCFA</div>
-            <a class="mini-link" href="#">Voir →</a>
-          </div>
-        </article>
-
-        <article class="tile">
-          <div class="tile-top">
-            <div class="tile-icon">👜</div>
-            <div class="tile-flag">Populaire</div>
-          </div>
-          <h3>Sac femme chic</h3>
-          <p>Pour le quotidien, les sorties, les cadeaux. Petit pavé vendeur, lisible, direct.</p>
-          <div class="chip-row">
-            <span class="chip">Noir • Beige • Rouge</span>
-            <span class="chip">Stock limité</span>
-          </div>
-          <div class="tile-bottom">
-            <div class="price">à partir de 6 500 FCFA</div>
-            <a class="mini-link" href="#">Voir →</a>
-          </div>
-        </article>
-
-        <article class="tile">
-          <div class="tile-top">
-            <div class="tile-icon">⌚</div>
-            <div class="tile-flag">Cadeau</div>
-          </div>
-          <h3>Montres & accessoires</h3>
-          <p>Un exemple qui pousse l’imaginaire du commerçant sans compliquer la structure.</p>
-          <div class="chip-row">
-            <span class="chip">Montre</span>
-            <span class="chip">Bracelet</span>
-          </div>
-          <div class="tile-bottom">
-            <div class="price">à partir de 5 000 FCFA</div>
-            <a class="mini-link" href="#">Voir →</a>
-          </div>
-        </article>
-
-        <article class="tile">
-          <div class="tile-top">
-            <div class="tile-icon">🧢</div>
-            <div class="tile-flag">Street</div>
-          </div>
-          <h3>Casquettes & looks du jour</h3>
-          <p>Le genre de produit qu’on vend vite si la vitrine donne envie sans bavarder.</p>
-          <div class="chip-row">
-            <span class="chip">Jeune</span>
-            <span class="chip">Urbain</span>
-          </div>
-          <div class="tile-bottom">
-            <div class="price">à partir de 3 500 FCFA</div>
-            <a class="mini-link" href="#">Voir →</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="mode" class="section">
-      <div class="section-head">
-        <div>
-          <h2>Mode & style</h2>
-          <p>Des exemples concrets pour lancer les intentions possibles dès l’entrée.</p>
-        </div>
-        <div class="section-actions">
-          <button class="scroll-btn" type="button" data-target="rail-style">‹</button>
-          <button class="scroll-btn" type="button" data-target="rail-style" data-dir="next">›</button>
-        </div>
-      </div>
-
-      <div class="rail" id="rail-style">
-        <article class="tile">
-          <div class="tile-top">
-            <div class="tile-icon">👚</div>
-            <div class="tile-flag">Femme</div>
-          </div>
-          <h3>Blouses, tops, ensembles</h3>
-          <p>Placeholders : tenue bureau, tenue sortie, style casual, wax, prêt-à-porter.</p>
-          <div class="chip-row">
-            <span class="chip">Neuf</span>
-            <span class="chip">Essayage possible</span>
-          </div>
-          <div class="tile-bottom">
-            <div class="price">voir collection</div>
-            <a class="mini-link" href="#">Explorer →</a>
-          </div>
-        </article>
-
-        <article class="tile">
-          <div class="tile-top">
-            <div class="tile-icon">👖</div>
-            <div class="tile-flag">Homme</div>
-          </div>
-          <h3>Pantalons & jeans</h3>
-          <p>Un vendeur comprend tout de suite quoi poster. C’est ça qu’on veut.</p>
-          <div class="chip-row">
-            <span class="chip">Ville</span>
-            <span class="chip">Weekend</span>
-          </div>
-          <div class="tile-bottom">
-            <div class="price">voir collection</div>
-            <a class="mini-link" href="#">Explorer →</a>
-          </div>
-        </article>
-
-        <article class="tile">
-          <div class="tile-top">
-            <div class="tile-icon">👠</div>
-            <div class="tile-flag">Sortie</div>
-          </div>
-          <h3>Sandales & talons</h3>
-          <p>Le petit pavé qui déclenche l’envie. Pas besoin d’un roman.</p>
-          <div class="chip-row">
-            <span class="chip">Mariage</span>
-            <span class="chip">Soirée</span>
-          </div>
-          <div class="tile-bottom">
-            <div class="price">voir modèles</div>
-            <a class="mini-link" href="#">Explorer →</a>
-          </div>
-        </article>
-
-        <article class="tile">
-          <div class="tile-top">
-            <div class="tile-icon">🧣</div>
-            <div class="tile-flag">Mixte</div>
-          </div>
-          <h3>Accessoires & finitions</h3>
-          <p>Foulards, lunettes, ceintures, petits plus qui font tourner le market.</p>
-          <div class="chip-row">
-            <span class="chip">Détail</span>
-            <span class="chip">Petit budget</span>
-          </div>
-          <div class="tile-bottom">
-            <div class="price">voir idées</div>
-            <a class="mini-link" href="#">Explorer →</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="beaute" class="section">
-      <div class="section-head">
-        <div>
-          <h2>Beauté, parfum, coiffure, onglerie</h2>
-          <p>Le market ne vend pas seulement des objets. Il vend aussi du service terrain.</p>
-        </div>
-        <div class="section-actions">
-          <button class="scroll-btn" type="button" data-target="rail-beaute">‹</button>
-          <button class="scroll-btn" type="button" data-target="rail-beaute" data-dir="next">›</button>
-        </div>
-      </div>
-
-      <div class="rail" id="rail-beaute">
-        <article class="tile">
-          <div class="tile-top">
-            <div class="tile-icon">🌸</div>
-            <div class="tile-flag">Parfum</div>
-          </div>
-          <h3>Parfum Dubai</h3>
-          <p>Très bon placeholder pour guider les annonces les plus naturelles du terrain.</p>
-          <div class="chip-row">
-            <span class="chip">Homme</span>
-            <span class="chip">Femme</span>
-            <span class="chip">Cadeau</span>
-          </div>
-          <div class="tile-bottom">
-            <div class="price">à partir de 5 000 FCFA</div>
-            <a class="mini-link" href="#">Voir →</a>
-          </div>
-        </article>
-
-        <article class="tile">
-          <div class="tile-top">
-            <div class="tile-icon">💇🏾‍♀️</div>
-            <div class="tile-flag">Service</div>
-          </div>
-          <h3>Tresses & coiffure</h3>
-          <p>Réservation terrain, à domicile ou au salon. Très fort commercialement.</p>
-          <div class="chip-row">
-            <span class="chip">Sur rendez-vous</span>
-            <span class="chip">Quartier</span>
-          </div>
-          <div class="tile-bottom">
-            <div class="price">service direct</div>
-            <a class="mini-link" href="#">Réserver →</a>
-          </div>
-        </article>
-
-        <article class="tile">
-          <div class="tile-top">
-            <div class="tile-icon">💅</div>
-            <div class="tile-flag">Beauté</div>
-          </div>
-          <h3>Pose ongles</h3>
-          <p>Simple, clair, puissant. Tu guides les usages sans enfermer le vendeur.</p>
-          <div class="chip-row">
-            <span class="chip">Gel</span>
-            <span class="chip">Nail art</span>
-          </div>
-          <div class="tile-bottom">
-            <div class="price">service direct</div>
-            <a class="mini-link" href="#">Réserver →</a>
-          </div>
-        </article>
-
-        <article class="tile">
-          <div class="tile-top">
-            <div class="tile-icon">🧴</div>
-            <div class="tile-flag">Soin</div>
-          </div>
-          <h3>Crèmes & petits soins</h3>
-          <p>Visage, corps, cheveux : un grand classique du quotidien.</p>
-          <div class="chip-row">
-            <span class="chip">Routine</span>
-            <span class="chip">Stock rapide</span>
-          </div>
-          <div class="tile-bottom">
-            <div class="price">voir produits</div>
-            <a class="mini-link" href="#">Explorer →</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="secondemain" class="section">
-      <div class="section-head">
-        <div>
-          <h2>Deuxième main & occasion</h2>
-          <p>Le nerf du terrain : vendre utile, vendre vite, vendre propre.</p>
-        </div>
-        <div class="section-actions">
-          <button class="scroll-btn" type="button" data-target="rail-occasion">‹</button>
-          <button class="scroll-btn" type="button" data-target="rail-occasion" data-dir="next">›</button>
-        </div>
-      </div>
-
-      <div class="rail" id="rail-occasion">
-        <article class="tile">
-          <div class="tile-top">
-            <div class="tile-icon">📱</div>
-            <div class="tile-flag">Occasion</div>
-          </div>
-          <h3>Téléphone occasion</h3>
-          <p>Très bon exemple d’annonce terrain. Tout le monde comprend ce pavé.</p>
-          <div class="chip-row">
-            <span class="chip">Android</span>
-            <span class="chip">iPhone</span>
-          </div>
-          <div class="tile-bottom">
-            <div class="price">prix selon état</div>
-            <a class="mini-link" href="#">Voir →</a>
-          </div>
-        </article>
-
-        <article class="tile">
-          <div class="tile-top">
-            <div class="tile-icon">🪑</div>
-            <div class="tile-flag">Brocante</div>
-          </div>
-          <h3>Chaise, table, meuble</h3>
-          <p>On ouvre la porte à la maison, à l’utile, au concret.</p>
-          <div class="chip-row">
-            <span class="chip">Maison</span>
-            <span class="chip">Petit prix</span>
-          </div>
-          <div class="tile-bottom">
-            <div class="price">voir annonces</div>
-            <a class="mini-link" href="#">Explorer →</a>
-          </div>
-        </article>
-
-        <article class="tile">
-          <div class="tile-top">
-            <div class="tile-icon">👜</div>
-            <div class="tile-flag">Seconde main</div>
-          </div>
-          <h3>Sacs & habits revisités</h3>
-          <p>Le market du quartier doit savoir accueillir ce type d’énergie-là.</p>
-          <div class="chip-row">
-            <span class="chip">Vintage</span>
-            <span class="chip">Look unique</span>
-          </div>
-          <div class="tile-bottom">
-            <div class="price">voir annonces</div>
-            <a class="mini-link" href="#">Explorer →</a>
-          </div>
-        </article>
-
-        <article class="tile">
-          <div class="tile-top">
-            <div class="tile-icon">🔌</div>
-            <div class="tile-flag">Utile</div>
-          </div>
-          <h3>Petit électro & appareils</h3>
-          <p>Ventilateur, mixeur, chargeur, lampe. Le quotidien, le vrai.</p>
-          <div class="chip-row">
-            <span class="chip">Maison</span>
-            <span class="chip">Testé</span>
-          </div>
-          <div class="tile-bottom">
-            <div class="price">voir annonces</div>
-            <a class="mini-link" href="#">Explorer →</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="quotidien" class="section">
-      <div class="section-head">
-        <div>
-          <h2>Produits du quotidien</h2>
-          <p>Ce qui fait revenir les gens souvent. Pas juste pour regarder, mais pour vivre avec.</p>
-        </div>
-        <div class="section-actions">
-          <button class="scroll-btn" type="button" data-target="rail-quotidien">‹</button>
-          <button class="scroll-btn" type="button" data-target="rail-quotidien" data-dir="next">›</button>
-        </div>
-      </div>
-
-      <div class="rail" id="rail-quotidien">
-        <article class="tile">
-          <div class="tile-top">
-            <div class="tile-icon">🧺</div>
-            <div class="tile-flag">Maison</div>
-          </div>
-          <h3>Produits ménagers</h3>
-          <p>Javel, savon, petits besoins du foyer. Ça ancre le market dans le réel.</p>
-          <div class="chip-row">
-            <span class="chip">Quotidien</span>
-            <span class="chip">Recharge</span>
-          </div>
-          <div class="tile-bottom">
-            <div class="price">voir stock</div>
-            <a class="mini-link" href="#">Voir →</a>
-          </div>
-        </article>
-
-        <article class="tile">
-          <div class="tile-top">
-            <div class="tile-icon">🥫</div>
-            <div class="tile-flag">Cuisine</div>
-          </div>
-          <h3>Épicerie utile</h3>
-          <p>Petits formats, dépannage, habitudes du quartier, commandes rapides.</p>
-          <div class="chip-row">
-            <span class="chip">Famille</span>
-            <span class="chip">Pratique</span>
-          </div>
-          <div class="tile-bottom">
-            <div class="price">voir produits</div>
-            <a class="mini-link" href="#">Voir →</a>
-          </div>
-        </article>
-
-        <article class="tile">
-          <div class="tile-top">
-            <div class="tile-icon">🕯️</div>
-            <div class="tile-flag">Dépannage</div>
-          </div>
-          <h3>Lampes, bougies, rallonges</h3>
-          <p>Les petits besoins qu’on cherche souvent au dernier moment.</p>
-          <div class="chip-row">
-            <span class="chip">Maison</span>
-            <span class="chip">Urgent</span>
-          </div>
-          <div class="tile-bottom">
-            <div class="price">voir stock</div>
-            <a class="mini-link" href="#">Voir →</a>
-          </div>
-        </article>
-
-        <article class="tile">
-          <div class="tile-top">
-            <div class="tile-icon">🍼</div>
-            <div class="tile-flag">Famille</div>
-          </div>
-          <h3>Besoins bébé & maison</h3>
-          <p>Encore un très bon terrain d’usage pour des vendeurs simples et réguliers.</p>
-          <div class="chip-row">
-            <span class="chip">Maman</span>
-            <span class="chip">Maison</span>
-          </div>
-          <div class="tile-bottom">
-            <div class="price">voir articles</div>
-            <a class="mini-link" href="#">Voir →</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="brocante" class="section">
-      <div class="duo">
-        <div class="panel" id="vendre">
-          <h3>Vendre dans DIGIY MARKET</h3>
-          <p>
-            Le cap est simple : permettre au petit vendeur, à la boutique, à la coiffeuse, à la vendeuse de parfum,
-            au bana-bana, au commerçant du quartier de poser ses offres sans entrer dans un labyrinthe.
-          </p>
-          <div class="steps">
-            <div class="step">
-              <div class="step-num">1</div>
-              <div>
-                <strong>Choisir une catégorie simple</strong><br />
-                vêtements, beauté, occasion, brocante, quotidien, service terrain.
-              </div>
-            </div>
-            <div class="step">
-              <div class="step-num">2</div>
-              <div>
-                <strong>Mettre photo + prix + zone</strong><br />
-                pas besoin de cinéma, juste ce qu’il faut pour vendre propre.
-              </div>
-            </div>
-            <div class="step">
-              <div class="step-num">3</div>
-              <div>
-                <strong>Paiement direct au vendeur</strong><br />
-                DIGIY reste propre, lisible, utile, branché terrain.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="panel" id="publier">
-          <h3>Exemples de publications</h3>
-          <p>Des placeholders bien choisis évitent le vide mental au moment de publier.</p>
-          <div class="steps">
-            <div class="step">
-              <div class="step-num">A</div>
-              <div><strong>Robe femme wax — 8 000 FCFA</strong><br />Saly centre • livraison quartier possible</div>
-            </div>
-            <div class="step">
-              <div class="step-num">B</div>
-              <div><strong>Parfum Dubai — 5 000 FCFA</strong><br />Petit stock • contact direct WhatsApp</div>
-            </div>
-            <div class="step">
-              <div class="step-num">C</div>
-              <div><strong>Pose ongles — sur rendez-vous</strong><br />Déplacement possible • photos de modèles</div>
-            </div>
-            <div class="step">
-              <div class="step-num">D</div>
-              <div><strong>Téléphone occasion — prix selon état</strong><br />Remise en main propre • test sur place</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta-band">
-      <div>
-        <h2>Un market simple, populaire, élégant.</h2>
-        <p>
-          Pas un monstre compliqué. Un outil qui donne envie d’entrer, de glisser, de voir, de publier,
-          d’acheter, de vendre. Le marché, mais bien tenu.
-        </p>
-      </div>
-      <div class="cta-box">
-        <a class="btn btn-ghost" href="#explorer">Parcourir</a>
-        <a class="btn btn-main" href="#publier">Publier mon article</a>
-      </div>
-    </section>
-
-    <footer>
-      DIGIY MARKET — neuf • deuxième main • brocante • beauté • quartier • quotidien
-    </footer>
-  </main>
-
-  <script>
-    (function () {
-      const buttons = document.querySelectorAll('.scroll-btn');
-
-      buttons.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const targetId = btn.getAttribute('data-target');
-          const dir = btn.getAttribute('data-dir') === 'next' ? 1 : -1;
-          const rail = document.getElementById(targetId);
-          if (!rail) return;
-          const amount = Math.min(rail.clientWidth * 0.85, 420) * dir;
-          rail.scrollBy({ left: amount, behavior: 'smooth' });
-        });
-      });
-    })();
-  </script>
+if(!catalog || !catalog.vendors || !slug){
+  renderMissing();
+}else{
+  const vendor = catalog.vendors.find(v => v.slug === slug);
+  if(!vendor){
+    renderMissing();
+  }else{
+    renderVendor(vendor);
+  }
+}
+</script>
 </body>
 </html>
