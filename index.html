@@ -32,6 +32,18 @@ img{display:block;max-width:100%}
 .topbar{position:sticky;top:0;z-index:100;background:rgba(253,246,236,.93);backdrop-filter:blur(16px);border-bottom:2px solid var(--line);}
 .topbar-inner{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;min-height:76px;}
 .brand-stack{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.back-site-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 14px;border-radius:999px;
+  background:#fff;border:1.5px solid var(--line);
+  font-size:.82rem;font-weight:900;color:var(--ink);
+  box-shadow:var(--shadow-soft);transition:.18s ease;
+  white-space:nowrap;
+}
+.back-site-chip:hover{
+  transform:translateY(-1px);
+  background:#fff3df;
+}
 .brand{display:flex;align-items:center;gap:10px;font-family:"Playfair Display",serif;font-weight:900;font-size:1.22rem;}
 .brand-icon{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#e86820,#c83830);display:grid;place-items:center;font-size:1.1rem;box-shadow:0 5px 16px rgba(232,104,32,.3);overflow:hidden;flex:0 0 auto;}
 .brand-icon img{width:100%;height:100%;object-fit:cover;}
@@ -59,7 +71,6 @@ img{display:block;max-width:100%}
 .hero-band{
   background:linear-gradient(135deg,#1a1208 0%,#2e1e0a 48%,#1d2f14 100%);
   color:#fff;
-  /* desktop : aéré */
   padding:38px 0 32px;
   position:relative;overflow:hidden;
 }
@@ -77,19 +88,16 @@ img{display:block;max-width:100%}
 
 .hero-band h1{
   font-family:"Playfair Display",serif;font-weight:900;
-  /* plancher 1.9rem — lisible sans écraser */
   font-size:clamp(1.9rem,4.3vw,4.2rem);
   line-height:.92;letter-spacing:-.02em;margin-bottom:10px;
 }
 .hero-band h1 em{font-style:normal;background:linear-gradient(90deg,#f8a040,#f06040);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 
-/* description : visible desktop, cachée mobile */
 .hero-desc{color:rgba(255,255,255,.74);font-size:1rem;line-height:1.68;max-width:56ch;}
 
 .hero-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;}
 .chip{padding:8px 13px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);font-size:.78rem;font-weight:800;color:rgba(255,255,255,.84);}
 
-/* Carte droite desktop */
 .hero-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:18px;backdrop-filter:blur(10px);box-shadow:0 14px 40px rgba(0,0,0,.12);}
 .hero-card h3{font-family:"Playfair Display",serif;font-size:1.32rem;margin-bottom:8px;}
 .hero-card p{font-size:.92rem;color:rgba(255,255,255,.76);line-height:1.68;}
@@ -98,12 +106,10 @@ img{display:block;max-width:100%}
 .hero-btn.primary{background:#fff;color:var(--ink);}
 .hero-btn.soft{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);color:#fff;}
 
-/* CTA compact mobile — masqué desktop */
 .hero-mob-cta{display:none;}
 
 /* ═══════════════════════════════════
    IDÉE 1 — STAT STRIP
-   Barre chiffres clés juste sous le hero
    ═══════════════════════════════════ */
 .stat-strip{background:linear-gradient(90deg,#1a1208,#2a1a08);border-bottom:1px solid rgba(255,255,255,.07);}
 .stat-inner{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
@@ -115,7 +121,6 @@ img{display:block;max-width:100%}
 
 /* ═══════════════════════════════════
    IDÉE 2 — TICKER TERRAIN
-   Bandeau orange défilant animé
    ═══════════════════════════════════ */
 .ticker{background:var(--orange);overflow:hidden;padding:7px 0;}
 .ticker-track{display:flex;animation:ticker-scroll 28s linear infinite;width:max-content;}
@@ -259,24 +264,15 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
   .trust-grid{grid-template-columns:1fr 1fr;}
 }
 
-/* ─── HERO COMPACT MOBILE — correctif principal ─── */
 @media(max-width:680px){
-  /* Padding réduit : ne prend plus toute la hauteur */
   .hero-band{padding:16px 0 14px;}
-  /* Kicker plus petit */
   .hero-kicker{font-size:.68rem;padding:5px 10px;margin-bottom:8px;}
-  /* H1 : plancher abaissé à 1.52rem — plus jamais écrasant */
   .hero-band h1{font-size:clamp(1.52rem,5.8vw,2rem);margin-bottom:7px;line-height:.96;}
-  /* Description supprimée — libère de la place */
   .hero-desc{display:none;}
-  /* Chips réduites */
   .hero-chips{margin-top:9px;gap:5px;}
   .chip{padding:5px 10px;font-size:.69rem;}
-  /* Carte desktop supprimée — non critique */
   .hero-card{display:none;}
-  /* Grille → 1 col */
   .hero-grid{grid-template-columns:1fr;gap:0;}
-  /* CTA compact mobile visible */
   .hero-mob-cta{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px;}
   .hero-mob-cta .hero-btn{padding:10px 14px;font-size:.82rem;}
 }
@@ -290,6 +286,7 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
   .float-btn{min-width:0;width:100%;}
   .stat-item{min-width:96px;padding:8px 14px;}
   .stat-num{font-size:1.1rem;}
+  .back-site-chip{padding:9px 12px;font-size:.78rem;}
 }
 
 @media(max-width:440px){
@@ -304,6 +301,7 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
 <header class="topbar">
   <div class="wrap topbar-inner">
     <div class="brand-stack">
+      <a class="back-site-chip" href="https://digiylyfe.com/" target="_blank" rel="noopener">← Retour au site</a>
       <a class="brand" href="#">
         <span class="brand-icon" id="brandIcon">🛍️</span>
         <span>DIGIY MARKET<small>Le marché vivant du quotidien</small></span>
@@ -321,14 +319,12 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
   </div>
 </header>
 
-<!-- ════ HERO BAND ════ -->
 <section class="hero-band">
   <div class="wrap hero-inner">
     <div class="hero-grid">
       <div>
         <div class="hero-kicker">🌍 DIGIYLYFE ∞ · Sénégal · Afrique</div>
         <h1>Le marché qui <em>bouge</em><br/>comme la rue.</h1>
-        <!-- Description cachée sur mobile via CSS -->
         <p class="hero-desc">Catégories qui glissent, fiches qui respirent, contact direct, entrée PRO visible. Ici on ne montre pas juste des cases. On montre une présence.</p>
         <div class="hero-chips">
           <span class="chip">🛒 Neuf</span>
@@ -340,13 +336,11 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
           <span class="chip">🏺 Brocante</span>
           <span class="chip">🧺 Bana-bana</span>
         </div>
-        <!-- CTA compact mobile — masqué sur desktop via CSS -->
         <div class="hero-mob-cta">
           <a class="hero-btn primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🚀 Mon module</a>
           <a id="heroWaBtnMob" class="hero-btn soft" href="#" target="_blank" rel="noopener">💬 DIGIY</a>
         </div>
       </div>
-      <!-- Carte droite — cachée sur mobile via CSS -->
       <div class="hero-card">
         <h3>Un hall qui convertit</h3>
         <p>Tous les exemples servent à guider les commerçants. Le bouton <strong>Je veux mon module</strong> pointe directement vers ton entrée PRO officielle.</p>
@@ -359,7 +353,6 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
   </div>
 </section>
 
-<!-- ════ STAT STRIP ════ -->
 <div class="stat-strip">
   <div class="wrap">
     <div class="stat-inner">
@@ -372,11 +365,9 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
   </div>
 </div>
 
-<!-- ════ TICKER ════ -->
 <div class="ticker">
   <div class="ticker-track">
     <span class="ticker-item">🛍️ DIGIY MARKET</span><span class="ticker-item">🌍 Sénégal</span><span class="ticker-item">✂️ Coiffeur</span><span class="ticker-item">💅 Onglerie</span><span class="ticker-item">🧺 Bana-bana</span><span class="ticker-item">🏺 Brocante</span><span class="ticker-item">👗 Vêtements</span><span class="ticker-item">🌸 Parfum</span><span class="ticker-item">📱 Téléphones</span><span class="ticker-item">🥜 Alimentaire</span><span class="ticker-item">♻️ Deuxième main</span><span class="ticker-item">0% Commission</span><span class="ticker-item">💳 Paiement direct</span><span class="ticker-item">🔥 Entrée PRO</span>
-    <!-- doublon pour boucle fluide -->
     <span class="ticker-item">🛍️ DIGIY MARKET</span><span class="ticker-item">🌍 Sénégal</span><span class="ticker-item">✂️ Coiffeur</span><span class="ticker-item">💅 Onglerie</span><span class="ticker-item">🧺 Bana-bana</span><span class="ticker-item">🏺 Brocante</span><span class="ticker-item">👗 Vêtements</span><span class="ticker-item">🌸 Parfum</span><span class="ticker-item">📱 Téléphones</span><span class="ticker-item">🥜 Alimentaire</span><span class="ticker-item">♻️ Deuxième main</span><span class="ticker-item">0% Commission</span><span class="ticker-item">💳 Paiement direct</span><span class="ticker-item">🔥 Entrée PRO</span>
   </div>
 </div>
@@ -461,7 +452,6 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
   </div>
 </section>
 
-<!-- ════ FAQ RAPIDE ════ -->
 <section class="faq-section">
   <div class="wrap">
     <div class="faq-shell">
@@ -485,7 +475,7 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
 <footer>
   <div class="wrap footer-inner">
     <div><div class="footer-brand">DIGIY MARKET ∞</div><div class="footer-sub">Neuf · Deuxième main · Brocante · Vêtements · Beauté · Services · Quotidien</div></div>
-    <div class="footer-links"><a href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">Je veux mon module</a><a href="http://digiylyfe.com" target="_blank" rel="noopener">digiylyfe.com</a></div>
+    <div class="footer-links"><a href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">Je veux mon module</a><a href="https://digiylyfe.com/" target="_blank" rel="noopener">digiylyfe.com</a></div>
   </div>
 </footer>
 
@@ -495,7 +485,7 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
 </div>
 
 <script>
-const DIGIY_CONFIG={whatsapp:"221771342889",siteUrl:"http://digiylyfe.com",proUrl:"https://commencer-a-payer.digiylyfe.com/",logoUrl:""};
+const DIGIY_CONFIG={whatsapp:"221771342889",siteUrl:"https://digiylyfe.com/",proUrl:"https://commencer-a-payer.digiylyfe.com/",logoUrl:""};
 const VENDORS={
   neuf:[{icon:"📱",bg:"#c8deff",name:"Tech Dakar Shop",what:"Téléphones neufs, accessoires, batteries, câbles",loc:"Dakar · Plateau",price:"5 000–250 000 F",live:true,images:[]},{icon:"👟",bg:"#ffe0cb",name:"Sneakers Mbaye",what:"Jordan, Nike, Adidas — arrivage chaque semaine",loc:"Mbour · Marché Central",price:"15 000–85 000 F",live:true,images:[]},{icon:"🛒",bg:"#ffeaaa",name:"Boutique Awa Neuf",what:"Produits ménagers neufs, ustensiles, déco",loc:"Saly · Ngaparou",price:"2 000–35 000 F",live:false,images:[]},{icon:"💻",bg:"#c8deff",name:"Diallo Informatique",what:"PC neufs et reconditionnés, imprimantes",loc:"Dakar · Parcelles",price:"80 000–450 000 F",live:true,images:[]}],
   deuxiemain:[{icon:"📺",bg:"#f4ead7",name:"Mamadou Électro",what:"TV, réfrigérateurs, machines à laver d'occasion",loc:"Dakar · Colobane",price:"20 000–150 000 F",live:true,images:[]},{icon:"👕",bg:"#ffd0e0",name:"Frip Sénégal",what:"Friperie sélectionnée, marques, prix juste",loc:"Dakar · Sicap",price:"500–5 000 F",live:true,images:[]},{icon:"🎮",bg:"#eadfff",name:"GameZone Dakar",what:"Consoles, jeux PS4/PS5, manettes",loc:"Dakar · Yoff",price:"15 000–120 000 F",live:true,images:[]}],
@@ -613,7 +603,6 @@ rail.addEventListener("touchstart",e=>{if(e.touches[0])dragStart(e.touches[0].pa
 rail.addEventListener("touchmove",e=>{if(e.touches[0])dragMove(e.touches[0].pageX);},{passive:true});
 rail.addEventListener("touchend",dragEnd);
 
-/* FAQ accordéon */
 document.querySelectorAll(".faq-item").forEach(item=>{
   item.querySelector(".faq-q").addEventListener("click",()=>{
     const open=item.classList.contains("open");
