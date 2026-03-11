@@ -9,30 +9,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --bg:#fdf6ec;
-  --bg-2:#fffaf2;
-  --card:#fffdf9;
-  --ink:#1a1208;
-  --muted:#7a6a54;
-  --line:#e8d8be;
-  --gold:#c8860a;
-  --orange:#e86820;
-  --red:#c83830;
-  --green:#28885a;
-  --blue:#4d7cff;
+  --bg:#fdf6ec;--bg-2:#fffaf2;--card:#fffdf9;
+  --ink:#1a1208;--muted:#7a6a54;--line:#e8d8be;
+  --gold:#c8860a;--orange:#e86820;--red:#c83830;--green:#28885a;
   --shadow:0 18px 52px rgba(26,18,8,.13);
   --shadow-soft:0 10px 28px rgba(26,18,8,.08);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-  font-family:'Nunito',sans-serif;
-  background:
-    radial-gradient(circle at top left, rgba(232,104,32,.06), transparent 28%),
-    radial-gradient(circle at top right, rgba(40,136,90,.05), transparent 22%),
-    var(--bg);
-  color:var(--ink);
-  overflow-x:hidden;
+  font-family:"Nunito",sans-serif;
+  background:radial-gradient(circle at top left,rgba(232,104,32,.06),transparent 28%),
+    radial-gradient(circle at top right,rgba(40,136,90,.05),transparent 22%),var(--bg);
+  color:var(--ink);overflow-x:hidden;
 }
 a{color:inherit;text-decoration:none}
 button,input,select{font:inherit}
@@ -40,437 +29,273 @@ img{display:block;max-width:100%}
 .wrap{width:min(1260px,calc(100% - 28px));margin:0 auto}
 
 /* TOPBAR */
-.topbar{
-  position:sticky;top:0;z-index:100;
-  background:rgba(253,246,236,.93);
-  backdrop-filter:blur(16px);
-  border-bottom:2px solid var(--line);
-}
-.topbar-inner{
-  display:grid;
-  grid-template-columns:auto 1fr auto;
-  gap:12px;
-  align-items:center;
-  min-height:76px;
-}
-.brand-stack{
-  display:flex;align-items:center;gap:10px;flex-wrap:wrap
-}
-.brand{
-  display:flex;align-items:center;gap:10px;
-  font-family:'Playfair Display',serif;
-  font-weight:900;font-size:1.22rem
-}
-.brand-icon{
-  width:42px;height:42px;border-radius:12px;
-  background:linear-gradient(135deg,#e86820,#c83830);
-  display:grid;place-items:center;font-size:1.1rem;
-  box-shadow:0 5px 16px rgba(232,104,32,.3);
-  overflow:hidden;
-  flex:0 0 auto;
-}
-.brand-icon img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-.brand small{
-  display:block;
-  font-family:'Nunito',sans-serif;
-  font-weight:800;font-size:.72rem;color:var(--muted);margin-top:1px
-}
-.live-count{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:8px 11px;border-radius:999px;background:#fff;border:1.5px solid var(--line);
-  font-size:.76rem;font-weight:900;color:var(--orange)
-}
-.live-count strong{
-  display:inline-flex;align-items:center;justify-content:center;
-  min-width:22px;height:22px;padding:0 8px;border-radius:999px;background:var(--orange);color:#fff
-}
-.top-search{
-  display:flex;align-items:center;background:#fff;border:2px solid var(--line);
-  border-radius:999px;overflow:hidden;padding:0 6px 0 15px;min-width:0
-}
-.top-search input{
-  flex:1;border:none;outline:none;background:transparent;
-  font-size:.92rem;color:var(--ink);padding:11px 0;min-width:0
-}
+.topbar{position:sticky;top:0;z-index:100;background:rgba(253,246,236,.93);backdrop-filter:blur(16px);border-bottom:2px solid var(--line);}
+.topbar-inner{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;min-height:76px;}
+.brand-stack{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.brand{display:flex;align-items:center;gap:10px;font-family:"Playfair Display",serif;font-weight:900;font-size:1.22rem;}
+.brand-icon{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#e86820,#c83830);display:grid;place-items:center;font-size:1.1rem;box-shadow:0 5px 16px rgba(232,104,32,.3);overflow:hidden;flex:0 0 auto;}
+.brand-icon img{width:100%;height:100%;object-fit:cover;}
+.brand small{display:block;font-family:"Nunito",sans-serif;font-weight:800;font-size:.72rem;color:var(--muted);margin-top:1px;}
+.live-count{display:inline-flex;align-items:center;gap:8px;padding:8px 11px;border-radius:999px;background:#fff;border:1.5px solid var(--line);font-size:.76rem;font-weight:900;color:var(--orange);}
+.live-count strong{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 8px;border-radius:999px;background:var(--orange);color:#fff;}
+.top-search{display:flex;align-items:center;background:#fff;border:2px solid var(--line);border-radius:999px;overflow:hidden;padding:0 6px 0 15px;min-width:0;}
+.top-search input{flex:1;border:none;outline:none;background:transparent;font-size:.92rem;color:var(--ink);padding:11px 0;min-width:0;}
 .top-search input::placeholder{color:var(--muted)}
-.top-search button{
-  width:38px;height:38px;border-radius:50%;background:var(--orange);color:#fff;border:none;
-  cursor:pointer;font-size:.95rem;display:grid;place-items:center;transition:background .18s
-}
+.top-search button{width:38px;height:38px;border-radius:50%;background:var(--orange);color:#fff;border:none;cursor:pointer;font-size:.95rem;display:grid;place-items:center;transition:background .18s;}
 .top-search button:hover{background:var(--red)}
-.top-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-.btn-top{
-  border:none;cursor:pointer;border-radius:999px;padding:11px 14px;font-weight:900;
-  transition:.18s ease;font-size:.84rem
-}
+.top-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
+.btn-top{border:none;cursor:pointer;border-radius:999px;padding:11px 14px;font-weight:900;transition:.18s ease;font-size:.84rem;}
 .btn-top:hover{transform:translateY(-1px)}
-.btn-top.primary{background:var(--orange);color:#fff;box-shadow:0 10px 20px rgba(232,104,32,.22)}
+.btn-top.primary{background:var(--orange);color:#fff;box-shadow:0 10px 20px rgba(232,104,32,.22);}
 .btn-top.primary:hover{background:var(--red)}
-.btn-top.soft{background:#fff;border:1.5px solid var(--line)}
+.btn-top.soft{background:#fff;border:1.5px solid var(--line);}
 .btn-top.soft:hover{background:#fff3df}
 
-/* HERO */
+/* ═══════════════════════════════════
+   HERO BAND
+   Desktop  : plein, carte + texte
+   Mobile   : ultra compact, carte cachée
+   ═══════════════════════════════════ */
 .hero-band{
   background:linear-gradient(135deg,#1a1208 0%,#2e1e0a 48%,#1d2f14 100%);
-  color:#fff;padding:38px 0 32px;position:relative;overflow:hidden
+  color:#fff;
+  /* desktop : aéré */
+  padding:38px 0 32px;
+  position:relative;overflow:hidden;
 }
 .hero-band::before{
   content:"";position:absolute;inset:0;
-  background:
-    radial-gradient(circle at 12% 55%,rgba(232,104,32,.24),transparent 40%),
+  background:radial-gradient(circle at 12% 55%,rgba(232,104,32,.24),transparent 40%),
     radial-gradient(circle at 88% 30%,rgba(40,136,90,.18),transparent 36%),
     radial-gradient(circle at 65% 80%,rgba(255,255,255,.06),transparent 28%);
 }
-.hero-band::after{
-  content:"";position:absolute;right:-80px;bottom:-80px;width:260px;height:260px;border-radius:50%;
-  background:radial-gradient(circle, rgba(255,255,255,.12), transparent 70%);
-}
-.hero-inner{position:relative;z-index:1}
-.hero-grid{
-  display:grid;
-  grid-template-columns:1.04fr .96fr;
-  gap:20px;
-  align-items:center;
-}
-.hero-kicker{
-  display:inline-flex;align-items:center;gap:7px;
-  padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.1);
-  border:1px solid rgba(255,255,255,.16);
-  font-size:.78rem;font-weight:900;letter-spacing:.07em;color:rgba(255,255,255,.82);
-  margin-bottom:12px;text-transform:uppercase
-}
+.hero-band::after{content:"";position:absolute;right:-80px;bottom:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%);}
+.hero-inner{position:relative;z-index:1;}
+.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:20px;align-items:center;}
+
+.hero-kicker{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);font-size:.78rem;font-weight:900;letter-spacing:.07em;color:rgba(255,255,255,.82);margin-bottom:12px;text-transform:uppercase;}
+
 .hero-band h1{
-  font-family:'Playfair Display',serif;font-weight:900;
-  font-size:clamp(2rem,4.3vw,4.2rem);line-height:.92;letter-spacing:-.02em;margin-bottom:10px
+  font-family:"Playfair Display",serif;font-weight:900;
+  /* plancher 1.9rem — lisible sans écraser */
+  font-size:clamp(1.9rem,4.3vw,4.2rem);
+  line-height:.92;letter-spacing:-.02em;margin-bottom:10px;
 }
-.hero-band h1 em{
-  font-style:normal;background:linear-gradient(90deg,#f8a040,#f06040);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text
-}
-.hero-band p{
-  color:rgba(255,255,255,.74);font-size:1rem;line-height:1.68;max-width:56ch
-}
-.hero-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
-.chip{
-  padding:8px 13px;border-radius:999px;background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.13);font-size:.78rem;font-weight:800;color:rgba(255,255,255,.84)
-}
-.hero-card{
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:28px;
-  padding:18px;
-  backdrop-filter:blur(10px);
-  box-shadow:0 14px 40px rgba(0,0,0,.12);
-}
-.hero-card h3{
-  font-family:'Playfair Display',serif;
-  font-size:1.32rem;
-  margin-bottom:8px;
-}
-.hero-card p{font-size:.92rem;color:rgba(255,255,255,.76);line-height:1.68}
-.hero-card .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.hero-btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  padding:12px 15px;border-radius:999px;font-weight:900;font-size:.86rem
-}
-.hero-btn.primary{background:#fff;color:var(--ink)}
-.hero-btn.soft{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);color:#fff}
+.hero-band h1 em{font-style:normal;background:linear-gradient(90deg,#f8a040,#f06040);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 
-/* PRESTIGE */
-.prestige{padding:18px 0 10px}
-.prestige-shell{
-  display:grid;grid-template-columns:1.1fr .9fr;gap:14px;align-items:center;
-  background:linear-gradient(135deg,#fff8ed,#fff3e1);
-  border:1.5px solid #f0d0a0;
-  border-radius:26px;
-  padding:16px;
-  box-shadow:var(--shadow-soft)
-}
-.prestige h2{
-  font-family:'Playfair Display',serif;
-  font-size:1.45rem;
-  margin-bottom:6px
-}
-.prestige p{color:#7c5a12;line-height:1.68}
-.prestige-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-.prestige-pill{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:10px 14px;border-radius:999px;background:#fff;border:1.5px solid #f0d0a0;
-  font-weight:900;font-size:.82rem
-}
-.prestige-cta{display:flex;flex-direction:column;gap:10px}
-.prestige-link{
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  padding:15px 18px;border-radius:18px;font-weight:900
-}
-.prestige-link.primary{
-  background:linear-gradient(135deg,var(--orange),var(--red));color:#fff;box-shadow:0 14px 28px rgba(232,104,32,.25)
-}
-.prestige-link.soft{
-  background:#fff;border:1.5px solid #f0d0a0;color:var(--ink)
-}
+/* description : visible desktop, cachée mobile */
+.hero-desc{color:rgba(255,255,255,.74);font-size:1rem;line-height:1.68;max-width:56ch;}
 
-/* TRUST */
-.trust{padding:12px 0 0}
-.trust-shell{
-  background:var(--card);
-  border:1.5px solid var(--line);
-  border-radius:24px;
-  padding:16px;
-  box-shadow:var(--shadow-soft)
-}
-.trust-head{
-  display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px
-}
-.trust-head h3{
-  font-family:'Playfair Display',serif;
-  font-size:1.26rem
-}
-.trust-head p{color:var(--muted);font-size:.9rem}
-.trust-grid{
-  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px
-}
-.trust-card{
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:14px;
-  background:#fff;
-}
-.trust-card .icon{
-  width:42px;height:42px;border-radius:14px;display:grid;place-items:center;margin-bottom:10px;
-  background:#fff3df;border:1px solid #f2d2a6;font-size:1.1rem
-}
-.trust-card h4{font-size:.96rem;margin-bottom:5px}
-.trust-card p{color:var(--muted);font-size:.84rem;line-height:1.58}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;}
+.chip{padding:8px 13px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);font-size:.78rem;font-weight:800;color:rgba(255,255,255,.84);}
+
+/* Carte droite desktop */
+.hero-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:18px;backdrop-filter:blur(10px);box-shadow:0 14px 40px rgba(0,0,0,.12);}
+.hero-card h3{font-family:"Playfair Display",serif;font-size:1.32rem;margin-bottom:8px;}
+.hero-card p{font-size:.92rem;color:rgba(255,255,255,.76);line-height:1.68;}
+.cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+.hero-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 15px;border-radius:999px;font-weight:900;font-size:.86rem;}
+.hero-btn.primary{background:#fff;color:var(--ink);}
+.hero-btn.soft{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);color:#fff;}
+
+/* CTA compact mobile — masqué desktop */
+.hero-mob-cta{display:none;}
+
+/* ═══════════════════════════════════
+   IDÉE 1 — STAT STRIP
+   Barre chiffres clés juste sous le hero
+   ═══════════════════════════════════ */
+.stat-strip{background:linear-gradient(90deg,#1a1208,#2a1a08);border-bottom:1px solid rgba(255,255,255,.07);}
+.stat-inner{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+.stat-inner::-webkit-scrollbar{display:none;}
+.stat-item{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 24px;gap:1px;border-right:1px solid rgba(255,255,255,.07);min-width:110px;}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-family:"Playfair Display",serif;font-weight:900;font-size:1.32rem;color:#f8a040;}
+.stat-lbl{font-size:.62rem;font-weight:800;color:rgba(255,255,255,.46);text-transform:uppercase;letter-spacing:.05em;}
+
+/* ═══════════════════════════════════
+   IDÉE 2 — TICKER TERRAIN
+   Bandeau orange défilant animé
+   ═══════════════════════════════════ */
+.ticker{background:var(--orange);overflow:hidden;padding:7px 0;}
+.ticker-track{display:flex;animation:ticker-scroll 28s linear infinite;width:max-content;}
+.ticker-track:hover{animation-play-state:paused;}
+.ticker-item{white-space:nowrap;padding:0 22px;font-weight:900;font-size:.76rem;color:#fff;letter-spacing:.04em;text-transform:uppercase;border-right:1px solid rgba(255,255,255,.24);}
+@keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* FILTERS */
-.filters{padding:18px 0 10px}
-.filters-shell{
-  display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;
-  background:var(--card);border:1.5px solid var(--line);border-radius:22px;padding:14px;box-shadow:var(--shadow-soft)
-}
-.filter-group{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.filter-pill{
-  display:inline-flex;align-items:center;gap:8px;padding:10px 13px;border-radius:999px;
-  background:#fff;border:1.5px solid var(--line);font-weight:900;font-size:.82rem
-}
-.filter-select{
-  appearance:none;background:#fff;border:1.5px solid var(--line);border-radius:999px;
-  padding:11px 16px;font-weight:900;color:var(--ink);min-width:160px;cursor:pointer
-}
-.filter-reset{
-  border:none;border-radius:999px;padding:11px 14px;background:#fff;border:1.5px solid var(--line);
-  font-weight:900;cursor:pointer
-}
-.filter-reset:hover{background:#fff3df}
+.filters{padding:18px 0 10px;}
+.filters-shell{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;background:var(--card);border:1.5px solid var(--line);border-radius:22px;padding:14px;box-shadow:var(--shadow-soft);}
+.filter-group{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.filter-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 13px;border-radius:999px;background:#fff;border:1.5px solid var(--line);font-weight:900;font-size:.82rem;}
+.filter-select{appearance:none;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:11px 16px;font-weight:900;color:var(--ink);min-width:160px;cursor:pointer;}
+.filter-reset{border:none;border-radius:999px;padding:11px 14px;background:#fff;border:1.5px solid var(--line);font-weight:900;cursor:pointer;}
+.filter-reset:hover{background:#fff3df;}
 
-/* SECTION */
-.cats-section{padding:14px 0 0}
-.section-head{
-  display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap
-}
-.section-head h2{
-  font-family:'Playfair Display',serif;font-weight:900;font-size:1.55rem;letter-spacing:-.02em
-}
-.section-head p{color:var(--muted);font-size:.88rem}
-.rail-controls{display:flex;gap:8px}
-.arr{
-  width:42px;height:42px;border-radius:12px;background:#fff;border:2px solid var(--line);
-  display:grid;place-items:center;cursor:pointer;font-size:1.08rem;font-weight:700;transition:all .18s
-}
-.arr:hover{background:var(--ink);color:#fff;border-color:var(--ink);transform:scale(1.06)}
-.arr:active{transform:scale(.94)}
-.rail-wrap{overflow:hidden;position:relative}
-.rail-wrap::before,.rail-wrap::after{
-  content:"";position:absolute;top:0;bottom:0;width:32px;z-index:2;pointer-events:none
-}
-.rail-wrap::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
-.rail-wrap::after{right:0;background:linear-gradient(270deg,var(--bg),transparent)}
+/* TRUST */
+.trust{padding:12px 0 0;}
+.trust-shell{background:var(--card);border:1.5px solid var(--line);border-radius:24px;padding:16px;box-shadow:var(--shadow-soft);}
+.trust-head{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
+.trust-head h3{font-family:"Playfair Display",serif;font-size:1.26rem;}
+.trust-head p{color:var(--muted);font-size:.9rem;}
+.trust-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;}
+.trust-card{border:1px solid var(--line);border-radius:18px;padding:14px;background:#fff;}
+.trust-card .icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;margin-bottom:10px;background:#fff3df;border:1px solid #f2d2a6;font-size:1.1rem;}
+.trust-card h4{font-size:.96rem;margin-bottom:5px;}
+.trust-card p{color:var(--muted);font-size:.84rem;line-height:1.58;}
 
-.cat-rail{
-  display:flex;gap:10px;overflow-x:auto;scroll-behavior:smooth;
-  scrollbar-width:none;padding:8px 4px 14px;cursor:grab
-}
-.cat-rail::-webkit-scrollbar{display:none}
-.cat-rail.grabbing{cursor:grabbing;scroll-behavior:auto}
-
-.cat-tile{
-  flex-shrink:0;width:124px;border-radius:18px;overflow:hidden;border:2.5px solid transparent;
-  cursor:pointer;transition:transform .22s,box-shadow .22s,border-color .18s;background:#fff;
-  box-shadow:0 4px 14px rgba(26,18,8,.09);user-select:none
-}
-.cat-tile:hover{transform:translateY(-4px) scale(1.04);box-shadow:var(--shadow)}
-.cat-tile.active{
-  border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,104,32,.2),var(--shadow);
-  transform:translateY(-3px) scale(1.03)
-}
-.cat-img{
-  height:84px;display:flex;align-items:center;justify-content:center;font-size:2.1rem;position:relative;overflow:hidden
-}
-.cat-bg-txt{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
-  opacity:.1;font-size:.85rem;letter-spacing:1px;line-height:1.5;padding:4px;word-break:break-all;pointer-events:none
-}
-.cat-icon{position:relative;z-index:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.22))}
-.cat-body{padding:8px 10px 10px}
-.cat-name{font-family:'Playfair Display',serif;font-weight:700;font-size:.84rem;margin-bottom:3px;line-height:1.2}
-.cat-count{font-size:.68rem;font-weight:800;color:var(--muted);letter-spacing:.02em}
-.cat-count span{
-  display:inline-flex;align-items:center;justify-content:center;background:var(--orange);color:#fff;
-  min-width:18px;height:18px;border-radius:50%;font-size:.6rem;margin-left:4px;padding:0 4px
-}
+/* CATS */
+.cats-section{padding:14px 0 0;}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap;}
+.section-head h2{font-family:"Playfair Display",serif;font-weight:900;font-size:1.55rem;letter-spacing:-.02em;}
+.section-head p{color:var(--muted);font-size:.88rem;}
+.rail-controls{display:flex;gap:8px;}
+.arr{width:42px;height:42px;border-radius:12px;background:#fff;border:2px solid var(--line);display:grid;place-items:center;cursor:pointer;font-size:1.08rem;font-weight:700;transition:all .18s;}
+.arr:hover{background:var(--ink);color:#fff;border-color:var(--ink);transform:scale(1.06);}
+.arr:active{transform:scale(.94);}
+.rail-wrap{overflow:hidden;position:relative;}
+.rail-wrap::before,.rail-wrap::after{content:"";position:absolute;top:0;bottom:0;width:32px;z-index:2;pointer-events:none;}
+.rail-wrap::before{left:0;background:linear-gradient(90deg,var(--bg),transparent);}
+.rail-wrap::after{right:0;background:linear-gradient(270deg,var(--bg),transparent);}
+.cat-rail{display:flex;gap:10px;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none;padding:8px 4px 14px;cursor:grab;}
+.cat-rail::-webkit-scrollbar{display:none;}
+.cat-rail.grabbing{cursor:grabbing;scroll-behavior:auto;}
+.cat-tile{flex-shrink:0;width:124px;border-radius:18px;overflow:hidden;border:2.5px solid transparent;cursor:pointer;transition:transform .22s,box-shadow .22s,border-color .18s;background:#fff;box-shadow:0 4px 14px rgba(26,18,8,.09);user-select:none;}
+.cat-tile:hover{transform:translateY(-4px) scale(1.04);box-shadow:var(--shadow);}
+.cat-tile.active{border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,104,32,.2),var(--shadow);transform:translateY(-3px) scale(1.03);}
+.cat-img{height:84px;display:flex;align-items:center;justify-content:center;font-size:2.1rem;position:relative;overflow:hidden;}
+.cat-bg-txt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;opacity:.1;font-size:.85rem;letter-spacing:1px;line-height:1.5;padding:4px;word-break:break-all;pointer-events:none;}
+.cat-icon{position:relative;z-index:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.22));}
+.cat-body{padding:8px 10px 10px;}
+.cat-name{font-family:"Playfair Display",serif;font-weight:700;font-size:.84rem;margin-bottom:3px;line-height:1.2;}
+.cat-count{font-size:.68rem;font-weight:800;color:var(--muted);letter-spacing:.02em;}
+.cat-count span{display:inline-flex;align-items:center;justify-content:center;background:var(--orange);color:#fff;min-width:18px;height:18px;border-radius:50%;font-size:.6rem;margin-left:4px;padding:0 4px;}
 
 /* PANEL */
-.vendor-panel{
-  max-height:0;overflow:hidden;
-  transition:max-height .55s cubic-bezier(.4,0,.2,1),opacity .4s,margin .4s;
-  opacity:0;margin-top:0
-}
-.vendor-panel.open{max-height:2200px;opacity:1;margin-top:20px}
-.vendor-panel-inner{
-  background:#fff;border:2px solid var(--line);border-radius:26px;overflow:hidden;box-shadow:var(--shadow)
-}
-.panel-header{
-  display:flex;align-items:center;justify-content:space-between;padding:16px 20px 14px;
-  border-bottom:1.5px solid var(--line);flex-wrap:wrap;gap:10px
-}
-.panel-title{display:flex;align-items:center;gap:10px}
-.panel-title .icon{font-size:1.5rem}
-.panel-title h3{font-family:'Playfair Display',serif;font-weight:900;font-size:1.2rem}
-.panel-title p{color:var(--muted);font-size:.82rem;margin-top:2px}
-.panel-close{
-  width:34px;height:34px;border-radius:9px;background:#f4ece0;border:none;cursor:pointer;
-  font-size:.95rem;display:grid;place-items:center;transition:background .2s
-}
-.panel-close:hover{background:var(--red);color:#fff}
-.vendor-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:14px;padding:18px
-}
+.vendor-panel{max-height:0;overflow:hidden;transition:max-height .55s cubic-bezier(.4,0,.2,1),opacity .4s,margin .4s;opacity:0;margin-top:0;}
+.vendor-panel.open{max-height:2200px;opacity:1;margin-top:20px;}
+.vendor-panel-inner{background:#fff;border:2px solid var(--line);border-radius:26px;overflow:hidden;box-shadow:var(--shadow);}
+.panel-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 14px;border-bottom:1.5px solid var(--line);flex-wrap:wrap;gap:10px;}
+.panel-title{display:flex;align-items:center;gap:10px;}
+.panel-title .icon{font-size:1.5rem;}
+.panel-title h3{font-family:"Playfair Display",serif;font-weight:900;font-size:1.2rem;}
+.panel-title p{color:var(--muted);font-size:.82rem;margin-top:2px;}
+.panel-close{width:34px;height:34px;border-radius:9px;background:#f4ece0;border:none;cursor:pointer;font-size:.95rem;display:grid;place-items:center;transition:background .2s;}
+.panel-close:hover{background:var(--red);color:#fff;}
+.vendor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:14px;padding:18px;}
 
 /* VENDOR */
-.vendor{
-  border-radius:18px;border:1.5px solid var(--line);overflow:hidden;background:#fdfaf5;
-  transition:transform .22s,box-shadow .22s;cursor:pointer
-}
-.vendor:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(26,18,8,.12)}
-.vendor-top{
-  height:108px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;position:relative;overflow:hidden
-}
-.vendor-top img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-.vendor-example{
-  position:absolute;left:10px;top:10px;background:rgba(255,255,255,.95);color:var(--orange);
-  border:1px solid rgba(232,104,32,.22);padding:4px 8px;border-radius:999px;font-size:.62rem;font-weight:900;z-index:2
-}
-.vendor-live{
-  position:absolute;right:10px;top:10px;display:flex;align-items:center;gap:4px;
-  background:rgba(40,136,90,.92);color:#fff;padding:4px 8px;border-radius:999px;font-size:.62rem;font-weight:900;z-index:2
-}
-.vendor-live::before{
-  content:"";width:6px;height:6px;border-radius:50%;background:#8ff7c5;animation:pulse 1.4s ease-in-out infinite
-}
-@keyframes pulse{
-  0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:.45;transform:scale(.8)}
-}
-.vendor-body{padding:12px 13px 13px}
-.vendor-name{
-  font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;line-height:1.1;margin-bottom:4px
-}
-.vendor-what{
-  font-size:.78rem;color:var(--muted);line-height:1.5;margin-bottom:10px;min-height:46px
-}
-.vendor-meta{
-  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px
-}
-.vendor-loc{font-size:.72rem;font-weight:800;color:var(--muted)}
-.vendor-price{
-  font-size:.74rem;font-weight:900;padding:4px 9px;border-radius:999px;background:#fef0d8;color:var(--gold);
-  border:1px solid #f8d8a0
-}
-.vendor-cta{display:flex;gap:7px;margin-top:10px}
-.vendor-btn{
-  flex:1;padding:9px 10px;border-radius:11px;font-size:.75rem;font-weight:900;border:none;
-  cursor:pointer;transition:all .18s
-}
-.vendor-btn.primary{background:var(--orange);color:#fff;box-shadow:0 4px 12px rgba(232,104,32,.26)}
-.vendor-btn.primary:hover{background:var(--red)}
-.vendor-btn.ghost{background:#f4ece0;color:var(--ink)}
-.vendor-btn.ghost:hover{background:#eadfce}
-
-.empty-state{text-align:center;padding:38px 20px;color:var(--muted);grid-column:1/-1}
-.empty-state .big{font-size:2.8rem;margin-bottom:10px}
-.empty-state p{font-size:.93rem;line-height:1.6}
+.vendor{border-radius:18px;border:1.5px solid var(--line);overflow:hidden;background:#fdfaf5;transition:transform .22s,box-shadow .22s;cursor:pointer;}
+.vendor:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(26,18,8,.12);}
+.vendor-top{height:108px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;position:relative;overflow:hidden;}
+.vendor-top img{width:100%;height:100%;object-fit:cover;}
+.vendor-example{position:absolute;left:10px;top:10px;background:rgba(255,255,255,.95);color:var(--orange);border:1px solid rgba(232,104,32,.22);padding:4px 8px;border-radius:999px;font-size:.62rem;font-weight:900;z-index:2;}
+.vendor-live{position:absolute;right:10px;top:10px;display:flex;align-items:center;gap:4px;background:rgba(40,136,90,.92);color:#fff;padding:4px 8px;border-radius:999px;font-size:.62rem;font-weight:900;z-index:2;}
+.vendor-live::before{content:"";width:6px;height:6px;border-radius:50%;background:#8ff7c5;animation:pulse 1.4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.8)}}
+.vendor-body{padding:12px 13px 13px;}
+.vendor-name{font-family:"Playfair Display",serif;font-weight:700;font-size:1rem;line-height:1.1;margin-bottom:4px;}
+.vendor-what{font-size:.78rem;color:var(--muted);line-height:1.5;margin-bottom:10px;min-height:46px;}
+.vendor-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+.vendor-loc{font-size:.72rem;font-weight:800;color:var(--muted);}
+.vendor-price{font-size:.74rem;font-weight:900;padding:4px 9px;border-radius:999px;background:#fef0d8;color:var(--gold);border:1px solid #f8d8a0;}
+.vendor-cta{display:flex;gap:7px;margin-top:10px;}
+.vendor-btn{flex:1;padding:9px 10px;border-radius:11px;font-size:.75rem;font-weight:900;border:none;cursor:pointer;transition:all .18s;}
+.vendor-btn.primary{background:var(--orange);color:#fff;box-shadow:0 4px 12px rgba(232,104,32,.26);}
+.vendor-btn.primary:hover{background:var(--red);}
+.vendor-btn.ghost{background:#f4ece0;color:var(--ink);}
+.vendor-btn.ghost:hover{background:#eadfce;}
+.empty-state{text-align:center;padding:38px 20px;color:var(--muted);grid-column:1/-1;}
+.empty-state .big{font-size:2.8rem;margin-bottom:10px;}
+.empty-state p{font-size:.93rem;line-height:1.6;}
 
 /* CTA BAND */
-.cta-band{
-  margin-top:24px;
-  background:linear-gradient(135deg,#fffaf3,#fff4e4);
-  border:2px solid var(--line);
-  border-radius:28px;
-  padding:18px;
-  box-shadow:var(--shadow);
-}
-.cta-band-grid{
-  display:grid;grid-template-columns:1.08fr .92fr;gap:14px;align-items:center
-}
-.cta-band h3{
-  font-family:'Playfair Display',serif;font-size:1.38rem;margin-bottom:8px
-}
-.cta-band p{color:var(--muted);line-height:1.7}
-.cta-band-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.cta-pill{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:10px 14px;border-radius:999px;background:#fff;border:1.5px solid var(--line);
-  font-weight:900;font-size:.84rem
-}
-.cta-main{
-  display:flex;flex-direction:column;gap:10px
-}
-.big-cta{
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  padding:16px 18px;border-radius:18px;background:linear-gradient(135deg,var(--orange),var(--red));
-  color:#fff;font-weight:900;font-size:.98rem;box-shadow:0 14px 28px rgba(232,104,32,.25)
-}
-.big-cta.soft{
-  background:#fff;color:var(--ink);border:1.5px solid var(--line);box-shadow:none
-}
+.cta-band{margin-top:24px;background:linear-gradient(135deg,#fffaf3,#fff4e4);border:2px solid var(--line);border-radius:28px;padding:18px;box-shadow:var(--shadow);}
+.cta-band-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:14px;align-items:center;}
+.cta-band h3{font-family:"Playfair Display",serif;font-size:1.38rem;margin-bottom:8px;}
+.cta-band p{color:var(--muted);line-height:1.7;}
+.cta-band-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+.cta-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:#fff;border:1.5px solid var(--line);font-weight:900;font-size:.84rem;}
+.cta-main{display:flex;flex-direction:column;gap:10px;}
+.big-cta{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px 18px;border-radius:18px;background:linear-gradient(135deg,var(--orange),var(--red));color:#fff;font-weight:900;font-size:.98rem;box-shadow:0 14px 28px rgba(232,104,32,.25);}
+.big-cta.soft{background:#fff;color:var(--ink);border:1.5px solid var(--line);box-shadow:none;}
+
+/* ═══════════════════════════════════
+   IDÉE 3 — FAQ RAPIDE ACCORDÉON
+   ═══════════════════════════════════ */
+.faq-section{padding:18px 0 4px;}
+.faq-shell{background:var(--card);border:1.5px solid var(--line);border-radius:24px;padding:16px;box-shadow:var(--shadow-soft);}
+.faq-head{font-family:"Playfair Display",serif;font-size:1.26rem;font-weight:900;margin-bottom:14px;}
+.faq-item{border-bottom:1px solid var(--line);overflow:hidden;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 2px;cursor:pointer;font-weight:900;font-size:.9rem;user-select:none;}
+.faq-q:hover{color:var(--orange);}
+.faq-arr{flex:0 0 auto;width:28px;height:28px;border-radius:8px;background:#fff3df;display:flex;align-items:center;justify-content:center;font-size:.82rem;transition:transform .28s,background .22s;}
+.faq-item.open .faq-arr{transform:rotate(180deg);background:var(--orange);color:#fff;}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .38s ease,padding .28s;color:var(--muted);font-size:.86rem;line-height:1.65;padding:0 2px;}
+.faq-item.open .faq-a{max-height:200px;padding-bottom:14px;}
 
 /* FLOAT CTA */
-.float-cta{
-  position:fixed;right:14px;bottom:14px;z-index:120;
-  display:flex;flex-direction:column;gap:10px
-}
-.float-btn{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  min-width:220px;padding:13px 16px;border-radius:999px;color:#fff;font-weight:900;
-  box-shadow:0 16px 28px rgba(0,0,0,.18)
-}
-.float-btn.wa{background:#0b8f59}
-.float-btn.module{background:linear-gradient(135deg,var(--orange),var(--red))}
+.float-cta{position:fixed;right:14px;bottom:14px;z-index:120;display:flex;flex-direction:column;gap:10px;}
+.float-btn{display:flex;align-items:center;justify-content:center;gap:8px;min-width:220px;padding:13px 16px;border-radius:999px;color:#fff;font-weight:900;box-shadow:0 16px 28px rgba(0,0,0,.18);}
+.float-btn.wa{background:#0b8f59;}
+.float-btn.module{background:linear-gradient(135deg,var(--orange),var(--red));}
 
+/* FOOTER */
+footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+.footer-brand{font-family:"Playfair Display",serif;font-weight:900;font-size:1.1rem;}
+.footer-sub{color:var(--muted);font-size:.74rem;margin-top:3px;}
+.footer-links{display:flex;gap:14px;font-weight:800;font-size:.82rem;flex-wrap:wrap;}
+.footer-links a{color:var(--orange);}
+.footer-links a:hover{text-decoration:underline;}
+
+/* ═══════════════════════════
+   RESPONSIVE MOBILE
+   ═══════════════════════════ */
 @media(max-width:980px){
-  .topbar-inner,.hero-grid,.prestige-shell,.trust-grid,.cta-band-grid,.filters-shell{grid-template-columns:1fr}
-  .top-actions{justify-content:flex-start}
+  .topbar-inner,.cta-band-grid,.filters-shell{grid-template-columns:1fr;}
+  .top-actions{justify-content:flex-start;}
+  .trust-grid{grid-template-columns:1fr 1fr;}
 }
+
+/* ─── HERO COMPACT MOBILE — correctif principal ─── */
+@media(max-width:680px){
+  /* Padding réduit : ne prend plus toute la hauteur */
+  .hero-band{padding:16px 0 14px;}
+  /* Kicker plus petit */
+  .hero-kicker{font-size:.68rem;padding:5px 10px;margin-bottom:8px;}
+  /* H1 : plancher abaissé à 1.52rem — plus jamais écrasant */
+  .hero-band h1{font-size:clamp(1.52rem,5.8vw,2rem);margin-bottom:7px;line-height:.96;}
+  /* Description supprimée — libère de la place */
+  .hero-desc{display:none;}
+  /* Chips réduites */
+  .hero-chips{margin-top:9px;gap:5px;}
+  .chip{padding:5px 10px;font-size:.69rem;}
+  /* Carte desktop supprimée — non critique */
+  .hero-card{display:none;}
+  /* Grille → 1 col */
+  .hero-grid{grid-template-columns:1fr;gap:0;}
+  /* CTA compact mobile visible */
+  .hero-mob-cta{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px;}
+  .hero-mob-cta .hero-btn{padding:10px 14px;font-size:.82rem;}
+}
+
 @media(max-width:700px){
-  .cat-tile{width:104px}
-  .cat-img{height:70px;font-size:1.8rem}
-  .vendor-grid,.trust-grid{grid-template-columns:1fr 1fr}
-  .panel-header{padding:12px 14px}
-  .float-cta{left:12px;right:12px}
-  .float-btn{min-width:0;width:100%}
+  .cat-tile{width:104px;}
+  .cat-img{height:70px;font-size:1.8rem;}
+  .vendor-grid,.trust-grid{grid-template-columns:1fr 1fr;}
+  .panel-header{padding:12px 14px;}
+  .float-cta{left:12px;right:12px;}
+  .float-btn{min-width:0;width:100%;}
+  .stat-item{min-width:96px;padding:8px 14px;}
+  .stat-num{font-size:1.1rem;}
 }
+
 @media(max-width:440px){
-  .vendor-grid,.trust-grid{grid-template-columns:1fr}
+  .vendor-grid,.trust-grid{grid-template-columns:1fr;}
+  .topbar-inner{grid-template-columns:1fr;}
+  .top-actions{display:none;}
 }
 </style>
 </head>
@@ -485,12 +310,10 @@ img{display:block;max-width:100%}
       </a>
       <div class="live-count">Vendeurs exemples <strong id="totalCount">0</strong></div>
     </div>
-
     <div class="top-search">
       <input id="topSearchInput" type="text" placeholder="Chercher un vendeur, un produit, une ville…"/>
       <button id="topSearchBtn" type="button">🔍</button>
     </div>
-
     <div class="top-actions">
       <a class="btn-top soft" id="waTopBtn" href="#" target="_blank" rel="noopener">💬 WhatsApp DIGIY</a>
       <a class="btn-top primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
@@ -498,16 +321,15 @@ img{display:block;max-width:100%}
   </div>
 </header>
 
+<!-- ════ HERO BAND ════ -->
 <section class="hero-band">
   <div class="wrap hero-inner">
     <div class="hero-grid">
       <div>
         <div class="hero-kicker">🌍 DIGIYLYFE ∞ · Sénégal · Afrique</div>
         <h1>Le marché qui <em>bouge</em><br/>comme la rue.</h1>
-        <p>
-          Catégories qui glissent, fiches qui respirent, contact direct, entrée PRO visible.
-          Ici on ne montre pas juste des cases. On montre une présence.
-        </p>
+        <!-- Description cachée sur mobile via CSS -->
+        <p class="hero-desc">Catégories qui glissent, fiches qui respirent, contact direct, entrée PRO visible. Ici on ne montre pas juste des cases. On montre une présence.</p>
         <div class="hero-chips">
           <span class="chip">🛒 Neuf</span>
           <span class="chip">♻️ Deuxième main</span>
@@ -518,14 +340,16 @@ img{display:block;max-width:100%}
           <span class="chip">🏺 Brocante</span>
           <span class="chip">🧺 Bana-bana</span>
         </div>
+        <!-- CTA compact mobile — masqué sur desktop via CSS -->
+        <div class="hero-mob-cta">
+          <a class="hero-btn primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🚀 Mon module</a>
+          <a id="heroWaBtnMob" class="hero-btn soft" href="#" target="_blank" rel="noopener">💬 DIGIY</a>
+        </div>
       </div>
-
+      <!-- Carte droite — cachée sur mobile via CSS -->
       <div class="hero-card">
         <h3>Un hall qui convertit</h3>
-        <p>
-          Tous les exemples servent à guider les commerçants.  
-          Le bouton <strong>Je veux mon module</strong> pointe directement vers ton entrée PRO officielle.
-        </p>
+        <p>Tous les exemples servent à guider les commerçants. Le bouton <strong>Je veux mon module</strong> pointe directement vers ton entrée PRO officielle.</p>
         <div class="cta-row">
           <a class="hero-btn primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🚀 Je veux mon module</a>
           <a id="heroWaBtn" class="hero-btn soft" href="#" target="_blank" rel="noopener">💬 Parler à DIGIY</a>
@@ -535,6 +359,28 @@ img{display:block;max-width:100%}
   </div>
 </section>
 
+<!-- ════ STAT STRIP ════ -->
+<div class="stat-strip">
+  <div class="wrap">
+    <div class="stat-inner">
+      <div class="stat-item"><div class="stat-num" id="statVendeurs">0</div><div class="stat-lbl">Vendeurs exemples</div></div>
+      <div class="stat-item"><div class="stat-num">12</div><div class="stat-lbl">Catégories</div></div>
+      <div class="stat-item"><div class="stat-num">0%</div><div class="stat-lbl">Commission</div></div>
+      <div class="stat-item"><div class="stat-num">Direct</div><div class="stat-lbl">Paiement pro</div></div>
+      <div class="stat-item"><div class="stat-num">∞</div><div class="stat-lbl">DIGIYLYFE</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ TICKER ════ -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">🛍️ DIGIY MARKET</span><span class="ticker-item">🌍 Sénégal</span><span class="ticker-item">✂️ Coiffeur</span><span class="ticker-item">💅 Onglerie</span><span class="ticker-item">🧺 Bana-bana</span><span class="ticker-item">🏺 Brocante</span><span class="ticker-item">👗 Vêtements</span><span class="ticker-item">🌸 Parfum</span><span class="ticker-item">📱 Téléphones</span><span class="ticker-item">🥜 Alimentaire</span><span class="ticker-item">♻️ Deuxième main</span><span class="ticker-item">0% Commission</span><span class="ticker-item">💳 Paiement direct</span><span class="ticker-item">🔥 Entrée PRO</span>
+    <!-- doublon pour boucle fluide -->
+    <span class="ticker-item">🛍️ DIGIY MARKET</span><span class="ticker-item">🌍 Sénégal</span><span class="ticker-item">✂️ Coiffeur</span><span class="ticker-item">💅 Onglerie</span><span class="ticker-item">🧺 Bana-bana</span><span class="ticker-item">🏺 Brocante</span><span class="ticker-item">👗 Vêtements</span><span class="ticker-item">🌸 Parfum</span><span class="ticker-item">📱 Téléphones</span><span class="ticker-item">🥜 Alimentaire</span><span class="ticker-item">♻️ Deuxième main</span><span class="ticker-item">0% Commission</span><span class="ticker-item">💳 Paiement direct</span><span class="ticker-item">🔥 Entrée PRO</span>
+  </div>
+</div>
+
 <section class="filters">
   <div class="wrap">
     <div class="filters-shell">
@@ -543,11 +389,7 @@ img{display:block;max-width:100%}
         <span class="filter-pill">🧭 Fiches exemples guidantes</span>
         <span class="filter-pill">🔥 Entrée PRO visible</span>
       </div>
-
-      <select id="cityFilter" class="filter-select">
-        <option value="">Toutes les villes</option>
-      </select>
-
+      <select id="cityFilter" class="filter-select"><option value="">Toutes les villes</option></select>
       <button id="resetFilters" class="filter-reset" type="button">Réinitialiser</button>
     </div>
   </div>
@@ -556,34 +398,12 @@ img{display:block;max-width:100%}
 <section class="trust">
   <div class="wrap">
     <div class="trust-shell">
-      <div class="trust-head">
-        <div>
-          <h3>Ils nous font confiance</h3>
-          <p>Bloc vitrine pour rassurer, inspirer et montrer la portée terrain.</p>
-        </div>
-      </div>
-
+      <div class="trust-head"><div><h3>Ils nous font confiance</h3><p>Bloc vitrine pour rassurer, inspirer et montrer la portée terrain.</p></div></div>
       <div class="trust-grid">
-        <article class="trust-card">
-          <div class="icon">🏪</div>
-          <h4>Boutiques terrain</h4>
-          <p>Vitrines simples, visibles et compréhensibles par tout le monde.</p>
-        </article>
-        <article class="trust-card">
-          <div class="icon">🧺</div>
-          <h4>Bana-bana & vendeurs mobiles</h4>
-          <p>Présence légère, rapide à poser, prête à circuler.</p>
-        </article>
-        <article class="trust-card">
-          <div class="icon">💇</div>
-          <h4>Beauté & services</h4>
-          <p>Coiffure, onglerie, soin, tout peut respirer dans une vraie fiche.</p>
-        </article>
-        <article class="trust-card">
-          <div class="icon">📍</div>
-          <h4>Présence locale</h4>
-          <p>Ville, zone, repère terrain et visibilité orientée action.</p>
-        </article>
+        <article class="trust-card"><div class="icon">🏪</div><h4>Boutiques terrain</h4><p>Vitrines simples, visibles et compréhensibles par tout le monde.</p></article>
+        <article class="trust-card"><div class="icon">🧺</div><h4>Bana-bana & vendeurs mobiles</h4><p>Présence légère, rapide à poser, prête à circuler.</p></article>
+        <article class="trust-card"><div class="icon">💇</div><h4>Beauté & services</h4><p>Coiffure, onglerie, soin, tout peut respirer dans une vraie fiche.</p></article>
+        <article class="trust-card"><div class="icon">📍</div><h4>Présence locale</h4><p>Ville, zone, repère terrain et visibilité orientée action.</p></article>
       </div>
     </div>
   </div>
@@ -592,128 +412,31 @@ img{display:block;max-width:100%}
 <section class="cats-section">
   <div class="wrap">
     <div class="section-head">
-      <div>
-        <h2>Les univers du marché</h2>
-        <p>Clique sur un pavé → les vendeurs s’ouvrent</p>
-      </div>
-      <div class="rail-controls">
-        <button class="arr" id="arrL" type="button">‹</button>
-        <button class="arr" id="arrR" type="button">›</button>
-      </div>
+      <div><h2>Les univers du marché</h2><p>Clique sur un pavé → les vendeurs s'ouvrent</p></div>
+      <div class="rail-controls"><button class="arr" id="arrL" type="button">‹</button><button class="arr" id="arrR" type="button">›</button></div>
     </div>
 
     <div class="rail-wrap">
       <div class="cat-rail" id="catRail">
-
-        <div class="cat-tile" data-cat="neuf">
-          <div class="cat-img" style="background:linear-gradient(135deg,#ffeaaa,#ffd070)">
-            <span class="cat-bg-txt">⭐🆕📦✨🛒⭐🆕📦✨🛒⭐🆕📦✨🛒⭐🆕📦</span>
-            <span class="cat-icon">🛒</span>
-          </div>
-          <div class="cat-body"><div class="cat-name">Neuf</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
-        </div>
-
-        <div class="cat-tile" data-cat="deuxiemain">
-          <div class="cat-img" style="background:linear-gradient(135deg,#c8deff,#90b8ff)">
-            <span class="cat-bg-txt">♻️💡🔄💎♻️💡🔄💎♻️💡🔄💎♻️💡🔄</span>
-            <span class="cat-icon">♻️</span>
-          </div>
-          <div class="cat-body"><div class="cat-name">Deuxième main</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
-        </div>
-
-        <div class="cat-tile" data-cat="vetements">
-          <div class="cat-img" style="background:linear-gradient(135deg,#ffd0e0,#ffaac8)">
-            <span class="cat-bg-txt">👗👕👖🧣👗👕👖🧣👗👕👖🧣👗👕👖</span>
-            <span class="cat-icon">👗</span>
-          </div>
-          <div class="cat-body"><div class="cat-name">Vêtements</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
-        </div>
-
-        <div class="cat-tile" data-cat="parfum">
-          <div class="cat-img" style="background:linear-gradient(135deg,#eadfff,#d4c2ff)">
-            <span class="cat-bg-txt">🌸✨💜🌺🌸✨💜🌺🌸✨💜🌺🌸✨💜</span>
-            <span class="cat-icon">🌸</span>
-          </div>
-          <div class="cat-body"><div class="cat-name">Parfum</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
-        </div>
-
-        <div class="cat-tile" data-cat="coiffeur">
-          <div class="cat-img" style="background:linear-gradient(135deg,#dbfff6,#b9f1e0)">
-            <span class="cat-bg-txt">✂️💈🪒💇✂️💈🪒💇✂️💈🪒💇✂️💈🪒</span>
-            <span class="cat-icon">✂️</span>
-          </div>
-          <div class="cat-body"><div class="cat-name">Coiffeur</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
-        </div>
-
-        <div class="cat-tile" data-cat="onglerie">
-          <div class="cat-img" style="background:linear-gradient(135deg,#ffd0e0,#ffb8d0)">
-            <span class="cat-bg-txt">💅💎✨🌸💅💎✨🌸💅💎✨🌸💅💎✨</span>
-            <span class="cat-icon">💅</span>
-          </div>
-          <div class="cat-body"><div class="cat-name">Onglerie</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
-        </div>
-
-        <div class="cat-tile" data-cat="brocante">
-          <div class="cat-img" style="background:linear-gradient(135deg,#f4ead7,#ead6b2)">
-            <span class="cat-bg-txt">🪑🏺🖼️🪞🪑🏺🖼️🪞🪑🏺🖼️🪞🪑🏺</span>
-            <span class="cat-icon">🏺</span>
-          </div>
-          <div class="cat-body"><div class="cat-name">Brocante</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
-        </div>
-
-        <div class="cat-tile" data-cat="banabana">
-          <div class="cat-img" style="background:linear-gradient(135deg,#ffe0cb,#ffc391)">
-            <span class="cat-bg-txt">🧺🛒🏪🎪🧺🛒🏪🎪🧺🛒🏪🎪🧺🛒</span>
-            <span class="cat-icon">🧺</span>
-          </div>
-          <div class="cat-body"><div class="cat-name">Bana-bana</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
-        </div>
-
-        <div class="cat-tile" data-cat="quotidien">
-          <div class="cat-img" style="background:linear-gradient(135deg,#dbf5ea,#bfe8d4)">
-            <span class="cat-bg-txt">🏠🧴🥫🧹🏠🧴🥫🧹🏠🧴🥫🧹🏠🧴</span>
-            <span class="cat-icon">🏠</span>
-          </div>
-          <div class="cat-body"><div class="cat-name">Quotidien</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
-        </div>
-
-        <div class="cat-tile" data-cat="phones">
-          <div class="cat-img" style="background:linear-gradient(135deg,#c8deff,#90b8ff)">
-            <span class="cat-bg-txt">📱💻⌨️🖥️📱💻⌨️🖥️📱💻⌨️🖥️📱💻</span>
-            <span class="cat-icon">📱</span>
-          </div>
-          <div class="cat-body"><div class="cat-name">Téléphones</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
-        </div>
-
-        <div class="cat-tile" data-cat="alimentaire">
-          <div class="cat-img" style="background:linear-gradient(135deg,#ffeaaa,#ffd070)">
-            <span class="cat-bg-txt">🥜🌽🥘🫘🥜🌽🥘🫘🥜🌽🥘🫘🥜🌽</span>
-            <span class="cat-icon">🥜</span>
-          </div>
-          <div class="cat-body"><div class="cat-name">Alimentaire</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
-        </div>
-
-        <div class="cat-tile" data-cat="chaussures">
-          <div class="cat-img" style="background:linear-gradient(135deg,#ffe0cb,#ffc391)">
-            <span class="cat-bg-txt">👟👠👞🥿👟👠👞🥿👟👠👞🥿👟👠</span>
-            <span class="cat-icon">👟</span>
-          </div>
-          <div class="cat-body"><div class="cat-name">Chaussures</div><div class="cat-count">Vendeurs exemples<span>0</span></div></div>
-        </div>
-
+        <div class="cat-tile" data-cat="neuf"><div class="cat-img" style="background:linear-gradient(135deg,#ffeaaa,#ffd070)"><span class="cat-bg-txt">⭐🆕📦✨🛒⭐🆕📦✨🛒⭐🆕📦✨🛒⭐🆕📦</span><span class="cat-icon">🛒</span></div><div class="cat-body"><div class="cat-name">Neuf</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="deuxiemain"><div class="cat-img" style="background:linear-gradient(135deg,#c8deff,#90b8ff)"><span class="cat-bg-txt">♻️💡🔄💎♻️💡🔄💎♻️💡🔄💎♻️💡🔄</span><span class="cat-icon">♻️</span></div><div class="cat-body"><div class="cat-name">Deuxième main</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="vetements"><div class="cat-img" style="background:linear-gradient(135deg,#ffd0e0,#ffaac8)"><span class="cat-bg-txt">👗👕👖🧣👗👕👖🧣👗👕👖🧣👗👕👖</span><span class="cat-icon">👗</span></div><div class="cat-body"><div class="cat-name">Vêtements</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="parfum"><div class="cat-img" style="background:linear-gradient(135deg,#eadfff,#d4c2ff)"><span class="cat-bg-txt">🌸✨💜🌺🌸✨💜🌺🌸✨💜🌺🌸✨💜</span><span class="cat-icon">🌸</span></div><div class="cat-body"><div class="cat-name">Parfum</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="coiffeur"><div class="cat-img" style="background:linear-gradient(135deg,#dbfff6,#b9f1e0)"><span class="cat-bg-txt">✂️💈🪒💇✂️💈🪒💇✂️💈🪒💇✂️💈🪒</span><span class="cat-icon">✂️</span></div><div class="cat-body"><div class="cat-name">Coiffeur</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="onglerie"><div class="cat-img" style="background:linear-gradient(135deg,#ffd0e0,#ffb8d0)"><span class="cat-bg-txt">💅💎✨🌸💅💎✨🌸💅💎✨🌸💅💎✨</span><span class="cat-icon">💅</span></div><div class="cat-body"><div class="cat-name">Onglerie</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="brocante"><div class="cat-img" style="background:linear-gradient(135deg,#f4ead7,#ead6b2)"><span class="cat-bg-txt">🪑🏺🖼️🪞🪑🏺🖼️🪞🪑🏺🖼️🪞🪑🏺</span><span class="cat-icon">🏺</span></div><div class="cat-body"><div class="cat-name">Brocante</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="banabana"><div class="cat-img" style="background:linear-gradient(135deg,#ffe0cb,#ffc391)"><span class="cat-bg-txt">🧺🛒🏪🎪🧺🛒🏪🎪🧺🛒🏪🎪🧺🛒</span><span class="cat-icon">🧺</span></div><div class="cat-body"><div class="cat-name">Bana-bana</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="quotidien"><div class="cat-img" style="background:linear-gradient(135deg,#dbf5ea,#bfe8d4)"><span class="cat-bg-txt">🏠🧴🥫🧹🏠🧴🥫🧹🏠🧴🥫🧹🏠🧴</span><span class="cat-icon">🏠</span></div><div class="cat-body"><div class="cat-name">Quotidien</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="phones"><div class="cat-img" style="background:linear-gradient(135deg,#c8deff,#90b8ff)"><span class="cat-bg-txt">📱💻⌨️🖥️📱💻⌨️🖥️📱💻⌨️🖥️📱💻</span><span class="cat-icon">📱</span></div><div class="cat-body"><div class="cat-name">Téléphones</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="alimentaire"><div class="cat-img" style="background:linear-gradient(135deg,#ffeaaa,#ffd070)"><span class="cat-bg-txt">🥜🌽🥘🫘🥜🌽🥘🫘🥜🌽🥘🫘🥜🌽</span><span class="cat-icon">🥜</span></div><div class="cat-body"><div class="cat-name">Alimentaire</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="chaussures"><div class="cat-img" style="background:linear-gradient(135deg,#ffe0cb,#ffc391)"><span class="cat-bg-txt">👟👠👞🥿👟👠👞🥿👟👠👞🥿👟👠</span><span class="cat-icon">👟</span></div><div class="cat-body"><div class="cat-name">Chaussures</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
       </div>
     </div>
 
     <div class="vendor-panel" id="vendorPanel">
       <div class="vendor-panel-inner">
         <div class="panel-header">
-          <div class="panel-title">
-            <span class="icon" id="panelIcon">🛒</span>
-            <div>
-              <h3 id="panelTitle">Catégorie</h3>
-              <p id="panelSub">Vendeurs exemples</p>
-            </div>
-          </div>
+          <div class="panel-title"><span class="icon" id="panelIcon">🛒</span><div><h3 id="panelTitle">Catégorie</h3><p id="panelSub">Vendeurs exemples</p></div></div>
           <button class="panel-close" id="panelClose" type="button">✕</button>
         </div>
         <div class="vendor-grid" id="vendorGrid"></div>
@@ -724,39 +447,45 @@ img{display:block;max-width:100%}
       <div class="cta-band-grid">
         <div>
           <h3>Tu veux ta vitrine comme ça ?</h3>
-          <p>
-            Fiche boutique, galerie, WhatsApp, présence terrain, entrée PRO.
-            La démo donne envie, et derrière tu récupères la demande réelle.
-          </p>
+          <p>Fiche boutique, galerie, WhatsApp, présence terrain, entrée PRO. La démo donne envie, et derrière tu récupères la demande réelle.</p>
           <div class="cta-band-row">
-            <span class="cta-pill">🛍️ Fiche boutique</span>
-            <span class="cta-pill">🖼️ Galerie</span>
-            <span class="cta-pill">💬 WhatsApp</span>
-            <span class="cta-pill">📍 Maps</span>
-            <span class="cta-pill">🔥 Entrée PRO</span>
+            <span class="cta-pill">🛍️ Fiche boutique</span><span class="cta-pill">🖼️ Galerie</span><span class="cta-pill">💬 WhatsApp</span><span class="cta-pill">📍 Maps</span><span class="cta-pill">🔥 Entrée PRO</span>
           </div>
         </div>
-
         <div class="cta-main">
           <a class="big-cta" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
           <a id="ctaWaBtn" class="big-cta soft" href="#" target="_blank" rel="noopener">💬 Parler sur WhatsApp</a>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
+<!-- ════ FAQ RAPIDE ════ -->
+<section class="faq-section">
+  <div class="wrap">
+    <div class="faq-shell">
+      <div class="faq-head">Questions fréquentes</div>
+      <div class="faq-item">
+        <div class="faq-q">C'est quoi DIGIY MARKET exactement ? <span class="faq-arr">▾</span></div>
+        <div class="faq-a">DIGIY MARKET est le module marché de DIGIYLYFE — la plateforme digitale africaine à 0% commission. Les commerçants obtiennent une vitrine en ligne : fiche boutique, galerie photo, contact WhatsApp direct. Pas de marketplace qui prend ta marge. Toi tu encaisses, DIGIY te voit.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Combien ça coûte pour avoir ma vitrine ? <span class="faq-arr">▾</span></div>
+        <div class="faq-a">Le modèle DIGIY c'est un abonnement fixe mensuel — pas de commission sur tes ventes, pas de surprise. Tu paies une fois, tu es visible. Clique sur "Je veux mon module" pour voir les tarifs en temps réel sur la page officielle.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Les vendeurs visibles ici sont de vrais vendeurs ? <span class="faq-arr">▾</span></div>
+        <div class="faq-a">Les fiches affichées sont des exemples guidants — elles montrent à quoi ressemble une vraie vitrine DIGIY MARKET pour inspirer les commerçants qui hésitent encore. Les vrais vendeurs actifs apparaissent dans le module PRO une fois inscrits et activés.</div>
+      </div>
+    </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap footer-inner">
-    <div>
-      <div class="footer-brand">DIGIY MARKET ∞</div>
-      <div class="footer-sub">Neuf • Deuxième main • Brocante • Vêtements • Beauté • Services • Quotidien</div>
-    </div>
-    <div class="footer-links">
-      <a href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">Je veux mon module</a>
-      <a href="http://digiylyfe.com" target="_blank" rel="noopener">digiylyfe.com</a>
-    </div>
+    <div><div class="footer-brand">DIGIY MARKET ∞</div><div class="footer-sub">Neuf · Deuxième main · Brocante · Vêtements · Beauté · Services · Quotidien</div></div>
+    <div class="footer-links"><a href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">Je veux mon module</a><a href="http://digiylyfe.com" target="_blank" rel="noopener">digiylyfe.com</a></div>
   </div>
 </footer>
 
@@ -766,728 +495,132 @@ img{display:block;max-width:100%}
 </div>
 
 <script>
-const DIGIY_CONFIG = {
-  whatsapp: "221771342889",
-  siteUrl: "http://digiylyfe.com",
-  proUrl: "https://commencer-a-payer.digiylyfe.com/",
-  logoUrl: ""
+const DIGIY_CONFIG={whatsapp:"221771342889",siteUrl:"http://digiylyfe.com",proUrl:"https://commencer-a-payer.digiylyfe.com/",logoUrl:""};
+const VENDORS={
+  neuf:[{icon:"📱",bg:"#c8deff",name:"Tech Dakar Shop",what:"Téléphones neufs, accessoires, batteries, câbles",loc:"Dakar · Plateau",price:"5 000–250 000 F",live:true,images:[]},{icon:"👟",bg:"#ffe0cb",name:"Sneakers Mbaye",what:"Jordan, Nike, Adidas — arrivage chaque semaine",loc:"Mbour · Marché Central",price:"15 000–85 000 F",live:true,images:[]},{icon:"🛒",bg:"#ffeaaa",name:"Boutique Awa Neuf",what:"Produits ménagers neufs, ustensiles, déco",loc:"Saly · Ngaparou",price:"2 000–35 000 F",live:false,images:[]},{icon:"💻",bg:"#c8deff",name:"Diallo Informatique",what:"PC neufs et reconditionnés, imprimantes",loc:"Dakar · Parcelles",price:"80 000–450 000 F",live:true,images:[]}],
+  deuxiemain:[{icon:"📺",bg:"#f4ead7",name:"Mamadou Électro",what:"TV, réfrigérateurs, machines à laver d'occasion",loc:"Dakar · Colobane",price:"20 000–150 000 F",live:true,images:[]},{icon:"👕",bg:"#ffd0e0",name:"Frip Sénégal",what:"Friperie sélectionnée, marques, prix juste",loc:"Dakar · Sicap",price:"500–5 000 F",live:true,images:[]},{icon:"🎮",bg:"#eadfff",name:"GameZone Dakar",what:"Consoles, jeux PS4/PS5, manettes",loc:"Dakar · Yoff",price:"15 000–120 000 F",live:true,images:[]}],
+  vetements:[{icon:"👘",bg:"#ffeaaa",name:"Boubous Cheikh",what:"Boubous brocart, bazin, grand boubou cérémonie",loc:"Dakar · HLM",price:"8 000–60 000 F",live:true,images:[]},{icon:"👗",bg:"#ffd0e0",name:"Robes Fatou",what:"Robes africaines, wax, tenues soirée et bureau",loc:"Saly · Centre",price:"5 000–35 000 F",live:true,images:[]},{icon:"🧣",bg:"#eadfff",name:"Accessoires Mode",what:"Ceintures, sacs, bijoux fantaisie, foulards",loc:"Saint-Louis",price:"1 000–12 000 F",live:true,images:[]}],
+  parfum:[{icon:"🕌",bg:"#eadfff",name:"Thiouraye Ndèye",what:"Thiouraye naturel, encens, encens de Djeddah",loc:"Dakar · Médina",price:"1 500–15 000 F",live:true,images:[]},{icon:"🌸",bg:"#ffd0e0",name:"Parfums Orientaux",what:"Attars, musc, oud, huiles de parfum",loc:"Dakar · Sandaga",price:"3 000–35 000 F",live:true,images:[]},{icon:"🎁",bg:"#ffeaaa",name:"Coffrets Mariama",what:"Coffrets mariage, baptême, kits parfum cadeaux",loc:"Dakar · Pikine",price:"8 000–50 000 F",live:false,images:[]}],
+  coiffeur:[{icon:"💇",bg:"#dbfff6",name:"Salon Aicha",what:"Tresses africaines, tissage, défrisage, soin",loc:"Dakar · Medina",price:"2 000–25 000 F",live:true,images:[]},{icon:"✂️",bg:"#c8deff",name:"Barber Moussa",what:"Coupe homme, dégradé américain, barbe sculptée",loc:"Saly · Portudal",price:"1 500–5 000 F",live:true,images:[]},{icon:"💆",bg:"#dbf5ea",name:"Soin Cheveux Rama",what:"Masques kératine, soin naturel, hydratation",loc:"Dakar · Sacré-Cœur",price:"5 000–20 000 F",live:true,images:[]}],
+  onglerie:[{icon:"💅",bg:"#ffd0e0",name:"Ongles by Aminata",what:"Pose gel, faux ongles, nail art, manucure",loc:"Dakar · Plateau",price:"4 000–20 000 F",live:true,images:[]},{icon:"✨",bg:"#eadfff",name:"Luxury Nails Saly",what:"Nail art 3D, extension, dégradé, brillants",loc:"Saly · Ngaparou",price:"6 000–30 000 F",live:true,images:[]},{icon:"🌸",bg:"#ffeaaa",name:"Beauty Corner Rokhaya",what:"Manucure naturelle, soin des mains, vernis",loc:"Thiès",price:"2 500–10 000 F",live:true,images:[]}],
+  brocante:[{icon:"🪑",bg:"#f4ead7",name:"Brocante Sénégal",what:"Meubles anciens, chaises bois, buffets vintage",loc:"Dakar · Colobane",price:"5 000–80 000 F",live:true,images:[]},{icon:"🏺",bg:"#ffeaaa",name:"Poteries & Artisanat",what:"Poteries, statuettes, objets africains authentiques",loc:"Saly · Village artisanat",price:"2 000–40 000 F",live:true,images:[]},{icon:"🖼️",bg:"#ffe0cb",name:"Art & Déco Diallo",what:"Tableaux locaux, masques, peintures, déco murale",loc:"Dakar · Ouakam",price:"3 000–60 000 F",live:false,images:[]}],
+  banabana:[{icon:"🧺",bg:"#ffe0cb",name:"Bana-bana Alassane",what:"Légumes frais, fruits de saison, livraison quartier",loc:"Dakar · Parcelles",price:"200–5 000 F",live:true,images:[]},{icon:"🧃",bg:"#dbfff6",name:"Jus Naturels Aminata",what:"Bissap, gingembre, ditax, tamarin, bouye maison",loc:"Dakar · Medina",price:"250–1 500 F",live:true,images:[]},{icon:"🎀",bg:"#ffd0e0",name:"Tissus & Rubans",what:"Rubans, dentelles, broderies, vente au mètre",loc:"Dakar · HLM",price:"200–3 000 F/m",live:true,images:[]}],
+  quotidien:[{icon:"🧹",bg:"#dbf5ea",name:"Ménage & Entretien",what:"Détergents, balais, produits nettoyants",loc:"Dakar · Pikine",price:"500–8 000 F",live:true,images:[]},{icon:"🍳",bg:"#ffe0cb",name:"Cuisine Équipée",what:"Marmites, casseroles, poêles, mortiers bois",loc:"Dakar · Sandaga",price:"2 000–20 000 F",live:true,images:[]},{icon:"💡",bg:"#ffeaaa",name:"Électricité Mamadou",what:"Prises, câbles, ampoules LED, matériel électrique",loc:"Thiès",price:"500–15 000 F",live:true,images:[]}],
+  phones:[{icon:"📱",bg:"#c8deff",name:"iDakar Phones",what:"iPhone reconditionné, garantie 3 mois",loc:"Dakar · Plateau",price:"120 000–450 000 F",live:true,images:[]},{icon:"🤳",bg:"#ffeaaa",name:"Samsung Sénégal",what:"Galaxy A, M et S series neufs et occasion",loc:"Dakar · Sacré-Cœur",price:"60 000–380 000 F",live:true,images:[]},{icon:"🎧",bg:"#eadfff",name:"Son & Audio Mobile",what:"AirPods, Bluetooth, enceintes, casques audio",loc:"Dakar · Yoff",price:"5 000–65 000 F",live:true,images:[]}],
+  alimentaire:[{icon:"🥜",bg:"#ffeaaa",name:"Arachides Baye",what:"Arachides grillées, huile d'arachide artisanale",loc:"Kaolack · Marché",price:"500–5 000 F",live:true,images:[]},{icon:"🌾",bg:"#f4ead7",name:"Céréales du Terroir",what:"Mil, sorgho, fonio, riz local, maïs",loc:"Tambacounda",price:"1 000–25 000 F",live:true,images:[]},{icon:"🥦",bg:"#dbf5ea",name:"Maraîchage Fatou",what:"Légumes frais jardin, tomates, oignons, aubergines",loc:"Thiès · Pout",price:"200–3 000 F",live:true,images:[]}],
+  chaussures:[{icon:"👡",bg:"#ffd0e0",name:"Sandales Aicha",what:"Sandales artisanales cuir, babouches colorées",loc:"Dakar · Médina",price:"3 000–18 000 F",live:true,images:[]},{icon:"👟",bg:"#ffe0cb",name:"Baskets Papito",what:"Nike, Adidas, Puma — arrivage hebdomadaire",loc:"Dakar · Parcelles",price:"15 000–85 000 F",live:true,images:[]},{icon:"👞",bg:"#c8deff",name:"Chaussures Homme SN",what:"Derby, bottes, chaussures ville qualité cuir",loc:"Dakar · Plateau",price:"12 000–55 000 F",live:true,images:[]}]
 };
+const META={neuf:{label:"Neuf",icon:"🛒",sub:"Produits récents, prix clairs"},deuxiemain:{label:"Deuxième main",icon:"♻️",sub:"La valeur continue, le bon prix circule"},vetements:{label:"Vêtements",icon:"👗",sub:"Style terrain, cérémonie ou quotidien"},parfum:{label:"Parfum & senteur",icon:"🌸",sub:"Essences, thiouraye, attars et cadeaux"},coiffeur:{label:"Coiffeur",icon:"✂️",sub:"Service de proximité"},onglerie:{label:"Onglerie",icon:"💅",sub:"Pose, nail art, manucure"},brocante:{label:"Brocante",icon:"🏺",sub:"Pièces rares, vintage"},banabana:{label:"Bana-bana",icon:"🧺",sub:"Commerce mobile ancré dans le réel"},quotidien:{label:"Quotidien",icon:"🏠",sub:"Ce qu'on cherche vite"},phones:{label:"Téléphones",icon:"📱",sub:"Neufs, reconditionnés, accessoires"},alimentaire:{label:"Alimentaire",icon:"🥜",sub:"Produits locaux, céréales, épices"},chaussures:{label:"Chaussures",icon:"👟",sub:"Sandales, baskets, mocassins"}};
 
-const VENDORS = {
-  neuf:[
-    {
-      icon:"📱",
-      bg:"#c8deff",
-      name:"Tech Dakar Shop",
-      what:"Téléphones neufs, accessoires, batteries, câbles",
-      loc:"Dakar · Plateau",
-      price:"5 000–250 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"👟",
-      bg:"#ffe0cb",
-      name:"Sneakers Mbaye",
-      what:"Jordan, Nike, Adidas — arrivage chaque semaine",
-      loc:"Mbour · Marché Central",
-      price:"15 000–85 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"🛒",
-      bg:"#ffeaaa",
-      name:"Boutique Awa Neuf",
-      what:"Produits ménagers neufs, ustensiles, déco",
-      loc:"Saly · Ngaparou",
-      price:"2 000–35 000 F",
-      live:false,
-      images:[]
-    },
-    {
-      icon:"💻",
-      bg:"#c8deff",
-      name:"Diallo Informatique",
-      what:"PC neufs et reconditionnés, imprimantes",
-      loc:"Dakar · Parcelles",
-      price:"80 000–450 000 F",
-      live:true,
-      images:[]
-    }
-  ],
-  deuxiemain:[
-    {
-      icon:"📺",
-      bg:"#f4ead7",
-      name:"Mamadou Électro",
-      what:"TV, réfrigérateurs, machines à laver d'occasion",
-      loc:"Dakar · Colobane",
-      price:"20 000–150 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"👕",
-      bg:"#ffd0e0",
-      name:"Frip Sénégal",
-      what:"Friperie sélectionnée, marques, prix juste",
-      loc:"Dakar · Sicap",
-      price:"500–5 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"🎮",
-      bg:"#eadfff",
-      name:"GameZone Dakar",
-      what:"Consoles, jeux PS4/PS5, manettes",
-      loc:"Dakar · Yoff",
-      price:"15 000–120 000 F",
-      live:true,
-      images:[]
-    }
-  ],
-  vetements:[
-    {
-      icon:"👘",
-      bg:"#ffeaaa",
-      name:"Boubous Cheikh",
-      what:"Boubous brocart, bazin, grand boubou cérémonie",
-      loc:"Dakar · HLM",
-      price:"8 000–60 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"👗",
-      bg:"#ffd0e0",
-      name:"Robes Fatou",
-      what:"Robes africaines, wax, tenues soirée et bureau",
-      loc:"Saly · Centre",
-      price:"5 000–35 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"🧣",
-      bg:"#eadfff",
-      name:"Accessoires Mode",
-      what:"Ceintures, sacs, bijoux fantaisie, foulards",
-      loc:"Saint-Louis",
-      price:"1 000–12 000 F",
-      live:true,
-      images:[]
-    }
-  ],
-  parfum:[
-    {
-      icon:"🕌",
-      bg:"#eadfff",
-      name:"Thiouraye Ndèye",
-      what:"Thiouraye naturel, encens, encens de Djeddah",
-      loc:"Dakar · Médina",
-      price:"1 500–15 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"🌸",
-      bg:"#ffd0e0",
-      name:"Parfums Orientaux",
-      what:"Attars, musc, oud, huiles de parfum",
-      loc:"Dakar · Sandaga",
-      price:"3 000–35 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"🎁",
-      bg:"#ffeaaa",
-      name:"Coffrets Mariama",
-      what:"Coffrets mariage, baptême, kits parfum cadeaux",
-      loc:"Dakar · Pikine",
-      price:"8 000–50 000 F",
-      live:false,
-      images:[]
-    }
-  ],
-  coiffeur:[
-    {
-      icon:"💇",
-      bg:"#dbfff6",
-      name:"Salon Aicha",
-      what:"Tresses africaines, tissage, défrisage, soin",
-      loc:"Dakar · Medina",
-      price:"2 000–25 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"✂️",
-      bg:"#c8deff",
-      name:"Barber Moussa",
-      what:"Coupe homme, dégradé américain, barbe sculptée",
-      loc:"Saly · Portudal",
-      price:"1 500–5 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"💆",
-      bg:"#dbf5ea",
-      name:"Soin Cheveux Rama",
-      what:"Masques kératine, soin naturel, hydratation",
-      loc:"Dakar · Sacré-Cœur",
-      price:"5 000–20 000 F",
-      live:true,
-      images:[]
-    }
-  ],
-  onglerie:[
-    {
-      icon:"💅",
-      bg:"#ffd0e0",
-      name:"Ongles by Aminata",
-      what:"Pose gel, faux ongles, nail art, manucure",
-      loc:"Dakar · Plateau",
-      price:"4 000–20 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"✨",
-      bg:"#eadfff",
-      name:"Luxury Nails Saly",
-      what:"Nail art 3D, extension, dégradé, brillants",
-      loc:"Saly · Ngaparou",
-      price:"6 000–30 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"🌸",
-      bg:"#ffeaaa",
-      name:"Beauty Corner Rokhaya",
-      what:"Manucure naturelle, soin des mains, vernis",
-      loc:"Thiès",
-      price:"2 500–10 000 F",
-      live:true,
-      images:[]
-    }
-  ],
-  brocante:[
-    {
-      icon:"🪑",
-      bg:"#f4ead7",
-      name:"Brocante Sénégal",
-      what:"Meubles anciens, chaises bois, buffets vintage",
-      loc:"Dakar · Colobane",
-      price:"5 000–80 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"🏺",
-      bg:"#ffeaaa",
-      name:"Poteries & Artisanat",
-      what:"Poteries, statuettes, objets africains authentiques",
-      loc:"Saly · Village artisanat",
-      price:"2 000–40 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"🖼️",
-      bg:"#ffe0cb",
-      name:"Art & Déco Diallo",
-      what:"Tableaux locaux, masques, peintures, déco murale",
-      loc:"Dakar · Ouakam",
-      price:"3 000–60 000 F",
-      live:false,
-      images:[]
-    }
-  ],
-  banabana:[
-    {
-      icon:"🧺",
-      bg:"#ffe0cb",
-      name:"Bana-bana Alassane",
-      what:"Légumes frais, fruits de saison, livraison quartier",
-      loc:"Dakar · Parcelles",
-      price:"200–5 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"🧃",
-      bg:"#dbfff6",
-      name:"Jus Naturels Aminata",
-      what:"Bissap, gingembre, ditax, tamarin, bouye maison",
-      loc:"Dakar · Medina",
-      price:"250–1 500 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"🎀",
-      bg:"#ffd0e0",
-      name:"Tissus & Rubans",
-      what:"Rubans, dentelles, broderies, vente au mètre",
-      loc:"Dakar · HLM",
-      price:"200–3 000 F/m",
-      live:true,
-      images:[]
-    }
-  ],
-  quotidien:[
-    {
-      icon:"🧹",
-      bg:"#dbf5ea",
-      name:"Ménage & Entretien",
-      what:"Détergents, balais, produits nettoyants",
-      loc:"Dakar · Pikine",
-      price:"500–8 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"🍳",
-      bg:"#ffe0cb",
-      name:"Cuisine Équipée",
-      what:"Marmites, casseroles, poêles, mortiers bois",
-      loc:"Dakar · Sandaga",
-      price:"2 000–20 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"💡",
-      bg:"#ffeaaa",
-      name:"Électricité Mamadou",
-      what:"Prises, câbles, ampoules LED, matériel électrique",
-      loc:"Thiès",
-      price:"500–15 000 F",
-      live:true,
-      images:[]
-    }
-  ],
-  phones:[
-    {
-      icon:"📱",
-      bg:"#c8deff",
-      name:"iDakar Phones",
-      what:"iPhone reconditionné, garantie 3 mois",
-      loc:"Dakar · Plateau",
-      price:"120 000–450 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"🤳",
-      bg:"#ffeaaa",
-      name:"Samsung Sénégal",
-      what:"Galaxy A, M et S series neufs et occasion",
-      loc:"Dakar · Sacré-Cœur",
-      price:"60 000–380 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"🎧",
-      bg:"#eadfff",
-      name:"Son & Audio Mobile",
-      what:"AirPods, Bluetooth, enceintes, casques audio",
-      loc:"Dakar · Yoff",
-      price:"5 000–65 000 F",
-      live:true,
-      images:[]
-    }
-  ],
-  alimentaire:[
-    {
-      icon:"🥜",
-      bg:"#ffeaaa",
-      name:"Arachides Baye",
-      what:"Arachides grillées, huile d'arachide artisanale",
-      loc:"Kaolack · Marché",
-      price:"500–5 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"🌾",
-      bg:"#f4ead7",
-      name:"Céréales du Terroir",
-      what:"Mil, sorgho, fonio, riz local, maïs",
-      loc:"Tambacounda",
-      price:"1 000–25 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"🥦",
-      bg:"#dbf5ea",
-      name:"Maraîchage Fatou",
-      what:"Légumes frais jardin, tomates, oignons, aubergines",
-      loc:"Thiès · Pout",
-      price:"200–3 000 F",
-      live:true,
-      images:[]
-    }
-  ],
-  chaussures:[
-    {
-      icon:"👡",
-      bg:"#ffd0e0",
-      name:"Sandales Aicha",
-      what:"Sandales artisanales cuir, babouches colorées",
-      loc:"Dakar · Médina",
-      price:"3 000–18 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"👟",
-      bg:"#ffe0cb",
-      name:"Baskets Papito",
-      what:"Nike, Adidas, Puma — arrivage hebdomadaire",
-      loc:"Dakar · Parcelles",
-      price:"15 000–85 000 F",
-      live:true,
-      images:[]
-    },
-    {
-      icon:"👞",
-      bg:"#c8deff",
-      name:"Chaussures Homme SN",
-      what:"Derby, bottes, chaussures ville qualité cuir",
-      loc:"Dakar · Plateau",
-      price:"12 000–55 000 F",
-      live:true,
-      images:[]
-    }
-  ]
-};
-
-const META = {
-  neuf:{label:"Neuf",icon:"🛒",sub:"Produits récents, prix clairs, vendeurs exemples guidants"},
-  deuxiemain:{label:"Deuxième main",icon:"♻️",sub:"La valeur continue, le bon prix circule"},
-  vetements:{label:"Vêtements",icon:"👗",sub:"Style terrain, cérémonie ou quotidien"},
-  parfum:{label:"Parfum & senteur",icon:"🌸",sub:"Essences, thiouraye, attars et cadeaux"},
-  coiffeur:{label:"Coiffeur",icon:"✂️",sub:"Coupes, tresses, barbe — service de proximité"},
-  onglerie:{label:"Onglerie",icon:"💅",sub:"Pose, nail art, manucure, beauté fine"},
-  brocante:{label:"Brocante",icon:"🏺",sub:"Pièces rares, vintage, objets de caractère"},
-  banabana:{label:"Bana-bana",icon:"🧺",sub:"Commerce mobile, souple, ancré dans le réel"},
-  quotidien:{label:"Quotidien",icon:"🏠",sub:"Ce qu'on cherche vite, ce qui sert tous les jours"},
-  phones:{label:"Téléphones",icon:"📱",sub:"Neufs, reconditionnés, accessoires — tech terrain"},
-  alimentaire:{label:"Alimentaire",icon:"🥜",sub:"Produits locaux, céréales, épices, conserves"},
-  chaussures:{label:"Chaussures",icon:"👟",sub:"Sandales, baskets, mocassins — toutes occasions"}
-};
-
-function slugify(str){
-  return str.toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-    .replace(/&/g,'-et-')
-    .replace(/[^a-z0-9]+/g,'-')
-    .replace(/^-+|-+$/g,'');
-}
-
-function waLink(text){
-  return `https://wa.me/${DIGIY_CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
-}
-
-function parseCity(loc=''){
-  return (loc.split('·')[0] || loc).trim();
-}
-
-function makeSvgData(title, subtitle, icon, c1, c2){
-  const svg = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
-    <defs>
-      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="${c1}"/>
-        <stop offset="100%" stop-color="${c2}"/>
-      </linearGradient>
-      <filter id="f" x="-20%" y="-20%" width="140%" height="140%">
-        <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="rgba(0,0,0,.18)"/>
-      </filter>
-    </defs>
-    <rect width="1200" height="900" fill="url(#g)"/>
-    <circle cx="1030" cy="120" r="160" fill="rgba(255,255,255,.12)"/>
-    <circle cx="190" cy="760" r="180" fill="rgba(255,255,255,.12)"/>
-    <text x="100" y="230" font-size="190" filter="url(#f)">${icon}</text>
-    <rect x="70" y="605" width="1060" height="180" rx="32" fill="rgba(255,255,255,.9)"/>
-    <text x="120" y="680" font-family="Arial, sans-serif" font-size="60" font-weight="700" fill="#1a1208">${title}</text>
-    <text x="120" y="740" font-family="Arial, sans-serif" font-size="30" fill="#6f624f">${subtitle}</text>
-  </svg>`;
-  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-}
-
-function palette(bg){
-  const map = {
-    "#c8deff":["#bdd8ff","#8cb7ff"],
-    "#ffe0cb":["#ffd9c5","#ffb88a"],
-    "#ffeaaa":["#fff0b8","#ffd56d"],
-    "#ffd0e0":["#ffd8e5","#ffb1cb"],
-    "#eadfff":["#eee2ff","#d2beff"],
-    "#dbfff6":["#ddfff5","#afe9d5"],
-    "#f4ead7":["#f6ead9","#ddc9a3"],
-    "#dbf5ea":["#dff7ec","#b8e0ca"]
-  };
-  return map[bg] || ["#f4ead7","#d8bf96"];
-}
-
-function fallbackVendorImage(v){
-  const [c1,c2] = palette(v.bg || '#f4ead7');
-  return makeSvgData(v.name, v.loc, v.icon || '🛍️', c1, c2);
-}
-
-function buildVendor(cat, v){
-  const meta = META[cat] || {};
-  const images = Array.isArray(v.images) ? v.images.filter(Boolean) : [];
-  return {
-    ...v,
-    category: cat,
-    categoryLabel: meta.label || cat,
-    categoryIcon: meta.icon || '🛍️',
-    categorySub: meta.sub || '',
-    city: parseCity(v.loc),
-    slug: `${cat}-${slugify(v.name)}`,
-    isExample: true,
-    coverImage: images[0] || fallbackVendorImage(v),
-    images
-  };
-}
-
-function buildCatalog(){
-  return Object.entries(VENDORS).flatMap(([cat, list]) => list.map(v => buildVendor(cat, v)));
-}
-
-function saveCatalog(){
-  localStorage.setItem('digiy_market_catalog_v5', JSON.stringify({
-    config: DIGIY_CONFIG,
-    meta: META,
-    vendors: buildCatalog()
-  }));
-}
+function slugify(s){return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/&/g,"-et-").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");}
+function waLink(t){return `https://wa.me/${DIGIY_CONFIG.whatsapp}?text=${encodeURIComponent(t)}`;}
+function parseCity(l=""){return (l.split("·")[0]||l).trim();}
+function makeSvgData(title,sub,icon,c1,c2){const s=`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient><filter id="f" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="rgba(0,0,0,.18)"/></filter></defs><rect width="1200" height="900" fill="url(#g)"/><circle cx="1030" cy="120" r="160" fill="rgba(255,255,255,.12)"/><circle cx="190" cy="760" r="180" fill="rgba(255,255,255,.12)"/><text x="100" y="230" font-size="190" filter="url(#f)">${icon}</text><rect x="70" y="605" width="1060" height="180" rx="32" fill="rgba(255,255,255,.9)"/><text x="120" y="680" font-family="Arial" font-size="60" font-weight="700" fill="#1a1208">${title}</text><text x="120" y="740" font-family="Arial" font-size="30" fill="#6f624f">${sub}</text></svg>`;return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(s)}`;}
+function palette(bg){const m={"#c8deff":["#bdd8ff","#8cb7ff"],"#ffe0cb":["#ffd9c5","#ffb88a"],"#ffeaaa":["#fff0b8","#ffd56d"],"#ffd0e0":["#ffd8e5","#ffb1cb"],"#eadfff":["#eee2ff","#d2beff"],"#dbfff6":["#ddfff5","#afe9d5"],"#f4ead7":["#f6ead9","#ddc9a3"],"#dbf5ea":["#dff7ec","#b8e0ca"]};return m[bg]||["#f4ead7","#d8bf96"];}
+function fallbackVendorImage(v){const [c1,c2]=palette(v.bg||"#f4ead7");return makeSvgData(v.name,v.loc,v.icon||"🛍️",c1,c2);}
+function buildVendor(cat,v){const m=META[cat]||{};const imgs=Array.isArray(v.images)?v.images.filter(Boolean):[];return{...v,category:cat,categoryLabel:m.label||cat,categoryIcon:m.icon||"🛍️",categorySub:m.sub||"",city:parseCity(v.loc),slug:`${cat}-${slugify(v.name)}`,isExample:true,coverImage:imgs[0]||fallbackVendorImage(v),images:imgs};}
+function buildCatalog(){return Object.entries(VENDORS).flatMap(([c,l])=>l.map(v=>buildVendor(c,v)));}
+function saveCatalog(){try{localStorage.setItem("digiy_market_catalog_v5",JSON.stringify({config:DIGIY_CONFIG,meta:META,vendors:buildCatalog()}));}catch(e){}}
 
 function updateCounts(){
-  document.querySelectorAll('.cat-tile').forEach(tile => {
-    const cat = tile.dataset.cat;
-    const countEl = tile.querySelector('.cat-count span');
-    if(countEl) countEl.textContent = (VENDORS[cat] || []).length;
-  });
-  document.getElementById('totalCount').textContent = buildCatalog().length;
+  document.querySelectorAll(".cat-tile").forEach(t=>{const c=t.dataset.cat;const el=t.querySelector(".cat-count span");if(el)el.textContent=(VENDORS[c]||[]).length;});
+  const n=buildCatalog().length;
+  document.getElementById("totalCount").textContent=n;
+  document.getElementById("statVendeurs").textContent=n;
 }
 
 function initButtons(){
-  const generalWa = waLink("Bonjour DIGIY 👋 Je veux des informations sur DIGIY MARKET.");
-  ['waTopBtn','heroWaBtn','ctaWaBtn','floatWaBtn'].forEach(id => {
-    const el = document.getElementById(id);
-    if(el) el.href = generalWa;
-  });
-
-  const brandIcon = document.getElementById('brandIcon');
-  if(DIGIY_CONFIG.logoUrl){
-    brandIcon.innerHTML = `<img src="${DIGIY_CONFIG.logoUrl}" alt="DIGIY">`;
-  }
+  const gw=waLink("Bonjour DIGIY 👋 Je veux des informations sur DIGIY MARKET.");
+  ["waTopBtn","heroWaBtn","heroWaBtnMob","ctaWaBtn","floatWaBtn"].forEach(id=>{const el=document.getElementById(id);if(el)el.href=gw;});
+  const bi=document.getElementById("brandIcon");if(DIGIY_CONFIG.logoUrl)bi.innerHTML=`<img src="${DIGIY_CONFIG.logoUrl}" alt="DIGIY">`;
 }
 
 function fillCityFilter(){
-  const select = document.getElementById('cityFilter');
-  const cities = [...new Set(buildCatalog().map(v => v.city))].sort((a,b)=>a.localeCompare(b,'fr'));
-  cities.forEach(city => {
-    const opt = document.createElement('option');
-    opt.value = city;
-    opt.textContent = city;
-    select.appendChild(opt);
-  });
+  const sel=document.getElementById("cityFilter");
+  const cities=[...new Set(buildCatalog().map(v=>v.city))].sort((a,b)=>a.localeCompare(b,"fr"));
+  cities.forEach(c=>{const o=document.createElement("option");o.value=c;o.textContent=c;sel.appendChild(o);});
 }
 
-function getCityFilter(){
-  return document.getElementById('cityFilter').value.trim();
-}
-
-function applyCityFilter(list){
-  const city = getCityFilter();
-  if(!city) return list;
-  return list.filter(v => v.city === city);
-}
+function getCityFilter(){return document.getElementById("cityFilter").value.trim();}
+function applyCityFilter(list){const c=getCityFilter();return c?list.filter(v=>v.city===c):list;}
 
 function renderVendorCards(list){
-  const grid = document.getElementById('vendorGrid');
-  if(!list.length){
-    grid.innerHTML = `
-      <div class="empty-state">
-        <div class="big">🏗️</div>
-        <p>Aucun vendeur exemple trouvé pour ce filtre.<br/>Essaie une autre ville ou une autre recherche.</p>
-      </div>
-    `;
-    return;
-  }
-
-  grid.innerHTML = list.map(v => `
-    <article class="vendor" onclick="openVendor('${v.slug}')">
-      <div class="vendor-top" style="background:${v.bg}">
-        <img src="${v.coverImage}" alt="${v.name}">
-        <span class="vendor-example">EXEMPLE</span>
-        ${v.live ? '<div class="vendor-live">EN LIGNE</div>' : ''}
-      </div>
-      <div class="vendor-body">
-        <div class="vendor-name">${v.name}</div>
-        <div class="vendor-what">${v.what}</div>
-        <div class="vendor-meta">
-          <span class="vendor-loc">📍 ${v.loc}</span>
-          <span class="vendor-price">${v.price}</span>
-        </div>
-        <div class="vendor-cta">
-          <button class="vendor-btn primary" type="button" onclick="event.stopPropagation();openVendor('${v.slug}')">👁 Voir la fiche</button>
-          <button class="vendor-btn ghost" type="button" onclick="event.stopPropagation();contactVendor('${v.slug}')">💬 WhatsApp</button>
-        </div>
-      </div>
-    </article>
-  `).join('');
+  const g=document.getElementById("vendorGrid");
+  if(!list.length){g.innerHTML=`<div class="empty-state"><div class="big">🏗️</div><p>Aucun vendeur exemple trouvé.<br/>Essaie une autre ville ou une autre recherche.</p></div>`;return;}
+  g.innerHTML=list.map(v=>`<article class="vendor" onclick="openVendor('${v.slug}')"><div class="vendor-top" style="background:${v.bg}"><img src="${v.coverImage}" alt="${v.name}"><span class="vendor-example">EXEMPLE</span>${v.live?"<div class=\"vendor-live\">EN LIGNE</div>":""}</div><div class="vendor-body"><div class="vendor-name">${v.name}</div><div class="vendor-what">${v.what}</div><div class="vendor-meta"><span class="vendor-loc">📍 ${v.loc}</span><span class="vendor-price">${v.price}</span></div><div class="vendor-cta"><button class="vendor-btn primary" type="button" onclick="event.stopPropagation();openVendor('${v.slug}')">👁 Voir la fiche</button><button class="vendor-btn ghost" type="button" onclick="event.stopPropagation();contactVendor('${v.slug}')">💬 WhatsApp</button></div></div></article>`).join("");
 }
 
 function renderVendorsByCategory(cat){
-  const meta = META[cat] || {};
-  let list = (VENDORS[cat] || []).map(v => buildVendor(cat, v));
-  list = applyCityFilter(list);
-
-  document.getElementById('panelIcon').textContent = meta.icon || '🛍️';
-  document.getElementById('panelTitle').textContent = meta.label || cat;
-  document.getElementById('panelSub').textContent = `${meta.sub || ''} • ${list.length} vendeur(s) exemple`;
+  const m=META[cat]||{};let list=(VENDORS[cat]||[]).map(v=>buildVendor(cat,v));list=applyCityFilter(list);
+  document.getElementById("panelIcon").textContent=m.icon||"🛍️";
+  document.getElementById("panelTitle").textContent=m.label||cat;
+  document.getElementById("panelSub").textContent=`${m.sub||""} • ${list.length} vendeur(s) exemple`;
   renderVendorCards(list);
 }
 
 function renderSearch(q){
-  const query = q.trim().toLowerCase();
-  let list = buildCatalog().filter(v =>
-    v.name.toLowerCase().includes(query) ||
-    v.what.toLowerCase().includes(query) ||
-    v.loc.toLowerCase().includes(query) ||
-    v.city.toLowerCase().includes(query) ||
-    v.categoryLabel.toLowerCase().includes(query)
-  );
-
-  list = applyCityFilter(list);
-
-  document.getElementById('panelIcon').textContent = '🔎';
-  document.getElementById('panelTitle').textContent = `Recherche : ${q}`;
-  document.getElementById('panelSub').textContent = `${list.length} résultat(s) exemple`;
+  const qq=q.trim().toLowerCase();
+  let list=buildCatalog().filter(v=>v.name.toLowerCase().includes(qq)||v.what.toLowerCase().includes(qq)||v.loc.toLowerCase().includes(qq)||v.city.toLowerCase().includes(qq)||v.categoryLabel.toLowerCase().includes(qq));
+  list=applyCityFilter(list);
+  document.getElementById("panelIcon").textContent="🔎";
+  document.getElementById("panelTitle").textContent=`Recherche : ${q}`;
+  document.getElementById("panelSub").textContent=`${list.length} résultat(s) exemple`;
   renderVendorCards(list);
 }
 
 function rerenderCurrent(){
-  if(currentMode === 'search'){
-    const q = document.getElementById('topSearchInput').value.trim();
-    if(q) renderSearch(q);
-  } else if(currentMode === 'cat' && currentKey){
-    renderVendorsByCategory(currentKey);
-  }
+  if(currentMode==="search"){const q=document.getElementById("topSearchInput").value.trim();if(q)renderSearch(q);}
+  else if(currentMode==="cat"&&currentKey)renderVendorsByCategory(currentKey);
 }
 
-function openVendor(slug){
-  saveCatalog();
-  window.location.href = `vendeur.html?v=${encodeURIComponent(slug)}`;
-}
+function openVendor(slug){saveCatalog();window.location.href=`vendeur.html?v=${encodeURIComponent(slug)}`;}
+function contactVendor(slug){const v=buildCatalog().find(x=>x.slug===slug);const n=v?v.name:"cette vitrine";window.open(waLink(`Bonjour DIGIY 👋 Je veux une vitrine comme l'exemple "${n}" sur DIGIY MARKET.`),"_blank");}
 
-function contactVendor(slug){
-  const vendor = buildCatalog().find(v => v.slug === slug);
-  const name = vendor ? vendor.name : "cette vitrine";
-  window.open(
-    waLink(`Bonjour DIGIY 👋 Je veux une vitrine comme l'exemple "${name}" sur DIGIY MARKET.`),
-    '_blank'
-  );
-}
+initButtons();saveCatalog();updateCounts();fillCityFilter();
 
-initButtons();
-saveCatalog();
-updateCounts();
-fillCityFilter();
+let currentMode=null,currentKey=null;
+const panel=document.getElementById("vendorPanel");
 
-let currentMode = null;
-let currentKey = null;
-const panel = document.getElementById('vendorPanel');
-
-document.querySelectorAll('.cat-tile').forEach(tile => {
-  tile.addEventListener('click', () => {
-    const cat = tile.dataset.cat;
-
-    if(currentMode === 'cat' && currentKey === cat){
-      panel.classList.remove('open');
-      tile.classList.remove('active');
-      currentMode = null;
-      currentKey = null;
-      return;
-    }
-
-    document.querySelectorAll('.cat-tile').forEach(x => x.classList.remove('active'));
-    tile.classList.add('active');
-    currentMode = 'cat';
-    currentKey = cat;
-
+document.querySelectorAll(".cat-tile").forEach(tile=>{
+  tile.addEventListener("click",()=>{
+    const cat=tile.dataset.cat;
+    if(currentMode==="cat"&&currentKey===cat){panel.classList.remove("open");tile.classList.remove("active");currentMode=null;currentKey=null;return;}
+    document.querySelectorAll(".cat-tile").forEach(x=>x.classList.remove("active"));
+    tile.classList.add("active");currentMode="cat";currentKey=cat;
     renderVendorsByCategory(cat);
-    if(!panel.classList.contains('open')) panel.classList.add('open');
-    setTimeout(() => panel.scrollIntoView({behavior:'smooth', block:'nearest'}), 180);
+    if(!panel.classList.contains("open"))panel.classList.add("open");
+    setTimeout(()=>panel.scrollIntoView({behavior:"smooth",block:"nearest"}),180);
   });
 });
 
-document.getElementById('panelClose').addEventListener('click', () => {
-  panel.classList.remove('open');
-  document.querySelectorAll('.cat-tile').forEach(x => x.classList.remove('active'));
-  currentMode = null;
-  currentKey = null;
+document.getElementById("panelClose").addEventListener("click",()=>{panel.classList.remove("open");document.querySelectorAll(".cat-tile").forEach(x=>x.classList.remove("active"));currentMode=null;currentKey=null;});
+document.getElementById("topSearchBtn").addEventListener("click",()=>{const q=document.getElementById("topSearchInput").value.trim();if(!q)return;document.querySelectorAll(".cat-tile").forEach(x=>x.classList.remove("active"));currentMode="search";currentKey=q;renderSearch(q);panel.classList.add("open");setTimeout(()=>panel.scrollIntoView({behavior:"smooth",block:"nearest"}),180);});
+document.getElementById("topSearchInput").addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("topSearchBtn").click();});
+document.getElementById("cityFilter").addEventListener("change",rerenderCurrent);
+document.getElementById("resetFilters").addEventListener("click",()=>{document.getElementById("cityFilter").value="";document.getElementById("topSearchInput").value="";if(currentMode==="cat"&&currentKey)renderVendorsByCategory(currentKey);else{panel.classList.remove("open");currentMode=null;currentKey=null;document.querySelectorAll(".cat-tile").forEach(x=>x.classList.remove("active"));}});
+
+const rail=document.getElementById("catRail");
+document.getElementById("arrL").addEventListener("click",()=>rail.scrollBy({left:-280,behavior:"smooth"}));
+document.getElementById("arrR").addEventListener("click",()=>rail.scrollBy({left:280,behavior:"smooth"}));
+let isDown=false,startX=0,startScroll=0;
+function dragStart(x){isDown=true;startX=x;startScroll=rail.scrollLeft;rail.classList.add("grabbing");}
+function dragMove(x){if(!isDown)return;rail.scrollLeft=startScroll-(x-startX);}
+function dragEnd(){isDown=false;rail.classList.remove("grabbing");}
+rail.addEventListener("mousedown",e=>dragStart(e.pageX));
+window.addEventListener("mouseup",dragEnd);
+window.addEventListener("mousemove",e=>dragMove(e.pageX));
+rail.addEventListener("touchstart",e=>{if(e.touches[0])dragStart(e.touches[0].pageX);},{passive:true});
+rail.addEventListener("touchmove",e=>{if(e.touches[0])dragMove(e.touches[0].pageX);},{passive:true});
+rail.addEventListener("touchend",dragEnd);
+
+/* FAQ accordéon */
+document.querySelectorAll(".faq-item").forEach(item=>{
+  item.querySelector(".faq-q").addEventListener("click",()=>{
+    const open=item.classList.contains("open");
+    document.querySelectorAll(".faq-item").forEach(x=>x.classList.remove("open"));
+    if(!open)item.classList.add("open");
+  });
 });
-
-document.getElementById('topSearchBtn').addEventListener('click', () => {
-  const q = document.getElementById('topSearchInput').value.trim();
-  if(!q) return;
-  document.querySelectorAll('.cat-tile').forEach(x => x.classList.remove('active'));
-  currentMode = 'search';
-  currentKey = q;
-  renderSearch(q);
-  panel.classList.add('open');
-  setTimeout(() => panel.scrollIntoView({behavior:'smooth', block:'nearest'}), 180);
-});
-
-document.getElementById('topSearchInput').addEventListener('keydown', e => {
-  if(e.key === 'Enter') document.getElementById('topSearchBtn').click();
-});
-
-document.getElementById('cityFilter').addEventListener('change', () => {
-  rerenderCurrent();
-});
-
-document.getElementById('resetFilters').addEventListener('click', () => {
-  document.getElementById('cityFilter').value = '';
-  document.getElementById('topSearchInput').value = '';
-  if(currentMode === 'cat' && currentKey){
-    renderVendorsByCategory(currentKey);
-  } else {
-    panel.classList.remove('open');
-    currentMode = null;
-    currentKey = null;
-    document.querySelectorAll('.cat-tile').forEach(x => x.classList.remove('active'));
-  }
-});
-
-const rail = document.getElementById('catRail');
-document.getElementById('arrL').addEventListener('click', () => rail.scrollBy({left:-280, behavior:'smooth'}));
-document.getElementById('arrR').addEventListener('click', () => rail.scrollBy({left:280, behavior:'smooth'}));
-
-let isDown = false, startX = 0, startScroll = 0;
-function dragStart(x){ isDown = true; startX = x; startScroll = rail.scrollLeft; rail.classList.add('grabbing'); }
-function dragMove(x){ if(!isDown) return; rail.scrollLeft = startScroll - (x - startX); }
-function dragEnd(){ isDown = false; rail.classList.remove('grabbing'); }
-
-rail.addEventListener('mousedown', e => dragStart(e.pageX));
-window.addEventListener('mouseup', dragEnd);
-window.addEventListener('mousemove', e => dragMove(e.pageX));
-rail.addEventListener('touchstart', e => { if(e.touches[0]) dragStart(e.touches[0].pageX); }, {passive:true});
-rail.addEventListener('touchmove', e => { if(e.touches[0]) dragMove(e.touches[0].pageX); }, {passive:true});
-rail.addEventListener('touchend', dragEnd);
 </script>
 </body>
 </html>
