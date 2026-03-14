@@ -3,1374 +3,520 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>DIGIY MARKET — Sélection ROYAL ♛</title>
+<title>DIGIY MARKET — Le marché vivant</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,600&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet"/>
-
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,600&family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-/* ═══════════════════════════════════════════
-   DIGIY ROYAL — DESIGN SYSTEM
-═══════════════════════════════════════════ */
-:root {
-  --ink:     #0d0a06;
-  --ink-2:   #1a1208;
-  --gold:    #c8860a;
-  --gold-lt: #f4b840;
-  --amber:   #e86820;
-  --cream:   #fdf6ec;
-  --cream-2: #f7e8d0;
-  --muted:   #8a7a64;
-  --line:    #2e2010;
-  --line-lt: #3e2e1a;
+/* ══════════════════════════════════════
+   DIGIY MARKET — DESIGN SYSTEM
+══════════════════════════════════════ */
+:root{
+  /* light page */
+  --bg:#fdf6ec; --bg-2:#fffaf2; --card:#fffdf9;
+  --ink:#1a1208; --muted:#7a6a54; --line:#e8d8be;
+  --gold:#c8860a; --orange:#e86820; --red:#c83830; --green:#28885a;
+  --shadow:0 18px 52px rgba(26,18,8,.13);
+  --shadow-soft:0 10px 28px rgba(26,18,8,.08);
+  /* dark panel palette */
+  --dk:#0d0a06; --dk-2:#1a1208; --dk-3:#241808;
+  --dk-line:#2e2010; --dk-line-lt:#3e2e1a;
+  --gold-lt:#f4b840;
+  --g-gold:linear-gradient(135deg,#c8860a,#f4b840,#c8860a);
+  --g-fire:linear-gradient(135deg,#e86820,#c83830);
+  --shadow-dark:0 24px 64px rgba(0,0,0,.55),0 0 0 1px rgba(200,134,10,.07);
+  --shadow-dark-hover:0 40px 100px rgba(0,0,0,.7),0 0 0 1px rgba(200,134,10,.2);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Nunito",sans-serif;
+  background:radial-gradient(circle at top left,rgba(232,104,32,.06),transparent 28%),
+             radial-gradient(circle at top right,rgba(40,136,90,.05),transparent 22%),
+             var(--bg);
+  color:var(--ink);overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}
+img{display:block;max-width:100%}
+.wrap{width:min(1260px,calc(100% - 28px));margin:0 auto}
 
-  --g-dark:  linear-gradient(160deg,#0d0a06 0%,#1a1208 50%,#0f1a0a 100%);
-  --g-gold:  linear-gradient(135deg,#c8860a,#f4b840,#c8860a);
-  --g-warm:  linear-gradient(135deg,#2e1a08,#1a0f04);
+/* TOPBAR */
+.topbar{position:sticky;top:0;z-index:100;background:rgba(253,246,236,.93);backdrop-filter:blur(16px);border-bottom:2px solid var(--line);}
+.topbar-inner{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;min-height:76px;}
+.brand-stack{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.back-site-chip{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:#fff;border:1.5px solid var(--line);font-size:.82rem;font-weight:900;color:var(--ink);box-shadow:var(--shadow-soft);transition:.18s ease;white-space:nowrap;}
+.back-site-chip:hover{transform:translateY(-1px);background:#fff3df;}
+.brand{display:flex;align-items:center;gap:10px;font-family:"Playfair Display",serif;font-weight:900;font-size:1.22rem;}
+.brand-icon{width:42px;height:42px;border-radius:12px;background:var(--g-fire);display:grid;place-items:center;font-size:1.1rem;box-shadow:0 5px 16px rgba(232,104,32,.3);overflow:hidden;flex:0 0 auto;}
+.brand-icon img{width:100%;height:100%;object-fit:cover;}
+.brand small{display:block;font-family:"Nunito",sans-serif;font-weight:800;font-size:.72rem;color:var(--muted);margin-top:1px;}
+.live-count{display:inline-flex;align-items:center;gap:8px;padding:8px 11px;border-radius:999px;background:#fff;border:1.5px solid var(--line);font-size:.76rem;font-weight:900;color:var(--orange);}
+.live-count strong{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 8px;border-radius:999px;background:var(--orange);color:#fff;}
+.top-search{display:flex;align-items:center;background:#fff;border:2px solid var(--line);border-radius:999px;overflow:hidden;padding:0 6px 0 15px;min-width:0;}
+.top-search input{flex:1;border:none;outline:none;background:transparent;font-size:.92rem;color:var(--ink);padding:11px 0;min-width:0;}
+.top-search input::placeholder{color:var(--muted)}
+.top-search button{width:38px;height:38px;border-radius:50%;background:var(--orange);color:#fff;border:none;cursor:pointer;font-size:.95rem;display:grid;place-items:center;transition:background .18s;}
+.top-search button:hover{background:var(--red)}
+.top-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
+.btn-top{border:none;cursor:pointer;border-radius:999px;padding:11px 14px;font-weight:900;transition:.18s ease;font-size:.84rem;}
+.btn-top:hover{transform:translateY(-1px)}
+.btn-top.primary{background:var(--orange);color:#fff;box-shadow:0 10px 20px rgba(232,104,32,.22);}
+.btn-top.primary:hover{background:var(--red)}
+.btn-top.soft{background:#fff;border:1.5px solid var(--line);}
+.btn-top.soft:hover{background:#fff3df}
+.royal-top-chip{display:inline-flex;align-items:center;gap:8px;padding:11px 15px;border-radius:999px;background:linear-gradient(135deg,#2b1808,#5c3510);color:#fff;border:1.5px solid rgba(255,255,255,.14);font-size:.82rem;font-weight:900;box-shadow:0 12px 24px rgba(26,18,8,.18);cursor:pointer;transition:.18s ease;}
+.royal-top-chip:hover{transform:translateY(-1px);background:linear-gradient(135deg,#3a1f08,#744212);}
 
-  --shadow-card: 0 32px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(200,134,10,.08);
-  --shadow-hover: 0 48px 120px rgba(0,0,0,.72), 0 0 0 1px rgba(200,134,10,.22);
-  --glow-gold: 0 0 60px rgba(200,134,10,.28), 0 0 120px rgba(200,134,10,.12);
-}
+/* HERO BAND */
+.hero-band{background:linear-gradient(135deg,#1a1208 0%,#2e1e0a 48%,#1d2f14 100%);color:#fff;padding:38px 0 32px;position:relative;overflow:hidden;}
+.hero-band::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 12% 55%,rgba(232,104,32,.24),transparent 40%),radial-gradient(circle at 88% 30%,rgba(40,136,90,.18),transparent 36%);}
+.hero-inner{position:relative;z-index:1;}
+.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:20px;align-items:center;}
+.hero-kicker{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);font-size:.78rem;font-weight:900;letter-spacing:.07em;color:rgba(255,255,255,.82);margin-bottom:12px;text-transform:uppercase;}
+.hero-band h1{font-family:"Playfair Display",serif;font-weight:900;font-size:clamp(1.9rem,4.3vw,4.2rem);line-height:.92;letter-spacing:-.02em;margin-bottom:10px;}
+.hero-band h1 em{font-style:normal;background:linear-gradient(90deg,#f8a040,#f06040);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-desc{color:rgba(255,255,255,.74);font-size:1rem;line-height:1.68;max-width:56ch;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;}
+.chip{padding:8px 13px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);font-size:.78rem;font-weight:800;color:rgba(255,255,255,.84);}
+.hero-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:18px;backdrop-filter:blur(10px);}
+.hero-card h3{font-family:"Playfair Display",serif;font-size:1.32rem;margin-bottom:8px;}
+.hero-card p{font-size:.92rem;color:rgba(255,255,255,.76);line-height:1.68;}
+.cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+.hero-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 15px;border-radius:999px;font-weight:900;font-size:.86rem;}
+.hero-btn.primary{background:#fff;color:var(--ink);}
+.hero-btn.soft{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);color:#fff;}
+.hero-mob-cta{display:none;}
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
-html { scroll-behavior: smooth }
+/* STAT STRIP */
+.stat-strip{background:linear-gradient(90deg,#1a1208,#2a1a08);border-bottom:1px solid rgba(255,255,255,.07);}
+.stat-inner{display:flex;overflow-x:auto;scrollbar-width:none;}
+.stat-inner::-webkit-scrollbar{display:none;}
+.stat-item{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 24px;gap:1px;border-right:1px solid rgba(255,255,255,.07);min-width:110px;}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-family:"Playfair Display",serif;font-weight:900;font-size:1.32rem;color:#f8a040;}
+.stat-lbl{font-size:.62rem;font-weight:800;color:rgba(255,255,255,.46);text-transform:uppercase;letter-spacing:.05em;}
 
-body {
-  font-family: "Nunito", sans-serif;
-  background: var(--g-dark);
-  color: var(--cream);
-  overflow-x: hidden;
-  min-height: 100vh;
-}
+/* TICKER */
+.ticker{background:var(--orange);overflow:hidden;padding:7px 0;}
+.ticker-track{display:flex;animation:ticker-scroll 28s linear infinite;width:max-content;}
+.ticker-track:hover{animation-play-state:paused;}
+.ticker-item{white-space:nowrap;padding:0 22px;font-weight:900;font-size:.76rem;color:#fff;letter-spacing:.04em;text-transform:uppercase;border-right:1px solid rgba(255,255,255,.24);}
+@keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-/* ─── GRAIN OVERLAY ─── */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: .025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-}
+/* FILTERS */
+.filters{padding:18px 0 10px;}
+.filters-shell{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;background:var(--card);border:1.5px solid var(--line);border-radius:22px;padding:14px;box-shadow:var(--shadow-soft);}
+.filter-group{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.filter-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 13px;border-radius:999px;background:#fff;border:1.5px solid var(--line);font-weight:900;font-size:.82rem;}
+.filter-select{appearance:none;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:11px 16px;font-weight:900;color:var(--ink);min-width:160px;cursor:pointer;}
+.filter-reset{border:none;border-radius:999px;padding:11px 14px;background:#fff;border:1.5px solid var(--line);font-weight:900;cursor:pointer;}
+.filter-reset:hover{background:#fff3df}
 
-a { color: inherit; text-decoration: none }
-img { display: block; max-width: 100% }
+/* ══════════════════════════════════════
+   ROYAL LEAD — same as before
+══════════════════════════════════════ */
+.royal-lead{padding:18px 0 6px;}
+.royal-shell{background:radial-gradient(circle at top right,rgba(232,104,32,.09),transparent 28%),radial-gradient(circle at bottom left,rgba(40,136,90,.08),transparent 26%),linear-gradient(135deg,#fff9f0,#fff3e2);border:1.5px solid var(--line);border-radius:28px;padding:18px;box-shadow:var(--shadow);}
+.royal-head{display:flex;align-items:end;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:16px;}
+.royal-head h2{font-family:"Playfair Display",serif;font-weight:900;font-size:1.6rem;letter-spacing:-.02em;margin-bottom:6px;}
+.royal-head p{color:var(--muted);font-size:.9rem;line-height:1.65;max-width:58ch;}
+.royal-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.royal-btn{border:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border-radius:999px;font-weight:900;font-size:.84rem;transition:.18s ease;}
+.royal-btn:hover{transform:translateY(-1px)}
+.royal-btn.primary{background:linear-gradient(135deg,#2b1808,#5c3510);color:#fff;box-shadow:0 12px 24px rgba(26,18,8,.18);}
+.royal-btn.soft{background:#fff;color:var(--ink);border:1.5px solid var(--line);}
+.royal-btn.soft:hover{background:#fff3df}
+.royal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
 
-.wrap { width: min(1380px, calc(100% - 32px)); margin: 0 auto; position: relative; z-index: 1 }
+/* ─── ROYAL SPOTLIGHT CARDS (upgraded) ─── */
+.royal-card{
+  border-radius:22px;overflow:hidden;
+  border:1px solid rgba(200,134,10,.15);
+  background:var(--dk-2);
+  box-shadow:var(--shadow-dark);
+  transition:transform .28s cubic-bezier(.23,1,.32,1),box-shadow .28s;
+  cursor:pointer;
+}
+.royal-card:hover{
+  transform:translateY(-5px) scale(1.01);
+  box-shadow:var(--shadow-dark-hover);
+  border-color:rgba(200,134,10,.3);
+}
+.royal-cover{position:relative;height:220px;background:var(--dk);overflow:hidden;}
+.royal-cover img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.23,1,.32,1);}
+.royal-card:hover .royal-cover img{transform:scale(1.04);}
+.royal-gloss{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,10,6,.06),transparent 28%,rgba(13,10,6,.7) 100%);z-index:2;}
+.royal-badge{position:absolute;left:12px;top:12px;z-index:4;display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:999px;background:linear-gradient(135deg,#c8860a,#f4b840);color:#0d0a06;font-size:.65rem;font-weight:900;letter-spacing:.05em;}
+.royal-live{position:absolute;right:12px;top:12px;z-index:4;display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border-radius:999px;background:rgba(40,136,90,.92);color:#fff;font-size:.62rem;font-weight:900;}
+.royal-live::before{content:"";width:6px;height:6px;border-radius:50%;background:#a7ffd3;animation:pg 1.4s ease-in-out infinite;}
+@keyframes pg{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.royal-body{padding:14px 14px 15px;background:var(--dk-2);}
+.royal-kicker{font-size:.66rem;font-weight:900;color:var(--gold-lt);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;opacity:.8;}
+.royal-title{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:1.18rem;line-height:1.05;margin-bottom:6px;color:#fdf6ec;}
+.royal-text{color:rgba(253,246,236,.6);font-size:.82rem;line-height:1.58;min-height:40px;}
+.royal-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.royal-loc{font-size:.7rem;font-weight:800;color:rgba(253,246,236,.45);}
+.royal-price{font-size:.7rem;font-weight:900;padding:5px 10px;border-radius:999px;background:rgba(200,134,10,.15);color:var(--gold-lt);border:1px solid rgba(200,134,10,.28);}
+.section-premium-note{margin-top:10px;color:var(--muted);font-size:.82rem;line-height:1.65;}
 
-/* ═══ HEADER ═══ */
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 200;
-  background: rgba(13,10,6,.88);
-  backdrop-filter: blur(20px) saturate(1.4);
-  border-bottom: 1px solid var(--line-lt);
-}
-.header-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  min-height: 72px;
-  flex-wrap: wrap;
-}
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-family: "Playfair Display", serif;
-  font-weight: 900;
-  font-size: 1.18rem;
-}
-.brand-gem {
-  width: 44px; height: 44px;
-  border-radius: 14px;
-  background: linear-gradient(135deg,#e86820,#c83830);
-  display: grid;
-  place-items: center;
-  font-size: 1.3rem;
-  box-shadow: 0 6px 20px rgba(232,104,32,.35);
-}
-.brand small {
-  display: block;
-  font-family: "Nunito", sans-serif;
-  font-size: .7rem;
-  font-weight: 800;
-  color: var(--muted);
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  margin-top: 2px;
-}
+/* TRUST */
+.trust{padding:12px 0 0;}
+.trust-shell{background:var(--card);border:1.5px solid var(--line);border-radius:24px;padding:16px;box-shadow:var(--shadow-soft);}
+.trust-head{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
+.trust-head h3{font-family:"Playfair Display",serif;font-size:1.26rem;}
+.trust-head p{color:var(--muted);font-size:.9rem;}
+.trust-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;}
+.trust-card{border:1px solid var(--line);border-radius:18px;padding:14px;background:#fff;}
+.trust-card .icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;margin-bottom:10px;background:#fff3df;border:1px solid #f2d2a6;font-size:1.1rem;}
+.trust-card h4{font-size:.96rem;margin-bottom:5px;}
+.trust-card p{color:var(--muted);font-size:.84rem;line-height:1.58;}
 
-.crown-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  border-radius: 999px;
-  background: linear-gradient(135deg,#1a0f04,#2e1a08);
-  border: 1px solid rgba(200,134,10,.32);
-  font-weight: 900;
-  font-size: .82rem;
-  color: var(--gold-lt);
-  letter-spacing: .04em;
-  box-shadow: 0 0 24px rgba(200,134,10,.12);
-}
-.hdr-btns {
-  display: flex;
-  gap: 10px;
-}
-.btn {
-  border: none;
-  cursor: pointer;
-  border-radius: 999px;
-  padding: 11px 18px;
-  font-weight: 900;
-  font-size: .84rem;
-  transition: .2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-}
-.btn:hover { transform: translateY(-2px) }
-.btn-gold {
-  background: linear-gradient(135deg,#c8860a,#f4b840);
-  color: #0d0a06;
-  box-shadow: 0 10px 28px rgba(200,134,10,.32);
-}
-.btn-ghost {
-  background: rgba(255,255,255,.04);
-  border: 1px solid var(--line-lt);
-  color: var(--cream);
-}
-.btn-ghost:hover { background: rgba(255,255,255,.08) }
+/* CATEGORIES */
+.cats-section{padding:14px 0 0;}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap;}
+.section-head h2{font-family:"Playfair Display",serif;font-weight:900;font-size:1.55rem;letter-spacing:-.02em;}
+.section-head p{color:var(--muted);font-size:.88rem;}
+.rail-controls{display:flex;gap:8px;}
+.arr{width:42px;height:42px;border-radius:12px;background:#fff;border:2px solid var(--line);display:grid;place-items:center;cursor:pointer;font-size:1.08rem;font-weight:700;transition:all .18s;}
+.arr:hover{background:var(--ink);color:#fff;border-color:var(--ink);}
+.rail-wrap{overflow:hidden;position:relative;}
+.rail-wrap::before,.rail-wrap::after{content:"";position:absolute;top:0;bottom:0;width:32px;z-index:2;pointer-events:none;}
+.rail-wrap::before{left:0;background:linear-gradient(90deg,var(--bg),transparent);}
+.rail-wrap::after{right:0;background:linear-gradient(270deg,var(--bg),transparent);}
+.cat-rail{display:flex;gap:10px;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none;padding:8px 4px 14px;cursor:grab;}
+.cat-rail::-webkit-scrollbar{display:none;}
+.cat-rail.grabbing{cursor:grabbing;scroll-behavior:auto;}
+.cat-tile{flex-shrink:0;width:124px;border-radius:18px;overflow:hidden;border:2.5px solid transparent;cursor:pointer;transition:transform .22s,box-shadow .22s,border-color .18s;background:#fff;box-shadow:0 4px 14px rgba(26,18,8,.09);user-select:none;}
+.cat-tile:hover{transform:translateY(-4px) scale(1.04);box-shadow:var(--shadow);}
+.cat-tile.active{border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,104,32,.2),var(--shadow);transform:translateY(-3px) scale(1.03);}
+.cat-img{height:84px;display:flex;align-items:center;justify-content:center;font-size:2.1rem;position:relative;overflow:hidden;}
+.cat-bg-txt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;opacity:.1;font-size:.85rem;letter-spacing:1px;line-height:1.5;padding:4px;word-break:break-all;pointer-events:none;}
+.cat-icon{position:relative;z-index:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.22));}
+.cat-body{padding:8px 10px 10px;}
+.cat-name{font-family:"Playfair Display",serif;font-weight:700;font-size:.84rem;margin-bottom:3px;line-height:1.2;}
+.cat-count{font-size:.68rem;font-weight:800;color:var(--muted);letter-spacing:.02em;}
+.cat-count span{display:inline-flex;align-items:center;justify-content:center;background:var(--orange);color:#fff;min-width:18px;height:18px;border-radius:50%;font-size:.6rem;margin-left:4px;padding:0 4px;}
 
-/* ═══ HERO SECTION ═══ */
-.hero {
-  padding: 72px 0 56px;
-  position: relative;
-  overflow: hidden;
+/* ══════════════════════════════════════
+   VENDOR PANEL — ROYAL DARK EDITION
+══════════════════════════════════════ */
+.vendor-panel{max-height:0;overflow:hidden;transition:max-height .55s cubic-bezier(.4,0,.2,1),opacity .4s,margin .4s;opacity:0;margin-top:0;}
+.vendor-panel.open{max-height:2800px;opacity:1;margin-top:20px;}
+.vendor-panel-inner{
+  background:var(--dk-2);
+  border:1px solid var(--dk-line-lt);
+  border-radius:28px;overflow:hidden;
+  box-shadow:var(--shadow-dark);
 }
-.hero::before {
-  content: "";
-  position: absolute;
-  top: -80px; left: 50%; transform: translateX(-50%);
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(200,134,10,.12) 0%, transparent 70%);
-  pointer-events: none;
-}
-.hero-content {
-  text-align: center;
-  max-width: 720px;
-  margin: 0 auto;
-}
-.royal-badge-big {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 20px;
-  border-radius: 999px;
-  background: linear-gradient(135deg,rgba(200,134,10,.15),rgba(244,184,64,.08));
-  border: 1px solid rgba(200,134,10,.3);
-  color: var(--gold-lt);
-  font-weight: 900;
-  font-size: .78rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-}
-.royal-badge-big::before {
-  content: "";
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--gold-lt);
-  animation: pulse-gold 2s ease-in-out infinite;
-}
-@keyframes pulse-gold {
-  0%, 100% { opacity: 1; transform: scale(1) }
-  50% { opacity: .4; transform: scale(.7) }
-}
-
-.hero h1 {
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 300;
-  font-size: clamp(3.2rem, 7vw, 7rem);
-  line-height: .88;
-  letter-spacing: -.02em;
-  margin-bottom: 20px;
-}
-.hero h1 em {
-  font-style: italic;
-  background: var(--g-gold);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.hero-sub {
-  font-size: 1.06rem;
-  line-height: 1.75;
-  color: rgba(253,246,236,.6);
-  max-width: 520px;
-  margin: 0 auto 32px;
-}
-.divider-ornament {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  color: rgba(200,134,10,.4);
-  font-size: .9rem;
-  letter-spacing: .2em;
-  margin-bottom: 16px;
-}
-.divider-ornament::before,
-.divider-ornament::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(200,134,10,.3), transparent);
-  max-width: 140px;
+/* grain on panel */
+.vendor-panel-inner::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.02;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* ═══ MAGAZINE GRID ═══ */
-.magazine {
-  padding: 24px 0 80px;
+.panel-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 22px 16px;
+  border-bottom:1px solid var(--dk-line-lt);
+  flex-wrap:wrap;gap:10px;
+  background:rgba(255,255,255,.02);
+  position:relative;z-index:1;
 }
+.panel-header::after{
+  content:"";position:absolute;bottom:0;left:22px;right:22px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(200,134,10,.25),transparent);
+}
+.panel-title{display:flex;align-items:center;gap:12px;}
+.panel-title .icon{font-size:1.6rem;filter:drop-shadow(0 4px 12px rgba(200,134,10,.3));}
+.panel-title h3{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:1.3rem;color:#fdf6ec;}
+.panel-title p{color:rgba(253,246,236,.5);font-size:.8rem;margin-top:2px;}
+.panel-close{width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid var(--dk-line-lt);cursor:pointer;font-size:.9rem;display:grid;place-items:center;transition:.2s;color:#fdf6ec;}
+.panel-close:hover{background:var(--red);border-color:var(--red);}
 
-/* ─── GRID LAYOUT ─── */
-.grid-wrapper {
-  display: grid;
-  gap: 16px;
-}
+.vendor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;padding:20px;position:relative;z-index:1;}
 
-/* Row types */
-.row-hero    { grid-template-columns: 1.4fr 1fr; }
-.row-trio    { grid-template-columns: repeat(3, 1fr); }
-.row-split   { grid-template-columns: 1fr 1.4fr; }
-.row-duo     { grid-template-columns: 1fr 1fr; }
-.row-feature { grid-template-columns: 1.6fr 1fr 1fr; }
+/* ─── ROYAL VENDOR CARD ─── */
+.vendor{
+  border-radius:20px;overflow:hidden;
+  border:1px solid rgba(200,134,10,.1);
+  background:rgba(255,255,255,.03);
+  box-shadow:0 8px 32px rgba(0,0,0,.4);
+  transition:transform .28s cubic-bezier(.23,1,.32,1),box-shadow .28s,border-color .2s;
+  cursor:pointer;
+}
+.vendor:hover{
+  transform:translateY(-5px) scale(1.01);
+  box-shadow:var(--shadow-dark-hover);
+  border-color:rgba(200,134,10,.28);
+}
+.vendor-top{
+  height:175px;position:relative;overflow:hidden;
+  background:var(--dk);
+}
+.vendor-top img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.23,1,.32,1);}
+.vendor:hover .vendor-top img{transform:scale(1.05);}
+.vendor-top-gradient{
+  position:absolute;inset:0;z-index:2;
+  background:linear-gradient(to bottom,rgba(13,10,6,.05),rgba(13,10,6,.5) 100%);
+}
+.vendor-example{position:absolute;left:10px;top:10px;z-index:4;background:rgba(232,104,32,.9);color:#fff;padding:5px 9px;border-radius:999px;font-size:.6rem;font-weight:900;}
+.vendor-live{position:absolute;right:10px;top:10px;z-index:4;display:flex;align-items:center;gap:4px;background:rgba(40,136,90,.92);color:#fff;padding:5px 8px;border-radius:999px;font-size:.6rem;font-weight:900;}
+.vendor-live::before{content:"";width:6px;height:6px;border-radius:50%;background:#8ff7c5;animation:pg 1.4s ease-in-out infinite;}
+.vendor-royal{position:absolute;left:10px;bottom:10px;z-index:4;display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#c8860a,#f4b840);color:#0d0a06;padding:5px 9px;border-radius:999px;font-size:.6rem;font-weight:900;}
+.vendor-body{padding:14px 14px 15px;}
+.vendor-name{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:1.1rem;line-height:1.08;margin-bottom:5px;color:#fdf6ec;}
+.vendor-what{font-size:.8rem;color:rgba(253,246,236,.55);line-height:1.55;margin-bottom:10px;min-height:42px;}
+.vendor-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+.vendor-loc{font-size:.7rem;font-weight:800;color:rgba(253,246,236,.4);}
+.vendor-price{font-size:.7rem;font-weight:900;padding:4px 9px;border-radius:999px;background:rgba(200,134,10,.15);color:var(--gold-lt);border:1px solid rgba(200,134,10,.25);}
+.vendor-cta{display:flex;gap:7px;margin-top:11px;}
+.vendor-btn{flex:1;padding:9px 10px;border-radius:11px;font-size:.74rem;font-weight:900;border:none;cursor:pointer;transition:.18s;}
+.vendor-btn.primary{background:linear-gradient(135deg,#e86820,#c83830);color:#fff;box-shadow:0 4px 14px rgba(232,104,32,.3);}
+.vendor-btn.primary:hover{filter:brightness(1.1);}
+.vendor-btn.ghost{background:rgba(255,255,255,.06);color:#fdf6ec;border:1px solid var(--dk-line-lt);}
+.vendor-btn.ghost:hover{background:rgba(255,255,255,.12);}
 
-.grid-row {
-  display: grid;
-  gap: 16px;
-  margin-bottom: 16px;
-}
+.empty-state{text-align:center;padding:40px 20px;color:rgba(253,246,236,.5);grid-column:1/-1;}
+.empty-state .big{font-size:2.8rem;margin-bottom:10px;}
+.empty-state p{font-size:.9rem;line-height:1.6;}
 
-/* ─── ROYAL CARD ─── */
-.r-card {
-  position: relative;
-  border-radius: 28px;
-  overflow: hidden;
-  cursor: pointer;
-  border: 1px solid rgba(200,134,10,.1);
-  box-shadow: var(--shadow-card);
-  transition: transform .35s cubic-bezier(.23,1,.32,1), box-shadow .35s cubic-bezier(.23,1,.32,1);
-  background: var(--ink-2);
-}
-.r-card:hover {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: var(--shadow-hover), var(--glow-gold);
-  border-color: rgba(200,134,10,.28);
-}
-.r-card:hover .r-img { transform: scale(1.04) }
-.r-card:hover .r-overlay { opacity: 1 }
-.r-card:hover .r-cta-row { opacity: 1; transform: translateY(0) }
+/* CTA BAND */
+.cta-band{margin-top:24px;background:linear-gradient(135deg,#fffaf3,#fff4e4);border:2px solid var(--line);border-radius:28px;padding:18px;box-shadow:var(--shadow);}
+.cta-band-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:14px;align-items:center;}
+.cta-band h3{font-family:"Playfair Display",serif;font-size:1.38rem;margin-bottom:8px;}
+.cta-band p{color:var(--muted);line-height:1.7;}
+.cta-band-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+.cta-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:#fff;border:1.5px solid var(--line);font-weight:900;font-size:.84rem;}
+.cta-main{display:flex;flex-direction:column;gap:10px;}
+.big-cta{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px 18px;border-radius:18px;background:var(--g-fire);color:#fff;font-weight:900;font-size:.98rem;box-shadow:0 14px 28px rgba(232,104,32,.25);}
+.big-cta.soft{background:#fff;color:var(--ink);border:1.5px solid var(--line);box-shadow:none;}
 
-/* Card sizes */
-.r-card.tall { min-height: 560px }
-.r-card.med  { min-height: 420px }
-.r-card.sm   { min-height: 340px }
+/* FAQ */
+.faq-section{padding:18px 0 4px;}
+.faq-shell{background:var(--card);border:1.5px solid var(--line);border-radius:24px;padding:16px;box-shadow:var(--shadow-soft);}
+.faq-head{font-family:"Playfair Display",serif;font-size:1.26rem;font-weight:900;margin-bottom:14px;}
+.faq-item{border-bottom:1px solid var(--line);overflow:hidden;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 2px;cursor:pointer;font-weight:900;font-size:.9rem;user-select:none;}
+.faq-q:hover{color:var(--orange);}
+.faq-arr{flex:0 0 auto;width:28px;height:28px;border-radius:8px;background:#fff3df;display:flex;align-items:center;justify-content:center;font-size:.82rem;transition:transform .28s,background .22s;}
+.faq-item.open .faq-arr{transform:rotate(180deg);background:var(--orange);color:#fff;}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .38s ease,padding .28s;color:var(--muted);font-size:.86rem;line-height:1.65;padding:0 2px;}
+.faq-item.open .faq-a{max-height:200px;padding-bottom:14px;}
 
-/* ─── IMAGE ZONE ─── */
-.r-img-wrap {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-.r-img {
-  width: 100%;
-  height: 100%;
-  transition: transform .6s cubic-bezier(.23,1,.32,1);
-}
-.r-img svg {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  inset: 0;
-}
+/* FLOAT */
+.float-cta{position:fixed;right:14px;bottom:14px;z-index:120;display:flex;flex-direction:column;gap:10px;}
+.float-btn{display:flex;align-items:center;justify-content:center;gap:8px;min-width:220px;padding:13px 16px;border-radius:999px;color:#fff;font-weight:900;box-shadow:0 16px 28px rgba(0,0,0,.18);}
+.float-btn.wa{background:#0b8f59;}
+.float-btn.module{background:var(--g-fire);}
 
-/* ─── OVERLAYS ─── */
-.r-gradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(13,10,6,.2) 40%,
-    rgba(13,10,6,.72) 72%,
-    rgba(13,10,6,.92) 100%
-  );
-  z-index: 2;
-}
-.r-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(13,10,6,.18);
-  z-index: 3;
-  opacity: 0;
-  transition: opacity .35s;
-}
+/* FOOTER */
+footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+.footer-brand{font-family:"Playfair Display",serif;font-weight:900;font-size:1.1rem;}
+.footer-sub{color:var(--muted);font-size:.74rem;margin-top:3px;}
+.footer-links{display:flex;gap:14px;font-weight:800;font-size:.82rem;flex-wrap:wrap;}
+.footer-links a{color:var(--orange);}
+.footer-links a:hover{text-decoration:underline;}
 
-/* ─── CARD LABELS ─── */
-.r-top-chips {
-  position: absolute;
-  left: 16px;
-  top: 16px;
-  z-index: 10;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.chip-royal {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 6px 11px;
-  border-radius: 999px;
-  background: linear-gradient(135deg,#c8860a,#f4b840);
-  color: #0d0a06;
-  font-size: .66rem;
-  font-weight: 900;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  box-shadow: 0 4px 14px rgba(200,134,10,.4);
-}
-.chip-live {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(40,136,90,.9);
-  color: #fff;
-  font-size: .62rem;
-  font-weight: 900;
-}
-.chip-live::before {
-  content: "";
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: #8ff7c5;
-  animation: pulse-green 1.4s ease-in-out infinite;
-}
-@keyframes pulse-green {
-  0%, 100% { opacity: 1 }
-  50% { opacity: .3 }
-}
-.chip-cat {
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(13,10,6,.72);
-  border: 1px solid rgba(255,255,255,.12);
-  color: rgba(255,255,255,.84);
-  font-size: .62rem;
-  font-weight: 900;
-  backdrop-filter: blur(8px);
-}
-
-/* ─── CARD BODY ─── */
-.r-body {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  padding: 22px 22px 24px;
-}
-.r-kicker {
-  font-size: .68rem;
-  font-weight: 900;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--gold-lt);
-  margin-bottom: 6px;
-  opacity: .86;
-}
-.r-title {
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 600;
-  font-size: clamp(1.4rem, 2.8vw, 2.4rem);
-  line-height: .95;
-  margin-bottom: 8px;
-  text-shadow: 0 2px 20px rgba(0,0,0,.4);
-}
-.r-what {
-  color: rgba(253,246,236,.72);
-  font-size: .84rem;
-  line-height: 1.6;
-  margin-bottom: 12px;
-}
-.r-meta {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.r-loc {
-  font-size: .72rem;
-  font-weight: 800;
-  color: rgba(253,246,236,.55);
-}
-.r-price {
-  padding: 5px 10px;
-  border-radius: 999px;
-  background: rgba(200,134,10,.18);
-  border: 1px solid rgba(200,134,10,.32);
-  color: var(--gold-lt);
-  font-size: .72rem;
-  font-weight: 900;
-}
-
-.r-cta-row {
-  display: flex;
-  gap: 8px;
-  margin-top: 14px;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity .3s, transform .3s;
-}
-.r-btn {
-  border: none;
-  cursor: pointer;
-  border-radius: 12px;
-  padding: 10px 14px;
-  font-weight: 900;
-  font-size: .78rem;
-  transition: .18s;
-}
-.r-btn.gold {
-  background: linear-gradient(135deg,#c8860a,#f4b840);
-  color: #0d0a06;
-  box-shadow: 0 6px 18px rgba(200,134,10,.35);
-}
-.r-btn.ghost {
-  background: rgba(255,255,255,.1);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,.14);
-  color: #fff;
-}
-.r-btn.gold:hover { filter: brightness(1.1) }
-.r-btn.ghost:hover { background: rgba(255,255,255,.18) }
-
-/* ─── FEATURED HORIZONTAL CARD ─── */
-.r-card.horizontal {
-  display: flex;
-  flex-direction: row;
-  min-height: 220px;
-}
-.r-card.horizontal .r-img-wrap {
-  position: relative;
-  flex: 0 0 42%;
-  min-height: 220px;
-}
-.r-card.horizontal .r-gradient {
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    rgba(13,10,6,.5) 60%,
-    rgba(13,10,6,.94) 100%
-  );
-}
-.r-card.horizontal .r-body {
-  position: relative;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 24px 28px;
-}
-.r-card.horizontal .r-cta-row {
-  opacity: 1;
-  transform: none;
-}
-
-/* ─── SECTION DIVIDER ─── */
-.section-divider {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 32px 0 20px;
-}
-.section-divider .cat-icon {
-  font-size: 1.6rem;
-  filter: drop-shadow(0 4px 10px rgba(200,134,10,.3));
-}
-.section-divider h2 {
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 600;
-  font-size: 1.9rem;
-  letter-spacing: -.01em;
-}
-.section-divider small {
-  color: var(--muted);
-  font-size: .82rem;
-  display: block;
-  margin-top: 2px;
-}
-.section-divider .line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(200,134,10,.24), transparent);
-}
-
-/* ─── CTA BAND ─── */
-.cta-band {
-  margin: 48px 0 0;
-  padding: 0 0 80px;
-}
-.cta-inner {
-  background: linear-gradient(135deg, #1a0f04 0%, #0f1a0a 50%, #1a1208 100%);
-  border: 1px solid rgba(200,134,10,.2);
-  border-radius: 36px;
-  padding: 56px 48px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--shadow-card);
-}
-.cta-inner::before {
-  content: "";
-  position: absolute;
-  top: -120px; left: 50%; transform: translateX(-50%);
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(200,134,10,.1) 0%, transparent 70%);
-  pointer-events: none;
-}
-.cta-inner h2 {
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 600;
-  font-size: clamp(2.2rem, 5vw, 4.2rem);
-  line-height: .9;
-  letter-spacing: -.02em;
-  margin-bottom: 16px;
-}
-.cta-inner h2 em {
-  font-style: italic;
-  background: var(--g-gold);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.cta-inner p {
-  color: rgba(253,246,236,.65);
-  font-size: 1.06rem;
-  line-height: 1.75;
-  max-width: 500px;
-  margin: 0 auto 32px;
-}
-.cta-btns {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-.btn-lg {
-  padding: 16px 28px;
-  font-size: .98rem;
-  border-radius: 18px;
-}
-
-/* ─── FOOTER ─── */
-.site-footer {
-  border-top: 1px solid var(--line-lt);
-  padding: 28px 0;
-}
-.footer-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-.footer-brand {
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 600;
-  font-size: 1.2rem;
-}
-.footer-brand small {
-  display: block;
-  font-family: "Nunito", sans-serif;
-  font-size: .72rem;
-  color: var(--muted);
-  margin-top: 2px;
-}
-.footer-links {
-  display: flex;
-  gap: 16px;
-  font-size: .82rem;
-  font-weight: 800;
-}
-.footer-links a {
-  color: var(--gold);
-  opacity: .72;
-}
-.footer-links a:hover { opacity: 1 }
-
-/* ─── ENTRANCE ANIMATIONS ─── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px) }
-  to   { opacity: 1; transform: translateY(0) }
-}
-@keyframes fadeIn {
-  from { opacity: 0 }
-  to   { opacity: 1 }
-}
-@keyframes shimmer {
-  0%, 100% { background-position: 200% center }
-  50% { background-position: -200% center }
-}
-
-.animate-in {
-  opacity: 0;
-  animation: fadeUp .7s cubic-bezier(.23,1,.32,1) forwards;
-}
-.animate-in.visible { animation-play-state: running }
-
-.hero-content { animation: fadeUp .9s cubic-bezier(.23,1,.32,1) both }
-.grid-row { animation: fadeIn .6s ease both }
-
-/* ─── RESPONSIVE ─── */
-@media(max-width:1080px) {
-  .row-hero, .row-split, .row-feature { grid-template-columns: 1fr 1fr }
-}
-@media(max-width:720px) {
-  .row-hero, .row-trio, .row-split, .row-duo, .row-feature { grid-template-columns: 1fr }
-  .r-card.tall { min-height: 460px }
-  .r-card.med  { min-height: 380px }
-  .r-card.horizontal { flex-direction: column }
-  .r-card.horizontal .r-img-wrap { flex: none; min-height: 220px }
-  .r-card.horizontal .r-gradient {
-    background: linear-gradient(to bottom, transparent 0%, rgba(13,10,6,.94) 100%);
-  }
-  .r-cta-row { opacity: 1; transform: none }
-  .cta-inner { padding: 36px 24px }
-  .header-inner { min-height: 60px }
-  .crown-pill { display: none }
-}
+/* RESPONSIVE */
+@media(max-width:980px){.topbar-inner,.cta-band-grid,.filters-shell{grid-template-columns:1fr;}.top-actions{justify-content:flex-start;}.trust-grid{grid-template-columns:1fr 1fr;}.royal-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:680px){.hero-band{padding:16px 0 14px;}.hero-kicker{font-size:.68rem;padding:5px 10px;margin-bottom:8px;}.hero-band h1{font-size:clamp(1.52rem,5.8vw,2rem);margin-bottom:7px;line-height:.96;}.hero-desc{display:none;}.hero-chips{margin-top:9px;gap:5px;}.chip{padding:5px 10px;font-size:.69rem;}.hero-card{display:none;}.hero-grid{grid-template-columns:1fr;gap:0;}.hero-mob-cta{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px;}.hero-mob-cta .hero-btn{padding:10px 14px;font-size:.82rem;}}
+@media(max-width:700px){.cat-tile{width:104px;}.cat-img{height:70px;font-size:1.8rem;}.vendor-grid,.trust-grid{grid-template-columns:1fr 1fr;}.panel-header{padding:12px 14px;}.float-cta{left:12px;right:12px;}.float-btn{min-width:0;width:100%;}.stat-item{min-width:96px;padding:8px 14px;}.stat-num{font-size:1.1rem;}.royal-grid{grid-template-columns:1fr;}}
+@media(max-width:440px){.vendor-grid,.trust-grid{grid-template-columns:1fr;}.topbar-inner{grid-template-columns:1fr;}.top-actions{display:none;}}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="site-header">
-  <div class="wrap header-inner">
-    <a class="brand" href="index.html">
-      <span class="brand-gem">🛍️</span>
-      <span>DIGIY MARKET <small>Sélection ROYAL</small></span>
-    </a>
-    <span class="crown-pill">♛ Fiches ROYAL — Vitrine éditoriale</span>
-    <div class="hdr-btns">
-      <a class="btn btn-ghost" href="index.html">← Retour au marché</a>
-      <a class="btn btn-gold" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <div class="brand-stack">
+      <a class="back-site-chip" href="https://digiylyfe.com/" target="_blank" rel="noopener">← Retour au site</a>
+      <a class="brand" href="#">
+        <span class="brand-icon" id="brandIcon">🛍️</span>
+        <span>DIGIY MARKET<small>Le marché vivant du quotidien</small></span>
+      </a>
+      <div class="live-count">Vendeurs exemples <strong id="totalCount">0</strong></div>
+    </div>
+    <div class="top-search">
+      <input id="topSearchInput" type="text" placeholder="Chercher un vendeur, un produit, une ville…"/>
+      <button id="topSearchBtn" type="button">🔍</button>
+    </div>
+    <div class="top-actions">
+      <button class="royal-top-chip" id="royalTopBtn" type="button">👑 Fiches ROYAL</button>
+      <a class="btn-top soft" id="waTopBtn" href="#" target="_blank" rel="noopener">💬 WhatsApp DIGIY</a>
+      <a class="btn-top primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
     </div>
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="wrap">
-    <div class="hero-content">
-      <div class="royal-badge-big">♛ DIGIY MARKET — Sélection Royale</div>
-      <h1>Les vitrines qui font<br/><em>désirer</em></h1>
-      <p class="hero-sub">Ces fiches sont la locomotive visuelle du marché. Elles tirent tout vers le haut, inspirent les futurs abonnés et montrent ce que devient une boutique quand on lui donne la vraie dimension.</p>
-      <div class="divider-ornament">✦ ✦ ✦</div>
+<section class="hero-band">
+  <div class="wrap hero-inner">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-kicker">🌍 DIGIYLYFE ∞ · Sénégal · Afrique</div>
+        <h1>Le marché qui <em>bouge</em><br/>comme la rue.</h1>
+        <p class="hero-desc">Catégories qui glissent, fiches qui respirent, contact direct, entrée PRO visible. Ici on ne montre pas juste des cases. On montre une présence.</p>
+        <div class="hero-chips">
+          <span class="chip">🛒 Neuf</span><span class="chip">♻️ Deuxième main</span><span class="chip">👗 Vêtements</span>
+          <span class="chip">🌸 Parfum</span><span class="chip">✂️ Coiffeur</span><span class="chip">💅 Onglerie</span>
+          <span class="chip">🏺 Brocante</span><span class="chip">🧺 Bana-bana</span>
+        </div>
+        <div class="hero-mob-cta">
+          <a class="hero-btn primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🚀 Mon module</a>
+          <a id="heroWaBtnMob" class="hero-btn soft" href="#" target="_blank" rel="noopener">💬 DIGIY</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3>Un hall qui convertit</h3>
+        <p>Tous les exemples servent à guider les commerçants. Le bouton <strong>Je veux mon module</strong> pointe directement vers ton entrée PRO officielle.</p>
+        <div class="cta-row">
+          <a class="hero-btn primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🚀 Je veux mon module</a>
+          <a id="heroWaBtn" class="hero-btn soft" href="#" target="_blank" rel="noopener">💬 Parler à DIGIY</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- MAGAZINE GRID -->
-<main class="magazine">
+<div class="stat-strip">
   <div class="wrap">
-
-    <!-- ═══ SECTION : MODE ═══ -->
-    <div class="section-divider animate-in">
-      <span class="cat-icon">👗</span>
-      <div>
-        <h2>Mode & Couture</h2>
-        <small>Robes, bijoux, sacs — l'élégance africaine au niveau magazine</small>
-      </div>
-      <span class="line"></span>
+    <div class="stat-inner">
+      <div class="stat-item"><div class="stat-num" id="statVendeurs">0</div><div class="stat-lbl">Vendeurs exemples</div></div>
+      <div class="stat-item"><div class="stat-num">12</div><div class="stat-lbl">Catégories</div></div>
+      <div class="stat-item"><div class="stat-num">0%</div><div class="stat-lbl">Commission</div></div>
+      <div class="stat-item"><div class="stat-num">Direct</div><div class="stat-lbl">Paiement pro</div></div>
+      <div class="stat-item"><div class="stat-num">∞</div><div class="stat-lbl">DIGIYLYFE</div></div>
     </div>
+  </div>
+</div>
 
-    <!-- ROW 1 — HERO + PORTRAIT -->
-    <div class="grid-row row-hero animate-in" style="animation-delay:.1s">
-      <!-- Maison Nafi Couture — GRANDE -->
-      <div class="r-card tall">
-        <div class="r-img-wrap">
-          <div class="r-img">
-            <svg viewBox="0 0 900 680" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-              <defs>
-                <linearGradient id="n1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f4c4d4"/><stop offset="100%" stop-color="#e8a4bc"/></linearGradient>
-                <linearGradient id="n2" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#fde8d2" stop-opacity=".8"/><stop offset="100%" stop-color="#f9d4be" stop-opacity=".5"/></linearGradient>
-                <radialGradient id="n3" cx="50%" cy="40%"><stop offset="0%" stop-color="#fff8f4" stop-opacity=".6"/><stop offset="100%" stop-color="transparent"/></radialGradient>
-                <filter id="blur-soft"><feGaussianBlur stdDeviation="1.2"/></filter>
-              </defs>
-              <rect width="900" height="680" fill="url(#n1)"/>
-              <!-- Big abstract figure — robe silhouette -->
-              <ellipse cx="450" cy="720" rx="220" ry="300" fill="#c8607a" opacity=".25"/>
-              <rect x="370" y="140" width="160" height="420" rx="80" fill="#d4708a" opacity=".7"/>
-              <ellipse cx="450" cy="135" rx="65" ry="70" fill="#e8a090" opacity=".85"/>
-              <rect x="340" y="280" width="220" height="18" rx="9" fill="#fff" opacity=".18"/>
-              <!-- Fabric texture lines -->
-              <line x1="310" y1="200" x2="590" y2="200" stroke="#c06070" stroke-width="1.5" opacity=".3"/>
-              <line x1="310" y1="240" x2="590" y2="240" stroke="#c06070" stroke-width="1.5" opacity=".3"/>
-              <line x1="310" y1="320" x2="590" y2="320" stroke="#c06070" stroke-width="1.5" opacity=".3"/>
-              <line x1="310" y1="360" x2="590" y2="360" stroke="#c06070" stroke-width="1.5" opacity=".3"/>
-              <!-- Gold accent detail -->
-              <path d="M400 290 Q450 270 500 290 Q450 310 400 290Z" fill="#c8860a" opacity=".6"/>
-              <circle cx="450" cy="290" r="8" fill="#f4b840" opacity=".8"/>
-              <!-- Background circles -->
-              <circle cx="760" cy="120" r="180" fill="rgba(255,255,255,.1)"/>
-              <circle cx="140" cy="560" r="140" fill="rgba(255,255,255,.1)"/>
-              <!-- Wax pattern dots -->
-              <circle cx="100" cy="100" r="6" fill="#c8860a" opacity=".3"/>
-              <circle cx="150" cy="80" r="4" fill="#c8860a" opacity=".2"/>
-              <circle cx="800" cy="600" r="8" fill="#c8860a" opacity=".3"/>
-              <circle cx="750" cy="580" r="5" fill="#c8860a" opacity=".2"/>
-              <rect x="60" y="200" width="60" height="3" rx="1.5" fill="#c8860a" opacity=".2"/>
-              <rect x="60" y="212" width="40" height="3" rx="1.5" fill="#c8860a" opacity=".15"/>
-              <!-- Light overlay -->
-              <rect width="900" height="680" fill="url(#n3)"/>
-              <!-- Brand mark -->
-              <text x="740" y="50" font-family="Georgia, serif" font-size="11" font-weight="700" fill="#c8860a" opacity=".6" letter-spacing="3">DIGIY ROYAL</text>
-            </svg>
-          </div>
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">🛍️ DIGIY MARKET</span><span class="ticker-item">🌍 Sénégal</span><span class="ticker-item">✂️ Coiffeur</span><span class="ticker-item">💅 Onglerie</span><span class="ticker-item">🧺 Bana-bana</span><span class="ticker-item">🏺 Brocante</span><span class="ticker-item">👗 Vêtements</span><span class="ticker-item">🌸 Parfum</span><span class="ticker-item">📱 Téléphones</span><span class="ticker-item">🥜 Alimentaire</span><span class="ticker-item">♻️ Deuxième main</span><span class="ticker-item">0% Commission</span><span class="ticker-item">💳 Paiement direct</span><span class="ticker-item">🔥 Entrée PRO</span>
+    <span class="ticker-item">🛍️ DIGIY MARKET</span><span class="ticker-item">🌍 Sénégal</span><span class="ticker-item">✂️ Coiffeur</span><span class="ticker-item">💅 Onglerie</span><span class="ticker-item">🧺 Bana-bana</span><span class="ticker-item">🏺 Brocante</span><span class="ticker-item">👗 Vêtements</span><span class="ticker-item">🌸 Parfum</span><span class="ticker-item">📱 Téléphones</span><span class="ticker-item">🥜 Alimentaire</span><span class="ticker-item">♻️ Deuxième main</span><span class="ticker-item">0% Commission</span><span class="ticker-item">💳 Paiement direct</span><span class="ticker-item">🔥 Entrée PRO</span>
+  </div>
+</div>
+
+<section class="filters">
+  <div class="wrap">
+    <div class="filters-shell">
+      <div class="filter-group">
+        <span class="filter-pill">🎯 Index MARKET V6</span>
+        <span class="filter-pill">🧭 Fiches exemples guidantes</span>
+        <span class="filter-pill">🔥 Entrée PRO visible</span>
+      </div>
+      <select id="cityFilter" class="filter-select"><option value="">Toutes les villes</option></select>
+      <button id="resetFilters" class="filter-reset" type="button">Réinitialiser</button>
+    </div>
+  </div>
+</section>
+
+<section class="royal-lead" id="royalLead">
+  <div class="wrap">
+    <div class="royal-shell">
+      <div class="royal-head">
+        <div>
+          <h2>👑 Sélection ROYAL</h2>
+          <p>Ici on met les vitrines premium en avant : plus de style, plus de matière, plus de désir, plus d'inspiration. C'est la locomotive visuelle du marché.</p>
         </div>
-        <div class="r-gradient"></div>
-        <div class="r-overlay"></div>
-        <div class="r-top-chips">
-          <span class="chip-royal">♛ ROYAL STAR</span>
-          <span class="chip-live">VISIBLE</span>
-          <span class="chip-cat">👗 Mode couture</span>
-        </div>
-        <div class="r-body">
-          <div class="r-kicker">Maison de couture · Dakar · Mermoz</div>
-          <div class="r-title">Maison Nafi<br/>Couture</div>
-          <div class="r-what">Robes couture, wax premium, tenues élégantes, silhouettes de cérémonie</div>
-          <div class="r-meta">
-            <span class="r-loc">📍 Dakar · Mermoz</span>
-            <span class="r-price">12 000 – 85 000 F</span>
-          </div>
-          <div class="r-cta-row">
-            <button class="r-btn gold" onclick="window.open('https://commencer-a-payer.digiylyfe.com/')">🔥 Voir la fiche</button>
-            <button class="r-btn ghost">💬 WhatsApp</button>
-          </div>
+        <div class="royal-actions">
+          <button class="royal-btn primary" id="btnRoyalOnly" type="button">👑 Rassembler les ROYAL</button>
+          <button class="royal-btn soft" id="btnRoyalReset" type="button">🌍 Revenir au marché complet</button>
         </div>
       </div>
+      <div class="royal-grid" id="royalSpotlightGrid"></div>
+      <div class="section-premium-note">Les fiches ROYAL servent à tirer toute la vitrine vers le haut, inspirer les futurs abonnés, et donner une image plus magazine, plus désirable, plus premium.</div>
+    </div>
+  </div>
+</section>
 
-      <!-- Perles & Or -->
-      <div class="r-card tall">
-        <div class="r-img-wrap">
-          <div class="r-img">
-            <svg viewBox="0 0 640 680" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-              <defs>
-                <linearGradient id="p1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2a1f3d"/><stop offset="100%" stop-color="#1a1230"/></linearGradient>
-                <radialGradient id="p2" cx="50%" cy="35%"><stop offset="0%" stop-color="#8060c0" stop-opacity=".5"/><stop offset="100%" stop-color="transparent"/></radialGradient>
-                <radialGradient id="p3" cx="60%" cy="50%"><stop offset="0%" stop-color="#f4b840" stop-opacity=".3"/><stop offset="100%" stop-color="transparent"/></radialGradient>
-              </defs>
-              <rect width="640" height="680" fill="url(#p1)"/>
-              <rect width="640" height="680" fill="url(#p2)"/>
-              <rect width="640" height="680" fill="url(#p3)"/>
-              <!-- Neck + jewelry base -->
-              <ellipse cx="320" cy="170" rx="70" ry="75" fill="#c8906a" opacity=".9"/>
-              <rect x="270" y="220" width="100" height="180" rx="50" fill="#b87a56" opacity=".6"/>
-              <!-- Necklace string -->
-              <path d="M250 195 Q320 240 390 195" stroke="#f4b840" stroke-width="2.5" fill="none" opacity=".8"/>
-              <!-- Pearls on necklace -->
-              <circle cx="250" cy="195" r="8" fill="#f4b840"/>
-              <circle cx="275" cy="215" r="7" fill="#f4d080"/>
-              <circle cx="300" cy="228" r="8" fill="#f4b840"/>
-              <circle cx="320" cy="232" r="9" fill="#fff8e8"/>
-              <circle cx="340" cy="228" r="8" fill="#f4b840"/>
-              <circle cx="365" cy="215" r="7" fill="#f4d080"/>
-              <circle cx="390" cy="195" r="8" fill="#f4b840"/>
-              <!-- Earring -->
-              <line x1="248" y1="170" x2="240" y2="215" stroke="#c8860a" stroke-width="2"/>
-              <ellipse cx="240" cy="218" rx="8" ry="12" fill="#f4b840" opacity=".9"/>
-              <!-- Stars / sparkles -->
-              <text x="460" y="120" font-size="22" fill="#f4b840" opacity=".7">✦</text>
-              <text x="140" y="300" font-size="16" fill="#f4b840" opacity=".5">✦</text>
-              <text x="520" y="400" font-size="13" fill="#f4b840" opacity=".4">✦</text>
-              <text x="100" y="140" font-size="10" fill="#f4b840" opacity=".35">✦</text>
-              <!-- Background rings -->
-              <circle cx="320" cy="250" r="200" fill="none" stroke="rgba(244,184,64,.07)" stroke-width="1.5"/>
-              <circle cx="320" cy="250" r="280" fill="none" stroke="rgba(244,184,64,.04)" stroke-width="1"/>
-              <!-- Bracelet display bottom -->
-              <ellipse cx="180" cy="500" rx="60" ry="20" fill="#c8860a" opacity=".3"/>
-              <ellipse cx="180" cy="500" rx="60" ry="20" fill="none" stroke="#f4b840" stroke-width="2" opacity=".5"/>
-              <ellipse cx="460" cy="520" rx="55" ry="18" fill="#c8860a" opacity=".3"/>
-              <ellipse cx="460" cy="520" rx="55" ry="18" fill="none" stroke="#f4b840" stroke-width="2" opacity=".5"/>
-              <!-- Divider line -->
-              <rect x="230" y="430" width="180" height="1.5" fill="#f4b840" opacity=".3"/>
-            </svg>
-          </div>
-        </div>
-        <div class="r-gradient"></div>
-        <div class="r-overlay"></div>
-        <div class="r-top-chips">
-          <span class="chip-royal">♛ ROYAL</span>
-          <span class="chip-live">VISIBLE</span>
-          <span class="chip-cat">💍 Bijoux</span>
-        </div>
-        <div class="r-body">
-          <div class="r-kicker">Bijouterie fine · Dakar · Almadies</div>
-          <div class="r-title">Perles & Or<br/>by Sokhna</div>
-          <div class="r-what">Bijoux fins, colliers, boucles, bracelets, perles et éclat doré</div>
-          <div class="r-meta">
-            <span class="r-loc">📍 Dakar · Almadies</span>
-            <span class="r-price">5 000 – 45 000 F</span>
-          </div>
-          <div class="r-cta-row">
-            <button class="r-btn gold">🔥 Voir la fiche</button>
-            <button class="r-btn ghost">💬 WhatsApp</button>
-          </div>
-        </div>
+<section class="trust">
+  <div class="wrap">
+    <div class="trust-shell">
+      <div class="trust-head"><div><h3>Ils nous font confiance</h3><p>Bloc vitrine pour rassurer, inspirer et montrer la portée terrain.</p></div></div>
+      <div class="trust-grid">
+        <article class="trust-card"><div class="icon">🏪</div><h4>Boutiques terrain</h4><p>Vitrines simples, visibles et compréhensibles par tout le monde.</p></article>
+        <article class="trust-card"><div class="icon">🧺</div><h4>Bana-bana & vendeurs mobiles</h4><p>Présence légère, rapide à poser, prête à circuler.</p></article>
+        <article class="trust-card"><div class="icon">💇</div><h4>Beauté & services</h4><p>Coiffure, onglerie, soin, tout peut respirer dans une vraie fiche.</p></article>
+        <article class="trust-card"><div class="icon">📍</div><h4>Présence locale</h4><p>Ville, zone, repère terrain et visibilité orientée action.</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cats-section">
+  <div class="wrap">
+    <div class="section-head">
+      <div><h2>Les univers du marché</h2><p>Clique sur un pavé → les vendeurs s'ouvrent</p></div>
+      <div class="rail-controls">
+        <button class="arr" id="arrL" type="button">‹</button>
+        <button class="arr" id="arrR" type="button">›</button>
+      </div>
+    </div>
+    <div class="rail-wrap">
+      <div class="cat-rail" id="catRail">
+        <div class="cat-tile" data-cat="neuf"><div class="cat-img" style="background:linear-gradient(135deg,#ffeaaa,#ffd070)"><span class="cat-bg-txt">⭐🆕📦✨🛒⭐🆕📦✨🛒⭐🆕📦✨🛒⭐🆕📦</span><span class="cat-icon">🛒</span></div><div class="cat-body"><div class="cat-name">Neuf</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="deuxiemain"><div class="cat-img" style="background:linear-gradient(135deg,#c8deff,#90b8ff)"><span class="cat-bg-txt">♻️💡🔄💎♻️💡🔄💎♻️💡🔄💎♻️💡🔄</span><span class="cat-icon">♻️</span></div><div class="cat-body"><div class="cat-name">Deuxième main</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="vetements"><div class="cat-img" style="background:linear-gradient(135deg,#ffd0e0,#ffaac8)"><span class="cat-bg-txt">👗👕👖🧣👗👕👖🧣👗👕👖🧣👗👕👖</span><span class="cat-icon">👗</span></div><div class="cat-body"><div class="cat-name">Vêtements</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="parfum"><div class="cat-img" style="background:linear-gradient(135deg,#eadfff,#d4c2ff)"><span class="cat-bg-txt">🌸✨💜🌺🌸✨💜🌺🌸✨💜🌺🌸✨💜</span><span class="cat-icon">🌸</span></div><div class="cat-body"><div class="cat-name">Parfum</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="coiffeur"><div class="cat-img" style="background:linear-gradient(135deg,#dbfff6,#b9f1e0)"><span class="cat-bg-txt">✂️💈🪒💇✂️💈🪒💇✂️💈🪒💇✂️💈🪒</span><span class="cat-icon">✂️</span></div><div class="cat-body"><div class="cat-name">Coiffeur</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="onglerie"><div class="cat-img" style="background:linear-gradient(135deg,#ffd0e0,#ffb8d0)"><span class="cat-bg-txt">💅💎✨🌸💅💎✨🌸💅💎✨🌸💅💎✨</span><span class="cat-icon">💅</span></div><div class="cat-body"><div class="cat-name">Onglerie</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="brocante"><div class="cat-img" style="background:linear-gradient(135deg,#f4ead7,#ead6b2)"><span class="cat-bg-txt">🪑🏺🖼️🪞🪑🏺🖼️🪞🪑🏺🖼️🪞🪑🏺</span><span class="cat-icon">🏺</span></div><div class="cat-body"><div class="cat-name">Brocante</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="banabana"><div class="cat-img" style="background:linear-gradient(135deg,#ffe0cb,#ffc391)"><span class="cat-bg-txt">🧺🛒🏪🎪🧺🛒🏪🎪🧺🛒🏪🎪🧺🛒</span><span class="cat-icon">🧺</span></div><div class="cat-body"><div class="cat-name">Bana-bana</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="quotidien"><div class="cat-img" style="background:linear-gradient(135deg,#dbf5ea,#bfe8d4)"><span class="cat-bg-txt">🏠🧴🥫🧹🏠🧴🥫🧹🏠🧴🥫🧹🏠🧴</span><span class="cat-icon">🏠</span></div><div class="cat-body"><div class="cat-name">Quotidien</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="phones"><div class="cat-img" style="background:linear-gradient(135deg,#c8deff,#90b8ff)"><span class="cat-bg-txt">📱💻⌨️🖥️📱💻⌨️🖥️📱💻⌨️🖥️📱💻</span><span class="cat-icon">📱</span></div><div class="cat-body"><div class="cat-name">Téléphones</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="alimentaire"><div class="cat-img" style="background:linear-gradient(135deg,#ffeaaa,#ffd070)"><span class="cat-bg-txt">🥜🌽🥘🫘🥜🌽🥘🫘🥜🌽🥘🫘🥜🌽</span><span class="cat-icon">🥜</span></div><div class="cat-body"><div class="cat-name">Alimentaire</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="chaussures"><div class="cat-img" style="background:linear-gradient(135deg,#ffe0cb,#ffc391)"><span class="cat-bg-txt">👟👠👞🥿👟👠👞🥿👟👠👞🥿👟👠</span><span class="cat-icon">👟</span></div><div class="cat-body"><div class="cat-name">Chaussures</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
       </div>
     </div>
 
-    <!-- ROW 2 — TRIO -->
-    <div class="grid-row row-trio animate-in" style="animation-delay:.18s">
-      <!-- Élégance Cuir Royal -->
-      <div class="r-card med">
-        <div class="r-img-wrap">
-          <div class="r-img">
-            <svg viewBox="0 0 540 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-              <defs>
-                <linearGradient id="c1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#5c3520"/><stop offset="100%" stop-color="#3a1f0e"/></linearGradient>
-                <radialGradient id="c2" cx="40%" cy="50%"><stop offset="0%" stop-color="#e8935a" stop-opacity=".4"/><stop offset="100%" stop-color="transparent"/></radialGradient>
-              </defs>
-              <rect width="540" height="420" fill="url(#c1)"/>
-              <rect width="540" height="420" fill="url(#c2)"/>
-              <!-- Bag main body -->
-              <rect x="140" y="130" width="260" height="200" rx="22" fill="#8B4513" opacity=".9"/>
-              <rect x="148" y="138" width="244" height="184" rx="16" fill="#a05020" opacity=".5"/>
-              <!-- Handle -->
-              <path d="M205 130 Q205 85 270 80 Q335 85 335 130" stroke="#6B3010" stroke-width="12" fill="none" stroke-linecap="round"/>
-              <!-- Clasp -->
-              <rect x="245" y="200" width="50" height="35" rx="8" fill="#c8860a"/>
-              <rect x="252" y="207" width="36" height="21" rx="5" fill="#1a0f04"/>
-              <circle cx="270" cy="217" r="5" fill="#f4b840"/>
-              <!-- Stitching lines -->
-              <rect x="160" y="148" width="220" height="1.5" stroke-dasharray="6,4" fill="none" stroke="#c8860a" stroke-width="1.5" opacity=".4"/>
-              <rect x="160" y="306" width="220" height="1.5" stroke-dasharray="6,4" fill="none" stroke="#c8860a" stroke-width="1.5" opacity=".4"/>
-              <!-- Light reflection -->
-              <rect x="148" y="138" width="100" height="60" rx="10" fill="white" opacity=".06"/>
-              <!-- Logo tag -->
-              <rect x="360" y="280" width="60" height="30" rx="6" fill="#c8860a" opacity=".7"/>
-              <text x="390" y="299" text-anchor="middle" font-family="serif" font-size="9" fill="#fff" font-weight="700">DIGIY</text>
-              <!-- Background gold dots -->
-              <circle cx="80" cy="80" r="4" fill="#c8860a" opacity=".3"/>
-              <circle cx="480" cy="340" r="5" fill="#c8860a" opacity=".25"/>
-            </svg>
+    <div class="vendor-panel" id="vendorPanel">
+      <div class="vendor-panel-inner" style="position:relative;">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span class="icon" id="panelIcon">🛒</span>
+            <div><h3 id="panelTitle">Catégorie</h3><p id="panelSub">Vendeurs exemples</p></div>
           </div>
+          <button class="panel-close" id="panelClose" type="button">✕</button>
         </div>
-        <div class="r-gradient"></div>
-        <div class="r-overlay"></div>
-        <div class="r-top-chips">
-          <span class="chip-royal">♛ ROYAL</span>
-          <span class="chip-cat">👜 Sacs</span>
-        </div>
-        <div class="r-body">
-          <div class="r-kicker">Maroquinerie · Dakar · Point E</div>
-          <div class="r-title">Élégance<br/>Cuir Royal</div>
-          <div class="r-what">Sacs cuir, pochettes, bandoulières</div>
-          <div class="r-meta">
-            <span class="r-loc">📍 Point E</span>
-            <span class="r-price">9 000 – 65 000 F</span>
-          </div>
-          <div class="r-cta-row">
-            <button class="r-btn gold">Voir la fiche</button>
-            <button class="r-btn ghost">💬</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Pas Royal chaussures -->
-      <div class="r-card med">
-        <div class="r-img-wrap">
-          <div class="r-img">
-            <svg viewBox="0 0 540 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-              <defs>
-                <linearGradient id="s1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f0e0a8"/><stop offset="100%" stop-color="#d4b850"/></linearGradient>
-                <radialGradient id="s2" cx="50%" cy="50%"><stop offset="0%" stop-color="#fff8d8" stop-opacity=".6"/><stop offset="100%" stop-color="transparent"/></radialGradient>
-              </defs>
-              <rect width="540" height="420" fill="url(#s1)"/>
-              <rect width="540" height="420" fill="url(#s2)"/>
-              <!-- Shoe silhouette — sneaker -->
-              <path d="M100 280 Q180 220 280 215 Q360 212 430 230 Q470 242 455 280 Z" fill="#2a1a0e" opacity=".92"/>
-              <!-- Sole -->
-              <path d="M100 280 Q270 295 455 280 Q460 295 450 305 Q270 320 95 305 Z" fill="#1a1208" opacity=".95"/>
-              <!-- Upper detail -->
-              <path d="M130 270 Q200 240 280 238 Q360 237 415 252" stroke="white" stroke-width="2.5" fill="none" opacity=".3"/>
-              <!-- Laces -->
-              <line x1="230" y1="250" x2="220" y2="235" stroke="#fff" stroke-width="2" opacity=".6"/>
-              <line x1="255" y1="248" x2="248" y2="233" stroke="#fff" stroke-width="2" opacity=".6"/>
-              <line x1="280" y1="247" x2="276" y2="232" stroke="#fff" stroke-width="2" opacity=".6"/>
-              <line x1="305" y1="247" x2="304" y2="232" stroke="#fff" stroke-width="2" opacity=".6"/>
-              <path d="M218 235 Q260 228 303 233" stroke="#fff" stroke-width="2" fill="none" opacity=".5"/>
-              <!-- Gold tick -->
-              <path d="M360 248 Q380 240 400 248 Q390 256 370 258Z" fill="#c8860a" opacity=".8"/>
-              <!-- Swoosh -->
-              <path d="M150 265 Q200 250 250 255 Q280 258 290 268" stroke="#c8860a" stroke-width="3" fill="none" opacity=".5"/>
-              <!-- Background -->
-              <circle cx="80" cy="120" r="120" fill="rgba(255,255,255,.14)"/>
-              <circle cx="480" cy="380" r="100" fill="rgba(0,0,0,.08)"/>
-              <!-- Shadow -->
-              <ellipse cx="280" cy="312" rx="200" ry="14" fill="rgba(0,0,0,.25)"/>
-            </svg>
-          </div>
-        </div>
-        <div class="r-gradient"></div>
-        <div class="r-overlay"></div>
-        <div class="r-top-chips">
-          <span class="chip-royal">♛ ROYAL</span>
-          <span class="chip-cat">👟 Chaussures</span>
-        </div>
-        <div class="r-body">
-          <div class="r-kicker">Chaussures premium · Dakar · Plateau</div>
-          <div class="r-title">Pas Royal</div>
-          <div class="r-what">Chaussures ville, sandales cuir, escarpins, baskets premium</div>
-          <div class="r-meta">
-            <span class="r-loc">📍 Plateau</span>
-            <span class="r-price">8 000 – 55 000 F</span>
-          </div>
-          <div class="r-cta-row">
-            <button class="r-btn gold">Voir la fiche</button>
-            <button class="r-btn ghost">💬</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Couronne Hair Studio -->
-      <div class="r-card med">
-        <div class="r-img-wrap">
-          <div class="r-img">
-            <svg viewBox="0 0 540 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-              <defs>
-                <linearGradient id="h1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0d2518"/><stop offset="100%" stop-color="#0a1e14"/></linearGradient>
-                <radialGradient id="h2" cx="50%" cy="30%"><stop offset="0%" stop-color="#28885a" stop-opacity=".4"/><stop offset="100%" stop-color="transparent"/></radialGradient>
-              </defs>
-              <rect width="540" height="420" fill="url(#h1)"/>
-              <rect width="540" height="420" fill="url(#h2)"/>
-              <!-- Face -->
-              <ellipse cx="270" cy="165" rx="72" ry="80" fill="#b87a56" opacity=".9"/>
-              <!-- Hair — elaborate braids -->
-              <ellipse cx="270" cy="115" rx="80" ry="60" fill="#1a0e08" opacity=".95"/>
-              <!-- Braid strands -->
-              <path d="M200 125 Q190 80 195 40" stroke="#2a1808" stroke-width="12" fill="none" stroke-linecap="round"/>
-              <path d="M220 115 Q215 72 218 32" stroke="#2a1808" stroke-width="10" fill="none" stroke-linecap="round"/>
-              <path d="M245 110 Q244 66 248 25" stroke="#2a1808" stroke-width="10" fill="none" stroke-linecap="round"/>
-              <path d="M270 108 Q272 62 275 18" stroke="#2a1808" stroke-width="10" fill="none" stroke-linecap="round"/>
-              <path d="M295 110 Q300 65 300 25" stroke="#2a1808" stroke-width="10" fill="none" stroke-linecap="round"/>
-              <path d="M318 115 Q325 72 326 35" stroke="#2a1808" stroke-width="10" fill="none" stroke-linecap="round"/>
-              <path d="M338 125 Q348 82 350 45" stroke="#2a1808" stroke-width="12" fill="none" stroke-linecap="round"/>
-              <!-- Braid gold threads -->
-              <path d="M200 125 Q190 80 195 40" stroke="#c8860a" stroke-width="1" fill="none" opacity=".4"/>
-              <path d="M270 108 Q272 62 275 18" stroke="#c8860a" stroke-width="1" fill="none" opacity=".4"/>
-              <path d="M338 125 Q348 82 350 45" stroke="#c8860a" stroke-width="1" fill="none" opacity=".4"/>
-              <!-- Crown at top -->
-              <text x="248" y="12" font-size="22" fill="#f4b840" opacity=".8">♛</text>
-              <!-- Neck -->
-              <rect x="235" y="225" width="70" height="80" rx="35" fill="#a06848" opacity=".7"/>
-              <!-- Earrings -->
-              <circle cx="197" cy="175" r="10" fill="#c8860a" opacity=".8"/>
-              <line x1="197" y1="185" x2="197" y2="210" stroke="#c8860a" stroke-width="2"/>
-              <circle cx="197" cy="213" r="7" fill="#f4b840" opacity=".8"/>
-              <circle cx="343" cy="175" r="10" fill="#c8860a" opacity=".8"/>
-              <line x1="343" y1="185" x2="343" y2="210" stroke="#c8860a" stroke-width="2"/>
-              <circle cx="343" cy="213" r="7" fill="#f4b840" opacity=".8"/>
-              <!-- BG stars -->
-              <text x="80" y="340" font-size="14" fill="#28885a" opacity=".4">✦</text>
-              <text x="430" y="80" font-size="10" fill="#28885a" opacity=".35">✦</text>
-              <circle cx="440" cy="340" r="40" fill="rgba(40,136,90,.08)"/>
-            </svg>
-          </div>
-        </div>
-        <div class="r-gradient"></div>
-        <div class="r-overlay"></div>
-        <div class="r-top-chips">
-          <span class="chip-royal">♛ ROYAL</span>
-          <span class="chip-live">VISIBLE</span>
-          <span class="chip-cat">💇 Cheveux</span>
-        </div>
-        <div class="r-body">
-          <div class="r-kicker">Salon premium · Saly · Ngaparou</div>
-          <div class="r-title">Couronne<br/>Hair Studio</div>
-          <div class="r-what">Tresses premium, coiffure évènement, perruques</div>
-          <div class="r-meta">
-            <span class="r-loc">📍 Saly</span>
-            <span class="r-price">3 500 – 35 000 F</span>
-          </div>
-          <div class="r-cta-row">
-            <button class="r-btn gold">Voir la fiche</button>
-            <button class="r-btn ghost">💬</button>
-          </div>
-        </div>
+        <div class="vendor-grid" id="vendorGrid"></div>
       </div>
     </div>
 
-    <!-- ═══ SECTION : BEAUTÉ & SOIN ═══ -->
-    <div class="section-divider animate-in" style="animation-delay:.22s">
-      <span class="cat-icon">💄</span>
-      <div>
-        <h2>Beauté & Soin</h2>
-        <small>Maquillage, crèmes, savons — la peau lumineuse au cœur du marché</small>
-      </div>
-      <span class="line"></span>
-    </div>
-
-    <!-- ROW 3 — FEATURE (large left + two right) -->
-    <div class="grid-row row-feature animate-in" style="animation-delay:.26s">
-      <!-- Belle Peau Maison — BIG -->
-      <div class="r-card tall">
-        <div class="r-img-wrap">
-          <div class="r-img">
-            <svg viewBox="0 0 720 560" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-              <defs>
-                <linearGradient id="b1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3d0e20"/><stop offset="100%" stop-color="#1a0810"/></linearGradient>
-                <radialGradient id="b2" cx="40%" cy="40%"><stop offset="0%" stop-color="#e84060" stop-opacity=".35"/><stop offset="100%" stop-color="transparent"/></radialGradient>
-                <radialGradient id="b3" cx="70%" cy="60%"><stop offset="0%" stop-color="#f4b840" stop-opacity=".25"/><stop offset="100%" stop-color="transparent"/></radialGradient>
-              </defs>
-              <rect width="720" height="560" fill="url(#b1)"/>
-              <rect width="720" height="560" fill="url(#b2)"/>
-              <rect width="720" height="560" fill="url(#b3)"/>
-              <!-- Face with dramatic makeup -->
-              <ellipse cx="310" cy="220" rx="90" ry="100" fill="#c07050" opacity=".9"/>
-              <!-- Eyes — dramatic -->
-              <ellipse cx="278" cy="205" rx="18" ry="11" fill="#1a0808"/>
-              <ellipse cx="342" cy="205" rx="18" ry="11" fill="#1a0808"/>
-              <ellipse cx="278" cy="204" rx="7" ry="6" fill="#fff" opacity=".95"/>
-              <ellipse cx="342" cy="204" rx="7" ry="6" fill="#fff" opacity=".95"/>
-              <ellipse cx="280" cy="204" rx="4" ry="4" fill="#1a0808"/>
-              <ellipse cx="344" cy="204" rx="4" ry="4" fill="#1a0808"/>
-              <!-- Eyeliner bold -->
-              <path d="M258 200 Q278 192 298 200" stroke="#1a0808" stroke-width="2.5" fill="none"/>
-              <path d="M258 200 Q252 195 248 192" stroke="#1a0808" stroke-width="1.8" fill="none"/>
-              <path d="M322 200 Q342 192 362 200" stroke="#1a0808" stroke-width="2.5" fill="none"/>
-              <path d="M362 200 Q368 195 372 192" stroke="#1a0808" stroke-width="1.8" fill="none"/>
-              <!-- Lips — bold red -->
-              <path d="M280 255 Q310 248 340 255 Q330 275 310 278 Q290 275 280 255Z" fill="#e83050"/>
-              <path d="M280 255 Q310 262 340 255" stroke="#c82040" stroke-width="1.5" fill="none"/>
-              <!-- Glow highlighter -->
-              <ellipse cx="275" cy="220" rx="15" ry="8" fill="#fff" opacity=".14" transform="rotate(-20,275,220)"/>
-              <ellipse cx="345" cy="220" rx="15" ry="8" fill="#fff" opacity=".14" transform="rotate(20,345,220)"/>
-              <!-- Lipstick product -->
-              <rect x="520" y="180" width="28" height="110" rx="6" fill="#e83050" opacity=".9"/>
-              <rect x="524" y="172" width="20" height="16" rx="3" fill="#c82040"/>
-              <rect x="521" y="166" width="26" height="10" rx="4" fill="#e83050"/>
-              <!-- Gold compact -->
-              <ellipse cx="560" cy="360" rx="50" ry="14" fill="#c8860a" opacity=".6"/>
-              <ellipse cx="560" cy="352" rx="50" ry="14" fill="#f4b840" opacity=".7"/>
-              <ellipse cx="560" cy="352" rx="40" ry="10" fill="#2a1808" opacity=".7"/>
-              <ellipse cx="560" cy="350" rx="28" ry="7" fill="#e06040" opacity=".6"/>
-              <!-- Sparkles -->
-              <text x="460" y="120" font-size="18" fill="#f4b840" opacity=".7">✦</text>
-              <text x="150" y="380" font-size="12" fill="#e83050" opacity=".4">✦</text>
-              <text x="600" y="200" font-size="10" fill="#f4b840" opacity=".5">✦</text>
-              <!-- Hair suggestion -->
-              <ellipse cx="310" cy="145" rx="100" ry="60" fill="#1a0808" opacity=".9"/>
-              <ellipse cx="220" cy="200" rx="35" ry="80" fill="#1a0808" opacity=".7"/>
-              <ellipse cx="400" cy="200" rx="35" ry="80" fill="#1a0808" opacity=".7"/>
-              <!-- Background circles -->
-              <circle cx="100" cy="100" r="150" fill="rgba(255,255,255,.04)"/>
-              <circle cx="620" cy="460" r="120" fill="rgba(255,255,255,.04)"/>
-            </svg>
+    <div class="cta-band">
+      <div class="cta-band-grid">
+        <div>
+          <h3>Tu veux ta vitrine comme ça ?</h3>
+          <p>Fiche boutique, galerie, WhatsApp, présence terrain, entrée PRO. La démo donne envie, et derrière tu récupères la demande réelle.</p>
+          <div class="cta-band-row">
+            <span class="cta-pill">🛍️ Fiche boutique</span><span class="cta-pill">🖼️ Galerie</span><span class="cta-pill">💬 WhatsApp</span><span class="cta-pill">📍 Maps</span><span class="cta-pill">🔥 Entrée PRO</span>
           </div>
         </div>
-        <div class="r-gradient"></div>
-        <div class="r-overlay"></div>
-        <div class="r-top-chips">
-          <span class="chip-royal">♛ ROYAL STAR</span>
-          <span class="chip-live">VISIBLE</span>
-          <span class="chip-cat">💄 Beauté</span>
-        </div>
-        <div class="r-body">
-          <div class="r-kicker">Maquillage premium · Dakar · Liberté 6</div>
-          <div class="r-title">Belle Peau<br/>Maison</div>
-          <div class="r-what">Beauté premium, gloss, mise en lumière, maquillage doux et chic</div>
-          <div class="r-meta">
-            <span class="r-loc">📍 Liberté 6</span>
-            <span class="r-price">2 500 – 22 000 F</span>
-          </div>
-          <div class="r-cta-row">
-            <button class="r-btn gold">🔥 Voir la fiche</button>
-            <button class="r-btn ghost">💬 WhatsApp</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right column — Douceur Sahel + Savonnerie -->
-      <div style="display:grid;gap:16px;">
-        <!-- Douceur Sahel -->
-        <div class="r-card sm">
-          <div class="r-img-wrap">
-            <div class="r-img">
-              <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                <defs>
-                  <linearGradient id="d1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1e3528"/><stop offset="100%" stop-color="#122016"/></linearGradient>
-                  <radialGradient id="d2" cx="35%" cy="40%"><stop offset="0%" stop-color="#60c080" stop-opacity=".3"/><stop offset="100%" stop-color="transparent"/></radialGradient>
-                </defs>
-                <rect width="400" height="340" fill="url(#d1)"/>
-                <rect width="400" height="340" fill="url(#d2)"/>
-                <!-- Cream jar -->
-                <ellipse cx="200" cy="200" rx="90" ry="28" fill="#1a1208"/>
-                <rect x="110" y="160" width="180" height="50" rx="8" fill="#e8e0d0" opacity=".95"/>
-                <rect x="118" y="152" width="164" height="16" rx="8" fill="#f8f4ee"/>
-                <!-- Label on jar -->
-                <rect x="130" y="165" width="140" height="36" rx="5" fill="white" opacity=".15"/>
-                <text x="200" y="182" text-anchor="middle" font-family="serif" font-size="9" fill="#1a1208" font-weight="700">DOUCEUR</text>
-                <text x="200" y="193" text-anchor="middle" font-family="serif" font-size="7" fill="#4a3820">SAHEL</text>
-                <!-- Ingredient leaf -->
-                <path d="M60 120 Q90 80 130 100 Q100 130 60 120Z" fill="#60c080" opacity=".7"/>
-                <line x1="95" y1="85" x2="85" y2="120" stroke="#3a8050" stroke-width="1.5" opacity=".6"/>
-                <path d="M300 80 Q340 60 360 100 Q320 110 300 80Z" fill="#60c080" opacity=".5"/>
-                <!-- Oil drops -->
-                <ellipse cx="80" cy="200" rx="12" ry="18" fill="#c8a040" opacity=".5"/>
-                <ellipse cx="340" cy="220" rx="10" ry="15" fill="#c8a040" opacity=".4"/>
-                <!-- Gold stars -->
-                <text x="50" y="280" font-size="12" fill="#60c080" opacity=".4">✦</text>
-                <text x="350" y="120" font-size="10" fill="#c8860a" opacity=".4">✦</text>
-              </svg>
-            </div>
-          </div>
-          <div class="r-gradient"></div>
-          <div class="r-overlay"></div>
-          <div class="r-top-chips">
-            <span class="chip-royal">♛</span>
-            <span class="chip-cat">🧴 Crèmes</span>
-          </div>
-          <div class="r-body">
-            <div class="r-kicker">Thiès · Centre</div>
-            <div class="r-title">Douceur Sahel</div>
-            <div class="r-what">Crèmes corps, huiles parfumées, soin peau douce</div>
-            <div class="r-meta">
-              <span class="r-loc">📍 Thiès</span>
-              <span class="r-price">2 000 – 18 000 F</span>
-            </div>
-            <div class="r-cta-row">
-              <button class="r-btn gold">Voir</button>
-              <button class="r-btn ghost">💬</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Savonnerie Reine -->
-        <div class="r-card sm">
-          <div class="r-img-wrap">
-            <div class="r-img">
-              <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                <defs>
-                  <linearGradient id="sv1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3d2e08"/><stop offset="100%" stop-color="#241a04"/></linearGradient>
-                  <radialGradient id="sv2" cx="50%" cy="50%"><stop offset="0%" stop-color="#f4b840" stop-opacity=".25"/><stop offset="100%" stop-color="transparent"/></radialGradient>
-                </defs>
-                <rect width="400" height="340" fill="url(#sv1)"/>
-                <rect width="400" height="340" fill="url(#sv2)"/>
-                <!-- Soap bars -->
-                <rect x="100" y="160" width="90" height="55" rx="12" fill="#e8c890" opacity=".9"/>
-                <rect x="200" y="175" width="90" height="55" rx="12" fill="#d4a850" opacity=".9"/>
-                <rect x="150" y="135" width="90" height="55" rx="12" fill="#f0d888" opacity=".9"/>
-                <!-- Soap details -->
-                <rect x="108" y="168" width="74" height="3" rx="1.5" fill="#c8a060" opacity=".5"/>
-                <rect x="108" y="175" width="60" height="2" rx="1" fill="#c8a060" opacity=".4"/>
-                <rect x="208" y="183" width="74" height="3" rx="1.5" fill="#b89040" opacity=".5"/>
-                <rect x="158" y="143" width="74" height="3" rx="1.5" fill="#d4b060" opacity=".5"/>
-                <!-- Foam bubbles -->
-                <circle cx="120" cy="155" r="8" fill="white" opacity=".18"/>
-                <circle cx="135" cy="147" r="5" fill="white" opacity=".14"/>
-                <circle cx="290" cy="165" r="7" fill="white" opacity=".16"/>
-                <circle cx="305" cy="157" r="4" fill="white" opacity=".12"/>
-                <!-- Black soap -->
-                <rect x="60" y="200" width="70" height="45" rx="10" fill="#1a1208" opacity=".9"/>
-                <rect x="66" y="206" width="58" height="33" rx="6" fill="#2a1e08" opacity=".5"/>
-                <!-- Herbs -->
-                <circle cx="330" cy="170" r="3" fill="#6ab840" opacity=".7"/>
-                <circle cx="338" cy="165" r="2" fill="#6ab840" opacity=".6"/>
-                <circle cx="325" cy="163" r="2" fill="#6ab840" opacity=".6"/>
-                <!-- Star -->
-                <text x="60" y="120" font-size="14" fill="#f4b840" opacity=".5">✦</text>
-                <text x="340" y="300" font-size="10" fill="#f4b840" opacity=".4">✦</text>
-              </svg>
-            </div>
-          </div>
-          <div class="r-gradient"></div>
-          <div class="r-overlay"></div>
-          <div class="r-top-chips">
-            <span class="chip-royal">♛</span>
-            <span class="chip-live">VISIBLE</span>
-            <span class="chip-cat">🧼 Savons</span>
-          </div>
-          <div class="r-body">
-            <div class="r-kicker">Mbour · Saly</div>
-            <div class="r-title">Savonnerie Reine</div>
-            <div class="r-what">Savons naturels, savons noirs, gommage artisanal</div>
-            <div class="r-meta">
-              <span class="r-loc">📍 Mbour</span>
-              <span class="r-price">1 000 – 9 000 F</span>
-            </div>
-            <div class="r-cta-row">
-              <button class="r-btn gold">Voir</button>
-              <button class="r-btn ghost">💬</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Chambre Douceur -->
-      <div class="r-card tall">
-        <div class="r-img-wrap">
-          <div class="r-img">
-            <svg viewBox="0 0 540 560" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-              <defs>
-                <linearGradient id="ch1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0e1a2a"/><stop offset="100%" stop-color="#081018"/></linearGradient>
-                <radialGradient id="ch2" cx="50%" cy="40%"><stop offset="0%" stop-color="#5080c0" stop-opacity=".3"/><stop offset="100%" stop-color="transparent"/></radialGradient>
-              </defs>
-              <rect width="540" height="560" fill="url(#ch1)"/>
-              <rect width="540" height="560" fill="url(#ch2)"/>
-              <!-- Bed frame -->
-              <rect x="60" y="300" width="420" height="180" rx="16" fill="#2a1e14" opacity=".9"/>
-              <!-- Pillow 1 -->
-              <rect x="80" y="260" width="160" height="90" rx="20" fill="#e8e0d0" opacity=".95"/>
-              <rect x="85" y="265" width="150" height="80" rx="16" fill="#f4f0e8" opacity=".6"/>
-              <!-- Pillow 2 -->
-              <rect x="300" y="260" width="160" height="90" rx="20" fill="#d0d8e4" opacity=".95"/>
-              <rect x="305" y="265" width="150" height="80" rx="16" fill="#e0e8f4" opacity=".6"/>
-              <!-- Blanket/duvet -->
-              <rect x="60" y="330" width="420" height="150" rx="12" fill="#b8a888" opacity=".6"/>
-              <rect x="60" y="330" width="420" height="30" rx="4" fill="#d4c4a4" opacity=".7"/>
-              <!-- Decorative folds on blanket -->
-              <path d="M100 340 Q200 346 280 340 Q360 334 440 340" stroke="#c4b098" stroke-width="1.5" fill="none" opacity=".5"/>
-              <path d="M100 350 Q200 356 300 350 Q380 344 440 350" stroke="#c4b098" stroke-width="1.5" fill="none" opacity=".4"/>
-              <!-- Bedside lamp -->
-              <rect x="440" y="180" width="20" height="100" rx="4" fill="#8a7060" opacity=".7"/>
-              <path d="M420 180 Q460 180 480 180 L470 140 L430 140 Z" fill="#f4b840" opacity=".6"/>
-              <ellipse cx="450" cy="138" rx="26" ry="6" fill="#f4b840" opacity=".5"/>
-              <!-- Lamp glow -->
-              <radialGradient id="lamp" cx="50%" cy="100%">
-                <stop offset="0%" stop-color="#f4b840" stop-opacity=".3"/>
-                <stop offset="100%" stop-color="transparent"/>
-              </radialGradient>
-              <ellipse cx="450" cy="175" rx="60" ry="60" fill="url(#lamp)"/>
-              <!-- Window light suggestion -->
-              <rect x="50" y="60" width="120" height="160" rx="8" fill="rgba(200,220,255,.07)" stroke="rgba(200,220,255,.1)" stroke-width="1"/>
-              <line x1="110" y1="60" x2="110" y2="220" stroke="rgba(200,220,255,.1)" stroke-width="1"/>
-              <line x1="50" y1="140" x2="170" y2="140" stroke="rgba(200,220,255,.1)" stroke-width="1"/>
-              <!-- Stars through window -->
-              <text x="70" y="100" font-size="10" fill="#c8d8ff" opacity=".4">✦</text>
-              <text x="140" y="85" font-size="8" fill="#c8d8ff" opacity=".3">✦</text>
-              <!-- Floor -->
-              <rect x="0" y="480" width="540" height="80" fill="rgba(0,0,0,.3)"/>
-            </svg>
-          </div>
-        </div>
-        <div class="r-gradient"></div>
-        <div class="r-overlay"></div>
-        <div class="r-top-chips">
-          <span class="chip-royal">♛ ROYAL</span>
-          <span class="chip-live">VISIBLE</span>
-          <span class="chip-cat">🛏️ Maison</span>
-        </div>
-        <div class="r-body">
-          <div class="r-kicker">Linge de maison · Saly · Centre</div>
-          <div class="r-title">Chambre<br/>Douceur</div>
-          <div class="r-what">Draps, housses, rideaux, linge de maison élégant</div>
-          <div class="r-meta">
-            <span class="r-loc">📍 Saly · Centre</span>
-            <span class="r-price">4 000 – 45 000 F</span>
-          </div>
-          <div class="r-cta-row">
-            <button class="r-btn gold">🔥 Voir la fiche</button>
-            <button class="r-btn ghost">💬</button>
-          </div>
+        <div class="cta-main">
+          <a class="big-cta" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+          <a id="ctaWaBtn" class="big-cta soft" href="#" target="_blank" rel="noopener">💬 Parler sur WhatsApp</a>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- ROW 4 — HORIZONTAL FEATURED CARD (full width feel) -->
-    <div class="grid-row animate-in" style="animation-delay:.3s">
-      <div class="r-card horizontal" style="min-height:240px">
-        <div class="r-img-wrap" style="position:relative;flex:0 0 45%;overflow:hidden;">
-          <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0;" preserveAspectRatio="xMidYMid slice">
-            <defs>
-              <linearGradient id="fx1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3d1a30"/><stop offset="100%" stop-color="#280f20"/></linearGradient>
-              <radialGradient id="fx2" cx="30%" cy="50%"><stop offset="0%" stop-color="#c84880" stop-opacity=".4"/><stop offset="100%" stop-color="transparent"/></radialGradient>
-            </defs>
-            <rect width="600" height="300" fill="url(#fx1)"/>
-            <rect width="600" height="300" fill="url(#fx2)"/>
-            <!-- African pattern tiles -->
-            <g opacity=".2">
-              <!-- Triangle patterns -->
-              <polygon points="30,0 60,0 45,26" fill="#f4b840"/>
-              <polygon points="90,0 120,0 105,26" fill="#e84060"/>
-              <polygon points="150,0 180,0 165,26" fill="#f4b840"/>
-              <polygon points="210,0 240,0 225,26" fill="#e84060"/>
-              <polygon points="270,0 300,0 285,26" fill="#f4b840"/>
-              <polygon points="330,0 360,0 345,26" fill="#e84060"/>
-              <!-- Diamonds -->
-              <path d="M0 80 L20 60 L40 80 L20 100Z" fill="#c8860a"/>
-              <path d="M60 80 L80 60 L100 80 L80 100Z" fill="#f4b840"/>
-              <path d="M120 80 L140 60 L160 80 L140 100Z" fill="#c8860a"/>
-            </g>
-            <!-- Center text decorative -->
-            <text x="300" y="130" text-anchor="middle" font-family="Georgia, serif" font-size="48" fill="#f4b840" opacity=".15" font-style="italic">DIGIY</text>
-            <text x="300" y="175" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#f4b840" opacity=".12" letter-spacing="8">ROYAL</text>
-            <!-- Gold circles -->
-            <circle cx="100" cy="200" r="80" fill="rgba(200,134,10,.08)"/>
-            <circle cx="500" cy="80" r="100" fill="rgba(200,134,10,.06)"/>
-            <!-- Stars -->
-            <text x="480" y="250" font-size="18" fill="#f4b840" opacity=".4">♛</text>
-            <text x="50" y="50" font-size="12" fill="#e84060" opacity=".3">✦</text>
-          </svg>
-          <div class="r-gradient"></div>
-        </div>
-        <div class="r-body">
-          <div class="r-kicker">♛ DIGIY ROYAL — Accès PRO</div>
-          <div class="r-title" style="font-size:clamp(1.6rem,2.5vw,2.8rem)">Ta vitrine au<br/><em style="font-style:italic;background:var(--g-gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">niveau ROYAL</em></div>
-          <div class="r-what" style="max-width:480px">Rejoins les commerçants qui font le choix de la visibilité premium. Une seule fois par mois, 0% de commission, et ta boutique qui respire comme un magazine.</div>
-          <div class="r-cta-row" style="opacity:1;transform:none">
-            <button class="r-btn gold" style="font-size:.9rem;padding:12px 20px" onclick="window.open('https://commencer-a-payer.digiylyfe.com/')">🔥 Je veux mon module</button>
-            <button class="r-btn ghost" style="font-size:.9rem;padding:12px 20px" onclick="window.open('https://wa.me/221771342889')">💬 WhatsApp DIGIY</button>
-          </div>
-        </div>
-      </div>
+<section class="faq-section">
+  <div class="wrap">
+    <div class="faq-shell">
+      <div class="faq-head">Questions fréquentes</div>
+      <div class="faq-item"><div class="faq-q">C'est quoi DIGIY MARKET exactement ? <span class="faq-arr">▾</span></div><div class="faq-a">DIGIY MARKET est le module marché de DIGIYLYFE — la plateforme digitale africaine à 0% commission. Les commerçants obtiennent une vitrine en ligne : fiche boutique, galerie photo, contact WhatsApp direct.</div></div>
+      <div class="faq-item"><div class="faq-q">Combien ça coûte pour avoir ma vitrine ? <span class="faq-arr">▾</span></div><div class="faq-a">Le modèle DIGIY c'est un abonnement fixe mensuel — pas de commission sur tes ventes, pas de surprise. Tu paies une fois, tu es visible. Clique sur "Je veux mon module" pour voir les tarifs en temps réel.</div></div>
+      <div class="faq-item"><div class="faq-q">Les vendeurs visibles ici sont de vrais vendeurs ? <span class="faq-arr">▾</span></div><div class="faq-a">Les fiches affichées sont des exemples guidants — elles montrent à quoi ressemble une vraie vitrine DIGIY MARKET pour inspirer les commerçants. Les vrais vendeurs actifs apparaissent dans le module PRO une fois inscrits.</div></div>
     </div>
+  </div>
+</section>
 
-    <!-- ═══ CTA FINAL ═══ -->
-    <div class="cta-band animate-in" style="animation-delay:.34s">
-      <div class="cta-inner">
-        <div class="royal-badge-big" style="margin-bottom:20px;display:inline-flex">♛ DIGIYLYFE · 0% Commission</div>
-        <h2>Prêt à rentrer<br/>dans la <em>cour des rois</em> ?</h2>
-        <p>Ces vitrines sont réelles, à portée de main. Un abonnement fixe, pas de commission sur tes ventes, et une présence qui frappe fort sur le marché.</p>
-        <div class="cta-btns">
-          <a class="btn btn-gold btn-lg" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
-          <a class="btn btn-ghost btn-lg" href="https://wa.me/221771342889" target="_blank" rel="noopener">💬 Parler à DIGIY</a>
-          <a class="btn btn-ghost btn-lg" href="index.html">← Retour au marché</a>
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /wrap -->
-</main>
-
-<!-- FOOTER -->
-<footer class="site-footer">
+<footer>
   <div class="wrap footer-inner">
-    <div class="footer-brand">
-      DIGIY MARKET ∞ — Sélection ROYAL
-      <small>L'Afrique enracinée, connectée au monde</small>
-    </div>
+    <div><div class="footer-brand">DIGIY MARKET ∞</div><div class="footer-sub">Neuf · Deuxième main · Brocante · Vêtements · Beauté · Services · Quotidien</div></div>
     <div class="footer-links">
       <a href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">Je veux mon module</a>
       <a href="https://digiylyfe.com/" target="_blank" rel="noopener">digiylyfe.com</a>
@@ -1378,44 +524,479 @@ img { display: block; max-width: 100% }
   </div>
 </footer>
 
+<div class="float-cta">
+  <a id="floatWaBtn" class="float-btn wa" href="#" target="_blank" rel="noopener">💬 WhatsApp DIGIY</a>
+  <a class="float-btn module" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+</div>
+
 <script>
-/* ─── SCROLL-TRIGGERED ENTRANCE ─── */
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.animationPlayState = 'running';
-      entry.target.style.opacity = '';
-      observer.unobserve(entry.target);
+/* ══════════════════════════════════════
+   CONFIG
+══════════════════════════════════════ */
+const DIGIY_CONFIG = {
+  whatsapp:"221771342889",
+  siteUrl:"https://digiylyfe.com/",
+  proUrl:"https://commencer-a-payer.digiylyfe.com/",
+  logoUrl:""
+};
+
+/* ══════════════════════════════════════
+   ROYAL SVG ILLUSTRATIONS PER VENDOR
+══════════════════════════════════════ */
+function makeDarkSvg(opts){
+  const {bg1="#1a1208",bg2="#0d0a06",accent="#c8860a",icon="🛍️",title="",subtitle="",pattern="dots"} = opts;
+  let patternEl = "";
+  if(pattern==="chevrons"){
+    patternEl=`<path d="M0 60 L60 0 L80 20 L20 80Z" fill="${accent}" opacity=".06"/><path d="M120 60 L180 0 L200 20 L140 80Z" fill="${accent}" opacity=".06"/><path d="M240 60 L300 0 L320 20 L260 80Z" fill="${accent}" opacity=".06"/>`;
+  } else if(pattern==="circles"){
+    patternEl=`<circle cx="80" cy="80" r="60" fill="none" stroke="${accent}" stroke-width="1" opacity=".1"/><circle cx="80" cy="80" r="100" fill="none" stroke="${accent}" stroke-width="1" opacity=".07"/><circle cx="320" cy="200" r="80" fill="none" stroke="${accent}" stroke-width="1" opacity=".08"/>`;
+  } else if(pattern==="wax"){
+    patternEl=`<polygon points="50,20 80,35 80,65 50,80 20,65 20,35" fill="none" stroke="${accent}" stroke-width="1.2" opacity=".12"/><polygon points="150,60 180,75 180,105 150,120 120,105 120,75" fill="none" stroke="${accent}" stroke-width="1" opacity=".1"/><polygon points="250,30 280,45 280,75 250,90 220,75 220,45" fill="none" stroke="${accent}" stroke-width="1" opacity=".1"/>`;
+  } else if(pattern==="stripes"){
+    patternEl=`<line x1="0" y1="40" x2="400" y2="40" stroke="${accent}" stroke-width="1" opacity=".08"/><line x1="0" y1="80" x2="400" y2="80" stroke="${accent}" stroke-width="1" opacity=".08"/><line x1="0" y1="120" x2="400" y2="120" stroke="${accent}" stroke-width="1" opacity=".06"/>`;
+  } else {
+    // dots
+    patternEl=`<circle cx="40" cy="40" r="3" fill="${accent}" opacity=".18"/><circle cx="120" cy="30" r="2" fill="${accent}" opacity=".12"/><circle cx="200" cy="50" r="3" fill="${accent}" opacity=".16"/><circle cx="300" cy="35" r="2" fill="${accent}" opacity=".12"/><circle cx="360" cy="55" r="3" fill="${accent}" opacity=".15"/>`;
+  }
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" width="400" height="280">
+    <defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="${bg1}"/>
+        <stop offset="100%" stop-color="${bg2}"/>
+      </linearGradient>
+      <radialGradient id="glow" cx="35%" cy="40%">
+        <stop offset="0%" stop-color="${accent}" stop-opacity=".18"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <filter id="shadow"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="rgba(0,0,0,.4)"/></filter>
+    </defs>
+    <rect width="400" height="280" fill="url(#bg)"/>
+    <rect width="400" height="280" fill="url(#glow)"/>
+    ${patternEl}
+    <!-- corner glow -->
+    <circle cx="340" cy="60" r="120" fill="${accent}" opacity=".05"/>
+    <!-- big icon -->
+    <text x="36" y="148" font-size="88" filter="url(#shadow)">${icon}</text>
+    <!-- gold line accent -->
+    <rect x="0" y="0" width="3" height="280" fill="${accent}" opacity=".35"/>
+    <!-- name plate -->
+    <rect x="36" y="188" width="340" height="70" rx="14" fill="rgba(255,255,255,.06)" stroke="${accent}" stroke-width=".8" stroke-opacity=".25"/>
+    <text x="52" y="216" font-family="Georgia, serif" font-size="18" font-weight="700" fill="#fdf6ec">${title.substring(0,22)}</text>
+    <text x="52" y="238" font-family="Arial, sans-serif" font-size="11" fill="rgba(253,246,236,.5)">${subtitle.substring(0,32)}</text>
+    <!-- ROYAL watermark -->
+    <text x="348" y="20" text-anchor="end" font-family="Arial" font-size="9" fill="${accent}" opacity=".4" letter-spacing="2">DIGIY</text>
+  </svg>`;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
+/* Category → dark palette mapping */
+const CAT_PALETTES = {
+  neuf:       {bg1:"#0e1a2a",bg2:"#071018",accent:"#4090e0",pattern:"circles"},
+  deuxiemain: {bg1:"#0e1a2a",bg2:"#071018",accent:"#60a0ff",pattern:"chevrons"},
+  vetements:  {bg1:"#2a0e1a",bg2:"#180710",accent:"#e060a0",pattern:"wax"},
+  parfum:     {bg1:"#1a0e2a",bg2:"#100718",accent:"#a060e0",pattern:"circles"},
+  coiffeur:   {bg1:"#0e2a1a",bg2:"#071810",accent:"#28885a",pattern:"stripes"},
+  onglerie:   {bg1:"#2a0e1a",bg2:"#180710",accent:"#e080b0",pattern:"dots"},
+  brocante:   {bg1:"#2a1a0e",bg2:"#181007",accent:"#c8860a",pattern:"wax"},
+  banabana:   {bg1:"#2a1a0e",bg2:"#181007",accent:"#e86820",pattern:"dots"},
+  quotidien:  {bg1:"#0e2a1a",bg2:"#071810",accent:"#40c080",pattern:"stripes"},
+  phones:     {bg1:"#0e1a2a",bg2:"#071018",accent:"#6090ff",pattern:"circles"},
+  alimentaire:{bg1:"#2a1a0e",bg2:"#181007",accent:"#d4a820",pattern:"wax"},
+  chaussures: {bg1:"#2a1208",bg2:"#181007",accent:"#e87040",pattern:"chevrons"},
+};
+
+function vendorCoverSvg(v, cat){
+  const pal = CAT_PALETTES[cat] || {bg1:"#1a1208",bg2:"#0d0a06",accent:"#c8860a",pattern:"dots"};
+  return makeDarkSvg({
+    ...pal,
+    icon: v.icon || "🛍️",
+    title: v.name,
+    subtitle: v.loc || "Sénégal"
+  });
+}
+
+/* Royal vendor uses its own richer SVGs from the images array */
+function royalCoverSvg(v, cat){
+  if(Array.isArray(v.images) && v.images.length) return v.images[0];
+  return vendorCoverSvg(v, cat);
+}
+
+/* ══════════════════════════════════════
+   VENDORS DATA
+══════════════════════════════════════ */
+const VENDORS = {
+  neuf:[
+    {icon:"📱",bg:"#c8deff",name:"Tech Dakar Shop",what:"Téléphones neufs, accessoires, batteries, câbles",loc:"Dakar · Plateau",price:"5 000–250 000 F",live:true,images:[]},
+    {icon:"👟",bg:"#ffe0cb",name:"Sneakers Mbaye",what:"Jordan, Nike, Adidas — arrivage chaque semaine",loc:"Mbour · Marché Central",price:"15 000–85 000 F",live:true,images:[]},
+    {icon:"🛒",bg:"#ffeaaa",name:"Boutique Awa Neuf",what:"Produits ménagers neufs, ustensiles, déco",loc:"Saly · Ngaparou",price:"2 000–35 000 F",live:false,images:[]},
+    {icon:"💻",bg:"#c8deff",name:"Diallo Informatique",what:"PC neufs et reconditionnés, imprimantes",loc:"Dakar · Parcelles",price:"80 000–450 000 F",live:true,images:[]}
+  ],
+  deuxiemain:[
+    {icon:"📺",bg:"#f4ead7",name:"Mamadou Électro",what:"TV, réfrigérateurs, machines à laver d'occasion",loc:"Dakar · Colobane",price:"20 000–150 000 F",live:true,images:[]},
+    {icon:"👕",bg:"#ffd0e0",name:"Frip Sénégal",what:"Friperie sélectionnée, marques, prix juste",loc:"Dakar · Sicap",price:"500–5 000 F",live:true,images:[]},
+    {icon:"🎮",bg:"#eadfff",name:"GameZone Dakar",what:"Consoles, jeux PS4/PS5, manettes",loc:"Dakar · Yoff",price:"15 000–120 000 F",live:true,images:[]}
+  ],
+  vetements:[
+    {icon:"👘",bg:"#ffeaaa",name:"Boubous Cheikh",what:"Boubous brocart, bazin, grand boubou cérémonie",loc:"Dakar · HLM",price:"8 000–60 000 F",live:true,images:[]},
+    {icon:"👗",bg:"#ffd0e0",name:"Robes Fatou",what:"Robes africaines, wax, tenues soirée et bureau",loc:"Saly · Centre",price:"5 000–35 000 F",live:true,images:[]},
+    {icon:"🧣",bg:"#eadfff",name:"Accessoires Mode",what:"Ceintures, sacs, bijoux fantaisie, foulards",loc:"Saint-Louis",price:"1 000–12 000 F",live:true,images:[]}
+  ],
+  parfum:[
+    {icon:"🕌",bg:"#eadfff",name:"Thiouraye Ndèye",what:"Thiouraye naturel, encens, encens de Djeddah",loc:"Dakar · Médina",price:"1 500–15 000 F",live:true,images:[]},
+    {icon:"🌸",bg:"#ffd0e0",name:"Parfums Orientaux",what:"Attars, musc, oud, huiles de parfum",loc:"Dakar · Sandaga",price:"3 000–35 000 F",live:true,images:[]},
+    {icon:"🎁",bg:"#ffeaaa",name:"Coffrets Mariama",what:"Coffrets mariage, baptême, kits parfum cadeaux",loc:"Dakar · Pikine",price:"8 000–50 000 F",live:false,images:[]}
+  ],
+  coiffeur:[
+    {icon:"💇",bg:"#dbfff6",name:"Salon Aicha",what:"Tresses africaines, tissage, défrisage, soin",loc:"Dakar · Medina",price:"2 000–25 000 F",live:true,images:[]},
+    {icon:"✂️",bg:"#c8deff",name:"Barber Moussa",what:"Coupe homme, dégradé américain, barbe sculptée",loc:"Saly · Portudal",price:"1 500–5 000 F",live:true,images:[]},
+    {icon:"💆",bg:"#dbf5ea",name:"Soin Cheveux Rama",what:"Masques kératine, soin naturel, hydratation",loc:"Dakar · Sacré-Cœur",price:"5 000–20 000 F",live:true,images:[]}
+  ],
+  onglerie:[
+    {icon:"💅",bg:"#ffd0e0",name:"Ongles by Aminata",what:"Pose gel, faux ongles, nail art, manucure",loc:"Dakar · Plateau",price:"4 000–20 000 F",live:true,images:[]},
+    {icon:"✨",bg:"#eadfff",name:"Luxury Nails Saly",what:"Nail art 3D, extension, dégradé, brillants",loc:"Saly · Ngaparou",price:"6 000–30 000 F",live:true,images:[]},
+    {icon:"🌸",bg:"#ffeaaa",name:"Beauty Corner Rokhaya",what:"Manucure naturelle, soin des mains, vernis",loc:"Thiès",price:"2 500–10 000 F",live:true,images:[]}
+  ],
+  brocante:[
+    {icon:"🪑",bg:"#f4ead7",name:"Brocante Sénégal",what:"Meubles anciens, chaises bois, buffets vintage",loc:"Dakar · Colobane",price:"5 000–80 000 F",live:true,images:[]},
+    {icon:"🏺",bg:"#ffeaaa",name:"Poteries & Artisanat",what:"Poteries, statuettes, objets africains authentiques",loc:"Saly · Village artisanat",price:"2 000–40 000 F",live:true,images:[]},
+    {icon:"🖼️",bg:"#ffe0cb",name:"Art & Déco Diallo",what:"Tableaux locaux, masques, peintures, déco murale",loc:"Dakar · Ouakam",price:"3 000–60 000 F",live:false,images:[]}
+  ],
+  banabana:[
+    {icon:"🧺",bg:"#ffe0cb",name:"Bana-bana Alassane",what:"Légumes frais, fruits de saison, livraison quartier",loc:"Dakar · Parcelles",price:"200–5 000 F",live:true,images:[]},
+    {icon:"🧃",bg:"#dbfff6",name:"Jus Naturels Aminata",what:"Bissap, gingembre, ditax, tamarin, bouye maison",loc:"Dakar · Medina",price:"250–1 500 F",live:true,images:[]},
+    {icon:"🎀",bg:"#ffd0e0",name:"Tissus & Rubans",what:"Rubans, dentelles, broderies, vente au mètre",loc:"Dakar · HLM",price:"200–3 000 F/m",live:true,images:[]}
+  ],
+  quotidien:[
+    {icon:"🧹",bg:"#dbf5ea",name:"Ménage & Entretien",what:"Détergents, balais, produits nettoyants",loc:"Dakar · Pikine",price:"500–8 000 F",live:true,images:[]},
+    {icon:"🍳",bg:"#ffe0cb",name:"Cuisine Équipée",what:"Marmites, casseroles, poêles, mortiers bois",loc:"Dakar · Sandaga",price:"2 000–20 000 F",live:true,images:[]},
+    {icon:"💡",bg:"#ffeaaa",name:"Électricité Mamadou",what:"Prises, câbles, ampoules LED, matériel électrique",loc:"Thiès",price:"500–15 000 F",live:true,images:[]}
+  ],
+  phones:[
+    {icon:"📱",bg:"#c8deff",name:"iDakar Phones",what:"iPhone reconditionné, garantie 3 mois",loc:"Dakar · Plateau",price:"120 000–450 000 F",live:true,images:[]},
+    {icon:"🤳",bg:"#ffeaaa",name:"Samsung Sénégal",what:"Galaxy A, M et S series neufs et occasion",loc:"Dakar · Sacré-Cœur",price:"60 000–380 000 F",live:true,images:[]},
+    {icon:"🎧",bg:"#eadfff",name:"Son & Audio Mobile",what:"AirPods, Bluetooth, enceintes, casques audio",loc:"Dakar · Yoff",price:"5 000–65 000 F",live:true,images:[]}
+  ],
+  alimentaire:[
+    {icon:"🥜",bg:"#ffeaaa",name:"Arachides Baye",what:"Arachides grillées, huile d'arachide artisanale",loc:"Kaolack · Marché",price:"500–5 000 F",live:true,images:[]},
+    {icon:"🌾",bg:"#f4ead7",name:"Céréales du Terroir",what:"Mil, sorgho, fonio, riz local, maïs",loc:"Tambacounda",price:"1 000–25 000 F",live:true,images:[]},
+    {icon:"🥦",bg:"#dbf5ea",name:"Maraîchage Fatou",what:"Légumes frais jardin, tomates, oignons, aubergines",loc:"Thiès · Pout",price:"200–3 000 F",live:true,images:[]}
+  ],
+  chaussures:[
+    {icon:"👡",bg:"#ffd0e0",name:"Sandales Aicha",what:"Sandales artisanales cuir, babouches colorées",loc:"Dakar · Médina",price:"3 000–18 000 F",live:true,images:[]},
+    {icon:"👟",bg:"#ffe0cb",name:"Baskets Papito",what:"Nike, Adidas, Puma — arrivage hebdomadaire",loc:"Dakar · Parcelles",price:"15 000–85 000 F",live:true,images:[]},
+    {icon:"👞",bg:"#c8deff",name:"Chaussures Homme SN",what:"Derby, bottes, chaussures ville qualité cuir",loc:"Dakar · Plateau",price:"12 000–55 000 F",live:true,images:[]}
+  ]
+};
+
+const META={
+  neuf:{label:"Neuf",icon:"🛒",sub:"Produits récents, prix clairs"},
+  deuxiemain:{label:"Deuxième main",icon:"♻️",sub:"La valeur continue, le bon prix circule"},
+  vetements:{label:"Vêtements",icon:"👗",sub:"Style terrain, cérémonie ou quotidien"},
+  parfum:{label:"Parfum & senteur",icon:"🌸",sub:"Essences, thiouraye, attars et cadeaux"},
+  coiffeur:{label:"Coiffeur",icon:"✂️",sub:"Service de proximité"},
+  onglerie:{label:"Onglerie",icon:"💅",sub:"Pose, nail art, manucure"},
+  brocante:{label:"Brocante",icon:"🏺",sub:"Pièces rares, vintage"},
+  banabana:{label:"Bana-bana",icon:"🧺",sub:"Commerce mobile ancré dans le réel"},
+  quotidien:{label:"Quotidien",icon:"🏠",sub:"Ce qu'on cherche vite"},
+  phones:{label:"Téléphones",icon:"📱",sub:"Neufs, reconditionnés, accessoires"},
+  alimentaire:{label:"Alimentaire",icon:"🥜",sub:"Produits locaux, céréales, épices"},
+  chaussures:{label:"Chaussures",icon:"👟",sub:"Sandales, baskets, mocassins"}
+};
+
+/* ══════════════════════════════════════
+   ROYAL VENDORS (enriched with SVGs)
+══════════════════════════════════════ */
+function makeRoyalPhoto(title,sub,icon,c1,c2){
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+    <defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient>
+      <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgba(255,255,255,.92)"/><stop offset="100%" stop-color="rgba(255,255,255,.72)"/></linearGradient>
+      <filter id="shadow"><feDropShadow dx="0" dy="20" stdDeviation="24" flood-color="rgba(0,0,0,.18)"/></filter>
+    </defs>
+    <rect width="1200" height="900" fill="url(#bg)"/>
+    <circle cx="1040" cy="120" r="190" fill="rgba(255,255,255,.13)"/>
+    <circle cx="170"  cy="720" r="220" fill="rgba(255,255,255,.12)"/>
+    <circle cx="820"  cy="650" r="120" fill="rgba(255,255,255,.08)"/>
+    <rect x="60" y="60" width="1080" height="780" rx="34" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.18)"/>
+    <rect x="92" y="520" width="1016" height="220" rx="30" fill="url(#glass)" filter="url(#shadow)"/>
+    <text x="110" y="220" font-size="200" filter="url(#shadow)">${icon}</text>
+    <text x="130" y="586" font-family="Arial,sans-serif" font-size="26" letter-spacing="5" font-weight="700" fill="#7a6a54">${sub}</text>
+    <text x="130" y="655" font-family="Arial,sans-serif" font-size="64" font-weight="800" fill="#1a1208">${title}</text>
+    <rect x="900" y="106" width="176" height="42" rx="21" fill="rgba(255,255,255,.88)"/>
+    <text x="988" y="133" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="800" fill="#c83830">DIGIY ROYAL</text>
+  </svg>`;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
+const ROYAL_VENDORS={
+  vetements:[
+    {icon:"👗",bg:"#ffd0e0",name:"Maison Nafi Couture",what:"Robes couture, wax premium, tenues élégantes, silhouettes de cérémonie",loc:"Dakar · Mermoz",price:"12 000–85 000 F",live:true,images:[makeRoyalPhoto("Maison Nafi","Couture Dakar","👗","#f9d4df","#f2b5c8"),makeRoyalPhoto("Wax Premium","Collection","🪡","#f5d4e7","#dfb9d0")]},
+    {icon:"💍",bg:"#eadfff",name:"Perles & Or by Sokhna",what:"Bijoux fins, colliers, boucles, bracelets, perles et éclat doré",loc:"Dakar · Almadies",price:"5 000–45 000 F",live:true,images:[makeRoyalPhoto("Perles & Or","Bijoux fins","💍","#efe3ff","#d4bfff")]},
+    {icon:"👜",bg:"#ffe0cb",name:"Élégance Cuir Royal",what:"Sacs cuir, pochettes, bandoulières, pièces bureau et sortie",loc:"Dakar · Point E",price:"9 000–65 000 F",live:true,images:[makeRoyalPhoto("Élégance Cuir","Maroquinerie","👜","#f9dbc8","#efb28f")]}
+  ],
+  chaussures:[
+    {icon:"👟",bg:"#ffeaaa",name:"Pas Royal",what:"Chaussures ville, sandales cuir, escarpins, baskets premium",loc:"Dakar · Plateau",price:"8 000–55 000 F",live:true,images:[makeRoyalPhoto("Pas Royal","Chaussures","👟","#fff0b8","#f0c95c")]}
+  ],
+  coiffeur:[
+    {icon:"💇",bg:"#dbfff6",name:"Couronne Hair Studio",what:"Tresses premium, coiffure évènement, perruques, soin capillaire",loc:"Saly · Ngaparou",price:"3 500–35 000 F",live:true,images:[makeRoyalPhoto("Couronne Hair","Salon premium","💇","#ddfff5","#b7e7d8")]}
+  ],
+  parfum:[
+    {icon:"💄",bg:"#ffd0e0",name:"Belle Peau Maison",what:"Beauté premium, gloss, maquillage doux et chic",loc:"Dakar · Liberté 6",price:"2 500–22 000 F",live:true,images:[makeRoyalPhoto("Belle Peau","Beauté Dakar","💄","#ffd9e6","#f4adc9")]},
+    {icon:"🧴",bg:"#dbf5ea",name:"Douceur Sahel",what:"Crèmes corps, lait visage, huiles parfumées, soin peau douce",loc:"Thiès · Centre",price:"2 000–18 000 F",live:true,images:[makeRoyalPhoto("Douceur Sahel","Crèmes corps","🧴","#def5eb","#bfe0cd")]},
+    {icon:"🧼",bg:"#ffeaaa",name:"Savonnerie Reine",what:"Savons naturels, savons noirs, gommage, senteurs artisanales",loc:"Mbour · Saly",price:"1 000–9 000 F",live:true,images:[makeRoyalPhoto("Savonnerie Reine","Savons naturels","🧼","#fff0b5","#eccf70")]}
+  ],
+  quotidien:[
+    {icon:"🛏️",bg:"#c8deff",name:"Chambre Douceur",what:"Draps, housses, rideaux, serviettes, linge de maison élégant",loc:"Saly · Centre",price:"4 000–45 000 F",live:true,images:[makeRoyalPhoto("Chambre Douceur","Linge maison","🛏️","#d8e7ff","#a8c7ef")]}
+  ]
+};
+
+Object.entries(ROYAL_VENDORS).forEach(([cat,items])=>{
+  if(!Array.isArray(VENDORS[cat])) VENDORS[cat]=[];
+  VENDORS[cat].push(...items.map(item=>({...item,royal:true})));
+});
+
+/* ══════════════════════════════════════
+   CATALOG BUILDERS
+══════════════════════════════════════ */
+function slugify(s){
+  return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/&/g,"-et-").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
+}
+function waLink(t){return `https://wa.me/${DIGIY_CONFIG.whatsapp}?text=${encodeURIComponent(t)}`;}
+function parseCity(l=""){return (l.split("·")[0]||l).trim();}
+
+function buildExampleVendor(cat,v){
+  const m=META[cat]||{};
+  const imgs=Array.isArray(v.images)?v.images.filter(Boolean):[];
+  return {
+    ...v, category:cat,
+    categoryLabel:v.categoryLabel||m.label||cat,
+    categoryIcon:v.categoryIcon||m.icon||"🛍️",
+    city:parseCity(v.loc),
+    slug:`${cat}-${slugify(v.name)}`,
+    isExample:true, isRoyal:!!v.royal,
+    coverImage: imgs[0] || vendorCoverSvg(v,cat),
+    images:imgs
+  };
+}
+function buildCatalog(){return Object.entries(VENDORS).flatMap(([c,l])=>l.map(v=>buildExampleVendor(c,v)));}
+function getRoyalCatalog(){return buildCatalog().filter(v=>v.isRoyal);}
+
+function saveCatalog(){
+  try{localStorage.setItem("digiy_market_catalog_v5",JSON.stringify({config:DIGIY_CONFIG,meta:META,vendors:buildCatalog()}));}catch(e){}
+}
+
+function updateCounts(){
+  document.querySelectorAll(".cat-tile").forEach(t=>{
+    const c=t.dataset.cat;
+    const el=t.querySelector(".cat-count span");
+    if(el) el.textContent=(VENDORS[c]||[]).length;
+  });
+  const n=buildCatalog().length;
+  document.getElementById("totalCount").textContent=n;
+  document.getElementById("statVendeurs").textContent=n;
+}
+
+function initButtons(){
+  const gw=waLink("Bonjour DIGIY 👋 Je veux des informations sur DIGIY MARKET.");
+  ["waTopBtn","heroWaBtn","heroWaBtnMob","ctaWaBtn","floatWaBtn"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.href=gw;
+  });
+  const bi=document.getElementById("brandIcon");
+  if(DIGIY_CONFIG.logoUrl) bi.innerHTML=`<img src="${DIGIY_CONFIG.logoUrl}" alt="DIGIY">`;
+}
+
+function fillCityFilter(){
+  const sel=document.getElementById("cityFilter");
+  const cities=[...new Set(buildCatalog().map(v=>v.city))].sort((a,b)=>a.localeCompare(b,"fr"));
+  cities.forEach(c=>{const o=document.createElement("option");o.value=c;o.textContent=c;sel.appendChild(o);});
+}
+function getCityFilter(){return document.getElementById("cityFilter").value.trim();}
+function applyCityFilter(list){const c=getCityFilter();return c?list.filter(v=>v.city===c):list;}
+
+/* ══════════════════════════════════════
+   RENDER — ROYAL SPOTLIGHT
+══════════════════════════════════════ */
+function renderRoyalSpotlight(){
+  const box=document.getElementById("royalSpotlightGrid");
+  if(!box) return;
+  const royals=getRoyalCatalog().slice(0,6);
+  if(!royals.length){
+    box.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:32px;color:var(--muted)"><div style="font-size:2.5rem;margin-bottom:10px">👑</div><p>Aucune fiche ROYAL pour l'instant.</p></div>`;
+    return;
+  }
+  box.innerHTML=royals.map(v=>`
+    <article class="royal-card" onclick="openVendor('${v.slug}')">
+      <div class="royal-cover">
+        <img src="${v.coverImage}" alt="${v.name}" loading="lazy">
+        <div class="royal-gloss"></div>
+        <span class="royal-badge">♛ ROYAL STAR</span>
+        ${v.live?`<span class="royal-live">VISIBLE</span>`:""}
+      </div>
+      <div class="royal-body">
+        <div class="royal-kicker">${v.categoryLabel||"DIGIY MARKET"}</div>
+        <div class="royal-title">${v.name}</div>
+        <div class="royal-text">${v.what}</div>
+        <div class="royal-meta">
+          <span class="royal-loc">📍 ${v.loc}</span>
+          <span class="royal-price">${v.price||"À définir"}</span>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+/* ══════════════════════════════════════
+   RENDER — VENDOR CARDS (panel)
+══════════════════════════════════════ */
+function renderVendorCards(list){
+  const g=document.getElementById("vendorGrid");
+  if(!list.length){
+    g.innerHTML=`<div class="empty-state"><div class="big">🏗️</div><p>Aucun vendeur exemple trouvé.<br/>Essaie une autre ville ou une autre recherche.</p></div>`;
+    return;
+  }
+  g.innerHTML=list.map(v=>`
+    <article class="vendor" onclick="openVendor('${v.slug}')">
+      <div class="vendor-top">
+        <img src="${v.coverImage}" alt="${v.name}" loading="lazy">
+        <div class="vendor-top-gradient"></div>
+        <span class="vendor-example">EXEMPLE</span>
+        ${v.live?`<div class="vendor-live">EN LIGNE</div>`:""}
+        ${v.isRoyal?`<div class="vendor-royal">♛ ROYAL</div>`:""}
+      </div>
+      <div class="vendor-body">
+        <div class="vendor-name">${v.name}</div>
+        <div class="vendor-what">${v.what}</div>
+        <div class="vendor-meta">
+          <span class="vendor-loc">📍 ${v.loc}</span>
+          <span class="vendor-price">${v.price}</span>
+        </div>
+        <div class="vendor-cta">
+          <button class="vendor-btn primary" type="button" onclick="event.stopPropagation();openVendor('${v.slug}')">👁 Voir la fiche</button>
+          <button class="vendor-btn ghost" type="button" onclick="event.stopPropagation();contactVendor('${v.slug}')">💬</button>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function renderVendorsByCategory(cat){
+  const m=META[cat]||{};
+  let list=(VENDORS[cat]||[]).map(v=>buildExampleVendor(cat,v));
+  list=applyCityFilter(list);
+  document.getElementById("panelIcon").textContent=m.icon||"🛍️";
+  document.getElementById("panelTitle").textContent=m.label||cat;
+  document.getElementById("panelSub").textContent=`${m.sub||""} · ${list.length} vendeur(s) exemple`;
+  renderVendorCards(list);
+}
+
+function renderSearch(q){
+  const qq=q.trim().toLowerCase();
+  let list=buildCatalog().filter(v=>
+    v.name.toLowerCase().includes(qq)||v.what.toLowerCase().includes(qq)||
+    v.loc.toLowerCase().includes(qq)||v.city.toLowerCase().includes(qq)||
+    v.categoryLabel.toLowerCase().includes(qq)
+  );
+  list=applyCityFilter(list);
+  document.getElementById("panelIcon").textContent="🔎";
+  document.getElementById("panelTitle").textContent=`Recherche : ${q}`;
+  document.getElementById("panelSub").textContent=`${list.length} résultat(s) exemple`;
+  renderVendorCards(list);
+}
+
+function renderRoyalList(){
+  let list=getRoyalCatalog();
+  list=applyCityFilter(list);
+  document.querySelectorAll(".cat-tile").forEach(x=>x.classList.remove("active"));
+  document.getElementById("panelIcon").textContent="👑";
+  document.getElementById("panelTitle").textContent="Sélection ROYAL";
+  document.getElementById("panelSub").textContent=`${list.length} fiche(s) premium en avant`;
+  renderVendorCards(list);
+  currentMode="royal"; currentKey="royal";
+  panel.classList.add("open");
+  setTimeout(()=>panel.scrollIntoView({behavior:"smooth",block:"nearest"}),180);
+}
+
+function rerenderCurrent(){
+  if(currentMode==="search"){const q=document.getElementById("topSearchInput").value.trim();if(q)renderSearch(q);}
+  else if(currentMode==="cat"&&currentKey) renderVendorsByCategory(currentKey);
+  else if(currentMode==="royal") renderRoyalList();
+}
+
+function openVendor(slug){saveCatalog();window.location.href=`vendeur.html?v=${encodeURIComponent(slug)}`;}
+function contactVendor(slug){const v=buildCatalog().find(x=>x.slug===slug);const n=v?v.name:"cette vitrine";window.open(waLink(`Bonjour DIGIY 👋 Je veux une vitrine comme l'exemple "${n}" sur DIGIY MARKET.`),"_blank");}
+
+/* ══════════════════════════════════════
+   INIT
+══════════════════════════════════════ */
+initButtons(); saveCatalog(); updateCounts(); fillCityFilter(); renderRoyalSpotlight();
+
+let currentMode=null,currentKey=null;
+const panel=document.getElementById("vendorPanel");
+
+document.querySelectorAll(".cat-tile").forEach(tile=>{
+  tile.addEventListener("click",()=>{
+    const cat=tile.dataset.cat;
+    if(currentMode==="cat"&&currentKey===cat){
+      panel.classList.remove("open");tile.classList.remove("active");currentMode=null;currentKey=null;return;
     }
-  });
-}, { threshold: 0.08 });
-
-document.querySelectorAll('.animate-in').forEach((el, i) => {
-  el.style.animationPlayState = 'paused';
-  el.style.animationDelay = `${i * 0.08}s`;
-  observer.observe(el);
-});
-
-/* ─── CARD TILT EFFECT ─── */
-document.querySelectorAll('.r-card:not(.horizontal)').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    card.style.transform = `translateY(-6px) scale(1.01) perspective(800px) rotateY(${x * 3.5}deg) rotateX(${-y * 2.5}deg)`;
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
+    document.querySelectorAll(".cat-tile").forEach(x=>x.classList.remove("active"));
+    tile.classList.add("active");currentMode="cat";currentKey=cat;
+    renderVendorsByCategory(cat);
+    if(!panel.classList.contains("open")) panel.classList.add("open");
+    setTimeout(()=>panel.scrollIntoView({behavior:"smooth",block:"nearest"}),180);
   });
 });
 
-/* ─── GOLD SHIMMER ON HOVER ─── */
-document.querySelectorAll('.r-btn.gold').forEach(btn => {
-  btn.addEventListener('mouseenter', () => {
-    btn.style.boxShadow = '0 8px 28px rgba(200,134,10,.5), 0 0 0 1px rgba(244,184,64,.3)';
-  });
-  btn.addEventListener('mouseleave', () => {
-    btn.style.boxShadow = '';
+document.getElementById("panelClose").addEventListener("click",()=>{
+  panel.classList.remove("open");
+  document.querySelectorAll(".cat-tile").forEach(x=>x.classList.remove("active"));
+  currentMode=null;currentKey=null;
+});
+
+document.getElementById("topSearchBtn").addEventListener("click",()=>{
+  const q=document.getElementById("topSearchInput").value.trim();if(!q)return;
+  document.querySelectorAll(".cat-tile").forEach(x=>x.classList.remove("active"));
+  currentMode="search";currentKey=q;renderSearch(q);
+  panel.classList.add("open");
+  setTimeout(()=>panel.scrollIntoView({behavior:"smooth",block:"nearest"}),180);
+});
+document.getElementById("topSearchInput").addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("topSearchBtn").click();});
+document.getElementById("cityFilter").addEventListener("change",rerenderCurrent);
+document.getElementById("resetFilters").addEventListener("click",()=>{
+  document.getElementById("cityFilter").value="";document.getElementById("topSearchInput").value="";
+  if(currentMode==="cat"&&currentKey) renderVendorsByCategory(currentKey);
+  else{panel.classList.remove("open");currentMode=null;currentKey=null;document.querySelectorAll(".cat-tile").forEach(x=>x.classList.remove("active"));}
+});
+document.getElementById("royalTopBtn")?.addEventListener("click",()=>{document.getElementById("royalLead")?.scrollIntoView({behavior:"smooth",block:"start"});});
+document.getElementById("btnRoyalOnly")?.addEventListener("click",()=>renderRoyalList());
+document.getElementById("btnRoyalReset")?.addEventListener("click",()=>{
+  document.getElementById("cityFilter").value="";document.getElementById("topSearchInput").value="";
+  panel.classList.remove("open");currentMode=null;currentKey=null;
+  document.querySelectorAll(".cat-tile").forEach(x=>x.classList.remove("active"));
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+
+const rail=document.getElementById("catRail");
+document.getElementById("arrL").addEventListener("click",()=>rail.scrollBy({left:-280,behavior:"smooth"}));
+document.getElementById("arrR").addEventListener("click",()=>rail.scrollBy({left:280,behavior:"smooth"}));
+let isDown=false,startX=0,startScroll=0;
+function dragStart(x){isDown=true;startX=x;startScroll=rail.scrollLeft;rail.classList.add("grabbing");}
+function dragMove(x){if(!isDown)return;rail.scrollLeft=startScroll-(x-startX);}
+function dragEnd(){isDown=false;rail.classList.remove("grabbing");}
+rail.addEventListener("mousedown",e=>dragStart(e.pageX));
+window.addEventListener("mouseup",dragEnd);
+window.addEventListener("mousemove",e=>dragMove(e.pageX));
+rail.addEventListener("touchstart",e=>{if(e.touches[0])dragStart(e.touches[0].pageX);},{passive:true});
+rail.addEventListener("touchmove",e=>{if(e.touches[0])dragMove(e.touches[0].pageX);},{passive:true});
+rail.addEventListener("touchend",dragEnd);
+
+document.querySelectorAll(".faq-item").forEach(item=>{
+  item.querySelector(".faq-q").addEventListener("click",()=>{
+    const open=item.classList.contains("open");
+    document.querySelectorAll(".faq-item").forEach(x=>x.classList.remove("open"));
+    if(!open) item.classList.add("open");
   });
 });
 </script>
