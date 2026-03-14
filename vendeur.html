@@ -6,6 +6,7 @@
 <title>DIGIY MARKET — Fiche vendeur</title>
 <meta name="theme-color" content="#0d0a06"/>
 <meta name="description" content="Fiche publique DIGIY MARKET : boutique exemple ou fiche réelle en mode slug-first."/>
+<meta name="robots" content="index,follow"/>
 
 <script>
   window.DIGIY_SUPABASE_URL      = "https://wesqmwjjtsefyjnluosj.supabase.co";
@@ -48,7 +49,6 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
 html { scroll-behavior: smooth }
-
 body {
   font-family: "Nunito", sans-serif;
   background: var(--g-dark);
@@ -56,22 +56,24 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
 }
-
-/* grain */
 body::before {
   content: "";
   position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .025;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-
 a { color: inherit; text-decoration: none }
 img { display: block; max-width: 100% }
 button { font: inherit; cursor: pointer }
-
 .wrap {
   width: min(1300px, calc(100% - 32px));
   margin: 0 auto;
-  position: relative; z-index: 1;
+  position: relative;
+  z-index: 1;
+}
+:focus-visible {
+  outline: 3px solid rgba(232,104,32,.35);
+  outline-offset: 2px;
+  border-radius: 12px;
 }
 
 /* ═══ TOPBAR ═══ */
@@ -135,6 +137,7 @@ button { font: inherit; cursor: pointer }
   box-shadow: var(--shadow-card);
   min-height: 520px;
   background: var(--ink-2);
+  transition: transform .22s ease;
 }
 .hero-cover-img {
   position: absolute; inset: 0;
@@ -254,7 +257,7 @@ button { font: inherit; cursor: pointer }
   opacity: .4;
 }
 
-/* ═══ INFO GRID (mini stats) ═══ */
+/* ═══ INFO GRID ═══ */
 .info-grid {
   display: grid; grid-template-columns: repeat(2, 1fr);
   gap: 10px; margin-top: 14px;
@@ -325,7 +328,11 @@ button { font: inherit; cursor: pointer }
   background: var(--ink-2); cursor: pointer;
   transition: .2s ease;
 }
-.thumb:hover { transform: translateY(-2px); border-color: var(--gold); box-shadow: 0 8px 20px rgba(0,0,0,.4) }
+.thumb:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+  box-shadow: 0 8px 20px rgba(0,0,0,.4);
+}
 .thumb.active {
   border-color: var(--gold-lt);
   box-shadow: 0 0 0 2px rgba(200,134,10,.25), 0 8px 20px rgba(0,0,0,.4);
@@ -451,17 +458,6 @@ button { font: inherit; cursor: pointer }
 .float-btn.wa { background: #0b8f59 }
 .float-btn.module { background: var(--g-fire) }
 
-/* ═══ DIVIDER ORNAMENT ═══ */
-.ornament {
-  display: flex; align-items: center; gap: 16px;
-  color: rgba(200,134,10,.3); font-size: .8rem;
-  letter-spacing: .2em; margin: 4px 0;
-}
-.ornament::before, .ornament::after {
-  content: ""; flex: 1; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(200,134,10,.25), transparent);
-}
-
 /* ═══ ENTRANCE ANIMATIONS ═══ */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px) }
@@ -471,7 +467,10 @@ button { font: inherit; cursor: pointer }
 
 /* ═══ RESPONSIVE ═══ */
 @media(max-width:1080px) { .layout { grid-template-columns: 1fr } }
-@media(max-width:860px)  { .edito-strip { grid-template-columns: 1fr 1fr } .thumb-rail { grid-template-columns: repeat(2,1fr) } }
+@media(max-width:860px)  {
+  .edito-strip { grid-template-columns: 1fr 1fr }
+  .thumb-rail { grid-template-columns: repeat(2,1fr) }
+}
 @media(max-width:600px)  {
   .edito-strip, .info-grid, .products-grid { grid-template-columns: 1fr }
   .hero-copy { padding: 20px 18px 24px }
@@ -486,7 +485,6 @@ button { font: inherit; cursor: pointer }
 </head>
 <body>
 
-<!-- ─── TOPBAR ─── -->
 <header class="topbar">
   <div class="wrap topbar-inner">
     <a class="brand" href="index.html">
@@ -496,21 +494,19 @@ button { font: inherit; cursor: pointer }
     <div class="hdr-actions">
       <a class="btn btn-ghost" href="index.html">← Marché</a>
       <a class="btn btn-ghost" id="topWaBtn" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
-      <a class="btn btn-fire"  id="topModuleBtn" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Mon module</a>
+      <a class="btn btn-fire" id="topModuleBtn" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Mon module</a>
     </div>
   </div>
 </header>
 
-<!-- ─── MAIN ─── -->
 <main class="page">
   <div class="wrap" id="app">
     <!-- rendered by JS -->
   </div>
 </main>
 
-<!-- ─── FLOAT CTA ─── -->
 <div class="float-cta" id="floatCtas" style="display:none">
-  <a class="float-btn wa"     id="floatWaBtn"     href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+  <a class="float-btn wa" id="floatWaBtn" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
   <a class="float-btn module" id="floatModuleBtn" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
 </div>
 
@@ -528,7 +524,9 @@ function readCatalog(){
   try {
     const raw = localStorage.getItem("digiy_market_catalog_v5");
     return raw ? JSON.parse(raw) : null;
-  } catch(e) { return null }
+  } catch(e) {
+    return null;
+  }
 }
 
 function getParam(name){
@@ -537,20 +535,31 @@ function getParam(name){
 
 function safe(str=""){
   return String(str)
-    .replace(/&/g,"&amp;").replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;");
 }
 
 function normPhone(v){
-  const d = String(v||"").replace(/[^\d]/g,"");
-  if(!d) return "";
-  if(d.startsWith("221") && d.length===12) return d;
-  if(d.length===9) return "221"+d;
+  const d = String(v || "").replace(/[^\d]/g,"");
+  if (!d) return "";
+  if (d.startsWith("221") && d.length === 12) return d;
+  if (d.length === 9) return "221" + d;
   return d;
 }
 
+function formatPhone(v){
+  const p = normPhone(v);
+  if (!p) return "—";
+  if (p.length === 12 && p.startsWith("221")) {
+    return `+221 ${p.slice(3,5)} ${p.slice(5,8)} ${p.slice(8,10)} ${p.slice(10,12)}`;
+  }
+  return p;
+}
+
 function parsePriceBase(price=""){
-  const first = String(price).split(/[–-]/)[0]||"";
+  const first = String(price).split(/[–-]/)[0] || "";
   const digits = first.replace(/[^\d]/g,"");
   return digits ? parseInt(digits,10) : null;
 }
@@ -576,12 +585,16 @@ function mapsUrl(query){
 /* ─── SVG generators ─── */
 function palette(bg){
   const map = {
-    "#c8deff":["#bdd8ff","#8cb7ff"], "#ffe0cb":["#ffd9c5","#ffb88a"],
-    "#ffeaaa":["#fff0b8","#ffd56d"], "#ffd0e0":["#ffd8e5","#ffb1cb"],
-    "#eadfff":["#eee2ff","#d2beff"], "#dbfff6":["#ddfff5","#afe9d5"],
-    "#f4ead7":["#f6ead9","#ddc9a3"], "#dbf5ea":["#dff7ec","#b8e0ca"]
+    "#c8deff":["#bdd8ff","#8cb7ff"],
+    "#ffe0cb":["#ffd9c5","#ffb88a"],
+    "#ffeaaa":["#fff0b8","#ffd56d"],
+    "#ffd0e0":["#ffd8e5","#ffb1cb"],
+    "#eadfff":["#eee2ff","#d2beff"],
+    "#dbfff6":["#ddfff5","#afe9d5"],
+    "#f4ead7":["#f6ead9","#ddc9a3"],
+    "#dbf5ea":["#dff7ec","#b8e0ca"]
   };
-  return map[bg]||["#f4ead7","#d8bf96"];
+  return map[bg] || ["#f4ead7","#d8bf96"];
 }
 
 function makeSvgData(title,subtitle,icon,c1,c2){
@@ -623,25 +636,32 @@ function makeMapSvg(title,subtitle){
 }
 
 function fallbackImg(v){
-  const [c1,c2] = palette(v.bg||"#f4ead7");
-  return makeSvgData(v.name, v.loc||v.city||"DIGIY MARKET", v.icon||"🛍️", c1, c2);
+  const [c1,c2] = palette(v.bg || "#f4ead7");
+  return makeSvgData(v.name, v.loc || v.city || "DIGIY MARKET", v.icon || "🛍️", c1, c2);
 }
 
 function buildGallery(v){
-  if(Array.isArray(v.images)&&v.images.length){
-    return v.images.map((src,i)=>({src, caption:i===0?"Image héro":`Vue ${i+1}`}));
+  const rawImages = Array.isArray(v.images) ? v.images.filter(Boolean) : [];
+  if (rawImages.length) {
+    const out = rawImages.map((src,i)=>({
+      src,
+      caption: i === 0 ? "Image principale" : `Vue ${i+1}`
+    }));
+    if (v.mapPreview) out.push({src:v.mapPreview, caption:"Repère carte"});
+    return out.slice(0,8);
   }
-  const [c1,c2] = palette(v.bg||"#f4ead7");
+
+  const [c1,c2] = palette(v.bg || "#f4ead7");
   const items = [
-    {title:"Signature", sub:v.name,                      icon:v.icon||"🛍️"},
-    {title:"Ambiance",  sub:v.loc||v.city||"terrain",    icon:"✨"},
-    {title:"Style",     sub:v.categoryLabel||"boutique", icon:v.categoryIcon||"🛍️"},
-    {title:"Repère",    sub:"présence publique",          icon:"📍"},
-    {title:"Éditorial", sub:"vitrine ROYAL",              icon:"♛"}
+    {title:"Signature", sub:v.name,                      icon:v.icon || "🛍️"},
+    {title:"Ambiance",  sub:v.loc || v.city || "terrain",icon:"✨"},
+    {title:"Style",     sub:v.categoryLabel || "boutique",icon:v.categoryIcon || "🛍️"},
+    {title:"Repère",    sub:"présence publique",         icon:"📍"},
+    {title:"Éditorial", sub:"vitrine DIGIY",             icon:v.isRoyal ? "♛" : "🌍"}
   ];
   return items.map((item,i)=>({
-    src: makeSvgData(item.title, item.sub, item.icon, i%2?c2:c1, i%2?c1:c2),
-    caption:`${item.title} — visuel`
+    src: makeSvgData(item.title, item.sub, item.icon, i%2 ? c2 : c1, i%2 ? c1 : c2),
+    caption: `${item.title} — visuel`
   }));
 }
 
@@ -654,16 +674,23 @@ function buildExampleProducts(v){
     {title:"Produit exemple 3", desc:"À personnaliser.", price:"Prix à définir"},
     {title:"Produit exemple 4", desc:"À personnaliser.", price:"Prix à définir"}
   ];
-  return parts.map((p,i)=>({title:p, desc:`Mise en avant pour ${v.name}.`, price:makePrice(base,0.35+(i*0.18))}));
+  return parts.map((p,i)=>({
+    title:p,
+    desc:`Mise en avant pour ${v.name}.`,
+    price:makePrice(base,0.35+(i*0.18))
+  }));
 }
 
 function buildRealPublicBlocks(v){
-  const rows=[];
-  if(v.categoryLabel) rows.push({title:"Catégorie", desc:"Univers du commerçant.", price:v.categoryLabel});
-  if(v.city)          rows.push({title:"Ville",     desc:"Repère terrain.",         price:v.city});
-  if(v.delivery_note) rows.push({title:"Livraison", desc:"Info publique utile.",    price:v.delivery_note});
-  if(v.payment_note)  rows.push({title:"Paiement",  desc:"Mode de paiement.",       price:v.payment_note});
-  return rows.slice(0,4);
+  const rows = [];
+  if (v.categoryLabel) rows.push({title:"Catégorie", desc:"Univers du commerçant.", price:v.categoryLabel});
+  if (v.address)       rows.push({title:"Adresse",   desc:"Repère public.",         price:v.address});
+  if (v.delivery_note) rows.push({title:"Livraison", desc:"Info publique utile.",    price:v.delivery_note});
+  if (v.payment_note)  rows.push({title:"Paiement",  desc:"Mode de paiement.",       price:v.payment_note});
+  if (v.owner_name)    rows.push({title:"Contact",   desc:"Nom public utile.",       price:v.owner_name});
+  if (v.phone)         rows.push({title:"Téléphone", desc:"Numéro public.",          price:formatPhone(v.phone)});
+  if (v.whatsapp)      rows.push({title:"WhatsApp",  desc:"Contact direct.",         price:formatPhone(v.whatsapp)});
+  return rows.slice(0,6);
 }
 
 function applyTopBrand(cfg){
@@ -673,39 +700,61 @@ function applyTopBrand(cfg){
 }
 
 function makeSupabaseClient(){
-  if(!window.supabase||!window.DIGIY_SUPABASE_URL) return null;
+  if(!window.supabase || !window.DIGIY_SUPABASE_URL) return null;
   return window.supabase.createClient(
     window.DIGIY_SUPABASE_URL,
-    window.DIGIY_SUPABASE_ANON_KEY||window.DIGIY_SUPABASE_ANON,
-    {auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}}
+    window.DIGIY_SUPABASE_ANON_KEY || window.DIGIY_SUPABASE_ANON,
+    { auth:{ persistSession:false, autoRefreshToken:false, detectSessionInUrl:false } }
   );
 }
 
 async function loadPublicProfileBySlug(slug){
-  const sb=makeSupabaseClient();
-  if(!sb||!slug) return null;
-  const {data,error}=await sb.from("digiy_market_public_profiles").select("*").eq("slug",slug).maybeSingle();
-  if(error||!data) return null;
-  const cover = data.cover_url||data.cover_image_url||data.photo_url||data.logo_url||"";
-  const photo = data.photo_url||data.logo_url||data.cover_url||data.cover_image_url||"";
-  const images=[cover,photo].filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i);
+  const sb = makeSupabaseClient();
+  if(!sb || !slug) return null;
+
+  const { data, error } = await sb
+    .from("digiy_market_public_profiles")
+    .select("*")
+    .eq("slug", slug)
+    .maybeSingle();
+
+  if(error || !data) return null;
+
+  const cover   = data.cover_url || data.cover_image_url || data.photo_url || data.logo_url || "";
+  const photo   = data.photo_url || data.logo_url || data.cover_url || data.cover_image_url || "";
+  const gallery = [
+    cover,
+    photo,
+    data.gallery_url_1,
+    data.gallery_url_2,
+    data.gallery_url_3,
+    data.gallery_url_4
+  ].filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i);
+
   return {
-    mode:"real", slug:data.slug||slug,
-    name:data.display_name||data.shop_name||data.business_name||"Boutique DIGIY",
-    what:data.category||data.categories_text||"Boutique locale",
-    loc:[data.city,data.address].filter(Boolean).join(" · ")||data.city||"Sénégal",
-    city:data.city||"", address:data.address||"",
-    categoryLabel:data.category||data.categories_text||"Boutique locale",
-    categoryIcon:"🛍️", icon:"🛍️", price:"",
-    live:data.is_published==null?true:!!data.is_published,
-    isExample:false,
-    description:data.bio||data.description||"",
-    whatsapp:normPhone(data.whatsapp||data.phone||""),
-    phone:normPhone(data.phone||""),
-    delivery_note:data.delivery_note||"",
-    payment_note:data.payment_note||"",
-    owner_name:data.owner_name||"",
-    images, coverImage:cover||photo||"", raw:data
+    mode: "real",
+    slug: data.slug || slug,
+    name: data.display_name || data.shop_name || data.business_name || "Boutique DIGIY",
+    what: data.category || data.categories_text || "Boutique locale",
+    loc: [data.city, data.address].filter(Boolean).join(" · ") || data.city || "Sénégal",
+    city: data.city || "",
+    address: data.address || "",
+    categoryLabel: data.category || data.categories_text || "Boutique locale",
+    categoryIcon: "🛍️",
+    icon: "🛍️",
+    price: "",
+    live: data.is_published == null ? true : !!data.is_published,
+    isExample: false,
+    isRoyal: false,
+    description: data.bio || data.description || "",
+    whatsapp: normPhone(data.whatsapp || data.phone || ""),
+    phone: normPhone(data.phone || ""),
+    delivery_note: data.delivery_note || "",
+    payment_note: data.payment_note || "",
+    owner_name: data.owner_name || "",
+    images: gallery,
+    coverImage: cover || photo || "",
+    raw: data
   };
 }
 
@@ -714,41 +763,45 @@ async function loadPublicProfileBySlug(slug){
 ═══════════════════════════════════════ */
 function renderVendor(v, cfg){
   const app      = document.getElementById("app");
+  const mapsQ    = [v.name, v.address || "", v.city || "", v.loc || ""].filter(Boolean).join(" ");
+  const mapLink  = mapsUrl(mapsQ || v.name);
+  const mapImg   = makeMapSvg(v.name, v.loc || v.city || "Sénégal");
+  v.mapPreview   = mapImg;
+
   const gallery  = buildGallery(v);
   const isEx     = !!v.isExample;
   const blocks   = isEx ? buildExampleProducts(v) : buildRealPublicBlocks(v);
   const isRoyal  = !!v.isRoyal;
+  const heroCover = v.coverImage || gallery[0]?.src || fallbackImg(v);
 
   document.title = `${v.name} — DIGIY MARKET`;
 
-  const waGeneral  = waLink(cfg.whatsapp,`Bonjour DIGIY 👋 Je veux une vitrine comme "${v.name}" sur DIGIY MARKET.`);
-  const waBoutique = v.whatsapp ? waLink(v.whatsapp,`Bonjour 👋 Je vous contacte depuis votre fiche DIGIY MARKET.`) : "";
-  const waMain     = isEx ? waGeneral : (waBoutique||waGeneral);
+  const waGeneral  = waLink(cfg.whatsapp, `Bonjour DIGIY 👋 Je veux une vitrine comme "${v.name}" sur DIGIY MARKET.`);
+  const waBoutique = v.whatsapp ? waLink(v.whatsapp, `Bonjour 👋 Je vous contacte depuis votre fiche DIGIY MARKET.`) : "";
+  const waMain     = isEx ? waGeneral : (waBoutique || waGeneral);
   const waLabel    = isEx ? "💬 WhatsApp DIGIY" : (waBoutique ? "💬 WhatsApp boutique" : "💬 WhatsApp DIGIY");
 
-  const mapsQ   = [v.name,v.address||"",v.city||"",v.loc||""].filter(Boolean).join(" ");
-  const mapLink = mapsUrl(mapsQ||v.name);
-  const mapImg  = makeMapSvg(v.name, v.loc||v.city||"Sénégal");
-  const heroCover = gallery[0]?.src || v.coverImage || fallbackImg(v);
-
-  /* wire header/float buttons */
-  document.getElementById("topWaBtn").href       = waMain;
+  document.getElementById("topWaBtn").href = waMain;
   document.getElementById("topWaBtn").textContent = waLabel;
-  document.getElementById("topModuleBtn").href   = cfg.proUrl||DEFAULT_CFG.proUrl;
-  document.getElementById("floatWaBtn").href      = waMain;
+  document.getElementById("topModuleBtn").href = cfg.proUrl || DEFAULT_CFG.proUrl;
+  document.getElementById("floatWaBtn").href = waMain;
   document.getElementById("floatWaBtn").textContent = waLabel;
-  document.getElementById("floatModuleBtn").href  = cfg.proUrl||DEFAULT_CFG.proUrl;
+  document.getElementById("floatModuleBtn").href = cfg.proUrl || DEFAULT_CFG.proUrl;
   document.getElementById("floatCtas").style.display = "flex";
   applyTopBrand(cfg);
 
-  const heroText   = isEx ? v.what : (v.description||"Fiche publique DIGIY MARKET.");
-  const sideNote   = isEx
-    ? `Cette fiche exemple montre le niveau visuel possible pour une boutique DIGIY MARKET.`
-    : `Cette fiche lit le profil réel par slug. Contact direct vers la boutique si numéro disponible.`;
+  const heroText = isEx
+    ? (v.what || "Vitrine exemple DIGIY MARKET.")
+    : (v.description || "Fiche publique DIGIY MARKET.");
+
+  const sideNote = isEx
+    ? "Cette fiche exemple montre le niveau visuel possible pour une boutique DIGIY MARKET."
+    : "Cette fiche lit le profil réel par slug. Contact direct vers la boutique si numéro disponible.";
+
   const sectionTitle = isEx ? "Produits & services mis en avant" : "Informations publiques";
   const sectionLead  = isEx
-    ? `La vitrine DIGIY MARKET présente les produits phares avec style et clarté.`
-    : `Repères publics visibles sans inventer un faux catalogue.`;
+    ? "La vitrine DIGIY MARKET présente les produits phares avec style et clarté."
+    : "Repères publics visibles sans inventer un faux catalogue.";
 
   const blocksHTML = blocks.length ? `
     <div class="products-grid">
@@ -760,21 +813,24 @@ function renderVendor(v, cfg){
         </div>
       `).join("")}
     </div>
-  ` : `<div class="empty-state" style="margin-top:14px"><h2>Catalogue à brancher</h2><p>La fiche est visible, le catalogue détaillé arrive bientôt.</p></div>`;
+  ` : `
+    <div class="empty-state" style="margin-top:14px">
+      <h2>Infos publiques à compléter</h2>
+      <p>La fiche est visible, mais certains repères publics n'ont pas encore été posés.</p>
+    </div>
+  `;
 
   app.innerHTML = `
-
-    <!-- ── HERO COVER ── -->
     <div class="anim" style="animation-delay:.0s">
-      <div class="hero-cover-wrap">
+      <div class="hero-cover-wrap" id="heroCoverWrap">
         <img id="heroMainImage" class="hero-cover-img" src="${heroCover}" alt="${safe(v.name)}">
         <div class="hero-gradient"></div>
 
         <div class="hero-top-chips">
           ${isRoyal ? `<span class="chip chip-royal">♛ ROYAL STAR</span>` : ""}
-          ${isEx    ? `<span class="chip chip-example">EXEMPLE DIGIY</span>` : `<span class="chip chip-live">BOUTIQUE PUBLIQUE</span>`}
-          ${v.live  ? `<span class="chip chip-live">VISIBLE</span>` : ""}
-          <span class="chip chip-dark">${safe(v.categoryIcon||"🛍️")} ${safe(v.categoryLabel||"Boutique")}</span>
+          ${isEx ? `<span class="chip chip-example">EXEMPLE DIGIY</span>` : `<span class="chip chip-live">BOUTIQUE PUBLIQUE</span>`}
+          ${v.live ? `<span class="chip chip-live">VISIBLE</span>` : ""}
+          <span class="chip chip-dark">${safe(v.categoryIcon || "🛍️")} ${safe(v.categoryLabel || "Boutique")}</span>
         </div>
 
         <div class="hero-copy">
@@ -782,15 +838,15 @@ function renderVendor(v, cfg){
           <h1>${safe(v.name)}</h1>
           <p>${safe(heroText)}</p>
           <div class="hero-meta-row">
-            <span class="hero-loc">📍 ${safe(v.loc||"Sénégal")}</span>
+            <span class="hero-loc">📍 ${safe(v.loc || "Sénégal")}</span>
             ${v.price ? `<span class="hero-pill">${safe(v.price)}</span>` : ""}
-            <span class="hero-pill">${safe(v.categoryLabel||"Boutique")}</span>
+            <span class="hero-pill">${safe(v.categoryLabel || "Boutique")}</span>
+            ${!isEx && v.whatsapp ? `<span class="hero-pill">${safe(formatPhone(v.whatsapp))}</span>` : ""}
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ── EDITO STRIP ── -->
     <div class="edito-strip anim" style="animation-delay:.1s">
       <div class="edito-tile">
         <div class="edito-tag">Signature</div>
@@ -799,23 +855,19 @@ function renderVendor(v, cfg){
       </div>
       <div class="edito-tile">
         <div class="edito-tag">Univers</div>
-        <h3>${safe(v.categoryLabel||"Boutique locale")}</h3>
-        <p>${safe(v.what||"Présence locale visible et soignée.")}</p>
+        <h3>${safe(v.categoryLabel || "Boutique locale")}</h3>
+        <p>${safe(v.what || "Présence locale visible et soignée.")}</p>
       </div>
       <div class="edito-tile">
         <div class="edito-tag">Zone</div>
-        <h3>${safe(v.city||"Sénégal")}</h3>
-        <p>${safe(v.loc||"Repère terrain actif.")}</p>
+        <h3>${safe(v.city || "Sénégal")}</h3>
+        <p>${safe(v.loc || "Repère terrain actif.")}</p>
       </div>
     </div>
 
-    <!-- ── TWO-COL LAYOUT ── -->
     <div class="layout">
-
-      <!-- LEFT COLUMN -->
       <div class="col-left">
 
-        <!-- Info card -->
         <div class="d-card accented anim" style="animation-delay:.12s">
           <div class="d-card-inner">
             <h2>Repères de la boutique</h2>
@@ -827,11 +879,11 @@ function renderVendor(v, cfg){
             <div class="info-grid">
               <div class="info-tile">
                 <div class="info-tile-label">Catégorie</div>
-                <div class="info-tile-value">${safe(v.categoryLabel||"Boutique locale")}</div>
+                <div class="info-tile-value">${safe(v.categoryLabel || "Boutique locale")}</div>
               </div>
               <div class="info-tile">
                 <div class="info-tile-label">Zone</div>
-                <div class="info-tile-value">${safe(v.loc||"Sénégal")}</div>
+                <div class="info-tile-value">${safe(v.loc || "Sénégal")}</div>
               </div>
               <div class="info-tile">
                 <div class="info-tile-label">Type</div>
@@ -839,13 +891,13 @@ function renderVendor(v, cfg){
               </div>
               <div class="info-tile">
                 <div class="info-tile-label">Statut</div>
-                <div class="info-tile-value">${isEx ? (v.live?"Exemple visible":"Vitrine exemple") : "Lecture publique active"}</div>
+                <div class="info-tile-value">${isEx ? (v.live ? "Exemple visible" : "Vitrine exemple") : "Lecture publique active"}</div>
               </div>
             </div>
 
             <div class="cta-row">
               <a class="btn btn-gold" href="${waMain}" target="_blank" rel="noopener">${waLabel}</a>
-              <a class="btn btn-fire" href="${cfg.proUrl||DEFAULT_CFG.proUrl}" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+              <a class="btn btn-fire" href="${cfg.proUrl || DEFAULT_CFG.proUrl}" target="_blank" rel="noopener">🔥 Je veux mon module</a>
               <a class="btn btn-ghost" href="${mapLink}" target="_blank" rel="noopener">📍 Maps</a>
               <a class="btn btn-ghost" href="index.html">← Marché</a>
             </div>
@@ -854,7 +906,6 @@ function renderVendor(v, cfg){
           </div>
         </div>
 
-        <!-- Gallery -->
         <div class="d-card anim" style="animation-delay:.16s">
           <div class="d-card-inner">
             <h2>${isEx ? "Galerie royale" : "Galerie publique"}</h2>
@@ -864,12 +915,12 @@ function renderVendor(v, cfg){
             }</p>
 
             <div class="gallery-hero">
-              <img id="galleryMainImage" src="${gallery[0]?.src||heroCover}" alt="${safe(gallery[0]?.caption||"Photo principale")}">
+              <img id="galleryMainImage" src="${gallery[0]?.src || heroCover}" alt="${safe(gallery[0]?.caption || "Photo principale")}">
             </div>
 
             <div class="thumb-rail" id="thumbRail">
               ${gallery.slice(0,8).map((g,i)=>`
-                <figure class="thumb${i===0?" active":""}" data-src="${safe(g.src)}" data-caption="${safe(g.caption)}">
+                <figure class="thumb${i===0 ? " active" : ""}" data-src="${safe(g.src)}" data-caption="${safe(g.caption)}">
                   <img src="${g.src}" alt="${safe(g.caption)}">
                   <small>${safe(g.caption)}</small>
                 </figure>
@@ -878,7 +929,6 @@ function renderVendor(v, cfg){
           </div>
         </div>
 
-        <!-- Products -->
         <div class="d-card anim" style="animation-delay:.2s">
           <div class="d-card-inner">
             <h2>${sectionTitle}</h2>
@@ -887,7 +937,6 @@ function renderVendor(v, cfg){
           </div>
         </div>
 
-        <!-- Map -->
         <div class="d-card anim" style="animation-delay:.24s">
           <div class="d-card-inner">
             <h2>Présence terrain & Maps</h2>
@@ -897,12 +946,11 @@ function renderVendor(v, cfg){
             </div>
             <div class="map-actions">
               <a class="btn btn-ghost" href="${mapLink}" target="_blank" rel="noopener">📍 Google Maps</a>
-              <a class="btn btn-gold"  href="${waMain}"  target="_blank" rel="noopener">${waLabel}</a>
+              <a class="btn btn-gold" href="${waMain}" target="_blank" rel="noopener">${waLabel}</a>
             </div>
           </div>
         </div>
 
-        <!-- Why it works -->
         <div class="d-card anim" style="animation-delay:.28s">
           <div class="d-card-inner">
             <h2>${isEx ? "Pourquoi cette fiche frappe fort" : "Pourquoi cette fiche est propre"}</h2>
@@ -913,37 +961,36 @@ function renderVendor(v, cfg){
           </div>
         </div>
 
-      </div><!-- /col-left -->
+      </div>
 
-      <!-- RIGHT COLUMN -->
       <div class="col-right">
 
-        <!-- Quick info -->
         <div class="d-card accented anim" style="animation-delay:.14s">
           <div class="d-card-inner">
             <h2>Repères rapides</h2>
             <div class="side-list">
               <div class="side-tile"><div class="side-tile-label">Nom</div><div class="side-tile-value">${safe(v.name)}</div></div>
-              <div class="side-tile"><div class="side-tile-label">Activité</div><div class="side-tile-value">${safe(v.what||"Boutique locale")}</div></div>
-              <div class="side-tile"><div class="side-tile-label">Zone</div><div class="side-tile-value">${safe(v.loc||"Sénégal")}</div></div>
-              <div class="side-tile"><div class="side-tile-label">Univers</div><div class="side-tile-value">${safe(v.categoryLabel||"Boutique locale")}</div></div>
-              <div class="side-tile"><div class="side-tile-label">Slug</div><div class="side-tile-value">${safe(v.slug||"—")}</div></div>
-              <div class="side-tile"><div class="side-tile-label">Type</div><div class="side-tile-value">${isEx?"Vitrine exemple DIGIY":"Boutique publique réelle"}</div></div>
+              <div class="side-tile"><div class="side-tile-label">Activité</div><div class="side-tile-value">${safe(v.what || "Boutique locale")}</div></div>
+              <div class="side-tile"><div class="side-tile-label">Zone</div><div class="side-tile-value">${safe(v.loc || "Sénégal")}</div></div>
+              <div class="side-tile"><div class="side-tile-label">Univers</div><div class="side-tile-value">${safe(v.categoryLabel || "Boutique locale")}</div></div>
+              <div class="side-tile"><div class="side-tile-label">Slug</div><div class="side-tile-value">${safe(v.slug || "—")}</div></div>
+              <div class="side-tile"><div class="side-tile-label">Type</div><div class="side-tile-value">${isEx ? "Vitrine exemple DIGIY" : "Boutique publique réelle"}</div></div>
+              ${!isEx && v.address ? `<div class="side-tile"><div class="side-tile-label">Adresse</div><div class="side-tile-value">${safe(v.address)}</div></div>` : ""}
+              ${!isEx && v.phone ? `<div class="side-tile"><div class="side-tile-label">Téléphone</div><div class="side-tile-value">${safe(formatPhone(v.phone))}</div></div>` : ""}
+              ${!isEx && v.whatsapp ? `<div class="side-tile"><div class="side-tile-label">WhatsApp</div><div class="side-tile-value">${safe(formatPhone(v.whatsapp))}</div></div>` : ""}
             </div>
           </div>
         </div>
 
-        <!-- Module CTA -->
         <div class="module-box anim" style="animation-delay:.18s">
           <h3>🔥 Je veux mon module</h3>
           <p>Cette vitrine peut devenir la tienne. Abonnement fixe, 0% de commission, présence magazine.</p>
           <div class="module-row">
-            <a class="btn btn-fire" href="${cfg.proUrl||DEFAULT_CFG.proUrl}" target="_blank" rel="noopener">Mon module</a>
+            <a class="btn btn-fire" href="${cfg.proUrl || DEFAULT_CFG.proUrl}" target="_blank" rel="noopener">Mon module</a>
             <a class="btn btn-ghost" href="${waGeneral}" target="_blank" rel="noopener">WhatsApp DIGIY</a>
           </div>
         </div>
 
-        <!-- Trust -->
         <div class="d-card anim" style="animation-delay:.22s">
           <div class="d-card-inner">
             <h2>Ils nous font confiance</h2>
@@ -955,60 +1002,67 @@ function renderVendor(v, cfg){
           </div>
         </div>
 
-        <!-- What's next -->
         <div class="d-card anim" style="animation-delay:.26s">
           <div class="d-card-inner">
             <h2>Ce que tu peux brancher</h2>
             <div class="side-list" style="gap:6px;margin-top:12px">
-              ${["📸 Galerie réelle du commerçant","📍 Google Maps réel","💬 WhatsApp direct","📞 Téléphone","💳 DIGIY PAY","🏪 MARKET PRO complet"].map(f=>`
-                <div class="feature-row">${f}</div>
-              `).join("")}
+              ${[
+                "📸 Galerie réelle du commerçant",
+                "📍 Google Maps réel",
+                "💬 WhatsApp direct",
+                "📞 Téléphone",
+                "💳 DIGIY PAY",
+                "🏪 MARKET PRO complet"
+              ].map(f=>`<div class="feature-row">${f}</div>`).join("")}
             </div>
           </div>
         </div>
 
-      </div><!-- /col-right -->
-    </div><!-- /layout -->
+      </div>
+    </div>
   `;
 
-  /* ── Gallery thumbnails ── */
-  const mainImg  = document.getElementById("galleryMainImage");
-  const heroImg  = document.getElementById("heroMainImage");
-  const thumbs   = Array.from(document.querySelectorAll("#thumbRail .thumb"));
+  const mainImg = document.getElementById("galleryMainImage");
+  const heroImg = document.getElementById("heroMainImage");
+  const thumbs  = Array.from(document.querySelectorAll("#thumbRail .thumb"));
+
   thumbs.forEach(thumb=>{
-    thumb.addEventListener("click",()=>{
+    thumb.addEventListener("click", ()=>{
       thumbs.forEach(t=>t.classList.remove("active"));
       thumb.classList.add("active");
       const src = thumb.getAttribute("data-src");
-      if(src&&mainImg) mainImg.src=src;
-      if(src&&heroImg) heroImg.src=src;
+      if (src && mainImg) mainImg.src = src;
+      if (src && heroImg) heroImg.src = src;
     });
   });
 
-  /* ── Scroll reveal ── */
   const io = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.style.animationPlayState="running";
-        io.unobserve(e.target);
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.style.animationPlayState = "running";
+        io.unobserve(entry.target);
       }
     });
   },{threshold:.06});
+
   document.querySelectorAll(".anim").forEach(el=>{
-    el.style.animationPlayState="paused";
+    el.style.animationPlayState = "paused";
     io.observe(el);
   });
 
-  /* ── Hero cover hover tilt ── */
-  const heroWrap = document.querySelector(".hero-cover-wrap");
-  if(heroWrap){
-    heroWrap.addEventListener("mousemove",e=>{
-      const r=heroWrap.getBoundingClientRect();
-      const x=(e.clientX-r.left)/r.width-.5;
-      const y=(e.clientY-r.top)/r.height-.5;
-      heroWrap.style.transform=`perspective(1200px) rotateY(${x*2.5}deg) rotateX(${-y*1.5}deg)`;
+  const supportsHover = window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+  const heroWrap = document.getElementById("heroCoverWrap");
+
+  if (supportsHover && heroWrap) {
+    heroWrap.addEventListener("mousemove", e=>{
+      const r = heroWrap.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      heroWrap.style.transform = `perspective(1200px) rotateY(${x*2.5}deg) rotateX(${-y*1.5}deg)`;
     });
-    heroWrap.addEventListener("mouseleave",()=>heroWrap.style.transform="");
+    heroWrap.addEventListener("mouseleave", ()=>{
+      heroWrap.style.transform = "";
+    });
   }
 }
 
@@ -1021,8 +1075,13 @@ function renderMissing(){
       <div class="d-card-inner" style="text-align:center;padding:48px 32px">
         <div style="font-size:3rem;margin-bottom:16px">🏗️</div>
         <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2rem;margin-bottom:10px">Fiche introuvable</h2>
-        <p style="color:var(--muted);margin-bottom:24px">Ouvre une fiche depuis <strong style="color:var(--cream)">index.html?v=...</strong> ou charge une vraie boutique avec <strong style="color:var(--cream)">?slug=...</strong></p>
-        <a class="btn btn-fire" href="index.html">← Retour au marché</a>
+        <p style="color:var(--muted);margin-bottom:24px">
+          Ouvre une fiche depuis <strong style="color:var(--cream)">index.html</strong> ou charge une vraie boutique avec <strong style="color:var(--cream)">?slug=...</strong>
+        </p>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <a class="btn btn-fire" href="index.html">← Retour au marché</a>
+          <a class="btn btn-ghost" href="${DEFAULT_CFG.proUrl}" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+        </div>
       </div>
     </div>
   `;
@@ -1033,21 +1092,29 @@ function renderMissing(){
    BOOT
 ═══════════════════════════════════════ */
 (async function boot(){
-  const catalog    = readCatalog();
-  const slug       = String(getParam("slug")||"").trim().toLowerCase();
-  const exampleSlug= String(getParam("v")||"").trim();
-  const cfg        = (catalog&&catalog.config)?{...DEFAULT_CFG,...catalog.config}:DEFAULT_CFG;
+  const catalog     = readCatalog();
+  const slug        = String(getParam("slug") || "").trim().toLowerCase();
+  const exampleSlug = String(getParam("v") || "").trim();
+  const cfg         = (catalog && catalog.config) ? { ...DEFAULT_CFG, ...catalog.config } : DEFAULT_CFG;
 
   applyTopBrand(cfg);
 
-  if(slug){
+  if (slug) {
     const pub = await loadPublicProfileBySlug(slug);
-    if(pub){ renderVendor(pub,cfg); return }
+    if (pub) {
+      renderVendor(pub, cfg);
+      return;
+    }
   }
-  if(catalog&&Array.isArray(catalog.vendors)&&exampleSlug){
-    const vendor = catalog.vendors.find(v=>v.slug===exampleSlug);
-    if(vendor){ renderVendor(vendor,cfg); return }
+
+  if (catalog && Array.isArray(catalog.vendors) && exampleSlug) {
+    const vendor = catalog.vendors.find(v => v.slug === exampleSlug);
+    if (vendor) {
+      renderVendor(vendor, cfg);
+      return;
+    }
   }
+
   renderMissing();
 })();
 </script>
