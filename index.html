@@ -674,6 +674,217 @@ function palette(bg){
   const m={"#c8deff":["#bdd8ff","#8cb7ff"],"#ffe0cb":["#ffd9c5","#ffb88a"],"#ffeaaa":["#fff0b8","#ffd56d"],"#ffd0e0":["#ffd8e5","#ffb1cb"],"#eadfff":["#eee2ff","#d2beff"],"#dbfff6":["#ddfff5","#afe9d5"],"#f4ead7":["#f6ead9","#ddc9a3"],"#dbf5ea":["#dff7ec","#b8e0ca"]};
   return m[bg] || ["#f4ead7","#d8bf96"];
 }
+function makeRoyalPhoto(title, subtitle, mood, icon, c1, c2){
+  const svg = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+    <defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="${c1}"/>
+        <stop offset="100%" stop-color="${c2}"/>
+      </linearGradient>
+      <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="rgba(255,255,255,.92)"/>
+        <stop offset="100%" stop-color="rgba(255,255,255,.72)"/>
+      </linearGradient>
+      <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="20" stdDeviation="24" flood-color="rgba(0,0,0,.18)"/>
+      </filter>
+    </defs>
+
+    <rect width="1200" height="900" fill="url(#bg)"/>
+    <circle cx="1040" cy="120" r="190" fill="rgba(255,255,255,.13)"/>
+    <circle cx="170" cy="720" r="220" fill="rgba(255,255,255,.12)"/>
+    <circle cx="820" cy="650" r="120" fill="rgba(255,255,255,.08)"/>
+
+    <rect x="60" y="60" width="1080" height="780" rx="34" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.18)"/>
+    <rect x="92" y="520" width="1016" height="220" rx="30" fill="url(#glass)" filter="url(#shadow)"/>
+
+    <text x="110" y="220" font-size="200" filter="url(#shadow)">${icon}</text>
+
+    <text x="130" y="586" font-family="Arial, sans-serif" font-size="26" letter-spacing="5" font-weight="700" fill="#7a6a54">${mood}</text>
+    <text x="130" y="655" font-family="Arial, sans-serif" font-size="64" font-weight="800" fill="#1a1208">${title}</text>
+    <text x="130" y="710" font-family="Arial, sans-serif" font-size="30" fill="#6f624f">${subtitle}</text>
+
+    <rect x="900" y="106" width="176" height="42" rx="21" fill="rgba(255,255,255,.88)"/>
+    <text x="988" y="133" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="800" fill="#c83830">DIGIY ROYAL</text>
+  </svg>`;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
+const ROYAL_VENDORS = {
+  vetements: [
+    {
+      icon:"👗",
+      bg:"#ffd0e0",
+      name:"Maison Nafi Couture",
+      what:"Robes couture, wax premium, tenues élégantes, silhouettes de cérémonie",
+      loc:"Dakar · Mermoz",
+      price:"12 000–85 000 F",
+      live:true,
+      categoryLabel:"Mode couture",
+      categoryIcon:"👗",
+      images:[
+        makeRoyalPhoto("Maison Nafi Couture","Robe éditoriale, tombé noble, lumière dorée","MODE COUTURE","👗","#f9d4df","#f2b5c8"),
+        makeRoyalPhoto("Détail couture","Texture tissu, finition soignée, allure chic","PAPIER GLACÉ","🪡","#f5d4e7","#dfb9d0"),
+        makeRoyalPhoto("Collection wax","Silhouette forte, présence élégante","ROYAL LOOK","✨","#f8d7bf","#efb08e"),
+        makeRoyalPhoto("Signature atelier","Coupe, noble, féminine, sûre","AFRIQUE CHIC","🛍️","#f8e1b6","#e7bd72")
+      ]
+    },
+    {
+      icon:"💍",
+      bg:"#eadfff",
+      name:"Perles & Or by Sokhna",
+      what:"Bijoux fins, colliers, boucles, bracelets, perles et éclat doré",
+      loc:"Dakar · Almadies",
+      price:"5 000–45 000 F",
+      live:true,
+      categoryLabel:"Bijoux",
+      categoryIcon:"💍",
+      images:[
+        makeRoyalPhoto("Perles & Or","Bijoux lumière, peau dorée, détail précieux","JEWEL EDITORIAL","💍","#efe3ff","#d4bfff"),
+        makeRoyalPhoto("Bracelets fins","Texture métal, peau lumineuse, chic discret","GLOSSY DETAIL","✨","#f7e3bf","#efc768"),
+        makeRoyalPhoto("Parure délicate","Élégance douce, luxe calme","LUXE CALME","👑","#f4d5e9","#ddb8d6"),
+        makeRoyalPhoto("Signature précieuse","Finesse, éclat, féminité","ROYAL GOLD","🌟","#f7ead1","#e2c17a")
+      ]
+    },
+    {
+      icon:"👜",
+      bg:"#ffe0cb",
+      name:"Élégance Cuir Royal",
+      what:"Sacs cuir, pochettes, bandoulières, pièces bureau et sortie",
+      loc:"Dakar · Point E",
+      price:"9 000–65 000 F",
+      live:true,
+      categoryLabel:"Sacs",
+      categoryIcon:"👜",
+      images:[
+        makeRoyalPhoto("Élégance Cuir Royal","Sac éditorial, cuir noble, allure forte","LEATHER EDIT","👜","#f9dbc8","#efb28f"),
+        makeRoyalPhoto("Détail poignée","Finition couture, texture premium","DETAIL LUXE","✨","#f7d7b8","#e6b07a"),
+        makeRoyalPhoto("Porté épaule","Sortie chic, style propre, lumière douce","CITY CHIC","👠","#f6d7d0","#e8b1a5"),
+        makeRoyalPhoto("Collection capsule","Pochette, sac ville, allure classe","BOUTIQUE ROYALE","🛍️","#f8e7d6","#e4be92")
+      ]
+    }
+  ],
+
+  chaussures: [
+    {
+      icon:"👟",
+      bg:"#ffeaaa",
+      name:"Pas Royal",
+      what:"Chaussures ville, sandales cuir, escarpins, baskets premium",
+      loc:"Dakar · Plateau",
+      price:"8 000–55 000 F",
+      live:true,
+      categoryLabel:"Chaussures",
+      categoryIcon:"👟",
+      images:[
+        makeRoyalPhoto("Pas Royal","Chaussure éditoriale, cuir visible, allure propre","FASHION STEP","👟","#fff0b8","#f0c95c"),
+        makeRoyalPhoto("Cuir & couture","Détail matière, semelle et finition","DETAIL CUIR","🥿","#f9e0bf","#eab36d"),
+        makeRoyalPhoto("Porté magazine","Jambe, posture, élégance sortie","GLOSSY WALK","👠","#f7d4c0","#eda780"),
+        makeRoyalPhoto("Collection ville","Confort chic, présence immédiate","CITY LINE","✨","#f6e6c9","#dfc082")
+      ]
+    }
+  ],
+
+  coiffeur: [
+    {
+      icon:"💇",
+      bg:"#dbfff6",
+      name:"Couronne Hair Studio",
+      what:"Tresses premium, coiffure évènement, perruques, soin capillaire",
+      loc:"Saly · Ngaparou",
+      price:"3 500–35 000 F",
+      live:true,
+      categoryLabel:"Cheveux",
+      categoryIcon:"💇",
+      images:[
+        makeRoyalPhoto("Couronne Hair Studio","Cheveux brillants, visage noble, salon premium","HAIR EDITORIAL","💇","#ddfff5","#b7e7d8"),
+        makeRoyalPhoto("Tresses signature","Propreté ligne, style fort, beauté nette","BEAUTY HAIR","👑","#e6f7e8","#bfe0cb"),
+        makeRoyalPhoto("Perruques & soin","Texture, finition, lumière chaude","ROYAL TEXTURE","✨","#dff5ff","#b7d9ee"),
+        makeRoyalPhoto("Présence coiffée","Entrée forte, élégance assurée","STYLE POWER","🌟","#f5e3d5","#dfbea2")
+      ]
+    }
+  ],
+
+  parfum: [
+    {
+      icon:"💄",
+      bg:"#ffd0e0",
+      name:"Belle Peau Maison",
+      what:"Beauté premium, gloss, mise en lumière, maquillage doux et chic",
+      loc:"Dakar · Liberté 6",
+      price:"2 500–22 000 F",
+      live:true,
+      categoryLabel:"Beauté",
+      categoryIcon:"💄",
+      images:[
+        makeRoyalPhoto("Belle Peau Maison","Peau lumineuse, maquillage fin, rendu magazine","BEAUTY GLOW","💄","#ffd9e6","#f4adc9"),
+        makeRoyalPhoto("Teint & lumière","Visage propre, douceur, confiance","SOFT LUXE","✨","#f4d2d6","#e8afb5"),
+        makeRoyalPhoto("Gloss & regard","Détail bouche, peau, éclat chic","EDITORIAL FACE","🌸","#f6d8cb","#ecb0a0"),
+        makeRoyalPhoto("Routine beauté","Produits élégants, geste maîtrisé","ROYAL BEAUTY","🪞","#f8e4c1","#e7c278")
+      ]
+    },
+    {
+      icon:"🧴",
+      bg:"#dbf5ea",
+      name:"Douceur Sahel",
+      what:"Crèmes corps, lait visage, huiles parfumées, soin peau douce",
+      loc:"Thiès · Centre",
+      price:"2 000–18 000 F",
+      live:true,
+      categoryLabel:"Crèmes",
+      categoryIcon:"🧴",
+      images:[
+        makeRoyalPhoto("Douceur Sahel","Crèmes premium, ambiance spa, chaleur sable","SKINCARE LUXE","🧴","#def5eb","#bfe0cd"),
+        makeRoyalPhoto("Texture soin","Peau nourrie, geste doux, lumière propre","GLOW CARE","✨","#f8ead1","#e6c38c"),
+        makeRoyalPhoto("Rituel corps","Serviette, crème, huile, calme chic","SPA ROYAL","🌿","#e3f6ef","#b4d9c4"),
+        makeRoyalPhoto("Signature douceur","Confort peau, raffinement simple","SOFT POWER","🤍","#f6e5d0","#dfbe98")
+      ]
+    },
+    {
+      icon:"🧼",
+      bg:"#ffeaaa",
+      name:"Savonnerie Reine",
+      what:"Savons naturels, savons noirs, gommage, senteurs artisanales",
+      loc:"Mbour · Saly",
+      price:"1 000–9 000 F",
+      live:true,
+      categoryLabel:"Savons",
+      categoryIcon:"🧼",
+      images:[
+        makeRoyalPhoto("Savonnerie Reine","Savons nobles, mousse fine, esprit spa","SOAP EDITORIAL","🧼","#fff0b5","#eccf70"),
+        makeRoyalPhoto("Texture artisanale","Coupe savon, matière, lumière chaude","ARTISAN DETAIL","✨","#f7e5c8","#dfbf8c"),
+        makeRoyalPhoto("Bain chic","Serviette, mousse, senteur, calme","BATH LUXE","🛁","#f4ead7","#ddcba3"),
+        makeRoyalPhoto("Collection soin","Savons noirs, gommage, rituel doux","ROYAL SPA","🌿","#e4f6ee","#beddc7")
+      ]
+    }
+  ],
+
+  quotidien: [
+    {
+      icon:"🛏️",
+      bg:"#c8deff",
+      name:"Chambre Douceur",
+      what:"Draps, housses, rideaux, serviettes, linge de maison élégant",
+      loc:"Saly · Centre",
+      price:"4 000–45 000 F",
+      live:true,
+      categoryLabel:"Linge de maison",
+      categoryIcon:"🛏️",
+      images:[
+        makeRoyalPhoto("Chambre Douceur","Lit dressé, draps nobles, ambiance calme","HOME LINEN","🛏️","#d8e7ff","#a8c7ef"),
+        makeRoyalPhoto("Détail textile","Serviettes, rideaux, coussins, toucher chic","TEXTURE HOME","✨","#eef4ff","#c9d8ef"),
+        makeRoyalPhoto("Maison bien posée","Confort, silence, propreté noble","SOFT INTERIOR","🤍","#f8ead1","#dfbf97"),
+        makeRoyalPhoto("Signature maison","Élégance simple, quotidien élevé","ROYAL HOME","🏡","#e3f6ef","#b9dbc9")
+      ]
+    }
+  ]
+};
+
+Object.entries(ROYAL_VENDORS).forEach(([cat, items]) => {
+  if (!Array.isArray(VENDORS[cat])) VENDORS[cat] = [];
+  VENDORS[cat].push(...items);
+});  
 function fallbackVendorImage(v){
   const [c1,c2] = palette(v.bg || "#f4ead7");
   return makeSvgData(v.name, v.loc || v.city || "DIGIY MARKET", v.icon || "🛍️", c1, c2);
@@ -702,9 +913,9 @@ function buildExampleVendor(cat,v){
   return {
     ...v,
     category:cat,
-    categoryLabel:m.label||cat,
-    categoryIcon:m.icon||"🛍️",
-    categorySub:m.sub||"",
+    categoryLabel:v.categoryLabel || m.label || cat,
+    categoryIcon:v.categoryIcon || m.icon || "🛍️",
+    categorySub:v.categorySub || m.sub || "",
     city:parseCity(v.loc),
     slug:`${cat}-${slugify(v.name)}`,
     publicSlug:"",
@@ -713,7 +924,6 @@ function buildExampleVendor(cat,v){
     images:imgs
   };
 }
-
 function buildRealVendor(profile){
   const cat = categoryFromText(profile.category || profile.bio || "");
   const m = META[cat] || META.quotidien;
