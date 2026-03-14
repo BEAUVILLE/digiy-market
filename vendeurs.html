@@ -273,13 +273,14 @@ function safe(str=''){
     .replace(/"/g,'&quot;');
 }
 function parsePriceBase(price=''){
-  const digits = price.match(/\d+/g);
-  if(!digits || !digits.length) return null;
-  return parseInt(digits[0],10);
+  const firstPart = String(price).split(/[–-]/)[0] || '';
+  const digits = firstPart.replace(/[^\d]/g, '');
+  if(!digits) return null;
+  return parseInt(digits, 10);
 }
 function makePrice(base, n){
   if(!base) return "Prix à définir";
-  const value = Math.round(base * n / 1000) * 1000;
+  const value = Math.round((base * n) / 1000) * 1000;
   return `${value.toLocaleString('fr-FR').replace(/\s/g,' ')} F`;
 }
 function splitOffer(what=''){
@@ -416,7 +417,7 @@ function renderVendor(v, cfg){
           <img src="${gallery[0]?.src || fallbackVendorImage(v)}" alt="${safe(v.name)}">
           <div class="cover-badges">
             <span class="badge example">EXEMPLE DIGIY</span>
-            ${v.live ? '<span class="badge live">EN LIGNE</span>' : ''}
+            ${v.live ? '<span class="badge live">EXEMPLE VISIBLE</span>' : ''}
             <span class="badge cat">${safe(v.categoryIcon)} ${safe(v.categoryLabel)}</span>
           </div>
         </div>
@@ -448,7 +449,7 @@ function renderVendor(v, cfg){
           </div>
           <div class="mini">
             <div class="mini-label">Statut</div>
-            <div class="mini-value">${v.live ? 'Visible / en ligne' : 'Vitrine exemple'}</div>
+            <div class="mini-value">${v.live ? 'Exemple visible' : 'Vitrine exemple'}</div>
           </div>
         </div>
 
@@ -460,7 +461,7 @@ function renderVendor(v, cfg){
         </div>
 
         <div class="note">
-          Tous les boutons contact renvoient vers <strong>ton WhatsApp DIGIY</strong>.  
+          Tous les boutons contact renvoient vers <strong>ton WhatsApp DIGIY</strong>.
           Le bouton module renvoie vers <strong>ton entrée PRO officielle</strong>.
         </div>
       </aside>
