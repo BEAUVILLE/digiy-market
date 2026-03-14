@@ -1,763 +1,1088 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-  <title>DIGIY MARKET PRO — Entrée</title>
-  <meta name="theme-color" content="#07140f"/>
-  <meta name="description" content="Entrée DIGIY MARKET PRO : PIN, dashboard, cockpit, boutique et produits sur un seul rail."/>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>DIGIY MARKET — Le marché vivant</title>
+<meta name="theme-color" content="#fdf6ec"/>
+<meta name="description" content="DIGIY MARKET — vitrine publique avec exemples inspirants et boutiques publiques réelles."/>
 
-  <style>
-    :root{
-      --bg:#07140f;
-      --bg2:#05100c;
-      --card:#10241b;
-      --card2:#0d1d16;
-      --line:rgba(255,255,255,.10);
-      --line-strong:rgba(255,255,255,.16);
-      --text:#ecfff4;
-      --muted:rgba(236,255,244,.72);
-      --primary:#22c55e;
-      --primary2:#16a34a;
-      --gold:#facc15;
-      --gold-ink:#3b2f00;
-      --danger:#ef4444;
-      --warn:#f59e0b;
-      --info:#60a5fa;
-      --shadow:0 20px 60px rgba(0,0,0,.38);
-      --shadow-soft:0 10px 26px rgba(0,0,0,.24);
-      --r:24px;
-      --r2:20px;
-      --max:1120px;
-    }
+<script>
+  window.DIGIY_SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
+  window.DIGIY_SUPABASE_ANON_KEY = "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
+  window.DIGIY_SUPABASE_ANON = window.DIGIY_SUPABASE_ANON_KEY;
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    *{box-sizing:border-box}
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#fdf6ec;--bg-2:#fffaf2;--card:#fffdf9;
+  --ink:#1a1208;--muted:#7a6a54;--line:#e8d8be;
+  --gold:#c8860a;--orange:#e86820;--red:#c83830;--green:#28885a;
+  --shadow:0 18px 52px rgba(26,18,8,.13);
+  --shadow-soft:0 10px 28px rgba(26,18,8,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Nunito",sans-serif;
+  background:radial-gradient(circle at top left,rgba(232,104,32,.06),transparent 28%),
+    radial-gradient(circle at top right,rgba(40,136,90,.05),transparent 22%),var(--bg);
+  color:var(--ink);overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}
+img{display:block;max-width:100%}
+.wrap{width:min(1260px,calc(100% - 28px));margin:0 auto}
 
-    html,body{
-      margin:0;
-      padding:0;
-      min-height:100%;
-      background:
-        radial-gradient(900px 520px at 10% -10%, rgba(34,197,94,.14), transparent 60%),
-        radial-gradient(900px 520px at 110% 0%, rgba(250,204,21,.10), transparent 55%),
-        linear-gradient(180deg, var(--bg), var(--bg2) 55%, #040b08 100%);
-      color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-    }
+/* TOPBAR */
+.topbar{position:sticky;top:0;z-index:100;background:rgba(253,246,236,.93);backdrop-filter:blur(16px);border-bottom:2px solid var(--line);}
+.topbar-inner{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;min-height:76px;}
+.brand-stack{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.back-site-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 14px;border-radius:999px;
+  background:#fff;border:1.5px solid var(--line);
+  font-size:.82rem;font-weight:900;color:var(--ink);
+  box-shadow:var(--shadow-soft);transition:.18s ease;
+  white-space:nowrap;
+}
+.back-site-chip:hover{transform:translateY(-1px);background:#fff3df;}
+.brand{display:flex;align-items:center;gap:10px;font-family:"Playfair Display",serif;font-weight:900;font-size:1.22rem;}
+.brand-icon{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#e86820,#c83830);display:grid;place-items:center;font-size:1.1rem;box-shadow:0 5px 16px rgba(232,104,32,.3);overflow:hidden;flex:0 0 auto;}
+.brand-icon img{width:100%;height:100%;object-fit:cover;}
+.brand small{display:block;font-family:"Nunito",sans-serif;font-weight:800;font-size:.72rem;color:var(--muted);margin-top:1px;}
+.live-count{display:inline-flex;align-items:center;gap:8px;padding:8px 11px;border-radius:999px;background:#fff;border:1.5px solid var(--line);font-size:.76rem;font-weight:900;color:var(--orange);}
+.live-count strong{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 8px;border-radius:999px;background:var(--orange);color:#fff;}
+.top-search{display:flex;align-items:center;background:#fff;border:2px solid var(--line);border-radius:999px;overflow:hidden;padding:0 6px 0 15px;min-width:0;}
+.top-search input{flex:1;border:none;outline:none;background:transparent;font-size:.92rem;color:var(--ink);padding:11px 0;min-width:0;}
+.top-search input::placeholder{color:var(--muted)}
+.top-search button{width:38px;height:38px;border-radius:50%;background:var(--orange);color:#fff;border:none;cursor:pointer;font-size:.95rem;display:grid;place-items:center;transition:background .18s;}
+.top-search button:hover{background:var(--red)}
+.top-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
+.btn-top{border:none;cursor:pointer;border-radius:999px;padding:11px 14px;font-weight:900;transition:.18s ease;font-size:.84rem;}
+.btn-top:hover{transform:translateY(-1px)}
+.btn-top.primary{background:var(--orange);color:#fff;box-shadow:0 10px 20px rgba(232,104,32,.22);}
+.btn-top.primary:hover{background:var(--red)}
+.btn-top.soft{background:#fff;border:1.5px solid var(--line);}
+.btn-top.soft:hover{background:#fff3df}
 
-    body{
-      padding:16px;
-      display:grid;
-      place-items:center;
-    }
+/* HERO */
+.hero-band{
+  background:linear-gradient(135deg,#1a1208 0%,#2e1e0a 48%,#1d2f14 100%);
+  color:#fff;
+  padding:38px 0 32px;
+  position:relative;overflow:hidden;
+}
+.hero-band::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 12% 55%,rgba(232,104,32,.24),transparent 40%),
+    radial-gradient(circle at 88% 30%,rgba(40,136,90,.18),transparent 36%),
+    radial-gradient(circle at 65% 80%,rgba(255,255,255,.06),transparent 28%);
+}
+.hero-band::after{content:"";position:absolute;right:-80px;bottom:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%);}
+.hero-inner{position:relative;z-index:1;}
+.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:20px;align-items:center;}
 
-    a{color:inherit;text-decoration:none}
+.hero-kicker{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);font-size:.78rem;font-weight:900;letter-spacing:.07em;color:rgba(255,255,255,.82);margin-bottom:12px;text-transform:uppercase;}
+.hero-band h1{
+  font-family:"Playfair Display",serif;font-weight:900;
+  font-size:clamp(1.9rem,4.3vw,4.2rem);
+  line-height:.92;letter-spacing:-.02em;margin-bottom:10px;
+}
+.hero-band h1 em{font-style:normal;background:linear-gradient(90deg,#f8a040,#f06040);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-desc{color:rgba(255,255,255,.74);font-size:1rem;line-height:1.68;max-width:60ch;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;}
+.chip{padding:8px 13px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);font-size:.78rem;font-weight:800;color:rgba(255,255,255,.84);}
+.hero-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:18px;backdrop-filter:blur(10px);box-shadow:0 14px 40px rgba(0,0,0,.12);}
+.hero-card h3{font-family:"Playfair Display",serif;font-size:1.32rem;margin-bottom:8px;}
+.hero-card p{font-size:.92rem;color:rgba(255,255,255,.76);line-height:1.68;}
+.cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+.hero-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 15px;border-radius:999px;font-weight:900;font-size:.86rem;}
+.hero-btn.primary{background:#fff;color:var(--ink);}
+.hero-btn.soft{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);color:#fff;}
+.hero-mob-cta{display:none;}
 
-    .floating-back{
-      position:fixed;
-      top:calc(env(safe-area-inset-top, 0px) + 14px);
-      left:calc(env(safe-area-inset-left, 0px) + 14px);
-      z-index:99999;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:12px 16px;
-      border-radius:999px;
-      border:1px solid rgba(250,204,21,.32);
-      background:linear-gradient(135deg, rgba(250,204,21,.96), rgba(34,197,94,.92));
-      color:#041b12;
-      font-weight:1000;
-      font-size:14px;
-      line-height:1;
-      box-shadow:0 16px 40px rgba(0,0,0,.38);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
-      transition:transform .18s ease, box-shadow .18s ease;
-    }
+/* STAT STRIP */
+.stat-strip{background:linear-gradient(90deg,#1a1208,#2a1a08);border-bottom:1px solid rgba(255,255,255,.07);}
+.stat-inner{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+.stat-inner::-webkit-scrollbar{display:none;}
+.stat-item{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 24px;gap:1px;border-right:1px solid rgba(255,255,255,.07);min-width:110px;}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-family:"Playfair Display",serif;font-weight:900;font-size:1.32rem;color:#f8a040;}
+.stat-lbl{font-size:.62rem;font-weight:800;color:rgba(255,255,255,.46);text-transform:uppercase;letter-spacing:.05em;}
 
-    .floating-back:hover{
-      transform:translateY(-1px);
-      box-shadow:0 20px 46px rgba(0,0,0,.45);
-    }
+/* TICKER */
+.ticker{background:var(--orange);overflow:hidden;padding:7px 0;}
+.ticker-track{display:flex;animation:ticker-scroll 28s linear infinite;width:max-content;}
+.ticker-track:hover{animation-play-state:paused;}
+.ticker-item{white-space:nowrap;padding:0 22px;font-weight:900;font-size:.76rem;color:#fff;letter-spacing:.04em;text-transform:uppercase;border-right:1px solid rgba(255,255,255,.24);}
+@keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-    .floating-back:active{
-      transform:translateY(0);
-    }
+/* FILTERS */
+.filters{padding:18px 0 10px;}
+.filters-shell{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;background:var(--card);border:1.5px solid var(--line);border-radius:22px;padding:14px;box-shadow:var(--shadow-soft);}
+.filter-group{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.filter-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 13px;border-radius:999px;background:#fff;border:1.5px solid var(--line);font-weight:900;font-size:.82rem;}
+.filter-select{appearance:none;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:11px 16px;font-weight:900;color:var(--ink);min-width:160px;cursor:pointer;}
+.filter-reset{border:none;border-radius:999px;padding:11px 14px;background:#fff;border:1.5px solid var(--line);font-weight:900;cursor:pointer;}
+.filter-reset:hover{background:#fff3df}
 
-    .wrap{
-      width:100%;
-      max-width:var(--max);
-      display:grid;
-      gap:16px;
-    }
+/* TRUST */
+.trust{padding:12px 0 0;}
+.trust-shell{background:var(--card);border:1.5px solid var(--line);border-radius:24px;padding:16px;box-shadow:var(--shadow-soft);}
+.trust-head{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
+.trust-head h3{font-family:"Playfair Display",serif;font-size:1.26rem;}
+.trust-head p{color:var(--muted);font-size:.9rem;}
+.trust-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;}
+.trust-card{border:1px solid var(--line);border-radius:18px;padding:14px;background:#fff;}
+.trust-card .icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;margin-bottom:10px;background:#fff3df;border:1px solid #f2d2a6;font-size:1.1rem;}
+.trust-card h4{font-size:.96rem;margin-bottom:5px;}
+.trust-card p{color:var(--muted);font-size:.84rem;line-height:1.58;}
 
-    .card{
-      width:100%;
-      border:1px solid var(--line);
-      border-radius:var(--r);
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.018));
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
+/* CATS */
+.cats-section{padding:14px 0 0;}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap;}
+.section-head h2{font-family:"Playfair Display",serif;font-weight:900;font-size:1.55rem;letter-spacing:-.02em;}
+.section-head p{color:var(--muted);font-size:.88rem;}
+.rail-controls{display:flex;gap:8px;}
+.arr{width:42px;height:42px;border-radius:12px;background:#fff;border:2px solid var(--line);display:grid;place-items:center;cursor:pointer;font-size:1.08rem;font-weight:700;transition:all .18s;}
+.arr:hover{background:var(--ink);color:#fff;border-color:var(--ink);transform:scale(1.06);}
+.arr:active{transform:scale(.94);}
+.rail-wrap{overflow:hidden;position:relative;}
+.rail-wrap::before,.rail-wrap::after{content:"";position:absolute;top:0;bottom:0;width:32px;z-index:2;pointer-events:none;}
+.rail-wrap::before{left:0;background:linear-gradient(90deg,var(--bg),transparent);}
+.rail-wrap::after{right:0;background:linear-gradient(270deg,var(--bg),transparent);}
+.cat-rail{display:flex;gap:10px;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none;padding:8px 4px 14px;cursor:grab;}
+.cat-rail::-webkit-scrollbar{display:none;}
+.cat-rail.grabbing{cursor:grabbing;scroll-behavior:auto;}
+.cat-tile{flex-shrink:0;width:124px;border-radius:18px;overflow:hidden;border:2.5px solid transparent;cursor:pointer;transition:transform .22s,box-shadow .22s,border-color .18s;background:#fff;box-shadow:0 4px 14px rgba(26,18,8,.09);user-select:none;}
+.cat-tile:hover{transform:translateY(-4px) scale(1.04);box-shadow:var(--shadow);}
+.cat-tile.active{border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,104,32,.2),var(--shadow);transform:translateY(-3px) scale(1.03);}
+.cat-img{height:84px;display:flex;align-items:center;justify-content:center;font-size:2.1rem;position:relative;overflow:hidden;}
+.cat-bg-txt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;opacity:.1;font-size:.85rem;letter-spacing:1px;line-height:1.5;padding:4px;word-break:break-all;pointer-events:none;}
+.cat-icon{position:relative;z-index:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.22));}
+.cat-body{padding:8px 10px 10px;}
+.cat-name{font-family:"Playfair Display",serif;font-weight:700;font-size:.84rem;margin-bottom:3px;line-height:1.2;}
+.cat-count{font-size:.68rem;font-weight:800;color:var(--muted);letter-spacing:.02em;}
+.cat-count span{display:inline-flex;align-items:center;justify-content:center;background:var(--orange);color:#fff;min-width:18px;height:18px;border-radius:50%;font-size:.6rem;margin-left:4px;padding:0 4px;}
 
-    .body{
-      padding:28px;
-      display:grid;
-      gap:22px;
-    }
+/* PANEL */
+.vendor-panel{max-height:0;overflow:hidden;transition:max-height .55s cubic-bezier(.4,0,.2,1),opacity .4s,margin .4s;opacity:0;margin-top:0;}
+.vendor-panel.open{max-height:2400px;opacity:1;margin-top:20px;}
+.vendor-panel-inner{background:#fff;border:2px solid var(--line);border-radius:26px;overflow:hidden;box-shadow:var(--shadow);}
+.panel-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 14px;border-bottom:1.5px solid var(--line);flex-wrap:wrap;gap:10px;}
+.panel-title{display:flex;align-items:center;gap:10px;}
+.panel-title .icon{font-size:1.5rem;}
+.panel-title h3{font-family:"Playfair Display",serif;font-weight:900;font-size:1.2rem;}
+.panel-title p{color:var(--muted);font-size:.82rem;margin-top:2px;}
+.panel-close{width:34px;height:34px;border-radius:9px;background:#f4ece0;border:none;cursor:pointer;font-size:.95rem;display:grid;place-items:center;transition:background .2s;}
+.panel-close:hover{background:var(--red);color:#fff;}
+.vendor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:14px;padding:18px;}
 
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:9px 13px;
-      border-radius:999px;
-      border:1px solid rgba(34,197,94,.28);
-      background:rgba(34,197,94,.12);
-      color:#bbf7d0;
-      font-size:12px;
-      font-weight:950;
-      width:max-content;
-    }
+/* VENDOR */
+.vendor{border-radius:18px;border:1.5px solid var(--line);overflow:hidden;background:#fdfaf5;transition:transform .22s,box-shadow .22s;cursor:pointer;}
+.vendor:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(26,18,8,.12);}
+.vendor-top{height:108px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;position:relative;overflow:hidden;}
+.vendor-top img{width:100%;height:100%;object-fit:cover;}
+.vendor-example{position:absolute;left:10px;top:10px;background:rgba(255,255,255,.95);color:var(--orange);border:1px solid rgba(232,104,32,.22);padding:4px 8px;border-radius:999px;font-size:.62rem;font-weight:900;z-index:2;}
+.vendor-live{position:absolute;right:10px;top:10px;display:flex;align-items:center;gap:4px;background:rgba(40,136,90,.92);color:#fff;padding:4px 8px;border-radius:999px;font-size:.62rem;font-weight:900;z-index:2;}
+.vendor-live::before{content:"";width:6px;height:6px;border-radius:50%;background:#8ff7c5;animation:pulse 1.4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.8)}}
+.vendor-body{padding:12px 13px 13px;}
+.vendor-name{font-family:"Playfair Display",serif;font-weight:700;font-size:1rem;line-height:1.1;margin-bottom:4px;}
+.vendor-what{font-size:.78rem;color:var(--muted);line-height:1.5;margin-bottom:10px;min-height:46px;}
+.vendor-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+.vendor-loc{font-size:.72rem;font-weight:800;color:var(--muted);}
+.vendor-price{font-size:.74rem;font-weight:900;padding:4px 9px;border-radius:999px;background:#fef0d8;color:var(--gold);border:1px solid #f8d8a0;}
+.vendor-cta{display:flex;gap:7px;margin-top:10px;}
+.vendor-btn{flex:1;padding:9px 10px;border-radius:11px;font-size:.75rem;font-weight:900;border:none;cursor:pointer;transition:all .18s;}
+.vendor-btn.primary{background:var(--orange);color:#fff;box-shadow:0 4px 12px rgba(232,104,32,.26);}
+.vendor-btn.primary:hover{background:var(--red);}
+.vendor-btn.ghost{background:#f4ece0;color:var(--ink);}
+.vendor-btn.ghost:hover{background:#eadfce;}
+.empty-state{text-align:center;padding:38px 20px;color:var(--muted);grid-column:1/-1;}
+.empty-state .big{font-size:2.8rem;margin-bottom:10px;}
+.empty-state p{font-size:.93rem;line-height:1.6;}
 
-    .dot{
-      width:8px;
-      height:8px;
-      border-radius:999px;
-      background:var(--primary);
-      box-shadow:0 0 0 4px rgba(34,197,94,.14);
-    }
+/* CTA BAND */
+.cta-band{margin-top:24px;background:linear-gradient(135deg,#fffaf3,#fff4e4);border:2px solid var(--line);border-radius:28px;padding:18px;box-shadow:var(--shadow);}
+.cta-band-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:14px;align-items:center;}
+.cta-band h3{font-family:"Playfair Display",serif;font-size:1.38rem;margin-bottom:8px;}
+.cta-band p{color:var(--muted);line-height:1.7;}
+.cta-band-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+.cta-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:#fff;border:1.5px solid var(--line);font-weight:900;font-size:.84rem;}
+.cta-main{display:flex;flex-direction:column;gap:10px;}
+.big-cta{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px 18px;border-radius:18px;background:linear-gradient(135deg,var(--orange),var(--red));color:#fff;font-weight:900;font-size:.98rem;box-shadow:0 14px 28px rgba(232,104,32,.25);}
+.big-cta.soft{background:#fff;color:var(--ink);border:1.5px solid var(--line);box-shadow:none;}
 
-    h1{
-      margin:0;
-      font-size:clamp(30px,4vw,48px);
-      line-height:1.03;
-      letter-spacing:-.02em;
-    }
+/* FAQ */
+.faq-section{padding:18px 0 4px;}
+.faq-shell{background:var(--card);border:1.5px solid var(--line);border-radius:24px;padding:16px;box-shadow:var(--shadow-soft);}
+.faq-head{font-family:"Playfair Display",serif;font-size:1.26rem;font-weight:900;margin-bottom:14px;}
+.faq-item{border-bottom:1px solid var(--line);overflow:hidden;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 2px;cursor:pointer;font-weight:900;font-size:.9rem;user-select:none;}
+.faq-q:hover{color:var(--orange);}
+.faq-arr{flex:0 0 auto;width:28px;height:28px;border-radius:8px;background:#fff3df;display:flex;align-items:center;justify-content:center;font-size:.82rem;transition:transform .28s,background .22s;}
+.faq-item.open .faq-arr{transform:rotate(180deg);background:var(--orange);color:#fff;}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .38s ease,padding .28s;color:var(--muted);font-size:.86rem;line-height:1.65;padding:0 2px;}
+.faq-item.open .faq-a{max-height:200px;padding-bottom:14px;}
 
-    .subtitle{
-      color:var(--muted);
-      font-size:16px;
-      font-weight:800;
-      line-height:1.58;
-      max-width:820px;
-    }
+/* FLOAT CTA */
+.float-cta{position:fixed;right:14px;bottom:14px;z-index:120;display:flex;flex-direction:column;gap:10px;}
+.float-btn{display:flex;align-items:center;justify-content:center;gap:8px;min-width:220px;padding:13px 16px;border-radius:999px;color:#fff;font-weight:900;box-shadow:0 16px 28px rgba(0,0,0,.18);}
+.float-btn.wa{background:#0b8f59;}
+.float-btn.module{background:linear-gradient(135deg,var(--orange),var(--red));}
 
-    .hero-top{
-      display:grid;
-      gap:14px;
-    }
+/* FOOTER */
+footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+.footer-brand{font-family:"Playfair Display",serif;font-weight:900;font-size:1.1rem;}
+.footer-sub{color:var(--muted);font-size:.74rem;margin-top:3px;}
+.footer-links{display:flex;gap:14px;font-weight:800;font-size:.82rem;flex-wrap:wrap;}
+.footer-links a{color:var(--orange);}
+.footer-links a:hover{text-decoration:underline;}
 
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-    }
-
-    .btn{
-      min-height:48px;
-      padding:12px 16px;
-      border-radius:14px;
-      font-weight:950;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.06);
-      color:var(--text);
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      cursor:pointer;
-      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-      text-decoration:none;
-      box-shadow:var(--shadow-soft);
-    }
-
-    .btn:hover{
-      transform:translateY(-1px);
-      border-color:var(--line-strong);
-    }
-
-    .btn.primary{
-      background:linear-gradient(135deg,var(--primary),var(--primary2));
-      color:#041b12;
-      border-color:transparent;
-    }
-
-    .btn.gold{
-      background:rgba(250,204,21,.12);
-      color:var(--gold);
-      border-color:rgba(250,204,21,.22);
-    }
-
-    .btn.info{
-      background:rgba(96,165,250,.12);
-      color:#bfdbfe;
-      border-color:rgba(96,165,250,.22);
-    }
-
-    .pills{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-    }
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:9px 12px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.18);
-      color:var(--muted);
-      font-size:12px;
-      font-weight:900;
-    }
-
-    .status-grid{
-      display:grid;
-      gap:14px;
-      grid-template-columns:1.15fr .85fr;
-    }
-
-    @media(max-width:880px){
-      .status-grid{
-        grid-template-columns:1fr;
-      }
-    }
-
-    .box{
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:20px;
-      background:rgba(0,0,0,.16);
-      padding:18px;
-      display:grid;
-      gap:14px;
-    }
-
-    .box h2{
-      margin:0;
-      font-size:20px;
-      line-height:1.2;
-    }
-
-    .muted{
-      color:var(--muted);
-      font-size:14px;
-      font-weight:800;
-      line-height:1.55;
-    }
-
-    .mono{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-      word-break:break-all;
-      font-size:13px;
-    }
-
-    .status{
-      padding:12px 14px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(0,0,0,.16);
-      font-weight:900;
-      color:var(--muted);
-      line-height:1.45;
-    }
-
-    .status.ok{
-      color:#bbf7d0;
-      border-color:rgba(34,197,94,.22);
-      background:rgba(34,197,94,.10);
-    }
-
-    .status.warn{
-      color:#fde68a;
-      border-color:rgba(250,204,21,.22);
-      background:rgba(250,204,21,.08);
-    }
-
-    .status.info{
-      color:#bfdbfe;
-      border-color:rgba(96,165,250,.22);
-      background:rgba(96,165,250,.08);
-    }
-
-    .status.danger{
-      color:#fecaca;
-      border-color:rgba(239,68,68,.22);
-      background:rgba(239,68,68,.08);
-    }
-
-    .reading{
-      display:grid;
-      gap:10px;
-    }
-
-    .reading-row{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      padding:11px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.03);
-      font-size:13px;
-      font-weight:900;
-    }
-
-    .reading-row .k{
-      color:var(--muted);
-    }
-
-    .reading-row .v{
-      color:var(--text);
-      word-break:break-word;
-      text-align:right;
-    }
-
-    .nav-grid{
-      display:grid;
-      gap:14px;
-      grid-template-columns:repeat(2, minmax(0,1fr));
-    }
-
-    @media(max-width:760px){
-      .nav-grid{
-        grid-template-columns:1fr;
-      }
-    }
-
-    .nav-card{
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:20px;
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.16));
-      padding:18px;
-      display:grid;
-      gap:12px;
-      transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
-      box-shadow:var(--shadow-soft);
-    }
-
-    .nav-card:hover{
-      transform:translateY(-2px);
-      border-color:rgba(255,255,255,.18);
-    }
-
-    .nav-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-    }
-
-    .nav-icon{
-      width:44px;
-      height:44px;
-      border-radius:14px;
-      display:grid;
-      place-items:center;
-      font-size:21px;
-      background:rgba(255,255,255,.07);
-      border:1px solid rgba(255,255,255,.10);
-      flex:0 0 auto;
-    }
-
-    .nav-title{
-      margin:0;
-      font-size:18px;
-      line-height:1.2;
-    }
-
-    .nav-text{
-      color:var(--muted);
-      font-size:14px;
-      font-weight:800;
-      line-height:1.55;
-    }
-
-    .nav-tag{
-      display:inline-flex;
-      align-items:center;
-      width:max-content;
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
-      color:var(--muted);
-      font-size:11px;
-      font-weight:950;
-      letter-spacing:.02em;
-      text-transform:uppercase;
-    }
-
-    .section-title{
-      margin:0;
-      font-size:18px;
-      letter-spacing:-.01em;
-    }
-
-    .footer{
-      text-align:center;
-      color:var(--muted);
-      font-size:12px;
-      font-weight:800;
-      padding:0 28px 24px;
-    }
-
-    @media(max-width:640px){
-      .floating-back{
-        top:calc(env(safe-area-inset-top, 0px) + 10px);
-        left:calc(env(safe-area-inset-left, 0px) + 10px);
-        padding:11px 14px;
-        font-size:13px;
-      }
-
-      .body{
-        padding:22px 18px 18px;
-      }
-
-      h1{
-        font-size:clamp(28px, 8vw, 40px);
-      }
-
-      .subtitle{
-        font-size:15px;
-      }
-    }
-  </style>
+@media(max-width:980px){
+  .topbar-inner,.cta-band-grid,.filters-shell{grid-template-columns:1fr;}
+  .top-actions{justify-content:flex-start;}
+  .trust-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:680px){
+  .hero-band{padding:16px 0 14px;}
+  .hero-kicker{font-size:.68rem;padding:5px 10px;margin-bottom:8px;}
+  .hero-band h1{font-size:clamp(1.52rem,5.8vw,2rem);margin-bottom:7px;line-height:.96;}
+  .hero-desc{display:none;}
+  .hero-chips{margin-top:9px;gap:5px;}
+  .chip{padding:5px 10px;font-size:.69rem;}
+  .hero-card{display:none;}
+  .hero-grid{grid-template-columns:1fr;gap:0;}
+  .hero-mob-cta{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px;}
+  .hero-mob-cta .hero-btn{padding:10px 14px;font-size:.82rem;}
+}
+@media(max-width:700px){
+  .cat-tile{width:104px;}
+  .cat-img{height:70px;font-size:1.8rem;}
+  .vendor-grid,.trust-grid{grid-template-columns:1fr 1fr;}
+  .panel-header{padding:12px 14px;}
+  .float-cta{left:12px;right:12px;}
+  .float-btn{min-width:0;width:100%;}
+  .stat-item{min-width:96px;padding:8px 14px;}
+  .stat-num{font-size:1.1rem;}
+  .back-site-chip{padding:9px 12px;font-size:.78rem;}
+}
+@media(max-width:440px){
+  .vendor-grid,.trust-grid{grid-template-columns:1fr;}
+  .topbar-inner{grid-template-columns:1fr;}
+  .top-actions{display:none;}
+}
+</style>
 </head>
 <body>
-  <a class="floating-back" href="https://digiylyfe.com/" aria-label="Retour au site DIGIYLYFE">
-    ↩️ Retour site
-  </a>
 
-  <div class="wrap">
-    <div class="card">
-      <div class="body">
-        <div class="badge"><span class="dot"></span> DIGIY MARKET PRO</div>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <div class="brand-stack">
+      <a class="back-site-chip" href="https://digiylyfe.com/" target="_blank" rel="noopener">← Retour au site</a>
+      <a class="brand" href="#">
+        <span class="brand-icon" id="brandIcon">🛍️</span>
+        <span>DIGIY MARKET<small>Le marché vivant du quotidien</small></span>
+      </a>
+      <div class="live-count">Fiches visibles <strong id="totalCount">0</strong></div>
+    </div>
+    <div class="top-search">
+      <input id="topSearchInput" type="text" placeholder="Chercher un vendeur, un produit, une ville…" />
+      <button id="topSearchBtn" type="button">🔍</button>
+    </div>
+    <div class="top-actions">
+      <a class="btn-top soft" id="waTopBtn" href="#" target="_blank" rel="noopener">💬 WhatsApp DIGIY</a>
+      <a class="btn-top primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+    </div>
+  </div>
+</header>
 
-        <div class="hero-top">
-          <div>
-            <h1>Hall d’entrée vendeur propre</h1>
-            <div class="subtitle">
-              Une seule porte claire pour MARKET PRO. On garde le même rail partout :
-              <b>PIN</b>, <b>dashboard</b>, <b>cockpit</b>, <b>boutique</b> et <b>produits</b>.
-              Ici, on ne joue pas à cache-cache avec le vendeur : on l’oriente proprement vers la bonne porte.
-            </div>
-          </div>
-
-          <div class="hero-actions">
-            <a class="btn primary" id="heroDashboard" href="./dashboard-pro.html">📊 Ouvrir le dashboard</a>
-            <a class="btn gold" id="heroPin" href="./pin.html">🔑 Entrer par PIN</a>
-            <a class="btn info" id="heroCockpit" href="./cockpit.html">🧭 Aller au cockpit</a>
-          </div>
+<section class="hero-band">
+  <div class="wrap hero-inner">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-kicker">🌍 DIGIYLYFE ∞ · Sénégal · Afrique</div>
+        <h1>Le marché qui <em>donne envie</em><br/>et qui respire.</h1>
+        <p class="hero-desc">Des exemples inspirants pour faire rêver, des vraies boutiques pour prouver le terrain, et une vitrine publique qui pousse les futurs abonnés à se projeter tout de suite.</p>
+        <div class="hero-chips">
+          <span class="chip">👗 Vêtements</span>
+          <span class="chip">💍 Bijoux</span>
+          <span class="chip">👜 Sacs</span>
+          <span class="chip">👟 Chaussures</span>
+          <span class="chip">💇 Cheveux</span>
+          <span class="chip">🧴 Beauté</span>
+          <span class="chip">🧼 Savons</span>
+          <span class="chip">🛏️ Linge maison</span>
         </div>
-
-        <div class="pills">
-          <div class="pill">🔑 Entrée PIN</div>
-          <div class="pill">📊 Dashboard central</div>
-          <div class="pill">🧭 Cockpit vendeur</div>
-          <div class="pill">🛠️ Réglages boutique</div>
-          <div class="pill">🛒 Catalogue produits</div>
-          <div class="pill" id="pillSlug">🧭 Route libre</div>
-        </div>
-
-        <div class="status-grid">
-          <div class="box">
-            <h2>Rail actif</h2>
-            <div class="status warn" id="statusBox">Lecture du rail en cours...</div>
-
-            <div class="reading">
-              <div class="reading-row">
-                <span class="k">Slug actif</span>
-                <span class="v mono" id="slugText">—</span>
-              </div>
-              <div class="reading-row">
-                <span class="k">Téléphone lié</span>
-                <span class="v" id="phoneText">—</span>
-              </div>
-              <div class="reading-row">
-                <span class="k">Session vendeur</span>
-                <span class="v" id="sessionText">—</span>
-              </div>
-            </div>
-
-            <div class="muted" id="statusHint">
-              Si ton slug MARKET est déjà connu, tu peux ouvrir directement ton espace vendeur.
-            </div>
-          </div>
-
-          <div class="box">
-            <h2>Cap DIGIY</h2>
-            <div class="muted">
-              <b>index.html</b> = hall d’entrée PRO.<br/>
-              <b>pin.html</b> = porte d’accès.<br/>
-              <b>dashboard-pro.html</b> = centre admin.<br/>
-              <b>cockpit.html</b> = cockpit vendeur.<br/>
-              <b>boutique.html</b> = réglages boutique.<br/>
-              <b>produits.html</b> = gestion catalogue.
-            </div>
-            <div class="status info">
-              Ce fichier est un <b>hall PRO</b>, pas une fiche publique client.
-            </div>
-          </div>
-        </div>
-
-        <h2 class="section-title">Navigation cousue</h2>
-
-        <div class="nav-grid">
-          <a class="nav-card" id="navPin" href="./pin.html">
-            <div class="nav-head">
-              <div>
-                <div class="nav-tag">Entrée</div>
-                <h3 class="nav-title">PIN vendeur</h3>
-              </div>
-              <div class="nav-icon">🔑</div>
-            </div>
-            <div class="nav-text">
-              Porte propre pour ouvrir la session et charger le slug réel sans bricolage.
-            </div>
-          </a>
-
-          <a class="nav-card" id="navDashboard" href="./dashboard-pro.html">
-            <div class="nav-head">
-              <div>
-                <div class="nav-tag">Central</div>
-                <h3 class="nav-title">Dashboard PRO</h3>
-              </div>
-              <div class="nav-icon">📊</div>
-            </div>
-            <div class="nav-text">
-              Point de pilotage global du vendeur : accès, repères, navigation principale du module.
-            </div>
-          </a>
-
-          <a class="nav-card" id="navCockpit" href="./cockpit.html">
-            <div class="nav-head">
-              <div>
-                <div class="nav-tag">Métier</div>
-                <h3 class="nav-title">Cockpit vendeur</h3>
-              </div>
-              <div class="nav-icon">🧭</div>
-            </div>
-            <div class="nav-text">
-              Vue de travail du commerçant avec ses vraies données si la session est bien ouverte.
-            </div>
-          </a>
-
-          <a class="nav-card" id="navProduits" href="./produits.html">
-            <div class="nav-head">
-              <div>
-                <div class="nav-tag">Catalogue</div>
-                <h3 class="nav-title">Produits</h3>
-              </div>
-              <div class="nav-icon">🛒</div>
-            </div>
-            <div class="nav-text">
-              Ajouter, modifier, publier ou désactiver les produits du catalogue MARKET.
-            </div>
-          </a>
-
-          <a class="nav-card" id="navBoutique" href="./boutique.html">
-            <div class="nav-head">
-              <div>
-                <div class="nav-tag">Réglages</div>
-                <h3 class="nav-title">Boutique</h3>
-              </div>
-              <div class="nav-icon">🛠️</div>
-            </div>
-            <div class="nav-text">
-              Régler l’identité publique, le contact, la publication et la lecture terrain.
-            </div>
-          </a>
-
-          <a class="nav-card" href="https://digiylyfe.com/">
-            <div class="nav-head">
-              <div>
-                <div class="nav-tag">Retour</div>
-                <h3 class="nav-title">Site DIGIYLYFE</h3>
-              </div>
-              <div class="nav-icon">🏠</div>
-            </div>
-            <div class="nav-text">
-              Sortie claire vers le site principal, sans laisser le vendeur enfermé dans une page isolée.
-            </div>
-          </a>
+        <div class="hero-mob-cta">
+          <a class="hero-btn primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🚀 Mon module</a>
+          <a id="heroWaBtnMob" class="hero-btn soft" href="#" target="_blank" rel="noopener">💬 DIGIY</a>
         </div>
       </div>
-
-      <div class="footer">
-        DIGIY MARKET PRO • hall propre • navigation cousue • même rail • slug-first ♾️
+      <div class="hero-card">
+        <h3>Une vitrine qui vend le rêve</h3>
+        <p>Les fiches placebo donnent du punch. Les vraies fiches publiques donnent la preuve. Ensemble, elles créent un moteur d’inspiration pour MARKET et pour les autres modules DIGIYLYFE.</p>
+        <div class="cta-row">
+          <a class="hero-btn primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🚀 Je veux mon module</a>
+          <a id="heroWaBtn" class="hero-btn soft" href="#" target="_blank" rel="noopener">💬 Parler à DIGIY</a>
+        </div>
       </div>
     </div>
   </div>
+</section>
 
-  <script>
-    (function(){
-      "use strict";
+<div class="stat-strip">
+  <div class="wrap">
+    <div class="stat-inner">
+      <div class="stat-item"><div class="stat-num" id="statVendeurs">0</div><div class="stat-lbl">Fiches visibles</div></div>
+      <div class="stat-item"><div class="stat-num" id="statReal">0</div><div class="stat-lbl">Boutiques publiques</div></div>
+      <div class="stat-item"><div class="stat-num" id="statExamples">0</div><div class="stat-lbl">Placebos inspirants</div></div>
+      <div class="stat-item"><div class="stat-num">0%</div><div class="stat-lbl">Commission</div></div>
+      <div class="stat-item"><div class="stat-num">∞</div><div class="stat-lbl">DIGIYLYFE</div></div>
+    </div>
+  </div>
+</div>
 
-      const qs = new URLSearchParams(location.search);
-      const $ = (id) => document.getElementById(id);
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">🛍️ DIGIY MARKET</span>
+    <span class="ticker-item">👗 VÊTEMENTS</span>
+    <span class="ticker-item">💍 BIJOUX</span>
+    <span class="ticker-item">👜 SACS</span>
+    <span class="ticker-item">👟 CHAUSSURES</span>
+    <span class="ticker-item">💇 CHEVEUX</span>
+    <span class="ticker-item">🧴 BEAUTÉ</span>
+    <span class="ticker-item">🧼 SAVONS</span>
+    <span class="ticker-item">🛏️ LINGE MAISON</span>
+    <span class="ticker-item">🌍 SÉNÉGAL</span>
+    <span class="ticker-item">0% COMMISSION</span>
+    <span class="ticker-item">💳 PAIEMENT DIRECT</span>
+    <span class="ticker-item">🔥 ENTRÉE PRO</span>
 
-      function normSlug(v){
-        return String(v || "").trim().toLowerCase();
+    <span class="ticker-item">🛍️ DIGIY MARKET</span>
+    <span class="ticker-item">👗 VÊTEMENTS</span>
+    <span class="ticker-item">💍 BIJOUX</span>
+    <span class="ticker-item">👜 SACS</span>
+    <span class="ticker-item">👟 CHAUSSURES</span>
+    <span class="ticker-item">💇 CHEVEUX</span>
+    <span class="ticker-item">🧴 BEAUTÉ</span>
+    <span class="ticker-item">🧼 SAVONS</span>
+    <span class="ticker-item">🛏️ LINGE MAISON</span>
+    <span class="ticker-item">🌍 SÉNÉGAL</span>
+    <span class="ticker-item">0% COMMISSION</span>
+    <span class="ticker-item">💳 PAIEMENT DIRECT</span>
+    <span class="ticker-item">🔥 ENTRÉE PRO</span>
+  </div>
+</div>
+
+<section class="filters">
+  <div class="wrap">
+    <div class="filters-shell">
+      <div class="filter-group">
+        <span class="filter-pill">🎯 Vitrine publique vivante</span>
+        <span class="filter-pill">🧭 Réel + placebo</span>
+        <span class="filter-pill">🔥 Fiches inspirantes</span>
+      </div>
+      <select id="cityFilter" class="filter-select"><option value="">Toutes les villes</option></select>
+      <button id="resetFilters" class="filter-reset" type="button">Réinitialiser</button>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap">
+    <div class="trust-shell">
+      <div class="trust-head">
+        <div>
+          <h3>Ils nous font confiance</h3>
+          <p>Bloc vitrine pour rassurer, inspirer et montrer la portée terrain.</p>
+        </div>
+      </div>
+      <div class="trust-grid">
+        <article class="trust-card"><div class="icon">🏪</div><h4>Boutiques terrain</h4><p>Vitrines simples, visibles et compréhensibles par tout le monde.</p></article>
+        <article class="trust-card"><div class="icon">🧺</div><h4>Vendeurs mobiles</h4><p>Présence légère, rapide à poser, prête à circuler.</p></article>
+        <article class="trust-card"><div class="icon">💇</div><h4>Beauté & style</h4><p>Cheveux, beauté, mode, bijoux, tout peut respirer ici.</p></article>
+        <article class="trust-card"><div class="icon">📍</div><h4>Présence locale</h4><p>Ville, zone, repère terrain et visibilité orientée action.</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cats-section">
+  <div class="wrap">
+    <div class="section-head">
+      <div><h2>Les univers du marché</h2><p>Clique sur un pavé → les fiches s'ouvrent</p></div>
+      <div class="rail-controls">
+        <button class="arr" id="arrL" type="button">‹</button>
+        <button class="arr" id="arrR" type="button">›</button>
+      </div>
+    </div>
+
+    <div class="rail-wrap">
+      <div class="cat-rail" id="catRail">
+        <div class="cat-tile" data-cat="neuf"><div class="cat-img" style="background:linear-gradient(135deg,#ffeaaa,#ffd070)"><span class="cat-bg-txt">⭐🆕📦✨🛒⭐🆕📦✨🛒⭐🆕📦✨🛒⭐🆕📦</span><span class="cat-icon">🛒</span></div><div class="cat-body"><div class="cat-name">Neuf</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="deuxiemain"><div class="cat-img" style="background:linear-gradient(135deg,#c8deff,#90b8ff)"><span class="cat-bg-txt">♻️💡🔄💎♻️💡🔄💎♻️💡🔄💎♻️💡🔄</span><span class="cat-icon">♻️</span></div><div class="cat-body"><div class="cat-name">Deuxième main</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="vetements"><div class="cat-img" style="background:linear-gradient(135deg,#ffd0e0,#ffaac8)"><span class="cat-bg-txt">👗👕👖🧣👗👕👖🧣👗👕👖🧣👗👕👖</span><span class="cat-icon">👗</span></div><div class="cat-body"><div class="cat-name">Vêtements</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="parfum"><div class="cat-img" style="background:linear-gradient(135deg,#eadfff,#d4c2ff)"><span class="cat-bg-txt">🌸✨💜🌺🌸✨💜🌺🌸✨💜🌺🌸✨💜</span><span class="cat-icon">🌸</span></div><div class="cat-body"><div class="cat-name">Parfum & beauté</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="coiffeur"><div class="cat-img" style="background:linear-gradient(135deg,#dbfff6,#b9f1e0)"><span class="cat-bg-txt">✂️💈🪒💇✂️💈🪒💇✂️💈🪒💇✂️💈🪒</span><span class="cat-icon">✂️</span></div><div class="cat-body"><div class="cat-name">Cheveux</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="onglerie"><div class="cat-img" style="background:linear-gradient(135deg,#ffd0e0,#ffb8d0)"><span class="cat-bg-txt">💅💎✨🌸💅💎✨🌸💅💎✨🌸💅💎✨</span><span class="cat-icon">💅</span></div><div class="cat-body"><div class="cat-name">Onglerie</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="brocante"><div class="cat-img" style="background:linear-gradient(135deg,#f4ead7,#ead6b2)"><span class="cat-bg-txt">🪑🏺🖼️🪞🪑🏺🖼️🪞🪑🏺🖼️🪞🪑🏺</span><span class="cat-icon">🏺</span></div><div class="cat-body"><div class="cat-name">Brocante</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="banabana"><div class="cat-img" style="background:linear-gradient(135deg,#ffe0cb,#ffc391)"><span class="cat-bg-txt">🧺🛒🏪🎪🧺🛒🏪🎪🧺🛒🏪🎪🧺🛒</span><span class="cat-icon">🧺</span></div><div class="cat-body"><div class="cat-name">Bana-bana</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="quotidien"><div class="cat-img" style="background:linear-gradient(135deg,#dbf5ea,#bfe8d4)"><span class="cat-bg-txt">🏠🧴🥫🧹🏠🧴🥫🧹🏠🧴🥫🧹🏠🧴</span><span class="cat-icon">🏠</span></div><div class="cat-body"><div class="cat-name">Maison</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="phones"><div class="cat-img" style="background:linear-gradient(135deg,#c8deff,#90b8ff)"><span class="cat-bg-txt">📱💻⌨️🖥️📱💻⌨️🖥️📱💻⌨️🖥️📱💻</span><span class="cat-icon">📱</span></div><div class="cat-body"><div class="cat-name">Téléphones</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="alimentaire"><div class="cat-img" style="background:linear-gradient(135deg,#ffeaaa,#ffd070)"><span class="cat-bg-txt">🥜🌽🥘🫘🥜🌽🥘🫘🥜🌽🥘🫘🥜🌽</span><span class="cat-icon">🥜</span></div><div class="cat-body"><div class="cat-name">Alimentaire</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="chaussures"><div class="cat-img" style="background:linear-gradient(135deg,#ffe0cb,#ffc391)"><span class="cat-bg-txt">👟👠👞🥿👟👠👞🥿👟👠👞🥿👟👠</span><span class="cat-icon">👟</span></div><div class="cat-body"><div class="cat-name">Chaussures</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="vendor-panel" id="vendorPanel">
+      <div class="vendor-panel-inner">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span class="icon" id="panelIcon">🛒</span>
+            <div>
+              <h3 id="panelTitle">Catégorie</h3>
+              <p id="panelSub">Fiches visibles</p>
+            </div>
+          </div>
+          <button class="panel-close" id="panelClose" type="button">✕</button>
+        </div>
+        <div class="vendor-grid" id="vendorGrid"></div>
+      </div>
+    </div>
+
+    <div class="cta-band">
+      <div class="cta-band-grid">
+        <div>
+          <h3>Tu veux ta vitrine comme ça ?</h3>
+          <p>Fiche boutique, galerie, WhatsApp, présence terrain, produits d’inspiration, entrée PRO. Il faut que le commerçant se voie déjà dedans.</p>
+          <div class="cta-band-row">
+            <span class="cta-pill">🛍️ Fiche boutique</span>
+            <span class="cta-pill">🖼️ Galerie</span>
+            <span class="cta-pill">💬 WhatsApp</span>
+            <span class="cta-pill">📍 Maps</span>
+            <span class="cta-pill">🔥 Entrée PRO</span>
+          </div>
+        </div>
+        <div class="cta-main">
+          <a class="big-cta" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+          <a id="ctaWaBtn" class="big-cta soft" href="#" target="_blank" rel="noopener">💬 Parler sur WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section">
+  <div class="wrap">
+    <div class="faq-shell">
+      <div class="faq-head">Questions fréquentes</div>
+      <div class="faq-item">
+        <div class="faq-q">C'est quoi DIGIY MARKET exactement ? <span class="faq-arr">▾</span></div>
+        <div class="faq-a">DIGIY MARKET est le module marché de DIGIYLYFE. On y montre des boutiques publiques réelles et des exemples inspirants pour aider les commerçants à se projeter dans une vraie vitrine locale.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Pourquoi des fiches placebo ? <span class="faq-arr">▾</span></div>
+        <div class="faq-a">Parce qu’une vitrine vide ne donne envie à personne. Les fiches placebo servent à meubler, inspirer, donner du style et montrer le potentiel du rail avant même que toutes les vraies boutiques soient branchées.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Les vraies fiches sont mélangées avec les exemples ? <span class="faq-arr">▾</span></div>
+        <div class="faq-a">Oui, mais proprement. Les vraies boutiques publiques et les exemples vivent dans la même vitrine, tout en gardant leur nature distincte quand on ouvre la fiche.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div>
+      <div class="footer-brand">DIGIY MARKET ∞</div>
+      <div class="footer-sub">Vêtements · Bijoux · Sacs · Chaussures · Beauté · Savons · Linge maison · Téléphones · Alimentaire</div>
+    </div>
+    <div class="footer-links">
+      <a href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">Je veux mon module</a>
+      <a href="https://digiylyfe.com/" target="_blank" rel="noopener">digiylyfe.com</a>
+    </div>
+  </div>
+</footer>
+
+<div class="float-cta">
+  <a id="floatWaBtn" class="float-btn wa" href="#" target="_blank" rel="noopener">💬 WhatsApp DIGIY</a>
+  <a class="float-btn module" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+</div>
+
+<script>
+const DIGIY_CONFIG = {
+  whatsapp: "221771342889",
+  siteUrl: "https://digiylyfe.com/",
+  proUrl: "https://commencer-a-payer.digiylyfe.com/",
+  logoUrl: ""
+};
+
+const VENDORS = {
+  neuf: [
+    {icon:"📱",bg:"#c8deff",name:"Tech Dakar Shop",what:"Téléphones neufs, accessoires, batteries, câbles",loc:"Dakar · Plateau",price:"5 000–250 000 F",live:true,images:[]},
+    {icon:"👟",bg:"#ffe0cb",name:"Sneakers Mbaye",what:"Jordan, Nike, Adidas — arrivage chaque semaine",loc:"Mbour · Marché Central",price:"15 000–85 000 F",live:true,images:[]},
+    {icon:"🛒",bg:"#ffeaaa",name:"Boutique Awa Neuf",what:"Produits ménagers neufs, ustensiles, déco",loc:"Saly · Ngaparou",price:"2 000–35 000 F",live:false,images:[]},
+    {icon:"💻",bg:"#c8deff",name:"Diallo Informatique",what:"PC neufs et reconditionnés, imprimantes",loc:"Dakar · Parcelles",price:"80 000–450 000 F",live:true,images:[]},
+    {icon:"🎧",bg:"#eadfff",name:"Audio House Sénégal",what:"Casques, enceintes Bluetooth, accessoires audio",loc:"Dakar · Liberté 6",price:"8 000–95 000 F",live:true,images:[]},
+    {icon:"⌚",bg:"#ffeaaa",name:"Montres Prestige SN",what:"Montres homme et femme, coffrets cadeaux, bracelets",loc:"Dakar · Sacré-Cœur",price:"12 000–120 000 F",live:true,images:[]}
+  ],
+
+  deuxiemain: [
+    {icon:"📺",bg:"#f4ead7",name:"Mamadou Électro",what:"TV, réfrigérateurs, machines à laver d'occasion",loc:"Dakar · Colobane",price:"20 000–150 000 F",live:true,images:[]},
+    {icon:"👕",bg:"#ffd0e0",name:"Frip Sénégal",what:"Friperie sélectionnée, marques, prix juste",loc:"Dakar · Sicap",price:"500–5 000 F",live:true,images:[]},
+    {icon:"🎮",bg:"#eadfff",name:"GameZone Dakar",what:"Consoles, jeux PS4/PS5, manettes",loc:"Dakar · Yoff",price:"15 000–120 000 F",live:true,images:[]},
+    {icon:"👜",bg:"#ffe0cb",name:"Sacs Seconde Vie",what:"Sacs choisis, pièces originales, accessoires élégants",loc:"Dakar · Colobane",price:"5 000–35 000 F",live:true,images:[]},
+    {icon:"💍",bg:"#ffd0e0",name:"Bijoux Héritage",what:"Bijoux seconde main, perles, pièces fines revisitées",loc:"Thiès · Centre",price:"3 000–28 000 F",live:true,images:[]}
+  ],
+
+  vetements: [
+    {icon:"👘",bg:"#ffeaaa",name:"Boubous Cheikh",what:"Boubous brocart, bazin, grand boubou cérémonie",loc:"Dakar · HLM",price:"8 000–60 000 F",live:true,images:[]},
+    {icon:"👗",bg:"#ffd0e0",name:"Robes Fatou",what:"Robes africaines, wax, tenues soirée et bureau",loc:"Saly · Centre",price:"5 000–35 000 F",live:true,images:[]},
+    {icon:"🧣",bg:"#eadfff",name:"Accessoires Mode",what:"Ceintures, sacs, bijoux fantaisie, foulards",loc:"Saint-Louis",price:"1 000–12 000 F",live:true,images:[]},
+    {icon:"👔",bg:"#c8deff",name:"Élégance Homme Dakar",what:"Chemises, pantalons, ensembles chic, tenues bureau",loc:"Dakar · Point E",price:"7 000–45 000 F",live:true,images:[]},
+    {icon:"🪡",bg:"#ffe0cb",name:"Atelier Wax Signature",what:"Wax premium, couture sur mesure, ensembles femme",loc:"Mbour · Saly",price:"10 000–55 000 F",live:true,images:[]},
+    {icon:"🛍️",bg:"#ffd0e0",name:"Collection Chic Ndeye",what:"Vestes, jupes, tops, pièces tendance et habillées",loc:"Dakar · Ouakam",price:"4 000–30 000 F",live:true,images:[]}
+  ],
+
+  parfum: [
+    {icon:"🕌",bg:"#eadfff",name:"Thiouraye Ndèye",what:"Thiouraye naturel, encens, encens de Djeddah",loc:"Dakar · Médina",price:"1 500–15 000 F",live:true,images:[]},
+    {icon:"🌸",bg:"#ffd0e0",name:"Parfums Orientaux",what:"Attars, musc, oud, huiles de parfum",loc:"Dakar · Sandaga",price:"3 000–35 000 F",live:true,images:[]},
+    {icon:"🎁",bg:"#ffeaaa",name:"Coffrets Mariama",what:"Coffrets mariage, baptême, kits parfum cadeaux",loc:"Dakar · Pikine",price:"8 000–50 000 F",live:false,images:[]},
+    {icon:"🧴",bg:"#dbf5ea",name:"Crèmes Douces du Sahel",what:"Crèmes visage, lait corps, huiles parfumées, soins douceur",loc:"Thiès · Centre",price:"2 500–18 000 F",live:true,images:[]},
+    {icon:"🧼",bg:"#ffeaaa",name:"Savons Naturels Aïcha",what:"Savons artisanaux, gommage, savons noirs, senteurs locales",loc:"Saly · Ngaparou",price:"1 000–8 000 F",live:true,images:[]},
+    {icon:"✨",bg:"#eadfff",name:"Beauty Aura Dakar",what:"Brumes, parfums cheveux, gloss, soins beauté parfumés",loc:"Dakar · Liberté",price:"2 000–22 000 F",live:true,images:[]}
+  ],
+
+  coiffeur: [
+    {icon:"💇",bg:"#dbfff6",name:"Salon Aicha",what:"Tresses africaines, tissage, défrisage, soin",loc:"Dakar · Médina",price:"2 000–25 000 F",live:true,images:[]},
+    {icon:"✂️",bg:"#c8deff",name:"Barber Moussa",what:"Coupe homme, dégradé américain, barbe sculptée",loc:"Saly · Portudal",price:"1 500–5 000 F",live:true,images:[]},
+    {icon:"💆",bg:"#dbf5ea",name:"Soin Cheveux Rama",what:"Masques kératine, soin naturel, hydratation",loc:"Dakar · Sacré-Cœur",price:"5 000–20 000 F",live:true,images:[]},
+    {icon:"🪮",bg:"#ffd0e0",name:"Cheveux by Khady",what:"Perruques, closures, mèches, coiffure événement",loc:"Dakar · Almadies",price:"4 000–40 000 F",live:true,images:[]},
+    {icon:"🌿",bg:"#dbfff6",name:"Nature Hair Lab",what:"Soin cheveux naturels, twists, locks, produits capillaires",loc:"Thiès · Centre",price:"3 000–18 000 F",live:true,images:[]},
+    {icon:"👑",bg:"#ffeaaa",name:"Queen Tresses Studio",what:"Cornrows, knotless braids, styles premium femme et fille",loc:"Mbour · Saly",price:"3 500–28 000 F",live:true,images:[]}
+  ],
+
+  onglerie: [
+    {icon:"💅",bg:"#ffd0e0",name:"Ongles by Aminata",what:"Pose gel, faux ongles, nail art, manucure",loc:"Dakar · Plateau",price:"4 000–20 000 F",live:true,images:[]},
+    {icon:"✨",bg:"#eadfff",name:"Luxury Nails Saly",what:"Nail art 3D, extension, dégradé, brillants",loc:"Saly · Ngaparou",price:"6 000–30 000 F",live:true,images:[]},
+    {icon:"🌸",bg:"#ffeaaa",name:"Beauty Corner Rokhaya",what:"Manucure naturelle, soin des mains, vernis",loc:"Thiès",price:"2 500–10 000 F",live:true,images:[]},
+    {icon:"💄",bg:"#ffd0e0",name:"Makeup & Nails House",what:"Maquillage simple, pose vernis, beauté express",loc:"Dakar · Yoff",price:"3 000–15 000 F",live:true,images:[]}
+  ],
+
+  brocante: [
+    {icon:"🪑",bg:"#f4ead7",name:"Brocante Sénégal",what:"Meubles anciens, chaises bois, buffets vintage",loc:"Dakar · Colobane",price:"5 000–80 000 F",live:true,images:[]},
+    {icon:"🏺",bg:"#ffeaaa",name:"Poteries & Artisanat",what:"Poteries, statuettes, objets africains authentiques",loc:"Saly · Village artisanat",price:"2 000–40 000 F",live:true,images:[]},
+    {icon:"🖼️",bg:"#ffe0cb",name:"Art & Déco Diallo",what:"Tableaux locaux, masques, peintures, déco murale",loc:"Dakar · Ouakam",price:"3 000–60 000 F",live:false,images:[]},
+    {icon:"🪞",bg:"#eadfff",name:"Maison Vintage Prestige",what:"Miroirs, lampes, petites pièces déco, brocante élégante",loc:"Saint-Louis",price:"2 500–25 000 F",live:true,images:[]}
+  ],
+
+  banabana: [
+    {icon:"🧺",bg:"#ffe0cb",name:"Bana-bana Alassane",what:"Légumes frais, fruits de saison, livraison quartier",loc:"Dakar · Parcelles",price:"200–5 000 F",live:true,images:[]},
+    {icon:"🧃",bg:"#dbfff6",name:"Jus Naturels Aminata",what:"Bissap, gingembre, ditax, tamarin, bouye maison",loc:"Dakar · Médina",price:"250–1 500 F",live:true,images:[]},
+    {icon:"🎀",bg:"#ffd0e0",name:"Tissus & Rubans",what:"Rubans, dentelles, broderies, vente au mètre",loc:"Dakar · HLM",price:"200–3 000 F/m",live:true,images:[]},
+    {icon:"🪮",bg:"#ffeaaa",name:"Beauté Mobile Marième",what:"Peignes, petites crèmes, accessoires cheveux, vente mobile",loc:"Mbour · Marché",price:"500–6 000 F",live:true,images:[]}
+  ],
+
+  quotidien: [
+    {icon:"🧹",bg:"#dbf5ea",name:"Ménage & Entretien",what:"Détergents, balais, produits nettoyants",loc:"Dakar · Pikine",price:"500–8 000 F",live:true,images:[]},
+    {icon:"🍳",bg:"#ffe0cb",name:"Cuisine Équipée",what:"Marmites, casseroles, poêles, mortiers bois",loc:"Dakar · Sandaga",price:"2 000–20 000 F",live:true,images:[]},
+    {icon:"💡",bg:"#ffeaaa",name:"Électricité Mamadou",what:"Prises, câbles, ampoules LED, matériel électrique",loc:"Thiès",price:"500–15 000 F",live:true,images:[]},
+    {icon:"🛏️",bg:"#c8deff",name:"Maison Douceur",what:"Draps, housses, serviettes, rideaux, linge de maison",loc:"Saly · Centre",price:"3 000–35 000 F",live:true,images:[]},
+    {icon:"🧴",bg:"#dbfff6",name:"Maison Soin & Bain",what:"Savons, gels douche, crèmes, paniers bain",loc:"Dakar · Liberté 5",price:"1 500–16 000 F",live:true,images:[]},
+    {icon:"🪟",bg:"#f4ead7",name:"Rideaux & Voilages Mame",what:"Rideaux maison, voilages, housses déco, coussins",loc:"Thiès · Grand Standing",price:"4 000–40 000 F",live:true,images:[]}
+  ],
+
+  phones: [
+    {icon:"📱",bg:"#c8deff",name:"iDakar Phones",what:"iPhone reconditionné, garantie 3 mois",loc:"Dakar · Plateau",price:"120 000–450 000 F",live:true,images:[]},
+    {icon:"🤳",bg:"#ffeaaa",name:"Samsung Sénégal",what:"Galaxy A, M et S series neufs et occasion",loc:"Dakar · Sacré-Cœur",price:"60 000–380 000 F",live:true,images:[]},
+    {icon:"🎧",bg:"#eadfff",name:"Son & Audio Mobile",what:"AirPods, Bluetooth, enceintes, casques audio",loc:"Dakar · Yoff",price:"5 000–65 000 F",live:true,images:[]},
+    {icon:"🔌",bg:"#ffe0cb",name:"Accessoires Connect",what:"Chargeurs, coques, films, câbles rapides",loc:"Mbour · Saly",price:"1 000–15 000 F",live:true,images:[]}
+  ],
+
+  alimentaire: [
+    {icon:"🥜",bg:"#ffeaaa",name:"Arachides Baye",what:"Arachides grillées, huile d'arachide artisanale",loc:"Kaolack · Marché",price:"500–5 000 F",live:true,images:[]},
+    {icon:"🌾",bg:"#f4ead7",name:"Céréales du Terroir",what:"Mil, sorgho, fonio, riz local, maïs",loc:"Tambacounda",price:"1 000–25 000 F",live:true,images:[]},
+    {icon:"🥦",bg:"#dbf5ea",name:"Maraîchage Fatou",what:"Légumes frais jardin, tomates, oignons, aubergines",loc:"Thiès · Pout",price:"200–3 000 F",live:true,images:[]},
+    {icon:"🍯",bg:"#ffe0cb",name:"Saveurs du Terroir",what:"Miel, confitures, épices, paniers gourmands",loc:"Saint-Louis",price:"1 500–18 000 F",live:true,images:[]}
+  ],
+
+  chaussures: [
+    {icon:"👡",bg:"#ffd0e0",name:"Sandales Aicha",what:"Sandales artisanales cuir, babouches colorées",loc:"Dakar · Médina",price:"3 000–18 000 F",live:true,images:[]},
+    {icon:"👟",bg:"#ffe0cb",name:"Baskets Papito",what:"Nike, Adidas, Puma — arrivage hebdomadaire",loc:"Dakar · Parcelles",price:"15 000–85 000 F",live:true,images:[]},
+    {icon:"👞",bg:"#c8deff",name:"Chaussures Homme SN",what:"Derby, bottes, chaussures ville qualité cuir",loc:"Dakar · Plateau",price:"12 000–55 000 F",live:true,images:[]},
+    {icon:"🩴",bg:"#ffeaaa",name:"Confort Maison",what:"Claquettes, chaussures détente, modèles quotidiens",loc:"Thiès · Centre",price:"2 000–12 000 F",live:true,images:[]},
+    {icon:"💼",bg:"#eadfff",name:"Lady Shoes & Bags",what:"Escarpins, sacs assortis, style bureau et sortie",loc:"Dakar · Mermoz",price:"8 000–48 000 F",live:true,images:[]}
+  ]
+};
+
+const META = {
+  neuf:{label:"Neuf",icon:"🛒",sub:"Produits récents, prix clairs"},
+  deuxiemain:{label:"Deuxième main",icon:"♻️",sub:"La valeur continue, le bon prix circule"},
+  vetements:{label:"Vêtements",icon:"👗",sub:"Style terrain, cérémonie ou quotidien"},
+  parfum:{label:"Parfum & beauté",icon:"🌸",sub:"Parfums, crèmes, savons et soins"},
+  coiffeur:{label:"Cheveux",icon:"✂️",sub:"Tresses, coupe, perruques et soin"},
+  onglerie:{label:"Onglerie",icon:"💅",sub:"Ongles, mains et beauté express"},
+  brocante:{label:"Brocante",icon:"🏺",sub:"Pièces rares, déco, vintage"},
+  banabana:{label:"Bana-bana",icon:"🧺",sub:"Commerce mobile ancré dans le réel"},
+  quotidien:{label:"Maison",icon:"🏠",sub:"Linge, déco, bain et quotidien"},
+  phones:{label:"Téléphones",icon:"📱",sub:"Neufs, reconditionnés, accessoires"},
+  alimentaire:{label:"Alimentaire",icon:"🥜",sub:"Produits locaux, céréales, épices"},
+  chaussures:{label:"Chaussures",icon:"👟",sub:"Sandales, baskets, sacs assortis"}
+};
+
+let REAL_VENDORS = [];
+let currentMode = null;
+let currentKey = null;
+
+function slugify(s){
+  return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/&/g,"-et-").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
+}
+function normPhone(v){
+  const d = String(v || "").replace(/[^\d]/g, "");
+  if (!d) return "";
+  if (d.startsWith("221") && d.length === 12) return d;
+  if (d.length === 9) return "221" + d;
+  return d;
+}
+function normalizeText(v=""){
+  return String(v || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+}
+function parseCity(l=""){
+  return (l.split("·")[0] || l).trim();
+}
+function waLink(t){
+  return `https://wa.me/${DIGIY_CONFIG.whatsapp}?text=${encodeURIComponent(t)}`;
+}
+function waDirect(phone, text){
+  return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+}
+function makeSvgData(title,sub,icon,c1,c2){
+  const s=`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient><filter id="f" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="rgba(0,0,0,.18)"/></filter></defs><rect width="1200" height="900" fill="url(#g)"/><circle cx="1030" cy="120" r="160" fill="rgba(255,255,255,.12)"/><circle cx="190" cy="760" r="180" fill="rgba(255,255,255,.12)"/><text x="100" y="230" font-size="190" filter="url(#f)">${icon}</text><rect x="70" y="605" width="1060" height="180" rx="32" fill="rgba(255,255,255,.9)"/><text x="120" y="680" font-family="Arial" font-size="60" font-weight="700" fill="#1a1208">${title}</text><text x="120" y="740" font-family="Arial" font-size="30" fill="#6f624f">${sub}</text></svg>`;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(s)}`;
+}
+function palette(bg){
+  const m={"#c8deff":["#bdd8ff","#8cb7ff"],"#ffe0cb":["#ffd9c5","#ffb88a"],"#ffeaaa":["#fff0b8","#ffd56d"],"#ffd0e0":["#ffd8e5","#ffb1cb"],"#eadfff":["#eee2ff","#d2beff"],"#dbfff6":["#ddfff5","#afe9d5"],"#f4ead7":["#f6ead9","#ddc9a3"],"#dbf5ea":["#dff7ec","#b8e0ca"]};
+  return m[bg] || ["#f4ead7","#d8bf96"];
+}
+function fallbackVendorImage(v){
+  const [c1,c2] = palette(v.bg || "#f4ead7");
+  return makeSvgData(v.name, v.loc || v.city || "DIGIY MARKET", v.icon || "🛍️", c1, c2);
+}
+function categoryFromText(txt){
+  const t = normalizeText(txt);
+  if (!t) return "quotidien";
+  if (t.includes("coiff") || t.includes("barber") || t.includes("salon") || t.includes("cheveu")) return "coiffeur";
+  if (t.includes("ongle") || t.includes("nail") || t.includes("manuc")) return "onglerie";
+  if (t.includes("parfum") || t.includes("musc") || t.includes("thiouraye") || t.includes("attar") || t.includes("savon") || t.includes("creme") || t.includes("soin") || t.includes("beaute")) return "parfum";
+  if (t.includes("vetement") || t.includes("mode") || t.includes("robe") || t.includes("boubou") || t.includes("textile") || t.includes("bijou") || t.includes("sac")) return "vetements";
+  if (t.includes("chauss") || t.includes("basket") || t.includes("sandale") || t.includes("babouche")) return "chaussures";
+  if (t.includes("telephone") || t.includes("smartphone") || t.includes("phone") || t.includes("mobile")) return "phones";
+  if (t.includes("aliment") || t.includes("fruit") || t.includes("legume") || t.includes("cereal") || t.includes("epice") || t.includes("boisson")) return "alimentaire";
+  if (t.includes("brocante") || t.includes("vintage") || t.includes("artisanat") || t.includes("deco") || t.includes("poterie")) return "brocante";
+  if (t.includes("deuxieme") || t.includes("occasion") || t.includes("recondition")) return "deuxiemain";
+  if (t.includes("bana") || t.includes("ambulant")) return "banabana";
+  if (t.includes("linge") || t.includes("maison") || t.includes("rideau") || t.includes("serviette")) return "quotidien";
+  if (t.includes("neuf")) return "neuf";
+  return "quotidien";
+}
+
+function buildExampleVendor(cat,v){
+  const m=META[cat]||{};
+  const imgs=Array.isArray(v.images)?v.images.filter(Boolean):[];
+  return {
+    ...v,
+    category:cat,
+    categoryLabel:m.label||cat,
+    categoryIcon:m.icon||"🛍️",
+    categorySub:m.sub||"",
+    city:parseCity(v.loc),
+    slug:`${cat}-${slugify(v.name)}`,
+    publicSlug:"",
+    isExample:true,
+    coverImage:imgs[0]||fallbackVendorImage(v),
+    images:imgs
+  };
+}
+
+function buildRealVendor(profile){
+  const cat = categoryFromText(profile.category || profile.bio || "");
+  const m = META[cat] || META.quotidien;
+  const name = profile.display_name || "Boutique DIGIY";
+  const city = profile.city || "Sénégal";
+  const what = profile.bio || profile.category || "Boutique locale";
+  const loc = [profile.city].filter(Boolean).join(" · ") || city;
+
+  const vendor = {
+    icon: m.icon || "🛍️",
+    bg: "#dbfff6",
+    name,
+    what,
+    loc,
+    price: "Boutique publique",
+    live: true,
+    images: [],
+    category: cat,
+    categoryLabel: profile.category || m.label || "Boutique locale",
+    categoryIcon: m.icon || "🛍️",
+    categorySub: m.sub || "",
+    city,
+    slug: profile.slug || "",
+    publicSlug: profile.slug || "",
+    isExample: false,
+    phone: normPhone(profile.phone || ""),
+    whatsapp: normPhone(profile.whatsapp || profile.phone || ""),
+    coverImage: "",
+    raw: profile
+  };
+
+  vendor.coverImage = fallbackVendorImage(vendor);
+  return vendor;
+}
+
+function buildExampleCatalog(){
+  return Object.entries(VENDORS).flatMap(([c,l])=>l.map(v=>buildExampleVendor(c,v)));
+}
+function buildCatalog(){
+  return [...REAL_VENDORS, ...buildExampleCatalog()];
+}
+function saveCatalog(){
+  try{
+    localStorage.setItem("digiy_market_catalog_v5",JSON.stringify({
+      config:DIGIY_CONFIG,
+      meta:META,
+      vendors:buildCatalog()
+    }));
+  }catch(e){}
+}
+
+function updateCounts(){
+  const catalog = buildCatalog();
+  document.querySelectorAll(".cat-tile").forEach(t=>{
+    const c=t.dataset.cat;
+    const el=t.querySelector(".cat-count span");
+    if(el) el.textContent = catalog.filter(v => v.category === c).length;
+  });
+
+  const total = catalog.length;
+  const real = catalog.filter(v => !v.isExample).length;
+  const examples = catalog.filter(v => v.isExample).length;
+
+  document.getElementById("totalCount").textContent = total;
+  document.getElementById("statVendeurs").textContent = total;
+  document.getElementById("statReal").textContent = real;
+  document.getElementById("statExamples").textContent = examples;
+}
+
+function initButtons(){
+  const gw = waLink("Bonjour DIGIY 👋 Je veux des informations sur DIGIY MARKET.");
+  ["waTopBtn","heroWaBtn","heroWaBtnMob","ctaWaBtn","floatWaBtn"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.href=gw;
+  });
+  const bi=document.getElementById("brandIcon");
+  if(DIGIY_CONFIG.logoUrl) bi.innerHTML=`<img src="${DIGIY_CONFIG.logoUrl}" alt="DIGIY">`;
+}
+
+function fillCityFilter(){
+  const sel=document.getElementById("cityFilter");
+  const previous = sel.value;
+  sel.innerHTML = `<option value="">Toutes les villes</option>`;
+  const cities=[...new Set(buildCatalog().map(v=>v.city).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"fr"));
+  cities.forEach(c=>{
+    const o=document.createElement("option");
+    o.value=c;
+    o.textContent=c;
+    sel.appendChild(o);
+  });
+  sel.value = previous;
+}
+function getCityFilter(){
+  return document.getElementById("cityFilter").value.trim();
+}
+function applyCityFilter(list){
+  const c=getCityFilter();
+  return c ? list.filter(v=>v.city===c) : list;
+}
+
+function openVendor(v){
+  saveCatalog();
+  if (v.isExample) {
+    window.location.href = `vendeur.html?v=${encodeURIComponent(v.slug)}`;
+    return;
+  }
+  const slug = v.publicSlug || v.slug;
+  window.location.href = `vendeur.html?slug=${encodeURIComponent(slug)}`;
+}
+
+function contactVendor(v){
+  if (!v.isExample && v.whatsapp) {
+    window.open(waDirect(v.whatsapp, `Bonjour 👋 Je vous contacte depuis votre fiche DIGIY MARKET.`), "_blank");
+    return;
+  }
+  window.open(waLink(`Bonjour DIGIY 👋 Je veux une vitrine comme "${v.name}" sur DIGIY MARKET.`), "_blank");
+}
+
+function vendorSourceTag(v){
+  return v.isExample
+    ? `<span class="vendor-example">EXEMPLE</span>`
+    : `<span class="vendor-example">BOUTIQUE PUBLIQUE</span>`;
+}
+function vendorLiveTag(v){
+  return v.live ? `<div class="vendor-live">${v.isExample ? "INSPIRATION" : "EN LIGNE"}</div>` : "";
+}
+function vendorPriceLabel(v){
+  return v.isExample ? v.price : "Voir la fiche";
+}
+
+function renderVendorCards(list){
+  const g=document.getElementById("vendorGrid");
+  if(!list.length){
+    g.innerHTML=`<div class="empty-state"><div class="big">🏗️</div><p>Aucune fiche trouvée.<br/>Essaie une autre ville ou une autre recherche.</p></div>`;
+    return;
+  }
+
+  g.innerHTML=list.map((v,idx)=>`
+    <article class="vendor" data-idx="${idx}">
+      <div class="vendor-top" style="background:${v.bg || '#f4ead7'}">
+        <img src="${v.coverImage || fallbackVendorImage(v)}" alt="${v.name}">
+        ${vendorSourceTag(v)}
+        ${vendorLiveTag(v)}
+      </div>
+      <div class="vendor-body">
+        <div class="vendor-name">${v.name}</div>
+        <div class="vendor-what">${v.what}</div>
+        <div class="vendor-meta">
+          <span class="vendor-loc">📍 ${v.loc}</span>
+          <span class="vendor-price">${vendorPriceLabel(v)}</span>
+        </div>
+        <div class="vendor-cta">
+          <button class="vendor-btn primary jsOpen" data-idx="${idx}" type="button">👁 Voir la fiche</button>
+          <button class="vendor-btn ghost jsWa" data-idx="${idx}" type="button">${(!v.isExample && v.whatsapp) ? "💬 Boutique" : "💬 DIGIY"}</button>
+        </div>
+      </div>
+    </article>
+  `).join("");
+
+  g.querySelectorAll(".jsOpen").forEach(btn=>{
+    btn.addEventListener("click", (e)=>{
+      e.stopPropagation();
+      openVendor(list[Number(btn.dataset.idx)]);
+    });
+  });
+
+  g.querySelectorAll(".jsWa").forEach(btn=>{
+    btn.addEventListener("click", (e)=>{
+      e.stopPropagation();
+      contactVendor(list[Number(btn.dataset.idx)]);
+    });
+  });
+
+  g.querySelectorAll(".vendor").forEach(card=>{
+    card.addEventListener("click", ()=>{
+      const idx = Number(card.dataset.idx);
+      openVendor(list[idx]);
+    });
+  });
+}
+
+function renderVendorsByCategory(cat){
+  const m = META[cat] || {};
+  let list = buildCatalog().filter(v => v.category === cat);
+  list = applyCityFilter(list);
+
+  const realCount = list.filter(v => !v.isExample).length;
+  const exCount = list.filter(v => v.isExample).length;
+
+  document.getElementById("panelIcon").textContent = m.icon || "🛍️";
+  document.getElementById("panelTitle").textContent = m.label || cat;
+  document.getElementById("panelSub").textContent = `${m.sub || ""} • ${realCount} réelle(s) • ${exCount} placebo(s)`;
+
+  renderVendorCards(list);
+}
+
+function renderSearch(q){
+  const qq=q.trim().toLowerCase();
+  let list=buildCatalog().filter(v =>
+    v.name.toLowerCase().includes(qq) ||
+    v.what.toLowerCase().includes(qq) ||
+    v.loc.toLowerCase().includes(qq) ||
+    v.city.toLowerCase().includes(qq) ||
+    String(v.categoryLabel || "").toLowerCase().includes(qq)
+  );
+
+  list=applyCityFilter(list);
+  const realCount = list.filter(v => !v.isExample).length;
+  const exCount = list.filter(v => v.isExample).length;
+
+  document.getElementById("panelIcon").textContent="🔎";
+  document.getElementById("panelTitle").textContent=`Recherche : ${q}`;
+  document.getElementById("panelSub").textContent=`${list.length} résultat(s) • ${realCount} réelle(s) • ${exCount} placebo(s)`;
+
+  renderVendorCards(list);
+}
+
+function rerenderCurrent(){
+  if(currentMode==="search"){
+    const q=document.getElementById("topSearchInput").value.trim();
+    if(q) renderSearch(q);
+  } else if(currentMode==="cat" && currentKey){
+    renderVendorsByCategory(currentKey);
+  }
+}
+
+function makeSupabaseClient(){
+  if (!window.supabase || !window.DIGIY_SUPABASE_URL || !(window.DIGIY_SUPABASE_ANON_KEY || window.DIGIY_SUPABASE_ANON)) {
+    return null;
+  }
+
+  return window.supabase.createClient(
+    window.DIGIY_SUPABASE_URL,
+    window.DIGIY_SUPABASE_ANON_KEY || window.DIGIY_SUPABASE_ANON,
+    {
+      auth:{
+        persistSession:false,
+        autoRefreshToken:false,
+        detectSessionInUrl:false
+      }
+    }
+  );
+}
+
+async function loadRealPublicProfiles(){
+  const sb = makeSupabaseClient();
+  if (!sb) return [];
+
+  try{
+    const { data, error } = await sb
+      .from("digiy_market_public_profiles")
+      .select("slug, phone, display_name, category, city, whatsapp, bio")
+      .order("display_name", { ascending:true });
+
+    if (error) {
+      console.error("real public profiles load error:", error);
+      return [];
+    }
+
+    return (data || [])
+      .filter(row => row && row.slug)
+      .map(buildRealVendor);
+  }catch(e){
+    console.error("real public profiles exception:", e);
+    return [];
+  }
+}
+
+function openPanel(){
+  const panel = document.getElementById("vendorPanel");
+  if(!panel.classList.contains("open")) panel.classList.add("open");
+  setTimeout(()=>panel.scrollIntoView({behavior:"smooth",block:"nearest"}),180);
+}
+
+function bindStaticUi(){
+  document.querySelectorAll(".cat-tile").forEach(tile=>{
+    tile.addEventListener("click",()=>{
+      const cat=tile.dataset.cat;
+      const panel=document.getElementById("vendorPanel");
+
+      if(currentMode==="cat" && currentKey===cat){
+        panel.classList.remove("open");
+        tile.classList.remove("active");
+        currentMode=null;
+        currentKey=null;
+        return;
       }
 
-      function normPhone(v){
-        const d = String(v || "").replace(/[^\d]/g, "");
-        if (!d) return "";
-        if (d.startsWith("221") && d.length === 12) return d;
-        if (d.length === 9) return "221" + d;
-        return d;
-      }
+      document.querySelectorAll(".cat-tile").forEach(x=>x.classList.remove("active"));
+      tile.classList.add("active");
+      currentMode="cat";
+      currentKey=cat;
+      renderVendorsByCategory(cat);
+      openPanel();
+    });
+  });
 
-      function displayPhone(v){
-        const d = normPhone(v);
-        return d ? "+" + d : "—";
-      }
+  document.getElementById("panelClose").addEventListener("click",()=>{
+    document.getElementById("vendorPanel").classList.remove("open");
+    document.querySelectorAll(".cat-tile").forEach(x=>x.classList.remove("active"));
+    currentMode=null;
+    currentKey=null;
+  });
 
-      function isTruthyLike(v){
-        if (v === true || v === 1) return true;
-        const s = String(v == null ? "" : v).trim().toLowerCase();
-        return s === "true" || s === "1" || s === "yes" || s === "ok";
-      }
+  document.getElementById("topSearchBtn").addEventListener("click",()=>{
+    const q=document.getElementById("topSearchInput").value.trim();
+    if(!q) return;
+    document.querySelectorAll(".cat-tile").forEach(x=>x.classList.remove("active"));
+    currentMode="search";
+    currentKey=q;
+    renderSearch(q);
+    openPanel();
+  });
 
-      const hintedSlug = normSlug(qs.get("slug"));
-      const hintedPhone = normPhone(qs.get("phone"));
+  document.getElementById("topSearchInput").addEventListener("keydown",e=>{
+    if(e.key==="Enter") document.getElementById("topSearchBtn").click();
+  });
 
-      const rememberedSlug =
-        normSlug(sessionStorage.getItem("digiy_market_slug")) ||
-        normSlug(sessionStorage.getItem("digiy_market_last_slug")) ||
-        normSlug(localStorage.getItem("digiy_market_last_slug")) ||
-        "";
+  document.getElementById("cityFilter").addEventListener("change",rerenderCurrent);
 
-      const rememberedPhone =
-        normPhone(sessionStorage.getItem("digiy_market_phone")) ||
-        normPhone(localStorage.getItem("digiy_market_last_phone")) ||
-        "";
+  document.getElementById("resetFilters").addEventListener("click",()=>{
+    document.getElementById("cityFilter").value="";
+    document.getElementById("topSearchInput").value="";
 
-      const activeSlug = hintedSlug || rememberedSlug || "";
-      const activePhone = hintedPhone || rememberedPhone || "";
+    if(currentMode==="cat" && currentKey){
+      renderVendorsByCategory(currentKey);
+    } else {
+      document.getElementById("vendorPanel").classList.remove("open");
+      currentMode=null;
+      currentKey=null;
+      document.querySelectorAll(".cat-tile").forEach(x=>x.classList.remove("active"));
+    }
+  });
 
-      const sessionFlags = [
-        sessionStorage.getItem("digiy_market_pin_access"),
-        sessionStorage.getItem("digiy_market_access_ok"),
-        sessionStorage.getItem("digiy_market_has_access"),
-        sessionStorage.getItem("digiy_market_access"),
-        localStorage.getItem("digiy_market_pin_access"),
-        localStorage.getItem("digiy_market_access_ok"),
-        localStorage.getItem("digiy_market_has_access"),
-        localStorage.getItem("digiy_market_access")
-      ];
+  const rail=document.getElementById("catRail");
+  document.getElementById("arrL").addEventListener("click",()=>rail.scrollBy({left:-280,behavior:"smooth"}));
+  document.getElementById("arrR").addEventListener("click",()=>rail.scrollBy({left:280,behavior:"smooth"}));
 
-      let sessionOpen = sessionFlags.some(isTruthyLike);
+  let isDown=false,startX=0,startScroll=0;
+  function dragStart(x){isDown=true;startX=x;startScroll=rail.scrollLeft;rail.classList.add("grabbing");}
+  function dragMove(x){if(!isDown)return;rail.scrollLeft=startScroll-(x-startX);}
+  function dragEnd(){isDown=false;rail.classList.remove("grabbing");}
 
-      const untilValues = [
-        sessionStorage.getItem("digiy_market_pin_access_until"),
-        sessionStorage.getItem("digiy_market_access_until"),
-        localStorage.getItem("digiy_market_pin_access_until"),
-        localStorage.getItem("digiy_market_access_until")
-      ];
+  rail.addEventListener("mousedown",e=>dragStart(e.pageX));
+  window.addEventListener("mouseup",dragEnd);
+  window.addEventListener("mousemove",e=>dragMove(e.pageX));
+  rail.addEventListener("touchstart",e=>{if(e.touches[0])dragStart(e.touches[0].pageX);},{passive:true});
+  rail.addEventListener("touchmove",e=>{if(e.touches[0])dragMove(e.touches[0].pageX);},{passive:true});
+  rail.addEventListener("touchend",dragEnd);
 
-      if (!sessionOpen){
-        for (const raw of untilValues){
-          if (!raw) continue;
+  document.querySelectorAll(".faq-item").forEach(item=>{
+    item.querySelector(".faq-q").addEventListener("click",()=>{
+      const open=item.classList.contains("open");
+      document.querySelectorAll(".faq-item").forEach(x=>x.classList.remove("open"));
+      if(!open) item.classList.add("open");
+    });
+  });
+}
 
-          const n = Number(raw);
-          if (Number.isFinite(n) && n > Date.now()){
-            sessionOpen = true;
-            break;
-          }
+async function boot(){
+  initButtons();
+  bindStaticUi();
+  REAL_VENDORS = await loadRealPublicProfiles();
+  saveCatalog();
+  updateCounts();
+  fillCityFilter();
+}
 
-          const d = Date.parse(String(raw));
-          if (Number.isFinite(d) && d > Date.now()){
-            sessionOpen = true;
-            break;
-          }
-        }
-      }
-
-      if (hintedSlug) {
-        try {
-          sessionStorage.setItem("digiy_market_slug", hintedSlug);
-          sessionStorage.setItem("digiy_market_last_slug", hintedSlug);
-          localStorage.setItem("digiy_market_last_slug", hintedSlug);
-        } catch (_) {}
-      }
-
-      if (hintedPhone) {
-        try {
-          sessionStorage.setItem("digiy_market_phone", hintedPhone);
-          localStorage.setItem("digiy_market_last_phone", hintedPhone);
-        } catch (_) {}
-      }
-
-      function withSlug(path){
-        const u = new URL(path, location.href);
-        if (activeSlug) u.searchParams.set("slug", activeSlug);
-        return u.pathname + u.search;
-      }
-
-      function setHref(id, path){
-        const el = $(id);
-        if (el) el.href = withSlug(path);
-      }
-
-      function setStatus(msg, tone){
-        const box = $("statusBox");
-        if (!box) return;
-        box.className = "status" + (tone ? " " + tone : "");
-        box.textContent = msg;
-      }
-
-      const slugText = $("slugText");
-      const phoneText = $("phoneText");
-      const sessionText = $("sessionText");
-      const pillSlug = $("pillSlug");
-      const statusHint = $("statusHint");
-
-      if (slugText) slugText.textContent = activeSlug || "Aucun slug mémorisé";
-      if (phoneText) phoneText.textContent = displayPhone(activePhone);
-      if (sessionText) sessionText.textContent = sessionOpen ? "Ouverte" : "Non ouverte";
-
-      if (pillSlug) {
-        pillSlug.textContent = activeSlug
-          ? `🧭 Slug guidé : ${activeSlug}`
-          : "🧭 Route libre";
-      }
-
-      setHref("heroDashboard", "./dashboard-pro.html");
-      setHref("heroPin", "./pin.html");
-      setHref("heroCockpit", "./cockpit.html");
-
-      setHref("navPin", "./pin.html");
-      setHref("navDashboard", "./dashboard-pro.html");
-      setHref("navCockpit", "./cockpit.html");
-      setHref("navProduits", "./produits.html");
-      setHref("navBoutique", "./boutique.html");
-
-      if (activeSlug && sessionOpen) {
-        setStatus("Slug MARKET détecté et session vendeur ouverte. Tu peux entrer directement dans l’espace pro.", "ok");
-        if (statusHint) {
-          statusHint.textContent =
-            "Le slug est propagé automatiquement et la session PIN semble déjà ouverte.";
-        }
-      } else if (activeSlug && !sessionOpen) {
-        setStatus("Slug MARKET détecté, mais session vendeur non ouverte. Passe par PIN pour ouvrir proprement l’accès.", "warn");
-        if (statusHint) {
-          statusHint.textContent =
-            "Le slug est bien repéré, mais le bon réflexe reste pin.html pour ouvrir la vraie session vendeur.";
-        }
-      } else {
-        setStatus("Aucun slug trouvé. Passe par le PIN pour entrer proprement.", "warn");
-        if (statusHint) {
-          statusHint.textContent =
-            "Sans slug mémorisé, le bon réflexe reste pin.html pour ouvrir la vraie session vendeur.";
-        }
-      }
-    })();
-  </script>
+boot();
+</script>
 </body>
 </html>
