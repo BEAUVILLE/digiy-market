@@ -4,6 +4,16 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>DIGIY MARKET — Le marché vivant</title>
+<meta name="theme-color" content="#fdf6ec"/>
+<meta name="description" content="DIGIY MARKET — vitrine publique avec exemples guidants et boutiques publiques réelles."/>
+
+<script>
+  window.DIGIY_SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
+  window.DIGIY_SUPABASE_ANON_KEY = "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
+  window.DIGIY_SUPABASE_ANON = window.DIGIY_SUPABASE_ANON_KEY;
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
@@ -63,11 +73,7 @@ img{display:block;max-width:100%}
 .btn-top.soft{background:#fff;border:1.5px solid var(--line);}
 .btn-top.soft:hover{background:#fff3df}
 
-/* ═══════════════════════════════════
-   HERO BAND
-   Desktop  : plein, carte + texte
-   Mobile   : ultra compact, carte cachée
-   ═══════════════════════════════════ */
+/* HERO */
 .hero-band{
   background:linear-gradient(135deg,#1a1208 0%,#2e1e0a 48%,#1d2f14 100%);
   color:#fff;
@@ -108,9 +114,7 @@ img{display:block;max-width:100%}
 
 .hero-mob-cta{display:none;}
 
-/* ═══════════════════════════════════
-   IDÉE 1 — STAT STRIP
-   ═══════════════════════════════════ */
+/* STAT STRIP */
 .stat-strip{background:linear-gradient(90deg,#1a1208,#2a1a08);border-bottom:1px solid rgba(255,255,255,.07);}
 .stat-inner{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
 .stat-inner::-webkit-scrollbar{display:none;}
@@ -119,9 +123,7 @@ img{display:block;max-width:100%}
 .stat-num{font-family:"Playfair Display",serif;font-weight:900;font-size:1.32rem;color:#f8a040;}
 .stat-lbl{font-size:.62rem;font-weight:800;color:rgba(255,255,255,.46);text-transform:uppercase;letter-spacing:.05em;}
 
-/* ═══════════════════════════════════
-   IDÉE 2 — TICKER TERRAIN
-   ═══════════════════════════════════ */
+/* TICKER */
 .ticker{background:var(--orange);overflow:hidden;padding:7px 0;}
 .ticker-track{display:flex;animation:ticker-scroll 28s linear infinite;width:max-content;}
 .ticker-track:hover{animation-play-state:paused;}
@@ -135,7 +137,7 @@ img{display:block;max-width:100%}
 .filter-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 13px;border-radius:999px;background:#fff;border:1.5px solid var(--line);font-weight:900;font-size:.82rem;}
 .filter-select{appearance:none;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:11px 16px;font-weight:900;color:var(--ink);min-width:160px;cursor:pointer;}
 .filter-reset{border:none;border-radius:999px;padding:11px 14px;background:#fff;border:1.5px solid var(--line);font-weight:900;cursor:pointer;}
-.filter-reset:hover{background:#fff3df;}
+.filter-reset:hover{background:#fff3df}
 
 /* TRUST */
 .trust{padding:12px 0 0;}
@@ -225,9 +227,7 @@ img{display:block;max-width:100%}
 .big-cta{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px 18px;border-radius:18px;background:linear-gradient(135deg,var(--orange),var(--red));color:#fff;font-weight:900;font-size:.98rem;box-shadow:0 14px 28px rgba(232,104,32,.25);}
 .big-cta.soft{background:#fff;color:var(--ink);border:1.5px solid var(--line);box-shadow:none;}
 
-/* ═══════════════════════════════════
-   IDÉE 3 — FAQ RAPIDE ACCORDÉON
-   ═══════════════════════════════════ */
+/* FAQ */
 .faq-section{padding:18px 0 4px;}
 .faq-shell{background:var(--card);border:1.5px solid var(--line);border-radius:24px;padding:16px;box-shadow:var(--shadow-soft);}
 .faq-head{font-family:"Playfair Display",serif;font-size:1.26rem;font-weight:900;margin-bottom:14px;}
@@ -255,9 +255,6 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
 .footer-links a{color:var(--orange);}
 .footer-links a:hover{text-decoration:underline;}
 
-/* ═══════════════════════════
-   RESPONSIVE MOBILE
-   ═══════════════════════════ */
 @media(max-width:980px){
   .topbar-inner,.cta-band-grid,.filters-shell{grid-template-columns:1fr;}
   .top-actions{justify-content:flex-start;}
@@ -306,7 +303,7 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
         <span class="brand-icon" id="brandIcon">🛍️</span>
         <span>DIGIY MARKET<small>Le marché vivant du quotidien</small></span>
       </a>
-      <div class="live-count">Vendeurs exemples <strong id="totalCount">0</strong></div>
+      <div class="live-count">Fiches visibles <strong id="totalCount">0</strong></div>
     </div>
     <div class="top-search">
       <input id="topSearchInput" type="text" placeholder="Chercher un vendeur, un produit, une ville…"/>
@@ -325,10 +322,10 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
       <div>
         <div class="hero-kicker">🌍 DIGIYLYFE ∞ · Sénégal · Afrique</div>
         <h1>Le marché qui <em>bouge</em><br/>comme la rue.</h1>
-        <p class="hero-desc">Catégories qui glissent, fiches qui respirent, contact direct, entrée PRO visible. Ici on ne montre pas juste des cases. On montre une présence.</p>
+        <p class="hero-desc">Catégories qui glissent, fiches qui respirent, contact direct, entrée PRO visible. Ici on montre à la fois les exemples guidants et les vraies boutiques publiques.</p>
         <div class="hero-chips">
-          <span class="chip">🛒 Neuf</span>
-          <span class="chip">♻️ Deuxième main</span>
+          <span class="chip">🛍️ Boutiques publiques</span>
+          <span class="chip">🧭 Exemples guidants</span>
           <span class="chip">👗 Vêtements</span>
           <span class="chip">🌸 Parfum</span>
           <span class="chip">✂️ Coiffeur</span>
@@ -342,8 +339,8 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
         </div>
       </div>
       <div class="hero-card">
-        <h3>Un hall qui convertit</h3>
-        <p>Tous les exemples servent à guider les commerçants. Le bouton <strong>Je veux mon module</strong> pointe directement vers ton entrée PRO officielle.</p>
+        <h3>Une vitrine qui respire</h3>
+        <p>Les exemples servent à inspirer. Les vraies boutiques publiques servent à prouver que le rail vit déjà. Le bouton <strong>Je veux mon module</strong> pointe directement vers ton entrée PRO officielle.</p>
         <div class="cta-row">
           <a class="hero-btn primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🚀 Je veux mon module</a>
           <a id="heroWaBtn" class="hero-btn soft" href="#" target="_blank" rel="noopener">💬 Parler à DIGIY</a>
@@ -356,10 +353,10 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
 <div class="stat-strip">
   <div class="wrap">
     <div class="stat-inner">
-      <div class="stat-item"><div class="stat-num" id="statVendeurs">0</div><div class="stat-lbl">Vendeurs exemples</div></div>
-      <div class="stat-item"><div class="stat-num">12</div><div class="stat-lbl">Catégories</div></div>
+      <div class="stat-item"><div class="stat-num" id="statVendeurs">0</div><div class="stat-lbl">Fiches visibles</div></div>
+      <div class="stat-item"><div class="stat-num" id="statReal">0</div><div class="stat-lbl">Boutiques publiques</div></div>
+      <div class="stat-item"><div class="stat-num" id="statExamples">0</div><div class="stat-lbl">Exemples</div></div>
       <div class="stat-item"><div class="stat-num">0%</div><div class="stat-lbl">Commission</div></div>
-      <div class="stat-item"><div class="stat-num">Direct</div><div class="stat-lbl">Paiement pro</div></div>
       <div class="stat-item"><div class="stat-num">∞</div><div class="stat-lbl">DIGIYLYFE</div></div>
     </div>
   </div>
@@ -376,9 +373,9 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
   <div class="wrap">
     <div class="filters-shell">
       <div class="filter-group">
-        <span class="filter-pill">🎯 Index MARKET V5</span>
-        <span class="filter-pill">🧭 Fiches exemples guidantes</span>
-        <span class="filter-pill">🔥 Entrée PRO visible</span>
+        <span class="filter-pill">🎯 Vitrine publique</span>
+        <span class="filter-pill">🧭 Exemples + réel</span>
+        <span class="filter-pill">🔥 Fiche slug-first</span>
       </div>
       <select id="cityFilter" class="filter-select"><option value="">Toutes les villes</option></select>
       <button id="resetFilters" class="filter-reset" type="button">Réinitialiser</button>
@@ -403,31 +400,31 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
 <section class="cats-section">
   <div class="wrap">
     <div class="section-head">
-      <div><h2>Les univers du marché</h2><p>Clique sur un pavé → les vendeurs s'ouvrent</p></div>
+      <div><h2>Les univers du marché</h2><p>Clique sur un pavé → les fiches s'ouvrent</p></div>
       <div class="rail-controls"><button class="arr" id="arrL" type="button">‹</button><button class="arr" id="arrR" type="button">›</button></div>
     </div>
 
     <div class="rail-wrap">
       <div class="cat-rail" id="catRail">
-        <div class="cat-tile" data-cat="neuf"><div class="cat-img" style="background:linear-gradient(135deg,#ffeaaa,#ffd070)"><span class="cat-bg-txt">⭐🆕📦✨🛒⭐🆕📦✨🛒⭐🆕📦✨🛒⭐🆕📦</span><span class="cat-icon">🛒</span></div><div class="cat-body"><div class="cat-name">Neuf</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="deuxiemain"><div class="cat-img" style="background:linear-gradient(135deg,#c8deff,#90b8ff)"><span class="cat-bg-txt">♻️💡🔄💎♻️💡🔄💎♻️💡🔄💎♻️💡🔄</span><span class="cat-icon">♻️</span></div><div class="cat-body"><div class="cat-name">Deuxième main</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="vetements"><div class="cat-img" style="background:linear-gradient(135deg,#ffd0e0,#ffaac8)"><span class="cat-bg-txt">👗👕👖🧣👗👕👖🧣👗👕👖🧣👗👕👖</span><span class="cat-icon">👗</span></div><div class="cat-body"><div class="cat-name">Vêtements</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="parfum"><div class="cat-img" style="background:linear-gradient(135deg,#eadfff,#d4c2ff)"><span class="cat-bg-txt">🌸✨💜🌺🌸✨💜🌺🌸✨💜🌺🌸✨💜</span><span class="cat-icon">🌸</span></div><div class="cat-body"><div class="cat-name">Parfum</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="coiffeur"><div class="cat-img" style="background:linear-gradient(135deg,#dbfff6,#b9f1e0)"><span class="cat-bg-txt">✂️💈🪒💇✂️💈🪒💇✂️💈🪒💇✂️💈🪒</span><span class="cat-icon">✂️</span></div><div class="cat-body"><div class="cat-name">Coiffeur</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="onglerie"><div class="cat-img" style="background:linear-gradient(135deg,#ffd0e0,#ffb8d0)"><span class="cat-bg-txt">💅💎✨🌸💅💎✨🌸💅💎✨🌸💅💎✨</span><span class="cat-icon">💅</span></div><div class="cat-body"><div class="cat-name">Onglerie</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="brocante"><div class="cat-img" style="background:linear-gradient(135deg,#f4ead7,#ead6b2)"><span class="cat-bg-txt">🪑🏺🖼️🪞🪑🏺🖼️🪞🪑🏺🖼️🪞🪑🏺</span><span class="cat-icon">🏺</span></div><div class="cat-body"><div class="cat-name">Brocante</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="banabana"><div class="cat-img" style="background:linear-gradient(135deg,#ffe0cb,#ffc391)"><span class="cat-bg-txt">🧺🛒🏪🎪🧺🛒🏪🎪🧺🛒🏪🎪🧺🛒</span><span class="cat-icon">🧺</span></div><div class="cat-body"><div class="cat-name">Bana-bana</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="quotidien"><div class="cat-img" style="background:linear-gradient(135deg,#dbf5ea,#bfe8d4)"><span class="cat-bg-txt">🏠🧴🥫🧹🏠🧴🥫🧹🏠🧴🥫🧹🏠🧴</span><span class="cat-icon">🏠</span></div><div class="cat-body"><div class="cat-name">Quotidien</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="phones"><div class="cat-img" style="background:linear-gradient(135deg,#c8deff,#90b8ff)"><span class="cat-bg-txt">📱💻⌨️🖥️📱💻⌨️🖥️📱💻⌨️🖥️📱💻</span><span class="cat-icon">📱</span></div><div class="cat-body"><div class="cat-name">Téléphones</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="alimentaire"><div class="cat-img" style="background:linear-gradient(135deg,#ffeaaa,#ffd070)"><span class="cat-bg-txt">🥜🌽🥘🫘🥜🌽🥘🫘🥜🌽🥘🫘🥜🌽</span><span class="cat-icon">🥜</span></div><div class="cat-body"><div class="cat-name">Alimentaire</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="chaussures"><div class="cat-img" style="background:linear-gradient(135deg,#ffe0cb,#ffc391)"><span class="cat-bg-txt">👟👠👞🥿👟👠👞🥿👟👠👞🥿👟👠</span><span class="cat-icon">👟</span></div><div class="cat-body"><div class="cat-name">Chaussures</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="neuf"><div class="cat-img" style="background:linear-gradient(135deg,#ffeaaa,#ffd070)"><span class="cat-bg-txt">⭐🆕📦✨🛒⭐🆕📦✨🛒⭐🆕📦✨🛒⭐🆕📦</span><span class="cat-icon">🛒</span></div><div class="cat-body"><div class="cat-name">Neuf</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="deuxiemain"><div class="cat-img" style="background:linear-gradient(135deg,#c8deff,#90b8ff)"><span class="cat-bg-txt">♻️💡🔄💎♻️💡🔄💎♻️💡🔄💎♻️💡🔄</span><span class="cat-icon">♻️</span></div><div class="cat-body"><div class="cat-name">Deuxième main</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="vetements"><div class="cat-img" style="background:linear-gradient(135deg,#ffd0e0,#ffaac8)"><span class="cat-bg-txt">👗👕👖🧣👗👕👖🧣👗👕👖🧣👗👕👖</span><span class="cat-icon">👗</span></div><div class="cat-body"><div class="cat-name">Vêtements</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="parfum"><div class="cat-img" style="background:linear-gradient(135deg,#eadfff,#d4c2ff)"><span class="cat-bg-txt">🌸✨💜🌺🌸✨💜🌺🌸✨💜🌺🌸✨💜</span><span class="cat-icon">🌸</span></div><div class="cat-body"><div class="cat-name">Parfum</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="coiffeur"><div class="cat-img" style="background:linear-gradient(135deg,#dbfff6,#b9f1e0)"><span class="cat-bg-txt">✂️💈🪒💇✂️💈🪒💇✂️💈🪒💇✂️💈🪒</span><span class="cat-icon">✂️</span></div><div class="cat-body"><div class="cat-name">Coiffeur</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="onglerie"><div class="cat-img" style="background:linear-gradient(135deg,#ffd0e0,#ffb8d0)"><span class="cat-bg-txt">💅💎✨🌸💅💎✨🌸💅💎✨🌸💅💎✨</span><span class="cat-icon">💅</span></div><div class="cat-body"><div class="cat-name">Onglerie</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="brocante"><div class="cat-img" style="background:linear-gradient(135deg,#f4ead7,#ead6b2)"><span class="cat-bg-txt">🪑🏺🖼️🪞🪑🏺🖼️🪞🪑🏺🖼️🪞🪑🏺</span><span class="cat-icon">🏺</span></div><div class="cat-body"><div class="cat-name">Brocante</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="banabana"><div class="cat-img" style="background:linear-gradient(135deg,#ffe0cb,#ffc391)"><span class="cat-bg-txt">🧺🛒🏪🎪🧺🛒🏪🎪🧺🛒🏪🎪🧺🛒</span><span class="cat-icon">🧺</span></div><div class="cat-body"><div class="cat-name">Bana-bana</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="quotidien"><div class="cat-img" style="background:linear-gradient(135deg,#dbf5ea,#bfe8d4)"><span class="cat-bg-txt">🏠🧴🥫🧹🏠🧴🥫🧹🏠🧴🥫🧹🏠🧴</span><span class="cat-icon">🏠</span></div><div class="cat-body"><div class="cat-name">Quotidien</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="phones"><div class="cat-img" style="background:linear-gradient(135deg,#c8deff,#90b8ff)"><span class="cat-bg-txt">📱💻⌨️🖥️📱💻⌨️🖥️📱💻⌨️🖥️📱💻</span><span class="cat-icon">📱</span></div><div class="cat-body"><div class="cat-name">Téléphones</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="alimentaire"><div class="cat-img" style="background:linear-gradient(135deg,#ffeaaa,#ffd070)"><span class="cat-bg-txt">🥜🌽🥘🫘🥜🌽🥘🫘🥜🌽🥘🫘🥜🌽</span><span class="cat-icon">🥜</span></div><div class="cat-body"><div class="cat-name">Alimentaire</div><div class="cat-count">Fiches<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="chaussures"><div class="cat-img" style="background:linear-gradient(135deg,#ffe0cb,#ffc391)"><span class="cat-bg-txt">👟👠👞🥿👟👠👞🥿👟👠👞🥿👟👠</span><span class="cat-icon">👟</span></div><div class="cat-body"><div class="cat-name">Chaussures</div><div class="cat-count">Fiches<span>0</span></div></div></div>
       </div>
     </div>
 
     <div class="vendor-panel" id="vendorPanel">
       <div class="vendor-panel-inner">
         <div class="panel-header">
-          <div class="panel-title"><span class="icon" id="panelIcon">🛒</span><div><h3 id="panelTitle">Catégorie</h3><p id="panelSub">Vendeurs exemples</p></div></div>
+          <div class="panel-title"><span class="icon" id="panelIcon">🛒</span><div><h3 id="panelTitle">Catégorie</h3><p id="panelSub">Fiches visibles</p></div></div>
           <button class="panel-close" id="panelClose" type="button">✕</button>
         </div>
         <div class="vendor-grid" id="vendorGrid"></div>
@@ -466,7 +463,7 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
       </div>
       <div class="faq-item">
         <div class="faq-q">Les vendeurs visibles ici sont de vrais vendeurs ? <span class="faq-arr">▾</span></div>
-        <div class="faq-a">Les fiches affichées sont des exemples guidants — elles montrent à quoi ressemble une vraie vitrine DIGIY MARKET pour inspirer les commerçants qui hésitent encore. Les vrais vendeurs actifs apparaissent dans le module PRO une fois inscrits et activés.</div>
+        <div class="faq-a">Cette vitrine peut montrer à la fois des fiches guidantes et de vraies boutiques publiques. Les exemples servent à inspirer. Les boutiques publiques servent à montrer le rail vivant.</div>
       </div>
     </div>
   </div>
@@ -485,8 +482,14 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line);}
 </div>
 
 <script>
-const DIGIY_CONFIG={whatsapp:"221771342889",siteUrl:"https://digiylyfe.com/",proUrl:"https://commencer-a-payer.digiylyfe.com/",logoUrl:""};
-const VENDORS={
+const DIGIY_CONFIG = {
+  whatsapp: "221771342889",
+  siteUrl: "https://digiylyfe.com/",
+  proUrl: "https://commencer-a-payer.digiylyfe.com/",
+  logoUrl: ""
+};
+
+const VENDORS = {
   neuf:[{icon:"📱",bg:"#c8deff",name:"Tech Dakar Shop",what:"Téléphones neufs, accessoires, batteries, câbles",loc:"Dakar · Plateau",price:"5 000–250 000 F",live:true,images:[]},{icon:"👟",bg:"#ffe0cb",name:"Sneakers Mbaye",what:"Jordan, Nike, Adidas — arrivage chaque semaine",loc:"Mbour · Marché Central",price:"15 000–85 000 F",live:true,images:[]},{icon:"🛒",bg:"#ffeaaa",name:"Boutique Awa Neuf",what:"Produits ménagers neufs, ustensiles, déco",loc:"Saly · Ngaparou",price:"2 000–35 000 F",live:false,images:[]},{icon:"💻",bg:"#c8deff",name:"Diallo Informatique",what:"PC neufs et reconditionnés, imprimantes",loc:"Dakar · Parcelles",price:"80 000–450 000 F",live:true,images:[]}],
   deuxiemain:[{icon:"📺",bg:"#f4ead7",name:"Mamadou Électro",what:"TV, réfrigérateurs, machines à laver d'occasion",loc:"Dakar · Colobane",price:"20 000–150 000 F",live:true,images:[]},{icon:"👕",bg:"#ffd0e0",name:"Frip Sénégal",what:"Friperie sélectionnée, marques, prix juste",loc:"Dakar · Sicap",price:"500–5 000 F",live:true,images:[]},{icon:"🎮",bg:"#eadfff",name:"GameZone Dakar",what:"Consoles, jeux PS4/PS5, manettes",loc:"Dakar · Yoff",price:"15 000–120 000 F",live:true,images:[]}],
   vetements:[{icon:"👘",bg:"#ffeaaa",name:"Boubous Cheikh",what:"Boubous brocart, bazin, grand boubou cérémonie",loc:"Dakar · HLM",price:"8 000–60 000 F",live:true,images:[]},{icon:"👗",bg:"#ffd0e0",name:"Robes Fatou",what:"Robes africaines, wax, tenues soirée et bureau",loc:"Saly · Centre",price:"5 000–35 000 F",live:true,images:[]},{icon:"🧣",bg:"#eadfff",name:"Accessoires Mode",what:"Ceintures, sacs, bijoux fantaisie, foulards",loc:"Saint-Louis",price:"1 000–12 000 F",live:true,images:[]}],
@@ -500,116 +503,473 @@ const VENDORS={
   alimentaire:[{icon:"🥜",bg:"#ffeaaa",name:"Arachides Baye",what:"Arachides grillées, huile d'arachide artisanale",loc:"Kaolack · Marché",price:"500–5 000 F",live:true,images:[]},{icon:"🌾",bg:"#f4ead7",name:"Céréales du Terroir",what:"Mil, sorgho, fonio, riz local, maïs",loc:"Tambacounda",price:"1 000–25 000 F",live:true,images:[]},{icon:"🥦",bg:"#dbf5ea",name:"Maraîchage Fatou",what:"Légumes frais jardin, tomates, oignons, aubergines",loc:"Thiès · Pout",price:"200–3 000 F",live:true,images:[]}],
   chaussures:[{icon:"👡",bg:"#ffd0e0",name:"Sandales Aicha",what:"Sandales artisanales cuir, babouches colorées",loc:"Dakar · Médina",price:"3 000–18 000 F",live:true,images:[]},{icon:"👟",bg:"#ffe0cb",name:"Baskets Papito",what:"Nike, Adidas, Puma — arrivage hebdomadaire",loc:"Dakar · Parcelles",price:"15 000–85 000 F",live:true,images:[]},{icon:"👞",bg:"#c8deff",name:"Chaussures Homme SN",what:"Derby, bottes, chaussures ville qualité cuir",loc:"Dakar · Plateau",price:"12 000–55 000 F",live:true,images:[]}]
 };
-const META={neuf:{label:"Neuf",icon:"🛒",sub:"Produits récents, prix clairs"},deuxiemain:{label:"Deuxième main",icon:"♻️",sub:"La valeur continue, le bon prix circule"},vetements:{label:"Vêtements",icon:"👗",sub:"Style terrain, cérémonie ou quotidien"},parfum:{label:"Parfum & senteur",icon:"🌸",sub:"Essences, thiouraye, attars et cadeaux"},coiffeur:{label:"Coiffeur",icon:"✂️",sub:"Service de proximité"},onglerie:{label:"Onglerie",icon:"💅",sub:"Pose, nail art, manucure"},brocante:{label:"Brocante",icon:"🏺",sub:"Pièces rares, vintage"},banabana:{label:"Bana-bana",icon:"🧺",sub:"Commerce mobile ancré dans le réel"},quotidien:{label:"Quotidien",icon:"🏠",sub:"Ce qu'on cherche vite"},phones:{label:"Téléphones",icon:"📱",sub:"Neufs, reconditionnés, accessoires"},alimentaire:{label:"Alimentaire",icon:"🥜",sub:"Produits locaux, céréales, épices"},chaussures:{label:"Chaussures",icon:"👟",sub:"Sandales, baskets, mocassins"}};
 
-function slugify(s){return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/&/g,"-et-").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");}
-function waLink(t){return `https://wa.me/${DIGIY_CONFIG.whatsapp}?text=${encodeURIComponent(t)}`;}
-function parseCity(l=""){return (l.split("·")[0]||l).trim();}
-function makeSvgData(title,sub,icon,c1,c2){const s=`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient><filter id="f" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="rgba(0,0,0,.18)"/></filter></defs><rect width="1200" height="900" fill="url(#g)"/><circle cx="1030" cy="120" r="160" fill="rgba(255,255,255,.12)"/><circle cx="190" cy="760" r="180" fill="rgba(255,255,255,.12)"/><text x="100" y="230" font-size="190" filter="url(#f)">${icon}</text><rect x="70" y="605" width="1060" height="180" rx="32" fill="rgba(255,255,255,.9)"/><text x="120" y="680" font-family="Arial" font-size="60" font-weight="700" fill="#1a1208">${title}</text><text x="120" y="740" font-family="Arial" font-size="30" fill="#6f624f">${sub}</text></svg>`;return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(s)}`;}
-function palette(bg){const m={"#c8deff":["#bdd8ff","#8cb7ff"],"#ffe0cb":["#ffd9c5","#ffb88a"],"#ffeaaa":["#fff0b8","#ffd56d"],"#ffd0e0":["#ffd8e5","#ffb1cb"],"#eadfff":["#eee2ff","#d2beff"],"#dbfff6":["#ddfff5","#afe9d5"],"#f4ead7":["#f6ead9","#ddc9a3"],"#dbf5ea":["#dff7ec","#b8e0ca"]};return m[bg]||["#f4ead7","#d8bf96"];}
-function fallbackVendorImage(v){const [c1,c2]=palette(v.bg||"#f4ead7");return makeSvgData(v.name,v.loc,v.icon||"🛍️",c1,c2);}
-function buildVendor(cat,v){const m=META[cat]||{};const imgs=Array.isArray(v.images)?v.images.filter(Boolean):[];return{...v,category:cat,categoryLabel:m.label||cat,categoryIcon:m.icon||"🛍️",categorySub:m.sub||"",city:parseCity(v.loc),slug:`${cat}-${slugify(v.name)}`,isExample:true,coverImage:imgs[0]||fallbackVendorImage(v),images:imgs};}
-function buildCatalog(){return Object.entries(VENDORS).flatMap(([c,l])=>l.map(v=>buildVendor(c,v)));}
-function saveCatalog(){try{localStorage.setItem("digiy_market_catalog_v5",JSON.stringify({config:DIGIY_CONFIG,meta:META,vendors:buildCatalog()}));}catch(e){}}
+const META = {
+  neuf:{label:"Neuf",icon:"🛒",sub:"Produits récents, prix clairs"},
+  deuxiemain:{label:"Deuxième main",icon:"♻️",sub:"La valeur continue, le bon prix circule"},
+  vetements:{label:"Vêtements",icon:"👗",sub:"Style terrain, cérémonie ou quotidien"},
+  parfum:{label:"Parfum & senteur",icon:"🌸",sub:"Essences, thiouraye, attars et cadeaux"},
+  coiffeur:{label:"Coiffeur",icon:"✂️",sub:"Service de proximité"},
+  onglerie:{label:"Onglerie",icon:"💅",sub:"Pose, nail art, manucure"},
+  brocante:{label:"Brocante",icon:"🏺",sub:"Pièces rares, vintage"},
+  banabana:{label:"Bana-bana",icon:"🧺",sub:"Commerce mobile ancré dans le réel"},
+  quotidien:{label:"Quotidien",icon:"🏠",sub:"Ce qu'on cherche vite"},
+  phones:{label:"Téléphones",icon:"📱",sub:"Neufs, reconditionnés, accessoires"},
+  alimentaire:{label:"Alimentaire",icon:"🥜",sub:"Produits locaux, céréales, épices"},
+  chaussures:{label:"Chaussures",icon:"👟",sub:"Sandales, baskets, mocassins"}
+};
+
+let REAL_VENDORS = [];
+let currentMode = null;
+let currentKey = null;
+
+function slugify(s){
+  return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/&/g,"-et-").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
+}
+function normPhone(v){
+  const d = String(v || "").replace(/[^\d]/g, "");
+  if (!d) return "";
+  if (d.startsWith("221") && d.length === 12) return d;
+  if (d.length === 9) return "221" + d;
+  return d;
+}
+function normalizeText(v=""){
+  return String(v || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+}
+function parseCity(l=""){
+  return (l.split("·")[0] || l).trim();
+}
+function waLink(t){
+  return `https://wa.me/${DIGIY_CONFIG.whatsapp}?text=${encodeURIComponent(t)}`;
+}
+function waDirect(phone, text){
+  return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+}
+function makeSvgData(title,sub,icon,c1,c2){
+  const s=`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient><filter id="f" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="rgba(0,0,0,.18)"/></filter></defs><rect width="1200" height="900" fill="url(#g)"/><circle cx="1030" cy="120" r="160" fill="rgba(255,255,255,.12)"/><circle cx="190" cy="760" r="180" fill="rgba(255,255,255,.12)"/><text x="100" y="230" font-size="190" filter="url(#f)">${icon}</text><rect x="70" y="605" width="1060" height="180" rx="32" fill="rgba(255,255,255,.9)"/><text x="120" y="680" font-family="Arial" font-size="60" font-weight="700" fill="#1a1208">${title}</text><text x="120" y="740" font-family="Arial" font-size="30" fill="#6f624f">${sub}</text></svg>`;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(s)}`;
+}
+function palette(bg){
+  const m={"#c8deff":["#bdd8ff","#8cb7ff"],"#ffe0cb":["#ffd9c5","#ffb88a"],"#ffeaaa":["#fff0b8","#ffd56d"],"#ffd0e0":["#ffd8e5","#ffb1cb"],"#eadfff":["#eee2ff","#d2beff"],"#dbfff6":["#ddfff5","#afe9d5"],"#f4ead7":["#f6ead9","#ddc9a3"],"#dbf5ea":["#dff7ec","#b8e0ca"]};
+  return m[bg] || ["#f4ead7","#d8bf96"];
+}
+function fallbackVendorImage(v){
+  const [c1,c2] = palette(v.bg || "#f4ead7");
+  return makeSvgData(v.name, v.loc || v.city || "DIGIY MARKET", v.icon || "🛍️", c1, c2);
+}
+function categoryFromText(txt){
+  const t = normalizeText(txt);
+  if (!t) return "quotidien";
+  if (t.includes("coiff") || t.includes("barber") || t.includes("salon")) return "coiffeur";
+  if (t.includes("ongle") || t.includes("nail") || t.includes("manuc")) return "onglerie";
+  if (t.includes("parfum") || t.includes("musc") || t.includes("thiouraye") || t.includes("attar")) return "parfum";
+  if (t.includes("vetement") || t.includes("mode") || t.includes("robe") || t.includes("boubou") || t.includes("textile")) return "vetements";
+  if (t.includes("chauss") || t.includes("basket") || t.includes("sandale") || t.includes("babouche")) return "chaussures";
+  if (t.includes("telephone") || t.includes("smartphone") || t.includes("phone") || t.includes("mobile")) return "phones";
+  if (t.includes("aliment") || t.includes("fruit") || t.includes("legume") || t.includes("cereal") || t.includes("epice") || t.includes("boisson")) return "alimentaire";
+  if (t.includes("brocante") || t.includes("vintage") || t.includes("artisanat") || t.includes("deco") || t.includes("poterie")) return "brocante";
+  if (t.includes("deuxieme") || t.includes("occasion") || t.includes("recondition")) return "deuxiemain";
+  if (t.includes("bana") || t.includes("ambulant") || t.includes("mobile")) return "banabana";
+  if (t.includes("neuf")) return "neuf";
+  return "quotidien";
+}
+
+function buildExampleVendor(cat,v){
+  const m=META[cat]||{};
+  const imgs=Array.isArray(v.images)?v.images.filter(Boolean):[];
+  return {
+    ...v,
+    category:cat,
+    categoryLabel:m.label||cat,
+    categoryIcon:m.icon||"🛍️",
+    categorySub:m.sub||"",
+    city:parseCity(v.loc),
+    slug:`${cat}-${slugify(v.name)}`,
+    publicSlug:"",
+    isExample:true,
+    coverImage:imgs[0]||fallbackVendorImage(v),
+    images:imgs
+  };
+}
+
+function buildRealVendor(profile){
+  const cat = categoryFromText(profile.category || profile.bio || "");
+  const m = META[cat] || META.quotidien;
+  const name = profile.display_name || "Boutique DIGIY";
+  const city = profile.city || "Sénégal";
+  const what = profile.bio || profile.category || "Boutique locale";
+  const loc = [profile.city].filter(Boolean).join(" · ") || city;
+
+  const vendor = {
+    icon: m.icon || "🛍️",
+    bg: "#dbfff6",
+    name,
+    what,
+    loc,
+    price: "Boutique publique",
+    live: true,
+    images: [],
+    category: cat,
+    categoryLabel: profile.category || m.label || "Boutique locale",
+    categoryIcon: m.icon || "🛍️",
+    categorySub: m.sub || "",
+    city,
+    slug: profile.slug || "",
+    publicSlug: profile.slug || "",
+    isExample: false,
+    phone: normPhone(profile.phone || ""),
+    whatsapp: normPhone(profile.whatsapp || profile.phone || ""),
+    coverImage: "",
+    raw: profile
+  };
+
+  vendor.coverImage = fallbackVendorImage(vendor);
+  return vendor;
+}
+
+function buildExampleCatalog(){
+  return Object.entries(VENDORS).flatMap(([c,l])=>l.map(v=>buildExampleVendor(c,v)));
+}
+
+function buildCatalog(){
+  return [...REAL_VENDORS, ...buildExampleCatalog()];
+}
+
+function saveCatalog(){
+  try{
+    localStorage.setItem("digiy_market_catalog_v5",JSON.stringify({
+      config:DIGIY_CONFIG,
+      meta:META,
+      vendors:buildCatalog()
+    }));
+  }catch(e){}
+}
 
 function updateCounts(){
-  document.querySelectorAll(".cat-tile").forEach(t=>{const c=t.dataset.cat;const el=t.querySelector(".cat-count span");if(el)el.textContent=(VENDORS[c]||[]).length;});
-  const n=buildCatalog().length;
-  document.getElementById("totalCount").textContent=n;
-  document.getElementById("statVendeurs").textContent=n;
+  const catalog = buildCatalog();
+  document.querySelectorAll(".cat-tile").forEach(t=>{
+    const c=t.dataset.cat;
+    const el=t.querySelector(".cat-count span");
+    if(el) el.textContent = catalog.filter(v => v.category === c).length;
+  });
+
+  const total = catalog.length;
+  const real = catalog.filter(v => !v.isExample).length;
+  const examples = catalog.filter(v => v.isExample).length;
+
+  document.getElementById("totalCount").textContent = total;
+  document.getElementById("statVendeurs").textContent = total;
+  document.getElementById("statReal").textContent = real;
+  document.getElementById("statExamples").textContent = examples;
 }
 
 function initButtons(){
-  const gw=waLink("Bonjour DIGIY 👋 Je veux des informations sur DIGIY MARKET.");
-  ["waTopBtn","heroWaBtn","heroWaBtnMob","ctaWaBtn","floatWaBtn"].forEach(id=>{const el=document.getElementById(id);if(el)el.href=gw;});
-  const bi=document.getElementById("brandIcon");if(DIGIY_CONFIG.logoUrl)bi.innerHTML=`<img src="${DIGIY_CONFIG.logoUrl}" alt="DIGIY">`;
+  const gw = waLink("Bonjour DIGIY 👋 Je veux des informations sur DIGIY MARKET.");
+  ["waTopBtn","heroWaBtn","heroWaBtnMob","ctaWaBtn","floatWaBtn"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.href=gw;
+  });
+  const bi=document.getElementById("brandIcon");
+  if(DIGIY_CONFIG.logoUrl) bi.innerHTML=`<img src="${DIGIY_CONFIG.logoUrl}" alt="DIGIY">`;
 }
 
 function fillCityFilter(){
   const sel=document.getElementById("cityFilter");
-  const cities=[...new Set(buildCatalog().map(v=>v.city))].sort((a,b)=>a.localeCompare(b,"fr"));
-  cities.forEach(c=>{const o=document.createElement("option");o.value=c;o.textContent=c;sel.appendChild(o);});
+  const previous = sel.value;
+  sel.innerHTML = `<option value="">Toutes les villes</option>`;
+
+  const cities=[...new Set(buildCatalog().map(v=>v.city).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"fr"));
+  cities.forEach(c=>{
+    const o=document.createElement("option");
+    o.value=c;
+    o.textContent=c;
+    sel.appendChild(o);
+  });
+
+  sel.value = previous;
 }
 
-function getCityFilter(){return document.getElementById("cityFilter").value.trim();}
-function applyCityFilter(list){const c=getCityFilter();return c?list.filter(v=>v.city===c):list;}
+function getCityFilter(){
+  return document.getElementById("cityFilter").value.trim();
+}
+function applyCityFilter(list){
+  const c=getCityFilter();
+  return c ? list.filter(v=>v.city===c) : list;
+}
+
+function openVendor(v){
+  saveCatalog();
+  if (v.isExample) {
+    window.location.href = `vendeur.html?v=${encodeURIComponent(v.slug)}`;
+    return;
+  }
+  const slug = v.publicSlug || v.slug;
+  window.location.href = `vendeur.html?slug=${encodeURIComponent(slug)}`;
+}
+
+function contactVendor(v){
+  if (!v.isExample && v.whatsapp) {
+    window.open(waDirect(v.whatsapp, `Bonjour 👋 Je vous contacte depuis votre fiche DIGIY MARKET.`), "_blank");
+    return;
+  }
+  window.open(waLink(`Bonjour DIGIY 👋 Je veux une vitrine comme "${v.name}" sur DIGIY MARKET.`), "_blank");
+}
+
+function vendorSourceTag(v){
+  return v.isExample
+    ? `<span class="vendor-example">EXEMPLE</span>`
+    : `<span class="vendor-example">BOUTIQUE PUBLIQUE</span>`;
+}
+
+function vendorLiveTag(v){
+  return v.live ? `<div class="vendor-live">${v.isExample ? "EXEMPLE VISIBLE" : "EN LIGNE"}</div>` : "";
+}
+
+function vendorPriceLabel(v){
+  return v.isExample ? v.price : "Voir la fiche";
+}
 
 function renderVendorCards(list){
   const g=document.getElementById("vendorGrid");
-  if(!list.length){g.innerHTML=`<div class="empty-state"><div class="big">🏗️</div><p>Aucun vendeur exemple trouvé.<br/>Essaie une autre ville ou une autre recherche.</p></div>`;return;}
-  g.innerHTML=list.map(v=>`<article class="vendor" onclick="openVendor('${v.slug}')"><div class="vendor-top" style="background:${v.bg}"><img src="${v.coverImage}" alt="${v.name}"><span class="vendor-example">EXEMPLE</span>${v.live?"<div class=\"vendor-live\">EN LIGNE</div>":""}</div><div class="vendor-body"><div class="vendor-name">${v.name}</div><div class="vendor-what">${v.what}</div><div class="vendor-meta"><span class="vendor-loc">📍 ${v.loc}</span><span class="vendor-price">${v.price}</span></div><div class="vendor-cta"><button class="vendor-btn primary" type="button" onclick="event.stopPropagation();openVendor('${v.slug}')">👁 Voir la fiche</button><button class="vendor-btn ghost" type="button" onclick="event.stopPropagation();contactVendor('${v.slug}')">💬 WhatsApp</button></div></div></article>`).join("");
+  if(!list.length){
+    g.innerHTML=`<div class="empty-state"><div class="big">🏗️</div><p>Aucune fiche trouvée.<br/>Essaie une autre ville ou une autre recherche.</p></div>`;
+    return;
+  }
+
+  g.innerHTML=list.map((v,idx)=>`
+    <article class="vendor" data-idx="${idx}">
+      <div class="vendor-top" style="background:${v.bg || '#f4ead7'}">
+        <img src="${v.coverImage || fallbackVendorImage(v)}" alt="${v.name}">
+        ${vendorSourceTag(v)}
+        ${vendorLiveTag(v)}
+      </div>
+      <div class="vendor-body">
+        <div class="vendor-name">${v.name}</div>
+        <div class="vendor-what">${v.what}</div>
+        <div class="vendor-meta">
+          <span class="vendor-loc">📍 ${v.loc}</span>
+          <span class="vendor-price">${vendorPriceLabel(v)}</span>
+        </div>
+        <div class="vendor-cta">
+          <button class="vendor-btn primary jsOpen" data-idx="${idx}" type="button">👁 Voir la fiche</button>
+          <button class="vendor-btn ghost jsWa" data-idx="${idx}" type="button">${(!v.isExample && v.whatsapp) ? "💬 Boutique" : "💬 DIGIY"}</button>
+        </div>
+      </div>
+    </article>
+  `).join("");
+
+  g.querySelectorAll(".jsOpen").forEach(btn=>{
+    btn.addEventListener("click", (e)=>{
+      e.stopPropagation();
+      openVendor(list[Number(btn.dataset.idx)]);
+    });
+  });
+
+  g.querySelectorAll(".jsWa").forEach(btn=>{
+    btn.addEventListener("click", (e)=>{
+      e.stopPropagation();
+      contactVendor(list[Number(btn.dataset.idx)]);
+    });
+  });
+
+  g.querySelectorAll(".vendor").forEach(card=>{
+    card.addEventListener("click", ()=>{
+      const idx = Number(card.dataset.idx);
+      openVendor(list[idx]);
+    });
+  });
 }
 
 function renderVendorsByCategory(cat){
-  const m=META[cat]||{};let list=(VENDORS[cat]||[]).map(v=>buildVendor(cat,v));list=applyCityFilter(list);
-  document.getElementById("panelIcon").textContent=m.icon||"🛍️";
-  document.getElementById("panelTitle").textContent=m.label||cat;
-  document.getElementById("panelSub").textContent=`${m.sub||""} • ${list.length} vendeur(s) exemple`;
+  const m = META[cat] || {};
+  let list = buildCatalog().filter(v => v.category === cat);
+  list = applyCityFilter(list);
+
+  const realCount = list.filter(v => !v.isExample).length;
+  const exCount = list.filter(v => v.isExample).length;
+
+  document.getElementById("panelIcon").textContent = m.icon || "🛍️";
+  document.getElementById("panelTitle").textContent = m.label || cat;
+  document.getElementById("panelSub").textContent = `${m.sub || ""} • ${realCount} réelle(s) • ${exCount} exemple(s)`;
+
   renderVendorCards(list);
 }
 
 function renderSearch(q){
   const qq=q.trim().toLowerCase();
-  let list=buildCatalog().filter(v=>v.name.toLowerCase().includes(qq)||v.what.toLowerCase().includes(qq)||v.loc.toLowerCase().includes(qq)||v.city.toLowerCase().includes(qq)||v.categoryLabel.toLowerCase().includes(qq));
+  let list=buildCatalog().filter(v =>
+    v.name.toLowerCase().includes(qq) ||
+    v.what.toLowerCase().includes(qq) ||
+    v.loc.toLowerCase().includes(qq) ||
+    v.city.toLowerCase().includes(qq) ||
+    String(v.categoryLabel || "").toLowerCase().includes(qq)
+  );
+
   list=applyCityFilter(list);
+  const realCount = list.filter(v => !v.isExample).length;
+  const exCount = list.filter(v => v.isExample).length;
+
   document.getElementById("panelIcon").textContent="🔎";
   document.getElementById("panelTitle").textContent=`Recherche : ${q}`;
-  document.getElementById("panelSub").textContent=`${list.length} résultat(s) exemple`;
+  document.getElementById("panelSub").textContent=`${list.length} résultat(s) • ${realCount} réelle(s) • ${exCount} exemple(s)`;
+
   renderVendorCards(list);
 }
 
 function rerenderCurrent(){
-  if(currentMode==="search"){const q=document.getElementById("topSearchInput").value.trim();if(q)renderSearch(q);}
-  else if(currentMode==="cat"&&currentKey)renderVendorsByCategory(currentKey);
+  if(currentMode==="search"){
+    const q=document.getElementById("topSearchInput").value.trim();
+    if(q) renderSearch(q);
+  } else if(currentMode==="cat" && currentKey){
+    renderVendorsByCategory(currentKey);
+  }
 }
 
-function openVendor(slug){saveCatalog();window.location.href=`vendeur.html?v=${encodeURIComponent(slug)}`;}
-function contactVendor(slug){const v=buildCatalog().find(x=>x.slug===slug);const n=v?v.name:"cette vitrine";window.open(waLink(`Bonjour DIGIY 👋 Je veux une vitrine comme l'exemple "${n}" sur DIGIY MARKET.`),"_blank");}
+function makeSupabaseClient(){
+  if (!window.supabase || !window.DIGIY_SUPABASE_URL || !(window.DIGIY_SUPABASE_ANON_KEY || window.DIGIY_SUPABASE_ANON)) {
+    return null;
+  }
 
-initButtons();saveCatalog();updateCounts();fillCityFilter();
+  return window.supabase.createClient(
+    window.DIGIY_SUPABASE_URL,
+    window.DIGIY_SUPABASE_ANON_KEY || window.DIGIY_SUPABASE_ANON,
+    {
+      auth:{
+        persistSession:false,
+        autoRefreshToken:false,
+        detectSessionInUrl:false
+      }
+    }
+  );
+}
 
-let currentMode=null,currentKey=null;
-const panel=document.getElementById("vendorPanel");
+async function loadRealPublicProfiles(){
+  const sb = makeSupabaseClient();
+  if (!sb) return [];
 
-document.querySelectorAll(".cat-tile").forEach(tile=>{
-  tile.addEventListener("click",()=>{
-    const cat=tile.dataset.cat;
-    if(currentMode==="cat"&&currentKey===cat){panel.classList.remove("open");tile.classList.remove("active");currentMode=null;currentKey=null;return;}
+  try{
+    const { data, error } = await sb
+      .from("digiy_market_public_profiles")
+      .select("slug, phone, display_name, category, city, whatsapp, bio")
+      .order("display_name", { ascending:true });
+
+    if (error) {
+      console.error("real public profiles load error:", error);
+      return [];
+    }
+
+    return (data || [])
+      .filter(row => row && row.slug)
+      .map(buildRealVendor);
+  }catch(e){
+    console.error("real public profiles exception:", e);
+    return [];
+  }
+}
+
+function openPanel(){
+  const panel = document.getElementById("vendorPanel");
+  if(!panel.classList.contains("open")) panel.classList.add("open");
+  setTimeout(()=>panel.scrollIntoView({behavior:"smooth",block:"nearest"}),180);
+}
+
+function bindStaticUi(){
+  document.querySelectorAll(".cat-tile").forEach(tile=>{
+    tile.addEventListener("click",()=>{
+      const cat=tile.dataset.cat;
+      const panel=document.getElementById("vendorPanel");
+
+      if(currentMode==="cat" && currentKey===cat){
+        panel.classList.remove("open");
+        tile.classList.remove("active");
+        currentMode=null;
+        currentKey=null;
+        return;
+      }
+
+      document.querySelectorAll(".cat-tile").forEach(x=>x.classList.remove("active"));
+      tile.classList.add("active");
+      currentMode="cat";
+      currentKey=cat;
+      renderVendorsByCategory(cat);
+      openPanel();
+    });
+  });
+
+  document.getElementById("panelClose").addEventListener("click",()=>{
+    document.getElementById("vendorPanel").classList.remove("open");
     document.querySelectorAll(".cat-tile").forEach(x=>x.classList.remove("active"));
-    tile.classList.add("active");currentMode="cat";currentKey=cat;
-    renderVendorsByCategory(cat);
-    if(!panel.classList.contains("open"))panel.classList.add("open");
-    setTimeout(()=>panel.scrollIntoView({behavior:"smooth",block:"nearest"}),180);
+    currentMode=null;
+    currentKey=null;
   });
-});
 
-document.getElementById("panelClose").addEventListener("click",()=>{panel.classList.remove("open");document.querySelectorAll(".cat-tile").forEach(x=>x.classList.remove("active"));currentMode=null;currentKey=null;});
-document.getElementById("topSearchBtn").addEventListener("click",()=>{const q=document.getElementById("topSearchInput").value.trim();if(!q)return;document.querySelectorAll(".cat-tile").forEach(x=>x.classList.remove("active"));currentMode="search";currentKey=q;renderSearch(q);panel.classList.add("open");setTimeout(()=>panel.scrollIntoView({behavior:"smooth",block:"nearest"}),180);});
-document.getElementById("topSearchInput").addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("topSearchBtn").click();});
-document.getElementById("cityFilter").addEventListener("change",rerenderCurrent);
-document.getElementById("resetFilters").addEventListener("click",()=>{document.getElementById("cityFilter").value="";document.getElementById("topSearchInput").value="";if(currentMode==="cat"&&currentKey)renderVendorsByCategory(currentKey);else{panel.classList.remove("open");currentMode=null;currentKey=null;document.querySelectorAll(".cat-tile").forEach(x=>x.classList.remove("active"));}});
-
-const rail=document.getElementById("catRail");
-document.getElementById("arrL").addEventListener("click",()=>rail.scrollBy({left:-280,behavior:"smooth"}));
-document.getElementById("arrR").addEventListener("click",()=>rail.scrollBy({left:280,behavior:"smooth"}));
-let isDown=false,startX=0,startScroll=0;
-function dragStart(x){isDown=true;startX=x;startScroll=rail.scrollLeft;rail.classList.add("grabbing");}
-function dragMove(x){if(!isDown)return;rail.scrollLeft=startScroll-(x-startX);}
-function dragEnd(){isDown=false;rail.classList.remove("grabbing");}
-rail.addEventListener("mousedown",e=>dragStart(e.pageX));
-window.addEventListener("mouseup",dragEnd);
-window.addEventListener("mousemove",e=>dragMove(e.pageX));
-rail.addEventListener("touchstart",e=>{if(e.touches[0])dragStart(e.touches[0].pageX);},{passive:true});
-rail.addEventListener("touchmove",e=>{if(e.touches[0])dragMove(e.touches[0].pageX);},{passive:true});
-rail.addEventListener("touchend",dragEnd);
-
-document.querySelectorAll(".faq-item").forEach(item=>{
-  item.querySelector(".faq-q").addEventListener("click",()=>{
-    const open=item.classList.contains("open");
-    document.querySelectorAll(".faq-item").forEach(x=>x.classList.remove("open"));
-    if(!open)item.classList.add("open");
+  document.getElementById("topSearchBtn").addEventListener("click",()=>{
+    const q=document.getElementById("topSearchInput").value.trim();
+    if(!q) return;
+    document.querySelectorAll(".cat-tile").forEach(x=>x.classList.remove("active"));
+    currentMode="search";
+    currentKey=q;
+    renderSearch(q);
+    openPanel();
   });
-});
+
+  document.getElementById("topSearchInput").addEventListener("keydown",e=>{
+    if(e.key==="Enter") document.getElementById("topSearchBtn").click();
+  });
+
+  document.getElementById("cityFilter").addEventListener("change",rerenderCurrent);
+
+  document.getElementById("resetFilters").addEventListener("click",()=>{
+    document.getElementById("cityFilter").value="";
+    document.getElementById("topSearchInput").value="";
+
+    if(currentMode==="cat" && currentKey){
+      renderVendorsByCategory(currentKey);
+    } else {
+      document.getElementById("vendorPanel").classList.remove("open");
+      currentMode=null;
+      currentKey=null;
+      document.querySelectorAll(".cat-tile").forEach(x=>x.classList.remove("active"));
+    }
+  });
+
+  const rail=document.getElementById("catRail");
+  document.getElementById("arrL").addEventListener("click",()=>rail.scrollBy({left:-280,behavior:"smooth"}));
+  document.getElementById("arrR").addEventListener("click",()=>rail.scrollBy({left:280,behavior:"smooth"}));
+
+  let isDown=false,startX=0,startScroll=0;
+  function dragStart(x){isDown=true;startX=x;startScroll=rail.scrollLeft;rail.classList.add("grabbing");}
+  function dragMove(x){if(!isDown)return;rail.scrollLeft=startScroll-(x-startX);}
+  function dragEnd(){isDown=false;rail.classList.remove("grabbing");}
+
+  rail.addEventListener("mousedown",e=>dragStart(e.pageX));
+  window.addEventListener("mouseup",dragEnd);
+  window.addEventListener("mousemove",e=>dragMove(e.pageX));
+  rail.addEventListener("touchstart",e=>{if(e.touches[0])dragStart(e.touches[0].pageX);},{passive:true});
+  rail.addEventListener("touchmove",e=>{if(e.touches[0])dragMove(e.touches[0].pageX);},{passive:true});
+  rail.addEventListener("touchend",dragEnd);
+
+  document.querySelectorAll(".faq-item").forEach(item=>{
+    item.querySelector(".faq-q").addEventListener("click",()=>{
+      const open=item.classList.contains("open");
+      document.querySelectorAll(".faq-item").forEach(x=>x.classList.remove("open"));
+      if(!open) item.classList.add("open");
+    });
+  });
+}
+
+async function boot(){
+  initButtons();
+  bindStaticUi();
+
+  REAL_VENDORS = await loadRealPublicProfiles();
+
+  saveCatalog();
+  updateCounts();
+  fillCityFilter();
+}
+
+boot();
 </script>
 </body>
 </html>
