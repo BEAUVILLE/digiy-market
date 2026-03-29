@@ -3,10 +3,9 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<title>DIGIY MARKET — Fiche vendeur</title>
+<title>DIGIY MARKET — Boutique</title>
 <meta name="theme-color" content="#0d0a06"/>
-<meta name="description" content="Fiche publique DIGIY MARKET : boutique exemple ou fiche réelle en mode slug-first."/>
-<meta name="robots" content="index,follow"/>
+<meta name="description" content="Boutique publique DIGIY MARKET : présence locale soignée, contact direct et lecture claire."/>
 
 <script>
   window.DIGIY_SUPABASE_URL      = "https://wesqmwjjtsefyjnluosj.supabase.co";
@@ -17,469 +16,464 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,600&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,600&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet"/>
 
 <style>
-/* ═══════════════════════════════════════════════
-   DIGIY MARKET — FICHE VENDEUR · DESIGN ROYAL
-═══════════════════════════════════════════════ */
-:root {
-  --ink:      #0d0a06;
-  --ink-2:    #1a1208;
-  --ink-3:    #241808;
-  --gold:     #c8860a;
-  --gold-lt:  #f4b840;
-  --amber:    #e86820;
-  --red:      #c83830;
-  --green:    #28885a;
-  --cream:    #fdf6ec;
-  --cream-2:  #f7e8d0;
-  --muted:    #8a7a64;
-  --line:     #2e2010;
-  --line-lt:  #3e2e1a;
+:root{
+  --ink:#0d0a06;
+  --ink-2:#1a1208;
+  --ink-3:#241808;
+  --gold:#c8860a;
+  --gold-lt:#f4b840;
+  --amber:#e86820;
+  --red:#c83830;
+  --green:#28885a;
+  --cream:#fdf6ec;
+  --cream-2:#f7e8d0;
+  --muted:#8a7a64;
+  --line:#2e2010;
+  --line-lt:#3e2e1a;
 
-  --g-dark:   linear-gradient(160deg,#0d0a06 0%,#1a1208 50%,#0f1a0a 100%);
-  --g-gold:   linear-gradient(135deg,#c8860a,#f4b840,#c8860a);
-  --g-fire:   linear-gradient(135deg,#e86820,#c83830);
+  --g-dark:linear-gradient(160deg,#0d0a06 0%,#1a1208 50%,#0f1a0a 100%);
+  --g-gold:linear-gradient(135deg,#c8860a,#f4b840,#c8860a);
+  --g-fire:linear-gradient(135deg,#e86820,#c83830);
 
-  --shadow-card:  0 24px 64px rgba(0,0,0,.55), 0 0 0 1px rgba(200,134,10,.07);
-  --shadow-hover: 0 40px 100px rgba(0,0,0,.7),  0 0 0 1px rgba(200,134,10,.2);
-  --glow-gold:    0 0 60px rgba(200,134,10,.22), 0 0 120px rgba(200,134,10,.08);
+  --shadow-card:0 24px 64px rgba(0,0,0,.55),0 0 0 1px rgba(200,134,10,.07);
+  --shadow-hover:0 40px 100px rgba(0,0,0,.7),0 0 0 1px rgba(200,134,10,.2);
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
-html { scroll-behavior: smooth }
-body {
-  font-family: "Nunito", sans-serif;
-  background: var(--g-dark);
-  color: var(--cream);
-  overflow-x: hidden;
-  min-height: 100vh;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Outfit",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  background:var(--g-dark);
+  color:var(--cream);
+  overflow-x:hidden;
+  min-height:100vh;
 }
-body::before {
-  content: "";
-  position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+body::before{
+  content:"";
+  position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-a { color: inherit; text-decoration: none }
-img { display: block; max-width: 100% }
-button { font: inherit; cursor: pointer }
-.wrap {
-  width: min(1300px, calc(100% - 32px));
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;cursor:pointer}
+.wrap{
+  width:min(1300px,calc(100% - 32px));
+  margin:0 auto;
+  position:relative;
+  z-index:1;
 }
-:focus-visible {
-  outline: 3px solid rgba(232,104,32,.35);
-  outline-offset: 2px;
-  border-radius: 12px;
-}
-
-/* ═══ TOPBAR ═══ */
-.topbar {
-  position: sticky; top: 0; z-index: 200;
-  background: rgba(13,10,6,.9);
-  backdrop-filter: blur(20px) saturate(1.4);
-  border-bottom: 1px solid var(--line-lt);
-}
-.topbar-inner {
-  display: flex; align-items: center;
-  justify-content: space-between;
-  gap: 12px; min-height: 72px; flex-wrap: wrap;
-}
-.brand {
-  display: flex; align-items: center; gap: 12px;
-  font-family: "Playfair Display", serif; font-weight: 900; font-size: 1.15rem;
-}
-.brand-gem {
-  width: 44px; height: 44px; border-radius: 14px;
-  background: var(--g-fire);
-  display: grid; place-items: center;
-  font-size: 1.2rem; box-shadow: 0 6px 20px rgba(232,104,32,.35);
-  overflow: hidden; flex-shrink: 0;
-}
-.brand-gem img { width: 100%; height: 100%; object-fit: cover }
-.brand small {
-  display: block; font-family: "Nunito", sans-serif;
-  font-size: .7rem; font-weight: 800; color: var(--muted);
-  letter-spacing: .06em; text-transform: uppercase; margin-top: 2px;
-}
-.hdr-actions { display: flex; gap: 8px; flex-wrap: wrap }
-.btn {
-  border: none; cursor: pointer; border-radius: 999px;
-  padding: 11px 16px; font-weight: 900; font-size: .84rem;
-  transition: .2s ease; display: inline-flex; align-items: center; gap: 7px;
-}
-.btn:hover { transform: translateY(-2px) }
-.btn-gold {
-  background: linear-gradient(135deg,#c8860a,#f4b840); color: #0d0a06;
-  box-shadow: 0 8px 24px rgba(200,134,10,.3);
-}
-.btn-gold:hover { filter: brightness(1.1) }
-.btn-ghost {
-  background: rgba(255,255,255,.05);
-  border: 1px solid var(--line-lt); color: var(--cream);
-}
-.btn-ghost:hover { background: rgba(255,255,255,.1) }
-.btn-fire {
-  background: var(--g-fire); color: #fff;
-  box-shadow: 0 8px 24px rgba(232,104,32,.28);
+:focus-visible{
+  outline:3px solid rgba(232,104,32,.35);
+  outline-offset:2px;
+  border-radius:12px;
 }
 
-/* ═══ PAGE ═══ */
-.page { padding: 24px 0 72px }
+/* TOPBAR */
+.topbar{
+  position:sticky; top:0; z-index:200;
+  background:rgba(13,10,6,.9);
+  backdrop-filter:blur(20px) saturate(1.4);
+  border-bottom:1px solid var(--line-lt);
+}
+.topbar-inner{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; min-height:72px; flex-wrap:wrap;
+}
+.brand{
+  display:flex; align-items:center; gap:12px;
+  font-family:"Playfair Display",serif; font-weight:900; font-size:1.15rem;
+}
+.brand-gem{
+  width:44px; height:44px; border-radius:14px;
+  background:var(--g-fire);
+  display:grid; place-items:center;
+  font-size:1.2rem; box-shadow:0 6px 20px rgba(232,104,32,.35);
+  overflow:hidden; flex-shrink:0;
+}
+.brand-gem img{width:100%; height:100%; object-fit:cover}
+.brand small{
+  display:block;
+  font-family:"Outfit",system-ui,sans-serif;
+  font-size:.7rem; font-weight:800; color:var(--muted);
+  letter-spacing:.06em; text-transform:uppercase; margin-top:2px;
+}
+.hdr-actions{display:flex; gap:8px; flex-wrap:wrap}
+.btn{
+  border:none; cursor:pointer; border-radius:999px;
+  padding:11px 16px; font-weight:900; font-size:.84rem;
+  transition:.2s ease; display:inline-flex; align-items:center; gap:7px;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-gold{
+  background:linear-gradient(135deg,#c8860a,#f4b840); color:#0d0a06;
+  box-shadow:0 8px 24px rgba(200,134,10,.3);
+}
+.btn-gold:hover{filter:brightness(1.1)}
+.btn-ghost{
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--line-lt); color:var(--cream);
+}
+.btn-ghost:hover{background:rgba(255,255,255,.1)}
+.btn-fire{
+  background:var(--g-fire); color:#fff;
+  box-shadow:0 8px 24px rgba(232,104,32,.28);
+}
 
-/* ═══ HERO COVER ═══ */
-.hero-cover-wrap {
-  position: relative; border-radius: 32px; overflow: hidden;
-  border: 1px solid rgba(200,134,10,.12);
-  box-shadow: var(--shadow-card);
-  min-height: 520px;
-  background: var(--ink-2);
-  transition: transform .22s ease;
+/* PAGE */
+.page{padding:24px 0 72px}
+
+/* HERO */
+.hero-cover-wrap{
+  position:relative; border-radius:32px; overflow:hidden;
+  border:1px solid rgba(200,134,10,.12);
+  box-shadow:var(--shadow-card);
+  min-height:520px;
+  background:var(--ink-2);
+  transition:transform .22s ease;
 }
-.hero-cover-img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform .6s cubic-bezier(.23,1,.32,1);
+.hero-cover-img{
+  position:absolute; inset:0;
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .6s cubic-bezier(.23,1,.32,1);
 }
-.hero-cover-wrap:hover .hero-cover-img { transform: scale(1.025) }
-.hero-gradient {
-  position: absolute; inset: 0;
-  background: linear-gradient(
+.hero-cover-wrap:hover .hero-cover-img{transform:scale(1.025)}
+.hero-gradient{
+  position:absolute; inset:0;
+  background:linear-gradient(
     to bottom,
     rgba(13,10,6,.1) 0%,
     rgba(13,10,6,.18) 30%,
     rgba(13,10,6,.7) 68%,
     rgba(13,10,6,.96) 100%
   );
-  z-index: 2;
+  z-index:2;
 }
-.hero-top-chips {
-  position: absolute; left: 20px; top: 20px;
-  display: flex; gap: 8px; flex-wrap: wrap; z-index: 10;
+.hero-top-chips{
+  position:absolute; left:20px; top:20px;
+  display:flex; gap:8px; flex-wrap:wrap; z-index:10;
 }
-.chip {
-  display: inline-flex; align-items: center; gap: 5px;
-  padding: 7px 12px; border-radius: 999px;
-  font-size: .68rem; font-weight: 900; letter-spacing: .05em;
+.chip{
+  display:inline-flex; align-items:center; gap:5px;
+  padding:7px 12px; border-radius:999px;
+  font-size:.68rem; font-weight:900; letter-spacing:.05em;
 }
-.chip-royal {
-  background: linear-gradient(135deg,#c8860a,#f4b840); color: #0d0a06;
-  box-shadow: 0 4px 14px rgba(200,134,10,.4);
+.chip-royal{
+  background:linear-gradient(135deg,#c8860a,#f4b840); color:#0d0a06;
+  box-shadow:0 4px 14px rgba(200,134,10,.4);
 }
-.chip-live {
-  background: rgba(40,136,90,.9); color: #fff;
+.chip-live{
+  background:rgba(40,136,90,.9); color:#fff;
 }
-.chip-live::before {
-  content: ""; width: 6px; height: 6px; border-radius: 50%;
-  background: #8ff7c5; animation: pulse-g 1.4s ease-in-out infinite;
+.chip-live::before{
+  content:""; width:6px; height:6px; border-radius:50%;
+  background:#8ff7c5; animation:pulse-g 1.4s ease-in-out infinite;
 }
-@keyframes pulse-g { 0%,100%{opacity:1} 50%{opacity:.3} }
-.chip-example {
-  background: rgba(232,104,32,.85); color: #fff;
+@keyframes pulse-g{0%,100%{opacity:1}50%{opacity:.3}}
+.chip-example{
+  background:rgba(232,104,32,.85); color:#fff;
 }
-.chip-dark {
-  background: rgba(13,10,6,.78); border: 1px solid rgba(255,255,255,.12);
-  color: rgba(253,246,236,.84); backdrop-filter: blur(8px);
-}
-
-.hero-copy {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  z-index: 10; padding: 28px 32px 36px;
-}
-.hero-kicker {
-  display: inline-flex; align-items: center; gap: 7px;
-  padding: 7px 13px; border-radius: 999px;
-  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15);
-  font-size: .72rem; font-weight: 900; margin-bottom: 14px;
-  letter-spacing: .08em; text-transform: uppercase; color: var(--gold-lt);
-}
-.hero-copy h1 {
-  font-family: "Cormorant Garamond", serif; font-weight: 600;
-  font-size: clamp(2.4rem, 5vw, 5rem); line-height: .88;
-  letter-spacing: -.02em; margin-bottom: 12px;
-  text-shadow: 0 6px 24px rgba(0,0,0,.3);
-}
-.hero-copy h1 em {
-  font-style: italic;
-  background: var(--g-gold);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.hero-copy p {
-  max-width: 64ch; color: rgba(253,246,236,.72);
-  line-height: 1.7; font-size: .98rem;
-}
-.hero-meta-row {
-  display: flex; align-items: center; gap: 10px;
-  flex-wrap: wrap; margin-top: 16px;
-}
-.hero-pill {
-  padding: 6px 12px; border-radius: 999px;
-  background: rgba(200,134,10,.15); border: 1px solid rgba(200,134,10,.28);
-  color: var(--gold-lt); font-size: .74rem; font-weight: 900;
-}
-.hero-loc {
-  font-size: .76rem; font-weight: 800; color: rgba(253,246,236,.52);
+.chip-dark{
+  background:rgba(13,10,6,.78); border:1px solid rgba(255,255,255,.12);
+  color:rgba(253,246,236,.84); backdrop-filter:blur(8px);
 }
 
-/* ═══ TWO-COL MAIN LAYOUT ═══ */
-.layout {
-  display: grid;
-  grid-template-columns: 1fr 360px;
-  gap: 18px; margin-top: 18px;
+.hero-copy{
+  position:absolute; bottom:0; left:0; right:0;
+  z-index:10; padding:28px 32px 36px;
 }
-.col-left, .col-right { display: grid; gap: 18px; align-content: start }
-
-/* ═══ DARK CARD ═══ */
-.d-card {
-  background: rgba(255,255,255,.03);
-  border: 1px solid var(--line-lt);
-  border-radius: 28px;
-  box-shadow: var(--shadow-card);
-  overflow: hidden;
-  position: relative;
+.hero-kicker{
+  display:inline-flex; align-items:center; gap:7px;
+  padding:7px 13px; border-radius:999px;
+  background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.15);
+  font-size:.72rem; font-weight:900; margin-bottom:14px;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--gold-lt);
 }
-.d-card-inner { padding: 24px }
-.d-card h2 {
-  font-family: "Cormorant Garamond", serif; font-weight: 600;
-  font-size: 1.6rem; letter-spacing: -.01em; margin-bottom: 10px;
+.hero-copy h1{
+  font-family:"Cormorant Garamond",serif; font-weight:600;
+  font-size:clamp(2.4rem,5vw,5rem); line-height:.88;
+  letter-spacing:-.02em; margin-bottom:12px;
+  text-shadow:0 6px 24px rgba(0,0,0,.3);
 }
-.d-card p { color: rgba(253,246,236,.62); line-height: 1.75; font-size: .92rem }
-
-/* gold top accent on card */
-.d-card.accented::before {
-  content: "";
-  position: absolute; top: 0; left: 24px; right: 24px; height: 2px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  opacity: .4;
+.hero-copy h1 em{
+  font-style:italic;
+  background:var(--g-gold);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text;
 }
-
-/* ═══ INFO GRID ═══ */
-.info-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr);
-  gap: 10px; margin-top: 14px;
+.hero-copy p{
+  max-width:64ch; color:rgba(253,246,236,.72);
+  line-height:1.7; font-size:.98rem;
 }
-.info-tile {
-  background: rgba(255,255,255,.04);
-  border: 1px solid var(--line-lt); border-radius: 18px; padding: 14px;
+.hero-meta-row{
+  display:flex; align-items:center; gap:10px;
+  flex-wrap:wrap; margin-top:16px;
 }
-.info-tile-label {
-  font-size: .68rem; font-weight: 900; text-transform: uppercase;
-  letter-spacing: .06em; color: var(--muted); margin-bottom: 4px;
+.hero-pill{
+  padding:6px 12px; border-radius:999px;
+  background:rgba(200,134,10,.15); border:1px solid rgba(200,134,10,.28);
+  color:var(--gold-lt); font-size:.74rem; font-weight:900;
 }
-.info-tile-value { font-weight: 900; line-height: 1.45; font-size: .92rem }
-
-/* ═══ CTA ROW ═══ */
-.cta-row {
-  display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px;
+.hero-loc{
+  font-size:.76rem; font-weight:800; color:rgba(253,246,236,.52);
 }
 
-/* ═══ NOTE BOX ═══ */
-.note-box {
-  margin-top: 14px; padding: 14px 16px; border-radius: 18px;
-  background: rgba(200,134,10,.07); border: 1px solid rgba(200,134,10,.2);
-  color: rgba(244,184,64,.75); font-size: .84rem; line-height: 1.65;
+/* LAYOUT */
+.layout{
+  display:grid;
+  grid-template-columns:1fr 360px;
+  gap:18px; margin-top:18px;
+}
+.col-left,.col-right{display:grid; gap:18px; align-content:start}
+
+/* CARD */
+.d-card{
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--line-lt);
+  border-radius:28px;
+  box-shadow:var(--shadow-card);
+  overflow:hidden;
+  position:relative;
+}
+.d-card-inner{padding:24px}
+.d-card h2{
+  font-family:"Cormorant Garamond",serif; font-weight:600;
+  font-size:1.6rem; letter-spacing:-.01em; margin-bottom:10px;
+}
+.d-card p{color:rgba(253,246,236,.62); line-height:1.75; font-size:.92rem}
+.d-card.accented::before{
+  content:"";
+  position:absolute; top:0; left:24px; right:24px; height:2px;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity:.4;
 }
 
-/* ═══ EDITO STRIP ═══ */
-.edito-strip {
-  display: grid; grid-template-columns: repeat(3,1fr); gap: 12px;
-  margin-top: 18px;
+/* INFO GRID */
+.info-grid{
+  display:grid; grid-template-columns:repeat(2,1fr);
+  gap:10px; margin-top:14px;
 }
-.edito-tile {
-  background: rgba(255,255,255,.03); border: 1px solid var(--line-lt);
-  border-radius: 20px; padding: 18px;
+.info-tile{
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--line-lt); border-radius:18px; padding:14px;
 }
-.edito-tag {
-  display: inline-flex; align-items: center; gap: 5px;
-  padding: 5px 10px; border-radius: 999px;
-  background: rgba(200,134,10,.12); border: 1px solid rgba(200,134,10,.22);
-  color: var(--gold-lt); font-size: .66rem; font-weight: 900;
-  text-transform: uppercase; letter-spacing: .05em; margin-bottom: 10px;
+.info-tile-label{
+  font-size:.68rem; font-weight:900; text-transform:uppercase;
+  letter-spacing:.06em; color:var(--muted); margin-bottom:4px;
 }
-.edito-tile h3 {
-  font-family: "Cormorant Garamond", serif; font-weight: 600;
-  font-size: 1.1rem; margin-bottom: 5px;
-}
-.edito-tile p { color: var(--muted); font-size: .84rem; line-height: 1.6 }
+.info-tile-value{font-weight:900; line-height:1.45; font-size:.92rem}
 
-/* ═══ GALLERY ═══ */
-.gallery-hero {
-  border-radius: 24px; overflow: hidden;
-  border: 1px solid var(--line-lt); position: relative;
-  background: var(--ink-2); margin-top: 14px;
-}
-.gallery-hero img {
-  width: 100%; aspect-ratio: 16/10; object-fit: cover;
-  display: block; transition: transform .5s cubic-bezier(.23,1,.32,1);
-}
-.gallery-hero:hover img { transform: scale(1.02) }
-
-.thumb-rail {
-  display: grid; grid-template-columns: repeat(4,1fr);
-  gap: 10px; margin-top: 10px;
-}
-.thumb {
-  border-radius: 16px; overflow: hidden;
-  border: 1.5px solid var(--line-lt);
-  background: var(--ink-2); cursor: pointer;
-  transition: .2s ease;
-}
-.thumb:hover {
-  transform: translateY(-2px);
-  border-color: var(--gold);
-  box-shadow: 0 8px 20px rgba(0,0,0,.4);
-}
-.thumb.active {
-  border-color: var(--gold-lt);
-  box-shadow: 0 0 0 2px rgba(200,134,10,.25), 0 8px 20px rgba(0,0,0,.4);
-}
-.thumb img { width: 100%; aspect-ratio: 1/1; object-fit: cover }
-.thumb small {
-  display: block; padding: 7px 9px;
-  background: rgba(255,255,255,.03); border-top: 1px solid var(--line);
-  font-weight: 800; color: var(--muted); font-size: .7rem; line-height: 1.3;
+/* CTA ROW */
+.cta-row{
+  display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;
 }
 
-/* ═══ PRODUCTS GRID ═══ */
-.products-grid {
-  display: grid; grid-template-columns: repeat(2,1fr);
-  gap: 12px; margin-top: 14px;
-}
-.product-tile {
-  border: 1px solid var(--line-lt); border-radius: 20px;
-  background: rgba(255,255,255,.03); padding: 16px;
-  transition: .2s ease;
-}
-.product-tile:hover {
-  border-color: rgba(200,134,10,.28);
-  background: rgba(200,134,10,.04);
-}
-.product-tile h3 { font-size: 1rem; margin-bottom: 6px; font-weight: 900 }
-.product-tile p {
-  font-size: .86rem; line-height: 1.6; color: var(--muted); margin-bottom: 12px;
-}
-.price-tag {
-  display: inline-flex; padding: 6px 11px; border-radius: 999px;
-  background: rgba(200,134,10,.15); border: 1px solid rgba(200,134,10,.28);
-  color: var(--gold-lt); font-weight: 900; font-size: .76rem;
+/* NOTE BOX */
+.note-box{
+  margin-top:14px; padding:14px 16px; border-radius:18px;
+  background:rgba(200,134,10,.07); border:1px solid rgba(200,134,10,.2);
+  color:rgba(244,184,64,.75); font-size:.84rem; line-height:1.65;
 }
 
-/* ═══ MAP BOX ═══ */
-.map-frame {
-  border-radius: 22px; overflow: hidden;
-  border: 1px solid var(--line-lt); background: var(--ink-2);
-  margin-top: 14px;
+/* EDITO */
+.edito-strip{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:12px;
+  margin-top:18px;
 }
-.map-frame img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block }
-.map-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px }
+.edito-tile{
+  background:rgba(255,255,255,.03); border:1px solid var(--line-lt);
+  border-radius:20px; padding:18px;
+}
+.edito-tag{
+  display:inline-flex; align-items:center; gap:5px;
+  padding:5px 10px; border-radius:999px;
+  background:rgba(200,134,10,.12); border:1px solid rgba(200,134,10,.22);
+  color:var(--gold-lt); font-size:.66rem; font-weight:900;
+  text-transform:uppercase; letter-spacing:.05em; margin-bottom:10px;
+}
+.edito-tile h3{
+  font-family:"Cormorant Garamond",serif; font-weight:600;
+  font-size:1.1rem; margin-bottom:5px;
+}
+.edito-tile p{color:var(--muted); font-size:.84rem; line-height:1.6}
 
-/* ═══ SIDEBAR TILES ═══ */
-.side-list { display: grid; gap: 8px }
-.side-tile {
-  border: 1px solid var(--line-lt); border-radius: 16px;
-  background: rgba(255,255,255,.03); padding: 13px;
+/* GALLERY */
+.gallery-hero{
+  border-radius:24px; overflow:hidden;
+  border:1px solid var(--line-lt); position:relative;
+  background:var(--ink-2); margin-top:14px;
 }
-.side-tile-label {
-  font-size: .66rem; font-weight: 900; text-transform: uppercase;
-  letter-spacing: .05em; color: var(--muted); margin-bottom: 3px;
+.gallery-hero img{
+  width:100%; aspect-ratio:16/10; object-fit:cover;
+  display:block; transition:transform .5s cubic-bezier(.23,1,.32,1);
 }
-.side-tile-value { font-weight: 900; font-size: .9rem; line-height: 1.45 }
+.gallery-hero:hover img{transform:scale(1.02)}
 
-/* ═══ MODULE BOX ═══ */
-.module-box {
-  background: linear-gradient(135deg, rgba(232,104,32,.1), rgba(200,56,48,.08));
-  border: 1px solid rgba(232,104,32,.25); border-radius: 24px; padding: 22px;
-  position: relative; overflow: hidden;
+.thumb-rail{
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:10px; margin-top:10px;
 }
-.module-box::before {
-  content: "";
-  position: absolute; top: -60px; right: -60px;
-  width: 200px; height: 200px;
-  background: radial-gradient(circle, rgba(232,104,32,.12), transparent 70%);
-  pointer-events: none;
+.thumb{
+  border-radius:16px; overflow:hidden;
+  border:1.5px solid var(--line-lt);
+  background:var(--ink-2); cursor:pointer;
+  transition:.2s ease;
 }
-.module-box h3 {
-  font-family: "Cormorant Garamond", serif; font-weight: 600;
-  font-size: 1.3rem; margin-bottom: 8px;
+.thumb:hover{
+  transform:translateY(-2px);
+  border-color:var(--gold);
+  box-shadow:0 8px 20px rgba(0,0,0,.4);
 }
-.module-box p { color: rgba(253,246,236,.62); line-height: 1.7; font-size: .9rem }
-.module-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px }
-
-/* ═══ TRUST BOX ═══ */
-.trust-list { display: grid; gap: 8px; margin-top: 12px }
-.trust-item {
-  border: 1px solid var(--line-lt); border-radius: 16px;
-  background: rgba(255,255,255,.03); padding: 13px;
+.thumb.active{
+  border-color:var(--gold-lt);
+  box-shadow:0 0 0 2px rgba(200,134,10,.25),0 8px 20px rgba(0,0,0,.4);
 }
-.trust-item strong { display: block; margin-bottom: 3px; font-weight: 900; font-size: .9rem }
-.trust-item span { color: var(--muted); font-size: .82rem; line-height: 1.55 }
-
-/* ═══ NEXT FEATURES ═══ */
-.feature-row {
-  display: flex; align-items: center; gap: 10px;
-  padding: 12px; border-radius: 14px;
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,.02);
-  font-weight: 900; font-size: .86rem;
-  transition: .18s;
-}
-.feature-row:hover {
-  border-color: rgba(200,134,10,.28);
-  background: rgba(200,134,10,.04);
+.thumb img{width:100%; aspect-ratio:1/1; object-fit:cover}
+.thumb small{
+  display:block; padding:7px 9px;
+  background:rgba(255,255,255,.03); border-top:1px solid var(--line);
+  font-weight:800; color:var(--muted); font-size:.7rem; line-height:1.3;
 }
 
-/* ═══ EMPTY STATE ═══ */
-.empty-state {
-  text-align: center; padding: 40px 24px;
-  border: 1px dashed var(--line-lt); border-radius: 24px;
+/* PRODUCTS GRID */
+.products-grid{
+  display:grid; grid-template-columns:repeat(2,1fr);
+  gap:12px; margin-top:14px;
 }
-.empty-state h2 {
-  font-family: "Cormorant Garamond", serif; font-weight: 600;
-  font-size: 1.5rem; margin-bottom: 10px;
+.product-tile{
+  border:1px solid var(--line-lt); border-radius:20px;
+  background:rgba(255,255,255,.03); padding:16px;
+  transition:.2s ease;
 }
-.empty-state p { color: var(--muted); line-height: 1.7 }
+.product-tile:hover{
+  border-color:rgba(200,134,10,.28);
+  background:rgba(200,134,10,.04);
+}
+.product-tile h3{font-size:1rem; margin-bottom:6px; font-weight:900}
+.product-tile p{
+  font-size:.86rem; line-height:1.6; color:var(--muted); margin-bottom:12px;
+}
+.price-tag{
+  display:inline-flex; padding:6px 11px; border-radius:999px;
+  background:rgba(200,134,10,.15); border:1px solid rgba(200,134,10,.28);
+  color:var(--gold-lt); font-weight:900; font-size:.76rem;
+}
 
-/* ═══ FLOAT CTA ═══ */
-.float-cta {
-  position: fixed; right: 16px; bottom: 16px;
-  z-index: 150; display: flex; flex-direction: column; gap: 10px;
+/* MAP */
+.map-frame{
+  border-radius:22px; overflow:hidden;
+  border:1px solid var(--line-lt); background:var(--ink-2);
+  margin-top:14px;
 }
-.float-btn {
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  min-width: 210px; padding: 13px 18px; border-radius: 999px; color: #fff;
-  font-weight: 900; font-size: .88rem;
-  box-shadow: 0 16px 32px rgba(0,0,0,.35); transition: .2s;
-}
-.float-btn:hover { transform: translateY(-2px) }
-.float-btn.wa { background: #0b8f59 }
-.float-btn.module { background: var(--g-fire) }
+.map-frame img{width:100%; aspect-ratio:16/10; object-fit:cover; display:block}
+.map-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
 
-/* ═══ ENTRANCE ANIMATIONS ═══ */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px) }
-  to   { opacity: 1; transform: translateY(0) }
+/* SIDEBAR */
+.side-list{display:grid; gap:8px}
+.side-tile{
+  border:1px solid var(--line-lt); border-radius:16px;
+  background:rgba(255,255,255,.03); padding:13px;
 }
-.anim { opacity: 0; animation: fadeUp .65s cubic-bezier(.23,1,.32,1) forwards }
+.side-tile-label{
+  font-size:.66rem; font-weight:900; text-transform:uppercase;
+  letter-spacing:.05em; color:var(--muted); margin-bottom:3px;
+}
+.side-tile-value{font-weight:900; font-size:.9rem; line-height:1.45}
 
-/* ═══ RESPONSIVE ═══ */
-@media(max-width:1080px) { .layout { grid-template-columns: 1fr } }
-@media(max-width:860px)  {
-  .edito-strip { grid-template-columns: 1fr 1fr }
-  .thumb-rail { grid-template-columns: repeat(2,1fr) }
+/* MODULE BOX */
+.module-box{
+  background:linear-gradient(135deg, rgba(232,104,32,.1), rgba(200,56,48,.08));
+  border:1px solid rgba(232,104,32,.25); border-radius:24px; padding:22px;
+  position:relative; overflow:hidden;
 }
-@media(max-width:600px)  {
-  .edito-strip, .info-grid, .products-grid { grid-template-columns: 1fr }
-  .hero-copy { padding: 20px 18px 24px }
-  .hero-cover-wrap { min-height: 420px }
-  .hero-copy h1 { font-size: clamp(1.9rem,8vw,2.8rem) }
-  .d-card-inner { padding: 18px }
-  .float-cta { left: 12px; right: 12px }
-  .float-btn { min-width: 0; width: 100% }
-  .topbar-inner { min-height: 60px }
+.module-box::before{
+  content:"";
+  position:absolute; top:-60px; right:-60px;
+  width:200px; height:200px;
+  background:radial-gradient(circle, rgba(232,104,32,.12), transparent 70%);
+  pointer-events:none;
+}
+.module-box h3{
+  font-family:"Cormorant Garamond",serif; font-weight:600;
+  font-size:1.3rem; margin-bottom:8px;
+}
+.module-box p{color:rgba(253,246,236,.62); line-height:1.7; font-size:.9rem}
+.module-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
+
+/* TRUST BOX */
+.trust-list{display:grid; gap:8px; margin-top:12px}
+.trust-item{
+  border:1px solid var(--line-lt); border-radius:16px;
+  background:rgba(255,255,255,.03); padding:13px;
+}
+.trust-item strong{display:block; margin-bottom:3px; font-weight:900; font-size:.9rem}
+.trust-item span{color:var(--muted); font-size:.82rem; line-height:1.55}
+
+/* FEATURES */
+.feature-row{
+  display:flex; align-items:center; gap:10px;
+  padding:12px; border-radius:14px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.02);
+  font-weight:900; font-size:.86rem;
+  transition:.18s;
+}
+.feature-row:hover{
+  border-color:rgba(200,134,10,.28);
+  background:rgba(200,134,10,.04);
+}
+
+/* EMPTY */
+.empty-state{
+  text-align:center; padding:40px 24px;
+  border:1px dashed var(--line-lt); border-radius:24px;
+}
+.empty-state h2{
+  font-family:"Cormorant Garamond",serif; font-weight:600;
+  font-size:1.5rem; margin-bottom:10px;
+}
+.empty-state p{color:var(--muted); line-height:1.7}
+
+/* FLOAT */
+.float-cta{
+  position:fixed; right:16px; bottom:16px;
+  z-index:150; display:flex; flex-direction:column; gap:10px;
+}
+.float-btn{
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  min-width:210px; padding:13px 18px; border-radius:999px; color:#fff;
+  font-weight:900; font-size:.88rem;
+  box-shadow:0 16px 32px rgba(0,0,0,.35); transition:.2s;
+}
+.float-btn:hover{transform:translateY(-2px)}
+.float-btn.wa{background:#0b8f59}
+.float-btn.fire{background:var(--g-fire)}
+.float-btn.gold{background:linear-gradient(135deg,#c8860a,#f4b840); color:#0d0a06}
+
+/* ANIM */
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(24px)}
+  to{opacity:1; transform:translateY(0)}
+}
+.anim{opacity:0; animation:fadeUp .65s cubic-bezier(.23,1,.32,1) forwards}
+
+/* RESPONSIVE */
+@media(max-width:1080px){.layout{grid-template-columns:1fr}}
+@media(max-width:860px){
+  .edito-strip{grid-template-columns:1fr 1fr}
+  .thumb-rail{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .edito-strip,.info-grid,.products-grid{grid-template-columns:1fr}
+  .hero-copy{padding:20px 18px 24px}
+  .hero-cover-wrap{min-height:420px}
+  .hero-copy h1{font-size:clamp(1.9rem,8vw,2.8rem)}
+  .d-card-inner{padding:18px}
+  .float-cta{left:12px; right:12px}
+  .float-btn{min-width:0; width:100%}
+  .topbar-inner{min-height:60px}
 }
 </style>
 </head>
@@ -489,42 +483,42 @@ button { font: inherit; cursor: pointer }
   <div class="wrap topbar-inner">
     <a class="brand" href="index.html">
       <span class="brand-gem" id="brandIcon">🛍️</span>
-      <span>DIGIY MARKET <small>Fiche vendeur</small></span>
+      <span>DIGIY MARKET <small>Boutique</small></span>
     </a>
+
     <div class="hdr-actions">
-      <a class="btn btn-ghost" href="index.html">← Marché</a>
+      <a class="btn btn-ghost" href="index.html">← Boutiques</a>
+      <a class="btn btn-ghost" id="topOrderBtn" href="#" style="display:none">🛒 Je commande</a>
       <a class="btn btn-ghost" id="topWaBtn" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
-      <a class="btn btn-fire" id="topModuleBtn" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Mon module</a>
+      <a class="btn btn-fire" id="topProBtn" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Ouvrir ma boutique</a>
     </div>
   </div>
 </header>
 
 <main class="page">
   <div class="wrap" id="app">
-    <!-- rendered by JS -->
+    <!-- rendu JS -->
   </div>
 </main>
 
 <div class="float-cta" id="floatCtas" style="display:none">
+  <a class="float-btn gold" id="floatOrderBtn" href="#" style="display:none">🛒 Je commande</a>
   <a class="float-btn wa" id="floatWaBtn" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
-  <a class="float-btn module" id="floatModuleBtn" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+  <a class="float-btn fire" id="floatProBtn" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Ouvrir ma boutique</a>
 </div>
 
 <script>
-/* ═══════════════════════════════════════
-   CONFIG & UTILITIES
-═══════════════════════════════════════ */
 const DEFAULT_CFG = {
-  whatsapp: "221771342889",
-  proUrl:   "https://commencer-a-payer.digiylyfe.com/",
-  logoUrl:  ""
+  whatsapp:"221771342889",
+  proUrl:"https://commencer-a-payer.digiylyfe.com/",
+  logoUrl:""
 };
 
 function readCatalog(){
-  try {
+  try{
     const raw = localStorage.getItem("digiy_market_catalog_v5");
     return raw ? JSON.parse(raw) : null;
-  } catch(e) {
+  }catch(e){
     return null;
   }
 }
@@ -543,16 +537,16 @@ function safe(str=""){
 
 function normPhone(v){
   const d = String(v || "").replace(/[^\d]/g,"");
-  if (!d) return "";
-  if (d.startsWith("221") && d.length === 12) return d;
-  if (d.length === 9) return "221" + d;
+  if(!d) return "";
+  if(d.startsWith("221") && d.length === 12) return d;
+  if(d.length === 9) return "221" + d;
   return d;
 }
 
 function formatPhone(v){
   const p = normPhone(v);
-  if (!p) return "—";
-  if (p.length === 12 && p.startsWith("221")) {
+  if(!p) return "—";
+  if(p.length === 12 && p.startsWith("221")){
     return `+221 ${p.slice(3,5)} ${p.slice(5,8)} ${p.slice(8,10)} ${p.slice(10,12)}`;
   }
   return p;
@@ -582,7 +576,24 @@ function mapsUrl(query){
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 }
 
-/* ─── SVG generators ─── */
+function buildSafeUrl(path, params = {}){
+  try{
+    const url = new URL(path, window.location.href);
+    Object.entries(params).forEach(([k,v])=>{
+      const clean = String(v || "").trim();
+      if(clean) url.searchParams.set(k, clean);
+    });
+    return url.pathname + url.search + url.hash;
+  }catch{
+    const q = Object.entries(params)
+      .filter(([,v]) => String(v || "").trim())
+      .map(([k,v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v).trim())}`)
+      .join("&");
+    return q ? `${path}?${q}` : path;
+  }
+}
+
+/* SVG */
 function palette(bg){
   const map = {
     "#c8deff":["#bdd8ff","#8cb7ff"],
@@ -607,7 +618,7 @@ function makeSvgData(title,subtitle,icon,c1,c2){
     </defs>
     <rect width="1200" height="900" fill="url(#g)"/>
     <circle cx="1030" cy="120" r="160" fill="rgba(255,255,255,.12)"/>
-    <circle cx="190"  cy="760" r="180" fill="rgba(255,255,255,.12)"/>
+    <circle cx="190" cy="760" r="180" fill="rgba(255,255,255,.12)"/>
     <text x="100" y="230" font-size="190" filter="url(#f)">${icon}</text>
     <rect x="70" y="605" width="1060" height="180" rx="32" fill="rgba(255,255,255,.9)"/>
     <text x="120" y="680" font-family="Arial" font-size="60" font-weight="700" fill="#1a1208">${title}</text>
@@ -642,54 +653,56 @@ function fallbackImg(v){
 
 function buildGallery(v){
   const rawImages = Array.isArray(v.images) ? v.images.filter(Boolean) : [];
-  if (rawImages.length) {
+  if(rawImages.length){
     const out = rawImages.map((src,i)=>({
       src,
-      caption: i === 0 ? "Image principale" : `Vue ${i+1}`
+      caption:i === 0 ? "Image principale" : `Vue ${i+1}`
     }));
-    if (v.mapPreview) out.push({src:v.mapPreview, caption:"Repère carte"});
+    if(v.mapPreview) out.push({ src:v.mapPreview, caption:"Repère carte" });
     return out.slice(0,8);
   }
 
   const [c1,c2] = palette(v.bg || "#f4ead7");
   const items = [
-    {title:"Signature", sub:v.name,                      icon:v.icon || "🛍️"},
-    {title:"Ambiance",  sub:v.loc || v.city || "terrain",icon:"✨"},
-    {title:"Style",     sub:v.categoryLabel || "boutique",icon:v.categoryIcon || "🛍️"},
-    {title:"Repère",    sub:"présence publique",         icon:"📍"},
-    {title:"Éditorial", sub:"vitrine DIGIY",             icon:v.isRoyal ? "♛" : "🌍"}
+    { title:"Signature", sub:v.name, icon:v.icon || "🛍️" },
+    { title:"Ambiance", sub:v.loc || v.city || "terrain", icon:"✨" },
+    { title:"Univers", sub:v.categoryLabel || "boutique", icon:v.categoryIcon || "🛍️" },
+    { title:"Repère", sub:"présence locale", icon:"📍" },
+    { title:"Élan", sub:"vitrine DIGIY", icon:v.isRoyal ? "♛" : "🌍" }
   ];
   return items.map((item,i)=>({
-    src: makeSvgData(item.title, item.sub, item.icon, i%2 ? c2 : c1, i%2 ? c1 : c2),
-    caption: `${item.title} — visuel`
+    src:makeSvgData(item.title, item.sub, item.icon, i % 2 ? c2 : c1, i % 2 ? c1 : c2),
+    caption:`${item.title} — visuel`
   }));
 }
 
 function buildExampleProducts(v){
-  const base  = parsePriceBase(v.price);
+  const base = parsePriceBase(v.price);
   const parts = splitOffer(v.what);
-  if(!parts.length) return [
-    {title:"Produit exemple 1", desc:"À personnaliser.", price:"Prix à définir"},
-    {title:"Produit exemple 2", desc:"À personnaliser.", price:"Prix à définir"},
-    {title:"Produit exemple 3", desc:"À personnaliser.", price:"Prix à définir"},
-    {title:"Produit exemple 4", desc:"À personnaliser.", price:"Prix à définir"}
-  ];
+  if(!parts.length){
+    return [
+      { title:"Produit exemple 1", desc:"À personnaliser.", price:"Prix à définir" },
+      { title:"Produit exemple 2", desc:"À personnaliser.", price:"Prix à définir" },
+      { title:"Produit exemple 3", desc:"À personnaliser.", price:"Prix à définir" },
+      { title:"Produit exemple 4", desc:"À personnaliser.", price:"Prix à définir" }
+    ];
+  }
   return parts.map((p,i)=>({
     title:p,
     desc:`Mise en avant pour ${v.name}.`,
-    price:makePrice(base,0.35+(i*0.18))
+    price:makePrice(base,0.35 + (i * 0.18))
   }));
 }
 
 function buildRealPublicBlocks(v){
   const rows = [];
-  if (v.categoryLabel) rows.push({title:"Catégorie", desc:"Univers du commerçant.", price:v.categoryLabel});
-  if (v.address)       rows.push({title:"Adresse",   desc:"Repère public.",         price:v.address});
-  if (v.delivery_note) rows.push({title:"Livraison", desc:"Info publique utile.",    price:v.delivery_note});
-  if (v.payment_note)  rows.push({title:"Paiement",  desc:"Mode de paiement.",       price:v.payment_note});
-  if (v.owner_name)    rows.push({title:"Contact",   desc:"Nom public utile.",       price:v.owner_name});
-  if (v.phone)         rows.push({title:"Téléphone", desc:"Numéro public.",          price:formatPhone(v.phone)});
-  if (v.whatsapp)      rows.push({title:"WhatsApp",  desc:"Contact direct.",         price:formatPhone(v.whatsapp)});
+  if(v.categoryLabel) rows.push({ title:"Catégorie", desc:"Univers du commerçant.", price:v.categoryLabel });
+  if(v.address) rows.push({ title:"Adresse", desc:"Repère public.", price:v.address });
+  if(v.delivery_note) rows.push({ title:"Livraison", desc:"Info utile.", price:v.delivery_note });
+  if(v.payment_note) rows.push({ title:"Paiement", desc:"Mode accepté.", price:v.payment_note });
+  if(v.owner_name) rows.push({ title:"Contact", desc:"Nom utile.", price:v.owner_name });
+  if(v.phone) rows.push({ title:"Téléphone", desc:"Numéro public.", price:formatPhone(v.phone) });
+  if(v.whatsapp) rows.push({ title:"WhatsApp", desc:"Contact direct.", price:formatPhone(v.whatsapp) });
   return rows.slice(0,6);
 }
 
@@ -720,8 +733,8 @@ async function loadPublicProfileBySlug(slug){
 
   if(error || !data) return null;
 
-  const cover   = data.cover_url || data.cover_image_url || data.photo_url || data.logo_url || "";
-  const photo   = data.photo_url || data.logo_url || data.cover_url || data.cover_image_url || "";
+  const cover = data.cover_url || data.cover_image_url || data.photo_url || data.logo_url || "";
+  const photo = data.photo_url || data.logo_url || data.cover_url || data.cover_image_url || "";
   const gallery = [
     cover,
     photo,
@@ -729,79 +742,92 @@ async function loadPublicProfileBySlug(slug){
     data.gallery_url_2,
     data.gallery_url_3,
     data.gallery_url_4
-  ].filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i);
+  ].filter(Boolean).filter((v,i,a)=>a.indexOf(v) === i);
 
   return {
-    mode: "real",
-    slug: data.slug || slug,
-    name: data.display_name || data.shop_name || data.business_name || "Boutique DIGIY",
-    what: data.category || data.categories_text || "Boutique locale",
-    loc: [data.city, data.address].filter(Boolean).join(" · ") || data.city || "Sénégal",
-    city: data.city || "",
-    address: data.address || "",
-    categoryLabel: data.category || data.categories_text || "Boutique locale",
-    categoryIcon: "🛍️",
-    icon: "🛍️",
-    price: "",
-    live: data.is_published == null ? true : !!data.is_published,
-    isExample: false,
-    isRoyal: false,
-    description: data.bio || data.description || "",
-    whatsapp: normPhone(data.whatsapp || data.phone || ""),
-    phone: normPhone(data.phone || ""),
-    delivery_note: data.delivery_note || "",
-    payment_note: data.payment_note || "",
-    owner_name: data.owner_name || "",
-    images: gallery,
-    coverImage: cover || photo || "",
-    raw: data
+    mode:"real",
+    slug:data.slug || slug,
+    name:data.display_name || data.shop_name || data.business_name || "Boutique DIGIY",
+    what:data.category || data.categories_text || "Boutique locale",
+    loc:[data.city, data.address].filter(Boolean).join(" · ") || data.city || "Sénégal",
+    city:data.city || "",
+    address:data.address || "",
+    categoryLabel:data.category || data.categories_text || "Boutique locale",
+    categoryIcon:"🛍️",
+    icon:"🛍️",
+    price:"",
+    live:data.is_published == null ? true : !!data.is_published,
+    isExample:false,
+    isRoyal:false,
+    description:data.bio || data.description || "",
+    whatsapp:normPhone(data.whatsapp || data.phone || ""),
+    phone:normPhone(data.phone || ""),
+    delivery_note:data.delivery_note || "",
+    payment_note:data.payment_note || "",
+    owner_name:data.owner_name || "",
+    images:gallery,
+    coverImage:cover || photo || "",
+    raw:data
   };
 }
 
-/* ═══════════════════════════════════════
-   RENDER
-═══════════════════════════════════════ */
 function renderVendor(v, cfg){
-  const app      = document.getElementById("app");
-  const mapsQ    = [v.name, v.address || "", v.city || "", v.loc || ""].filter(Boolean).join(" ");
-  const mapLink  = mapsUrl(mapsQ || v.name);
-  const mapImg   = makeMapSvg(v.name, v.loc || v.city || "Sénégal");
-  v.mapPreview   = mapImg;
+  const app = document.getElementById("app");
+  const mapsQ = [v.name, v.address || "", v.city || "", v.loc || ""].filter(Boolean).join(" ");
+  const mapLink = mapsUrl(mapsQ || v.name);
+  const mapImg = makeMapSvg(v.name, v.loc || v.city || "Sénégal");
+  v.mapPreview = mapImg;
 
-  const gallery  = buildGallery(v);
-  const isEx     = !!v.isExample;
-  const blocks   = isEx ? buildExampleProducts(v) : buildRealPublicBlocks(v);
-  const isRoyal  = !!v.isRoyal;
+  const gallery = buildGallery(v);
+  const isEx = !!v.isExample;
+  const blocks = isEx ? buildExampleProducts(v) : buildRealPublicBlocks(v);
+  const isRoyal = !!v.isRoyal;
   const heroCover = v.coverImage || gallery[0]?.src || fallbackImg(v);
+  const orderUrl = !isEx && v.slug ? buildSafeUrl("commander.html", { slug:v.slug }) : "";
 
   document.title = `${v.name} — DIGIY MARKET`;
 
-  const waGeneral  = waLink(cfg.whatsapp, `Bonjour DIGIY 👋 Je veux une vitrine comme "${v.name}" sur DIGIY MARKET.`);
-  const waBoutique = v.whatsapp ? waLink(v.whatsapp, `Bonjour 👋 Je vous contacte depuis votre fiche DIGIY MARKET.`) : "";
-  const waMain     = isEx ? waGeneral : (waBoutique || waGeneral);
-  const waLabel    = isEx ? "💬 WhatsApp DIGIY" : (waBoutique ? "💬 WhatsApp boutique" : "💬 WhatsApp DIGIY");
+  const waGeneral = waLink(cfg.whatsapp, `Bonjour DIGIY 👋 Je veux une boutique comme "${v.name}" sur DIGIY MARKET.`);
+  const waBoutique = v.whatsapp ? waLink(v.whatsapp, `Bonjour 👋 Je vous contacte depuis votre boutique DIGIY MARKET.`) : "";
+  const waMain = isEx ? waGeneral : (waBoutique || waGeneral);
+  const waLabel = isEx ? "💬 WhatsApp DIGIY" : (waBoutique ? "💬 WhatsApp boutique" : "💬 WhatsApp DIGIY");
 
   document.getElementById("topWaBtn").href = waMain;
   document.getElementById("topWaBtn").textContent = waLabel;
-  document.getElementById("topModuleBtn").href = cfg.proUrl || DEFAULT_CFG.proUrl;
+  document.getElementById("topProBtn").href = cfg.proUrl || DEFAULT_CFG.proUrl;
+
   document.getElementById("floatWaBtn").href = waMain;
   document.getElementById("floatWaBtn").textContent = waLabel;
-  document.getElementById("floatModuleBtn").href = cfg.proUrl || DEFAULT_CFG.proUrl;
+  document.getElementById("floatProBtn").href = cfg.proUrl || DEFAULT_CFG.proUrl;
+
+  const topOrderBtn = document.getElementById("topOrderBtn");
+  const floatOrderBtn = document.getElementById("floatOrderBtn");
+
+  if(orderUrl){
+    topOrderBtn.href = orderUrl;
+    topOrderBtn.style.display = "inline-flex";
+    floatOrderBtn.href = orderUrl;
+    floatOrderBtn.style.display = "inline-flex";
+  }else{
+    topOrderBtn.style.display = "none";
+    floatOrderBtn.style.display = "none";
+  }
+
   document.getElementById("floatCtas").style.display = "flex";
   applyTopBrand(cfg);
 
   const heroText = isEx
     ? (v.what || "Vitrine exemple DIGIY MARKET.")
-    : (v.description || "Fiche publique DIGIY MARKET.");
+    : (v.description || "Découvre cette boutique, ses repères utiles et le bon contact.");
 
   const sideNote = isEx
     ? "Cette fiche exemple montre le niveau visuel possible pour une boutique DIGIY MARKET."
-    : "Cette fiche lit le profil réel par slug. Contact direct vers la boutique si numéro disponible.";
+    : "Cette page présente la boutique telle qu’elle apparaît au public, avec contact direct quand il est disponible.";
 
-  const sectionTitle = isEx ? "Produits & services mis en avant" : "Informations publiques";
-  const sectionLead  = isEx
+  const sectionTitle = isEx ? "Produits et services mis en avant" : "Infos utiles";
+  const sectionLead = isEx
     ? "La vitrine DIGIY MARKET présente les produits phares avec style et clarté."
-    : "Repères publics visibles sans inventer un faux catalogue.";
+    : "Repères visibles, lisibles et directs, sans brouiller le visiteur.";
 
   const blocksHTML = blocks.length ? `
     <div class="products-grid">
@@ -815,8 +841,8 @@ function renderVendor(v, cfg){
     </div>
   ` : `
     <div class="empty-state" style="margin-top:14px">
-      <h2>Infos publiques à compléter</h2>
-      <p>La fiche est visible, mais certains repères publics n'ont pas encore été posés.</p>
+      <h2>Infos à compléter</h2>
+      <p>La boutique est visible, mais certains repères publics n'ont pas encore été posés.</p>
     </div>
   `;
 
@@ -827,16 +853,16 @@ function renderVendor(v, cfg){
         <div class="hero-gradient"></div>
 
         <div class="hero-top-chips">
-          ${isRoyal ? `<span class="chip chip-royal">♛ ROYAL STAR</span>` : ""}
-          ${isEx ? `<span class="chip chip-example">EXEMPLE DIGIY</span>` : `<span class="chip chip-live">BOUTIQUE PUBLIQUE</span>`}
-          ${v.live ? `<span class="chip chip-live">VISIBLE</span>` : ""}
+          ${isRoyal ? `<span class="chip chip-royal">♛ ÉDITION ROYALE</span>` : ""}
+          ${isEx ? `<span class="chip chip-example">INSPIRATION DIGIY</span>` : `<span class="chip chip-live">${v.live ? "BOUTIQUE OUVERTE" : "BOUTIQUE À VENIR"}</span>`}
           <span class="chip chip-dark">${safe(v.categoryIcon || "🛍️")} ${safe(v.categoryLabel || "Boutique")}</span>
         </div>
 
         <div class="hero-copy">
-          <div class="hero-kicker">${isEx ? "✦ ROYAL VITRINE" : "✦ PUBLIC DIGIY MARKET"}</div>
+          <div class="hero-kicker">${isEx ? "✦ INSPIRATION DIGIY" : "✦ BOUTIQUE DIGIY MARKET"}</div>
           <h1>${safe(v.name)}</h1>
           <p>${safe(heroText)}</p>
+
           <div class="hero-meta-row">
             <span class="hero-loc">📍 ${safe(v.loc || "Sénégal")}</span>
             ${v.price ? `<span class="hero-pill">${safe(v.price)}</span>` : ""}
@@ -849,9 +875,9 @@ function renderVendor(v, cfg){
 
     <div class="edito-strip anim" style="animation-delay:.1s">
       <div class="edito-tile">
-        <div class="edito-tag">Signature</div>
-        <h3>${isEx ? "Présence éditoriale" : "Présence publique"}</h3>
-        <p>${isEx ? "Vitrine qui donne envie, inspire et convertit." : "Lecture propre, claire, séparée du cockpit vendeur."}</p>
+        <div class="edito-tag">Présence</div>
+        <h3>${isEx ? "Inspiration boutique" : "Présence publique"}</h3>
+        <p>${isEx ? "Une vitrine qui donne envie, inspire et attire." : "Lecture simple, claire et directe pour le public."}</p>
       </div>
       <div class="edito-tile">
         <div class="edito-tag">Univers</div>
@@ -872,8 +898,8 @@ function renderVendor(v, cfg){
           <div class="d-card-inner">
             <h2>Repères de la boutique</h2>
             <p>${isEx
-              ? "Une fiche exemple qui montre le niveau possible : galerie, contact direct, Maps, ouverture PRO."
-              : "Cette fiche publique lit le profil réel du commerçant via son slug — sans passer par la session PRO."
+              ? "Une fiche exemple qui montre le niveau possible : galerie, contact direct, Maps et ouverture de boutique."
+              : "Cette page montre la boutique telle qu’elle est présentée au public : claire, utile et facile à lire."
             }</p>
 
             <div class="info-grid">
@@ -886,20 +912,20 @@ function renderVendor(v, cfg){
                 <div class="info-tile-value">${safe(v.loc || "Sénégal")}</div>
               </div>
               <div class="info-tile">
-                <div class="info-tile-label">Type</div>
-                <div class="info-tile-value">${isEx ? "Vitrine exemple DIGIY" : "Boutique publique réelle"}</div>
+                <div class="info-tile-label">Lecture</div>
+                <div class="info-tile-value">${isEx ? "Inspiration DIGIY" : "Page publique active"}</div>
               </div>
               <div class="info-tile">
-                <div class="info-tile-label">Statut</div>
-                <div class="info-tile-value">${isEx ? (v.live ? "Exemple visible" : "Vitrine exemple") : "Lecture publique active"}</div>
+                <div class="info-tile-label">Visibilité</div>
+                <div class="info-tile-value">${v.live ? "Visible" : "Bientôt visible"}</div>
               </div>
             </div>
 
             <div class="cta-row">
-              <a class="btn btn-gold" href="${waMain}" target="_blank" rel="noopener">${waLabel}</a>
-              <a class="btn btn-fire" href="${cfg.proUrl || DEFAULT_CFG.proUrl}" target="_blank" rel="noopener">🔥 Je veux mon module</a>
-              <a class="btn btn-ghost" href="${mapLink}" target="_blank" rel="noopener">📍 Maps</a>
-              <a class="btn btn-ghost" href="index.html">← Marché</a>
+              ${orderUrl ? `<a class="btn btn-gold" href="${orderUrl}">🛒 Je commande</a>` : ""}
+              <a class="btn btn-fire" href="${waMain}" target="_blank" rel="noopener">${waLabel}</a>
+              <a class="btn btn-ghost" href="${mapLink}" target="_blank" rel="noopener">📍 Ouvrir dans Maps</a>
+              <a class="btn btn-ghost" href="index.html">← Boutiques</a>
             </div>
 
             <div class="note-box">${safe(sideNote)}</div>
@@ -908,10 +934,10 @@ function renderVendor(v, cfg){
 
         <div class="d-card anim" style="animation-delay:.16s">
           <div class="d-card-inner">
-            <h2>${isEx ? "Galerie royale" : "Galerie publique"}</h2>
+            <h2>${isEx ? "Galerie inspiration" : "Galerie"}</h2>
             <p>${isEx
-              ? "Mini shooting éditorial : matière, lumière, ambiance, présence magazine."
-              : "Galerie publique autour de la boutique pour poser une présence claire."
+              ? "Mini shooting éditorial : matière, lumière, ambiance et présence."
+              : "Quelques vues pour poser l’ambiance de la boutique."
             }</p>
 
             <div class="gallery-hero">
@@ -939,24 +965,25 @@ function renderVendor(v, cfg){
 
         <div class="d-card anim" style="animation-delay:.24s">
           <div class="d-card-inner">
-            <h2>Présence terrain & Maps</h2>
-            <p>Repère local, accès direct Google Maps et contact utile.</p>
+            <h2>Repère local</h2>
+            <p>Accès direct vers la carte et contact utile quand on veut passer à l’action.</p>
             <div class="map-frame">
               <img src="${mapImg}" alt="Carte ${safe(v.name)}">
             </div>
             <div class="map-actions">
               <a class="btn btn-ghost" href="${mapLink}" target="_blank" rel="noopener">📍 Google Maps</a>
-              <a class="btn btn-gold" href="${waMain}" target="_blank" rel="noopener">${waLabel}</a>
+              ${orderUrl ? `<a class="btn btn-gold" href="${orderUrl}">🛒 Commander</a>` : ""}
+              <a class="btn btn-fire" href="${waMain}" target="_blank" rel="noopener">${waLabel}</a>
             </div>
           </div>
         </div>
 
         <div class="d-card anim" style="animation-delay:.28s">
           <div class="d-card-inner">
-            <h2>${isEx ? "Pourquoi cette fiche frappe fort" : "Pourquoi cette fiche est propre"}</h2>
+            <h2>${isEx ? "Pourquoi cette page attire" : "Pourquoi cette page fonctionne"}</h2>
             <p>${isEx
-              ? "Présence complète : visuel, catégorie, zone, galerie, contact, Maps, et ouverture PRO. Le visiteur ne repart pas les mains vides."
-              : "Lecture publique par slug, séparée de la session vendeur. Clean, rapide, ciblée."
+              ? "Visuel, zone, contact, carte et présence claire. Le visiteur comprend vite et se projette."
+              : "On voit l’essentiel en quelques secondes : la boutique, la zone, les contacts et le chemin pour agir."
             }</p>
           </div>
         </div>
@@ -973,8 +1000,7 @@ function renderVendor(v, cfg){
               <div class="side-tile"><div class="side-tile-label">Activité</div><div class="side-tile-value">${safe(v.what || "Boutique locale")}</div></div>
               <div class="side-tile"><div class="side-tile-label">Zone</div><div class="side-tile-value">${safe(v.loc || "Sénégal")}</div></div>
               <div class="side-tile"><div class="side-tile-label">Univers</div><div class="side-tile-value">${safe(v.categoryLabel || "Boutique locale")}</div></div>
-              <div class="side-tile"><div class="side-tile-label">Slug</div><div class="side-tile-value">${safe(v.slug || "—")}</div></div>
-              <div class="side-tile"><div class="side-tile-label">Type</div><div class="side-tile-value">${isEx ? "Vitrine exemple DIGIY" : "Boutique publique réelle"}</div></div>
+              <div class="side-tile"><div class="side-tile-label">Présence</div><div class="side-tile-value">${isEx ? "Inspiration DIGIY" : "Boutique publique"}</div></div>
               ${!isEx && v.address ? `<div class="side-tile"><div class="side-tile-label">Adresse</div><div class="side-tile-value">${safe(v.address)}</div></div>` : ""}
               ${!isEx && v.phone ? `<div class="side-tile"><div class="side-tile-label">Téléphone</div><div class="side-tile-value">${safe(formatPhone(v.phone))}</div></div>` : ""}
               ${!isEx && v.whatsapp ? `<div class="side-tile"><div class="side-tile-label">WhatsApp</div><div class="side-tile-value">${safe(formatPhone(v.whatsapp))}</div></div>` : ""}
@@ -983,10 +1009,10 @@ function renderVendor(v, cfg){
         </div>
 
         <div class="module-box anim" style="animation-delay:.18s">
-          <h3>🔥 Je veux mon module</h3>
-          <p>Cette vitrine peut devenir la tienne. Abonnement fixe, 0% de commission, présence magazine.</p>
+          <h3>🔥 Ouvrir ma boutique</h3>
+          <p>Cette présence peut devenir la tienne. Abonnement fixe, 0% de commission, lecture claire et contact direct.</p>
           <div class="module-row">
-            <a class="btn btn-fire" href="${cfg.proUrl || DEFAULT_CFG.proUrl}" target="_blank" rel="noopener">Mon module</a>
+            <a class="btn btn-fire" href="${cfg.proUrl || DEFAULT_CFG.proUrl}" target="_blank" rel="noopener">Ouvrir ma boutique</a>
             <a class="btn btn-ghost" href="${waGeneral}" target="_blank" rel="noopener">WhatsApp DIGIY</a>
           </div>
         </div>
@@ -997,22 +1023,22 @@ function renderVendor(v, cfg){
             <div class="trust-list">
               <div class="trust-item"><strong>Vendeurs terrain</strong><span>Présence simple, forte, visible et humaine.</span></div>
               <div class="trust-item"><strong>Beauté & service</strong><span>Coiffure, onglerie, soin — tout peut vivre ici.</span></div>
-              <div class="trust-item"><strong>Commerce du quotidien</strong><span>Du textile à l'alimentaire, chaque boutique respire.</span></div>
+              <div class="trust-item"><strong>Commerce du quotidien</strong><span>Du textile à l’alimentaire, chaque boutique respire.</span></div>
             </div>
           </div>
         </div>
 
         <div class="d-card anim" style="animation-delay:.26s">
           <div class="d-card-inner">
-            <h2>Ce que tu peux brancher</h2>
+            <h2>Ce qu’on peut relier</h2>
             <div class="side-list" style="gap:6px;margin-top:12px">
               ${[
-                "📸 Galerie réelle du commerçant",
-                "📍 Google Maps réel",
+                "📸 Galerie réelle",
+                "📍 Google Maps",
                 "💬 WhatsApp direct",
                 "📞 Téléphone",
-                "💳 DIGIY PAY",
-                "🏪 MARKET PRO complet"
+                "💸 Mon argent",
+                "🏪 Ma boutique complète"
               ].map(f=>`<div class="feature-row">${f}</div>`).join("")}
             </div>
           </div>
@@ -1024,15 +1050,15 @@ function renderVendor(v, cfg){
 
   const mainImg = document.getElementById("galleryMainImage");
   const heroImg = document.getElementById("heroMainImage");
-  const thumbs  = Array.from(document.querySelectorAll("#thumbRail .thumb"));
+  const thumbs = Array.from(document.querySelectorAll("#thumbRail .thumb"));
 
   thumbs.forEach(thumb=>{
     thumb.addEventListener("click", ()=>{
       thumbs.forEach(t=>t.classList.remove("active"));
       thumb.classList.add("active");
       const src = thumb.getAttribute("data-src");
-      if (src && mainImg) mainImg.src = src;
-      if (src && heroImg) heroImg.src = src;
+      if(src && mainImg) mainImg.src = src;
+      if(src && heroImg) heroImg.src = src;
     });
   });
 
@@ -1043,7 +1069,7 @@ function renderVendor(v, cfg){
         io.unobserve(entry.target);
       }
     });
-  },{threshold:.06});
+  }, { threshold:.06 });
 
   document.querySelectorAll(".anim").forEach(el=>{
     el.style.animationPlayState = "paused";
@@ -1053,7 +1079,7 @@ function renderVendor(v, cfg){
   const supportsHover = window.matchMedia("(hover:hover) and (pointer:fine)").matches;
   const heroWrap = document.getElementById("heroCoverWrap");
 
-  if (supportsHover && heroWrap) {
+  if(supportsHover && heroWrap){
     heroWrap.addEventListener("mousemove", e=>{
       const r = heroWrap.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width - 0.5;
@@ -1066,21 +1092,18 @@ function renderVendor(v, cfg){
   }
 }
 
-/* ═══════════════════════════════════════
-   MISSING STATE
-═══════════════════════════════════════ */
 function renderMissing(){
   document.getElementById("app").innerHTML = `
     <div class="d-card" style="max-width:560px;margin:80px auto 0">
       <div class="d-card-inner" style="text-align:center;padding:48px 32px">
         <div style="font-size:3rem;margin-bottom:16px">🏗️</div>
-        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2rem;margin-bottom:10px">Fiche introuvable</h2>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2rem;margin-bottom:10px">Boutique introuvable</h2>
         <p style="color:var(--muted);margin-bottom:24px">
-          Ouvre une fiche depuis <strong style="color:var(--cream)">index.html</strong> ou charge une vraie boutique avec <strong style="color:var(--cream)">?slug=...</strong>
+          Reviens à la vitrine pour ouvrir une boutique disponible.
         </p>
         <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-          <a class="btn btn-fire" href="index.html">← Retour au marché</a>
-          <a class="btn btn-ghost" href="${DEFAULT_CFG.proUrl}" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+          <a class="btn btn-fire" href="index.html">← Retour aux boutiques</a>
+          <a class="btn btn-ghost" href="${DEFAULT_CFG.proUrl}" target="_blank" rel="noopener">🔥 Ouvrir ma boutique</a>
         </div>
       </div>
     </div>
@@ -1088,28 +1111,25 @@ function renderMissing(){
   document.getElementById("floatCtas").style.display = "none";
 }
 
-/* ═══════════════════════════════════════
-   BOOT
-═══════════════════════════════════════ */
 (async function boot(){
-  const catalog     = readCatalog();
-  const slug        = String(getParam("slug") || "").trim().toLowerCase();
+  const catalog = readCatalog();
+  const slug = String(getParam("slug") || "").trim().toLowerCase();
   const exampleSlug = String(getParam("v") || "").trim();
-  const cfg         = (catalog && catalog.config) ? { ...DEFAULT_CFG, ...catalog.config } : DEFAULT_CFG;
+  const cfg = (catalog && catalog.config) ? { ...DEFAULT_CFG, ...catalog.config } : DEFAULT_CFG;
 
   applyTopBrand(cfg);
 
-  if (slug) {
+  if(slug){
     const pub = await loadPublicProfileBySlug(slug);
-    if (pub) {
+    if(pub){
       renderVendor(pub, cfg);
       return;
     }
   }
 
-  if (catalog && Array.isArray(catalog.vendors) && exampleSlug) {
+  if(catalog && Array.isArray(catalog.vendors) && exampleSlug){
     const vendor = catalog.vendors.find(v => v.slug === exampleSlug);
-    if (vendor) {
+    if(vendor){
       renderVendor(vendor, cfg);
       return;
     }
