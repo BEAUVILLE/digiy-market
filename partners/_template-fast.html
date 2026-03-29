@@ -2,71 +2,155 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <title>PARTNER_NAME — Commander direct | DIGIY MARKET ∞</title>
+  <title>Fiche boutique — DIGIY</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="description" content="PARTNER_NAME à CITY : CATEGORY. WhatsApp direct, 0% commission." />
+  <meta name="description" content="Fiche boutique DIGIY. Contact direct, WhatsApp, appel et localisation." />
   <meta name="theme-color" content="#facc15" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
       --bg:#060b10;
       --card:#0b1220;
+      --card-2:#0f1726;
       --line:rgba(255,255,255,.10);
       --text:#f8fafc;
-      --muted:rgba(248,250,252,.75);
+      --muted:rgba(248,250,252,.74);
       --gold:#facc15;
       --gold2:#f59e0b;
       --green:#22c55e;
       --blue:#0ea5e9;
-      --radius:22px;
+      --radius:24px;
       --shadow:0 18px 50px rgba(0,0,0,.55);
+      --max:860px;
     }
+
     *{box-sizing:border-box}
+
+    html,body{margin:0;padding:0}
+
     body{
-      margin:0; min-height:100vh;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      min-height:100vh;
+      font-family:Outfit,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(900px 500px at 10% -10%, rgba(34,197,94,.18), transparent 60%),
-        radial-gradient(900px 500px at 110% 0%, rgba(250,204,21,.10), transparent 55%),
+        radial-gradient(900px 500px at 10% -10%, rgba(34,197,94,.16), transparent 60%),
+        radial-gradient(900px 500px at 110% 0%, rgba(250,204,21,.11), transparent 55%),
         var(--bg);
       padding:14px;
       display:flex;
       justify-content:center;
     }
-    .wrap{width:100%; max-width:860px}
+
+    a,button,input,textarea,select{
+      font:inherit;
+    }
+
+    .wrap{
+      width:100%;
+      max-width:var(--max);
+    }
+
     .top{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px; flex-wrap:wrap; margin-bottom:12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
     }
+
     .brand{
-      display:flex; align-items:center; gap:10px; min-width:0;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
     }
+
     .mark{
-      width:44px; height:44px; border-radius:16px;
-      display:grid; place-items:center;
-      background:linear-gradient(135deg, rgba(250,204,21,.95), rgba(245,158,11,.85));
-      color:#111; font-weight:1000; font-size:20px;
+      width:46px;
+      height:46px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(250,204,21,.96), rgba(245,158,11,.88));
+      color:#111;
+      font-weight:1000;
+      font-size:20px;
       box-shadow:0 10px 28px rgba(250,204,21,.25);
+      flex:0 0 auto;
     }
-    .brand b{
-      display:block; font-weight:1000; letter-spacing:.4px;
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+
+    .brand-text{
+      min-width:0;
     }
-    .brand small{display:block; color:var(--muted); font-weight:800}
+
+    .brand-title{
+      display:block;
+      font-weight:1000;
+      letter-spacing:.2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .brand-sub{
+      display:block;
+      color:var(--muted);
+      font-weight:800;
+      font-size:13px;
+    }
+
     .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:12px 14px; border-radius:999px; border:1px solid var(--line);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:48px;
+      padding:12px 15px;
+      border-radius:999px;
+      border:1px solid var(--line);
       background:rgba(255,255,255,.04);
-      color:var(--text); text-decoration:none;
-      font-weight:950; cursor:pointer;
-      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:900;
+      cursor:pointer;
+      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
       user-select:none;
+      -webkit-tap-highlight-color:transparent;
     }
-    .btn:hover{transform:translateY(-2px); border-color:rgba(250,204,21,.35); box-shadow:0 12px 24px rgba(0,0,0,.35)}
-    .btn.gold{background:linear-gradient(135deg, var(--gold), var(--gold2)); color:#111; border-color:rgba(250,204,21,.35)}
-    .btn.wa{background:linear-gradient(135deg, #25D366, var(--green)); color:#052e16; border-color:rgba(34,197,94,.35)}
-    .btn.call{background:linear-gradient(135deg, var(--blue), #0284c7); color:#fff; border-color:rgba(14,165,233,.35)}
+
+    .btn:hover{
+      transform:translateY(-2px);
+      border-color:rgba(250,204,21,.35);
+      box-shadow:0 12px 24px rgba(0,0,0,.35);
+    }
+
+    .btn:active{
+      transform:translateY(0);
+    }
+
+    .btn.gold{
+      background:linear-gradient(135deg, var(--gold), var(--gold2));
+      color:#111;
+      border-color:rgba(250,204,21,.35);
+    }
+
+    .btn.wa{
+      background:linear-gradient(135deg, #25D366, var(--green));
+      color:#052e16;
+      border-color:rgba(34,197,94,.35);
+    }
+
+    .btn.call{
+      background:linear-gradient(135deg, var(--blue), #0284c7);
+      color:#fff;
+      border-color:rgba(14,165,233,.35);
+    }
+
     .hero{
       border:1px solid rgba(250,204,21,.18);
       border-radius:var(--radius);
@@ -74,69 +158,150 @@
       background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
       box-shadow:var(--shadow);
     }
+
     .cover{
       position:relative;
-      height:300px;
-      background:#0b1220;
+      height:320px;
+      background:
+        radial-gradient(800px 400px at 15% 10%, rgba(250,204,21,.12), transparent 60%),
+        linear-gradient(180deg, #111827, #0b1220);
+      overflow:hidden;
     }
+
     .cover img{
-      width:100%; height:100%; object-fit:cover; display:block;
-      filter:saturate(1.05) contrast(1.05);
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter:saturate(1.04) contrast(1.03);
     }
+
+    .cover-fallback{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:24px;
+      color:rgba(248,250,252,.82);
+      font-weight:800;
+      line-height:1.5;
+      background:
+        radial-gradient(700px 280px at 50% -10%, rgba(250,204,21,.14), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+    }
+
     .badge{
-      position:absolute; top:14px; right:14px;
-      background:linear-gradient(135deg, rgba(250,204,21,.95), rgba(245,158,11,.90));
-      color:#111; font-weight:1000; font-size:12px;
-      padding:8px 12px; border-radius:999px;
+      position:absolute;
+      top:14px;
+      right:14px;
+      z-index:2;
+      background:linear-gradient(135deg, rgba(250,204,21,.96), rgba(245,158,11,.90));
+      color:#111;
+      font-weight:1000;
+      font-size:12px;
+      padding:8px 12px;
+      border-radius:999px;
       box-shadow:0 10px 24px rgba(250,204,21,.20);
     }
-    .body{padding:16px}
+
+    .body{
+      padding:18px;
+    }
+
     h1{
       margin:0 0 8px;
-      font-size:clamp(22px, 4.5vw, 32px);
+      font-size:clamp(24px, 4.8vw, 34px);
       font-weight:1000;
+      line-height:1.08;
+      letter-spacing:-.02em;
     }
+
     .meta{
-      display:flex; gap:10px; flex-wrap:wrap;
-      color:var(--muted); font-weight:800; font-size:13px;
-      margin-bottom:10px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-weight:800;
+      font-size:13px;
+      margin-bottom:12px;
     }
-    .chips{display:flex; gap:10px; flex-wrap:wrap; margin:12px 0 6px}
+
+    .chips{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:12px 0 8px;
+    }
+
     .chip{
       border:1px solid var(--line);
       background:rgba(255,255,255,.03);
-      padding:8px 12px; border-radius:999px;
-      font-weight:900; font-size:12px; color:var(--muted);
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:12px;
+      color:var(--muted);
     }
+
     .desc{
-      color:rgba(248,250,252,.86);
-      font-weight:750; line-height:1.6; font-size:14px;
+      color:rgba(248,250,252,.88);
+      font-weight:700;
+      line-height:1.7;
+      font-size:14px;
       margin-top:10px;
+      white-space:pre-line;
     }
+
     .cta{
-      display:grid; grid-template-columns:1fr 1fr; gap:10px;
-      margin-top:14px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:16px;
     }
-    .cta .btn{width:100%}
-    @media (max-width:640px){
-      .cover{height:240px}
-      .cta{grid-template-columns:1fr}
+
+    .cta .btn{
+      width:100%;
     }
+
     .panel{
       margin-top:12px;
       border:1px solid var(--line);
-      border-radius:var(--radius);
+      border-radius:22px;
       background:rgba(0,0,0,.20);
-      padding:14px;
+      padding:15px;
     }
-    .panel b{font-weight:1000}
-    .panel .muted{color:var(--muted); font-weight:800; font-size:12px; margin-top:6px; line-height:1.5}
+
+    .panel-title{
+      font-weight:1000;
+      margin-bottom:6px;
+    }
+
+    .panel-text{
+      color:var(--muted);
+      font-weight:800;
+      font-size:13px;
+      line-height:1.55;
+    }
+
     .foot{
       margin-top:14px;
       text-align:center;
       color:rgba(248,250,252,.55);
       font-weight:800;
       font-size:12px;
+    }
+
+    .hidden{
+      display:none !important;
+    }
+
+    @media (max-width:640px){
+      .cover{height:248px}
+      .cta{grid-template-columns:1fr}
+      .body{padding:16px}
+      .brand-title{white-space:normal}
     }
   </style>
 </head>
@@ -147,100 +312,207 @@
     <div class="top">
       <div class="brand">
         <div class="mark">∞</div>
-        <div style="min-width:0">
-          <b>DIGIY MARKET · Fiche rapide</b>
-          <small>0% commission · Direct au pro</small>
+        <div class="brand-text">
+          <span class="brand-title">Les boutiques DIGIY</span>
+          <span class="brand-sub">Contact direct · sans commission</span>
         </div>
       </div>
 
-      <!-- ✅ Retour vers index du repo MARKET -->
-      <a class="btn" href="../index.html">← Retour Market</a>
+      <a class="btn" id="btn_back" href="../index.html">← Retour aux boutiques</a>
     </div>
 
     <section class="hero">
       <div class="cover">
-        <div class="badge">✅ Partenaire DIGIY</div>
-        <img src="HERO_IMAGE_URL" alt="PARTNER_NAME à CITY" loading="eager" decoding="async" />
+        <div class="badge" id="badge_text">✅ Disponible maintenant</div>
+
+        <img
+          id="hero_img"
+          src=""
+          alt=""
+          loading="eager"
+          decoding="async"
+          class="hidden"
+        />
+
+        <div class="cover-fallback" id="cover_fallback">
+          <div>
+            <div style="font-size:20px;font-weight:1000;margin-bottom:6px;">Photo de la boutique</div>
+            <div style="font-size:14px;">Ajoute une image de couverture pour donner envie dès le premier regard.</div>
+          </div>
+        </div>
       </div>
 
       <div class="body">
-        <h1>PARTNER_EMOJI PARTNER_NAME</h1>
+        <h1 id="shop_title">🛍️ Nom de la boutique</h1>
 
         <div class="meta">
-          <span>📍 CITY</span>
+          <span id="meta_city">📍 Ville</span>
           <span>•</span>
-          <span>🏷️ CATEGORY</span>
+          <span id="meta_category">🏷️ Catégorie</span>
           <span>•</span>
-          <span>♾️ 0% commission</span>
+          <span>🤝 Contact direct</span>
         </div>
 
         <div class="chips">
           <span class="chip">⚡ Réponse rapide</span>
           <span class="chip">💬 WhatsApp direct</span>
           <span class="chip">📦 Commande simple</span>
-          <span class="chip">🧾 Vrai prix</span>
+          <span class="chip">🧾 Prix clair</span>
         </div>
 
-        <p class="desc">
-          SHORT_PITCH_1<br><br>
-          SHORT_PITCH_2
+        <p class="desc" id="shop_desc">
+          Présente ici la boutique, ce qu’elle propose, et pourquoi le client peut te contacter tout de suite.
         </p>
 
         <div class="cta">
-          <a class="btn wa" id="btn_wa" href="#" target="_blank" rel="noopener">💬 Commander WhatsApp</a>
-          <a class="btn call" id="btn_call" href="#">📞 Appeler</a>
-          <a class="btn gold" id="btn_maps" href="#" target="_blank" rel="noopener">🗺️ Voir sur Maps</a>
-          <a class="btn" id="btn_copy" href="javascript:void(0)">📎 Copier contact</a>
+          <a class="btn wa" id="btn_wa" href="#" target="_blank" rel="noopener">💬 Écrire sur WhatsApp</a>
+          <a class="btn call" id="btn_call" href="#">📞 Appeler maintenant</a>
+          <a class="btn gold" id="btn_maps" href="#" target="_blank" rel="noopener">🗺️ Ouvrir l’adresse</a>
+          <button class="btn" id="btn_copy" type="button">📎 Copier le contact</button>
         </div>
 
         <div class="panel">
-          <b>📌 Repère</b>
-          <div class="muted" id="address_hint">ADDRESS_HINT</div>
+          <div class="panel-title">📌 Repère</div>
+          <div class="panel-text" id="address_hint">Ajoute ici un repère simple pour trouver la boutique.</div>
         </div>
       </div>
     </section>
 
     <div class="foot">
-      © DIGIYLYFE ∞ — paiement direct au pro — pierre par pierre
+      © DIGIYLYFE ∞ — paiement direct au commerçant — pierre par pierre
     </div>
-
   </div>
 
   <script>
-  (function(){
-    "use strict";
+    (function(){
+      "use strict";
 
-    // ✅ À REMPLACER (7 champs)
-    const P = {
-      name: "PARTNER_NAME",
-      phone: "+221XXXXXXXXX",
-      city: "CITY",
-      category: "CATEGORY",
-      addressHint: "ADDRESS_HINT",
-      mapsQuery: "MAPS_QUERY", // ex: "Astou Boutique Teranga Saly"
-      whatsappText: "Salam, je viens de DIGIY MARKET. Je veux commander / infos."
-    };
+      /*
+        REMPLIS ICI SEULEMENT
+      */
+      const SHOP = {
+        emoji: "🛍️",
+        name: "PARTNER_NAME",
+        city: "CITY",
+        category: "CATEGORY",
+        phone: "+221XXXXXXXXX",
+        addressHint: "ADDRESS_HINT",
+        mapsQuery: "MAPS_QUERY",
+        heroImage: "HERO_IMAGE_URL",
+        badgeText: "✅ Partenaire DIGIY",
+        shortPitch1: "SHORT_PITCH_1",
+        shortPitch2: "SHORT_PITCH_2",
+        whatsappText: "Salam, je viens de DIGIY. Je veux commander / avoir plus d'infos.",
+        backHref: "../index.html"
+      };
 
-    function cleanPhone(p){ return String(p||"").replace(/\s+/g,"").replace("+",""); }
-    const wa = "https://wa.me/" + cleanPhone(P.phone) + "?text=" + encodeURIComponent(P.whatsappText);
-    const maps = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(P.mapsQuery || (P.name + " " + P.city));
+      const $ = (id) => document.getElementById(id);
 
-    document.getElementById("btn_wa").href = wa;
-    document.getElementById("btn_call").href = "tel:" + P.phone;
-    document.getElementById("btn_maps").href = maps;
-    document.getElementById("address_hint").textContent = P.addressHint || "";
-
-    // Copier contact
-    document.getElementById("btn_copy").addEventListener("click", async ()=>{
-      const txt = `${P.name} — ${P.phone}\n${P.addressHint || ""}\n${maps}`;
-      try{
-        await navigator.clipboard.writeText(txt);
-        alert("✅ Contact copié !");
-      }catch(e){
-        prompt("Copie :", txt);
+      function cleanPhone(value){
+        return String(value || "").replace(/[^\d+]/g, "").replace(/^\++/, "+");
       }
-    });
-  })();
+
+      function cleanPhoneForWa(value){
+        return cleanPhone(value).replace(/[^\d]/g, "");
+      }
+
+      function safeText(value, fallback){
+        const v = String(value || "").trim();
+        return v || fallback;
+      }
+
+      function buildMapsUrl(query){
+        const q = safeText(query, "");
+        if(!q) return "#";
+        return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+      }
+
+      function buildWaUrl(phone, text){
+        const num = cleanPhoneForWa(phone);
+        if(!num) return "#";
+        return "https://wa.me/" + num + "?text=" + encodeURIComponent(text || "");
+      }
+
+      function buildTelUrl(phone){
+        const num = cleanPhone(phone);
+        if(!num) return "#";
+        return "tel:" + num;
+      }
+
+      function buildDescription(a, b){
+        const parts = [safeText(a, ""), safeText(b, "")]
+          .filter(Boolean);
+        return parts.join("\n\n") || "Contacte-nous directement pour découvrir les produits, les prix et les disponibilités.";
+      }
+
+      const displayName = safeText(SHOP.name, "Nom de la boutique");
+      const displayCity = safeText(SHOP.city, "Ville");
+      const displayCategory = safeText(SHOP.category, "Catégorie");
+      const displayEmoji = safeText(SHOP.emoji, "🛍️");
+      const displayAddress = safeText(SHOP.addressHint, "Ajoute ici un repère simple pour trouver la boutique.");
+      const displayBadge = safeText(SHOP.badgeText, "✅ Disponible maintenant");
+      const mapsQuery = safeText(SHOP.mapsQuery, (displayName + " " + displayCity)).trim();
+      const waUrl = buildWaUrl(SHOP.phone, SHOP.whatsappText);
+      const telUrl = buildTelUrl(SHOP.phone);
+      const mapsUrl = buildMapsUrl(mapsQuery);
+      const fullDescription = buildDescription(SHOP.shortPitch1, SHOP.shortPitch2);
+
+      document.title = displayName + " — Commander direct | DIGIY";
+      document.querySelector('meta[name="description"]').setAttribute(
+        "content",
+        displayName + " à " + displayCity + " : " + displayCategory + ". Contact direct, WhatsApp, appel et localisation."
+      );
+
+      $("shop_title").textContent = displayEmoji + " " + displayName;
+      $("meta_city").textContent = "📍 " + displayCity;
+      $("meta_category").textContent = "🏷️ " + displayCategory;
+      $("shop_desc").textContent = fullDescription;
+      $("address_hint").textContent = displayAddress;
+      $("badge_text").textContent = displayBadge;
+
+      $("btn_wa").href = waUrl;
+      $("btn_call").href = telUrl;
+      $("btn_maps").href = mapsUrl;
+      $("btn_back").href = safeText(SHOP.backHref, "../index.html");
+
+      const heroImg = $("hero_img");
+      const coverFallback = $("cover_fallback");
+      const heroSrc = safeText(SHOP.heroImage, "");
+
+      if(heroSrc && !/^(HERO_IMAGE_URL|PARTNER_NAME|CITY|CATEGORY)$/i.test(heroSrc)){
+        heroImg.src = heroSrc;
+        heroImg.alt = displayName + " à " + displayCity;
+        heroImg.classList.remove("hidden");
+
+        heroImg.addEventListener("load", function(){
+          coverFallback.classList.add("hidden");
+        });
+
+        heroImg.addEventListener("error", function(){
+          heroImg.classList.add("hidden");
+          coverFallback.classList.remove("hidden");
+        });
+      }
+
+      $("btn_copy").addEventListener("click", async function(){
+        const txt = [
+          displayName,
+          cleanPhone(SHOP.phone),
+          displayAddress,
+          mapsUrl !== "#" ? mapsUrl : ""
+        ].filter(Boolean).join("\n");
+
+        try{
+          await navigator.clipboard.writeText(txt);
+          $("btn_copy").textContent = "✅ Contact copié";
+          setTimeout(function(){
+            $("btn_copy").textContent = "📎 Copier le contact";
+          }, 1800);
+        }catch(err){
+          window.prompt("Copie ce contact :", txt);
+        }
+      });
+    })();
   </script>
 </body>
 </html>
