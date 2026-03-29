@@ -2,198 +2,532 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <title>PARTNER_NAME — Fiche Premium | DIGIY MARKET ∞</title>
+  <title>Boutique DIGIY</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="description" content="PARTNER_NAME à CITY : CATEGORY. Contact direct WhatsApp, 0% commission." />
+  <meta name="description" content="Fiche boutique DIGIY. Contact direct WhatsApp, appel, photos et repère sur la carte." />
   <meta name="theme-color" content="#facc15" />
 
-  <!-- Leaflet (carte) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
   <style>
     :root{
-      --bg-1:#fffbeb; --bg-2:#fef3c7; --card:#ffffff;
-      --ink:#0f172a; --muted:#475569; --line:rgba(15,23,42,.08);
-      --gold-1:#facc15; --gold-2:#f59e0b; --gold-3:#fef3c7; --gold-dark:#ca8a04;
-      --green:#16a34a; --blue:#0ea5e9; --blue-dark:#0284c7;
+      --bg-1:#fffbeb;
+      --bg-2:#fef3c7;
+      --card:#ffffff;
+      --ink:#0f172a;
+      --muted:#475569;
+      --line:rgba(15,23,42,.08);
+      --gold-1:#facc15;
+      --gold-2:#f59e0b;
+      --gold-3:#fde68a;
+      --gold-dark:#a16207;
+      --green:#16a34a;
+      --green-2:#22c55e;
+      --blue:#0ea5e9;
+      --blue-dark:#0284c7;
       --shadow-xl:0 20px 60px rgba(2,6,23,.12);
       --shadow-lg:0 14px 40px rgba(2,6,23,.10);
       --shadow-md:0 10px 26px rgba(2,6,23,.08);
       --shadow-sm:0 4px 12px rgba(2,6,23,.06);
-      --r-xxl:32px; --r-xl:24px; --r-lg:18px; --r-md:14px;
+      --r-xxl:32px;
+      --r-xl:24px;
+      --r-lg:18px;
+      --r-md:14px;
+      --max:1200px;
     }
-    *{box-sizing:border-box;margin:0;padding:0}
+
+    *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
-      font-family:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+      margin:0;
+      font-family:Outfit,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
       color:var(--ink);
       background:
         radial-gradient(1200px 700px at 10% -5%, rgba(250,204,21,.20), transparent 60%),
-        radial-gradient(1000px 600px at 95% 5%, rgba(22,163,74,.14), transparent 60%),
+        radial-gradient(1000px 600px at 95% 5%, rgba(22,163,74,.12), transparent 60%),
         radial-gradient(800px 500px at 50% 100%, rgba(245,158,11,.10), transparent 65%),
-        linear-gradient(180deg, #ffffff 0%, var(--bg-1) 40%, #ffffff 100%);
+        linear-gradient(180deg, #ffffff 0%, var(--bg-1) 45%, #ffffff 100%);
       overflow-x:hidden;
     }
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:1200px;margin:0 auto;padding:20px 16px 60px}
 
-    /* Topbar */
+    a{color:inherit;text-decoration:none}
+    button,input,textarea,select{font:inherit}
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:20px 16px 60px;
+    }
+
     .topbar{
-      position:sticky; top:0; z-index:100;
-      background: rgba(255,255,255,.90);
-      backdrop-filter: blur(20px) saturate(150%);
+      position:sticky;
+      top:0;
+      z-index:100;
+      background:rgba(255,255,255,.90);
+      backdrop-filter:blur(18px) saturate(150%);
       border-bottom:1px solid var(--line);
-      box-shadow: var(--shadow-sm);
+      box-shadow:var(--shadow-sm);
     }
+
     .topbar .inner{
-      max-width:1200px;margin:0 auto;padding:12px 16px;
-      display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 16px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
     }
-    .brand{display:flex;align-items:center;gap:12px;min-width:0}
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
     .mark{
-      width:44px;height:44px;border-radius:16px;display:grid;place-items:center;
-      font-weight:900;font-size:20px;color:#111827;
-      background: linear-gradient(135deg, rgba(250,204,21,.95), rgba(245,158,11,.85));
-      box-shadow: 0 8px 24px rgba(245,158,11,.30), 0 0 0 1px rgba(245,158,11,.40) inset;
-      border: 2px solid rgba(255,255,255,.6);
+      width:46px;
+      height:46px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      font-size:20px;
+      color:#111827;
+      background:linear-gradient(135deg, rgba(250,204,21,.95), rgba(245,158,11,.85));
+      box-shadow:0 8px 24px rgba(245,158,11,.28), 0 0 0 1px rgba(245,158,11,.35) inset;
+      border:2px solid rgba(255,255,255,.65);
+      flex:0 0 auto;
     }
-    .brand .txt{min-width:0}
+
+    .brand .txt{
+      min-width:0;
+    }
+
     .brand b{
-      display:block;font-size:14px;letter-spacing:.3px;font-weight:900;
-      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+      display:block;
+      font-size:14px;
+      letter-spacing:.2px;
+      font-weight:900;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
-    .brand small{display:block;color:var(--muted);font-weight:800;font-size:12px}
+
+    .brand small{
+      display:block;
+      color:var(--muted);
+      font-weight:800;
+      font-size:12px;
+    }
+
     .spacer{flex:1}
-    .actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
 
     .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;
-      padding:11px 16px;border-radius:999px;border:1.5px solid var(--line);
-      background: rgba(255,255,255,.85); box-shadow: var(--shadow-sm);
-      font-weight:900;font-size:13px; user-select:none; white-space:nowrap;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:11px 16px;
+      min-height:46px;
+      border-radius:999px;
+      border:1.5px solid var(--line);
+      background:rgba(255,255,255,.85);
+      box-shadow:var(--shadow-sm);
+      font-weight:900;
+      font-size:13px;
       cursor:pointer;
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      white-space:nowrap;
+      user-select:none;
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+      -webkit-tap-highlight-color:transparent;
     }
-    .btn:hover{transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: rgba(250,204,21,.45)}
-    .btn-dark{background: linear-gradient(135deg, #1e293b, #0f172a); color:#fff; border-color: rgba(15,23,42,.3)}
-    .btn-gold{background: linear-gradient(135deg, var(--gold-1), var(--gold-2)); border-color: rgba(245,158,11,.40); color:#111827}
-    .btn-wa{background: linear-gradient(135deg, #25D366, var(--green)); border-color: rgba(22,163,74,.40); color:#052e16}
-    .btn-call{background: linear-gradient(135deg, var(--blue), var(--blue-dark)); border-color: rgba(14,165,233,.40); color:#fffeff}
 
-    /* Hero */
+    .btn:hover{
+      transform:translateY(-2px);
+      box-shadow:var(--shadow-md);
+      border-color:rgba(250,204,21,.45);
+    }
+
+    .btn-dark{
+      background:linear-gradient(135deg, #1e293b, #0f172a);
+      color:#fff;
+      border-color:rgba(15,23,42,.28);
+    }
+
+    .btn-gold{
+      background:linear-gradient(135deg, var(--gold-1), var(--gold-2));
+      border-color:rgba(245,158,11,.40);
+      color:#111827;
+    }
+
+    .btn-wa{
+      background:linear-gradient(135deg, #25D366, var(--green-2));
+      border-color:rgba(22,163,74,.38);
+      color:#052e16;
+    }
+
+    .btn-call{
+      background:linear-gradient(135deg, var(--blue), var(--blue-dark));
+      border-color:rgba(14,165,233,.40);
+      color:#fff;
+    }
+
     .hero{
-      margin-top:20px;background: var(--card);
-      border:2px solid rgba(250,204,21,.15);
-      border-radius: var(--r-xxl);
-      box-shadow: var(--shadow-xl);
+      margin-top:20px;
+      background:var(--card);
+      border:2px solid rgba(250,204,21,.14);
+      border-radius:var(--r-xxl);
+      box-shadow:var(--shadow-xl);
       overflow:hidden;
     }
-    .heroMedia{position:relative;height:360px;background:#0f172a;overflow:hidden}
-    .heroMedia img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.08) contrast(1.05) brightness(1.02)}
-    .heroShade{position:absolute;inset:0;background:linear-gradient(180deg, rgba(2,6,23,.02) 0%, rgba(2,6,23,.35) 60%, rgba(2,6,23,.65) 100%)}
-    .heroBadge{
-      position:absolute;top:18px;right:18px;z-index:2;
-      padding:10px 18px;border-radius:999px;
-      background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
-      font-weight:900;font-size:13px;color:#111;
-      box-shadow: 0 8px 24px rgba(245,158,11,.35), 0 0 0 2px rgba(255,255,255,.6) inset;
+
+    .heroMedia{
+      position:relative;
+      height:380px;
+      background:
+        radial-gradient(900px 360px at 50% 0%, rgba(250,204,21,.16), transparent 55%),
+        linear-gradient(180deg, #1e293b, #0f172a);
+      overflow:hidden;
     }
+
+    .heroMedia img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter:saturate(1.06) contrast(1.04) brightness(1.02);
+    }
+
+    .heroFallback{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:24px;
+      color:rgba(255,255,255,.86);
+      font-weight:800;
+      line-height:1.6;
+      background:
+        radial-gradient(600px 280px at 50% 0%, rgba(250,204,21,.16), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    }
+
+    .heroShade{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(2,6,23,.02) 0%, rgba(2,6,23,.30) 58%, rgba(2,6,23,.64) 100%);
+      pointer-events:none;
+    }
+
+    .heroBadge{
+      position:absolute;
+      top:18px;
+      right:18px;
+      z-index:2;
+      padding:10px 18px;
+      border-radius:999px;
+      background:linear-gradient(135deg, var(--gold-1), var(--gold-2));
+      font-weight:900;
+      font-size:13px;
+      color:#111;
+      box-shadow:0 8px 24px rgba(245,158,11,.35), 0 0 0 2px rgba(255,255,255,.58) inset;
+    }
+
     .heroBody{
       padding:22px 22px 26px;
-      display:grid;grid-template-columns:1.25fr .75fr;gap:18px;align-items:start;
+      display:grid;
+      grid-template-columns:1.25fr .75fr;
+      gap:18px;
+      align-items:start;
     }
+
     .title{
-      margin:0 0 10px;font-size:clamp(26px, 5vw, 36px);letter-spacing:.3px;font-weight:1000;
-      background: linear-gradient(135deg, var(--ink), var(--gold-dark));
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      margin:0 0 10px;
+      font-size:clamp(26px, 5vw, 36px);
+      line-height:1.05;
+      letter-spacing:.2px;
+      font-weight:1000;
+      background:linear-gradient(135deg, var(--ink), var(--gold-dark));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
     }
-    .subtitle{margin:0;color:var(--muted);font-weight:750;line-height:1.55;font-size:15px}
-    .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-weight:750;
+      line-height:1.65;
+      font-size:15px;
+      white-space:pre-line;
+    }
+
+    .chips{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
     .chip{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:9px 14px;border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 14px;
+      border-radius:999px;
       border:1.5px solid rgba(250,204,21,.25);
-      background: linear-gradient(135deg, rgba(250,204,21,.12), rgba(245,158,11,.08));
-      font-weight:900;font-size:12px;box-shadow: var(--shadow-sm);
+      background:linear-gradient(135deg, rgba(250,204,21,.12), rgba(245,158,11,.08));
+      font-weight:900;
+      font-size:12px;
+      box-shadow:var(--shadow-sm);
     }
 
-    .pillCol{display:grid;gap:14px;align-content:start}
+    .pillCol{
+      display:grid;
+      gap:14px;
+      align-content:start;
+    }
+
     .pill{
-      display:flex;gap:14px;align-items:flex-start;
-      padding:18px;border-radius: var(--r-lg);
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      padding:18px;
+      border-radius:var(--r-lg);
       border:1.5px solid var(--line);
-      background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,.85));
-      box-shadow: var(--shadow-md);
-      position:relative;overflow:hidden;
-    }
-    .pill::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background: linear-gradient(180deg, var(--gold-1), var(--gold-2))}
-    .pill .icon{font-size:24px}
-    .pill b{display:block;font-size:14px;font-weight:950;margin-bottom:6px}
-    .pill small{display:block;color:var(--muted);font-weight:750;line-height:1.45;font-size:13px}
-    .pill .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-
-    /* Grid content */
-    .grid{
-      margin-top:20px;display:grid;grid-template-columns:1.2fr .8fr;gap:20px;
-    }
-    .card{
-      background: var(--card);
-      border:1.5px solid var(--line);
-      border-radius: var(--r-xl);
-      box-shadow: var(--shadow-lg);
+      background:linear-gradient(135deg, rgba(255,255,255,.96), rgba(255,255,255,.88));
+      box-shadow:var(--shadow-md);
+      position:relative;
       overflow:hidden;
     }
-    .card .hd{
-      padding:16px 20px;border-bottom:1.5px solid var(--line);
-      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
-      background: linear-gradient(135deg, rgba(250,204,21,.08), rgba(245,158,11,.04));
-    }
-    .card .hd b{font-size:16px;letter-spacing:.3px;font-weight:950}
-    .card .bd{padding:20px}
-    .list{display:grid;gap:14px}
-    .item{
-      padding:18px;border-radius: var(--r-lg);
-      border:1.5px solid rgba(250,204,21,.15);
-      background: linear-gradient(135deg, rgba(250,204,21,.04), rgba(255,255,255,.6));
-      box-shadow: var(--shadow-sm);
-    }
-    .item .t{font-weight:950;font-size:15px;margin-bottom:10px}
-    .item .s{color:var(--muted);font-weight:750;line-height:1.75;font-size:14px}
-    .item .s b{color:var(--ink);font-weight:900}
 
-    .gallery{display:grid;grid-template-columns: repeat(3, 1fr);gap:12px}
-    .ph{border-radius: var(--r-lg);overflow:hidden;border:1.5px solid var(--line);background:#f8fafc;aspect-ratio:4/3}
-    .ph img{width:100%;height:100%;object-fit:cover;display:block}
+    .pill::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      width:4px;
+      height:100%;
+      background:linear-gradient(180deg, var(--gold-1), var(--gold-2));
+    }
+
+    .pill .icon{
+      font-size:24px;
+      flex:0 0 auto;
+    }
+
+    .pill b{
+      display:block;
+      font-size:14px;
+      font-weight:950;
+      margin-bottom:6px;
+    }
+
+    .pill small{
+      display:block;
+      color:var(--muted);
+      font-weight:750;
+      line-height:1.5;
+      font-size:13px;
+      white-space:pre-line;
+    }
+
+    .pill .btns{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .grid{
+      margin-top:20px;
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:20px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1.5px solid var(--line);
+      border-radius:var(--r-xl);
+      box-shadow:var(--shadow-lg);
+      overflow:hidden;
+    }
+
+    .card .hd{
+      padding:16px 20px;
+      border-bottom:1.5px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      background:linear-gradient(135deg, rgba(250,204,21,.08), rgba(245,158,11,.04));
+    }
+
+    .card .hd b{
+      font-size:16px;
+      letter-spacing:.2px;
+      font-weight:950;
+    }
+
+    .card .bd{
+      padding:20px;
+    }
+
+    .list{
+      display:grid;
+      gap:14px;
+    }
+
+    .item{
+      padding:18px;
+      border-radius:var(--r-lg);
+      border:1.5px solid rgba(250,204,21,.15);
+      background:linear-gradient(135deg, rgba(250,204,21,.04), rgba(255,255,255,.62));
+      box-shadow:var(--shadow-sm);
+    }
+
+    .item .t{
+      font-weight:950;
+      font-size:15px;
+      margin-bottom:10px;
+    }
+
+    .item .s{
+      color:var(--muted);
+      font-weight:750;
+      line-height:1.75;
+      font-size:14px;
+      white-space:pre-line;
+    }
+
+    .item .s b{
+      color:var(--ink);
+      font-weight:900;
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:12px;
+    }
+
+    .ph{
+      border-radius:var(--r-lg);
+      overflow:hidden;
+      border:1.5px solid var(--line);
+      background:#f8fafc;
+      aspect-ratio:4/3;
+      position:relative;
+    }
+
+    .ph img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .ph .placeholder{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:14px;
+      color:var(--muted);
+      font-weight:800;
+      font-size:13px;
+      background:linear-gradient(180deg, rgba(255,255,255,.8), rgba(255,255,255,.95));
+    }
 
     .note{
-      margin-top:14px;padding:16px 18px;border-radius: var(--r-lg);
+      margin-top:14px;
+      padding:16px 18px;
+      border-radius:var(--r-lg);
       border:2px dashed rgba(245,158,11,.35);
-      background: linear-gradient(135deg, rgba(250,204,21,.14), rgba(245,158,11,.10));
-      font-weight:850;line-height:1.65;font-size:14px;
+      background:linear-gradient(135deg, rgba(250,204,21,.14), rgba(245,158,11,.10));
+      font-weight:850;
+      line-height:1.65;
+      font-size:14px;
+      white-space:pre-line;
     }
-    .note b{font-weight:950;color:var(--gold-dark)}
 
-    /* Map */
+    .note b{
+      font-weight:950;
+      color:var(--gold-dark);
+    }
+
     .mapCard{
-      margin-top:14px;background: var(--card);
+      margin-top:14px;
+      background:var(--card);
       border:1.5px solid var(--line);
-      border-radius: var(--r-xl);
-      box-shadow: var(--shadow-lg);
+      border-radius:var(--r-xl);
+      box-shadow:var(--shadow-lg);
       overflow:hidden;
     }
+
     .mapCard .hd{
-      padding:16px 20px;background: linear-gradient(135deg, rgba(250,204,21,.10), rgba(245,158,11,.06));
+      padding:16px 20px;
+      background:linear-gradient(135deg, rgba(250,204,21,.10), rgba(245,158,11,.06));
       border-bottom:1.5px solid var(--line);
-      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
     }
-    .mapCard .hd h3{font-size:16px;font-weight:950;margin:0}
-    #partnerMap{width:100%;height:380px}
+
+    .mapCard .hd h3{
+      margin:0;
+      font-size:16px;
+      font-weight:950;
+    }
+
+    #partnerMap{
+      width:100%;
+      height:380px;
+      background:#f8fafc;
+    }
+
+    .mapFallback{
+      padding:28px 20px;
+      text-align:center;
+      color:var(--muted);
+      font-weight:800;
+      line-height:1.65;
+      background:linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,251,235,.9));
+    }
+
+    .hidden{display:none !important}
 
     .foot{
-      margin-top:28px;padding:20px 16px;text-align:center;
-      color: rgba(15,23,42,.50);font-weight:850;font-size:13px;
-      background: linear-gradient(135deg, rgba(250,204,21,.06), rgba(245,158,11,.04));
-      border-radius: var(--r-lg);
+      margin-top:28px;
+      padding:20px 16px;
+      text-align:center;
+      color:rgba(15,23,42,.50);
+      font-weight:850;
+      font-size:13px;
+      background:linear-gradient(135deg, rgba(250,204,21,.06), rgba(245,158,11,.04));
+      border-radius:var(--r-lg);
       border:1.5px solid var(--line);
     }
 
@@ -202,34 +536,43 @@
       .grid{grid-template-columns:1fr}
       .heroMedia{height:300px}
       #partnerMap{height:320px}
-      .gallery{grid-template-columns: repeat(2, 1fr)}
+      .gallery{grid-template-columns:repeat(2, 1fr)}
+    }
+
+    @media (max-width:640px){
+      .wrap{padding:16px 12px 46px}
+      .topbar .inner{padding:10px 12px}
+      .heroMedia{height:250px}
+      .card .bd,.heroBody{padding:16px}
+      .gallery{grid-template-columns:1fr 1fr}
+      .actions{width:100%}
     }
   </style>
 </head>
 
 <body>
-  <!-- TOPBAR -->
   <div class="topbar" role="banner">
     <div class="inner">
-      <!-- ✅ Retour propre vers le MARKET -->
-      <a class="btn" href="../index.html" aria-label="Retour MARKET"><span>← Retour</span></a>
+      <a class="btn" id="btn_back" href="../index.html" aria-label="Retour aux boutiques">
+        <span>← Retour</span>
+      </a>
 
-      <div class="brand" aria-label="DIGIY MARKET">
+      <div class="brand" aria-label="Les boutiques DIGIY">
         <div class="mark">∞</div>
         <div class="txt">
-          <b>DIGIY MARKET · Fiche Premium</b>
-          <small>0% commission · Direct au pro</small>
+          <b>Les boutiques DIGIY</b>
+          <small>Contact direct · sans commission</small>
         </div>
       </div>
 
       <div class="spacer"></div>
 
       <div class="actions">
-        <a class="btn btn-dark" href="https://beauville.github.io/digiy-mdimbal-map/" target="_blank" rel="noopener">
+        <a class="btn btn-dark" id="btn_ndimbal" href="https://beauville.github.io/digiy-mdimbal-map/" target="_blank" rel="noopener">
           <span>🗺️ NDIMBAL Map</span>
         </a>
-        <a class="btn btn-gold" href="https://beauville.github.io/digiy-hub/" target="_blank" rel="noopener">
-          <span>🏠 HUB</span>
+        <a class="btn btn-gold" id="btn_hub" href="https://beauville.github.io/digiy-hub/" target="_blank" rel="noopener">
+          <span>🏠 Accueil DIGIY</span>
         </a>
       </div>
     </div>
@@ -237,59 +580,69 @@
 
   <div class="wrap">
 
-    <!-- HERO -->
-    <section class="hero" aria-label="Fiche partenaire">
+    <section class="hero" aria-label="Fiche boutique">
       <div class="heroMedia" aria-label="Photo principale">
-        <div class="heroBadge">✨ Partenaire Validé DIGIY</div>
+        <div class="heroBadge" id="hero_badge">✨ Boutique mise en avant</div>
+
         <img
-          src="HERO_IMAGE_URL"
-          alt="PARTNER_NAME — CATEGORY à CITY"
-          loading="eager" decoding="async"
+          id="hero_img"
+          src=""
+          alt=""
+          loading="eager"
+          decoding="async"
+          class="hidden"
         />
+
+        <div class="heroFallback" id="hero_fallback">
+          <div>
+            <div style="font-size:22px;font-weight:1000;margin-bottom:8px;">Ajoute une belle photo de couverture</div>
+            <div style="font-size:14px;">Un bon visuel donne confiance tout de suite et aide le client à te reconnaître.</div>
+          </div>
+        </div>
+
         <div class="heroShade"></div>
       </div>
 
       <div class="heroBody">
         <div>
-          <h1 class="title">PARTNER_EMOJI PARTNER_NAME</h1>
-          <p class="subtitle">
-            <b>CATEGORY</b> — DESCRIPTION_1<br><br>
-            DESCRIPTION_2
+          <h1 class="title" id="title">🛍️ Nom de la boutique</h1>
+          <p class="subtitle" id="subtitle">
+            Catégorie — Présente ici ce que la boutique propose, ce qui la rend utile, et pourquoi on peut te contacter directement.
           </p>
 
           <div class="chips" aria-label="Points forts">
-            <span class="chip">🏪 ZONE_LABEL</span>
+            <span class="chip" id="chip_zone">🏪 Quartier</span>
             <span class="chip">💬 WhatsApp direct</span>
-            <span class="chip">✅ 0% commission</span>
-            <span class="chip">📍 CITY</span>
+            <span class="chip">✅ Sans commission</span>
+            <span class="chip" id="chip_city">📍 Ville</span>
           </div>
         </div>
 
         <div class="pillCol">
-          <div class="pill" aria-label="Contact">
+          <div class="pill" aria-label="Contact direct">
             <div class="icon">⚡</div>
             <div>
               <b>Contact direct</b>
-              <small>WhatsApp / Appel — réponse rapide</small>
+              <small id="contact_text">WhatsApp ou appel selon le moment.</small>
               <div class="btns">
                 <a class="btn btn-wa" id="btn_wa" href="#" target="_blank" rel="noopener noreferrer">
                   <span>💬 WhatsApp</span>
                 </a>
-                <a class="btn btn-call" id="btn_call" href="#" aria-label="Appeler">
+                <a class="btn btn-call" id="btn_call" href="#">
                   <span>📞 Appeler</span>
                 </a>
               </div>
             </div>
           </div>
 
-          <div class="pill" aria-label="Localisation">
+          <div class="pill" aria-label="Repère et localisation">
             <div class="icon">🧭</div>
             <div>
-              <b>Localisation</b>
-              <small>ADDRESS_HINT</small>
+              <b>Repère</b>
+              <small id="address_hint">Ajoute ici un repère simple pour que le client trouve facilement.</small>
               <div class="btns">
                 <a class="btn btn-dark" id="btn_maps_search" href="#" target="_blank" rel="noopener noreferrer">
-                  <span>🗺️ Google Maps</span>
+                  <span>🗺️ Ouvrir sur Maps</span>
                 </a>
                 <a class="btn" id="btn_maps_dir" href="#" target="_blank" rel="noopener noreferrer">
                   <span>🧭 Itinéraire</span>
@@ -302,78 +655,67 @@
       </div>
     </section>
 
-    <!-- CONTENT -->
-    <section class="grid" aria-label="Contenu fiche partenaire">
+    <section class="grid" aria-label="Contenu de la fiche">
 
-      <article class="card" aria-label="Offre & services">
+      <article class="card" aria-label="Produits et services">
         <div class="hd">
-          <b>🧺 Produits & Services</b>
-          <span class="chip" style="background:linear-gradient(135deg, rgba(22,163,74,.15), rgba(34,197,94,.10));border-color:rgba(22,163,74,.25)">✅ Validé DIGIY</span>
+          <b>🧺 Ce que tu proposes</b>
+          <span class="chip" id="valid_chip">✅ Boutique visible sur DIGIY</span>
         </div>
+
         <div class="bd">
           <div class="list">
             <div class="item">
               <div class="t">💎 Produits phares</div>
-              <div class="s">
-                • <b>ITEM_1</b> : DETAILS_1<br>
-                • <b>ITEM_2</b> : DETAILS_2<br>
-                • <b>ITEM_3</b> : DETAILS_3
-              </div>
+              <div class="s" id="items_block"></div>
             </div>
 
             <div class="item">
               <div class="t">✨ Services</div>
-              <div class="s">
-                • <b>SERVICE_1</b><br>
-                • <b>SERVICE_2</b><br>
-                • <b>SERVICE_3</b>
-              </div>
+              <div class="s" id="services_block"></div>
             </div>
 
-            <div class="note">
-              💎 <b>Astuce</b> : TIP_TEXT
+            <div class="note" id="tip_block">
+              💡 <b>Conseil</b> : Mets ici une info utile qui rassure ou aide le client à passer à l’action.
             </div>
           </div>
         </div>
       </article>
 
-      <aside class="card" aria-label="Galerie">
+      <aside class="card" aria-label="Galerie photos">
         <div class="hd">
           <b>📸 Galerie</b>
-          <span class="chip">✨ Inspiration</span>
+          <span class="chip">✨ En images</span>
         </div>
-        <div class="bd">
-          <div class="gallery" aria-label="Photos">
-            <a class="ph" href="GALLERY_1_URL" target="_blank" rel="noopener"><img src="GALLERY_1_URL" alt="Photo 1"></a>
-            <a class="ph" href="GALLERY_2_URL" target="_blank" rel="noopener"><img src="GALLERY_2_URL" alt="Photo 2"></a>
-            <a class="ph" href="GALLERY_3_URL" target="_blank" rel="noopener"><img src="GALLERY_3_URL" alt="Photo 3"></a>
-            <a class="ph" href="GALLERY_4_URL" target="_blank" rel="noopener"><img src="GALLERY_4_URL" alt="Photo 4"></a>
-            <a class="ph" href="GALLERY_5_URL" target="_blank" rel="noopener"><img src="GALLERY_5_URL" alt="Photo 5"></a>
-            <a class="ph" href="GALLERY_6_URL" target="_blank" rel="noopener"><img src="GALLERY_6_URL" alt="Photo 6"></a>
-          </div>
 
-          <div class="note" style="margin-top:16px">
-            ✅ <b>Conseil</b> : GALLERY_NOTE
+        <div class="bd">
+          <div class="gallery" id="gallery"></div>
+
+          <div class="note" style="margin-top:16px" id="gallery_note">
+            ✅ <b>Conseil</b> : Mets des photos claires, proches du réel, pour que le client sache tout de suite où il met les pieds.
           </div>
         </div>
       </aside>
 
     </section>
 
-    <!-- MAP -->
     <section class="mapCard" aria-label="Carte">
       <div class="hd">
         <h3>🗺️ Carte & repère</h3>
-        <div style="display:flex; gap:8px; flex-wrap:wrap">
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
           <span class="chip">📍 GPS</span>
-          <span class="chip">0% commission</span>
+          <span class="chip">Paiement direct au commerçant</span>
         </div>
       </div>
+
       <div id="partnerMap"></div>
+      <div class="mapFallback hidden" id="map_fallback">
+        Ajoute des coordonnées GPS valides pour afficher la carte ici.
+      </div>
     </section>
 
     <div class="foot">
-      © DIGIYLYFE · 0% commission · Paiement direct au pro · Pierre par pierre ∞
+      © DIGIYLYFE · Sans commission · Paiement direct au commerçant · Pierre par pierre ∞
     </div>
 
   </div>
@@ -381,60 +723,337 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <script>
-  (function(){
-    "use strict";
+    (function(){
+      "use strict";
 
-    // ==========
-    // 🔧 CONFIG À CHANGER (8 CHAMPS)
-    // ==========
-    const PARTNER = {
-      name: "PARTNER_NAME",
-      phone: "+221XXXXXXXXX",
-      city: "CITY",
-      addressHint: "ADDRESS_HINT",
-      mapsQuery: "MAPS_QUERY", // ex: "Astou Boutique Teranga Saly"
-      lat: 14.0000,
-      lng: -16.0000,
-      whatsappText: "Salam, je viens de DIGIY MARKET. Je veux des infos / commander.",
-    };
+      /*
+        REMPLIS ICI
+        Tu peux laisser vide ce que tu n’as pas encore.
+      */
+      const SHOP = {
+        emoji: "🛍️",
+        name: "PARTNER_NAME",
+        category: "CATEGORY",
+        city: "CITY",
+        zoneLabel: "ZONE_LABEL",
+        phone: "+221XXXXXXXXX",
+        addressHint: "ADDRESS_HINT",
+        mapsQuery: "MAPS_QUERY",
+        lat: 14.0000,
+        lng: -16.0000,
+        heroImage: "HERO_IMAGE_URL",
+        heroBadge: "✨ Boutique mise en avant",
+        description1: "DESCRIPTION_1",
+        description2: "DESCRIPTION_2",
+        whatsappText: "Salam, je viens de DIGIY MARKET. Je veux des infos / commander.",
+        backHref: "../index.html",
+        ndimbalHref: "https://beauville.github.io/digiy-mdimbal-map/",
+        hubHref: "https://beauville.github.io/digiy-hub/",
+        items: [
+          { title: "ITEM_1", details: "DETAILS_1" },
+          { title: "ITEM_2", details: "DETAILS_2" },
+          { title: "ITEM_3", details: "DETAILS_3" }
+        ],
+        services: [
+          "SERVICE_1",
+          "SERVICE_2",
+          "SERVICE_3"
+        ],
+        tipText: "TIP_TEXT",
+        galleryNote: "GALLERY_NOTE",
+        gallery: [
+          "GALLERY_1_URL",
+          "GALLERY_2_URL",
+          "GALLERY_3_URL",
+          "GALLERY_4_URL",
+          "GALLERY_5_URL",
+          "GALLERY_6_URL"
+        ]
+      };
 
-    // WhatsApp + Tel
-    function cleanPhone(p){ return String(p||"").replace(/\s+/g,"").replace("+",""); }
-    const waUrl = "https://wa.me/" + cleanPhone(PARTNER.phone) + "?text=" + encodeURIComponent(PARTNER.whatsappText);
-    document.getElementById("btn_wa").href = waUrl;
-    document.getElementById("btn_call").href = "tel:" + PARTNER.phone;
+      const $ = (id) => document.getElementById(id);
 
-    // Maps
-    const q = encodeURIComponent(PARTNER.mapsQuery || (PARTNER.name + " " + PARTNER.city));
-    document.getElementById("btn_maps_search").href = "https://www.google.com/maps/search/?api=1&query=" + q;
-    document.getElementById("btn_maps_dir").href = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(PARTNER.lat + "," + PARTNER.lng);
+      function txt(value, fallback){
+        const v = String(value ?? "").trim();
+        return v ? v : fallback;
+      }
 
-    // Carte Leaflet (OSM)
-    function initMap(){
-      if(!window.L) return;
-      const map = L.map('partnerMap', { zoomControl:true, scrollWheelZoom:false })
-        .setView([PARTNER.lat, PARTNER.lng], 16);
+      function isPlaceholder(value){
+        const v = String(value ?? "").trim();
+        if(!v) return true;
+        return /^[A-Z0-9_]+$/i.test(v) && v.includes("_");
+      }
 
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap | DIGIYLYFE ∞',
-        maxZoom: 19
-      }).addTo(map);
+      function cleanPhone(value){
+        return String(value || "").replace(/[^\d+]/g, "");
+      }
 
-      const marker = L.marker([PARTNER.lat, PARTNER.lng]).addTo(map);
-      marker.bindPopup("<b>" + PARTNER.name + "</b><br>" + PARTNER.addressHint).openPopup();
+      function cleanPhoneForWa(value){
+        return cleanPhone(value).replace(/[^\d]/g, "");
+      }
 
-      L.circle([PARTNER.lat, PARTNER.lng], {
-        color: '#facc15',
-        fillColor: '#fef3c7',
-        fillOpacity: 0.18,
-        radius: 200
-      }).addTo(map);
-    }
+      function buildWa(phone, message){
+        const p = cleanPhoneForWa(phone);
+        if(!p) return "#";
+        return "https://wa.me/" + p + "?text=" + encodeURIComponent(message || "");
+      }
 
-    window.addEventListener("load", initMap);
-    if(document.readyState === "complete") initMap();
-  })();
+      function buildTel(phone){
+        const p = cleanPhone(phone);
+        return p ? "tel:" + p : "#";
+      }
+
+      function buildMapsSearch(query){
+        const q = txt(query, "");
+        return q ? "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q) : "#";
+      }
+
+      function buildMapsDir(lat, lng){
+        if(!isFinite(lat) || !isFinite(lng)) return "#";
+        return "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(lat + "," + lng);
+      }
+
+      function validLatLng(lat, lng){
+        return typeof lat === "number" && typeof lng === "number" && isFinite(lat) && isFinite(lng) &&
+          lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180;
+      }
+
+      function escapeHtml(str){
+        return String(str)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function setHref(el, href){
+        if(!el) return;
+        el.href = href && href !== "#" ? href : "#";
+        if(href === "#"){
+          el.setAttribute("aria-disabled", "true");
+          el.style.opacity = ".65";
+          el.style.pointerEvents = "none";
+        }
+      }
+
+      function fillItems(items){
+        const valid = Array.isArray(items) ? items.filter(it => {
+          return it && !isPlaceholder(it.title) && txt(it.title, "").length;
+        }) : [];
+
+        if(!valid.length){
+          return "• <b>Produit 1</b> : Mets ici ton article fort\n• <b>Produit 2</b> : Ajoute le détail utile\n• <b>Produit 3</b> : Donne envie simplement";
+        }
+
+        return valid.map(it => {
+          const title = escapeHtml(txt(it.title, "Produit"));
+          const details = escapeHtml(txt(it.details, "Détail à compléter"));
+          return "• <b>" + title + "</b> : " + details;
+        }).join("\n");
+      }
+
+      function fillServices(services){
+        const valid = Array.isArray(services)
+          ? services.filter(s => txt(s, "") && !isPlaceholder(s))
+          : [];
+
+        if(!valid.length){
+          return "• Conseil\n• Préparation\n• Service sur demande";
+        }
+
+        return valid.map(s => "• <b>" + escapeHtml(txt(s, "Service")) + "</b>").join("\n");
+      }
+
+      function buildSubtitle(){
+        const category = txt(SHOP.category, "Catégorie");
+        const d1 = !isPlaceholder(SHOP.description1) ? txt(SHOP.description1, "") : "";
+        const d2 = !isPlaceholder(SHOP.description2) ? txt(SHOP.description2, "") : "";
+
+        const lines = [];
+        lines.push(category + " — " + (d1 || "Présente ici ce que tu proposes clairement."));
+        if(d2) lines.push(d2);
+        return lines.join("\n\n");
+      }
+
+      function buildGallery(){
+        const host = $("gallery");
+        const list = Array.isArray(SHOP.gallery) ? SHOP.gallery : [];
+
+        host.innerHTML = "";
+
+        const valid = list.filter(url => {
+          const u = txt(url, "");
+          return u && !isPlaceholder(u);
+        });
+
+        if(!valid.length){
+          for(let i = 0; i < 6; i++){
+            const item = document.createElement("div");
+            item.className = "ph";
+            item.innerHTML = '<div class="placeholder">Ajoute une photo ici</div>';
+            host.appendChild(item);
+          }
+          return;
+        }
+
+        valid.forEach((url, index) => {
+          const a = document.createElement("a");
+          a.className = "ph";
+          a.href = url;
+          a.target = "_blank";
+          a.rel = "noopener";
+
+          const img = document.createElement("img");
+          img.src = url;
+          img.alt = "Photo " + (index + 1);
+
+          img.addEventListener("error", function(){
+            a.removeAttribute("href");
+            a.removeAttribute("target");
+            a.removeAttribute("rel");
+            a.innerHTML = '<div class="placeholder">Image non disponible</div>';
+          });
+
+          a.appendChild(img);
+          host.appendChild(a);
+        });
+      }
+
+      function initHeroImage(){
+        const img = $("hero_img");
+        const fallback = $("hero_fallback");
+        const src = txt(SHOP.heroImage, "");
+
+        if(!src || isPlaceholder(src)){
+          img.classList.add("hidden");
+          fallback.classList.remove("hidden");
+          return;
+        }
+
+        img.src = src;
+        img.alt = txt(SHOP.name, "Boutique") + " — " + txt(SHOP.category, "Catégorie") + " à " + txt(SHOP.city, "Ville");
+        img.classList.remove("hidden");
+
+        img.addEventListener("load", function(){
+          fallback.classList.add("hidden");
+        });
+
+        img.addEventListener("error", function(){
+          img.classList.add("hidden");
+          fallback.classList.remove("hidden");
+        });
+      }
+
+      function hydrate(){
+        const name = txt(SHOP.name, "Nom de la boutique");
+        const category = txt(SHOP.category, "Catégorie");
+        const city = txt(SHOP.city, "Ville");
+        const zone = txt(SHOP.zoneLabel, city);
+        const emoji = txt(SHOP.emoji, "🛍️");
+        const addressHint = !isPlaceholder(SHOP.addressHint)
+          ? txt(SHOP.addressHint, "Ajoute ici un repère simple pour que le client trouve facilement.")
+          : "Ajoute ici un repère simple pour que le client trouve facilement.";
+
+        const title = name + " — Boutique DIGIY";
+        const metaDesc = name + " à " + city + " : " + category + ". Contact direct WhatsApp, appel, photos et repère sur la carte.";
+
+        document.title = title;
+        document.querySelector('meta[name="description"]').setAttribute("content", metaDesc);
+
+        $("title").textContent = emoji + " " + name;
+        $("subtitle").textContent = buildSubtitle();
+        $("chip_zone").textContent = "🏪 " + zone;
+        $("chip_city").textContent = "📍 " + city;
+        $("address_hint").textContent = addressHint;
+        $("hero_badge").textContent = txt(SHOP.heroBadge, "✨ Boutique mise en avant");
+        $("contact_text").textContent = "WhatsApp ou appel — réponse directe du commerçant.";
+
+        $("items_block").innerHTML = fillItems(SHOP.items);
+        $("services_block").innerHTML = fillServices(SHOP.services);
+
+        const tip = !isPlaceholder(SHOP.tipText)
+          ? txt(SHOP.tipText, "")
+          : "";
+        $("tip_block").innerHTML = "💡 <b>Conseil</b> : " + escapeHtml(tip || "Ajoute une petite phrase qui rassure, explique ou aide le client à commander plus vite.");
+
+        const galleryNote = !isPlaceholder(SHOP.galleryNote)
+          ? txt(SHOP.galleryNote, "")
+          : "";
+        $("gallery_note").innerHTML = "✅ <b>Conseil</b> : " + escapeHtml(galleryNote || "Mets des photos propres, vraies et proches du réel.");
+
+        setHref($("btn_back"), txt(SHOP.backHref, "../index.html"));
+        setHref($("btn_ndimbal"), txt(SHOP.ndimbalHref, "https://beauville.github.io/digiy-mdimbal-map/"));
+        setHref($("btn_hub"), txt(SHOP.hubHref, "https://beauville.github.io/digiy-hub/"));
+
+        const wa = buildWa(SHOP.phone, txt(SHOP.whatsappText, "Salam, je viens de DIGIY. Je veux plus d'infos."));
+        const tel = buildTel(SHOP.phone);
+
+        const mapsQuery = !isPlaceholder(SHOP.mapsQuery)
+          ? txt(SHOP.mapsQuery, name + " " + city)
+          : (name + " " + city);
+
+        const mapsSearch = buildMapsSearch(mapsQuery);
+        const mapsDir = buildMapsDir(Number(SHOP.lat), Number(SHOP.lng));
+
+        setHref($("btn_wa"), wa);
+        setHref($("btn_call"), tel);
+        setHref($("btn_maps_search"), mapsSearch);
+        setHref($("btn_maps_dir"), mapsDir);
+
+        initHeroImage();
+        buildGallery();
+      }
+
+      let mapReady = false;
+
+      function initMap(){
+        if(mapReady) return;
+        mapReady = true;
+
+        const mapEl = $("partnerMap");
+        const fallback = $("map_fallback");
+        const lat = Number(SHOP.lat);
+        const lng = Number(SHOP.lng);
+
+        if(!window.L || !validLatLng(lat, lng)){
+          mapEl.classList.add("hidden");
+          fallback.classList.remove("hidden");
+          return;
+        }
+
+        const map = L.map("partnerMap", {
+          zoomControl: true,
+          scrollWheelZoom: false
+        }).setView([lat, lng], 16);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution: "© OpenStreetMap | DIGIYLYFE ∞",
+          maxZoom: 19
+        }).addTo(map);
+
+        const marker = L.marker([lat, lng]).addTo(map);
+        marker.bindPopup(
+          "<b>" + escapeHtml(txt(SHOP.name, "Boutique")) + "</b><br>" +
+          escapeHtml(txt(SHOP.addressHint, "Repère à compléter"))
+        ).openPopup();
+
+        L.circle([lat, lng], {
+          color: "#f59e0b",
+          fillColor: "#fde68a",
+          fillOpacity: 0.18,
+          radius: 180
+        }).addTo(map);
+      }
+
+      hydrate();
+
+      if(document.readyState === "complete"){
+        initMap();
+      }else{
+        window.addEventListener("load", initMap, { once:true });
+      }
+    })();
   </script>
-
 </body>
 </html>
