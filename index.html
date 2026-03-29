@@ -3,26 +3,35 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>DIGIY MARKET — Le marché vivant</title>
-<meta name="description" content="DIGIY MARKET — le marché vivant de DIGIYLYFE : catégories terrain, fiches exemples guidantes, sélection ROYAL, WhatsApp direct et entrée PRO visible."/>
+<title>DIGIY MARKET — Les boutiques</title>
+<meta name="description" content="DIGIY MARKET — les boutiques du quotidien : univers terrain, vitrines inspirantes, contact direct et entrée boutique visible."/>
 <meta name="theme-color" content="#1a1208"/>
 <meta name="robots" content="index,follow"/>
+
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,600&family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet"/>
+
 <style>
-/* ══════════════════════════════════════
-   DIGIY MARKET — DESIGN SYSTEM
-══════════════════════════════════════ */
 :root{
-  --bg:#fdf6ec; --bg-2:#fffaf2; --card:#fffdf9;
-  --ink:#1a1208; --muted:#7a6a54; --line:#e8d8be;
-  --gold:#c8860a; --orange:#e86820; --red:#c83830; --green:#28885a;
+  --bg:#fdf6ec;
+  --bg-2:#fffaf2;
+  --card:#fffdf9;
+  --ink:#1a1208;
+  --muted:#7a6a54;
+  --line:#e8d8be;
+  --gold:#c8860a;
+  --orange:#e86820;
+  --red:#c83830;
+  --green:#28885a;
   --shadow:0 18px 52px rgba(26,18,8,.13);
   --shadow-soft:0 10px 28px rgba(26,18,8,.08);
 
-  --dk:#0d0a06; --dk-2:#1a1208; --dk-3:#241808;
-  --dk-line:#2e2010; --dk-line-lt:#3e2e1a;
+  --dk:#0d0a06;
+  --dk-2:#1a1208;
+  --dk-3:#241808;
+  --dk-line:#2e2010;
+  --dk-line-lt:#3e2e1a;
   --gold-lt:#f4b840;
   --g-gold:linear-gradient(135deg,#c8860a,#f4b840,#c8860a);
   --g-fire:linear-gradient(135deg,#e86820,#c83830);
@@ -33,7 +42,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-  font-family:"Nunito",sans-serif;
+  font-family:"Outfit",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   background:
     radial-gradient(circle at top left,rgba(232,104,32,.06),transparent 28%),
     radial-gradient(circle at top right,rgba(40,136,90,.05),transparent 22%),
@@ -100,8 +109,12 @@ section[id], .royal-lead, .cats-section, .faq-section{scroll-margin-top:96px}
 }
 .brand-icon img{width:100%;height:100%;object-fit:cover}
 .brand small{
-  display:block;font-family:"Nunito",sans-serif;font-weight:800;
-  font-size:.72rem;color:var(--muted);margin-top:1px;
+  display:block;
+  font-family:"Outfit",system-ui,sans-serif;
+  font-weight:800;
+  font-size:.72rem;
+  color:var(--muted);
+  margin-top:1px;
 }
 .live-count{
   display:inline-flex;align-items:center;gap:8px;
@@ -157,7 +170,7 @@ section[id], .royal-lead, .cats-section, .faq-section{scroll-margin-top:96px}
   background:linear-gradient(135deg,#3a1f08,#744212);
 }
 
-/* HERO BAND */
+/* HERO */
 .hero-band{
   background:linear-gradient(135deg,#1a1208 0%,#2e1e0a 48%,#1d2f14 100%);
   color:#fff;padding:38px 0 32px;position:relative;overflow:hidden;
@@ -214,7 +227,7 @@ section[id], .royal-lead, .cats-section, .faq-section{scroll-margin-top:96px}
 }
 .hero-mob-cta{display:none}
 
-/* STAT STRIP */
+/* STATS */
 .stat-strip{background:linear-gradient(90deg,#1a1208,#2a1a08);border-bottom:1px solid rgba(255,255,255,.07)}
 .stat-inner{display:flex;overflow-x:auto;scrollbar-width:none}
 .stat-inner::-webkit-scrollbar{display:none}
@@ -262,7 +275,7 @@ section[id], .royal-lead, .cats-section, .faq-section{scroll-margin-top:96px}
 }
 .filter-reset:hover{background:#fff3df}
 
-/* ROYAL LEAD */
+/* ROYAL */
 .royal-lead{padding:18px 0 6px}
 .royal-shell{
   background:
@@ -293,7 +306,7 @@ section[id], .royal-lead, .cats-section, .faq-section{scroll-margin-top:96px}
 .royal-btn.soft:hover{background:#fff3df}
 .royal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 
-/* ROYAL SPOTLIGHT CARDS */
+/* ROYAL CARD */
 .royal-card{
   border-radius:22px;overflow:hidden;
   border:1px solid rgba(200,134,10,.15);
@@ -423,7 +436,7 @@ section[id], .royal-lead, .cats-section, .faq-section{scroll-margin-top:96px}
   font-size:.6rem;margin-left:4px;padding:0 4px;
 }
 
-/* VENDOR PANEL — ROYAL DARK EDITION */
+/* PANEL */
 .vendor-panel{
   max-height:0;overflow:hidden;
   transition:max-height .55s cubic-bezier(.4,0,.2,1),opacity .4s,margin .4s;
@@ -466,7 +479,6 @@ section[id], .royal-lead, .cats-section, .faq-section{scroll-margin-top:96px}
   padding:20px;position:relative;z-index:1;
 }
 
-/* ROYAL VENDOR CARD */
 .vendor{
   border-radius:20px;overflow:hidden;
   border:1px solid rgba(200,134,10,.1);
@@ -646,20 +658,20 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line)}
       <a class="back-site-chip" href="https://digiylyfe.com/" target="_blank" rel="noopener">← Retour au site</a>
       <a class="brand" href="#top" aria-label="Retour en haut de page">
         <span class="brand-icon" id="brandIcon">🛍️</span>
-        <span>DIGIY MARKET<small>Le marché vivant du quotidien</small></span>
+        <span>DIGIY MARKET<small>Les boutiques du quotidien</small></span>
       </a>
-      <div class="live-count">Vendeurs exemples <strong id="totalCount">0</strong></div>
+      <div class="live-count">Boutiques inspiration <strong id="totalCount">0</strong></div>
     </div>
 
     <div class="top-search">
-      <input id="topSearchInput" type="text" placeholder="Chercher un vendeur, un produit, une ville…"/>
+      <input id="topSearchInput" type="text" placeholder="Chercher une boutique, une ville, un besoin…"/>
       <button id="topSearchBtn" type="button" aria-label="Lancer la recherche">🔍</button>
     </div>
 
     <div class="top-actions">
-      <button class="royal-top-chip" id="royalTopBtn" type="button">👑 Fiches ROYAL</button>
+      <button class="royal-top-chip" id="royalTopBtn" type="button">👑 Boutiques ROYAL</button>
       <a class="btn-top soft" id="waTopBtn" href="#" target="_blank" rel="noopener">💬 WhatsApp DIGIY</a>
-      <a class="btn-top primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+      <a class="btn-top primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Ouvrir ma boutique</a>
     </div>
   </div>
 </header>
@@ -669,29 +681,29 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line)}
     <div class="hero-grid">
       <div>
         <div class="hero-kicker">🌍 DIGIYLYFE ∞ · Sénégal · Afrique</div>
-        <h1>Le marché qui <em>bouge</em><br/>comme la rue.</h1>
-        <p class="hero-desc">Catégories qui glissent, fiches qui respirent, contact direct, entrée PRO visible. Ici on ne montre pas juste des cases. On montre une présence.</p>
+        <h1>Les boutiques qui <em>respirent</em><br/>comme le terrain.</h1>
+        <p class="hero-desc">Univers qui glissent, vitrines qui donnent envie, contact direct, ouverture boutique visible. Ici, on ne montre pas juste des cases. On montre une présence.</p>
         <div class="hero-chips">
           <span class="chip">🛒 Neuf</span>
           <span class="chip">♻️ Deuxième main</span>
           <span class="chip">👗 Vêtements</span>
           <span class="chip">🌸 Parfum</span>
-          <span class="chip">✂️ Coiffeur</span>
+          <span class="chip">✂️ Coiffure</span>
           <span class="chip">💅 Onglerie</span>
           <span class="chip">🏺 Brocante</span>
           <span class="chip">🧺 Bana-bana</span>
         </div>
         <div class="hero-mob-cta">
-          <a class="hero-btn primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🚀 Mon module</a>
+          <a class="hero-btn primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🚀 Ouvrir ma boutique</a>
           <a id="heroWaBtnMob" class="hero-btn soft" href="#" target="_blank" rel="noopener">💬 DIGIY</a>
         </div>
       </div>
 
       <div class="hero-card">
-        <h3>Un hall qui convertit</h3>
-        <p>Tous les exemples servent à guider les commerçants. Le bouton <strong>Je veux mon module</strong> pointe directement vers ton entrée PRO officielle.</p>
+        <h3>Une vitrine qui attire</h3>
+        <p>Toutes les boutiques inspiration servent à guider les commerçants. Le bouton <strong>Ouvrir ma boutique</strong> pointe directement vers ton entrée officielle.</p>
         <div class="cta-row">
-          <a class="hero-btn primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🚀 Je veux mon module</a>
+          <a class="hero-btn primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🚀 Ouvrir ma boutique</a>
           <a id="heroWaBtn" class="hero-btn soft" href="#" target="_blank" rel="noopener">💬 Parler à DIGIY</a>
         </div>
       </div>
@@ -702,8 +714,8 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line)}
 <div class="stat-strip">
   <div class="wrap">
     <div class="stat-inner">
-      <div class="stat-item"><div class="stat-num" id="statVendeurs">0</div><div class="stat-lbl">Vendeurs exemples</div></div>
-      <div class="stat-item"><div class="stat-num">12</div><div class="stat-lbl">Catégories</div></div>
+      <div class="stat-item"><div class="stat-num" id="statVendeurs">0</div><div class="stat-lbl">Boutiques inspiration</div></div>
+      <div class="stat-item"><div class="stat-num">12</div><div class="stat-lbl">Univers</div></div>
       <div class="stat-item"><div class="stat-num">0%</div><div class="stat-lbl">Commission</div></div>
       <div class="stat-item"><div class="stat-num">Direct</div><div class="stat-lbl">Paiement pro</div></div>
       <div class="stat-item"><div class="stat-num">∞</div><div class="stat-lbl">DIGIYLYFE</div></div>
@@ -713,8 +725,8 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line)}
 
 <div class="ticker">
   <div class="ticker-track">
-    <span class="ticker-item">🛍️ DIGIY MARKET</span><span class="ticker-item">🌍 Sénégal</span><span class="ticker-item">✂️ Coiffeur</span><span class="ticker-item">💅 Onglerie</span><span class="ticker-item">🧺 Bana-bana</span><span class="ticker-item">🏺 Brocante</span><span class="ticker-item">👗 Vêtements</span><span class="ticker-item">🌸 Parfum</span><span class="ticker-item">📱 Téléphones</span><span class="ticker-item">🥜 Alimentaire</span><span class="ticker-item">♻️ Deuxième main</span><span class="ticker-item">0% Commission</span><span class="ticker-item">💳 Paiement direct</span><span class="ticker-item">🔥 Entrée PRO</span>
-    <span class="ticker-item">🛍️ DIGIY MARKET</span><span class="ticker-item">🌍 Sénégal</span><span class="ticker-item">✂️ Coiffeur</span><span class="ticker-item">💅 Onglerie</span><span class="ticker-item">🧺 Bana-bana</span><span class="ticker-item">🏺 Brocante</span><span class="ticker-item">👗 Vêtements</span><span class="ticker-item">🌸 Parfum</span><span class="ticker-item">📱 Téléphones</span><span class="ticker-item">🥜 Alimentaire</span><span class="ticker-item">♻️ Deuxième main</span><span class="ticker-item">0% Commission</span><span class="ticker-item">💳 Paiement direct</span><span class="ticker-item">🔥 Entrée PRO</span>
+    <span class="ticker-item">🛍️ DIGIY MARKET</span><span class="ticker-item">🌍 Sénégal</span><span class="ticker-item">✂️ Coiffure</span><span class="ticker-item">💅 Onglerie</span><span class="ticker-item">🧺 Bana-bana</span><span class="ticker-item">🏺 Brocante</span><span class="ticker-item">👗 Vêtements</span><span class="ticker-item">🌸 Parfum</span><span class="ticker-item">📱 Téléphones</span><span class="ticker-item">🥜 Alimentaire</span><span class="ticker-item">♻️ Deuxième main</span><span class="ticker-item">0% Commission</span><span class="ticker-item">💳 Paiement direct</span><span class="ticker-item">🔥 Ouvrir ma boutique</span>
+    <span class="ticker-item">🛍️ DIGIY MARKET</span><span class="ticker-item">🌍 Sénégal</span><span class="ticker-item">✂️ Coiffure</span><span class="ticker-item">💅 Onglerie</span><span class="ticker-item">🧺 Bana-bana</span><span class="ticker-item">🏺 Brocante</span><span class="ticker-item">👗 Vêtements</span><span class="ticker-item">🌸 Parfum</span><span class="ticker-item">📱 Téléphones</span><span class="ticker-item">🥜 Alimentaire</span><span class="ticker-item">♻️ Deuxième main</span><span class="ticker-item">0% Commission</span><span class="ticker-item">💳 Paiement direct</span><span class="ticker-item">🔥 Ouvrir ma boutique</span>
   </div>
 </div>
 
@@ -722,9 +734,9 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line)}
   <div class="wrap">
     <div class="filters-shell">
       <div class="filter-group">
-        <span class="filter-pill">🎯 Index MARKET V6</span>
-        <span class="filter-pill">🧭 Fiches exemples guidantes</span>
-        <span class="filter-pill">🔥 Entrée PRO visible</span>
+        <span class="filter-pill">🎯 Hall MARKET</span>
+        <span class="filter-pill">🧭 Boutiques inspiration</span>
+        <span class="filter-pill">🔥 Ouverture visible</span>
       </div>
       <select id="cityFilter" class="filter-select"><option value="">Toutes les villes</option></select>
       <button id="resetFilters" class="filter-reset" type="button">Réinitialiser</button>
@@ -738,15 +750,15 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line)}
       <div class="royal-head">
         <div>
           <h2>👑 Sélection ROYAL</h2>
-          <p>Ici on met les vitrines premium en avant : plus de style, plus de matière, plus de désir, plus d'inspiration. C'est la locomotive visuelle du marché.</p>
+          <p>Ici, on met les vitrines premium en avant : plus de style, plus de matière, plus de désir, plus d’inspiration. C’est la locomotive visuelle du marché.</p>
         </div>
         <div class="royal-actions">
           <button class="royal-btn primary" id="btnRoyalOnly" type="button">👑 Rassembler les ROYAL</button>
-          <button class="royal-btn soft" id="btnRoyalReset" type="button">🌍 Revenir au marché complet</button>
+          <button class="royal-btn soft" id="btnRoyalReset" type="button">🌍 Revenir au hall complet</button>
         </div>
       </div>
       <div class="royal-grid" id="royalSpotlightGrid"></div>
-      <div class="section-premium-note">Les fiches ROYAL servent à tirer toute la vitrine vers le haut, inspirer les futurs abonnés, et donner une image plus magazine, plus désirable, plus premium.</div>
+      <div class="section-premium-note">Les vitrines ROYAL tirent toute la façade vers le haut, inspirent les futurs abonnés et donnent un parfum plus magazine au marché.</div>
     </div>
   </div>
 </section>
@@ -756,14 +768,14 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line)}
     <div class="trust-shell">
       <div class="trust-head">
         <div>
-          <h3>Ils nous font confiance</h3>
+          <h3>Ils se reconnaissent ici</h3>
           <p>Bloc vitrine pour rassurer, inspirer et montrer la portée terrain.</p>
         </div>
       </div>
       <div class="trust-grid">
-        <article class="trust-card"><div class="icon">🏪</div><h4>Boutiques terrain</h4><p>Vitrines simples, visibles et compréhensibles par tout le monde.</p></article>
-        <article class="trust-card"><div class="icon">🧺</div><h4>Bana-bana & vendeurs mobiles</h4><p>Présence légère, rapide à poser, prête à circuler.</p></article>
-        <article class="trust-card"><div class="icon">💇</div><h4>Beauté & services</h4><p>Coiffure, onglerie, soin, tout peut respirer dans une vraie fiche.</p></article>
+        <article class="trust-card"><div class="icon">🏪</div><h4>Boutiques terrain</h4><p>Présence simple, visible et compréhensible dès le premier regard.</p></article>
+        <article class="trust-card"><div class="icon">🧺</div><h4>Bana-bana & mobile</h4><p>Présence légère, rapide à poser, prête à circuler.</p></article>
+        <article class="trust-card"><div class="icon">💇</div><h4>Beauté & service</h4><p>Coiffure, onglerie, soin, tout peut respirer dans une vraie boutique.</p></article>
         <article class="trust-card"><div class="icon">📍</div><h4>Présence locale</h4><p>Ville, zone, repère terrain et visibilité orientée action.</p></article>
       </div>
     </div>
@@ -775,7 +787,7 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line)}
     <div class="section-head">
       <div>
         <h2>Les univers du marché</h2>
-        <p>Clique sur un pavé → les vendeurs s'ouvrent</p>
+        <p>Clique sur un pavé → les boutiques s’ouvrent</p>
       </div>
       <div class="rail-controls">
         <button class="arr" id="arrL" type="button">‹</button>
@@ -785,18 +797,18 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line)}
 
     <div class="rail-wrap">
       <div class="cat-rail" id="catRail">
-        <div class="cat-tile" data-cat="neuf"><div class="cat-img" style="background:linear-gradient(135deg,#ffeaaa,#ffd070)"><span class="cat-bg-txt">⭐🆕📦✨🛒⭐🆕📦✨🛒⭐🆕📦✨🛒⭐🆕📦</span><span class="cat-icon">🛒</span></div><div class="cat-body"><div class="cat-name">Neuf</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="deuxiemain"><div class="cat-img" style="background:linear-gradient(135deg,#c8deff,#90b8ff)"><span class="cat-bg-txt">♻️💡🔄💎♻️💡🔄💎♻️💡🔄💎♻️💡🔄</span><span class="cat-icon">♻️</span></div><div class="cat-body"><div class="cat-name">Deuxième main</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="vetements"><div class="cat-img" style="background:linear-gradient(135deg,#ffd0e0,#ffaac8)"><span class="cat-bg-txt">👗👕👖🧣👗👕👖🧣👗👕👖🧣👗👕👖</span><span class="cat-icon">👗</span></div><div class="cat-body"><div class="cat-name">Vêtements</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="parfum"><div class="cat-img" style="background:linear-gradient(135deg,#eadfff,#d4c2ff)"><span class="cat-bg-txt">🌸✨💜🌺🌸✨💜🌺🌸✨💜🌺🌸✨💜</span><span class="cat-icon">🌸</span></div><div class="cat-body"><div class="cat-name">Parfum</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="coiffeur"><div class="cat-img" style="background:linear-gradient(135deg,#dbfff6,#b9f1e0)"><span class="cat-bg-txt">✂️💈🪒💇✂️💈🪒💇✂️💈🪒💇✂️💈🪒</span><span class="cat-icon">✂️</span></div><div class="cat-body"><div class="cat-name">Coiffeur</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="onglerie"><div class="cat-img" style="background:linear-gradient(135deg,#ffd0e0,#ffb8d0)"><span class="cat-bg-txt">💅💎✨🌸💅💎✨🌸💅💎✨🌸💅💎✨</span><span class="cat-icon">💅</span></div><div class="cat-body"><div class="cat-name">Onglerie</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="brocante"><div class="cat-img" style="background:linear-gradient(135deg,#f4ead7,#ead6b2)"><span class="cat-bg-txt">🪑🏺🖼️🪞🪑🏺🖼️🪞🪑🏺🖼️🪞🪑🏺</span><span class="cat-icon">🏺</span></div><div class="cat-body"><div class="cat-name">Brocante</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="banabana"><div class="cat-img" style="background:linear-gradient(135deg,#ffe0cb,#ffc391)"><span class="cat-bg-txt">🧺🛒🏪🎪🧺🛒🏪🎪🧺🛒🏪🎪🧺🛒</span><span class="cat-icon">🧺</span></div><div class="cat-body"><div class="cat-name">Bana-bana</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="quotidien"><div class="cat-img" style="background:linear-gradient(135deg,#dbf5ea,#bfe8d4)"><span class="cat-bg-txt">🏠🧴🥫🧹🏠🧴🥫🧹🏠🧴🥫🧹🏠🧴</span><span class="cat-icon">🏠</span></div><div class="cat-body"><div class="cat-name">Quotidien</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="phones"><div class="cat-img" style="background:linear-gradient(135deg,#c8deff,#90b8ff)"><span class="cat-bg-txt">📱💻⌨️🖥️📱💻⌨️🖥️📱💻⌨️🖥️📱💻</span><span class="cat-icon">📱</span></div><div class="cat-body"><div class="cat-name">Téléphones</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="alimentaire"><div class="cat-img" style="background:linear-gradient(135deg,#ffeaaa,#ffd070)"><span class="cat-bg-txt">🥜🌽🥘🫘🥜🌽🥘🫘🥜🌽🥘🫘🥜🌽</span><span class="cat-icon">🥜</span></div><div class="cat-body"><div class="cat-name">Alimentaire</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="chaussures"><div class="cat-img" style="background:linear-gradient(135deg,#ffe0cb,#ffc391)"><span class="cat-bg-txt">👟👠👞🥿👟👠👞🥿👟👠👞🥿👟👠</span><span class="cat-icon">👟</span></div><div class="cat-body"><div class="cat-name">Chaussures</div><div class="cat-count">Vendeurs<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="neuf"><div class="cat-img" style="background:linear-gradient(135deg,#ffeaaa,#ffd070)"><span class="cat-bg-txt">⭐🆕📦✨🛒⭐🆕📦✨🛒⭐🆕📦✨🛒⭐🆕📦</span><span class="cat-icon">🛒</span></div><div class="cat-body"><div class="cat-name">Neuf</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="deuxiemain"><div class="cat-img" style="background:linear-gradient(135deg,#c8deff,#90b8ff)"><span class="cat-bg-txt">♻️💡🔄💎♻️💡🔄💎♻️💡🔄💎♻️💡🔄</span><span class="cat-icon">♻️</span></div><div class="cat-body"><div class="cat-name">Deuxième main</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="vetements"><div class="cat-img" style="background:linear-gradient(135deg,#ffd0e0,#ffaac8)"><span class="cat-bg-txt">👗👕👖🧣👗👕👖🧣👗👕👖🧣👗👕👖</span><span class="cat-icon">👗</span></div><div class="cat-body"><div class="cat-name">Vêtements</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="parfum"><div class="cat-img" style="background:linear-gradient(135deg,#eadfff,#d4c2ff)"><span class="cat-bg-txt">🌸✨💜🌺🌸✨💜🌺🌸✨💜🌺🌸✨💜</span><span class="cat-icon">🌸</span></div><div class="cat-body"><div class="cat-name">Parfum</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="coiffeur"><div class="cat-img" style="background:linear-gradient(135deg,#dbfff6,#b9f1e0)"><span class="cat-bg-txt">✂️💈🪒💇✂️💈🪒💇✂️💈🪒💇✂️💈🪒</span><span class="cat-icon">✂️</span></div><div class="cat-body"><div class="cat-name">Coiffure</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="onglerie"><div class="cat-img" style="background:linear-gradient(135deg,#ffd0e0,#ffb8d0)"><span class="cat-bg-txt">💅💎✨🌸💅💎✨🌸💅💎✨🌸💅💎✨</span><span class="cat-icon">💅</span></div><div class="cat-body"><div class="cat-name">Onglerie</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="brocante"><div class="cat-img" style="background:linear-gradient(135deg,#f4ead7,#ead6b2)"><span class="cat-bg-txt">🪑🏺🖼️🪞🪑🏺🖼️🪞🪑🏺🖼️🪞🪑🏺</span><span class="cat-icon">🏺</span></div><div class="cat-body"><div class="cat-name">Brocante</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="banabana"><div class="cat-img" style="background:linear-gradient(135deg,#ffe0cb,#ffc391)"><span class="cat-bg-txt">🧺🛒🏪🎪🧺🛒🏪🎪🧺🛒🏪🎪🧺🛒</span><span class="cat-icon">🧺</span></div><div class="cat-body"><div class="cat-name">Bana-bana</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="quotidien"><div class="cat-img" style="background:linear-gradient(135deg,#dbf5ea,#bfe8d4)"><span class="cat-bg-txt">🏠🧴🥫🧹🏠🧴🥫🧹🏠🧴🥫🧹🏠🧴</span><span class="cat-icon">🏠</span></div><div class="cat-body"><div class="cat-name">Quotidien</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="phones"><div class="cat-img" style="background:linear-gradient(135deg,#c8deff,#90b8ff)"><span class="cat-bg-txt">📱💻⌨️🖥️📱💻⌨️🖥️📱💻⌨️🖥️📱💻</span><span class="cat-icon">📱</span></div><div class="cat-body"><div class="cat-name">Téléphones</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="alimentaire"><div class="cat-img" style="background:linear-gradient(135deg,#ffeaaa,#ffd070)"><span class="cat-bg-txt">🥜🌽🥘🫘🥜🌽🥘🫘🥜🌽🥘🫘🥜🌽</span><span class="cat-icon">🥜</span></div><div class="cat-body"><div class="cat-name">Alimentaire</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
+        <div class="cat-tile" data-cat="chaussures"><div class="cat-img" style="background:linear-gradient(135deg,#ffe0cb,#ffc391)"><span class="cat-bg-txt">👟👠👞🥿👟👠👞🥿👟👠👞🥿👟👠</span><span class="cat-icon">👟</span></div><div class="cat-body"><div class="cat-name">Chaussures</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
       </div>
     </div>
 
@@ -806,8 +818,8 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line)}
           <div class="panel-title">
             <span class="icon" id="panelIcon">🛒</span>
             <div>
-              <h3 id="panelTitle">Catégorie</h3>
-              <p id="panelSub">Vendeurs exemples</p>
+              <h3 id="panelTitle">Univers</h3>
+              <p id="panelSub">Boutiques inspiration</p>
             </div>
           </div>
           <button class="panel-close" id="panelClose" type="button">✕</button>
@@ -819,18 +831,18 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line)}
     <div class="cta-band">
       <div class="cta-band-grid">
         <div>
-          <h3>Tu veux ta vitrine comme ça ?</h3>
-          <p>Fiche boutique, galerie, WhatsApp, présence terrain, entrée PRO. La démo donne envie, et derrière tu récupères la demande réelle.</p>
+          <h3>Tu veux ta boutique comme ça ?</h3>
+          <p>Vitrine, galerie, WhatsApp, présence terrain, ouverture visible. La démo donne envie, et derrière tu récupères la vraie demande.</p>
           <div class="cta-band-row">
-            <span class="cta-pill">🛍️ Fiche boutique</span>
+            <span class="cta-pill">🛍️ Vitrine</span>
             <span class="cta-pill">🖼️ Galerie</span>
             <span class="cta-pill">💬 WhatsApp</span>
             <span class="cta-pill">📍 Maps</span>
-            <span class="cta-pill">🔥 Entrée PRO</span>
+            <span class="cta-pill">🔥 Ouverture</span>
           </div>
         </div>
         <div class="cta-main">
-          <a class="big-cta" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+          <a class="big-cta" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Ouvrir ma boutique</a>
           <a id="ctaWaBtn" class="big-cta soft" href="#" target="_blank" rel="noopener">💬 Parler sur WhatsApp</a>
         </div>
       </div>
@@ -842,9 +854,9 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line)}
   <div class="wrap">
     <div class="faq-shell">
       <div class="faq-head">Questions fréquentes</div>
-      <div class="faq-item"><div class="faq-q">C'est quoi DIGIY MARKET exactement ? <span class="faq-arr">▾</span></div><div class="faq-a">DIGIY MARKET est le module marché de DIGIYLYFE — la plateforme digitale africaine à 0% commission. Les commerçants obtiennent une vitrine en ligne : fiche boutique, galerie photo, contact WhatsApp direct.</div></div>
-      <div class="faq-item"><div class="faq-q">Combien ça coûte pour avoir ma vitrine ? <span class="faq-arr">▾</span></div><div class="faq-a">Le modèle DIGIY c'est un abonnement fixe mensuel — pas de commission sur tes ventes, pas de surprise. Tu paies une fois, tu es visible. Clique sur "Je veux mon module" pour voir les tarifs en temps réel.</div></div>
-      <div class="faq-item"><div class="faq-q">Les vendeurs visibles ici sont de vrais vendeurs ? <span class="faq-arr">▾</span></div><div class="faq-a">Les fiches affichées sont des exemples guidants — elles montrent à quoi ressemble une vraie vitrine DIGIY MARKET pour inspirer les commerçants. Les vrais vendeurs actifs apparaissent ensuite sur leur rail public quand ils sont posés proprement.</div></div>
+      <div class="faq-item"><div class="faq-q">C’est quoi DIGIY MARKET ? <span class="faq-arr">▾</span></div><div class="faq-a">DIGIY MARKET est le hall des boutiques de DIGIYLYFE. Les commerçants y obtiennent une présence claire : vitrine, galerie, WhatsApp direct et repère terrain.</div></div>
+      <div class="faq-item"><div class="faq-q">Combien ça coûte pour ouvrir ma boutique ? <span class="faq-arr">▾</span></div><div class="faq-a">Le modèle DIGIY repose sur un abonnement fixe mensuel, sans commission sur les ventes. Tu paies une fois, tu es visible.</div></div>
+      <div class="faq-item"><div class="faq-q">Les boutiques visibles ici sont-elles réelles ? <span class="faq-arr">▾</span></div><div class="faq-a">Les boutiques affichées ici servent d’inspiration pour montrer à quoi peut ressembler une vraie façade DIGIY MARKET. Le rail public réel vient ensuite quand la boutique est posée proprement.</div></div>
     </div>
   </div>
 </section>
@@ -856,7 +868,7 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line)}
       <div class="footer-sub">Neuf · Deuxième main · Brocante · Vêtements · Beauté · Services · Quotidien</div>
     </div>
     <div class="footer-links">
-      <a href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">Je veux mon module</a>
+      <a href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">Ouvrir ma boutique</a>
       <a href="https://digiylyfe.com/" target="_blank" rel="noopener">digiylyfe.com</a>
     </div>
   </div>
@@ -864,13 +876,10 @@ footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line)}
 
 <div class="float-cta">
   <a id="floatWaBtn" class="float-btn wa" href="#" target="_blank" rel="noopener">💬 WhatsApp DIGIY</a>
-  <a class="float-btn module" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Je veux mon module</a>
+  <a class="float-btn module" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Ouvrir ma boutique</a>
 </div>
 
 <script>
-/* ══════════════════════════════════════
-   CONFIG
-══════════════════════════════════════ */
 const DIGIY_CONFIG = {
   whatsapp: "221771342889",
   siteUrl: "https://digiylyfe.com/",
@@ -878,9 +887,6 @@ const DIGIY_CONFIG = {
   logoUrl: ""
 };
 
-/* ══════════════════════════════════════
-   ROYAL SVG ILLUSTRATIONS PER VENDOR
-══════════════════════════════════════ */
 function makeDarkSvg(opts){
   const { bg1="#1a1208", bg2="#0d0a06", accent="#c8860a", icon="🛍️", title="", subtitle="", pattern="dots" } = opts;
 
@@ -938,15 +944,36 @@ function makeDarkSvg(opts){
       <circle cx="340" cy="60" r="120" fill="${accent}" opacity=".05"/>
       <text x="36" y="148" font-size="88" filter="url(#shadow)">${icon}</text>
       <rect x="36" y="188" width="340" height="70" rx="14" fill="rgba(255,255,255,.06)" stroke="${accent}" stroke-width=".8" stroke-opacity=".25"/>
-      <text x="52" y="216" font-family="Georgia, serif" font-size="18" font-weight="700" fill="#fdf6ec">${title.substring(0,22)}</text>
-      <text x="52" y="238" font-family="Arial, sans-serif" font-size="11" fill="rgba(253,246,236,.5)">${subtitle.substring(0,32)}</text>
+      <text x="52" y="216" font-family="Georgia, serif" font-size="18" font-weight="700" fill="#fdf6ec">${String(title).substring(0,22)}</text>
+      <text x="52" y="238" font-family="Arial, sans-serif" font-size="11" fill="rgba(253,246,236,.5)">${String(subtitle).substring(0,32)}</text>
       <text x="348" y="20" text-anchor="end" font-family="Arial" font-size="9" fill="${accent}" opacity=".4" letter-spacing="2">DIGIY</text>
     </svg>
   `;
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
 }
 
-/* Category → dark palette mapping */
+function makeRoyalPhoto(title, sub, icon, c1, c2){
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 840" width="1200" height="840">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="${c1}"/>
+          <stop offset="100%" stop-color="${c2}"/>
+        </linearGradient>
+        <filter id="f"><feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="rgba(0,0,0,.22)"/></filter>
+      </defs>
+      <rect width="1200" height="840" fill="url(#g)"/>
+      <circle cx="980" cy="130" r="180" fill="rgba(255,255,255,.14)"/>
+      <circle cx="180" cy="710" r="210" fill="rgba(255,255,255,.12)"/>
+      <text x="90" y="250" font-size="190" filter="url(#f)">${icon}</text>
+      <rect x="70" y="560" width="1060" height="170" rx="30" fill="rgba(255,255,255,.86)"/>
+      <text x="120" y="640" font-family="Georgia, serif" font-size="60" font-weight="700" fill="#1a1208">${title}</text>
+      <text x="120" y="695" font-family="Arial, sans-serif" font-size="30" fill="#6f624f">${sub}</text>
+    </svg>
+  `;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
 const CAT_PALETTES = {
   neuf:       {bg1:"#0e1a2a",bg2:"#071018",accent:"#4090e0",pattern:"circles"},
   deuxiemain: {bg1:"#0e1a2a",bg2:"#071018",accent:"#60a0ff",pattern:"chevrons"},
@@ -959,7 +986,7 @@ const CAT_PALETTES = {
   quotidien:  {bg1:"#0e2a1a",bg2:"#071810",accent:"#40c080",pattern:"stripes"},
   phones:     {bg1:"#0e1a2a",bg2:"#071018",accent:"#6090ff",pattern:"circles"},
   alimentaire:{bg1:"#2a1a0e",bg2:"#181007",accent:"#d4a820",pattern:"wax"},
-  chaussures: {bg1:"#2a1208",bg2:"#181007",accent:"#e87040",pattern:"chevrons"},
+  chaussures: {bg1:"#2a1208",bg2:"#181007",accent:"#e87040",pattern:"chevrons"}
 };
 
 function vendorCoverSvg(v, cat){
@@ -972,75 +999,61 @@ function vendorCoverSvg(v, cat){
   });
 }
 
-function royalCoverSvg(v, cat){
-  if (Array.isArray(v.images) && v.images.length) return v.images[0];
-  return vendorCoverSvg(v, cat);
-}
-
-/* ══════════════════════════════════════
-   VENDORS DATA
-══════════════════════════════════════ */
 const VENDORS = {
   neuf:[
-    {icon:"📱",bg:"#c8deff",name:"Tech Dakar Shop",what:"Téléphones neufs, accessoires, batteries, câbles",loc:"Dakar · Plateau",price:"5 000–250 000 F",live:true,images:[]},
-    {icon:"👟",bg:"#ffe0cb",name:"Sneakers Mbaye",what:"Jordan, Nike, Adidas — arrivage chaque semaine",loc:"Mbour · Marché Central",price:"15 000–85 000 F",live:true,images:[]},
-    {icon:"🛒",bg:"#ffeaaa",name:"Boutique Awa Neuf",what:"Produits ménagers neufs, ustensiles, déco",loc:"Saly · Ngaparou",price:"2 000–35 000 F",live:false,images:[]},
-    {icon:"💻",bg:"#c8deff",name:"Diallo Informatique",what:"PC neufs et reconditionnés, imprimantes",loc:"Dakar · Parcelles",price:"80 000–450 000 F",live:true,images:[]}
+    {icon:"📱",name:"Tech Dakar Shop",what:"Téléphones neufs, accessoires, batteries, câbles",loc:"Dakar · Plateau",price:"5 000–250 000 F",live:true,images:[]},
+    {icon:"👟",name:"Sneakers Mbaye",what:"Jordan, Nike, Adidas — arrivage chaque semaine",loc:"Mbour · Marché Central",price:"15 000–85 000 F",live:true,images:[]},
+    {icon:"🛒",name:"Boutique Awa Neuf",what:"Produits ménagers neufs, ustensiles, déco",loc:"Saly · Ngaparou",price:"2 000–35 000 F",live:false,images:[]}
   ],
   deuxiemain:[
-    {icon:"📺",bg:"#f4ead7",name:"Mamadou Électro",what:"TV, réfrigérateurs, machines à laver d'occasion",loc:"Dakar · Colobane",price:"20 000–150 000 F",live:true,images:[]},
-    {icon:"👕",bg:"#ffd0e0",name:"Frip Sénégal",what:"Friperie sélectionnée, marques, prix juste",loc:"Dakar · Sicap",price:"500–5 000 F",live:true,images:[]},
-    {icon:"🎮",bg:"#eadfff",name:"GameZone Dakar",what:"Consoles, jeux PS4/PS5, manettes",loc:"Dakar · Yoff",price:"15 000–120 000 F",live:true,images:[]}
+    {icon:"📺",name:"Mamadou Électro",what:"TV, réfrigérateurs, machines à laver d'occasion",loc:"Dakar · Colobane",price:"20 000–150 000 F",live:true,images:[]},
+    {icon:"👕",name:"Frip Sénégal",what:"Friperie sélectionnée, marques, prix juste",loc:"Dakar · Sicap",price:"500–5 000 F",live:true,images:[]},
+    {icon:"🎮",name:"GameZone Dakar",what:"Consoles, jeux, manettes, accessoires",loc:"Dakar · Yoff",price:"15 000–120 000 F",live:true,images:[]}
   ],
   vetements:[
-    {icon:"👘",bg:"#ffeaaa",name:"Boubous Cheikh",what:"Boubous brocart, bazin, grand boubou cérémonie",loc:"Dakar · HLM",price:"8 000–60 000 F",live:true,images:[]},
-    {icon:"👗",bg:"#ffd0e0",name:"Robes Fatou",what:"Robes africaines, wax, tenues soirée et bureau",loc:"Saly · Centre",price:"5 000–35 000 F",live:true,images:[]},
-    {icon:"🧣",bg:"#eadfff",name:"Accessoires Mode",what:"Ceintures, sacs, bijoux fantaisie, foulards",loc:"Saint-Louis",price:"1 000–12 000 F",live:true,images:[]}
+    {icon:"👘",name:"Boubous Cheikh",what:"Boubous brocart, bazin, grand boubou cérémonie",loc:"Dakar · HLM",price:"8 000–60 000 F",live:true,images:[]},
+    {icon:"👗",name:"Robes Fatou",what:"Robes africaines, wax, tenues soirée et bureau",loc:"Saly · Centre",price:"5 000–35 000 F",live:true,images:[]},
+    {icon:"🧣",name:"Accessoires Mode",what:"Ceintures, sacs, bijoux fantaisie, foulards",loc:"Saint-Louis",price:"1 000–12 000 F",live:true,images:[]}
   ],
   parfum:[
-    {icon:"🕌",bg:"#eadfff",name:"Thiouraye Ndèye",what:"Thiouraye naturel, encens, encens de Djeddah",loc:"Dakar · Médina",price:"1 500–15 000 F",live:true,images:[]},
-    {icon:"🌸",bg:"#ffd0e0",name:"Parfums Orientaux",what:"Attars, musc, oud, huiles de parfum",loc:"Dakar · Sandaga",price:"3 000–35 000 F",live:true,images:[]},
-    {icon:"🎁",bg:"#ffeaaa",name:"Coffrets Mariama",what:"Coffrets mariage, baptême, kits parfum cadeaux",loc:"Dakar · Pikine",price:"8 000–50 000 F",live:false,images:[]}
+    {icon:"🕌",name:"Thiouraye Ndèye",what:"Thiouraye naturel, encens, senteurs d’ambiance",loc:"Dakar · Médina",price:"1 500–15 000 F",live:true,images:[]},
+    {icon:"🌸",name:"Parfums Orientaux",what:"Attars, musc, oud, huiles de parfum",loc:"Dakar · Sandaga",price:"3 000–35 000 F",live:true,images:[]},
+    {icon:"🎁",name:"Coffrets Mariama",what:"Coffrets mariage, baptême, kits parfum cadeaux",loc:"Pikine",price:"8 000–50 000 F",live:false,images:[]}
   ],
   coiffeur:[
-    {icon:"💇",bg:"#dbfff6",name:"Salon Aicha",what:"Tresses africaines, tissage, défrisage, soin",loc:"Dakar · Medina",price:"2 000–25 000 F",live:true,images:[]},
-    {icon:"✂️",bg:"#c8deff",name:"Barber Moussa",what:"Coupe homme, dégradé américain, barbe sculptée",loc:"Saly · Portudal",price:"1 500–5 000 F",live:true,images:[]},
-    {icon:"💆",bg:"#dbf5ea",name:"Soin Cheveux Rama",what:"Masques kératine, soin naturel, hydratation",loc:"Dakar · Sacré-Cœur",price:"5 000–20 000 F",live:true,images:[]}
+    {icon:"✂️",name:"Salon Yacine",what:"Coupe homme, barbe, dégradé propre, accueil rapide",loc:"Dakar · Liberté 6",price:"2 000–10 000 F",live:true,images:[]},
+    {icon:"💇",name:"Tresses Khady",what:"Tresses collées, nattes, perruques et pose",loc:"Mbour · Grand Mbour",price:"3 000–25 000 F",live:true,images:[]},
+    {icon:"💈",name:"Barber Saly",what:"Coupe, barbe, soin visage, finitions nettes",loc:"Saly · Rond-point",price:"2 000–8 000 F",live:true,images:[]}
   ],
   onglerie:[
-    {icon:"💅",bg:"#ffd0e0",name:"Ongles by Aminata",what:"Pose gel, faux ongles, nail art, manucure",loc:"Dakar · Plateau",price:"4 000–20 000 F",live:true,images:[]},
-    {icon:"✨",bg:"#eadfff",name:"Luxury Nails Saly",what:"Nail art 3D, extension, dégradé, brillants",loc:"Saly · Ngaparou",price:"6 000–30 000 F",live:true,images:[]},
-    {icon:"🌸",bg:"#ffeaaa",name:"Beauty Corner Rokhaya",what:"Manucure naturelle, soin des mains, vernis",loc:"Thiès",price:"2 500–10 000 F",live:true,images:[]}
+    {icon:"💅",name:"Nails Aya",what:"Pose américaine, gel, nail art, beauté des mains",loc:"Dakar · Almadies",price:"5 000–20 000 F",live:true,images:[]},
+    {icon:"✨",name:"Studio Mani Chic",what:"Manucure, pédicure, vernis semi-permanent",loc:"Thiès · Centre",price:"3 500–15 000 F",live:true,images:[]}
   ],
   brocante:[
-    {icon:"🪑",bg:"#f4ead7",name:"Brocante Sénégal",what:"Meubles anciens, chaises bois, buffets vintage",loc:"Dakar · Colobane",price:"5 000–80 000 F",live:true,images:[]},
-    {icon:"🏺",bg:"#ffeaaa",name:"Poteries & Artisanat",what:"Poteries, statuettes, objets africains authentiques",loc:"Saly · Village artisanat",price:"2 000–40 000 F",live:true,images:[]},
-    {icon:"🖼️",bg:"#ffe0cb",name:"Art & Déco Diallo",what:"Tableaux locaux, masques, peintures, déco murale",loc:"Dakar · Ouakam",price:"3 000–60 000 F",live:false,images:[]}
+    {icon:"🏺",name:"Maison Vintage",what:"Objets rares, déco, miroirs, petits trésors",loc:"Dakar · Ngor",price:"2 000–70 000 F",live:true,images:[]},
+    {icon:"🪑",name:"Le Coin Brocante",what:"Chaises, tables, lampes, cadres, pièces anciennes",loc:"Saint-Louis",price:"3 000–90 000 F",live:true,images:[]}
   ],
   banabana:[
-    {icon:"🧺",bg:"#ffe0cb",name:"Bana-bana Alassane",what:"Légumes frais, fruits de saison, livraison quartier",loc:"Dakar · Parcelles",price:"200–5 000 F",live:true,images:[]},
-    {icon:"🧃",bg:"#dbfff6",name:"Jus Naturels Aminata",what:"Bissap, gingembre, ditax, tamarin, bouye maison",loc:"Dakar · Medina",price:"250–1 500 F",live:true,images:[]},
-    {icon:"🎀",bg:"#ffd0e0",name:"Tissus & Rubans",what:"Rubans, dentelles, broderies, vente au mètre",loc:"Dakar · HLM",price:"200–3 000 F/m",live:true,images:[]}
+    {icon:"🧺",name:"Asta Bana-bana",what:"Arrivages terrain, commerce mobile, bonnes affaires",loc:"Mbour · Marché",price:"500–25 000 F",live:true,images:[]},
+    {icon:"🎪",name:"Marché Mobile Samba",what:"Petit commerce souple, produits qui tournent vite",loc:"Kaolack",price:"500–15 000 F",live:true,images:[]}
   ],
   quotidien:[
-    {icon:"🧹",bg:"#dbf5ea",name:"Ménage & Entretien",what:"Détergents, balais, produits nettoyants",loc:"Dakar · Pikine",price:"500–8 000 F",live:true,images:[]},
-    {icon:"🍳",bg:"#ffe0cb",name:"Cuisine Équipée",what:"Marmites, casseroles, poêles, mortiers bois",loc:"Dakar · Sandaga",price:"2 000–20 000 F",live:true,images:[]},
-    {icon:"💡",bg:"#ffeaaa",name:"Électricité Mamadou",what:"Prises, câbles, ampoules LED, matériel électrique",loc:"Thiès",price:"500–15 000 F",live:true,images:[]}
+    {icon:"🧴",name:"Maison Propre",what:"Produits d’entretien, javel, lessive, balais",loc:"Dakar · Parcelles",price:"500–12 000 F",live:true,images:[]},
+    {icon:"🏠",name:"Tout pour la maison",what:"Ustensiles, boîtes, petits outils, rangements",loc:"Thiès · Médina Fall",price:"1 000–20 000 F",live:true,images:[]}
   ],
   phones:[
-    {icon:"📱",bg:"#c8deff",name:"iDakar Phones",what:"iPhone reconditionné, garantie 3 mois",loc:"Dakar · Plateau",price:"120 000–450 000 F",live:true,images:[]},
-    {icon:"🤳",bg:"#ffeaaa",name:"Samsung Sénégal",what:"Galaxy A, M et S series neufs et occasion",loc:"Dakar · Sacré-Cœur",price:"60 000–380 000 F",live:true,images:[]},
-    {icon:"🎧",bg:"#eadfff",name:"Son & Audio Mobile",what:"AirPods, Bluetooth, enceintes, casques audio",loc:"Dakar · Yoff",price:"5 000–65 000 F",live:true,images:[]}
+    {icon:"📱",name:"Phone Express",what:"Smartphones, coques, écrans, chargeurs",loc:"Dakar · Colobane",price:"1 500–220 000 F",live:true,images:[]},
+    {icon:"🔋",name:"Batterie Plus",what:"Accessoires, batteries, écouteurs, adaptateurs",loc:"Mbour · Centre",price:"1 000–18 000 F",live:true,images:[]}
   ],
   alimentaire:[
-    {icon:"🥜",bg:"#ffeaaa",name:"Arachides Baye",what:"Arachides grillées, huile d'arachide artisanale",loc:"Kaolack · Marché",price:"500–5 000 F",live:true,images:[]},
-    {icon:"🌾",bg:"#f4ead7",name:"Céréales du Terroir",what:"Mil, sorgho, fonio, riz local, maïs",loc:"Tambacounda",price:"1 000–25 000 F",live:true,images:[]},
-    {icon:"🥦",bg:"#dbf5ea",name:"Maraîchage Fatou",what:"Légumes frais jardin, tomates, oignons, aubergines",loc:"Thiès · Pout",price:"200–3 000 F",live:true,images:[]}
+    {icon:"🥜",name:"Saveurs du Terroir",what:"Arachide, épices, céréales, produits locaux",loc:"Kaolack",price:"500–20 000 F",live:true,images:[]},
+    {icon:"🌾",name:"Céréales du Terroir",what:"Mil, sorgho, fonio, riz local, maïs",loc:"Tambacounda",price:"1 000–25 000 F",live:true,images:[]},
+    {icon:"🥦",name:"Maraîchage Fatou",what:"Légumes frais jardin, tomates, oignons, aubergines",loc:"Thiès · Pout",price:"200–3 000 F",live:true,images:[]}
   ],
   chaussures:[
-    {icon:"👡",bg:"#ffd0e0",name:"Sandales Aicha",what:"Sandales artisanales cuir, babouches colorées",loc:"Dakar · Médina",price:"3 000–18 000 F",live:true,images:[]},
-    {icon:"👟",bg:"#ffe0cb",name:"Baskets Papito",what:"Nike, Adidas, Puma — arrivage hebdomadaire",loc:"Dakar · Parcelles",price:"15 000–85 000 F",live:true,images:[]},
-    {icon:"👞",bg:"#c8deff",name:"Chaussures Homme SN",what:"Derby, bottes, chaussures ville qualité cuir",loc:"Dakar · Plateau",price:"12 000–55 000 F",live:true,images:[]}
+    {icon:"👡",name:"Sandales Aicha",what:"Sandales artisanales cuir, babouches colorées",loc:"Dakar · Médina",price:"3 000–18 000 F",live:true,images:[]},
+    {icon:"👟",name:"Baskets Papito",what:"Nike, Adidas, Puma — arrivage hebdomadaire",loc:"Dakar · Parcelles",price:"15 000–85 000 F",live:true,images:[]},
+    {icon:"👞",name:"Chaussures Homme SN",what:"Derby, bottes, chaussures ville cuir",loc:"Dakar · Plateau",price:"12 000–55 000 F",live:true,images:[]}
   ]
 };
 
@@ -1048,80 +1061,39 @@ const META = {
   neuf:{label:"Neuf",icon:"🛒",sub:"Produits récents, prix clairs"},
   deuxiemain:{label:"Deuxième main",icon:"♻️",sub:"La valeur continue, le bon prix circule"},
   vetements:{label:"Vêtements",icon:"👗",sub:"Style terrain, cérémonie ou quotidien"},
-  parfum:{label:"Parfum & senteur",icon:"🌸",sub:"Essences, thiouraye, attars et cadeaux"},
-  coiffeur:{label:"Coiffeur",icon:"✂️",sub:"Service de proximité"},
+  parfum:{label:"Parfum",icon:"🌸",sub:"Essences, thiouraye, attars et cadeaux"},
+  coiffeur:{label:"Coiffure",icon:"✂️",sub:"Service de proximité"},
   onglerie:{label:"Onglerie",icon:"💅",sub:"Pose, nail art, manucure"},
   brocante:{label:"Brocante",icon:"🏺",sub:"Pièces rares, vintage"},
   banabana:{label:"Bana-bana",icon:"🧺",sub:"Commerce mobile ancré dans le réel"},
-  quotidien:{label:"Quotidien",icon:"🏠",sub:"Ce qu'on cherche vite"},
+  quotidien:{label:"Quotidien",icon:"🏠",sub:"Ce qu’on cherche vite"},
   phones:{label:"Téléphones",icon:"📱",sub:"Neufs, reconditionnés, accessoires"},
   alimentaire:{label:"Alimentaire",icon:"🥜",sub:"Produits locaux, céréales, épices"},
   chaussures:{label:"Chaussures",icon:"👟",sub:"Sandales, baskets, mocassins"}
 };
 
-/* ══════════════════════════════════════
-   ROYAL VENDORS
-══════════════════════════════════════ */
-function makeRoyalPhoto(title, sub, icon, c1, c2){
-  const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
-      <defs>
-        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="${c1}"/>
-          <stop offset="100%" stop-color="${c2}"/>
-        </linearGradient>
-        <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="rgba(255,255,255,.92)"/>
-          <stop offset="100%" stop-color="rgba(255,255,255,.72)"/>
-        </linearGradient>
-        <filter id="shadow"><feDropShadow dx="0" dy="20" stdDeviation="24" flood-color="rgba(0,0,0,.18)"/></filter>
-      </defs>
-      <rect width="1200" height="900" fill="url(#bg)"/>
-      <circle cx="1040" cy="120" r="190" fill="rgba(255,255,255,.13)"/>
-      <circle cx="170" cy="720" r="220" fill="rgba(255,255,255,.12)"/>
-      <circle cx="820" cy="650" r="120" fill="rgba(255,255,255,.08)"/>
-      <rect x="60" y="60" width="1080" height="780" rx="34" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.18)"/>
-      <rect x="92" y="520" width="1016" height="220" rx="30" fill="url(#glass)" filter="url(#shadow)"/>
-      <text x="110" y="220" font-size="200" filter="url(#shadow)">${icon}</text>
-      <text x="130" y="586" font-family="Arial,sans-serif" font-size="26" letter-spacing="5" font-weight="700" fill="#7a6a54">${sub}</text>
-      <text x="130" y="655" font-family="Arial,sans-serif" font-size="64" font-weight="800" fill="#1a1208">${title}</text>
-      <rect x="900" y="106" width="176" height="42" rx="21" fill="rgba(255,255,255,.88)"/>
-      <text x="988" y="133" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="800" fill="#c83830">DIGIY ROYAL</text>
-    </svg>
-  `;
-  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-}
-
 const ROYAL_VENDORS = {
   vetements:[
-    {icon:"👗",bg:"#ffd0e0",name:"Maison Nafi Couture",what:"Robes couture, wax premium, tenues élégantes, silhouettes de cérémonie",loc:"Dakar · Mermoz",price:"12 000–85 000 F",live:true,images:[makeRoyalPhoto("Maison Nafi","Couture Dakar","👗","#f9d4df","#f2b5c8"),makeRoyalPhoto("Wax Premium","Collection","🪡","#f5d4e7","#dfb9d0")]},
-    {icon:"💍",bg:"#eadfff",name:"Perles & Or by Sokhna",what:"Bijoux fins, colliers, boucles, bracelets, perles et éclat doré",loc:"Dakar · Almadies",price:"5 000–45 000 F",live:true,images:[makeRoyalPhoto("Perles & Or","Bijoux fins","💍","#efe3ff","#d4bfff")]},
-    {icon:"👜",bg:"#ffe0cb",name:"Élégance Cuir Royal",what:"Sacs cuir, pochettes, bandoulières, pièces bureau et sortie",loc:"Dakar · Point E",price:"9 000–65 000 F",live:true,images:[makeRoyalPhoto("Élégance Cuir","Maroquinerie","👜","#f9dbc8","#efb28f")]}
-  ],
-  chaussures:[
-    {icon:"👟",bg:"#ffeaaa",name:"Pas Royal",what:"Chaussures ville, sandales cuir, escarpins, baskets premium",loc:"Dakar · Plateau",price:"8 000–55 000 F",live:true,images:[makeRoyalPhoto("Pas Royal","Chaussures","👟","#fff0b8","#f0c95c")]}
-  ],
-  coiffeur:[
-    {icon:"💇",bg:"#dbfff6",name:"Couronne Hair Studio",what:"Tresses premium, coiffure évènement, perruques, soin capillaire",loc:"Saly · Ngaparou",price:"3 500–35 000 F",live:true,images:[makeRoyalPhoto("Couronne Hair","Salon premium","💇","#ddfff5","#b7e7d8")]}
+    {icon:"👑",name:"Maison Élégance",what:"Bazin riche, couture soignée, tenue cérémonie grand style",loc:"Dakar · Almadies",price:"20 000–120 000 F",live:true,images:[makeRoyalPhoto("Maison Élégance","Bazin & couture","👑","#f3dfb6","#d4a448")]}
   ],
   parfum:[
-    {icon:"💄",bg:"#ffd0e0",name:"Belle Peau Maison",what:"Beauté premium, gloss, maquillage doux et chic",loc:"Dakar · Liberté 6",price:"2 500–22 000 F",live:true,images:[makeRoyalPhoto("Belle Peau","Beauté Dakar","💄","#ffd9e6","#f4adc9")]},
-    {icon:"🧴",bg:"#dbf5ea",name:"Douceur Sahel",what:"Crèmes corps, lait visage, huiles parfumées, soin peau douce",loc:"Thiès · Centre",price:"2 000–18 000 F",live:true,images:[makeRoyalPhoto("Douceur Sahel","Crèmes corps","🧴","#def5eb","#bfe0cd")]},
-    {icon:"🧼",bg:"#ffeaaa",name:"Savonnerie Reine",what:"Savons naturels, savons noirs, gommage, senteurs artisanales",loc:"Mbour · Saly",price:"1 000–9 000 F",live:true,images:[makeRoyalPhoto("Savonnerie Reine","Savons naturels","🧼","#fff0b5","#eccf70")]}
+    {icon:"🌹",name:"Rose d’Orient",what:"Musc, oud, senteurs raffinées et coffrets premium",loc:"Dakar · Plateau",price:"8 000–65 000 F",live:true,images:[makeRoyalPhoto("Rose d’Orient","Musc & oud","🌹","#f0d7e8","#d89ec1")]}
+  ],
+  onglerie:[
+    {icon:"💄",name:"Belle Peau",what:"Gloss, maquillage doux et chic, beauté soignée",loc:"Dakar · Liberté 6",price:"2 500–22 000 F",live:true,images:[makeRoyalPhoto("Belle Peau","Beauté Dakar","💄","#ffd9e6","#f4adc9")]},
+    {icon:"🧴",name:"Douceur Sahel",what:"Crèmes corps, lait visage, huiles parfumées, soin peau douce",loc:"Thiès · Centre",price:"2 000–18 000 F",live:true,images:[makeRoyalPhoto("Douceur Sahel","Crèmes corps","🧴","#def5eb","#bfe0cd")]},
+    {icon:"🧼",name:"Savonnerie Reine",what:"Savons naturels, savons noirs, gommage, senteurs artisanales",loc:"Mbour · Saly",price:"1 000–9 000 F",live:true,images:[makeRoyalPhoto("Savonnerie Reine","Savons naturels","🧼","#fff0b5","#eccf70")]}
   ],
   quotidien:[
-    {icon:"🛏️",bg:"#c8deff",name:"Chambre Douceur",what:"Draps, housses, rideaux, serviettes, linge de maison élégant",loc:"Saly · Centre",price:"4 000–45 000 F",live:true,images:[makeRoyalPhoto("Chambre Douceur","Linge maison","🛏️","#d8e7ff","#a8c7ef")]}
+    {icon:"🛏️",name:"Chambre Douceur",what:"Draps, housses, rideaux, serviettes, linge de maison élégant",loc:"Saly · Centre",price:"4 000–45 000 F",live:true,images:[makeRoyalPhoto("Chambre Douceur","Linge maison","🛏️","#d8e7ff","#a8c7ef")]}
   ]
 };
 
 Object.entries(ROYAL_VENDORS).forEach(([cat,items])=>{
   if(!Array.isArray(VENDORS[cat])) VENDORS[cat] = [];
-  VENDORS[cat].push(...items.map(item => ({...item, royal:true})));
+  VENDORS[cat].push(...items.map(item => ({ ...item, royal:true })));
 });
 
-/* ══════════════════════════════════════
-   HELPERS
-══════════════════════════════════════ */
 function slugify(s){
   return s.toLowerCase()
     .normalize("NFD")
@@ -1218,9 +1190,6 @@ function applyCityFilter(list){
   return city ? list.filter(v => v.city === city) : list;
 }
 
-/* ══════════════════════════════════════
-   RENDER — ROYAL SPOTLIGHT
-══════════════════════════════════════ */
 function renderRoyalSpotlight(){
   const box = document.getElementById("royalSpotlightGrid");
   if (!box) return;
@@ -1231,7 +1200,7 @@ function renderRoyalSpotlight(){
     box.innerHTML = `
       <div style="grid-column:1/-1;text-align:center;padding:32px;color:var(--muted)">
         <div style="font-size:2.5rem;margin-bottom:10px">👑</div>
-        <p>Aucune fiche ROYAL pour l'instant.</p>
+        <p>Aucune boutique ROYAL pour l’instant.</p>
       </div>
     `;
     return;
@@ -1258,9 +1227,6 @@ function renderRoyalSpotlight(){
   `).join("");
 }
 
-/* ══════════════════════════════════════
-   RENDER — PANEL
-══════════════════════════════════════ */
 function renderVendorCards(list){
   const g = document.getElementById("vendorGrid");
 
@@ -1268,7 +1234,7 @@ function renderVendorCards(list){
     g.innerHTML = `
       <div class="empty-state">
         <div class="big">🏗️</div>
-        <p>Aucun vendeur exemple trouvé.<br/>Essaie une autre ville ou une autre recherche.</p>
+        <p>Aucune boutique inspiration trouvée.<br/>Essaie une autre ville ou une autre recherche.</p>
       </div>
     `;
     return;
@@ -1279,8 +1245,8 @@ function renderVendorCards(list){
       <div class="vendor-top">
         <img src="${v.coverImage}" alt="${v.name}" loading="lazy">
         <div class="vendor-top-gradient"></div>
-        <span class="vendor-example">EXEMPLE</span>
-        ${v.live ? `<div class="vendor-live">EN LIGNE</div>` : ""}
+        <span class="vendor-example">INSPIRATION</span>
+        ${v.live ? `<div class="vendor-live">VISIBLE</div>` : ""}
         ${v.isRoyal ? `<div class="vendor-royal">♛ ROYAL</div>` : ""}
       </div>
       <div class="vendor-body">
@@ -1288,10 +1254,10 @@ function renderVendorCards(list){
         <div class="vendor-what">${v.what}</div>
         <div class="vendor-meta">
           <span class="vendor-loc">📍 ${v.loc}</span>
-          <span class="vendor-price">${v.price}</span>
+          <span class="vendor-price">${v.price || "À définir"}</span>
         </div>
         <div class="vendor-cta">
-          <button class="vendor-btn primary" type="button" onclick="event.stopPropagation();openVendor('${v.slug}')">👁 Voir la fiche</button>
+          <button class="vendor-btn primary" type="button" onclick="event.stopPropagation();openVendor('${v.slug}')">👁 Voir la boutique</button>
           <button class="vendor-btn ghost" type="button" onclick="event.stopPropagation();contactVendor('${v.slug}')">💬</button>
         </div>
       </div>
@@ -1306,7 +1272,7 @@ function renderVendorsByCategory(cat){
 
   document.getElementById("panelIcon").textContent = m.icon || "🛍️";
   document.getElementById("panelTitle").textContent = m.label || cat;
-  document.getElementById("panelSub").textContent = `${m.sub || ""} · ${list.length} vendeur(s) exemple`;
+  document.getElementById("panelSub").textContent = `${m.sub || ""} · ${list.length} boutique(s) inspiration`;
   renderVendorCards(list);
 }
 
@@ -1324,7 +1290,7 @@ function renderSearch(q){
 
   document.getElementById("panelIcon").textContent = "🔎";
   document.getElementById("panelTitle").textContent = `Recherche : ${q}`;
-  document.getElementById("panelSub").textContent = `${list.length} résultat(s) exemple`;
+  document.getElementById("panelSub").textContent = `${list.length} résultat(s) inspiration`;
   renderVendorCards(list);
 }
 
@@ -1335,7 +1301,7 @@ function renderRoyalList(){
   document.querySelectorAll(".cat-tile").forEach(x => x.classList.remove("active"));
   document.getElementById("panelIcon").textContent = "👑";
   document.getElementById("panelTitle").textContent = "Sélection ROYAL";
-  document.getElementById("panelSub").textContent = `${list.length} fiche(s) premium en avant`;
+  document.getElementById("panelSub").textContent = `${list.length} boutique(s) premium mises en avant`;
   renderVendorCards(list);
 
   currentMode = "royal";
@@ -1363,16 +1329,13 @@ function openVendor(slug){
 
 function contactVendor(slug){
   const v = buildCatalog().find(x => x.slug === slug);
-  const name = v ? v.name : "cette vitrine";
+  const name = v ? v.name : "cette boutique";
   window.open(
-    waLink(`Bonjour DIGIY 👋 Je veux une vitrine comme l'exemple "${name}" sur DIGIY MARKET.`),
+    waLink(`Bonjour DIGIY 👋 Je veux une boutique comme l'exemple "${name}" sur DIGIY MARKET.`),
     "_blank"
   );
 }
 
-/* ══════════════════════════════════════
-   INIT
-══════════════════════════════════════ */
 initButtons();
 saveCatalog();
 updateCounts();
@@ -1383,7 +1346,6 @@ let currentMode = null;
 let currentKey = null;
 const panel = document.getElementById("vendorPanel");
 
-/* Categories */
 document.querySelectorAll(".cat-tile").forEach(tile=>{
   tile.addEventListener("click", ()=>{
     const cat = tile.dataset.cat;
@@ -1408,7 +1370,6 @@ document.querySelectorAll(".cat-tile").forEach(tile=>{
   });
 });
 
-/* Panel close */
 document.getElementById("panelClose").addEventListener("click", ()=>{
   panel.classList.remove("open");
   document.querySelectorAll(".cat-tile").forEach(x => x.classList.remove("active"));
@@ -1416,7 +1377,6 @@ document.getElementById("panelClose").addEventListener("click", ()=>{
   currentKey = null;
 });
 
-/* Search */
 document.getElementById("topSearchBtn").addEventListener("click", ()=>{
   const q = document.getElementById("topSearchInput").value.trim();
   if (!q) return;
@@ -1434,7 +1394,6 @@ document.getElementById("topSearchInput").addEventListener("keydown", e=>{
   if (e.key === "Enter") document.getElementById("topSearchBtn").click();
 });
 
-/* Filters */
 document.getElementById("cityFilter").addEventListener("change", rerenderCurrent);
 
 document.getElementById("resetFilters").addEventListener("click", ()=>{
@@ -1457,7 +1416,6 @@ document.getElementById("resetFilters").addEventListener("click", ()=>{
   }
 });
 
-/* Royal actions */
 document.getElementById("royalTopBtn")?.addEventListener("click", ()=>{
   document.getElementById("royalLead")?.scrollIntoView({behavior:"smooth", block:"start"});
   setTimeout(()=>renderRoyalList(), 180);
@@ -1475,7 +1433,6 @@ document.getElementById("btnRoyalReset")?.addEventListener("click", ()=>{
   window.scrollTo({top:0, behavior:"smooth"});
 });
 
-/* Rail */
 const rail = document.getElementById("catRail");
 document.getElementById("arrL").addEventListener("click", ()=>rail.scrollBy({left:-280, behavior:"smooth"}));
 document.getElementById("arrR").addEventListener("click", ()=>rail.scrollBy({left:280, behavior:"smooth"}));
@@ -1510,7 +1467,6 @@ rail.addEventListener("touchmove", e => {
 }, {passive:true});
 rail.addEventListener("touchend", dragEnd);
 
-/* FAQ */
 document.querySelectorAll(".faq-item").forEach(item=>{
   item.querySelector(".faq-q").addEventListener("click", ()=>{
     const open = item.classList.contains("open");
