@@ -3,9 +3,13 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-  <title>DIGIY MARKET — Commander</title>
+  <title>DIGIY MARKET — Je commande</title>
   <meta name="theme-color" content="#07140f"/>
-  <meta name="description" content="Passez une commande simplement dans une boutique DIGIY MARKET."/>
+  <meta name="description" content="Passe une commande simplement dans une boutique DIGIY MARKET."/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -40,7 +44,7 @@
         radial-gradient(900px 520px at 110% 0%, rgba(250,204,21,.10), transparent 55%),
         linear-gradient(180deg, #07140f, #05100c 55%, #040b08 100%);
       color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      font-family:"Outfit",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
       padding:16px;
     }
 
@@ -137,6 +141,7 @@
       cursor:pointer;
       transition:.18s ease;
       box-shadow:var(--shadow);
+      font-family:inherit;
     }
 
     .btn:hover{transform:translateY(-1px)}
@@ -145,17 +150,20 @@
       cursor:not-allowed;
       transform:none;
     }
+
     .btn.primary{
       background:linear-gradient(135deg, var(--primary), var(--primary2));
       color:#041b12;
       border-color:transparent;
       box-shadow:0 12px 28px rgba(34,197,94,.22);
     }
+
     .btn.gold{
       background:rgba(250,204,21,.12);
       color:var(--gold);
       border-color:rgba(250,204,21,.24);
     }
+
     .btn.ghost{
       background:rgba(255,255,255,.04);
       color:var(--muted);
@@ -448,21 +456,21 @@
         <div class="brand-mark">🛒</div>
         <div class="brand-copy">
           <div class="eyebrow">DIGIY MARKET</div>
-          <div class="brand-title" id="brandTitle">Commander</div>
+          <div class="brand-title" id="brandTitle">Je commande</div>
           <div class="brand-sub" id="brandSub">Préparation du formulaire…</div>
         </div>
       </div>
 
       <div class="top-actions">
-        <a class="btn ghost" id="btnBackShop" href="./boutique.html">← Retour boutique</a>
-        <a class="btn" href="./index.html">🏠 Vitrine</a>
+        <a class="btn ghost" id="btnBackShop" href="./boutique.html">← Retour à la boutique</a>
+        <a class="btn" id="btnHome" href="./index.html">🏠 Voir les boutiques</a>
       </div>
     </section>
 
     <section class="hero">
       <div class="hero-grid">
         <div class="hero-body">
-          <div class="mode" id="modeBadge">Mode aperçu</div>
+          <div class="mode" id="modeBadge">Formulaire prêt</div>
 
           <div>
             <h1 id="shopName">Astou Market</h1>
@@ -478,7 +486,7 @@
           </div>
 
           <div class="notice" id="heroNotice">
-            Formulaire simple terrain : produit, quantité, téléphone, puis la boutique reçoit la commande.
+            Formulaire simple terrain : produit, quantité, téléphone, puis la boutique reçoit la demande.
           </div>
         </div>
 
@@ -508,9 +516,9 @@
 
     <section class="layout">
       <section class="card panel">
-        <h2>Ta commande</h2>
+        <h2>Ma commande</h2>
         <div class="muted">
-          Remplis ce qu’il faut, sans surcharge. La boutique recevra une demande claire.
+          Remplis juste l’essentiel. La boutique reçoit une demande claire.
         </div>
 
         <div class="form-grid">
@@ -526,7 +534,7 @@
 
           <div class="field two">
             <div>
-              <label for="itemName">Produit / demande</label>
+              <label for="itemName">Produit ou demande</label>
               <input id="itemName" type="text" placeholder="Ex: Huile de moringa">
             </div>
             <div>
@@ -541,10 +549,10 @@
           </div>
 
           <div class="field">
-            <label for="deliveryMode">Mode de réception</label>
+            <label for="deliveryMode">Comment recevoir</label>
             <select id="deliveryMode">
-              <option value="pickup">Retrait boutique</option>
-              <option value="delivery">Livraison</option>
+              <option value="pickup">Je viens récupérer</option>
+              <option value="delivery">Je veux une livraison</option>
             </select>
           </div>
 
@@ -554,23 +562,23 @@
           </div>
 
           <div class="field">
-            <label for="note">Note</label>
-            <textarea id="note" placeholder="Précision utile, horaire souhaité, détail de la commande..."></textarea>
+            <label for="note">Précision utile</label>
+            <textarea id="note" placeholder="Horaire souhaité, détail important, repère utile..."></textarea>
           </div>
         </div>
 
         <div class="actions">
           <button class="btn primary" id="btnSubmit" type="button">✅ Envoyer ma commande</button>
-          <a class="btn gold" id="btnWhatsapp" href="#" target="_blank" rel="noopener">💬 WhatsApp boutique</a>
+          <a class="btn gold" id="btnWhatsapp" href="#" target="_blank" rel="noopener">💬 Écrire sur WhatsApp</a>
         </div>
 
         <div id="statusBox" class="statusbox">Prêt.</div>
       </section>
 
       <section class="card panel">
-        <h2>Repères utiles</h2>
+        <h2>Infos utiles</h2>
         <div class="muted">
-          Le client ne doit pas se perdre. Ici, tout reste lisible et direct.
+          Ici, tout doit rester simple, lisible et direct.
         </div>
 
         <div class="facts">
@@ -596,7 +604,7 @@
         </div>
 
         <div class="notice" id="sideNotice">
-          Si la boutique n’est pas chargée en mode vivant, le formulaire reste en aperçu et n’enverra rien.
+          Si la boutique n’est pas reconnue, le formulaire reste visible mais l’envoi n’est pas activé.
         </div>
       </section>
     </section>
@@ -608,8 +616,9 @@
 
   <script>
     const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
-const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const SUPABASE_ANON_KEY = "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
     const qs = new URLSearchParams(location.search);
     const slug = (qs.get("slug") || "").trim();
 
@@ -627,12 +636,33 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       return p || "—";
     }
 
-    function whatsappUrl(phone, shopName, itemName=""){
+    function buildSafeUrl(path, params = {}){
+      try{
+        const url = new URL(path, location.href);
+        Object.entries(params).forEach(([key, value]) => {
+          const clean = String(value ?? "").trim();
+          if(clean) url.searchParams.set(key, clean);
+        });
+        return url.pathname + url.search + url.hash;
+      }catch{
+        const entries = Object.entries(params)
+          .filter(([, value]) => String(value ?? "").trim())
+          .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(String(value).trim())}`);
+        return entries.length ? `${path}?${entries.join("&")}` : path;
+      }
+    }
+
+    function whatsappUrl(phone, shopName, itemName = "", quantity = "", unitLabel = ""){
       const p = normalizePhone(phone);
-      const base = itemName
-        ? `Salut ${shopName || "DIGIY MARKET"}, je veux commander : ${itemName}.`
-        : `Salut ${shopName || "DIGIY MARKET"}, je veux des infos sur vos produits.`;
-      return p ? `https://wa.me/${p}?text=${encodeURIComponent(base)}` : "#";
+      if(!p) return "#";
+
+      const qtyText = quantity ? ` x${quantity}` : "";
+      const unitText = unitLabel ? ` ${unitLabel}` : "";
+      const itemText = itemName
+        ? `Bonjour ${shopName || "DIGIY MARKET"}, je veux commander : ${itemName}${qtyText}${unitText}.`
+        : `Bonjour ${shopName || "DIGIY MARKET"}, je veux des informations sur vos produits.`;
+
+      return `https://wa.me/${p}?text=${encodeURIComponent(itemText)}`;
     }
 
     function previewData(){
@@ -650,7 +680,7 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       };
     }
 
-    function setStatus(msg, tone=""){
+    function setStatus(msg, tone = ""){
       const box = $("statusBox");
       box.className = "statusbox" + (tone ? " " + tone : "");
       box.textContent = msg;
@@ -667,18 +697,33 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         "deliveryMode",
         "deliveryAddress",
         "note"
-      ].forEach(id => { $(id).disabled = isBusy; });
+      ].forEach(id => {
+        $(id).disabled = isBusy;
+      });
     }
 
     function orderBackUrl(){
-      return slug
-        ? `./boutique.html?slug=${encodeURIComponent(slug)}`
-        : "./boutique.html";
+      return buildSafeUrl("./boutique.html", slug ? { slug } : {});
     }
 
     function refreshDeliveryField(){
       const isDelivery = $("deliveryMode").value === "delivery";
       $("deliveryAddressWrap").style.display = isDelivery ? "grid" : "none";
+    }
+
+    function currentProfile(){
+      return LIVE_PROFILE || previewData();
+    }
+
+    function refreshWhatsappLink(){
+      const profile = currentProfile();
+      const shopName = profile.business_name || "Boutique DIGIY";
+      const phone = profile.whatsapp || profile.public_phone || "";
+      const itemName = $("itemName").value.trim();
+      const quantity = String(Math.max(parseInt($("quantity").value || "1", 10) || 1, 1));
+      const unitLabel = $("unitLabel").value.trim();
+
+      $("btnWhatsapp").href = whatsappUrl(phone, shopName, itemName, quantity, unitLabel);
     }
 
     function applyData(profile, liveMode){
@@ -694,8 +739,9 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
       $("brandTitle").textContent = shopName;
       $("brandSub").textContent = liveMode
-        ? `Commande publique • ${p.slug || slug}`
-        : "Aperçu du formulaire public";
+        ? "Commande publique prête"
+        : "Formulaire visible, en attente d’activation";
+
       $("shopName").textContent = shopName;
       $("shopSubtitle").textContent = `Commande directe • ${category} • ${city}`;
       $("pillCategory").textContent = `🏷️ ${category}`;
@@ -713,25 +759,26 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       $("factDelivery").textContent = delivery;
 
       $("modeBadge").className = liveMode ? "mode live" : "mode";
-      $("modeBadge").textContent = liveMode ? "Mode vivant" : "Mode aperçu";
+      $("modeBadge").textContent = liveMode ? "Commande active" : "Lecture seulement";
 
       $("footerText").textContent = liveMode
-        ? `DIGIY MARKET • ${shopName} • Commande vivante`
-        : "DIGIY MARKET • Aperçu commande";
+        ? `DIGIY MARKET • ${shopName} • Commande active`
+        : "DIGIY MARKET • Formulaire visible";
 
       $("btnBackShop").href = orderBackUrl();
-      $("btnWhatsapp").href = whatsappUrl(p.whatsapp || p.public_phone, shopName);
+      $("btnHome").href = buildSafeUrl("./index.html");
+      refreshWhatsappLink();
 
       $("heroNotice").textContent = liveMode
-        ? "Formulaire vivant : la boutique recevra la commande dans son cockpit."
-        : "Aperçu du formulaire : entre en mode vivant avec un slug pour envoyer vraiment.";
+        ? "Formulaire direct : la boutique reçoit une demande claire et peut te répondre par téléphone ou WhatsApp."
+        : "Le formulaire est visible pour lecture, mais l’envoi n’est pas encore activé.";
 
       $("sideNotice").textContent = liveMode
-        ? "Commande simple : nom, téléphone, produit, quantité, mode de réception."
-        : "Sans slug vivant, le formulaire reste une démonstration élégante.";
+        ? "On va droit au but : produit, quantité, retrait ou livraison."
+        : "Tu peux lire le formulaire, mais l’envoi ne partira que depuis une boutique active.";
 
       if(!liveMode){
-        setStatus("Mode aperçu. Ajoute ?slug=... pour envoyer une vraie commande.", "warn");
+        setStatus("Formulaire en lecture seulement. Ouvre-le depuis une boutique active pour envoyer une vraie commande.", "warn");
       }else{
         setStatus("Prêt à envoyer la commande.");
       }
@@ -764,7 +811,7 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     async function submitOrder(){
       if(IS_PREVIEW){
-        setStatus("Mode aperçu : impossible d’envoyer sans boutique vivante.", "warn");
+        setStatus("Impossible d’envoyer pour le moment depuis ce formulaire.", "warn");
         return;
       }
 
@@ -785,6 +832,12 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
       if(!customerPhone){
         setStatus("Ton téléphone est manquant.", "err");
+        $("customerPhone").focus();
+        return;
+      }
+
+      if(customerPhone.length < 8){
+        setStatus("Ton téléphone semble incomplet.", "err");
         $("customerPhone").focus();
         return;
       }
@@ -837,9 +890,12 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         $("quantity").value = "1";
         $("unitLabel").value = "";
         $("note").value = "";
+
         if($("deliveryMode").value === "delivery"){
           $("deliveryAddress").value = "";
         }
+
+        refreshWhatsappLink();
       }catch(err){
         console.error(err);
         setStatus("Impossible d’envoyer la commande pour le moment.", "err");
@@ -854,6 +910,7 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       document.body.classList.add("loading");
       loadLocalMemory();
       $("btnBackShop").href = orderBackUrl();
+      $("btnHome").href = buildSafeUrl("./index.html");
       refreshDeliveryField();
 
       try{
@@ -872,19 +929,27 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         IS_PREVIEW = true;
         LIVE_PROFILE = null;
         applyData(previewData(), false);
-        $("brandSub").textContent = "Boutique introuvable, aperçu affiché";
+        $("brandSub").textContent = "Boutique non reconnue";
         $("modeBadge").className = "mode";
-        $("modeBadge").textContent = "Aperçu de secours";
+        $("modeBadge").textContent = "Lecture seulement";
       }finally{
         document.body.classList.remove("loading");
         setBusy(false);
+        refreshWhatsappLink();
       }
     }
 
-    $("deliveryMode").addEventListener("change", refreshDeliveryField);
+    $("deliveryMode").addEventListener("change", () => {
+      refreshDeliveryField();
+    });
+
     $("btnSubmit").addEventListener("click", submitOrder);
 
-    ["customerPhone","itemName","deliveryAddress","note","customerName"].forEach((id) => {
+    ["itemName", "quantity", "unitLabel"].forEach((id) => {
+      $(id).addEventListener("input", refreshWhatsappLink);
+    });
+
+    ["customerPhone","itemName","deliveryAddress","note","customerName","unitLabel","quantity"].forEach((id) => {
       $(id).addEventListener("keydown", (e) => {
         if(e.key === "Enter" && id !== "note"){
           e.preventDefault();
