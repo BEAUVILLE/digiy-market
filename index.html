@@ -74,12 +74,14 @@
       min-width:0;
     }
 
-    .brand-mark{
-      width:46px;height:46px;border-radius:14px;
-      display:grid;place-items:center;
-      background:linear-gradient(135deg,var(--green),#1d7a5a);
-      color:#fff;font-size:1.35rem;font-weight:800;
+    .brand-logo{
+      width:52px;
+      height:52px;
+      object-fit:cover;
+      border-radius:14px;
+      border:1px solid rgba(12,74,54,.10);
       box-shadow:var(--shadow-soft);
+      background:#fff;
       flex:0 0 auto;
     }
 
@@ -546,6 +548,9 @@
       .quick-card{flex-basis:82%}
       .section{padding:22px 0}
       .panel{border-radius:24px}
+      .brand-logo{width:46px;height:46px;border-radius:12px}
+      .brand-title{font-size:.98rem}
+      .brand-sub{font-size:.82rem}
     }
   </style>
 </head>
@@ -554,10 +559,14 @@
   <div class="topbar">
     <div class="wrap topbar-inner">
       <a class="brand" href="./index.html" aria-label="Retour à l'accueil">
-        <div class="brand-mark">D</div>
+        <img
+          class="brand-logo"
+          src="https://digiylyfe.net/wp-content/uploads/2026/03/digiylyfe_logo_qr.jpeg"
+          alt="Logo DIGIYLYFE"
+        />
         <div class="brand-text">
           <div class="brand-title">DIGIY MARKET</div>
-          <div class="brand-sub">Une boutique vivante, claire et directe</div>
+          <div class="brand-sub">Boutiques, ambiance, produits et contact direct</div>
         </div>
       </a>
 
