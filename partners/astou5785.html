@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>🧵 Astou — Boutique Premium | DIGIYLYFE ∞</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="Astou à Saly : linge de maison premium (draps, housses, taies, serviettes, rideaux) + collection de robes exclusives. Conseils personnalisés, 0% commission.">
-  <meta name="theme-color" content="#facc15">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="Astou à Saly : linge de maison premium, robes exclusives, conseils personnalisés et contact direct." />
+  <meta name="theme-color" content="#facc15" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
 
   <!-- Google Tag Manager -->
   <script>
-  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-PHGX42GR');
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),
+          dl=l!='dataLayer' ? '&l='+l : '';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PHGX42GR');
   </script>
 
-  <!-- Leaflet CSS pour carte interactive -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
   <style>
-    /* ============================================ */
-    /* 🎨 THÈME EXTRA PREMIUM ASTOU — Or & Élégance */
-    /* ============================================ */
     :root{
       --bg-1:#fffbeb;
       --bg-2:#fef3c7;
@@ -31,81 +36,70 @@
       --muted:#475569;
       --line:rgba(15,23,42,.08);
 
-      /* Palette Or Premium */
       --gold-1:#facc15;
       --gold-2:#f59e0b;
       --gold-3:#fef3c7;
-      --gold-dark:#ca8a04;
-      
+      --gold-dark:#a16207;
+
       --green:#16a34a;
       --green-light:#22c55e;
       --blue:#0ea5e9;
       --blue-dark:#0284c7;
 
-      /* Ombres premium */
-      --shadow-xl: 0 20px 60px rgba(2,6,23,.12);
-      --shadow-lg: 0 14px 40px rgba(2,6,23,.10);
-      --shadow-md: 0 10px 26px rgba(2,6,23,.08);
-      --shadow-sm: 0 4px 12px rgba(2,6,23,.06);
-      
-      /* Radius premium */
+      --shadow-xl:0 20px 60px rgba(2,6,23,.12);
+      --shadow-lg:0 14px 40px rgba(2,6,23,.10);
+      --shadow-md:0 10px 26px rgba(2,6,23,.08);
+      --shadow-sm:0 4px 12px rgba(2,6,23,.06);
+
       --r-xxl:32px;
       --r-xl:24px;
       --r-lg:18px;
       --r-md:14px;
+      --max:1200px;
     }
 
-    *{box-sizing:border-box; margin:0; padding:0}
+    *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     html,body{height:100%}
-    
+
     body{
-      font-family: system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+      font-family:Outfit,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
       color:var(--ink);
       background:
         radial-gradient(1200px 700px at 10% -5%, rgba(250,204,21,.20), transparent 60%),
         radial-gradient(1000px 600px at 95% 5%, rgba(22,163,74,.14), transparent 60%),
         radial-gradient(800px 500px at 50% 100%, rgba(245,158,11,.10), transparent 65%),
         linear-gradient(180deg, #ffffff 0%, var(--bg-1) 40%, #ffffff 100%);
-      position:relative;
       overflow-x:hidden;
     }
 
-    /* Animation de fond subtile */
-    @keyframes bgFloat {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
+    a{color:inherit;text-decoration:none}
+    button,input,textarea,select{font:inherit}
 
-    a{color:inherit; text-decoration:none}
-    
     .wrap{
-      max-width:1200px;
+      max-width:var(--max);
       margin:0 auto;
       padding:20px 16px 60px;
     }
 
-    /* ============================================ */
-    /* 📌 TOPBAR ULTRA PREMIUM */
-    /* ============================================ */
     .topbar{
       position:sticky;
       top:0;
       z-index:100;
-      background: rgba(255,255,255,.90);
-      backdrop-filter: blur(20px) saturate(150%);
+      background:rgba(255,255,255,.90);
+      backdrop-filter:blur(20px) saturate(150%);
       border-bottom:1px solid var(--line);
-      box-shadow: var(--shadow-sm);
-      animation: slideDown .5s ease;
+      box-shadow:var(--shadow-sm);
+      animation:slideDown .45s ease;
     }
 
-    @keyframes slideDown {
-      from { transform: translateY(-100%); opacity:0; }
-      to { transform: translateY(0); opacity:1; }
+    @keyframes slideDown{
+      from{transform:translateY(-100%);opacity:0}
+      to{transform:translateY(0);opacity:1}
     }
 
     .topbar .inner{
-      max-width:1200px;
+      max-width:var(--max);
       margin:0 auto;
       padding:12px 16px;
       display:flex;
@@ -130,27 +124,29 @@
       font-weight:900;
       font-size:20px;
       color:#111827;
-      background: linear-gradient(135deg, rgba(250,204,21,.95), rgba(245,158,11,.85));
-      box-shadow: 0 8px 24px rgba(245,158,11,.30), 0 0 0 1px rgba(245,158,11,.40) inset;
-      border: 2px solid rgba(255,255,255,.6);
-      transition: all .3s ease;
+      background:linear-gradient(135deg, rgba(250,204,21,.95), rgba(245,158,11,.85));
+      box-shadow:0 8px 24px rgba(245,158,11,.30), 0 0 0 1px rgba(245,158,11,.40) inset;
+      border:2px solid rgba(255,255,255,.6);
+      transition:transform .25s ease, box-shadow .25s ease;
+      flex:0 0 auto;
     }
 
     .mark:hover{
-      transform: scale(1.08) rotate(5deg);
-      box-shadow: 0 12px 32px rgba(245,158,11,.40);
+      transform:scale(1.06) rotate(4deg);
+      box-shadow:0 12px 32px rgba(245,158,11,.40);
     }
 
     .brand .txt{min-width:0}
     .brand b{
       display:block;
       font-size:14px;
-      letter-spacing:.3px;
+      letter-spacing:.25px;
       font-weight:900;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
     }
+
     .brand small{
       display:block;
       color:var(--muted);
@@ -159,7 +155,7 @@
     }
 
     .spacer{flex:1}
-    
+
     .actions{
       display:flex;
       gap:10px;
@@ -173,134 +169,94 @@
       justify-content:center;
       gap:8px;
       padding:11px 16px;
+      min-height:44px;
       border-radius:999px;
       border:1.5px solid var(--line);
-      background: rgba(255,255,255,.85);
-      box-shadow: var(--shadow-sm);
+      background:rgba(255,255,255,.85);
+      box-shadow:var(--shadow-sm);
       font-weight:900;
       font-size:13px;
-      transition: all .25s cubic-bezier(0.4, 0, 0.2, 1);
+      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
       user-select:none;
       white-space:nowrap;
       cursor:pointer;
       position:relative;
       overflow:hidden;
-    }
-
-    .btn::before{
-      content:'';
-      position:absolute;
-      top:50%;
-      left:50%;
-      width:0;
-      height:0;
-      border-radius:50%;
-      background: rgba(255,255,255,.4);
-      transform: translate(-50%,-50%);
-      transition: width .4s ease, height .4s ease;
-    }
-
-    .btn:hover::before{
-      width:300px;
-      height:300px;
+      -webkit-tap-highlight-color:transparent;
     }
 
     .btn:hover{
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-      border-color: rgba(250,204,21,.45);
+      transform:translateY(-2px);
+      box-shadow:var(--shadow-md);
+      border-color:rgba(250,204,21,.45);
     }
 
     .btn:active{
-      transform: translateY(0);
+      transform:translateY(0);
     }
-
-    .btn span{position:relative; z-index:1}
 
     .btn-dark{
-      background: linear-gradient(135deg, #1e293b, #0f172a);
+      background:linear-gradient(135deg, #1e293b, #0f172a);
       color:#fff;
-      border-color: rgba(15,23,42,.3);
-    }
-
-    .btn-dark:hover{
-      border-color: rgba(250,204,21,.60);
-      box-shadow: var(--shadow-md), 0 0 20px rgba(250,204,21,.15);
+      border-color:rgba(15,23,42,.3);
     }
 
     .btn-gold{
-      background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
-      border-color: rgba(245,158,11,.40);
+      background:linear-gradient(135deg, var(--gold-1), var(--gold-2));
+      border-color:rgba(245,158,11,.40);
       color:#111827;
-      font-weight:1000;
-    }
-
-    .btn-gold:hover{
-      box-shadow: var(--shadow-lg), 0 0 30px rgba(250,204,21,.25);
     }
 
     .btn-wa{
-      background: linear-gradient(135deg, #25D366, var(--green));
-      border-color: rgba(22,163,74,.40);
+      background:linear-gradient(135deg, #25D366, var(--green));
+      border-color:rgba(22,163,74,.40);
       color:#052e16;
     }
 
-    .btn-wa:hover{
-      box-shadow: var(--shadow-md), 0 0 20px rgba(37,211,102,.20);
-    }
-
     .btn-call{
-      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
-      border-color: rgba(14,165,233,.40);
-      color:#fffeff;
+      background:linear-gradient(135deg, var(--blue), var(--blue-dark));
+      border-color:rgba(14,165,233,.40);
+      color:#fff;
     }
 
-    .btn-call:hover{
-      box-shadow: var(--shadow-md), 0 0 20px rgba(14,165,233,.20);
-    }
-
-    /* ============================================ */
-    /* 🎭 HERO SECTION SUBLIME */
-    /* ============================================ */
     .hero{
       margin-top:20px;
-      background: var(--card);
+      background:var(--card);
       border:2px solid rgba(250,204,21,.15);
-      border-radius: var(--r-xxl);
-      box-shadow: var(--shadow-xl);
+      border-radius:var(--r-xxl);
+      box-shadow:var(--shadow-xl);
       overflow:hidden;
       position:relative;
-      animation: fadeInUp .7s ease;
+      animation:fadeInUp .6s ease;
     }
 
-    @keyframes fadeInUp {
-      from { opacity:0; transform: translateY(30px); }
-      to { opacity:1; transform: translateY(0); }
+    @keyframes fadeInUp{
+      from{opacity:0;transform:translateY(24px)}
+      to{opacity:1;transform:translateY(0)}
     }
 
-    /* Effet de brillance premium */
     .hero::before{
-      content:'';
+      content:"";
       position:absolute;
       top:0;
       left:-100%;
       width:50%;
       height:100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent);
-      animation: shine 3s infinite;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent);
+      animation:shine 3.6s infinite;
       pointer-events:none;
       z-index:1;
     }
 
-    @keyframes shine {
-      0% { left:-100%; }
-      20%, 100% { left:200%; }
+    @keyframes shine{
+      0%{left:-100%}
+      22%,100%{left:200%}
     }
 
     .heroMedia{
       position:relative;
-      height: 380px;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
+      height:380px;
+      background:linear-gradient(135deg, #0f172a, #1e293b);
       overflow:hidden;
     }
 
@@ -308,53 +264,47 @@
       width:100%;
       height:100%;
       object-fit:cover;
-      object-position: center 28%;
+      object-position:center 28%;
       display:block;
-      filter: saturate(1.08) contrast(1.05) brightness(1.02);
-      transition: transform .6s cubic-bezier(0.4, 0, 0.2, 1);
+      filter:saturate(1.08) contrast(1.05) brightness(1.02);
+      transition:transform .55s ease;
     }
 
     .hero:hover .heroMedia img{
-      transform: scale(1.05);
+      transform:scale(1.04);
     }
 
     .heroShade{
       position:absolute;
       inset:0;
-      background:
-        linear-gradient(180deg, 
-          rgba(2,6,23,.02) 0%, 
-          rgba(2,6,23,.35) 60%, 
-          rgba(2,6,23,.65) 100%
-        );
+      background:linear-gradient(180deg, rgba(2,6,23,.02) 0%, rgba(2,6,23,.35) 60%, rgba(2,6,23,.65) 100%);
       pointer-events:none;
     }
 
-    /* Badge premium flottant */
     .heroBadge{
       position:absolute;
       top:20px;
       right:20px;
       padding:10px 18px;
-      background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
+      background:linear-gradient(135deg, var(--gold-1), var(--gold-2));
       border-radius:999px;
       font-weight:900;
       font-size:13px;
       color:#111;
-      box-shadow: 0 8px 24px rgba(245,158,11,.35), 0 0 0 2px rgba(255,255,255,.6) inset;
+      box-shadow:0 8px 24px rgba(245,158,11,.35), 0 0 0 2px rgba(255,255,255,.6) inset;
       z-index:2;
-      animation: float 3s ease-in-out infinite;
+      animation:floatBadge 3s ease-in-out infinite;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
+    @keyframes floatBadge{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-7px)}
     }
 
     .heroBody{
       padding:24px 24px 28px;
       display:grid;
-      grid-template-columns: 1.25fr .75fr;
+      grid-template-columns:1.25fr .75fr;
       gap:20px;
       align-items:start;
       position:relative;
@@ -363,20 +313,20 @@
     .title{
       margin:0 0 12px;
       font-size:clamp(28px, 5vw, 38px);
-      letter-spacing:.3px;
+      letter-spacing:.2px;
       font-weight:1000;
-      color:var(--ink);
-      background: linear-gradient(135deg, var(--ink), var(--gold-dark));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      line-height:1.05;
+      background:linear-gradient(135deg, var(--ink), var(--gold-dark));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
     }
 
     .subtitle{
       margin:0;
-      color: var(--muted);
+      color:var(--muted);
       font-weight:750;
-      line-height:1.55;
+      line-height:1.6;
       font-size:15px;
     }
 
@@ -399,18 +349,18 @@
       padding:9px 14px;
       border-radius:999px;
       border:1.5px solid rgba(250,204,21,.25);
-      background: linear-gradient(135deg, rgba(250,204,21,.12), rgba(245,158,11,.08));
+      background:linear-gradient(135deg, rgba(250,204,21,.12), rgba(245,158,11,.08));
       color:var(--ink);
       font-weight:900;
       font-size:12px;
-      box-shadow: var(--shadow-sm);
-      transition: all .3s ease;
+      box-shadow:var(--shadow-sm);
+      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
     }
 
     .chip:hover{
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-      border-color: rgba(250,204,21,.45);
+      transform:translateY(-2px);
+      box-shadow:var(--shadow-md);
+      border-color:rgba(250,204,21,.45);
     }
 
     .pillCol{
@@ -423,35 +373,36 @@
       display:flex;
       gap:14px;
       align-items:flex-start;
-      padding:18px 18px;
-      border-radius: var(--r-lg);
+      padding:18px;
+      border-radius:var(--r-lg);
       border:1.5px solid var(--line);
-      background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,.85));
-      box-shadow: var(--shadow-md);
-      transition: all .3s ease;
+      background:linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,.86));
+      box-shadow:var(--shadow-md);
+      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
       position:relative;
       overflow:hidden;
     }
 
     .pill::before{
-      content:'';
+      content:"";
       position:absolute;
       top:0;
       left:0;
       width:4px;
       height:100%;
-      background: linear-gradient(180deg, var(--gold-1), var(--gold-2));
+      background:linear-gradient(180deg, var(--gold-1), var(--gold-2));
     }
 
     .pill:hover{
-      transform: translateX(4px);
-      box-shadow: var(--shadow-lg);
-      border-color: rgba(250,204,21,.35);
+      transform:translateX(4px);
+      box-shadow:var(--shadow-lg);
+      border-color:rgba(250,204,21,.35);
     }
 
     .pill .icon{
       font-size:24px;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,.1));
+      flex:0 0 auto;
+      filter:drop-shadow(0 2px 4px rgba(0,0,0,.1));
     }
 
     .pill b{
@@ -465,7 +416,7 @@
       display:block;
       color:var(--muted);
       font-weight:750;
-      line-height:1.45;
+      line-height:1.5;
       font-size:13px;
     }
 
@@ -476,25 +427,20 @@
       margin-top:12px;
     }
 
-    /* ============================================ */
-    /* 📊 CONTENT GRID PREMIUM */
-    /* ============================================ */
     .grid{
       margin-top:20px;
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
+      grid-template-columns:1.2fr .8fr;
       gap:20px;
     }
 
     .card{
-      background: var(--card);
+      background:var(--card);
       border:1.5px solid var(--line);
-      border-radius: var(--r-xl);
-      box-shadow: var(--shadow-lg);
+      border-radius:var(--r-xl);
+      box-shadow:var(--shadow-lg);
       overflow:hidden;
-      animation: fadeInUp .8s ease;
-      animation-delay: .2s;
-      animation-fill-mode: both;
+      animation:fadeInUp .7s ease both;
     }
 
     .card .hd{
@@ -504,13 +450,13 @@
       align-items:center;
       justify-content:space-between;
       gap:12px;
-      background: linear-gradient(135deg, rgba(250,204,21,.08), rgba(245,158,11,.04));
+      background:linear-gradient(135deg, rgba(250,204,21,.08), rgba(245,158,11,.04));
       flex-wrap:wrap;
     }
 
     .card .hd b{
       font-size:16px;
-      letter-spacing:.3px;
+      letter-spacing:.2px;
       font-weight:950;
     }
 
@@ -524,18 +470,18 @@
     }
 
     .item{
-      padding:18px 18px;
-      border-radius: var(--r-lg);
+      padding:18px;
+      border-radius:var(--r-lg);
       border:1.5px solid rgba(250,204,21,.15);
-      background: linear-gradient(135deg, rgba(250,204,21,.04), rgba(255,255,255,.6));
-      box-shadow: var(--shadow-sm);
-      transition: all .3s ease;
+      background:linear-gradient(135deg, rgba(250,204,21,.04), rgba(255,255,255,.6));
+      box-shadow:var(--shadow-sm);
+      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
     }
 
     .item:hover{
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-      border-color: rgba(250,204,21,.30);
+      transform:translateY(-2px);
+      box-shadow:var(--shadow-md);
+      border-color:rgba(250,204,21,.30);
     }
 
     .item .t{
@@ -559,19 +505,19 @@
 
     .gallery{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns:repeat(3, 1fr);
       gap:12px;
     }
 
     .ph{
       position:relative;
-      border-radius: var(--r-lg);
+      border-radius:var(--r-lg);
       overflow:hidden;
       border:1.5px solid var(--line);
-      background: #f8fafc;
-      aspect-ratio: 4 / 3;
+      background:#f8fafc;
+      aspect-ratio:4 / 3;
       cursor:pointer;
-      transition: all .4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
     }
 
     .ph img{
@@ -579,27 +525,27 @@
       height:100%;
       object-fit:cover;
       display:block;
-      transition: transform .6s cubic-bezier(0.4, 0, 0.2, 1);
+      transition:transform .55s ease;
     }
 
     .ph:hover{
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: var(--shadow-lg);
-      border-color: rgba(250,204,21,.35);
+      transform:translateY(-4px) scale(1.02);
+      box-shadow:var(--shadow-lg);
+      border-color:rgba(250,204,21,.35);
       z-index:2;
     }
 
     .ph:hover img{
-      transform: scale(1.1);
+      transform:scale(1.1);
     }
 
     .ph::after{
       content:"";
       position:absolute;
       inset:0;
-      background: linear-gradient(180deg, transparent 50%, rgba(2,6,23,.30));
+      background:linear-gradient(180deg, transparent 50%, rgba(2,6,23,.30));
       opacity:0;
-      transition: opacity .4s ease;
+      transition:opacity .35s ease;
       pointer-events:none;
     }
 
@@ -610,14 +556,14 @@
     .note{
       margin-top:14px;
       padding:16px 18px;
-      border-radius: var(--r-lg);
+      border-radius:var(--r-lg);
       border:2px dashed rgba(245,158,11,.35);
-      background: linear-gradient(135deg, rgba(250,204,21,.14), rgba(245,158,11,.10));
+      background:linear-gradient(135deg, rgba(250,204,21,.14), rgba(245,158,11,.10));
       color:var(--ink);
       font-weight:850;
       line-height:1.65;
       font-size:14px;
-      box-shadow: var(--shadow-sm);
+      box-shadow:var(--shadow-sm);
     }
 
     .note b{
@@ -625,21 +571,18 @@
       color:var(--gold-dark);
     }
 
-    /* ============================================ */
-    /* 🗺️ CARTE INTERACTIVE PREMIUM */
-    /* ============================================ */
     .mapCard{
       margin-top:14px;
-      background: var(--card);
+      background:var(--card);
       border:1.5px solid var(--line);
-      border-radius: var(--r-xl);
-      box-shadow: var(--shadow-lg);
+      border-radius:var(--r-xl);
+      box-shadow:var(--shadow-lg);
       overflow:hidden;
     }
 
     .mapCard .hd{
       padding:16px 20px;
-      background: linear-gradient(135deg, rgba(250,204,21,.10), rgba(245,158,11,.06));
+      background:linear-gradient(135deg, rgba(250,204,21,.10), rgba(245,158,11,.06));
       border-bottom:1.5px solid var(--line);
       display:flex;
       align-items:center;
@@ -660,169 +603,163 @@
       position:relative;
     }
 
-    /* Marker Astou personnalisé */
-    .astou-marker {
-      background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
-      border: 3px solid white;
-      border-radius: 50% 50% 50% 0;
-      width: 48px;
-      height: 48px;
-      transform: rotate(-45deg);
-      box-shadow: 0 8px 24px rgba(245,158,11,.45), 0 0 0 2px rgba(255,255,255,.3) inset;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      animation: bounce 2s ease-in-out infinite;
+    .astou-marker{
+      background:linear-gradient(135deg, var(--gold-1), var(--gold-2));
+      border:3px solid #fff;
+      border-radius:50% 50% 50% 0;
+      width:48px;
+      height:48px;
+      transform:rotate(-45deg);
+      box-shadow:0 8px 24px rgba(245,158,11,.45), 0 0 0 2px rgba(255,255,255,.3) inset;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:24px;
+      animation:bounce 2s ease-in-out infinite;
     }
 
-    .astou-marker span {
-      transform: rotate(45deg);
+    .astou-marker span{
+      transform:rotate(45deg);
     }
 
-    @keyframes bounce {
-      0%, 100% { transform: rotate(-45deg) translateY(0); }
-      50% { transform: rotate(-45deg) translateY(-8px); }
+    @keyframes bounce{
+      0%,100%{transform:rotate(-45deg) translateY(0)}
+      50%{transform:rotate(-45deg) translateY(-8px)}
     }
 
-    /* Popup Leaflet premium */
-    .leaflet-popup-content-wrapper {
-      border-radius: var(--r-lg);
-      padding: 0;
-      overflow: hidden;
-      box-shadow: var(--shadow-xl);
-      border: 2px solid var(--gold-1);
+    .leaflet-popup-content-wrapper{
+      border-radius:var(--r-lg);
+      padding:0;
+      overflow:hidden;
+      box-shadow:var(--shadow-xl);
+      border:2px solid var(--gold-1);
     }
 
-    .leaflet-popup-content {
-      margin: 0;
-      padding: 24px;
-      min-width: 340px;
+    .leaflet-popup-content{
+      margin:0;
+      padding:24px;
+      min-width:320px;
     }
 
-    .popup-header {
-      font-size: 22px;
-      font-weight: 950;
-      margin-bottom: 8px;
-      color: var(--ink);
-      background: linear-gradient(135deg, var(--ink), var(--gold-dark));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .popup-header{
+      font-size:22px;
+      font-weight:950;
+      margin-bottom:8px;
+      color:var(--ink);
+      background:linear-gradient(135deg, var(--ink), var(--gold-dark));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
     }
 
-    .popup-subtitle {
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 6px;
-      font-weight: 800;
+    .popup-subtitle{
+      font-size:14px;
+      color:var(--muted);
+      margin-bottom:8px;
+      font-weight:800;
     }
 
-    .popup-desc {
-      font-size: 13px;
-      margin-bottom: 16px;
-      color: #4b5563;
-      line-height: 1.6;
+    .popup-desc{
+      font-size:13px;
+      margin-bottom:16px;
+      color:#4b5563;
+      line-height:1.6;
     }
 
-    .popup-badge {
-      display: inline-block;
-      padding: 7px 14px;
-      background: linear-gradient(135deg, var(--gold-3), #fef3c7);
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 900;
-      color: #111;
-      margin-bottom: 14px;
-      box-shadow: var(--shadow-sm);
+    .popup-badge{
+      display:inline-block;
+      padding:7px 14px;
+      background:linear-gradient(135deg, var(--gold-3), #fef3c7);
+      border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      color:#111;
+      margin-bottom:14px;
+      box-shadow:var(--shadow-sm);
     }
 
-    .popup-cta {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+    .popup-cta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
     }
 
-    .popup-btn {
-      flex: 1;
-      padding: 12px;
-      text-align: center;
-      font-weight: 900;
-      font-size: 13px;
-      border-radius: 12px;
-      transition: all .3s ease;
-      min-width: 130px;
-      box-shadow: var(--shadow-sm);
+    .popup-btn{
+      flex:1;
+      padding:12px;
+      text-align:center;
+      font-weight:900;
+      font-size:13px;
+      border-radius:12px;
+      transition:transform .22s ease, box-shadow .22s ease;
+      min-width:130px;
+      box-shadow:var(--shadow-sm);
     }
 
-    .popup-btn.whatsapp {
-      background: linear-gradient(135deg, #25D366, var(--green));
-      color: #052e16;
+    .popup-btn.whatsapp{
+      background:linear-gradient(135deg, #25D366, var(--green));
+      color:#052e16;
     }
 
-    .popup-btn.view {
-      background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
-      color: #111;
+    .popup-btn.call{
+      background:linear-gradient(135deg, var(--gold-1), var(--gold-2));
+      color:#111;
     }
 
-    .popup-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-md);
+    .popup-btn:hover{
+      transform:translateY(-3px);
+      box-shadow:var(--shadow-md);
     }
 
-    /* ============================================ */
-    /* 📱 RESPONSIVE PREMIUM */
-    /* ============================================ */
-    @media (max-width: 980px){
-      .heroBody{grid-template-columns:1fr}
-      .grid{grid-template-columns:1fr}
-      .heroMedia{height: 320px}
-      #astouMap{height:360px}
-    }
-
-    @media (max-width: 640px){
-      .wrap{padding:14px 10px 40px}
-      .heroMedia{height: 280px}
-      .heroBody{padding:18px 16px 20px}
-      .gallery{grid-template-columns: repeat(2, 1fr)}
-      .actions{justify-content:flex-start}
-      .btn{flex:1; min-width:0}
-      .topbar .inner{padding:10px 12px}
-      #astouMap{height:320px}
-      .leaflet-popup-content{min-width:280px; padding:18px}
-    }
-
-    /* Footer premium */
     .foot{
       margin-top:28px;
       padding:20px 16px;
       text-align:center;
-      color: rgba(15,23,42,.50);
+      color:rgba(15,23,42,.50);
       font-weight:850;
       font-size:13px;
-      background: linear-gradient(135deg, rgba(250,204,21,.06), rgba(245,158,11,.04));
-      border-radius: var(--r-lg);
+      background:linear-gradient(135deg, rgba(250,204,21,.06), rgba(245,158,11,.04));
+      border-radius:var(--r-lg);
       border:1.5px solid var(--line);
+    }
+
+    @media (max-width:980px){
+      .heroBody{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .heroMedia{height:320px}
+      #astouMap{height:360px}
+    }
+
+    @media (max-width:640px){
+      .wrap{padding:14px 10px 40px}
+      .heroMedia{height:280px}
+      .heroBody{padding:18px 16px 20px}
+      .gallery{grid-template-columns:repeat(2, 1fr)}
+      .actions{justify-content:flex-start}
+      .btn{flex:1;min-width:0}
+      .topbar .inner{padding:10px 12px}
+      #astouMap{height:320px}
+      .leaflet-popup-content{min-width:280px;padding:18px}
     }
   </style>
 </head>
 
 <body>
-  <!-- Google Tag Manager (noscript) -->
   <noscript>
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PHGX42GR"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+      height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </noscript>
 
-  <!-- TOPBAR PREMIUM -->
   <div class="topbar" role="banner">
     <div class="inner">
-      <a class="btn" href="javascript:history.back()" aria-label="Retour"><span>← Retour</span></a>
+      <a class="btn" href="../index.html" id="backBtn" aria-label="Retour">
+        <span>← Retour</span>
+      </a>
 
       <div class="brand" aria-label="DIGIYLYFE">
         <div class="mark">∞</div>
         <div class="txt">
-          <b>DIGIYLYFE · Fiche Extra Premium</b>
+          <b>DIGIYLYFE · Fiche Premium</b>
           <small>0% commission · Direct au pro</small>
         </div>
       </div>
@@ -830,7 +767,7 @@
       <div class="spacer"></div>
 
       <div class="actions">
-        <a class="btn btn-dark" href="https://beauville.github.io/digiy-mdimbal-map/" rel="noopener">
+        <a class="btn btn-dark" href="https://beauville.github.io/digiy-mdimbal-map/" target="_blank" rel="noopener">
           <span>🗺️ NDIMBAL Map</span>
         </a>
 
@@ -847,14 +784,15 @@
 
   <div class="wrap">
 
-    <!-- HERO SUBLIME -->
     <section class="hero" itemscope itemtype="https://schema.org/Store" aria-label="Fiche partenaire Astou">
       <div class="heroMedia" aria-label="Photo principale Astou">
-        <div class="heroBadge">✨ Boutique Premium Validée DIGIY</div>
+        <div class="heroBadge">✨ Boutique Premium validée DIGIY</div>
         <img
           src="https://digiylyfe.com/wp-content/uploads/2025/06/ASTOU-BOUTIK.png"
-          alt="Astou — Boutique linge de maison & robes à Saly"
-          loading="eager" decoding="async" fetchpriority="high"
+          alt="Astou — Boutique linge de maison et robes à Saly"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
         />
         <div class="heroShade"></div>
       </div>
@@ -863,15 +801,15 @@
         <div>
           <h1 class="title" itemprop="name">🧵 Astou</h1>
           <p class="subtitle" itemprop="description">
-            Boutique <b>linge de maison premium</b> (draps, housses, taies, serviettes, peignoirs, rideaux) 
-            + <b>collection exclusive de robes</b> (prêt-à-porter & créations personnalisables).<br><br>
-            💎 Besoin d'un conseil tissu/couleur/taille ? Astou te guide <b>personnellement</b>, sans blabla commercial.
+            Boutique <b>linge de maison premium</b> : draps, housses, taies, serviettes, peignoirs, rideaux,
+            avec aussi une <b>collection de robes</b> prête à porter ou personnalisable.<br><br>
+            💎 Besoin d’un conseil sur la couleur, la matière ou la coupe ? Astou te répond directement, avec une vraie lecture terrain et sans détour.
           </p>
 
           <div class="chips" aria-label="Points forts">
-            <span class="chip">🛍️ Promo locale exclusive</span>
-            <span class="chip">🎨 Palette couleurs (pastels & vives)</span>
-            <span class="chip">✂️ Retouches sur mesure</span>
+            <span class="chip">🛍️ Sélection locale soignée</span>
+            <span class="chip">🎨 Couleurs douces & vives</span>
+            <span class="chip">✂️ Retouches possibles</span>
             <span class="chip">📍 Saly · Face Hôpital des Yeux</span>
           </div>
         </div>
@@ -880,149 +818,165 @@
           <div class="pill" aria-label="Contact rapide">
             <div class="icon">⚡</div>
             <div>
-              <b>Contact direct premium</b>
-              <small>WhatsApp / Appel — Réponse garantie sous 2h</small>
+              <b>Contact direct</b>
+              <small>WhatsApp ou appel — réponse rapide selon disponibilité</small>
               <div class="btns">
-                <a class="btn btn-wa" href="https://wa.me/221778765785?text=Salam%20Astou%2C%20je%20viens%20de%20DIGIYLYFE%20(commande%20ou%20conseil)"
-                   target="_blank" rel="noopener noreferrer" aria-label="Contacter Astou sur WhatsApp">
+                <a
+                  class="btn btn-wa"
+                  href="https://wa.me/221778765785?text=Salam%20Astou%2C%20je%20viens%20de%20DIGIYLYFE%20pour%20une%20commande%20ou%20un%20conseil."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Contacter Astou sur WhatsApp"
+                  data-track="whatsapp_click"
+                >
                   <span>💬 WhatsApp</span>
                 </a>
-                <a class="btn btn-call" href="tel:+221778765785" aria-label="Appeler Astou">
+
+                <a
+                  class="btn btn-call"
+                  href="tel:+221778765785"
+                  aria-label="Appeler Astou"
+                  data-track="call_click"
+                >
                   <span>📞 Appeler</span>
                 </a>
               </div>
             </div>
           </div>
 
-          <div class="pill" aria-label="Localisation premium">
+          <div class="pill" aria-label="Localisation">
             <div class="icon">🧭</div>
             <div>
-              <b>Localisation GPS précise</b>
-              <small><b>Saly</b> — Face <b>Hôpital des Yeux</b><br>Recherche : "Astou Boutique Teranga Saly"</small>
+              <b>Repère</b>
+              <small><b>Saly</b> — Face <b>Hôpital des Yeux</b><br>Recherche utile : “Astou Boutique Teranga Saly”</small>
               <div class="btns">
-                <a class="btn btn-dark"
-                   href="https://www.google.com/maps/search/?api=1&query=Astou%20Boutique%20Teranga%20Saly"
-                   target="_blank" rel="noopener noreferrer">
+                <a
+                  class="btn btn-dark"
+                  href="https://www.google.com/maps/search/?api=1&query=Astou%20Boutique%20Teranga%20Saly"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-track="maps_click"
+                >
                   <span>🗺️ Google Maps</span>
                 </a>
-                <a class="btn"
-                   href="https://www.google.com/maps/dir/?api=1&destination=Astou%20Boutique%20Teranga%20Saly"
-                   target="_blank" rel="noopener noreferrer">
+
+                <a
+                  class="btn"
+                  href="https://www.google.com/maps/dir/?api=1&destination=14.4574,-16.9984"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-track="maps_click"
+                >
                   <span>🧭 Itinéraire</span>
                 </a>
               </div>
             </div>
           </div>
 
-          <meta itemprop="telephone" content="+221778765785">
-          <meta itemprop="areaServed" content="Saly, Mbour, Thiès">
+          <meta itemprop="telephone" content="+221778765785" />
+          <meta itemprop="areaServed" content="Saly, Mbour, Thiès" />
         </div>
       </div>
     </section>
 
-    <!-- CONTENT GRID PREMIUM -->
     <section class="grid" aria-label="Contenu fiche Astou">
-
-      <!-- LEFT COLUMN -->
-      <article class="card" aria-label="Offre & services">
+      <article class="card" aria-label="Offre et services">
         <div class="hd">
-          <b>🧺 Produits & Services Premium</b>
+          <b>🧺 Produits & services</b>
           <span class="chip" style="background:linear-gradient(135deg, rgba(22,163,74,.15), rgba(34,197,94,.10));border-color:rgba(22,163,74,.25)">✅ Validé DIGIY</span>
         </div>
+
         <div class="bd">
           <div class="list">
             <div class="item">
-              <div class="t">💎 Produits phares exclusifs</div>
+              <div class="t">💎 Produits phares</div>
               <div class="s">
                 • <b>Linge de maison premium</b> : draps satinés, housses ajustables, taies assorties, serviettes épaisses, peignoirs doux, rideaux occultants.<br>
-                • <b>Palette couleurs complète</b> : pastels (rose poudré, bleu ciel, menthe) & vives (corail, émeraude, or) — pour chambre, salon, salle de bain.<br>
-                • <b>Robes exclusives</b> : prêt-à-porter raffiné & créations personnalisables sur mesure.
+                • <b>Choix de couleurs</b> : tons pastels, doux, lumineux ou plus affirmés selon la chambre, le salon ou la salle de bain.<br>
+                • <b>Robes exclusives</b> : prêt-à-porter élégant et modèles personnalisables selon ton envie.
               </div>
             </div>
 
             <div class="item">
-              <div class="t">✨ Services personnalisés</div>
+              <div class="t">✨ Services utiles</div>
               <div class="s">
-                • <b>Conseils déco professionnels</b> : assortiments harmonieux chambre/salon/SDB.<br>
-                • <b>Commandes sur-mesure</b> : choix tissus, couleurs, dimensions selon tes envies.<br>
-                • <b>Retouches expertes</b> : ajustements précis pour une tenue parfaite.<br>
-                • <b>Livraison locale</b> : possible sur Saly/Mbour (nous contacter).
+                • <b>Conseil déco</b> pour harmoniser matière, couleur et ambiance.<br>
+                • <b>Commande sur mesure</b> selon tissu, taille et besoin réel.<br>
+                • <b>Retouches</b> pour un rendu plus juste et plus propre.<br>
+                • <b>Livraison locale</b> possible sur Saly / Mbour selon échange direct.
               </div>
             </div>
 
             <div class="note">
-              💎 <b>Astuce premium exclusive</b> : Envoie une photo de ta chambre ou ton style vestimentaire sur WhatsApp — Astou te propose le combo parfait couleur + matière + coupe, adapté à ton univers !
+              💎 <b>Astuce</b> : envoie une photo de ta chambre, de ton salon ou de ton style sur WhatsApp. Astou peut te proposer une combinaison simple et cohérente, au lieu de te laisser choisir au hasard.
             </div>
           </div>
         </div>
       </article>
 
-      <!-- RIGHT COLUMN -->
       <aside class="card" aria-label="Galerie premium">
         <div class="hd">
-          <b>📸 Galerie Inspiration</b>
-          <span class="chip">✨ Linge & Robes premium</span>
+          <b>📸 Galerie</b>
+          <span class="chip">✨ Linge & robes</span>
         </div>
+
         <div class="bd">
           <div class="gallery" aria-label="Photos univers Astou">
             <a class="ph" href="https://digiylyfe.com/wp-content/uploads/2025/06/ASTOU-BOUTIK.png" target="_blank" rel="noopener" aria-label="Boutique Astou">
-              <img src="https://digiylyfe.com/wp-content/uploads/2025/06/ASTOU-BOUTIK.png" alt="Boutique Astou">
+              <img src="https://digiylyfe.com/wp-content/uploads/2025/06/ASTOU-BOUTIK.png" alt="Boutique Astou" />
             </a>
 
             <a class="ph" href="https://images.unsplash.com/photo-1759264244764-2cb80f1a67bd?fm=jpg&ixlib=rb-4.1.0&q=80&w=1600" target="_blank" rel="noopener" aria-label="Linge de lit premium">
-              <img src="https://images.unsplash.com/photo-1759264244764-2cb80f1a67bd?fm=jpg&ixlib=rb-4.1.0&q=80&w=1600" alt="Linge de lit premium">
+              <img src="https://images.unsplash.com/photo-1759264244764-2cb80f1a67bd?fm=jpg&ixlib=rb-4.1.0&q=80&w=1600" alt="Linge de lit premium" />
             </a>
 
-            <a class="ph" href="https://images.unsplash.com/photo-1635353059173-461b9c459f2a?fm=jpg&ixlib=rb-4.1.0&q=80&w=1600" target="_blank" rel="noopener" aria-label="Serviettes & linge">
-              <img src="https://images.unsplash.com/photo-1635353059173-461b9c459f2a?fm=jpg&ixlib=rb-4.1.0&q=80&w=1600" alt="Serviettes & linge">
+            <a class="ph" href="https://images.unsplash.com/photo-1635353059173-461b9c459f2a?fm=jpg&ixlib=rb-4.1.0&q=80&w=1600" target="_blank" rel="noopener" aria-label="Serviettes et linge">
+              <img src="https://images.unsplash.com/photo-1635353059173-461b9c459f2a?fm=jpg&ixlib=rb-4.1.0&q=80&w=1600" alt="Serviettes et linge" />
             </a>
 
             <a class="ph" href="https://images.unsplash.com/photo-1762834923135-f125e65b88eb?fm=jpg&ixlib=rb-4.1.0&q=80&w=1600" target="_blank" rel="noopener" aria-label="Robes boutique">
-              <img src="https://images.unsplash.com/photo-1762834923135-f125e65b88eb?fm=jpg&ixlib=rb-4.1.0&q=80&w=1600" alt="Robes boutique">
+              <img src="https://images.unsplash.com/photo-1762834923135-f125e65b88eb?fm=jpg&ixlib=rb-4.1.0&q=80&w=1600" alt="Robes boutique" />
             </a>
 
             <a class="ph" href="https://images.unsplash.com/photo-1761090617068-f1b3257d27ad?fm=jpg&ixlib=rb-4.1.0&q=80&w=1600" target="_blank" rel="noopener" aria-label="Portant exclusif">
-              <img src="https://images.unsplash.com/photo-1761090617068-f1b3257d27ad?fm=jpg&ixlib=rb-4.1.0&q=80&w=1600" alt="Portant exclusif">
+              <img src="https://images.unsplash.com/photo-1761090617068-f1b3257d27ad?fm=jpg&ixlib=rb-4.1.0&q=80&w=1600" alt="Portant exclusif" />
             </a>
 
             <a class="ph" href="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?fm=jpg&ixlib=rb-4.1.0&q=80&w=1600" target="_blank" rel="noopener" aria-label="Ambiance boutique">
-              <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?fm=jpg&ixlib=rb-4.1.0&q=80&w=1600" alt="Ambiance boutique">
+              <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?fm=jpg&ixlib=rb-4.1.0&q=80&w=1600" alt="Ambiance boutique" />
             </a>
           </div>
 
           <div class="note" style="margin-top:16px">
-            ✅ <b>Cohérence visuelle premium</b> : Images soigneusement sélectionnées — linge raffiné, robes élégantes, ambiance boutique chaleureuse. Zéro hors-sujet, 100% inspiration !
+            ✅ <b>Conseil</b> : ici, la galerie reste cohérente avec l’univers d’Astou — textile, douceur, style, boutique. Pas de bruit visuel inutile.
           </div>
         </div>
       </aside>
-
     </section>
 
-    <!-- CARTE INTERACTIVE PREMIUM -->
     <section class="mapCard" aria-label="Localisation interactive Astou">
       <div class="hd">
-        <h3>🗺️ Trouve-moi facilement avec ma carte interactive premium</h3>
-        <div style="display:flex; gap:8px; flex-wrap:wrap">
+        <h3>🗺️ Trouve la boutique facilement</h3>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
           <span class="chip">📍 GPS précis</span>
-          <span class="chip">0% commission</span>
+          <span class="chip">Paiement direct au pro</span>
         </div>
       </div>
       <div id="astouMap"></div>
     </section>
 
     <div class="foot">
-      © DIGIYLYFE · 0% commission · Paiement direct au pro · Pierre par pierre, l'Afrique enracinée, connectée au monde ∞
+      © DIGIYLYFE · 0% commission · Paiement direct au pro · Pierre par pierre ∞
     </div>
   </div>
 
-  <!-- JSON-LD SEO -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":["Store","ClothingStore","HomeGoodsStore"],
     "@id":"https://digiylyfe.com/partenaires-astou/#store",
     "name":"Astou — Boutique Premium",
-    "description":"Boutique premium linge de maison & robes exclusives. Conseils personnalisés, créations sur mesure, retouches expertes. À Saly (face Hôpital des Yeux).",
+    "description":"Boutique premium linge de maison et robes exclusives. Conseils personnalisés, créations sur mesure et retouches. À Saly, face Hôpital des Yeux.",
     "telephone":"+221778765785",
     "image":"https://digiylyfe.com/wp-content/uploads/2025/06/ASTOU-BOUTIK.png",
     "url":"https://digiylyfe.com/partenaires-astou/",
@@ -1032,10 +986,10 @@
       "addressLocality":"Saly",
       "addressCountry":"SN"
     },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "14.4574",
-      "longitude": "-16.9984"
+    "geo":{
+      "@type":"GeoCoordinates",
+      "latitude":"14.4574",
+      "longitude":"-16.9984"
     },
     "areaServed":["Saly","Mbour","Thiès"],
     "sameAs":["https://wa.me/221778765785"],
@@ -1046,127 +1000,130 @@
   }
   </script>
 
-  <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <!-- Script carte + tracking -->
   <script>
-  (function(){
-    // ============================================
-    // 🗺️ CARTE INTERACTIVE PREMIUM ASTOU
-    // ============================================
-    
-    window.addEventListener('load', function() {
-      if (typeof L === 'undefined') {
-        console.error('Leaflet non chargé, retry...');
-        setTimeout(initAstouMap, 500);
-      } else {
-        initAstouMap();
-      }
-    });
+    (function(){
+      "use strict";
 
-    function initAstouMap() {
-      console.log('🗺️ Init carte Astou premium...');
-
-      // Coordonnées Astou Boutique Teranga Saly
-      const astouLoc = {
+      const ASTOU = {
+        name: "🧵 Astou Boutique",
+        phone: "+221778765785",
+        whatsapp: "https://wa.me/221778765785?text=Salam%20Astou%2C%20je%20viens%20de%20DIGIYLYFE",
         lat: 14.4574,
         lng: -16.9984,
-        name: "🧵 Astou Boutique",
         address: "Saly — Face Hôpital des Yeux"
       };
 
-      // Init carte
-      const map = L.map('astouMap', {
-        zoomControl: true,
-        scrollWheelZoom: true
-      }).setView([astouLoc.lat, astouLoc.lng], 16);
+      let mapStarted = false;
 
-      // Tuile OSM
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap | DIGIYLYFE ∞',
-        maxZoom: 19
-      }).addTo(map);
+      function trackEvent(action){
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: action,
+          partner: "Astou",
+          phone: ASTOU.phone,
+          page: window.location.href,
+          timestamp: new Date().toISOString()
+        });
+      }
 
-      // Marker premium Astou
-      const astouIcon = L.divIcon({
-        className: 'custom-marker',
-        html: '<div class="astou-marker"><span>🧵</span></div>',
-        iconSize: [48, 48],
-        iconAnchor: [24, 48],
-        popupAnchor: [0, -48]
-      });
+      function bindTracking(){
+        document.querySelectorAll("[data-track]").forEach(function(el){
+          el.addEventListener("click", function(){
+            const action = el.getAttribute("data-track");
+            if(action) trackEvent(action);
+          });
+        });
+      }
 
-      const marker = L.marker([astouLoc.lat, astouLoc.lng], {
-        icon: astouIcon
-      }).addTo(map);
+      function resolveBackButton(){
+        const backBtn = document.getElementById("backBtn");
+        if(!backBtn) return;
 
-      // Popup premium
-      const popupHTML = `
-        <div class="popup-header">🧵 Astou Boutique</div>
-        <div class="popup-subtitle">📍 ${astouLoc.address}</div>
-        <div class="popup-badge">✨ Linge de maison & Robes premium</div>
-        <div class="popup-desc">
-          Draps satinés, housses, taies, serviettes épaisses, rideaux + robes exclusives.<br>
-          Conseils déco, créations sur mesure, retouches expertes.
-        </div>
-        <div class="popup-cta">
-          <a href="https://wa.me/221778765785?text=Salam%20Astou%2C%20je%20viens%20de%20DIGIYLYFE" target="_blank" class="popup-btn whatsapp">💬 WhatsApp</a>
-          <a href="tel:+221778765785" class="popup-btn view">📞 Appeler</a>
-        </div>
-      `;
+        try{
+          if(document.referrer && new URL(document.referrer).origin === window.location.origin){
+            backBtn.setAttribute("href", document.referrer);
+          }
+        }catch(e){}
+      }
 
-      marker.bindPopup(popupHTML).openPopup();
+      function initAstouMap(){
+        if(mapStarted) return;
+        if(typeof L === "undefined") return;
 
-      // Cercle zone (200m)
-      L.circle([astouLoc.lat, astouLoc.lng], {
-        color: '#facc15',
-        fillColor: '#fef3c7',
-        fillOpacity: 0.18,
-        radius: 200
-      }).addTo(map);
+        const mapEl = document.getElementById("astouMap");
+        if(!mapEl) return;
 
-      console.log('✅ Carte Astou premium ready! 🦅');
-    }
+        mapStarted = true;
 
-    // Fallback
-    if (document.readyState === 'complete') {
-      initAstouMap();
-    }
+        const map = L.map("astouMap", {
+          zoomControl: true,
+          scrollWheelZoom: false,
+          tap: true
+        }).setView([ASTOU.lat, ASTOU.lng], 16);
 
-    // ============================================
-    // 📊 TRACKING INTERACTIONS
-    // ============================================
-    
-    function trackEvent(action) {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: action,
-        partner: 'Astou',
-        phone: '+221778765785',
-        page: window.location.href,
-        timestamp: new Date().toISOString()
-      });
-      console.log(`📊 Track: ${action} - Astou`);
-    }
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution: "© OpenStreetMap | DIGIYLYFE ∞",
+          maxZoom: 19
+        }).addTo(map);
 
-    // Track WhatsApp clicks
-    document.querySelectorAll('.btn-wa, .popup-btn.whatsapp').forEach(btn => {
-      btn.addEventListener('click', () => trackEvent('whatsapp_click'));
-    });
+        const astouIcon = L.divIcon({
+          className: "custom-marker",
+          html: '<div class="astou-marker"><span>🧵</span></div>',
+          iconSize: [48, 48],
+          iconAnchor: [24, 48],
+          popupAnchor: [0, -48]
+        });
 
-    // Track Call clicks
-    document.querySelectorAll('.btn-call, .popup-btn.view').forEach(btn => {
-      btn.addEventListener('click', () => trackEvent('call_click'));
-    });
+        const marker = L.marker([ASTOU.lat, ASTOU.lng], { icon: astouIcon }).addTo(map);
 
-    // Track Maps clicks
-    document.querySelectorAll('[href*="google.com/maps"]').forEach(btn => {
-      btn.addEventListener('click', () => trackEvent('maps_click'));
-    });
+        const popupHTML = `
+          <div class="popup-header">🧵 Astou Boutique</div>
+          <div class="popup-subtitle">📍 ${ASTOU.address}</div>
+          <div class="popup-badge">✨ Linge de maison & robes</div>
+          <div class="popup-desc">
+            Draps, housses, taies, serviettes, rideaux et robes avec contact direct, conseils simples et commande plus humaine.
+          </div>
+          <div class="popup-cta">
+            <a href="${ASTOU.whatsapp}" target="_blank" rel="noopener" class="popup-btn whatsapp" data-track="whatsapp_click">💬 WhatsApp</a>
+            <a href="tel:${ASTOU.phone}" class="popup-btn call" data-track="call_click">📞 Appeler</a>
+          </div>
+        `;
 
-    console.log('🦅 DIGIY Astou Extra Premium — Ready! Pierre par pierre ∞');
-  })();
+        marker.bindPopup(popupHTML).openPopup();
+
+        L.circle([ASTOU.lat, ASTOU.lng], {
+          color: "#facc15",
+          fillColor: "#fef3c7",
+          fillOpacity: 0.18,
+          radius: 200
+        }).addTo(map);
+
+        setTimeout(function(){
+          map.invalidateSize();
+          bindTracking();
+        }, 120);
+      }
+
+      function boot(){
+        resolveBackButton();
+        bindTracking();
+        initAstouMap();
+      }
+
+      if(document.readyState === "loading"){
+        document.addEventListener("DOMContentLoaded", boot, { once:true });
+      }else{
+        boot();
+      }
+
+      window.addEventListener("load", function(){
+        if(!mapStarted){
+          initAstouMap();
+        }
+      }, { once:true });
+    })();
   </script>
 </body>
 </html>
