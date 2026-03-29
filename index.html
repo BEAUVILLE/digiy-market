@@ -1,1479 +1,874 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>DIGIY MARKET — Les boutiques</title>
-<meta name="description" content="DIGIY MARKET — les boutiques du quotidien : univers terrain, vitrines inspirantes, contact direct et entrée boutique visible."/>
-<meta name="theme-color" content="#1a1208"/>
-<meta name="robots" content="index,follow"/>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <title>DIGIY MARKET — La boutique</title>
+  <meta name="theme-color" content="#0c4a36"/>
+  <meta name="description" content="Une boutique vivante, claire et humaine. Photos, ambiance, produits, contact direct WhatsApp."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet"/>
+  <style>
+    :root{
+      --bg:#f6f3ea;
+      --bg-2:#fffdf7;
+      --card:#ffffff;
+      --ink:#13261d;
+      --muted:#5a6a63;
+      --line:rgba(19,38,29,.10);
+      --green:#0c4a36;
+      --green-2:#166b50;
+      --gold:#d7a928;
+      --orange:#f59e0b;
+      --sand:#efe4c9;
+      --shadow:0 18px 50px rgba(12,74,54,.10);
+      --shadow-soft:0 8px 24px rgba(12,74,54,.08);
+      --radius:22px;
+      --radius-sm:16px;
+      --max:1180px;
+    }
 
-<style>
-:root{
-  --bg:#fdf6ec;
-  --bg-2:#fffaf2;
-  --card:#fffdf9;
-  --ink:#1a1208;
-  --muted:#7a6a54;
-  --line:#e8d8be;
-  --gold:#c8860a;
-  --orange:#e86820;
-  --red:#c83830;
-  --green:#28885a;
-  --shadow:0 18px 52px rgba(26,18,8,.13);
-  --shadow-soft:0 10px 28px rgba(26,18,8,.08);
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(245,158,11,.08), transparent 26%),
+        radial-gradient(circle at top right, rgba(12,74,54,.09), transparent 28%),
+        linear-gradient(180deg, #fbf8f0 0%, #f7f2e7 100%);
+      font-family:Outfit,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
 
-  --dk:#0d0a06;
-  --dk-2:#1a1208;
-  --dk-3:#241808;
-  --dk-line:#2e2010;
-  --dk-line-lt:#3e2e1a;
-  --gold-lt:#f4b840;
-  --g-gold:linear-gradient(135deg,#c8860a,#f4b840,#c8860a);
-  --g-fire:linear-gradient(135deg,#e86820,#c83830);
-  --shadow-dark:0 24px 64px rgba(0,0,0,.55),0 0 0 1px rgba(200,134,10,.07);
-  --shadow-dark-hover:0 40px 100px rgba(0,0,0,.7),0 0 0 1px rgba(200,134,10,.2);
-}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    button,input,textarea,select{font:inherit}
 
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  font-family:"Outfit",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-  background:
-    radial-gradient(circle at top left,rgba(232,104,32,.06),transparent 28%),
-    radial-gradient(circle at top right,rgba(40,136,90,.05),transparent 22%),
-    var(--bg);
-  color:var(--ink);
-  overflow-x:hidden;
-}
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:0;
-  opacity:.02;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-a{color:inherit;text-decoration:none}
-button,input,select{font:inherit}
-img{display:block;max-width:100%}
-.wrap{width:min(1260px,calc(100% - 28px));margin:0 auto;position:relative;z-index:1}
+    .wrap{width:min(var(--max),calc(100% - 28px));margin:0 auto}
+    .section{padding:28px 0}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 14px;border-radius:999px;
+      background:rgba(12,74,54,.08);
+      border:1px solid rgba(12,74,54,.10);
+      color:var(--green);
+      font-size:.92rem;font-weight:700;
+    }
 
-section[id], .royal-lead, .cats-section, .faq-section{scroll-margin-top:96px}
+    .topbar{
+      position:sticky;top:0;z-index:40;
+      backdrop-filter:blur(14px);
+      background:rgba(251,248,240,.86);
+      border-bottom:1px solid rgba(19,38,29,.08);
+    }
 
-:focus-visible{
-  outline:3px solid rgba(232,104,32,.35);
-  outline-offset:2px;
-  border-radius:12px;
-}
+    .topbar-inner{
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+      min-height:70px;
+    }
 
-/* TOPBAR */
-.topbar{
-  position:sticky;top:0;z-index:100;
-  background:rgba(253,246,236,.93);
-  backdrop-filter:blur(16px);
-  border-bottom:2px solid var(--line);
-}
-.topbar-inner{
-  display:grid;
-  grid-template-columns:auto 1fr auto;
-  gap:12px;
-  align-items:center;
-  min-height:76px;
-}
-.brand-stack{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.back-site-chip{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:10px 14px;border-radius:999px;
-  background:#fff;border:1.5px solid var(--line);
-  font-size:.82rem;font-weight:900;color:var(--ink);
-  box-shadow:var(--shadow-soft);transition:.18s ease;white-space:nowrap;
-}
-.back-site-chip:hover{transform:translateY(-1px);background:#fff3df}
-.brand{
-  display:flex;align-items:center;gap:10px;
-  font-family:"Playfair Display",serif;font-weight:900;font-size:1.22rem;
-}
-.brand-icon{
-  width:42px;height:42px;border-radius:12px;
-  background:var(--g-fire);
-  display:grid;place-items:center;
-  font-size:1.1rem;
-  box-shadow:0 5px 16px rgba(232,104,32,.3);
-  overflow:hidden;flex:0 0 auto;
-}
-.brand-icon img{width:100%;height:100%;object-fit:cover}
-.brand small{
-  display:block;
-  font-family:"Outfit",system-ui,sans-serif;
-  font-weight:800;
-  font-size:.72rem;
-  color:var(--muted);
-  margin-top:1px;
-}
-.live-count{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:8px 11px;border-radius:999px;
-  background:#fff;border:1.5px solid var(--line);
-  font-size:.76rem;font-weight:900;color:var(--orange);
-}
-.live-count strong{
-  display:inline-flex;align-items:center;justify-content:center;
-  min-width:22px;height:22px;padding:0 8px;border-radius:999px;
-  background:var(--orange);color:#fff;
-}
-.top-search{
-  display:flex;align-items:center;background:#fff;
-  border:2px solid var(--line);border-radius:999px;
-  overflow:hidden;padding:0 6px 0 15px;min-width:0;
-}
-.top-search input{
-  flex:1;border:none;outline:none;background:transparent;
-  font-size:.92rem;color:var(--ink);padding:11px 0;min-width:0;
-}
-.top-search input::placeholder{color:var(--muted)}
-.top-search button{
-  width:38px;height:38px;border-radius:50%;
-  background:var(--orange);color:#fff;border:none;cursor:pointer;
-  font-size:.95rem;display:grid;place-items:center;transition:background .18s;
-}
-.top-search button:hover{background:var(--red)}
-.top-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-.btn-top{
-  border:none;cursor:pointer;border-radius:999px;
-  padding:11px 14px;font-weight:900;transition:.18s ease;font-size:.84rem;
-}
-.btn-top:hover{transform:translateY(-1px)}
-.btn-top.primary{
-  background:var(--orange);color:#fff;
-  box-shadow:0 10px 20px rgba(232,104,32,.22);
-}
-.btn-top.primary:hover{background:var(--red)}
-.btn-top.soft{background:#fff;border:1.5px solid var(--line)}
-.btn-top.soft:hover{background:#fff3df}
-.royal-top-chip{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:11px 15px;border-radius:999px;
-  background:linear-gradient(135deg,#2b1808,#5c3510);
-  color:#fff;border:1.5px solid rgba(255,255,255,.14);
-  font-size:.82rem;font-weight:900;
-  box-shadow:0 12px 24px rgba(26,18,8,.18);
-  cursor:pointer;transition:.18s ease;
-}
-.royal-top-chip:hover{
-  transform:translateY(-1px);
-  background:linear-gradient(135deg,#3a1f08,#744212);
-}
+    .brand{
+      display:flex;align-items:center;gap:12px;
+      min-width:0;
+    }
 
-/* HERO */
-.hero-band{
-  background:linear-gradient(135deg,#1a1208 0%,#2e1e0a 48%,#1d2f14 100%);
-  color:#fff;padding:38px 0 32px;position:relative;overflow:hidden;
-}
-.hero-band::before{
-  content:"";position:absolute;inset:0;
-  background:
-    radial-gradient(circle at 12% 55%,rgba(232,104,32,.24),transparent 40%),
-    radial-gradient(circle at 88% 30%,rgba(40,136,90,.18),transparent 36%);
-}
-.hero-inner{position:relative;z-index:1}
-.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:20px;align-items:center}
-.hero-kicker{
-  display:inline-flex;align-items:center;gap:7px;
-  padding:7px 13px;border-radius:999px;
-  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);
-  font-size:.78rem;font-weight:900;letter-spacing:.07em;
-  color:rgba(255,255,255,.82);margin-bottom:12px;text-transform:uppercase;
-}
-.hero-band h1{
-  font-family:"Playfair Display",serif;font-weight:900;
-  font-size:clamp(1.9rem,4.3vw,4.2rem);line-height:.92;
-  letter-spacing:-.02em;margin-bottom:10px;
-}
-.hero-band h1 em{
-  font-style:normal;
-  background:linear-gradient(90deg,#f8a040,#f06040);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.hero-desc{
-  color:rgba(255,255,255,.74);
-  font-size:1rem;line-height:1.68;max-width:56ch;
-}
-.hero-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
-.chip{
-  padding:8px 13px;border-radius:999px;
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);
-  font-size:.78rem;font-weight:800;color:rgba(255,255,255,.84);
-}
-.hero-card{
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
-  border-radius:28px;padding:18px;backdrop-filter:blur(10px);
-}
-.hero-card h3{font-family:"Playfair Display",serif;font-size:1.32rem;margin-bottom:8px}
-.hero-card p{font-size:.92rem;color:rgba(255,255,255,.76);line-height:1.68}
-.cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.hero-btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  padding:12px 15px;border-radius:999px;font-weight:900;font-size:.86rem;
-}
-.hero-btn.primary{background:#fff;color:var(--ink)}
-.hero-btn.soft{
-  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);color:#fff;
-}
-.hero-mob-cta{display:none}
+    .brand-mark{
+      width:46px;height:46px;border-radius:14px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--green),#1d7a5a);
+      color:#fff;font-size:1.35rem;font-weight:800;
+      box-shadow:var(--shadow-soft);
+      flex:0 0 auto;
+    }
 
-/* STATS */
-.stat-strip{background:linear-gradient(90deg,#1a1208,#2a1a08);border-bottom:1px solid rgba(255,255,255,.07)}
-.stat-inner{display:flex;overflow-x:auto;scrollbar-width:none}
-.stat-inner::-webkit-scrollbar{display:none}
-.stat-item{
-  flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:10px 24px;gap:1px;border-right:1px solid rgba(255,255,255,.07);min-width:110px;
-}
-.stat-item:last-child{border-right:none}
-.stat-num{font-family:"Playfair Display",serif;font-weight:900;font-size:1.32rem;color:#f8a040}
-.stat-lbl{
-  font-size:.62rem;font-weight:800;color:rgba(255,255,255,.46);
-  text-transform:uppercase;letter-spacing:.05em;
-}
+    .brand-text{min-width:0}
+    .brand-title{
+      font-size:1rem;font-weight:800;letter-spacing:.01em;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
+    .brand-sub{
+      font-size:.88rem;color:var(--muted);
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
 
-/* TICKER */
-.ticker{background:var(--orange);overflow:hidden;padding:7px 0}
-.ticker-track{display:flex;animation:ticker-scroll 28s linear infinite;width:max-content}
-.ticker-track:hover{animation-play-state:paused}
-.ticker-item{
-  white-space:nowrap;padding:0 22px;font-weight:900;font-size:.76rem;color:#fff;
-  letter-spacing:.04em;text-transform:uppercase;border-right:1px solid rgba(255,255,255,.24);
-}
-@keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    .top-actions{
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end;
+    }
 
-/* FILTERS */
-.filters{padding:18px 0 10px}
-.filters-shell{
-  display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;
-  background:var(--card);border:1.5px solid var(--line);border-radius:22px;
-  padding:14px;box-shadow:var(--shadow-soft);
-}
-.filter-group{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.filter-pill{
-  display:inline-flex;align-items:center;gap:8px;padding:10px 13px;border-radius:999px;
-  background:#fff;border:1.5px solid var(--line);font-weight:900;font-size:.82rem;
-}
-.filter-select{
-  appearance:none;background:#fff;border:1.5px solid var(--line);
-  border-radius:999px;padding:11px 16px;font-weight:900;color:var(--ink);
-  min-width:160px;cursor:pointer;
-}
-.filter-reset{
-  border:none;border-radius:999px;padding:11px 14px;background:#fff;
-  border:1.5px solid var(--line);font-weight:900;cursor:pointer;
-}
-.filter-reset:hover{background:#fff3df}
+    .btn{
+      appearance:none;border:0;cursor:pointer;
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      min-height:48px;padding:0 18px;border-radius:999px;
+      font-weight:800;transition:.2s ease;
+      box-shadow:var(--shadow-soft);
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn-main{
+      background:linear-gradient(135deg,var(--green),var(--green-2));
+      color:#fff;
+    }
+    .btn-soft{
+      background:#fff;color:var(--green);
+      border:1px solid rgba(12,74,54,.10);
+    }
+    .btn-gold{
+      background:linear-gradient(135deg,#f5c84c,#d7a928);
+      color:#2d2406;
+    }
 
-/* ROYAL */
-.royal-lead{padding:18px 0 6px}
-.royal-shell{
-  background:
-    radial-gradient(circle at top right,rgba(232,104,32,.09),transparent 28%),
-    radial-gradient(circle at bottom left,rgba(40,136,90,.08),transparent 26%),
-    linear-gradient(135deg,#fff9f0,#fff3e2);
-  border:1.5px solid var(--line);border-radius:28px;padding:18px;box-shadow:var(--shadow);
-}
-.royal-head{
-  display:flex;align-items:end;justify-content:space-between;gap:14px;flex-wrap:wrap;
-  margin-bottom:16px;
-}
-.royal-head h2{
-  font-family:"Playfair Display",serif;font-weight:900;font-size:1.6rem;letter-spacing:-.02em;margin-bottom:6px;
-}
-.royal-head p{color:var(--muted);font-size:.9rem;line-height:1.65;max-width:58ch}
-.royal-actions{display:flex;gap:10px;flex-wrap:wrap}
-.royal-btn{
-  border:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  padding:12px 16px;border-radius:999px;font-weight:900;font-size:.84rem;transition:.18s ease;
-}
-.royal-btn:hover{transform:translateY(-1px)}
-.royal-btn.primary{
-  background:linear-gradient(135deg,#2b1808,#5c3510);color:#fff;
-  box-shadow:0 12px 24px rgba(26,18,8,.18);
-}
-.royal-btn.soft{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
-.royal-btn.soft:hover{background:#fff3df}
-.royal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    .hero{
+      padding:26px 0 18px;
+    }
 
-/* ROYAL CARD */
-.royal-card{
-  border-radius:22px;overflow:hidden;
-  border:1px solid rgba(200,134,10,.15);
-  background:var(--dk-2);
-  box-shadow:var(--shadow-dark);
-  transition:transform .28s cubic-bezier(.23,1,.32,1),box-shadow .28s;
-  cursor:pointer;
-}
-.royal-card:hover{
-  transform:translateY(-5px) scale(1.01);
-  box-shadow:var(--shadow-dark-hover);
-  border-color:rgba(200,134,10,.3);
-}
-.royal-cover{position:relative;height:220px;background:var(--dk);overflow:hidden}
-.royal-cover img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.23,1,.32,1)}
-.royal-card:hover .royal-cover img{transform:scale(1.04)}
-.royal-gloss{
-  position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(13,10,6,.06),transparent 28%,rgba(13,10,6,.7) 100%);
-  z-index:2;
-}
-.royal-badge{
-  position:absolute;left:12px;top:12px;z-index:4;display:inline-flex;align-items:center;gap:5px;
-  padding:6px 10px;border-radius:999px;background:linear-gradient(135deg,#c8860a,#f4b840);
-  color:#0d0a06;font-size:.65rem;font-weight:900;letter-spacing:.05em;
-}
-.royal-live{
-  position:absolute;right:12px;top:12px;z-index:4;display:inline-flex;align-items:center;gap:5px;
-  padding:6px 9px;border-radius:999px;background:rgba(40,136,90,.92);
-  color:#fff;font-size:.62rem;font-weight:900;
-}
-.royal-live::before{
-  content:"";width:6px;height:6px;border-radius:50%;
-  background:#a7ffd3;animation:pg 1.4s ease-in-out infinite;
-}
-@keyframes pg{
-  0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:.4;transform:scale(.7)}
-}
-.royal-body{padding:14px 14px 15px;background:var(--dk-2)}
-.royal-kicker{
-  font-size:.66rem;font-weight:900;color:var(--gold-lt);letter-spacing:.08em;
-  text-transform:uppercase;margin-bottom:4px;opacity:.8;
-}
-.royal-title{
-  font-family:"Cormorant Garamond",serif;font-weight:600;font-size:1.18rem;
-  line-height:1.05;margin-bottom:6px;color:#fdf6ec;
-}
-.royal-text{color:rgba(253,246,236,.6);font-size:.82rem;line-height:1.58;min-height:40px}
-.royal-meta{
-  display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:10px;
-}
-.royal-loc{font-size:.7rem;font-weight:800;color:rgba(253,246,236,.45)}
-.royal-price{
-  font-size:.7rem;font-weight:900;padding:5px 10px;border-radius:999px;
-  background:rgba(200,134,10,.15);color:var(--gold-lt);border:1px solid rgba(200,134,10,.28);
-}
-.section-premium-note{margin-top:10px;color:var(--muted);font-size:.82rem;line-height:1.65}
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:18px;
+      align-items:stretch;
+    }
 
-/* TRUST */
-.trust{padding:12px 0 0}
-.trust-shell{
-  background:var(--card);border:1.5px solid var(--line);
-  border-radius:24px;padding:16px;box-shadow:var(--shadow-soft);
-}
-.trust-head{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
-.trust-head h3{font-family:"Playfair Display",serif;font-size:1.26rem}
-.trust-head p{color:var(--muted);font-size:.9rem}
-.trust-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-.trust-card{border:1px solid var(--line);border-radius:18px;padding:14px;background:#fff}
-.trust-card .icon{
-  width:42px;height:42px;border-radius:14px;display:grid;place-items:center;
-  margin-bottom:10px;background:#fff3df;border:1px solid #f2d2a6;font-size:1.1rem;
-}
-.trust-card h4{font-size:.96rem;margin-bottom:5px}
-.trust-card p{color:var(--muted);font-size:.84rem;line-height:1.58}
+    .hero-card{
+      position:relative;overflow:hidden;
+      background:linear-gradient(135deg,#0f4f3b 0%, #166b50 100%);
+      color:#fff;
+      border-radius:32px;
+      padding:28px;
+      box-shadow:var(--shadow);
+      min-height:520px;
+    }
 
-/* CATEGORIES */
-.cats-section{padding:14px 0 0}
-.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
-.section-head h2{font-family:"Playfair Display",serif;font-weight:900;font-size:1.55rem;letter-spacing:-.02em}
-.section-head p{color:var(--muted);font-size:.88rem}
-.rail-controls{display:flex;gap:8px}
-.arr{
-  width:42px;height:42px;border-radius:12px;background:#fff;border:2px solid var(--line);
-  display:grid;place-items:center;cursor:pointer;font-size:1.08rem;font-weight:700;transition:all .18s;
-}
-.arr:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
-.rail-wrap{overflow:hidden;position:relative}
-.rail-wrap::before,.rail-wrap::after{
-  content:"";position:absolute;top:0;bottom:0;width:32px;z-index:2;pointer-events:none;
-}
-.rail-wrap::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
-.rail-wrap::after{right:0;background:linear-gradient(270deg,var(--bg),transparent)}
-.cat-rail{
-  display:flex;gap:10px;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none;
-  padding:8px 4px 14px;cursor:grab;
-}
-.cat-rail::-webkit-scrollbar{display:none}
-.cat-rail.grabbing{cursor:grabbing;scroll-behavior:auto}
-.cat-tile{
-  flex-shrink:0;width:124px;border-radius:18px;overflow:hidden;border:2.5px solid transparent;
-  cursor:pointer;transition:transform .22s,box-shadow .22s,border-color .18s;
-  background:#fff;box-shadow:0 4px 14px rgba(26,18,8,.09);user-select:none;
-}
-.cat-tile:hover{transform:translateY(-4px) scale(1.04);box-shadow:var(--shadow)}
-.cat-tile.active{
-  border-color:var(--orange);
-  box-shadow:0 0 0 3px rgba(232,104,32,.2),var(--shadow);
-  transform:translateY(-3px) scale(1.03);
-}
-.cat-img{
-  height:84px;display:flex;align-items:center;justify-content:center;
-  font-size:2.1rem;position:relative;overflow:hidden;
-}
-.cat-bg-txt{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
-  opacity:.1;font-size:.85rem;letter-spacing:1px;line-height:1.5;padding:4px;word-break:break-all;pointer-events:none;
-}
-.cat-icon{position:relative;z-index:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.22))}
-.cat-body{padding:8px 10px 10px}
-.cat-name{font-family:"Playfair Display",serif;font-weight:700;font-size:.84rem;margin-bottom:3px;line-height:1.2}
-.cat-count{font-size:.68rem;font-weight:800;color:var(--muted);letter-spacing:.02em}
-.cat-count span{
-  display:inline-flex;align-items:center;justify-content:center;
-  background:var(--orange);color:#fff;min-width:18px;height:18px;border-radius:50%;
-  font-size:.6rem;margin-left:4px;padding:0 4px;
-}
+    .hero-card::before{
+      content:"";
+      position:absolute;inset:auto auto -70px -70px;
+      width:220px;height:220px;border-radius:50%;
+      background:rgba(255,255,255,.08);
+    }
 
-/* PANEL */
-.vendor-panel{
-  max-height:0;overflow:hidden;
-  transition:max-height .55s cubic-bezier(.4,0,.2,1),opacity .4s,margin .4s;
-  opacity:0;margin-top:0;
-}
-.vendor-panel.open{max-height:7000px;opacity:1;margin-top:20px}
-.vendor-panel-inner{
-  background:var(--dk-2);
-  border:1px solid var(--dk-line-lt);
-  border-radius:28px;overflow:hidden;
-  box-shadow:var(--shadow-dark);
-}
-.vendor-panel-inner::before{
-  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.02;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-.panel-header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:18px 22px 16px;border-bottom:1px solid var(--dk-line-lt);
-  flex-wrap:wrap;gap:10px;background:rgba(255,255,255,.02);
-  position:relative;z-index:1;
-}
-.panel-header::after{
-  content:"";position:absolute;bottom:0;left:22px;right:22px;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(200,134,10,.25),transparent);
-}
-.panel-title{display:flex;align-items:center;gap:12px}
-.panel-title .icon{font-size:1.6rem;filter:drop-shadow(0 4px 12px rgba(200,134,10,.3))}
-.panel-title h3{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:1.3rem;color:#fdf6ec}
-.panel-title p{color:rgba(253,246,236,.5);font-size:.8rem;margin-top:2px}
-.panel-close{
-  width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.05);
-  border:1px solid var(--dk-line-lt);cursor:pointer;font-size:.9rem;
-  display:grid;place-items:center;transition:.2s;color:#fdf6ec;
-}
-.panel-close:hover{background:var(--red);border-color:var(--red)}
+    .hero-card::after{
+      content:"";
+      position:absolute;top:-50px;right:-50px;
+      width:180px;height:180px;border-radius:50%;
+      background:rgba(245,200,76,.18);
+    }
 
-.vendor-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;
-  padding:20px;position:relative;z-index:1;
-}
+    .hero-copy{
+      position:relative;z-index:1;
+      max-width:640px;
+    }
 
-.vendor{
-  border-radius:20px;overflow:hidden;
-  border:1px solid rgba(200,134,10,.1);
-  background:rgba(255,255,255,.03);
-  box-shadow:0 8px 32px rgba(0,0,0,.4);
-  transition:transform .28s cubic-bezier(.23,1,.32,1),box-shadow .28s,border-color .2s;
-  cursor:pointer;
-}
-.vendor:hover{
-  transform:translateY(-5px) scale(1.01);
-  box-shadow:var(--shadow-dark-hover);
-  border-color:rgba(200,134,10,.28);
-}
-.vendor-top{height:175px;position:relative;overflow:hidden;background:var(--dk)}
-.vendor-top img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.23,1,.32,1)}
-.vendor:hover .vendor-top img{transform:scale(1.05)}
-.vendor-top-gradient{
-  position:absolute;inset:0;z-index:2;
-  background:linear-gradient(to bottom,rgba(13,10,6,.05),rgba(13,10,6,.5) 100%);
-}
-.vendor-example{
-  position:absolute;left:10px;top:10px;z-index:4;
-  background:rgba(232,104,32,.9);color:#fff;padding:5px 9px;border-radius:999px;font-size:.6rem;font-weight:900;
-}
-.vendor-live{
-  position:absolute;right:10px;top:10px;z-index:4;display:flex;align-items:center;gap:4px;
-  background:rgba(40,136,90,.92);color:#fff;padding:5px 8px;border-radius:999px;font-size:.6rem;font-weight:900;
-}
-.vendor-live::before{
-  content:"";width:6px;height:6px;border-radius:50%;
-  background:#8ff7c5;animation:pg 1.4s ease-in-out infinite;
-}
-.vendor-royal{
-  position:absolute;left:10px;bottom:10px;z-index:4;
-  display:inline-flex;align-items:center;gap:5px;
-  background:linear-gradient(135deg,#c8860a,#f4b840);color:#0d0a06;
-  padding:5px 9px;border-radius:999px;font-size:.6rem;font-weight:900;
-}
-.vendor-body{padding:14px 14px 15px}
-.vendor-name{
-  font-family:"Cormorant Garamond",serif;font-weight:600;font-size:1.1rem;
-  line-height:1.08;margin-bottom:5px;color:#fdf6ec;
-}
-.vendor-what{font-size:.8rem;color:rgba(253,246,236,.55);line-height:1.55;margin-bottom:10px;min-height:42px}
-.vendor-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
-.vendor-loc{font-size:.7rem;font-weight:800;color:rgba(253,246,236,.4)}
-.vendor-price{
-  font-size:.7rem;font-weight:900;padding:4px 9px;border-radius:999px;
-  background:rgba(200,134,10,.15);color:var(--gold-lt);border:1px solid rgba(200,134,10,.25);
-}
-.vendor-cta{display:flex;gap:7px;margin-top:11px}
-.vendor-btn{
-  flex:1;padding:9px 10px;border-radius:11px;font-size:.74rem;font-weight:900;border:none;cursor:pointer;transition:.18s;
-}
-.vendor-btn.primary{
-  background:linear-gradient(135deg,#e86820,#c83830);color:#fff;
-  box-shadow:0 4px 14px rgba(232,104,32,.3);
-}
-.vendor-btn.primary:hover{filter:brightness(1.1)}
-.vendor-btn.ghost{
-  background:rgba(255,255,255,.06);color:#fdf6ec;border:1px solid var(--dk-line-lt);
-}
-.vendor-btn.ghost:hover{background:rgba(255,255,255,.12)}
+    .hero h1{
+      margin:14px 0 12px;
+      font-size:clamp(2rem,4vw,4rem);
+      line-height:.98;
+      letter-spacing:-.03em;
+    }
 
-.empty-state{text-align:center;padding:40px 20px;color:rgba(253,246,236,.5);grid-column:1/-1}
-.empty-state .big{font-size:2.8rem;margin-bottom:10px}
-.empty-state p{font-size:.9rem;line-height:1.6}
+    .hero p{
+      margin:0;
+      max-width:620px;
+      color:rgba(255,255,255,.86);
+      font-size:1.03rem;
+      line-height:1.6;
+    }
 
-/* CTA BAND */
-.cta-band{
-  margin-top:24px;background:linear-gradient(135deg,#fffaf3,#fff4e4);
-  border:2px solid var(--line);border-radius:28px;padding:18px;box-shadow:var(--shadow);
-}
-.cta-band-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:14px;align-items:center}
-.cta-band h3{font-family:"Playfair Display",serif;font-size:1.38rem;margin-bottom:8px}
-.cta-band p{color:var(--muted);line-height:1.7}
-.cta-band-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.cta-pill{
-  display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;
-  background:#fff;border:1.5px solid var(--line);font-weight:900;font-size:.84rem;
-}
-.cta-main{display:flex;flex-direction:column;gap:10px}
-.big-cta{
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  padding:16px 18px;border-radius:18px;background:var(--g-fire);
-  color:#fff;font-weight:900;font-size:.98rem;box-shadow:0 14px 28px rgba(232,104,32,.25);
-}
-.big-cta.soft{
-  background:#fff;color:var(--ink);border:1.5px solid var(--line);box-shadow:none;
-}
+    .hero-badges{
+      display:flex;flex-wrap:wrap;gap:10px;
+      margin:18px 0 0;
+    }
 
-/* FAQ */
-.faq-section{padding:18px 0 4px}
-.faq-shell{
-  background:var(--card);border:1.5px solid var(--line);
-  border-radius:24px;padding:16px;box-shadow:var(--shadow-soft);
-}
-.faq-head{font-family:"Playfair Display",serif;font-size:1.26rem;font-weight:900;margin-bottom:14px}
-.faq-item{border-bottom:1px solid var(--line);overflow:hidden}
-.faq-item:last-child{border-bottom:none}
-.faq-q{
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
-  padding:14px 2px;cursor:pointer;font-weight:900;font-size:.9rem;user-select:none;
-}
-.faq-q:hover{color:var(--orange)}
-.faq-arr{
-  flex:0 0 auto;width:28px;height:28px;border-radius:8px;background:#fff3df;
-  display:flex;align-items:center;justify-content:center;font-size:.82rem;transition:transform .28s,background .22s;
-}
-.faq-item.open .faq-arr{transform:rotate(180deg);background:var(--orange);color:#fff}
-.faq-a{
-  max-height:0;overflow:hidden;transition:max-height .38s ease,padding .28s;
-  color:var(--muted);font-size:.86rem;line-height:1.65;padding:0 2px;
-}
-.faq-item.open .faq-a{max-height:200px;padding-bottom:14px}
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 14px;border-radius:999px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.14);
+      color:#fff;font-weight:700;font-size:.92rem;
+    }
 
-/* FLOAT */
-.float-cta{position:fixed;right:14px;bottom:14px;z-index:120;display:flex;flex-direction:column;gap:10px}
-.float-btn{
-  display:flex;align-items:center;justify-content:center;gap:8px;min-width:220px;
-  padding:13px 16px;border-radius:999px;color:#fff;font-weight:900;box-shadow:0 16px 28px rgba(0,0,0,.18);
-}
-.float-btn.wa{background:#0b8f59}
-.float-btn.module{background:var(--g-fire)}
+    .hero-actions{
+      display:flex;flex-wrap:wrap;gap:12px;
+      margin-top:22px;
+    }
 
-/* FOOTER */
-footer{padding:18px 0;margin-top:24px;border-top:2px solid var(--line)}
-.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
-.footer-brand{font-family:"Playfair Display",serif;font-weight:900;font-size:1.1rem}
-.footer-sub{color:var(--muted);font-size:.74rem;margin-top:3px}
-.footer-links{display:flex;gap:14px;font-weight:800;font-size:.82rem;flex-wrap:wrap}
-.footer-links a{color:var(--orange)}
-.footer-links a:hover{text-decoration:underline}
+    .hero-mini-grid{
+      margin-top:24px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+    }
 
-/* RESPONSIVE */
-@media(max-width:980px){
-  .topbar-inner,.cta-band-grid,.filters-shell{grid-template-columns:1fr}
-  .top-actions{justify-content:flex-start}
-  .trust-grid{grid-template-columns:1fr 1fr}
-  .royal-grid{grid-template-columns:1fr 1fr}
-}
-@media(max-width:680px){
-  .hero-band{padding:16px 0 14px}
-  .hero-kicker{font-size:.68rem;padding:5px 10px;margin-bottom:8px}
-  .hero-band h1{font-size:clamp(1.52rem,5.8vw,2rem);margin-bottom:7px;line-height:.96}
-  .hero-desc{display:none}
-  .hero-chips{margin-top:9px;gap:5px}
-  .chip{padding:5px 10px;font-size:.69rem}
-  .hero-card{display:none}
-  .hero-grid{grid-template-columns:1fr;gap:0}
-  .hero-mob-cta{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
-  .hero-mob-cta .hero-btn{padding:10px 14px;font-size:.82rem}
-}
-@media(max-width:700px){
-  .cat-tile{width:104px}
-  .cat-img{height:70px;font-size:1.8rem}
-  .vendor-grid,.trust-grid{grid-template-columns:1fr 1fr}
-  .panel-header{padding:12px 14px}
-  .float-cta{left:12px;right:12px}
-  .float-btn{min-width:0;width:100%}
-  .stat-item{min-width:96px;padding:8px 14px}
-  .stat-num{font-size:1.1rem}
-  .royal-grid{grid-template-columns:1fr}
-}
-@media(max-width:440px){
-  .vendor-grid,.trust-grid{grid-template-columns:1fr}
-  .topbar-inner{grid-template-columns:1fr}
-  .top-actions{display:none}
-}
-</style>
+    .hero-mini{
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:20px;
+      padding:16px;
+      backdrop-filter:blur(10px);
+    }
+
+    .hero-mini strong{
+      display:block;
+      font-size:1.15rem;
+      margin-bottom:4px;
+    }
+
+    .hero-mini span{
+      color:rgba(255,255,255,.78);
+      font-size:.9rem;
+    }
+
+    .hero-gallery{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      grid-template-rows:1.15fr .85fr;
+      gap:14px;
+      min-height:520px;
+    }
+
+    .photo-card{
+      position:relative;overflow:hidden;
+      border-radius:28px;
+      background:#d9d9d9;
+      box-shadow:var(--shadow);
+      min-height:160px;
+    }
+
+    .photo-card.big{grid-column:1 / span 2}
+
+    .photo-card img{
+      width:100%;height:100%;object-fit:cover;
+      transition:transform .6s ease;
+    }
+
+    .photo-card:hover img{transform:scale(1.05)}
+
+    .photo-overlay{
+      position:absolute;left:0;right:0;bottom:0;
+      padding:18px;
+      background:linear-gradient(180deg,transparent,rgba(0,0,0,.60));
+      color:#fff;
+    }
+
+    .photo-overlay strong{
+      display:block;
+      font-size:1.05rem;
+      margin-bottom:4px;
+    }
+
+    .photo-overlay span{
+      font-size:.92rem;color:rgba(255,255,255,.86);
+    }
+
+    .quick-strip{
+      padding:10px 0 0;
+    }
+
+    .quick-scroll{
+      display:flex;gap:12px;overflow:auto;padding-bottom:6px;
+      scrollbar-width:none;
+    }
+    .quick-scroll::-webkit-scrollbar{display:none}
+
+    .quick-card{
+      flex:0 0 220px;
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(19,38,29,.08);
+      border-radius:22px;
+      padding:16px;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .quick-card strong{
+      display:block;margin-bottom:6px;font-size:1rem;
+    }
+
+    .quick-card span{
+      color:var(--muted);font-size:.94rem;line-height:1.45;
+    }
+
+    .panel{
+      background:rgba(255,255,255,.84);
+      border:1px solid rgba(19,38,29,.08);
+      border-radius:28px;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .section-head{
+      display:flex;align-items:end;justify-content:space-between;gap:14px;
+      margin-bottom:16px;
+    }
+
+    .section-head h2{
+      margin:0;
+      font-size:clamp(1.55rem,2.4vw,2.25rem);
+      line-height:1.05;
+      letter-spacing:-.02em;
+    }
+
+    .section-head p{
+      margin:8px 0 0;color:var(--muted);max-width:680px;line-height:1.6;
+    }
+
+    .gallery-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+    }
+
+    .gallery-tile{
+      position:relative;
+      overflow:hidden;
+      border-radius:24px;
+      background:#ddd;
+      min-height:290px;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .gallery-tile img{
+      width:100%;height:100%;object-fit:cover;
+      transition:transform .55s ease;
+    }
+
+    .gallery-tile:hover img{transform:scale(1.06)}
+
+    .gallery-tile .layer{
+      position:absolute;inset:auto 0 0 0;
+      padding:16px;
+      background:linear-gradient(180deg,transparent,rgba(0,0,0,.65));
+      color:#fff;
+    }
+
+    .gallery-tile .layer strong{
+      display:block;font-size:1.02rem;margin-bottom:4px;
+    }
+
+    .gallery-tile .layer span{
+      color:rgba(255,255,255,.84);font-size:.92rem;
+    }
+
+    .story-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+
+    .story-box{
+      padding:22px;
+      border-radius:26px;
+      background:#fff;
+      border:1px solid rgba(19,38,29,.08);
+      box-shadow:var(--shadow-soft);
+    }
+
+    .story-box h3{
+      margin:0 0 10px;
+      font-size:1.24rem;
+    }
+
+    .story-box p{
+      margin:0;color:var(--muted);line-height:1.68;
+    }
+
+    .products{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+
+    .product{
+      overflow:hidden;
+      background:#fff;
+      border:1px solid rgba(19,38,29,.08);
+      border-radius:26px;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .product-media{
+      position:relative;
+      aspect-ratio:1 / 1;
+      overflow:hidden;
+      background:#e8e3d8;
+    }
+
+    .product-media img{
+      width:100%;height:100%;object-fit:cover;
+      transition:transform .55s ease;
+    }
+    .product:hover .product-media img{transform:scale(1.05)}
+
+    .tag{
+      position:absolute;left:14px;top:14px;
+      display:inline-flex;align-items:center;
+      min-height:34px;padding:0 12px;border-radius:999px;
+      background:rgba(255,255,255,.92);
+      color:var(--green);
+      font-size:.82rem;font-weight:800;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .product-body{padding:18px}
+    .product-title{
+      display:flex;align-items:start;justify-content:space-between;gap:10px;
+      margin-bottom:10px;
+    }
+
+    .product-title strong{
+      font-size:1.08rem;line-height:1.2;
+    }
+
+    .price{
+      flex:0 0 auto;
+      color:var(--green);font-weight:900;font-size:1rem;
+      background:rgba(12,74,54,.08);
+      padding:8px 10px;border-radius:14px;
+    }
+
+    .product p{
+      margin:0 0 14px;
+      color:var(--muted);line-height:1.58;font-size:.96rem;
+    }
+
+    .product-actions{
+      display:flex;gap:10px;flex-wrap:wrap;
+    }
+
+    .product-actions a{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-height:42px;padding:0 14px;border-radius:999px;
+      font-size:.92rem;font-weight:800;
+      border:1px solid rgba(12,74,54,.10);
+      background:#fff;
+      color:var(--green);
+    }
+
+    .product-actions a.main{
+      border:0;
+      background:linear-gradient(135deg,var(--green),var(--green-2));
+      color:#fff;
+    }
+
+    .contact-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+    }
+
+    .contact-main{
+      padding:24px;
+      border-radius:28px;
+      background:linear-gradient(135deg,#0f4f3b 0%, #1d7a5a 100%);
+      color:#fff;
+      box-shadow:var(--shadow);
+      position:relative;overflow:hidden;
+    }
+
+    .contact-main::after{
+      content:"";
+      position:absolute;right:-60px;bottom:-60px;
+      width:180px;height:180px;border-radius:50%;
+      background:rgba(255,255,255,.08);
+    }
+
+    .contact-main h3{
+      margin:0 0 12px;font-size:1.6rem;line-height:1.05;
+    }
+
+    .contact-main p{
+      margin:0;color:rgba(255,255,255,.86);line-height:1.65;
+      max-width:620px;
+    }
+
+    .contact-actions{
+      display:flex;flex-wrap:wrap;gap:12px;
+      margin-top:20px;
+    }
+
+    .contact-side{
+      display:grid;gap:14px;
+    }
+
+    .info-card{
+      padding:18px;
+      border-radius:24px;
+      background:#fff;
+      border:1px solid rgba(19,38,29,.08);
+      box-shadow:var(--shadow-soft);
+    }
+
+    .info-label{
+      display:block;
+      color:var(--muted);
+      font-size:.88rem;
+      margin-bottom:6px;
+    }
+
+    .info-value{
+      font-weight:800;
+      font-size:1.02rem;
+      line-height:1.4;
+    }
+
+    footer{
+      padding:28px 0 42px;
+      color:var(--muted);
+    }
+
+    .footer-box{
+      display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
+      padding:18px 20px;
+      border:1px solid rgba(19,38,29,.08);
+      border-radius:24px;
+      background:rgba(255,255,255,.72);
+      box-shadow:var(--shadow-soft);
+    }
+
+    .footer-box strong{color:var(--ink)}
+
+    @media (max-width:1080px){
+      .hero-grid,
+      .story-grid,
+      .contact-grid{grid-template-columns:1fr}
+      .gallery-grid{grid-template-columns:repeat(2,1fr)}
+      .products{grid-template-columns:repeat(2,1fr)}
+    }
+
+    @media (max-width:760px){
+      .wrap{width:min(var(--max),calc(100% - 18px))}
+      .topbar-inner{min-height:64px}
+      .top-actions{gap:8px}
+      .btn{min-height:44px;padding:0 15px}
+      .hero-card{padding:22px;min-height:auto;border-radius:26px}
+      .hero-gallery{min-height:auto;grid-template-columns:1fr 1fr}
+      .photo-card.big{min-height:240px}
+      .hero-mini-grid{grid-template-columns:1fr}
+      .gallery-grid,
+      .products{grid-template-columns:1fr}
+      .quick-card{flex-basis:82%}
+      .section{padding:22px 0}
+      .panel{border-radius:24px}
+    }
+  </style>
 </head>
 <body>
 
-<header class="topbar">
-  <div class="wrap topbar-inner">
-    <div class="brand-stack">
-      <a class="back-site-chip" href="https://digiylyfe.com/" target="_blank" rel="noopener">← Retour au site</a>
-      <a class="brand" href="#top" aria-label="Retour en haut de page">
-        <span class="brand-icon" id="brandIcon">🛍️</span>
-        <span>DIGIY MARKET<small>Les boutiques du quotidien</small></span>
+  <div class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="./index.html" aria-label="Retour à l'accueil">
+        <div class="brand-mark">D</div>
+        <div class="brand-text">
+          <div class="brand-title">DIGIY MARKET</div>
+          <div class="brand-sub">Une boutique vivante, claire et directe</div>
+        </div>
       </a>
-      <div class="live-count">Boutiques inspiration <strong id="totalCount">0</strong></div>
-    </div>
 
-    <div class="top-search">
-      <input id="topSearchInput" type="text" placeholder="Chercher une boutique, une ville, un besoin…"/>
-      <button id="topSearchBtn" type="button" aria-label="Lancer la recherche">🔍</button>
-    </div>
-
-    <div class="top-actions">
-      <button class="royal-top-chip" id="royalTopBtn" type="button">👑 Boutiques ROYAL</button>
-      <a class="btn-top soft" id="waTopBtn" href="#" target="_blank" rel="noopener">💬 WhatsApp DIGIY</a>
-      <a class="btn-top primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Ouvrir ma boutique</a>
-    </div>
-  </div>
-</header>
-
-<section class="hero-band" id="top">
-  <div class="wrap hero-inner">
-    <div class="hero-grid">
-      <div>
-        <div class="hero-kicker">🌍 DIGIYLYFE ∞ · Sénégal · Afrique</div>
-        <h1>Les boutiques qui <em>respirent</em><br/>comme le terrain.</h1>
-        <p class="hero-desc">Univers qui glissent, vitrines qui donnent envie, contact direct, ouverture boutique visible. Ici, on ne montre pas juste des cases. On montre une présence.</p>
-        <div class="hero-chips">
-          <span class="chip">🛒 Neuf</span>
-          <span class="chip">♻️ Deuxième main</span>
-          <span class="chip">👗 Vêtements</span>
-          <span class="chip">🌸 Parfum</span>
-          <span class="chip">✂️ Coiffure</span>
-          <span class="chip">💅 Onglerie</span>
-          <span class="chip">🏺 Brocante</span>
-          <span class="chip">🧺 Bana-bana</span>
-        </div>
-        <div class="hero-mob-cta">
-          <a class="hero-btn primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🚀 Ouvrir ma boutique</a>
-          <a id="heroWaBtnMob" class="hero-btn soft" href="#" target="_blank" rel="noopener">💬 DIGIY</a>
-        </div>
-      </div>
-
-      <div class="hero-card">
-        <h3>Une vitrine qui attire</h3>
-        <p>Toutes les boutiques inspiration servent à guider les commerçants. Le bouton <strong>Ouvrir ma boutique</strong> pointe directement vers ton entrée officielle.</p>
-        <div class="cta-row">
-          <a class="hero-btn primary" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🚀 Ouvrir ma boutique</a>
-          <a id="heroWaBtn" class="hero-btn soft" href="#" target="_blank" rel="noopener">💬 Parler à DIGIY</a>
-        </div>
+      <div class="top-actions">
+        <a class="btn btn-soft" href="./index.html">← Retour</a>
+        <a class="btn btn-main" href="https://wa.me/221771342889?text=Bonjour%20DIGIY%20MARKET%2C%20je%20veux%20voir%20les%20articles.">WhatsApp</a>
       </div>
     </div>
   </div>
-</section>
 
-<div class="stat-strip">
-  <div class="wrap">
-    <div class="stat-inner">
-      <div class="stat-item"><div class="stat-num" id="statVendeurs">0</div><div class="stat-lbl">Boutiques inspiration</div></div>
-      <div class="stat-item"><div class="stat-num">12</div><div class="stat-lbl">Univers</div></div>
-      <div class="stat-item"><div class="stat-num">0%</div><div class="stat-lbl">Commission</div></div>
-      <div class="stat-item"><div class="stat-num">Direct</div><div class="stat-lbl">Paiement pro</div></div>
-      <div class="stat-item"><div class="stat-num">∞</div><div class="stat-lbl">DIGIYLYFE</div></div>
-    </div>
-  </div>
-</div>
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-card">
+          <div class="hero-copy">
+            <span class="pill">🛍️ Boutique en lumière</span>
+            <h1>Une boutique qui respire la vie.</h1>
+            <p>
+              Ici, on ne montre pas juste des produits. On montre une ambiance, une présence,
+              une boutique qui donne envie d’entrer, de regarder, d’écrire et d’acheter.
+            </p>
 
-<div class="ticker">
-  <div class="ticker-track">
-    <span class="ticker-item">🛍️ DIGIY MARKET</span><span class="ticker-item">🌍 Sénégal</span><span class="ticker-item">✂️ Coiffure</span><span class="ticker-item">💅 Onglerie</span><span class="ticker-item">🧺 Bana-bana</span><span class="ticker-item">🏺 Brocante</span><span class="ticker-item">👗 Vêtements</span><span class="ticker-item">🌸 Parfum</span><span class="ticker-item">📱 Téléphones</span><span class="ticker-item">🥜 Alimentaire</span><span class="ticker-item">♻️ Deuxième main</span><span class="ticker-item">0% Commission</span><span class="ticker-item">💳 Paiement direct</span><span class="ticker-item">🔥 Ouvrir ma boutique</span>
-    <span class="ticker-item">🛍️ DIGIY MARKET</span><span class="ticker-item">🌍 Sénégal</span><span class="ticker-item">✂️ Coiffure</span><span class="ticker-item">💅 Onglerie</span><span class="ticker-item">🧺 Bana-bana</span><span class="ticker-item">🏺 Brocante</span><span class="ticker-item">👗 Vêtements</span><span class="ticker-item">🌸 Parfum</span><span class="ticker-item">📱 Téléphones</span><span class="ticker-item">🥜 Alimentaire</span><span class="ticker-item">♻️ Deuxième main</span><span class="ticker-item">0% Commission</span><span class="ticker-item">💳 Paiement direct</span><span class="ticker-item">🔥 Ouvrir ma boutique</span>
-  </div>
-</div>
+            <div class="hero-badges">
+              <span class="hero-badge">📍 Terrain local</span>
+              <span class="hero-badge">💬 Contact direct</span>
+              <span class="hero-badge">🌞 Couleurs vivantes</span>
+            </div>
 
-<section class="filters">
-  <div class="wrap">
-    <div class="filters-shell">
-      <div class="filter-group">
-        <span class="filter-pill">🎯 Hall MARKET</span>
-        <span class="filter-pill">🧭 Boutiques inspiration</span>
-        <span class="filter-pill">🔥 Ouverture visible</span>
-      </div>
-      <select id="cityFilter" class="filter-select"><option value="">Toutes les villes</option></select>
-      <button id="resetFilters" class="filter-reset" type="button">Réinitialiser</button>
-    </div>
-  </div>
-</section>
+            <div class="hero-actions">
+              <a class="btn btn-gold" href="#collection">Voir la collection</a>
+              <a class="btn btn-soft" href="#contact">Parler à la boutique</a>
+            </div>
 
-<section class="royal-lead" id="royalLead">
-  <div class="wrap">
-    <div class="royal-shell">
-      <div class="royal-head">
-        <div>
-          <h2>👑 Sélection ROYAL</h2>
-          <p>Ici, on met les vitrines premium en avant : plus de style, plus de matière, plus de désir, plus d’inspiration. C’est la locomotive visuelle du marché.</p>
-        </div>
-        <div class="royal-actions">
-          <button class="royal-btn primary" id="btnRoyalOnly" type="button">👑 Rassembler les ROYAL</button>
-          <button class="royal-btn soft" id="btnRoyalReset" type="button">🌍 Revenir au hall complet</button>
-        </div>
-      </div>
-      <div class="royal-grid" id="royalSpotlightGrid"></div>
-      <div class="section-premium-note">Les vitrines ROYAL tirent toute la façade vers le haut, inspirent les futurs abonnés et donnent un parfum plus magazine au marché.</div>
-    </div>
-  </div>
-</section>
-
-<section class="trust">
-  <div class="wrap">
-    <div class="trust-shell">
-      <div class="trust-head">
-        <div>
-          <h3>Ils se reconnaissent ici</h3>
-          <p>Bloc vitrine pour rassurer, inspirer et montrer la portée terrain.</p>
-        </div>
-      </div>
-      <div class="trust-grid">
-        <article class="trust-card"><div class="icon">🏪</div><h4>Boutiques terrain</h4><p>Présence simple, visible et compréhensible dès le premier regard.</p></article>
-        <article class="trust-card"><div class="icon">🧺</div><h4>Bana-bana & mobile</h4><p>Présence légère, rapide à poser, prête à circuler.</p></article>
-        <article class="trust-card"><div class="icon">💇</div><h4>Beauté & service</h4><p>Coiffure, onglerie, soin, tout peut respirer dans une vraie boutique.</p></article>
-        <article class="trust-card"><div class="icon">📍</div><h4>Présence locale</h4><p>Ville, zone, repère terrain et visibilité orientée action.</p></article>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="cats-section">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <h2>Les univers du marché</h2>
-        <p>Clique sur un pavé → les boutiques s’ouvrent</p>
-      </div>
-      <div class="rail-controls">
-        <button class="arr" id="arrL" type="button">‹</button>
-        <button class="arr" id="arrR" type="button">›</button>
-      </div>
-    </div>
-
-    <div class="rail-wrap">
-      <div class="cat-rail" id="catRail">
-        <div class="cat-tile" data-cat="neuf"><div class="cat-img" style="background:linear-gradient(135deg,#ffeaaa,#ffd070)"><span class="cat-bg-txt">⭐🆕📦✨🛒⭐🆕📦✨🛒⭐🆕📦✨🛒⭐🆕📦</span><span class="cat-icon">🛒</span></div><div class="cat-body"><div class="cat-name">Neuf</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="deuxiemain"><div class="cat-img" style="background:linear-gradient(135deg,#c8deff,#90b8ff)"><span class="cat-bg-txt">♻️💡🔄💎♻️💡🔄💎♻️💡🔄💎♻️💡🔄</span><span class="cat-icon">♻️</span></div><div class="cat-body"><div class="cat-name">Deuxième main</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="vetements"><div class="cat-img" style="background:linear-gradient(135deg,#ffd0e0,#ffaac8)"><span class="cat-bg-txt">👗👕👖🧣👗👕👖🧣👗👕👖🧣👗👕👖</span><span class="cat-icon">👗</span></div><div class="cat-body"><div class="cat-name">Vêtements</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="parfum"><div class="cat-img" style="background:linear-gradient(135deg,#eadfff,#d4c2ff)"><span class="cat-bg-txt">🌸✨💜🌺🌸✨💜🌺🌸✨💜🌺🌸✨💜</span><span class="cat-icon">🌸</span></div><div class="cat-body"><div class="cat-name">Parfum</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="coiffeur"><div class="cat-img" style="background:linear-gradient(135deg,#dbfff6,#b9f1e0)"><span class="cat-bg-txt">✂️💈🪒💇✂️💈🪒💇✂️💈🪒💇✂️💈🪒</span><span class="cat-icon">✂️</span></div><div class="cat-body"><div class="cat-name">Coiffure</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="onglerie"><div class="cat-img" style="background:linear-gradient(135deg,#ffd0e0,#ffb8d0)"><span class="cat-bg-txt">💅💎✨🌸💅💎✨🌸💅💎✨🌸💅💎✨</span><span class="cat-icon">💅</span></div><div class="cat-body"><div class="cat-name">Onglerie</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="brocante"><div class="cat-img" style="background:linear-gradient(135deg,#f4ead7,#ead6b2)"><span class="cat-bg-txt">🪑🏺🖼️🪞🪑🏺🖼️🪞🪑🏺🖼️🪞🪑🏺</span><span class="cat-icon">🏺</span></div><div class="cat-body"><div class="cat-name">Brocante</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="banabana"><div class="cat-img" style="background:linear-gradient(135deg,#ffe0cb,#ffc391)"><span class="cat-bg-txt">🧺🛒🏪🎪🧺🛒🏪🎪🧺🛒🏪🎪🧺🛒</span><span class="cat-icon">🧺</span></div><div class="cat-body"><div class="cat-name">Bana-bana</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="quotidien"><div class="cat-img" style="background:linear-gradient(135deg,#dbf5ea,#bfe8d4)"><span class="cat-bg-txt">🏠🧴🥫🧹🏠🧴🥫🧹🏠🧴🥫🧹🏠🧴</span><span class="cat-icon">🏠</span></div><div class="cat-body"><div class="cat-name">Quotidien</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="phones"><div class="cat-img" style="background:linear-gradient(135deg,#c8deff,#90b8ff)"><span class="cat-bg-txt">📱💻⌨️🖥️📱💻⌨️🖥️📱💻⌨️🖥️📱💻</span><span class="cat-icon">📱</span></div><div class="cat-body"><div class="cat-name">Téléphones</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="alimentaire"><div class="cat-img" style="background:linear-gradient(135deg,#ffeaaa,#ffd070)"><span class="cat-bg-txt">🥜🌽🥘🫘🥜🌽🥘🫘🥜🌽🥘🫘🥜🌽</span><span class="cat-icon">🥜</span></div><div class="cat-body"><div class="cat-name">Alimentaire</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
-        <div class="cat-tile" data-cat="chaussures"><div class="cat-img" style="background:linear-gradient(135deg,#ffe0cb,#ffc391)"><span class="cat-bg-txt">👟👠👞🥿👟👠👞🥿👟👠👞🥿👟👠</span><span class="cat-icon">👟</span></div><div class="cat-body"><div class="cat-name">Chaussures</div><div class="cat-count">Boutiques<span>0</span></div></div></div>
-      </div>
-    </div>
-
-    <div class="vendor-panel" id="vendorPanel">
-      <div class="vendor-panel-inner" style="position:relative;">
-        <div class="panel-header">
-          <div class="panel-title">
-            <span class="icon" id="panelIcon">🛒</span>
-            <div>
-              <h3 id="panelTitle">Univers</h3>
-              <p id="panelSub">Boutiques inspiration</p>
+            <div class="hero-mini-grid">
+              <div class="hero-mini">
+                <strong>Photos vraies</strong>
+                <span>Plus de relief, plus de matière, plus de chaleur visuelle.</span>
+              </div>
+              <div class="hero-mini">
+                <strong>Lecture simple</strong>
+                <span>On comprend vite quoi vendre, quoi montrer, où cliquer.</span>
+              </div>
+              <div class="hero-mini">
+                <strong>WhatsApp direct</strong>
+                <span>Le client ne se perd pas. Il voit, il aime, il écrit.</span>
+              </div>
             </div>
           </div>
-          <button class="panel-close" id="panelClose" type="button">✕</button>
         </div>
-        <div class="vendor-grid" id="vendorGrid"></div>
-      </div>
-    </div>
 
-    <div class="cta-band">
-      <div class="cta-band-grid">
-        <div>
-          <h3>Tu veux ta boutique comme ça ?</h3>
-          <p>Vitrine, galerie, WhatsApp, présence terrain, ouverture visible. La démo donne envie, et derrière tu récupères la vraie demande.</p>
-          <div class="cta-band-row">
-            <span class="cta-pill">🛍️ Vitrine</span>
-            <span class="cta-pill">🖼️ Galerie</span>
-            <span class="cta-pill">💬 WhatsApp</span>
-            <span class="cta-pill">📍 Maps</span>
-            <span class="cta-pill">🔥 Ouverture</span>
+        <div class="hero-gallery">
+          <div class="photo-card big">
+            <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=1400&q=80" alt="Vitrine lumineuse et colorée"/>
+            <div class="photo-overlay">
+              <strong>Une entrée qui attire l’œil</strong>
+              <span>Couleurs, chaleur, présence visuelle.</span>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80" alt="Sélection de vêtements en boutique"/>
+            <div class="photo-overlay">
+              <strong>Collection mise en valeur</strong>
+              <span>Simple, propre, vivante.</span>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80" alt="Ambiance boutique chaleureuse"/>
+            <div class="photo-overlay">
+              <strong>Ambiance humaine</strong>
+              <span>On sent le lieu, pas juste le catalogue.</span>
+            </div>
           </div>
         </div>
-        <div class="cta-main">
-          <a class="big-cta" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Ouvrir ma boutique</a>
-          <a id="ctaWaBtn" class="big-cta soft" href="#" target="_blank" rel="noopener">💬 Parler sur WhatsApp</a>
+      </div>
+    </section>
+
+    <section class="quick-strip">
+      <div class="wrap">
+        <div class="quick-scroll">
+          <div class="quick-card">
+            <strong>🌿 Plus vivant</strong>
+            <span>Des visuels larges, chauds et respirants pour casser l’effet fade.</span>
+          </div>
+          <div class="quick-card">
+            <strong>📸 Plus d’images</strong>
+            <span>Une vraie place donnée aux photos pour vendre par les yeux aussi.</span>
+          </div>
+          <div class="quick-card">
+            <strong>🧭 Plus clair</strong>
+            <span>Le client comprend vite où regarder et comment écrire à la boutique.</span>
+          </div>
+          <div class="quick-card">
+            <strong>✨ Plus charmant</strong>
+            <span>Moins algorithme, plus présence, plus boutique, plus terrain.</span>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="faq-section">
-  <div class="wrap">
-    <div class="faq-shell">
-      <div class="faq-head">Questions fréquentes</div>
-      <div class="faq-item"><div class="faq-q">C’est quoi DIGIY MARKET ? <span class="faq-arr">▾</span></div><div class="faq-a">DIGIY MARKET est le hall des boutiques de DIGIYLYFE. Les commerçants y obtiennent une présence claire : vitrine, galerie, WhatsApp direct et repère terrain.</div></div>
-      <div class="faq-item"><div class="faq-q">Combien ça coûte pour ouvrir ma boutique ? <span class="faq-arr">▾</span></div><div class="faq-a">Le modèle DIGIY repose sur un abonnement fixe mensuel, sans commission sur les ventes. Tu paies une fois, tu es visible.</div></div>
-      <div class="faq-item"><div class="faq-q">Les boutiques visibles ici sont-elles réelles ? <span class="faq-arr">▾</span></div><div class="faq-a">Les boutiques affichées ici servent d’inspiration pour montrer à quoi peut ressembler une vraie façade DIGIY MARKET. Le rail public réel vient ensuite quand la boutique est posée proprement.</div></div>
-    </div>
-  </div>
-</section>
+    <section class="section">
+      <div class="wrap panel" style="padding:22px;">
+        <div class="section-head">
+          <div>
+            <span class="pill">📷 Galerie vivante</span>
+            <h2>Ce que la boutique dégage</h2>
+            <p>
+              Une vitrine ne doit pas seulement montrer des objets. Elle doit donner envie de rester,
+              de toucher du regard, de se projeter.
+            </p>
+          </div>
+        </div>
 
-<footer>
-  <div class="wrap footer-inner">
-    <div>
-      <div class="footer-brand">DIGIY MARKET ∞</div>
-      <div class="footer-sub">Neuf · Deuxième main · Brocante · Vêtements · Beauté · Services · Quotidien</div>
-    </div>
-    <div class="footer-links">
-      <a href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">Ouvrir ma boutique</a>
-      <a href="https://digiylyfe.com/" target="_blank" rel="noopener">digiylyfe.com</a>
-    </div>
-  </div>
-</footer>
+        <div class="gallery-grid">
+          <div class="gallery-tile">
+            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=900&q=80" alt="Boutique élégante et chaleureuse"/>
+            <div class="layer">
+              <strong>Accueil visuel</strong>
+              <span>Le premier regard doit déjà vendre.</span>
+            </div>
+          </div>
 
-<div class="float-cta">
-  <a id="floatWaBtn" class="float-btn wa" href="#" target="_blank" rel="noopener">💬 WhatsApp DIGIY</a>
-  <a class="float-btn module" href="https://commencer-a-payer.digiylyfe.com/" target="_blank" rel="noopener">🔥 Ouvrir ma boutique</a>
-</div>
+          <div class="gallery-tile">
+            <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80" alt="Vêtements colorés présentés en boutique"/>
+            <div class="layer">
+              <strong>Couleurs qui vivent</strong>
+              <span>Pas de façade morte. On met de la matière.</span>
+            </div>
+          </div>
 
-<script>
-const DIGIY_CONFIG = {
-  whatsapp: "221771342889",
-  siteUrl: "https://digiylyfe.com/",
-  proUrl: "https://commencer-a-payer.digiylyfe.com/",
-  logoUrl: ""
-};
+          <div class="gallery-tile">
+            <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80" alt="Produits mis en scène"/>
+            <div class="layer">
+              <strong>Mise en scène simple</strong>
+              <span>Beau sans surcharger.</span>
+            </div>
+          </div>
 
-function makeDarkSvg(opts){
-  const { bg1="#1a1208", bg2="#0d0a06", accent="#c8860a", icon="🛍️", title="", subtitle="", pattern="dots" } = opts;
-
-  let patternEl = "";
-  if (pattern === "chevrons") {
-    patternEl = `
-      <path d="M0 60 L60 0 L80 20 L20 80Z" fill="${accent}" opacity=".06"/>
-      <path d="M120 60 L180 0 L200 20 L140 80Z" fill="${accent}" opacity=".06"/>
-      <path d="M240 60 L300 0 L320 20 L260 80Z" fill="${accent}" opacity=".06"/>
-    `;
-  } else if (pattern === "circles") {
-    patternEl = `
-      <circle cx="80" cy="80" r="60" fill="none" stroke="${accent}" stroke-width="1" opacity=".1"/>
-      <circle cx="80" cy="80" r="100" fill="none" stroke="${accent}" stroke-width="1" opacity=".07"/>
-      <circle cx="320" cy="200" r="80" fill="none" stroke="${accent}" stroke-width="1" opacity=".08"/>
-    `;
-  } else if (pattern === "wax") {
-    patternEl = `
-      <polygon points="50,20 80,35 80,65 50,80 20,65 20,35" fill="none" stroke="${accent}" stroke-width="1.2" opacity=".12"/>
-      <polygon points="150,60 180,75 180,105 150,120 120,105 120,75" fill="none" stroke="${accent}" stroke-width="1" opacity=".1"/>
-      <polygon points="250,30 280,45 280,75 250,90 220,75 220,45" fill="none" stroke="${accent}" stroke-width="1" opacity=".1"/>
-    `;
-  } else if (pattern === "stripes") {
-    patternEl = `
-      <line x1="0" y1="40" x2="400" y2="40" stroke="${accent}" stroke-width="1" opacity=".08"/>
-      <line x1="0" y1="80" x2="400" y2="80" stroke="${accent}" stroke-width="1" opacity=".08"/>
-      <line x1="0" y1="120" x2="400" y2="120" stroke="${accent}" stroke-width="1" opacity=".06"/>
-    `;
-  } else {
-    patternEl = `
-      <circle cx="40" cy="40" r="3" fill="${accent}" opacity=".18"/>
-      <circle cx="120" cy="30" r="2" fill="${accent}" opacity=".12"/>
-      <circle cx="200" cy="50" r="3" fill="${accent}" opacity=".16"/>
-      <circle cx="300" cy="35" r="2" fill="${accent}" opacity=".12"/>
-      <circle cx="360" cy="55" r="3" fill="${accent}" opacity=".15"/>
-    `;
-  }
-
-  const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" width="400" height="280">
-      <defs>
-        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="${bg1}"/>
-          <stop offset="100%" stop-color="${bg2}"/>
-        </linearGradient>
-        <radialGradient id="glow" cx="35%" cy="40%">
-          <stop offset="0%" stop-color="${accent}" stop-opacity=".18"/>
-          <stop offset="100%" stop-color="transparent"/>
-        </radialGradient>
-        <filter id="shadow"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="rgba(0,0,0,.4)"/></filter>
-      </defs>
-      <rect width="400" height="280" fill="url(#bg)"/>
-      <rect width="400" height="280" fill="url(#glow)"/>
-      ${patternEl}
-      <circle cx="340" cy="60" r="120" fill="${accent}" opacity=".05"/>
-      <text x="36" y="148" font-size="88" filter="url(#shadow)">${icon}</text>
-      <rect x="36" y="188" width="340" height="70" rx="14" fill="rgba(255,255,255,.06)" stroke="${accent}" stroke-width=".8" stroke-opacity=".25"/>
-      <text x="52" y="216" font-family="Georgia, serif" font-size="18" font-weight="700" fill="#fdf6ec">${String(title).substring(0,22)}</text>
-      <text x="52" y="238" font-family="Arial, sans-serif" font-size="11" fill="rgba(253,246,236,.5)">${String(subtitle).substring(0,32)}</text>
-      <text x="348" y="20" text-anchor="end" font-family="Arial" font-size="9" fill="${accent}" opacity=".4" letter-spacing="2">DIGIY</text>
-    </svg>
-  `;
-  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-}
-
-function makeRoyalPhoto(title, sub, icon, c1, c2){
-  const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 840" width="1200" height="840">
-      <defs>
-        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="${c1}"/>
-          <stop offset="100%" stop-color="${c2}"/>
-        </linearGradient>
-        <filter id="f"><feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="rgba(0,0,0,.22)"/></filter>
-      </defs>
-      <rect width="1200" height="840" fill="url(#g)"/>
-      <circle cx="980" cy="130" r="180" fill="rgba(255,255,255,.14)"/>
-      <circle cx="180" cy="710" r="210" fill="rgba(255,255,255,.12)"/>
-      <text x="90" y="250" font-size="190" filter="url(#f)">${icon}</text>
-      <rect x="70" y="560" width="1060" height="170" rx="30" fill="rgba(255,255,255,.86)"/>
-      <text x="120" y="640" font-family="Georgia, serif" font-size="60" font-weight="700" fill="#1a1208">${title}</text>
-      <text x="120" y="695" font-family="Arial, sans-serif" font-size="30" fill="#6f624f">${sub}</text>
-    </svg>
-  `;
-  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-}
-
-const CAT_PALETTES = {
-  neuf:       {bg1:"#0e1a2a",bg2:"#071018",accent:"#4090e0",pattern:"circles"},
-  deuxiemain: {bg1:"#0e1a2a",bg2:"#071018",accent:"#60a0ff",pattern:"chevrons"},
-  vetements:  {bg1:"#2a0e1a",bg2:"#180710",accent:"#e060a0",pattern:"wax"},
-  parfum:     {bg1:"#1a0e2a",bg2:"#100718",accent:"#a060e0",pattern:"circles"},
-  coiffeur:   {bg1:"#0e2a1a",bg2:"#071810",accent:"#28885a",pattern:"stripes"},
-  onglerie:   {bg1:"#2a0e1a",bg2:"#180710",accent:"#e080b0",pattern:"dots"},
-  brocante:   {bg1:"#2a1a0e",bg2:"#181007",accent:"#c8860a",pattern:"wax"},
-  banabana:   {bg1:"#2a1a0e",bg2:"#181007",accent:"#e86820",pattern:"dots"},
-  quotidien:  {bg1:"#0e2a1a",bg2:"#071810",accent:"#40c080",pattern:"stripes"},
-  phones:     {bg1:"#0e1a2a",bg2:"#071018",accent:"#6090ff",pattern:"circles"},
-  alimentaire:{bg1:"#2a1a0e",bg2:"#181007",accent:"#d4a820",pattern:"wax"},
-  chaussures: {bg1:"#2a1208",bg2:"#181007",accent:"#e87040",pattern:"chevrons"}
-};
-
-function vendorCoverSvg(v, cat){
-  const pal = CAT_PALETTES[cat] || {bg1:"#1a1208",bg2:"#0d0a06",accent:"#c8860a",pattern:"dots"};
-  return makeDarkSvg({
-    ...pal,
-    icon: v.icon || "🛍️",
-    title: v.name,
-    subtitle: v.loc || "Sénégal"
-  });
-}
-
-const VENDORS = {
-  neuf:[
-    {icon:"📱",name:"Tech Dakar Shop",what:"Téléphones neufs, accessoires, batteries, câbles",loc:"Dakar · Plateau",price:"5 000–250 000 F",live:true,images:[]},
-    {icon:"👟",name:"Sneakers Mbaye",what:"Jordan, Nike, Adidas — arrivage chaque semaine",loc:"Mbour · Marché Central",price:"15 000–85 000 F",live:true,images:[]},
-    {icon:"🛒",name:"Boutique Awa Neuf",what:"Produits ménagers neufs, ustensiles, déco",loc:"Saly · Ngaparou",price:"2 000–35 000 F",live:false,images:[]}
-  ],
-  deuxiemain:[
-    {icon:"📺",name:"Mamadou Électro",what:"TV, réfrigérateurs, machines à laver d'occasion",loc:"Dakar · Colobane",price:"20 000–150 000 F",live:true,images:[]},
-    {icon:"👕",name:"Frip Sénégal",what:"Friperie sélectionnée, marques, prix juste",loc:"Dakar · Sicap",price:"500–5 000 F",live:true,images:[]},
-    {icon:"🎮",name:"GameZone Dakar",what:"Consoles, jeux, manettes, accessoires",loc:"Dakar · Yoff",price:"15 000–120 000 F",live:true,images:[]}
-  ],
-  vetements:[
-    {icon:"👘",name:"Boubous Cheikh",what:"Boubous brocart, bazin, grand boubou cérémonie",loc:"Dakar · HLM",price:"8 000–60 000 F",live:true,images:[]},
-    {icon:"👗",name:"Robes Fatou",what:"Robes africaines, wax, tenues soirée et bureau",loc:"Saly · Centre",price:"5 000–35 000 F",live:true,images:[]},
-    {icon:"🧣",name:"Accessoires Mode",what:"Ceintures, sacs, bijoux fantaisie, foulards",loc:"Saint-Louis",price:"1 000–12 000 F",live:true,images:[]}
-  ],
-  parfum:[
-    {icon:"🕌",name:"Thiouraye Ndèye",what:"Thiouraye naturel, encens, senteurs d’ambiance",loc:"Dakar · Médina",price:"1 500–15 000 F",live:true,images:[]},
-    {icon:"🌸",name:"Parfums Orientaux",what:"Attars, musc, oud, huiles de parfum",loc:"Dakar · Sandaga",price:"3 000–35 000 F",live:true,images:[]},
-    {icon:"🎁",name:"Coffrets Mariama",what:"Coffrets mariage, baptême, kits parfum cadeaux",loc:"Pikine",price:"8 000–50 000 F",live:false,images:[]}
-  ],
-  coiffeur:[
-    {icon:"✂️",name:"Salon Yacine",what:"Coupe homme, barbe, dégradé propre, accueil rapide",loc:"Dakar · Liberté 6",price:"2 000–10 000 F",live:true,images:[]},
-    {icon:"💇",name:"Tresses Khady",what:"Tresses collées, nattes, perruques et pose",loc:"Mbour · Grand Mbour",price:"3 000–25 000 F",live:true,images:[]},
-    {icon:"💈",name:"Barber Saly",what:"Coupe, barbe, soin visage, finitions nettes",loc:"Saly · Rond-point",price:"2 000–8 000 F",live:true,images:[]}
-  ],
-  onglerie:[
-    {icon:"💅",name:"Nails Aya",what:"Pose américaine, gel, nail art, beauté des mains",loc:"Dakar · Almadies",price:"5 000–20 000 F",live:true,images:[]},
-    {icon:"✨",name:"Studio Mani Chic",what:"Manucure, pédicure, vernis semi-permanent",loc:"Thiès · Centre",price:"3 500–15 000 F",live:true,images:[]}
-  ],
-  brocante:[
-    {icon:"🏺",name:"Maison Vintage",what:"Objets rares, déco, miroirs, petits trésors",loc:"Dakar · Ngor",price:"2 000–70 000 F",live:true,images:[]},
-    {icon:"🪑",name:"Le Coin Brocante",what:"Chaises, tables, lampes, cadres, pièces anciennes",loc:"Saint-Louis",price:"3 000–90 000 F",live:true,images:[]}
-  ],
-  banabana:[
-    {icon:"🧺",name:"Asta Bana-bana",what:"Arrivages terrain, commerce mobile, bonnes affaires",loc:"Mbour · Marché",price:"500–25 000 F",live:true,images:[]},
-    {icon:"🎪",name:"Marché Mobile Samba",what:"Petit commerce souple, produits qui tournent vite",loc:"Kaolack",price:"500–15 000 F",live:true,images:[]}
-  ],
-  quotidien:[
-    {icon:"🧴",name:"Maison Propre",what:"Produits d’entretien, javel, lessive, balais",loc:"Dakar · Parcelles",price:"500–12 000 F",live:true,images:[]},
-    {icon:"🏠",name:"Tout pour la maison",what:"Ustensiles, boîtes, petits outils, rangements",loc:"Thiès · Médina Fall",price:"1 000–20 000 F",live:true,images:[]}
-  ],
-  phones:[
-    {icon:"📱",name:"Phone Express",what:"Smartphones, coques, écrans, chargeurs",loc:"Dakar · Colobane",price:"1 500–220 000 F",live:true,images:[]},
-    {icon:"🔋",name:"Batterie Plus",what:"Accessoires, batteries, écouteurs, adaptateurs",loc:"Mbour · Centre",price:"1 000–18 000 F",live:true,images:[]}
-  ],
-  alimentaire:[
-    {icon:"🥜",name:"Saveurs du Terroir",what:"Arachide, épices, céréales, produits locaux",loc:"Kaolack",price:"500–20 000 F",live:true,images:[]},
-    {icon:"🌾",name:"Céréales du Terroir",what:"Mil, sorgho, fonio, riz local, maïs",loc:"Tambacounda",price:"1 000–25 000 F",live:true,images:[]},
-    {icon:"🥦",name:"Maraîchage Fatou",what:"Légumes frais jardin, tomates, oignons, aubergines",loc:"Thiès · Pout",price:"200–3 000 F",live:true,images:[]}
-  ],
-  chaussures:[
-    {icon:"👡",name:"Sandales Aicha",what:"Sandales artisanales cuir, babouches colorées",loc:"Dakar · Médina",price:"3 000–18 000 F",live:true,images:[]},
-    {icon:"👟",name:"Baskets Papito",what:"Nike, Adidas, Puma — arrivage hebdomadaire",loc:"Dakar · Parcelles",price:"15 000–85 000 F",live:true,images:[]},
-    {icon:"👞",name:"Chaussures Homme SN",what:"Derby, bottes, chaussures ville cuir",loc:"Dakar · Plateau",price:"12 000–55 000 F",live:true,images:[]}
-  ]
-};
-
-const META = {
-  neuf:{label:"Neuf",icon:"🛒",sub:"Produits récents, prix clairs"},
-  deuxiemain:{label:"Deuxième main",icon:"♻️",sub:"La valeur continue, le bon prix circule"},
-  vetements:{label:"Vêtements",icon:"👗",sub:"Style terrain, cérémonie ou quotidien"},
-  parfum:{label:"Parfum",icon:"🌸",sub:"Essences, thiouraye, attars et cadeaux"},
-  coiffeur:{label:"Coiffure",icon:"✂️",sub:"Service de proximité"},
-  onglerie:{label:"Onglerie",icon:"💅",sub:"Pose, nail art, manucure"},
-  brocante:{label:"Brocante",icon:"🏺",sub:"Pièces rares, vintage"},
-  banabana:{label:"Bana-bana",icon:"🧺",sub:"Commerce mobile ancré dans le réel"},
-  quotidien:{label:"Quotidien",icon:"🏠",sub:"Ce qu’on cherche vite"},
-  phones:{label:"Téléphones",icon:"📱",sub:"Neufs, reconditionnés, accessoires"},
-  alimentaire:{label:"Alimentaire",icon:"🥜",sub:"Produits locaux, céréales, épices"},
-  chaussures:{label:"Chaussures",icon:"👟",sub:"Sandales, baskets, mocassins"}
-};
-
-const ROYAL_VENDORS = {
-  vetements:[
-    {icon:"👑",name:"Maison Élégance",what:"Bazin riche, couture soignée, tenue cérémonie grand style",loc:"Dakar · Almadies",price:"20 000–120 000 F",live:true,images:[makeRoyalPhoto("Maison Élégance","Bazin & couture","👑","#f3dfb6","#d4a448")]}
-  ],
-  parfum:[
-    {icon:"🌹",name:"Rose d’Orient",what:"Musc, oud, senteurs raffinées et coffrets premium",loc:"Dakar · Plateau",price:"8 000–65 000 F",live:true,images:[makeRoyalPhoto("Rose d’Orient","Musc & oud","🌹","#f0d7e8","#d89ec1")]}
-  ],
-  onglerie:[
-    {icon:"💄",name:"Belle Peau",what:"Gloss, maquillage doux et chic, beauté soignée",loc:"Dakar · Liberté 6",price:"2 500–22 000 F",live:true,images:[makeRoyalPhoto("Belle Peau","Beauté Dakar","💄","#ffd9e6","#f4adc9")]},
-    {icon:"🧴",name:"Douceur Sahel",what:"Crèmes corps, lait visage, huiles parfumées, soin peau douce",loc:"Thiès · Centre",price:"2 000–18 000 F",live:true,images:[makeRoyalPhoto("Douceur Sahel","Crèmes corps","🧴","#def5eb","#bfe0cd")]},
-    {icon:"🧼",name:"Savonnerie Reine",what:"Savons naturels, savons noirs, gommage, senteurs artisanales",loc:"Mbour · Saly",price:"1 000–9 000 F",live:true,images:[makeRoyalPhoto("Savonnerie Reine","Savons naturels","🧼","#fff0b5","#eccf70")]}
-  ],
-  quotidien:[
-    {icon:"🛏️",name:"Chambre Douceur",what:"Draps, housses, rideaux, serviettes, linge de maison élégant",loc:"Saly · Centre",price:"4 000–45 000 F",live:true,images:[makeRoyalPhoto("Chambre Douceur","Linge maison","🛏️","#d8e7ff","#a8c7ef")]}
-  ]
-};
-
-Object.entries(ROYAL_VENDORS).forEach(([cat,items])=>{
-  if(!Array.isArray(VENDORS[cat])) VENDORS[cat] = [];
-  VENDORS[cat].push(...items.map(item => ({ ...item, royal:true })));
-});
-
-function slugify(s){
-  return s.toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g,"")
-    .replace(/&/g,"-et-")
-    .replace(/[^a-z0-9]+/g,"-")
-    .replace(/^-+|-+$/g,"");
-}
-
-function waLink(text){
-  return `https://wa.me/${DIGIY_CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
-}
-
-function parseCity(loc=""){
-  return (loc.split("·")[0] || loc).trim();
-}
-
-function buildExampleVendor(cat, v){
-  const m = META[cat] || {};
-  const imgs = Array.isArray(v.images) ? v.images.filter(Boolean) : [];
-  return {
-    ...v,
-    category: cat,
-    categoryLabel: v.categoryLabel || m.label || cat,
-    categoryIcon: v.categoryIcon || m.icon || "🛍️",
-    city: parseCity(v.loc),
-    slug: `${cat}-${slugify(v.name)}`,
-    isExample: true,
-    isRoyal: !!v.royal,
-    coverImage: imgs[0] || vendorCoverSvg(v, cat),
-    images: imgs
-  };
-}
-
-function buildCatalog(){
-  return Object.entries(VENDORS).flatMap(([c,list]) => list.map(v => buildExampleVendor(c,v)));
-}
-
-function getRoyalCatalog(){
-  return buildCatalog().filter(v => v.isRoyal);
-}
-
-function saveCatalog(){
-  try{
-    localStorage.setItem("digiy_market_catalog_v5", JSON.stringify({
-      config: DIGIY_CONFIG,
-      meta: META,
-      vendors: buildCatalog()
-    }));
-  }catch(e){}
-}
-
-function updateCounts(){
-  document.querySelectorAll(".cat-tile").forEach(tile=>{
-    const cat = tile.dataset.cat;
-    const el = tile.querySelector(".cat-count span");
-    if (el) el.textContent = (VENDORS[cat] || []).length;
-  });
-  const n = buildCatalog().length;
-  document.getElementById("totalCount").textContent = n;
-  document.getElementById("statVendeurs").textContent = n;
-}
-
-function initButtons(){
-  const wa = waLink("Bonjour DIGIY 👋 Je veux des informations sur DIGIY MARKET.");
-  ["waTopBtn","heroWaBtn","heroWaBtnMob","ctaWaBtn","floatWaBtn"].forEach(id=>{
-    const el = document.getElementById(id);
-    if (el) el.href = wa;
-  });
-
-  const bi = document.getElementById("brandIcon");
-  if (DIGIY_CONFIG.logoUrl) {
-    bi.innerHTML = `<img src="${DIGIY_CONFIG.logoUrl}" alt="DIGIY">`;
-  }
-}
-
-function fillCityFilter(){
-  const sel = document.getElementById("cityFilter");
-  const cities = [...new Set(buildCatalog().map(v => v.city))].sort((a,b)=>a.localeCompare(b,"fr"));
-  cities.forEach(city=>{
-    const opt = document.createElement("option");
-    opt.value = city;
-    opt.textContent = city;
-    sel.appendChild(opt);
-  });
-}
-
-function getCityFilter(){
-  return document.getElementById("cityFilter").value.trim();
-}
-
-function applyCityFilter(list){
-  const city = getCityFilter();
-  return city ? list.filter(v => v.city === city) : list;
-}
-
-function renderRoyalSpotlight(){
-  const box = document.getElementById("royalSpotlightGrid");
-  if (!box) return;
-
-  const royals = getRoyalCatalog().slice(0,6);
-
-  if (!royals.length) {
-    box.innerHTML = `
-      <div style="grid-column:1/-1;text-align:center;padding:32px;color:var(--muted)">
-        <div style="font-size:2.5rem;margin-bottom:10px">👑</div>
-        <p>Aucune boutique ROYAL pour l’instant.</p>
-      </div>
-    `;
-    return;
-  }
-
-  box.innerHTML = royals.map(v=>`
-    <article class="royal-card" onclick="openVendor('${v.slug}')">
-      <div class="royal-cover">
-        <img src="${v.coverImage}" alt="${v.name}" loading="lazy">
-        <div class="royal-gloss"></div>
-        <span class="royal-badge">♛ ROYAL STAR</span>
-        ${v.live ? `<span class="royal-live">VISIBLE</span>` : ""}
-      </div>
-      <div class="royal-body">
-        <div class="royal-kicker">${v.categoryLabel || "DIGIY MARKET"}</div>
-        <div class="royal-title">${v.name}</div>
-        <div class="royal-text">${v.what}</div>
-        <div class="royal-meta">
-          <span class="royal-loc">📍 ${v.loc}</span>
-          <span class="royal-price">${v.price || "À définir"}</span>
+          <div class="gallery-tile">
+            <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=80" alt="Ambiance mode élégante et naturelle"/>
+            <div class="layer">
+              <strong>Présence humaine</strong>
+              <span>Une boutique respire mieux quand on sent la vie dedans.</span>
+            </div>
+          </div>
         </div>
       </div>
-    </article>
-  `).join("");
-}
+    </section>
 
-function renderVendorCards(list){
-  const g = document.getElementById("vendorGrid");
-
-  if (!list.length) {
-    g.innerHTML = `
-      <div class="empty-state">
-        <div class="big">🏗️</div>
-        <p>Aucune boutique inspiration trouvée.<br/>Essaie une autre ville ou une autre recherche.</p>
-      </div>
-    `;
-    return;
-  }
-
-  g.innerHTML = list.map(v=>`
-    <article class="vendor" onclick="openVendor('${v.slug}')">
-      <div class="vendor-top">
-        <img src="${v.coverImage}" alt="${v.name}" loading="lazy">
-        <div class="vendor-top-gradient"></div>
-        <span class="vendor-example">INSPIRATION</span>
-        ${v.live ? `<div class="vendor-live">VISIBLE</div>` : ""}
-        ${v.isRoyal ? `<div class="vendor-royal">♛ ROYAL</div>` : ""}
-      </div>
-      <div class="vendor-body">
-        <div class="vendor-name">${v.name}</div>
-        <div class="vendor-what">${v.what}</div>
-        <div class="vendor-meta">
-          <span class="vendor-loc">📍 ${v.loc}</span>
-          <span class="vendor-price">${v.price || "À définir"}</span>
+    <section class="section" id="collection">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="pill">🧺 Collection</span>
+            <h2>Des produits mieux mis en lumière</h2>
+            <p>
+              Chaque carte produit doit faire deux choses : rassurer et donner envie.
+              Image forte, texte court, action directe.
+            </p>
+          </div>
         </div>
-        <div class="vendor-cta">
-          <button class="vendor-btn primary" type="button" onclick="event.stopPropagation();openVendor('${v.slug}')">👁 Voir la boutique</button>
-          <button class="vendor-btn ghost" type="button" onclick="event.stopPropagation();contactVendor('${v.slug}')">💬</button>
+
+        <div class="products">
+          <article class="product">
+            <div class="product-media">
+              <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80" alt="T-shirt premium"/>
+              <span class="tag">Nouveau</span>
+            </div>
+            <div class="product-body">
+              <div class="product-title">
+                <strong>T-shirt premium</strong>
+                <span class="price">12 000 F</span>
+              </div>
+              <p>
+                Coupe simple, belle tenue, photo claire. On vend mieux quand le visuel respire.
+              </p>
+              <div class="product-actions">
+                <a class="main" href="https://wa.me/221771342889?text=Bonjour%2C%20je%20veux%20le%20T-shirt%20premium.">Commander</a>
+                <a href="https://wa.me/221771342889?text=Bonjour%2C%20j%E2%80%99ai%20une%20question%20sur%20le%20T-shirt%20premium.">Question</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product">
+            <div class="product-media">
+              <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80" alt="Chaussures tendance"/>
+              <span class="tag">Sélection</span>
+            </div>
+            <div class="product-body">
+              <div class="product-title">
+                <strong>Chaussures tendance</strong>
+                <span class="price">25 000 F</span>
+              </div>
+              <p>
+                Une photo nette, un bon angle, une fiche claire. Pas besoin de roman pour donner envie.
+              </p>
+              <div class="product-actions">
+                <a class="main" href="https://wa.me/221771342889?text=Bonjour%2C%20je%20veux%20les%20chaussures%20tendance.">Commander</a>
+                <a href="https://wa.me/221771342889?text=Bonjour%2C%20je%20veux%20voir%20plus%20de%20photos%20des%20chaussures.">Voir plus</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product">
+            <div class="product-media">
+              <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" alt="Robe élégante"/>
+              <span class="tag">Ambiance</span>
+            </div>
+            <div class="product-body">
+              <div class="product-title">
+                <strong>Robe élégante</strong>
+                <span class="price">18 000 F</span>
+              </div>
+              <p>
+                Une image chaude, une silhouette lisible, une ambiance douce. Là, la vitrine commence à parler.
+              </p>
+              <div class="product-actions">
+                <a class="main" href="https://wa.me/221771342889?text=Bonjour%2C%20je%20veux%20la%20robe%20%C3%A9l%C3%A9gante.">Commander</a>
+                <a href="https://wa.me/221771342889?text=Bonjour%2C%20je%20veux%20plus%20d%E2%80%99infos%20sur%20la%20robe%20%C3%A9l%C3%A9gante.">Question</a>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
-    </article>
-  `).join("");
-}
+    </section>
 
-function renderVendorsByCategory(cat){
-  const m = META[cat] || {};
-  let list = (VENDORS[cat] || []).map(v => buildExampleVendor(cat,v));
-  list = applyCityFilter(list);
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="pill">🪞 Esprit de la boutique</span>
+            <h2>Moins fade. Plus présence.</h2>
+            <p>
+              La différence se joue souvent dans les détails : profondeur, respiration, contraste,
+              chaleur, et surtout des photos qui ne ressemblent pas à un mur vide puni par un algorithme.
+            </p>
+          </div>
+        </div>
 
-  document.getElementById("panelIcon").textContent = m.icon || "🛍️";
-  document.getElementById("panelTitle").textContent = m.label || cat;
-  document.getElementById("panelSub").textContent = `${m.sub || ""} · ${list.length} boutique(s) inspiration`;
-  renderVendorCards(list);
-}
+        <div class="story-grid">
+          <div class="story-box">
+            <h3>Ce qu’on corrige ici</h3>
+            <p>
+              On sort de l’effet plat. On donne de la place aux images, aux textures, aux angles,
+              aux respirations. Une boutique doit avoir du caractère, pas l’air d’un tableau Excel
+              qui a mis une robe pour sortir.
+            </p>
+          </div>
 
-function renderSearch(q){
-  const qq = q.trim().toLowerCase();
-  let list = buildCatalog().filter(v =>
-    v.name.toLowerCase().includes(qq) ||
-    v.what.toLowerCase().includes(qq) ||
-    v.loc.toLowerCase().includes(qq) ||
-    v.city.toLowerCase().includes(qq) ||
-    v.categoryLabel.toLowerCase().includes(qq)
-  );
+          <div class="story-box">
+            <h3>Ce que le client ressent</h3>
+            <p>
+              Il comprend plus vite. Il voit mieux la qualité. Il se projette. Il a plus envie
+              d’écrire sur WhatsApp. Et surtout, il retient la boutique au lieu d’oublier la page
+              deux secondes après.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  list = applyCityFilter(list);
+    <section class="section" id="contact">
+      <div class="wrap contact-grid">
+        <div class="contact-main">
+          <span class="pill" style="background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.16);color:#fff;">💬 Contact direct</span>
+          <h3>Tu veux acheter, demander un prix ou voir d’autres photos ?</h3>
+          <p>
+            Le plus simple reste le contact direct. Tu écris, on te répond. C’est rapide, humain,
+            et ça colle au vrai terrain.
+          </p>
 
-  document.getElementById("panelIcon").textContent = "🔎";
-  document.getElementById("panelTitle").textContent = `Recherche : ${q}`;
-  document.getElementById("panelSub").textContent = `${list.length} résultat(s) inspiration`;
-  renderVendorCards(list);
-}
+          <div class="contact-actions">
+            <a class="btn btn-gold" href="https://wa.me/221771342889?text=Bonjour%20DIGIY%20MARKET%2C%20je%20veux%20voir%20vos%20articles.">Écrire sur WhatsApp</a>
+            <a class="btn btn-soft" href="tel:+221771342889">Appeler</a>
+          </div>
+        </div>
 
-function renderRoyalList(){
-  let list = getRoyalCatalog();
-  list = applyCityFilter(list);
+        <div class="contact-side">
+          <div class="info-card">
+            <span class="info-label">Nom de la boutique</span>
+            <div class="info-value">DIGIY MARKET</div>
+          </div>
 
-  document.querySelectorAll(".cat-tile").forEach(x => x.classList.remove("active"));
-  document.getElementById("panelIcon").textContent = "👑";
-  document.getElementById("panelTitle").textContent = "Sélection ROYAL";
-  document.getElementById("panelSub").textContent = `${list.length} boutique(s) premium mises en avant`;
-  renderVendorCards(list);
+          <div class="info-card">
+            <span class="info-label">Zone</span>
+            <div class="info-value">Saly · Mbour · Sénégal</div>
+          </div>
 
-  currentMode = "royal";
-  currentKey = "royal";
-  panel.classList.add("open");
+          <div class="info-card">
+            <span class="info-label">WhatsApp</span>
+            <div class="info-value">+221 77 134 28 89</div>
+          </div>
 
-  setTimeout(()=>panel.scrollIntoView({behavior:"smooth", block:"nearest"}), 180);
-}
+          <div class="info-card">
+            <span class="info-label">Ambiance</span>
+            <div class="info-value">Boutique vivante · visuels chauds · contact direct</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-function rerenderCurrent(){
-  if (currentMode === "search") {
-    const q = document.getElementById("topSearchInput").value.trim();
-    if (q) renderSearch(q);
-  } else if (currentMode === "cat" && currentKey) {
-    renderVendorsByCategory(currentKey);
-  } else if (currentMode === "royal") {
-    renderRoyalList();
-  }
-}
+  <footer>
+    <div class="wrap">
+      <div class="footer-box">
+        <div><strong>DIGIY MARKET</strong> — Une vitrine plus vivante, plus humaine, plus mémorable.</div>
+        <div>Photos • ambiance • produits • WhatsApp direct</div>
+      </div>
+    </div>
+  </footer>
 
-function openVendor(slug){
-  saveCatalog();
-  window.location.href = `vendeur.html?v=${encodeURIComponent(slug)}`;
-}
-
-function contactVendor(slug){
-  const v = buildCatalog().find(x => x.slug === slug);
-  const name = v ? v.name : "cette boutique";
-  window.open(
-    waLink(`Bonjour DIGIY 👋 Je veux une boutique comme l'exemple "${name}" sur DIGIY MARKET.`),
-    "_blank"
-  );
-}
-
-initButtons();
-saveCatalog();
-updateCounts();
-fillCityFilter();
-renderRoyalSpotlight();
-
-let currentMode = null;
-let currentKey = null;
-const panel = document.getElementById("vendorPanel");
-
-document.querySelectorAll(".cat-tile").forEach(tile=>{
-  tile.addEventListener("click", ()=>{
-    const cat = tile.dataset.cat;
-
-    if (currentMode === "cat" && currentKey === cat) {
-      panel.classList.remove("open");
-      tile.classList.remove("active");
-      currentMode = null;
-      currentKey = null;
-      return;
-    }
-
-    document.querySelectorAll(".cat-tile").forEach(x => x.classList.remove("active"));
-    tile.classList.add("active");
-    currentMode = "cat";
-    currentKey = cat;
-
-    renderVendorsByCategory(cat);
-
-    if (!panel.classList.contains("open")) panel.classList.add("open");
-    setTimeout(()=>panel.scrollIntoView({behavior:"smooth", block:"nearest"}), 180);
-  });
-});
-
-document.getElementById("panelClose").addEventListener("click", ()=>{
-  panel.classList.remove("open");
-  document.querySelectorAll(".cat-tile").forEach(x => x.classList.remove("active"));
-  currentMode = null;
-  currentKey = null;
-});
-
-document.getElementById("topSearchBtn").addEventListener("click", ()=>{
-  const q = document.getElementById("topSearchInput").value.trim();
-  if (!q) return;
-
-  document.querySelectorAll(".cat-tile").forEach(x => x.classList.remove("active"));
-  currentMode = "search";
-  currentKey = q;
-  renderSearch(q);
-  panel.classList.add("open");
-
-  setTimeout(()=>panel.scrollIntoView({behavior:"smooth", block:"nearest"}), 180);
-});
-
-document.getElementById("topSearchInput").addEventListener("keydown", e=>{
-  if (e.key === "Enter") document.getElementById("topSearchBtn").click();
-});
-
-document.getElementById("cityFilter").addEventListener("change", rerenderCurrent);
-
-document.getElementById("resetFilters").addEventListener("click", ()=>{
-  document.getElementById("cityFilter").value = "";
-  document.getElementById("topSearchInput").value = "";
-
-  if (currentMode === "cat" && currentKey) {
-    renderVendorsByCategory(currentKey);
-  } else if (currentMode === "royal") {
-    renderRoyalList();
-  } else if (currentMode === "search") {
-    panel.classList.remove("open");
-    currentMode = null;
-    currentKey = null;
-  } else {
-    panel.classList.remove("open");
-    currentMode = null;
-    currentKey = null;
-    document.querySelectorAll(".cat-tile").forEach(x => x.classList.remove("active"));
-  }
-});
-
-document.getElementById("royalTopBtn")?.addEventListener("click", ()=>{
-  document.getElementById("royalLead")?.scrollIntoView({behavior:"smooth", block:"start"});
-  setTimeout(()=>renderRoyalList(), 180);
-});
-
-document.getElementById("btnRoyalOnly")?.addEventListener("click", ()=>renderRoyalList());
-
-document.getElementById("btnRoyalReset")?.addEventListener("click", ()=>{
-  document.getElementById("cityFilter").value = "";
-  document.getElementById("topSearchInput").value = "";
-  panel.classList.remove("open");
-  currentMode = null;
-  currentKey = null;
-  document.querySelectorAll(".cat-tile").forEach(x => x.classList.remove("active"));
-  window.scrollTo({top:0, behavior:"smooth"});
-});
-
-const rail = document.getElementById("catRail");
-document.getElementById("arrL").addEventListener("click", ()=>rail.scrollBy({left:-280, behavior:"smooth"}));
-document.getElementById("arrR").addEventListener("click", ()=>rail.scrollBy({left:280, behavior:"smooth"}));
-
-let isDown = false;
-let startX = 0;
-let startScroll = 0;
-
-function dragStart(x){
-  isDown = true;
-  startX = x;
-  startScroll = rail.scrollLeft;
-  rail.classList.add("grabbing");
-}
-function dragMove(x){
-  if (!isDown) return;
-  rail.scrollLeft = startScroll - (x - startX);
-}
-function dragEnd(){
-  isDown = false;
-  rail.classList.remove("grabbing");
-}
-
-rail.addEventListener("mousedown", e => dragStart(e.pageX));
-window.addEventListener("mouseup", dragEnd);
-window.addEventListener("mousemove", e => dragMove(e.pageX));
-rail.addEventListener("touchstart", e => {
-  if (e.touches[0]) dragStart(e.touches[0].pageX);
-}, {passive:true});
-rail.addEventListener("touchmove", e => {
-  if (e.touches[0]) dragMove(e.touches[0].pageX);
-}, {passive:true});
-rail.addEventListener("touchend", dragEnd);
-
-document.querySelectorAll(".faq-item").forEach(item=>{
-  item.querySelector(".faq-q").addEventListener("click", ()=>{
-    const open = item.classList.contains("open");
-    document.querySelectorAll(".faq-item").forEach(x => x.classList.remove("open"));
-    if (!open) item.classList.add("open");
-  });
-});
-</script>
 </body>
 </html>
