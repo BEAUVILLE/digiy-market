@@ -134,7 +134,6 @@
     }
 
     .btn{
-      appearance:none;
       border:0;
       cursor:pointer;
       display:inline-flex;
@@ -664,7 +663,7 @@
     .floating-back{
       position:fixed;
       right:18px;
-      bottom:18px;
+      bottom:calc(18px + env(safe-area-inset-bottom, 0px));
       z-index:80;
       display:inline-flex;
       align-items:center;
@@ -753,7 +752,7 @@
       .panel{border-radius:24px}
       .floating-back{
         right:12px;
-        bottom:12px;
+        bottom:calc(12px + env(safe-area-inset-bottom, 0px));
         min-height:52px;
         padding:0 16px;
         font-size:.95rem;
@@ -765,11 +764,12 @@
 
   <div class="topbar">
     <div class="wrap topbar-inner">
-      <a class="brand" href="http://digiylyfe.com" aria-label="Retour au site DIGIYLYFE">
+      <a class="brand" href="https://digiylyfe.com/" aria-label="Retour au site DIGIYLYFE">
         <img
           class="brand-logo"
           src="https://digiylyfe.net/wp-content/uploads/2026/03/digiylyfe_logo_qr.jpeg"
           alt="Logo DIGIYLYFE"
+          onerror="this.onerror=null;this.style.opacity='0';this.style.pointerEvents='none';"
         />
         <div class="brand-text">
           <div class="brand-title">DIGIY MARKET</div>
@@ -778,7 +778,7 @@
       </a>
 
       <div class="top-actions">
-        <a class="btn btn-soft" href="http://digiylyfe.com">← Retour au site</a>
+        <a class="btn btn-soft" href="https://digiylyfe.com/">← Retour au site</a>
         <a class="btn btn-main" href="https://wa.me/221771342889?text=Bonjour%20DIGIY%20MARKET%2C%20je%20veux%20voir%20les%20articles.">WhatsApp</a>
       </div>
     </div>
@@ -1086,7 +1086,7 @@
     </div>
   </footer>
 
-  <a class="floating-back" href="http://digiylyfe.com" aria-label="Retour au site DIGIYLYFE">
+  <a class="floating-back" href="https://digiylyfe.com/" aria-label="Retour au site DIGIYLYFE">
     <span class="icon">🏠</span>
     <span>Retour au site</span>
   </a>
