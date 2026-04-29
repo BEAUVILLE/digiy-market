@@ -3,12 +3,15 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-  <title>DIGIY MARKET — La boutique</title>
+  <title>DIGIY MARKET — Galeries de boutiques locales</title>
   <meta name="theme-color" content="#0c4a36"/>
-  <meta name="description" content="Une boutique vivante, claire et humaine. Photos, ambiance, produits, contact direct WhatsApp."/>
+  <meta name="description" content="DIGIY MARKET — Découvrir les boutiques locales, voir les produits, contacter directement par WhatsApp, zéro commission."/>
+  <meta name="robots" content="index,follow"/>
+
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
     :root{
@@ -23,10 +26,10 @@
       --gold:#d7a928;
       --orange:#f59e0b;
       --sand:#efe4c9;
+      --danger:#dc2626;
       --shadow:0 18px 50px rgba(12,74,54,.10);
       --shadow-soft:0 8px 24px rgba(12,74,54,.08);
-      --radius:22px;
-      --radius-sm:16px;
+      --radius:24px;
       --max:1180px;
     }
 
@@ -43,720 +46,192 @@
     }
 
     a{color:inherit;text-decoration:none}
+    button,input,select{font:inherit}
     img{display:block;max-width:100%}
-    button,input,textarea,select{font:inherit}
-
     .wrap{width:min(var(--max),calc(100% - 28px));margin:0 auto}
     .section{padding:28px 0}
 
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 14px;
-      border-radius:999px;
-      background:rgba(12,74,54,.08);
-      border:1px solid rgba(12,74,54,.10);
-      color:var(--green);
-      font-size:.92rem;
-      font-weight:700;
-    }
-
     .topbar{
-      position:sticky;
-      top:0;
-      z-index:40;
+      position:sticky;top:0;z-index:40;
       backdrop-filter:blur(14px);
       background:rgba(251,248,240,.92);
       border-bottom:1px solid rgba(19,38,29,.08);
     }
-
     .topbar-inner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      min-height:96px;
-      padding:10px 0;
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+      min-height:92px;padding:10px 0;flex-wrap:wrap;
     }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:16px;
-      min-width:0;
-    }
-
+    .brand{display:flex;align-items:center;gap:14px;min-width:0}
     .brand-logo{
-      width:84px;
-      height:84px;
-      object-fit:cover;
-      border-radius:22px;
-      border:1px solid rgba(12,74,54,.12);
-      box-shadow:0 12px 30px rgba(12,74,54,.14);
-      background:#fff;
-      flex:0 0 auto;
+      width:72px;height:72px;object-fit:cover;border-radius:22px;
+      border:1px solid rgba(12,74,54,.12);box-shadow:0 12px 30px rgba(12,74,54,.14);
+      background:#fff;flex:0 0 auto;
     }
-
-    .brand-text{
-      min-width:0;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-    }
-
-    .brand-title{
-      font-size:1.24rem;
-      font-weight:900;
-      letter-spacing:.01em;
-      line-height:1.1;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .brand-sub{
-      margin-top:4px;
-      font-size:.94rem;
-      color:var(--muted);
-      line-height:1.25;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .top-actions{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
+    .brand-title{font-size:1.22rem;font-weight:1000;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .brand-sub{margin-top:5px;color:var(--muted);font-size:.92rem;font-weight:750;line-height:1.25}
+    .top-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
 
     .btn{
-      border:0;
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      min-height:48px;
-      padding:0 18px;
-      border-radius:999px;
-      font-weight:800;
-      transition:.2s ease;
-      box-shadow:var(--shadow-soft);
+      border:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:9px;
+      min-height:46px;padding:0 17px;border-radius:999px;font-weight:900;
+      transition:.18s ease;box-shadow:var(--shadow-soft);white-space:nowrap;
     }
-
     .btn:hover{transform:translateY(-1px)}
+    .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+    .btn-main{background:linear-gradient(135deg,var(--green),var(--green-2));color:#fff}
+    .btn-soft{background:#fff;color:var(--green);border:1px solid rgba(12,74,54,.10)}
+    .btn-gold{background:linear-gradient(135deg,#f5c84c,#d7a928);color:#2d2406}
+    .btn-ghost{background:rgba(12,74,54,.06);color:var(--green);border:1px solid rgba(12,74,54,.08);box-shadow:none}
 
-    .btn-main{
-      background:linear-gradient(135deg,var(--green),var(--green-2));
-      color:#fff;
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;width:max-content;
+      padding:9px 13px;border-radius:999px;background:rgba(12,74,54,.08);
+      border:1px solid rgba(12,74,54,.10);color:var(--green);font-size:.88rem;font-weight:900;
     }
 
-    .btn-soft{
-      background:#fff;
-      color:var(--green);
-      border:1px solid rgba(12,74,54,.10);
+    .hero{padding:26px 0 18px}
+    .hero-card{
+      position:relative;overflow:hidden;border-radius:34px;padding:30px;
+      color:#fff;background:linear-gradient(135deg,#0f4f3b 0%, #166b50 100%);
+      box-shadow:var(--shadow);min-height:430px;display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:center;
     }
+    .hero-card::before{content:"";position:absolute;inset:auto auto -80px -80px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.08)}
+    .hero-card::after{content:"";position:absolute;top:-60px;right:-60px;width:190px;height:190px;border-radius:50%;background:rgba(245,200,76,.18)}
+    .hero-copy{position:relative;z-index:1;max-width:720px}
+    .hero h1{margin:14px 0 12px;font-size:clamp(2.2rem,5vw,4.6rem);line-height:.95;letter-spacing:-.04em}
+    .hero p{margin:0;color:rgba(255,255,255,.88);font-size:1.06rem;line-height:1.65;font-weight:650;max-width:66ch}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+    .hero-badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.14);font-weight:800}
+    .hero-side{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .hero-mini{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:16px;backdrop-filter:blur(10px)}
+    .hero-mini strong{display:block;font-size:1.35rem;margin-bottom:4px}
+    .hero-mini span{color:rgba(255,255,255,.78);font-size:.92rem;line-height:1.45}
 
-    .btn-gold{
-      background:linear-gradient(135deg,#f5c84c,#d7a928);
-      color:#2d2406;
+    .search-panel{
+      margin-top:18px;background:rgba(255,255,255,.86);border:1px solid rgba(19,38,29,.08);
+      border-radius:28px;box-shadow:var(--shadow-soft);padding:16px;
+      display:grid;grid-template-columns:1.4fr .8fr .8fr auto;gap:10px;align-items:center;
     }
-
-    .hero{
-      padding:26px 0 18px;
+    .input,.select{
+      width:100%;min-height:48px;padding:0 14px;border-radius:999px;border:1px solid rgba(19,38,29,.12);
+      background:#fff;color:var(--ink);outline:none;font-weight:800;
     }
+    .input:focus,.select:focus{border-color:rgba(12,74,54,.28);box-shadow:0 0 0 4px rgba(12,74,54,.08)}
 
-    .hero-grid{
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+    .section-head h2{margin:0;font-size:clamp(1.55rem,2.4vw,2.35rem);line-height:1.05;letter-spacing:-.02em}
+    .section-head p{margin:8px 0 0;color:var(--muted);max-width:720px;line-height:1.6;font-weight:650}
+
+    .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .shop-card{
+      overflow:hidden;background:#fff;border:1px solid rgba(19,38,29,.08);border-radius:28px;box-shadow:var(--shadow-soft);
+      display:flex;flex-direction:column;min-height:100%;transition:.18s ease;
+    }
+    .shop-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+    .shop-cover{position:relative;aspect-ratio:16/10;background:linear-gradient(135deg,#0f4f3b,#d7a928);overflow:hidden}
+    .shop-cover img{width:100%;height:100%;object-fit:cover}
+    .shop-cover .fallback{position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:3.4rem;font-weight:1000;background:linear-gradient(135deg,#0f4f3b,#166b50)}
+    .shop-logo{
+      position:absolute;left:16px;bottom:14px;width:58px;height:58px;border-radius:19px;background:rgba(255,255,255,.94);
+      border:1px solid rgba(255,255,255,.60);display:grid;place-items:center;box-shadow:0 12px 30px rgba(0,0,0,.16);overflow:hidden;
+      color:var(--green);font-size:1.45rem;font-weight:1000;
+    }
+    .shop-logo img{width:100%;height:100%;object-fit:cover}
+    .shop-status{position:absolute;right:14px;top:14px;background:rgba(255,255,255,.94);color:var(--green);border-radius:999px;padding:8px 11px;font-size:.78rem;font-weight:1000;box-shadow:var(--shadow-soft)}
+    .shop-body{padding:18px;display:flex;flex-direction:column;gap:10px;flex:1}
+    .shop-kicker{color:var(--green);font-size:.78rem;font-weight:1000;text-transform:uppercase;letter-spacing:.06em}
+    .shop-name{font-size:1.25rem;font-weight:1000;line-height:1.1;margin:0}
+    .shop-desc{margin:0;color:var(--muted);line-height:1.55;font-weight:650;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    .shop-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
+    .chip{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:rgba(12,74,54,.07);border:1px solid rgba(12,74,54,.08);color:var(--green);font-size:.78rem;font-weight:900}
+    .shop-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:auto;padding-top:8px}
+    .shop-actions .btn{min-height:42px;padding:0 13px;font-size:.9rem;box-shadow:none}
+
+
+
+    .inspiration-panel{
+      margin-top:18px;
       display:grid;
-      grid-template-columns:1.08fr .92fr;
-      gap:18px;
+      grid-template-columns:1.05fr .95fr;
+      gap:16px;
       align-items:stretch;
     }
-
-    .hero-card{
+    .inspiration-main{
       position:relative;
       overflow:hidden;
-      background:linear-gradient(135deg,#0f4f3b 0%, #166b50 100%);
-      color:#fff;
+      min-height:380px;
       border-radius:32px;
-      padding:28px;
       box-shadow:var(--shadow);
-      min-height:520px;
+      background:#d8d0bd;
     }
-
-    .hero-card::before{
-      content:"";
-      position:absolute;
-      inset:auto auto -70px -70px;
-      width:220px;
-      height:220px;
-      border-radius:50%;
-      background:rgba(255,255,255,.08);
-    }
-
-    .hero-card::after{
-      content:"";
-      position:absolute;
-      top:-50px;
-      right:-50px;
-      width:180px;
-      height:180px;
-      border-radius:50%;
-      background:rgba(245,200,76,.18);
-    }
-
-    .hero-copy{
-      position:relative;
-      z-index:1;
-      max-width:640px;
-    }
-
-    .hero h1{
-      margin:14px 0 12px;
-      font-size:clamp(2rem,4vw,4rem);
-      line-height:.98;
-      letter-spacing:-.03em;
-    }
-
-    .hero p{
-      margin:0;
-      max-width:620px;
-      color:rgba(255,255,255,.86);
-      font-size:1.03rem;
-      line-height:1.6;
-    }
-
-    .hero-badges{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin:18px 0 0;
-    }
-
-    .hero-badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,.12);
-      border:1px solid rgba(255,255,255,.14);
-      color:#fff;
-      font-weight:700;
-      font-size:.92rem;
-    }
-
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:22px;
-    }
-
-    .hero-mini-grid{
-      margin-top:24px;
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-    }
-
-    .hero-mini{
-      background:rgba(255,255,255,.10);
-      border:1px solid rgba(255,255,255,.14);
-      border-radius:20px;
-      padding:16px;
-      backdrop-filter:blur(10px);
-    }
-
-    .hero-mini strong{
-      display:block;
-      font-size:1.15rem;
-      margin-bottom:4px;
-    }
-
-    .hero-mini span{
-      color:rgba(255,255,255,.78);
-      font-size:.9rem;
-    }
-
-    .hero-gallery{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      grid-template-rows:1.15fr .85fr;
-      gap:14px;
-      min-height:520px;
-    }
-
-    .photo-card{
-      position:relative;
-      overflow:hidden;
-      border-radius:28px;
-      background:#d9d9d9;
-      box-shadow:var(--shadow);
-      min-height:160px;
-    }
-
-    .photo-card.big{grid-column:1 / span 2}
-
-    .photo-card img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      transition:transform .6s ease;
-    }
-
-    .photo-card:hover img{transform:scale(1.05)}
-
-    .photo-overlay{
-      position:absolute;
-      left:0;
-      right:0;
-      bottom:0;
-      padding:18px;
-      background:linear-gradient(180deg,transparent,rgba(0,0,0,.60));
-      color:#fff;
-    }
-
-    .photo-overlay strong{
-      display:block;
-      font-size:1.05rem;
-      margin-bottom:4px;
-    }
-
-    .photo-overlay span{
-      font-size:.92rem;
-      color:rgba(255,255,255,.86);
-    }
-
-    .quick-strip{
-      padding:10px 0 0;
-    }
-
-    .quick-scroll{
-      display:flex;
-      gap:12px;
-      overflow:auto;
-      padding-bottom:6px;
-      scrollbar-width:none;
-    }
-
-    .quick-scroll::-webkit-scrollbar{display:none}
-
-    .quick-card{
-      flex:0 0 220px;
-      background:rgba(255,255,255,.78);
-      border:1px solid rgba(19,38,29,.08);
-      border-radius:22px;
-      padding:16px;
-      box-shadow:var(--shadow-soft);
-    }
-
-    .quick-card strong{
-      display:block;
-      margin-bottom:6px;
-      font-size:1rem;
-    }
-
-    .quick-card span{
-      color:var(--muted);
-      font-size:.94rem;
-      line-height:1.45;
-    }
-
-    .panel{
-      background:rgba(255,255,255,.84);
-      border:1px solid rgba(19,38,29,.08);
-      border-radius:28px;
-      box-shadow:var(--shadow-soft);
-    }
-
-    .section-head{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:14px;
-      margin-bottom:16px;
-    }
-
-    .section-head h2{
-      margin:0;
-      font-size:clamp(1.55rem,2.4vw,2.25rem);
-      line-height:1.05;
-      letter-spacing:-.02em;
-    }
-
-    .section-head p{
-      margin:8px 0 0;
-      color:var(--muted);
-      max-width:680px;
-      line-height:1.6;
-    }
-
-    .gallery-grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:14px;
-    }
-
-    .gallery-tile{
-      position:relative;
-      overflow:hidden;
-      border-radius:24px;
-      background:#ddd;
-      min-height:290px;
-      box-shadow:var(--shadow-soft);
-    }
-
-    .gallery-tile img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
+    .inspiration-main img,
+    .inspiration-tile img{
+      width:100%;height:100%;object-fit:cover;
       transition:transform .55s ease;
     }
+    .inspiration-main:hover img,
+    .inspiration-tile:hover img{transform:scale(1.04)}
+    .inspiration-layer{
+      position:absolute;inset:auto 0 0 0;padding:22px;
+      background:linear-gradient(180deg,transparent,rgba(0,0,0,.68));color:#fff;
+    }
+    .inspiration-layer strong{display:block;font-size:1.35rem;font-weight:1000;margin-bottom:6px}
+    .inspiration-layer span{display:block;color:rgba(255,255,255,.86);font-weight:750;line-height:1.45}
+    .inspiration-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .inspiration-tile{position:relative;overflow:hidden;min-height:180px;border-radius:26px;background:#ded6c7;box-shadow:var(--shadow-soft)}
+    .commerce-strip{margin-top:14px;display:flex;gap:12px;overflow:auto;padding-bottom:6px;scrollbar-width:none}
+    .commerce-strip::-webkit-scrollbar{display:none}
+    .commerce-card{flex:0 0 246px;background:#fff;border:1px solid rgba(19,38,29,.08);border-radius:24px;box-shadow:var(--shadow-soft);overflow:hidden}
+    .commerce-card-media{height:150px;background:#e8e1d2;overflow:hidden}
+    .commerce-card-media img{width:100%;height:100%;object-fit:cover}
+    .commerce-card-body{padding:14px}
+    .commerce-card-body strong{display:block;font-size:1rem;font-weight:1000;margin-bottom:5px}
+    .commerce-card-body span{display:block;color:var(--muted);font-size:.9rem;font-weight:700;line-height:1.45}
+    .demo-label{display:inline-flex;margin-top:10px;padding:7px 10px;border-radius:999px;background:rgba(12,74,54,.08);color:var(--green);font-size:.76rem;font-weight:1000;border:1px solid rgba(12,74,54,.08)}
 
-    .gallery-tile:hover img{transform:scale(1.06)}
-
-    .gallery-tile .layer{
-      position:absolute;
-      inset:auto 0 0 0;
-      padding:16px;
-      background:linear-gradient(180deg,transparent,rgba(0,0,0,.65));
-      color:#fff;
+    .empty{
+      padding:26px;border:1px dashed rgba(19,38,29,.16);border-radius:24px;background:rgba(255,255,255,.64);
+      color:var(--muted);font-weight:800;line-height:1.65;text-align:center;grid-column:1/-1;
     }
 
-    .gallery-tile .layer strong{
-      display:block;
-      font-size:1.02rem;
-      margin-bottom:4px;
-    }
+    .panel{background:rgba(255,255,255,.84);border:1px solid rgba(19,38,29,.08);border-radius:28px;box-shadow:var(--shadow-soft)}
+    .about-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .about-card{padding:18px;border-radius:24px;background:#fff;border:1px solid rgba(19,38,29,.08);box-shadow:var(--shadow-soft)}
+    .about-card strong{display:block;font-size:1.08rem;margin-bottom:7px}
+    .about-card span{display:block;color:var(--muted);line-height:1.55;font-weight:650}
 
-    .gallery-tile .layer span{
-      color:rgba(255,255,255,.84);
-      font-size:.92rem;
-    }
-
-    .story-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:18px;
-    }
-
-    .story-box{
-      padding:22px;
-      border-radius:26px;
-      background:#fff;
-      border:1px solid rgba(19,38,29,.08);
-      box-shadow:var(--shadow-soft);
-    }
-
-    .story-box h3{
-      margin:0 0 10px;
-      font-size:1.24rem;
-    }
-
-    .story-box p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.68;
-    }
-
-    .products{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:16px;
-    }
-
-    .product{
-      overflow:hidden;
-      background:#fff;
-      border:1px solid rgba(19,38,29,.08);
-      border-radius:26px;
-      box-shadow:var(--shadow-soft);
-    }
-
-    .product-media{
-      position:relative;
-      aspect-ratio:1 / 1;
-      overflow:hidden;
-      background:#e8e3d8;
-    }
-
-    .product-media img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      transition:transform .55s ease;
-    }
-
-    .product:hover .product-media img{transform:scale(1.05)}
-
-    .tag{
-      position:absolute;
-      left:14px;
-      top:14px;
-      display:inline-flex;
-      align-items:center;
-      min-height:34px;
-      padding:0 12px;
-      border-radius:999px;
-      background:rgba(255,255,255,.92);
-      color:var(--green);
-      font-size:.82rem;
-      font-weight:800;
-      box-shadow:var(--shadow-soft);
-    }
-
-    .product-body{padding:18px}
-
-    .product-title{
-      display:flex;
-      align-items:start;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:10px;
-    }
-
-    .product-title strong{
-      font-size:1.08rem;
-      line-height:1.2;
-    }
-
-    .price{
-      flex:0 0 auto;
-      color:var(--green);
-      font-weight:900;
-      font-size:1rem;
-      background:rgba(12,74,54,.08);
-      padding:8px 10px;
-      border-radius:14px;
-    }
-
-    .product p{
-      margin:0 0 14px;
-      color:var(--muted);
-      line-height:1.58;
-      font-size:.96rem;
-    }
-
-    .product-actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .product-actions a{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:42px;
-      padding:0 14px;
-      border-radius:999px;
-      font-size:.92rem;
-      font-weight:800;
-      border:1px solid rgba(12,74,54,.10);
-      background:#fff;
-      color:var(--green);
-    }
-
-    .product-actions a.main{
-      border:0;
-      background:linear-gradient(135deg,var(--green),var(--green-2));
-      color:#fff;
-    }
-
-    .contact-grid{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:18px;
-    }
-
-    .contact-main{
-      padding:24px;
-      border-radius:28px;
-      background:linear-gradient(135deg,#0f4f3b 0%, #1d7a5a 100%);
-      color:#fff;
-      box-shadow:var(--shadow);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .contact-main::after{
-      content:"";
-      position:absolute;
-      right:-60px;
-      bottom:-60px;
-      width:180px;
-      height:180px;
-      border-radius:50%;
-      background:rgba(255,255,255,.08);
-    }
-
-    .contact-main h3{
-      margin:0 0 12px;
-      font-size:1.6rem;
-      line-height:1.05;
-    }
-
-    .contact-main p{
-      margin:0;
-      color:rgba(255,255,255,.86);
-      line-height:1.65;
-      max-width:620px;
-    }
-
-    .contact-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:20px;
-    }
-
-    .contact-side{
-      display:grid;
-      gap:14px;
-    }
-
-    .info-card{
-      padding:18px;
-      border-radius:24px;
-      background:#fff;
-      border:1px solid rgba(19,38,29,.08);
-      box-shadow:var(--shadow-soft);
-    }
-
-    .info-label{
-      display:block;
-      color:var(--muted);
-      font-size:.88rem;
-      margin-bottom:6px;
-    }
-
-    .info-value{
-      font-weight:800;
-      font-size:1.02rem;
-      line-height:1.4;
-    }
-
-    footer{
-      padding:28px 0 42px;
-      color:var(--muted);
-    }
-
-    .footer-box{
-      display:flex;
-      justify-content:space-between;
-      gap:18px;
-      flex-wrap:wrap;
-      padding:18px 20px;
-      border:1px solid rgba(19,38,29,.08);
-      border-radius:24px;
-      background:rgba(255,255,255,.72);
-      box-shadow:var(--shadow-soft);
-    }
-
+    footer{padding:28px 0 42px;color:var(--muted)}
+    .footer-box{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:18px 20px;border:1px solid rgba(19,38,29,.08);border-radius:24px;background:rgba(255,255,255,.72);box-shadow:var(--shadow-soft)}
     .footer-box strong{color:var(--ink)}
 
-    .floating-back{
-      position:fixed;
-      right:18px;
-      bottom:calc(18px + env(safe-area-inset-bottom, 0px));
-      z-index:80;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      min-height:56px;
-      padding:0 18px;
-      border-radius:999px;
-      background:linear-gradient(135deg,var(--green),var(--green-2));
-      color:#fff;
-      font-weight:900;
-      box-shadow:0 18px 40px rgba(12,74,54,.26);
-      border:1px solid rgba(255,255,255,.18);
-      transition:transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+    #digiy-audio-btn{
+      position:fixed;left:24px;bottom:24px;z-index:99999;display:inline-flex;align-items:center;gap:12px;
+      padding:15px 22px;border:none;border-radius:999px;cursor:pointer;font-weight:950;font-size:16px;
+      background:linear-gradient(135deg,#d4af37,#b78b34);color:#111827;box-shadow:0 10px 30px rgba(0,0,0,.24);
     }
+    #digiy-audio-progress-wrap{position:fixed;left:0;right:0;bottom:0;height:3px;opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:99998;background:rgba(212,175,55,.2)}
+    #digiy-audio-progress{width:0%;height:100%;transition:width .18s linear;background:linear-gradient(90deg,#d4af37,#b78b34)}
 
-    .floating-back:hover{
-      transform:translateY(-2px);
-      box-shadow:0 22px 48px rgba(12,74,54,.32);
-    }
-
-    .floating-back:active{
-      transform:translateY(0);
-    }
-
-    .floating-back .icon{
-      width:30px;
-      height:30px;
-      border-radius:999px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      background:rgba(255,255,255,.14);
-      font-size:1rem;
-      flex:0 0 auto;
-    }
-
-    @media (max-width:1080px){
-      .hero-grid,
-      .story-grid,
-      .contact-grid{grid-template-columns:1fr}
+    @media(max-width:1080px){
+      .hero-card{grid-template-columns:1fr;min-height:auto}
       .gallery-grid{grid-template-columns:repeat(2,1fr)}
-      .products{grid-template-columns:repeat(2,1fr)}
+      .inspiration-panel{grid-template-columns:1fr}
+      .inspiration-grid{grid-template-columns:1fr 1fr}
+      .inspiration-main{min-height:300px}
+      .about-grid{grid-template-columns:1fr}
+      .search-panel{grid-template-columns:1fr 1fr}
     }
-
-    @media (max-width:760px){
+    @media(max-width:720px){
       .wrap{width:min(var(--max),calc(100% - 18px))}
-      .topbar-inner{
-        min-height:82px;
-        padding:8px 0;
-      }
-      .brand{
-        gap:12px;
-      }
-      .brand-logo{
-        width:64px;
-        height:64px;
-        border-radius:18px;
-      }
-      .brand-title{
-        font-size:1.02rem;
-      }
-      .brand-sub{
-        font-size:.82rem;
-      }
-      .top-actions{gap:8px}
-      .btn{
-        min-height:44px;
-        padding:0 15px;
-      }
-      .hero-card{
-        padding:22px;
-        min-height:auto;
-        border-radius:26px;
-      }
-      .hero-gallery{
-        min-height:auto;
-        grid-template-columns:1fr 1fr;
-      }
-      .photo-card.big{min-height:240px}
-      .hero-mini-grid{grid-template-columns:1fr}
-      .gallery-grid,
-      .products{grid-template-columns:1fr}
-      .quick-card{flex-basis:82%}
-      .section{padding:22px 0}
-      .panel{border-radius:24px}
-      .floating-back{
-        right:12px;
-        bottom:calc(12px + env(safe-area-inset-bottom, 0px));
-        min-height:52px;
-        padding:0 16px;
-        font-size:.95rem;
-      }
+      .topbar-inner{min-height:82px}
+      .brand-logo{width:58px;height:58px;border-radius:18px}
+      .top-actions{width:100%}.top-actions>*{flex:1 1 auto}
+      .hero-card{padding:22px;border-radius:28px}.hero-side{grid-template-columns:1fr}
+      .gallery-grid{grid-template-columns:1fr}.search-panel{grid-template-columns:1fr;border-radius:24px}
+      .inspiration-grid{grid-template-columns:1fr}
+      .commerce-card{flex-basis:82%}
+      #digiy-audio-btn{left:12px;right:12px;bottom:12px;justify-content:center}
     }
   </style>
 </head>
@@ -765,112 +240,114 @@
   <div class="topbar">
     <div class="wrap topbar-inner">
       <a class="brand" href="https://digiylyfe.com/" aria-label="Retour au site DIGIYLYFE">
-        <img
-          class="brand-logo"
-          src="https://digiylyfe.net/wp-content/uploads/2026/03/digiylyfe_logo_qr.jpeg"
-          alt="Logo DIGIYLYFE"
-          onerror="this.onerror=null;this.style.opacity='0';this.style.pointerEvents='none';"
-        />
-        <div class="brand-text">
+        <img class="brand-logo" src="https://digiylyfe.net/wp-content/uploads/2026/03/digiylyfe_logo_qr.jpeg" alt="Logo DIGIYLYFE" onerror="this.onerror=null;this.style.display='none';"/>
+        <div>
           <div class="brand-title">DIGIY MARKET</div>
-          <div class="brand-sub">Boutiques, ambiance, produits et contact direct</div>
+          <div class="brand-sub">Galerie locale · boutiques visibles · contact direct</div>
         </div>
       </a>
-
       <div class="top-actions">
         <a class="btn btn-soft" href="https://digiylyfe.com/">← Retour au site</a>
-        <a class="btn btn-main" href="https://wa.me/221771342889?text=Bonjour%20DIGIY%20MARKET%2C%20je%20veux%20voir%20les%20articles.">WhatsApp</a>
+        <a class="btn btn-main" href="https://pro-market.digiylyfe.com/pin.html">Entrer côté vendeur</a>
       </div>
     </div>
   </div>
 
   <main>
     <section class="hero">
-      <div class="wrap hero-grid">
+      <div class="wrap">
         <div class="hero-card">
           <div class="hero-copy">
-            <span class="pill">🛍️ Boutique en lumière</span>
-            <h1>Une boutique qui respire la vie.</h1>
+            <span class="pill">🛍️ Marché local vivant</span>
+            <h1>Entre dans une galerie de boutiques locales.</h1>
             <p>
-              Ici, on ne montre pas juste des produits. On montre une ambiance, une présence,
-              une boutique qui donne envie d’entrer, de regarder, d’écrire et d’acheter.
+              Ici, les boutiques ne restent pas perdues dans le cloud. Elles se regroupent dans une vraie rue digitale :
+              tu regardes, tu découvres, tu contactes directement le commerçant, sans commission.
             </p>
-
             <div class="hero-badges">
-              <span class="hero-badge">📍 Terrain local</span>
-              <span class="hero-badge">💬 Contact direct</span>
-              <span class="hero-badge">🌞 Couleurs vivantes</span>
+              <span class="hero-badge">📍 Boutiques locales</span>
+              <span class="hero-badge">💬 WhatsApp direct</span>
+              <span class="hero-badge">💳 Paiement direct au pro</span>
             </div>
-
             <div class="hero-actions">
-              <a class="btn btn-gold" href="#collection">Voir la collection</a>
-              <a class="btn btn-soft" href="#contact">Parler à la boutique</a>
+              <a class="btn btn-gold" href="#boutiques">Voir les boutiques</a>
+              <a class="btn btn-soft" href="https://pro-market.digiylyfe.com/pin.html">Ajouter ma boutique</a>
             </div>
+          </div>
 
-            <div class="hero-mini-grid">
-              <div class="hero-mini">
-                <strong>Photos vraies</strong>
-                <span>Plus de relief, plus de matière, plus de chaleur visuelle.</span>
-              </div>
-              <div class="hero-mini">
-                <strong>Lecture simple</strong>
-                <span>On comprend vite quoi vendre, quoi montrer, où cliquer.</span>
-              </div>
-              <div class="hero-mini">
-                <strong>WhatsApp direct</strong>
-                <span>Le client ne se perd pas. Il voit, il aime, il écrit.</span>
-              </div>
-            </div>
+          <div class="hero-side">
+            <div class="hero-mini"><strong id="statShops">—</strong><span>Boutiques en galerie</span></div>
+            <div class="hero-mini"><strong id="statCities">—</strong><span>Zones représentées</span></div>
+            <div class="hero-mini"><strong>0%</strong><span>commission DIGIY sur la vente</span></div>
+            <div class="hero-mini"><strong>Direct</strong><span>client → commerçant</span></div>
           </div>
         </div>
 
-        <div class="hero-gallery">
-          <div class="photo-card big">
-            <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=1400&q=80" alt="Vitrine lumineuse et colorée"/>
-            <div class="photo-overlay">
-              <strong>Une entrée qui attire l’œil</strong>
-              <span>Couleurs, chaleur, présence visuelle.</span>
-            </div>
-          </div>
-
-          <div class="photo-card">
-            <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80" alt="Sélection de vêtements en boutique"/>
-            <div class="photo-overlay">
-              <strong>Collection mise en valeur</strong>
-              <span>Simple, propre, vivante.</span>
-            </div>
-          </div>
-
-          <div class="photo-card">
-            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80" alt="Ambiance boutique chaleureuse"/>
-            <div class="photo-overlay">
-              <strong>Ambiance humaine</strong>
-              <span>On sent le lieu, pas juste le catalogue.</span>
-            </div>
-          </div>
+        <div class="search-panel" id="searchPanel">
+          <input class="input" id="searchInput" type="search" placeholder="Chercher une boutique, une activité, une ville…"/>
+          <select class="select" id="cityFilter"><option value="all">Toutes les villes</option></select>
+          <select class="select" id="categoryFilter"><option value="all">Toutes les activités</option></select>
+          <button class="btn btn-ghost" id="btnReset" type="button">Réinitialiser</button>
         </div>
       </div>
     </section>
 
-    <section class="quick-strip">
+
+
+    <section class="section" id="ambiance">
       <div class="wrap">
-        <div class="quick-scroll">
-          <div class="quick-card">
-            <strong>🌿 Plus vivant</strong>
-            <span>Des visuels larges, chauds et respirants pour casser l’effet fade.</span>
+        <div class="section-head">
+          <div>
+            <span class="pill">📷 Ambiance commerciale</span>
+            <h2>On attire d’abord le regard, puis on montre les vraies boutiques.</h2>
+            <p>
+              Une galerie doit donner envie avant même la recherche. Ces visuels sont là pour poser l’ambiance,
+              faire sentir le commerce, la couleur, la matière et l’énergie du marché.
+            </p>
           </div>
-          <div class="quick-card">
-            <strong>📸 Plus d’images</strong>
-            <span>Une vraie place donnée aux photos pour vendre par les yeux aussi.</span>
+          <a class="btn btn-soft" href="#boutiques">Voir les boutiques réelles</a>
+        </div>
+
+        <div class="inspiration-panel">
+          <div class="inspiration-main">
+            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80" alt="Ambiance de boutique vivante" loading="lazy"/>
+            <div class="inspiration-layer">
+              <strong>Une rue commerçante digitale, pas une page froide.</strong>
+              <span>Le client doit sentir qu’il entre dans un marché vivant : boutiques, produits, couleurs, présence locale.</span>
+            </div>
           </div>
-          <div class="quick-card">
-            <strong>🧭 Plus clair</strong>
-            <span>Le client comprend vite où regarder et comment écrire à la boutique.</span>
+
+          <div class="inspiration-grid">
+            <div class="inspiration-tile"><img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80" alt="Articles de mode" loading="lazy"/><div class="inspiration-layer"><strong>Mode</strong><span>Voir, aimer, écrire.</span></div></div>
+            <div class="inspiration-tile"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=900&q=80" alt="Cosmétiques" loading="lazy"/><div class="inspiration-layer"><strong>Beauté</strong><span>Produits visibles, contact direct.</span></div></div>
+            <div class="inspiration-tile"><img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80" alt="Marché local" loading="lazy"/><div class="inspiration-layer"><strong>Local</strong><span>Le terrain entre dans le digital.</span></div></div>
+            <div class="inspiration-tile"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80" alt="Shopping" loading="lazy"/><div class="inspiration-layer"><strong>Découverte</strong><span>Le client circule, la boutique respire.</span></div></div>
           </div>
-          <div class="quick-card">
-            <strong>✨ Plus charmant</strong>
-            <span>Moins algorithme, plus présence, plus boutique, plus terrain.</span>
+        </div>
+
+        <div class="commerce-strip" aria-label="Exemples d'univers commerciaux">
+          <div class="commerce-card"><div class="commerce-card-media"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80" alt="Exemple vêtement" loading="lazy"/></div><div class="commerce-card-body"><strong>Vêtements & accessoires</strong><span>Une carte visuelle donne envie avant même de lire.</span><span class="demo-label">Exemple visuel</span></div></div>
+          <div class="commerce-card"><div class="commerce-card-media"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=700&q=80" alt="Exemple beauté" loading="lazy"/></div><div class="commerce-card-body"><strong>Cosmétiques & soins</strong><span>Le marché doit parler à l’œil, pas seulement au moteur.</span><span class="demo-label">Exemple visuel</span></div></div>
+          <div class="commerce-card"><div class="commerce-card-media"><img src="https://images.unsplash.com/photo-1607082349566-187342175e2f?auto=format&fit=crop&w=700&q=80" alt="Exemple commerce" loading="lazy"/></div><div class="commerce-card-body"><strong>Petits commerces</strong><span>Chaque boutique réelle arrive ensuite dans la galerie.</span><span class="demo-label">Exemple visuel</span></div></div>
+          <div class="commerce-card"><div class="commerce-card-media"><img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=700&q=80" alt="Exemple artisanat" loading="lazy"/></div><div class="commerce-card-body"><strong>Objets & maison</strong><span>Une ambiance chaude soutient les fiches réelles.</span><span class="demo-label">Exemple visuel</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="boutiques">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="pill">🏪 Galeries de magasins</span>
+            <h2>Les boutiques visibles maintenant</h2>
+            <p>
+              Chaque carte mène vers une fiche publique claire : produits, contact, ville, WhatsApp et paiement direct au commerçant.
+            </p>
           </div>
+          <button class="btn btn-soft" id="btnReload" type="button">↻ Recharger</button>
+        </div>
+        <div class="gallery-grid" id="shopsGrid">
+          <div class="empty">Chargement des boutiques…</div>
         </div>
       </div>
     </section>
@@ -879,199 +356,17 @@
       <div class="wrap panel" style="padding:22px;">
         <div class="section-head">
           <div>
-            <span class="pill">📷 Galerie vivante</span>
-            <h2>Ce que la boutique dégage</h2>
+            <span class="pill">♾️ Doctrine DIGIY</span>
+            <h2>Une galerie, pas des liens perdus.</h2>
             <p>
-              Une vitrine ne doit pas seulement montrer des objets. Elle doit donner envie de rester,
-              de toucher du regard, de se projeter.
+              La force du marché, c’est de rassembler. Une boutique seule existe ; une galerie attire, rassure et fait circuler les clients.
             </p>
           </div>
         </div>
-
-        <div class="gallery-grid">
-          <div class="gallery-tile">
-            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=900&q=80" alt="Boutique élégante et chaleureuse"/>
-            <div class="layer">
-              <strong>Accueil visuel</strong>
-              <span>Le premier regard doit déjà vendre.</span>
-            </div>
-          </div>
-
-          <div class="gallery-tile">
-            <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80" alt="Vêtements colorés présentés en boutique"/>
-            <div class="layer">
-              <strong>Couleurs qui vivent</strong>
-              <span>Pas de façade morte. On met de la matière.</span>
-            </div>
-          </div>
-
-          <div class="gallery-tile">
-            <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80" alt="Produits mis en scène"/>
-            <div class="layer">
-              <strong>Mise en scène simple</strong>
-              <span>Beau sans surcharger.</span>
-            </div>
-          </div>
-
-          <div class="gallery-tile">
-            <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=80" alt="Ambiance mode élégante et naturelle"/>
-            <div class="layer">
-              <strong>Présence humaine</strong>
-              <span>Une boutique respire mieux quand on sent la vie dedans.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="collection">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <span class="pill">🧺 Collection</span>
-            <h2>Des produits mieux mis en lumière</h2>
-            <p>
-              Chaque carte produit doit faire deux choses : rassurer et donner envie.
-              Image forte, texte court, action directe.
-            </p>
-          </div>
-        </div>
-
-        <div class="products">
-          <article class="product">
-            <div class="product-media">
-              <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80" alt="T-shirt premium"/>
-              <span class="tag">Nouveau</span>
-            </div>
-            <div class="product-body">
-              <div class="product-title">
-                <strong>T-shirt premium</strong>
-                <span class="price">12 000 F</span>
-              </div>
-              <p>
-                Coupe simple, belle tenue, photo claire. On vend mieux quand le visuel respire.
-              </p>
-              <div class="product-actions">
-                <a class="main" href="https://wa.me/221771342889?text=Bonjour%2C%20je%20veux%20le%20T-shirt%20premium.">Commander</a>
-                <a href="https://wa.me/221771342889?text=Bonjour%2C%20j%E2%80%99ai%20une%20question%20sur%20le%20T-shirt%20premium.">Question</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="product">
-            <div class="product-media">
-              <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80" alt="Chaussures tendance"/>
-              <span class="tag">Sélection</span>
-            </div>
-            <div class="product-body">
-              <div class="product-title">
-                <strong>Chaussures tendance</strong>
-                <span class="price">25 000 F</span>
-              </div>
-              <p>
-                Une photo nette, un bon angle, une fiche claire. Pas besoin de roman pour donner envie.
-              </p>
-              <div class="product-actions">
-                <a class="main" href="https://wa.me/221771342889?text=Bonjour%2C%20je%20veux%20les%20chaussures%20tendance.">Commander</a>
-                <a href="https://wa.me/221771342889?text=Bonjour%2C%20je%20veux%20voir%20plus%20de%20photos%20des%20chaussures.">Voir plus</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="product">
-            <div class="product-media">
-              <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" alt="Robe élégante"/>
-              <span class="tag">Ambiance</span>
-            </div>
-            <div class="product-body">
-              <div class="product-title">
-                <strong>Robe élégante</strong>
-                <span class="price">18 000 F</span>
-              </div>
-              <p>
-                Une image chaude, une silhouette lisible, une ambiance douce. Là, la vitrine commence à parler.
-              </p>
-              <div class="product-actions">
-                <a class="main" href="https://wa.me/221771342889?text=Bonjour%2C%20je%20veux%20la%20robe%20%C3%A9l%C3%A9gante.">Commander</a>
-                <a href="https://wa.me/221771342889?text=Bonjour%2C%20je%20veux%20plus%20d%E2%80%99infos%20sur%20la%20robe%20%C3%A9l%C3%A9gante.">Question</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <span class="pill">🪞 Esprit de la boutique</span>
-            <h2>Moins fade. Plus présence.</h2>
-            <p>
-              La différence se joue souvent dans les détails : profondeur, respiration, contraste,
-              chaleur, et surtout des photos qui ne ressemblent pas à un mur vide puni par un algorithme.
-            </p>
-          </div>
-        </div>
-
-        <div class="story-grid">
-          <div class="story-box">
-            <h3>Ce qu’on corrige ici</h3>
-            <p>
-              On sort de l’effet plat. On donne de la place aux images, aux textures, aux angles,
-              aux respirations. Une boutique doit avoir du caractère, pas l’air d’un tableau Excel
-              qui a mis une robe pour sortir.
-            </p>
-          </div>
-
-          <div class="story-box">
-            <h3>Ce que le client ressent</h3>
-            <p>
-              Il comprend plus vite. Il voit mieux la qualité. Il se projette. Il a plus envie
-              d’écrire sur WhatsApp. Et surtout, il retient la boutique au lieu d’oublier la page
-              deux secondes après.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="contact">
-      <div class="wrap contact-grid">
-        <div class="contact-main">
-          <span class="pill" style="background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.16);color:#fff;">💬 Contact direct</span>
-          <h3>Tu veux acheter, demander un prix ou voir d’autres photos ?</h3>
-          <p>
-            Le plus simple reste le contact direct. Tu écris, on te répond. C’est rapide, humain,
-            et ça colle au vrai terrain.
-          </p>
-
-          <div class="contact-actions">
-            <a class="btn btn-gold" href="https://wa.me/221771342889?text=Bonjour%20DIGIY%20MARKET%2C%20je%20veux%20voir%20vos%20articles.">Écrire sur WhatsApp</a>
-            <a class="btn btn-soft" href="tel:+221771342889">Appeler</a>
-          </div>
-        </div>
-
-        <div class="contact-side">
-          <div class="info-card">
-            <span class="info-label">Nom de la boutique</span>
-            <div class="info-value">DIGIY MARKET</div>
-          </div>
-
-          <div class="info-card">
-            <span class="info-label">Zone</span>
-            <div class="info-value">Saly · Mbour · Sénégal</div>
-          </div>
-
-          <div class="info-card">
-            <span class="info-label">WhatsApp</span>
-            <div class="info-value">+221 77 134 28 89</div>
-          </div>
-
-          <div class="info-card">
-            <span class="info-label">Ambiance</span>
-            <div class="info-value">Boutique vivante · visuels chauds · contact direct</div>
-          </div>
+        <div class="about-grid">
+          <div class="about-card"><strong>✅ Contact direct</strong><span>Le client écrit au commerçant sans passer par une mécanique lourde.</span></div>
+          <div class="about-card"><strong>💳 Argent direct</strong><span>DIGIY ne garde pas l’argent de la boutique. Le paiement reste direct au pro.</span></div>
+          <div class="about-card"><strong>📍 Présence locale</strong><span>La boutique sort de l’ombre et rejoint une rue digitale ancrée terrain.</span></div>
         </div>
       </div>
     </section>
@@ -1080,305 +375,217 @@
   <footer>
     <div class="wrap">
       <div class="footer-box">
-        <div><strong>DIGIY MARKET</strong> — Une vitrine plus vivante, plus humaine, plus mémorable.</div>
-        <div>Photos • ambiance • produits • WhatsApp direct</div>
+        <div><strong>DIGIY MARKET</strong> — Galerie locale, boutiques visibles, contact direct.</div>
+        <div>Zéro commission • WhatsApp direct • Paiement au pro</div>
       </div>
     </div>
   </footer>
 
-  <a class="floating-back" href="https://digiylyfe.com/" aria-label="Retour au site DIGIYLYFE">
-    <span class="icon">🏠</span>
-    <span>Retour au site</span>
-  </a>
-  <!-- ============================================================
-     DIGIY AUDIO — MARKET
-     À coller juste avant </body> dans ta page MARKET
-     ============================================================ -->
+  <button id="digiy-audio-btn" type="button" aria-label="Écouter DIGIY MARKET">
+    <span id="digiyAudioIcon">▶</span><span id="digiyAudioLabel">Écouter le marché</span>
+  </button>
+  <div id="digiy-audio-progress-wrap" aria-hidden="true"><div id="digiy-audio-progress"></div></div>
 
-<script>
-window.DIGIY_AUDIO_CONFIG = {
-  label: "Écouter la boutique",
-  stopLabel: "Arrêter",
-  text: "Bienvenue. Ici, tu peux découvrir une boutique, voir ses produits et contacter directement le vendeur. Tu regardes, tu choisis, tu avances sans intermédiaire. Simple. Direct. Humain. DIGIYLYFE.",
-  buttonBg: "linear-gradient(135deg,#d4af37,#b78b34)",
-  buttonColor: "#111827",
-  bottom: "24px",
-  left: "24px",
-  rate: 0.82,
-  pitch: 1,
-  volume: 1,
-  zIndex: 99999,
-  shadow: "0 10px 30px rgba(0,0,0,.26)"
-};
-</script>
+  <script>
+    const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+      auth:{ persistSession:false, autoRefreshToken:false, detectSessionInUrl:false }
+    });
 
-<style>
-#digiy-audio-btn{
-position:fixed;
-display:inline-flex;
-align-items:center;
-gap:12px;
-padding:16px 26px;
-border:none;
-border-radius:999px;
-cursor:pointer;
-font-family:'Outfit',Inter,sans-serif;
-font-weight:900;
-font-size:17px;
-line-height:1;
--webkit-tap-highlight-color:transparent;
-user-select:none;
-transition:transform .18s ease,box-shadow .18s ease,opacity .18s ease;
-}
-#digiy-audio-btn:hover{
-transform:translateY(-2px);
-}
-#digiy-audio-btn:active{
-transform:scale(.97);
-}
-#digiy-audio-btn:disabled{
-opacity:.65;
-cursor:not-allowed;
-}
-#digiy-audio-btn .digiy-audio-ico{
-font-size:18px;
-line-height:1;
-}
-#digiy-audio-progress-wrap{
-position:fixed;
-left:0;
-right:0;
-bottom:0;
-height:3px;
-opacity:0;
-pointer-events:none;
-transition:opacity .25s ease;
-}
-#digiy-audio-progress{
-width:0%;
-height:100%;
-transition:width .18s linear;
-}
-@media (max-width:600px){
-#digiy-audio-btn{
-font-size:16px;
-padding:15px 22px;
-gap:11px;
-}
-#digiy-audio-btn .digiy-audio-ico{
-font-size:17px;
-}
-}
-</style>
+    const $ = (id) => document.getElementById(id);
+    let SHOPS = [];
 
-<button id="digiy-audio-btn" type="button" aria-label="Écouter la boutique">
-  <span class="digiy-audio-ico">&#9654;</span>
-  <span class="digiy-audio-lbl">Écouter la boutique</span>
-</button>
+    function esc(v){
+      return String(v ?? "")
+        .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+    }
+    function text(v, fallback=""){
+      const s = String(v || "").trim();
+      return s || fallback;
+    }
+    function normPhone(v){
+      const d = String(v || "").replace(/[^\d]/g, "");
+      if (!d) return "";
+      if (d.startsWith("221") && d.length === 12) return d;
+      if (d.length === 9) return "221" + d;
+      return d;
+    }
+    function formatPhone(v){
+      const d = normPhone(v);
+      if(!d) return "—";
+      if(d.startsWith("221") && d.length === 12) return `+221 ${d.slice(3,5)} ${d.slice(5,8)} ${d.slice(8,10)} ${d.slice(10,12)}`;
+      return "+" + d;
+    }
+    function shopName(shop){ return text(shop.shop_name, text(shop.business_name, "Boutique locale")); }
+    function shopCategory(shop){ return text(shop.categories_text, text(shop.category, "Boutique locale")); }
+    function shopCity(shop){ return text(shop.city, "Ville à définir"); }
+    function shopZone(shop){
+      const city = text(shop.city, "");
+      const zones = text(shop.zones, "");
+      if(city && zones && city.toLowerCase() !== zones.toLowerCase()) return `${city} • ${zones}`;
+      return city || zones || "Zone à définir";
+    }
+    function shopDescription(shop){
+      return text(shop.description, "Boutique locale visible sur DIGIY MARKET. Contact direct avec le commerçant.");
+    }
+    function shopUrl(shop){
+      const slug = text(shop.slug, text(shop.workspace_slug, text(shop.last_slug, "")));
+      const u = new URL("https://market.digiylyfe.com/shop.html");
+      if(slug) u.searchParams.set("slug", slug);
+      return u.toString();
+    }
+    function waUrl(shop){
+      const phone = normPhone(shop.whatsapp || shop.public_phone || shop.phone || shop.owner_phone || "");
+      if(!phone) return "";
+      const label = encodeURIComponent(`Bonjour 👋 Je vous contacte via DIGIY MARKET au sujet de ${shopName(shop)}.`);
+      return `https://wa.me/${phone}?text=${label}`;
+    }
+    function initials(name){
+      const words = String(name || "").trim().split(/\s+/).filter(Boolean).slice(0,2);
+      return words.map(w => w[0] || "").join("").toUpperCase() || "DM";
+    }
 
-<div id="digiy-audio-progress-wrap" aria-hidden="true">
-  <div id="digiy-audio-progress"></div>
-</div>
+    async function loadShops(){
+      $("shopsGrid").innerHTML = `<div class="empty">Chargement des boutiques…</div>`;
+      try{
+        const { data, error } = await sb
+          .from("digiy_market_profiles")
+          .select("id,slug,workspace_slug,last_slug,shop_name,business_name,owner_name,city,zones,address,address_text,description,categories_text,category,whatsapp,public_phone,phone,owner_phone,photo_url,logo_url,cover_url,cover_image_url,is_published,is_active,updated_at")
+          .eq("is_published", true)
+          .eq("is_active", true)
+          .order("updated_at", { ascending:false });
 
-<script>
-(function(){
-  var cfg = window.DIGIY_AUDIO_CONFIG || {};
+        if(error) throw error;
+        SHOPS = Array.isArray(data) ? data : [];
+        buildFilters();
+        renderShops();
+        updateStats();
+      }catch(err){
+        console.error("DIGIY MARKET galerie KO", err);
+        $("shopsGrid").innerHTML = `<div class="empty">Impossible de charger les boutiques pour le moment.<br>${esc(err.message || String(err))}</div>`;
+        $("statShops").textContent = "—";
+        $("statCities").textContent = "—";
+      }
+    }
 
-  var config = {
-    label: cfg.label || "Écouter DIGIY",
-    stopLabel: cfg.stopLabel || "Arrêter",
-    text: cfg.text || "Bienvenue sur DIGIYLYFE.",
-    buttonBg: cfg.buttonBg || "linear-gradient(135deg,#d4af37,#b78b34)",
-    buttonColor: cfg.buttonColor || "#111827",
-    bottom: cfg.bottom || "24px",
-    left: cfg.left || "24px",
-    right: cfg.right || null,
-    rate: typeof cfg.rate === "number" ? cfg.rate : 0.82,
-    pitch: typeof cfg.pitch === "number" ? cfg.pitch : 1,
-    volume: typeof cfg.volume === "number" ? cfg.volume : 1,
-    zIndex: cfg.zIndex || 99999,
-    shadow: cfg.shadow || "0 8px 28px rgba(0,0,0,.24)"
-  };
+    function buildFilters(){
+      const cities = [...new Set(SHOPS.map(shopCity).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"fr"));
+      const cats = [...new Set(SHOPS.map(shopCategory).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"fr"));
+      $("cityFilter").innerHTML = `<option value="all">Toutes les villes</option>` + cities.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
+      $("categoryFilter").innerHTML = `<option value="all">Toutes les activités</option>` + cats.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
+    }
 
-  var btn = document.getElementById("digiy-audio-btn");
-  var lbl = btn ? btn.querySelector(".digiy-audio-lbl") : null;
-  var ico = btn ? btn.querySelector(".digiy-audio-ico") : null;
-  var progressWrap = document.getElementById("digiy-audio-progress-wrap");
-  var progressBar = document.getElementById("digiy-audio-progress");
+    function updateStats(){
+      const cityCount = new Set(SHOPS.map(s => shopCity(s)).filter(Boolean)).size;
+      $("statShops").textContent = String(SHOPS.length);
+      $("statCities").textContent = String(cityCount);
+    }
 
-  if (!btn || !lbl || !ico || !progressWrap || !progressBar) return;
+    function filteredShops(){
+      const q = String($("searchInput").value || "").trim().toLowerCase();
+      const city = $("cityFilter").value;
+      const cat = $("categoryFilter").value;
+      return SHOPS.filter(shop => {
+        if(city !== "all" && shopCity(shop) !== city) return false;
+        if(cat !== "all" && shopCategory(shop) !== cat) return false;
+        if(q){
+          const hay = [shopName(shop), shopCategory(shop), shopCity(shop), shop.zones, shop.address, shop.description].join(" ").toLowerCase();
+          if(!hay.includes(q)) return false;
+        }
+        return true;
+      });
+    }
 
-  btn.style.bottom = config.bottom;
-  btn.style.left = config.left ? config.left : "auto";
-  btn.style.right = config.right ? config.right : "auto";
-  btn.style.zIndex = String(config.zIndex);
-  btn.style.background = config.buttonBg;
-  btn.style.color = config.buttonColor;
-  btn.style.boxShadow = config.shadow;
-
-  progressWrap.style.zIndex = String(config.zIndex - 1);
-  progressWrap.style.background = "rgba(212,175,55,.2)";
-  progressBar.style.background = "linear-gradient(90deg,#d4af37,#b78b34)";
-
-  if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) {
-    btn.style.display = "none";
-    return;
-  }
-
-  var synth = window.speechSynthesis;
-  var utterance = null;
-  var playing = false;
-  var timer = null;
-  var launchId = 0;
-
-  function getFrenchVoice(){
-    var voices = synth.getVoices() || [];
-    if (!voices.length) return null;
-
-    return (
-      voices.find(function(v){ return /fr[-_]?FR/i.test(v.lang) && /google/i.test(v.name); }) ||
-      voices.find(function(v){ return /fr[-_]?FR/i.test(v.lang); }) ||
-      voices.find(function(v){ return /^fr/i.test(v.lang); }) ||
-      null
-    );
-  }
-
-  function setIdle(){
-    playing = false;
-    ico.innerHTML = "&#9654;";
-    lbl.textContent = config.label;
-    btn.setAttribute("aria-label", config.label);
-    clearInterval(timer);
-    timer = null;
-    progressWrap.style.opacity = "0";
-    progressBar.style.width = "0%";
-  }
-
-  function setPlaying(){
-    playing = true;
-    ico.innerHTML = "&#9632;";
-    lbl.textContent = config.stopLabel;
-    btn.setAttribute("aria-label", config.stopLabel);
-  }
-
-  function stop(){
-    clearInterval(timer);
-    timer = null;
-    try { synth.cancel(); } catch(e){}
-    utterance = null;
-    setIdle();
-  }
-
-  function startProgress(text, currentId){
-    var words = (text.trim().match(/\S+/g) || []).length;
-    var estimatedDuration = Math.max(2500, words * 520);
-    var elapsed = 0;
-
-    clearInterval(timer);
-    progressBar.style.width = "0%";
-    progressWrap.style.opacity = "1";
-
-    timer = setInterval(function(){
-      if (!playing || currentId !== launchId) {
-        clearInterval(timer);
-        timer = null;
+    function renderShops(){
+      const rows = filteredShops();
+      if(!rows.length){
+        $("shopsGrid").innerHTML = `<div class="empty">Aucune boutique trouvée avec ce filtre.</div>`;
         return;
       }
-      elapsed += 150;
-      var pct = Math.min((elapsed / estimatedDuration) * 100, 97);
-      progressBar.style.width = pct + "%";
-    }, 150);
-  }
-
-  function launch(){
-    launchId += 1;
-    var currentId = launchId;
-
-    try { synth.cancel(); } catch(e){}
-
-    utterance = new SpeechSynthesisUtterance(config.text);
-    utterance.lang = "fr-FR";
-    utterance.rate = config.rate;
-    utterance.pitch = config.pitch;
-    utterance.volume = config.volume;
-
-    var voice = getFrenchVoice();
-    if (voice) utterance.voice = voice;
-
-    utterance.onstart = function(){
-      if (currentId !== launchId) return;
-      setPlaying();
-      startProgress(config.text, currentId);
-    };
-
-    utterance.onend = function(){
-      if (currentId !== launchId) return;
-      clearInterval(timer);
-      timer = null;
-      progressBar.style.width = "100%";
-      setTimeout(function(){
-        if (currentId === launchId) setIdle();
-      }, 250);
-    };
-
-    utterance.onerror = function(){
-      if (currentId !== launchId) return;
-      stop();
-    };
-
-    synth.speak(utterance);
-  }
-
-  function play(){
-    if (playing) return;
-
-    if (synth.speaking || synth.pending) {
-      try { synth.cancel(); } catch(e){}
+      $("shopsGrid").innerHTML = rows.map(shop => {
+        const name = shopName(shop);
+        const cat = shopCategory(shop);
+        const zone = shopZone(shop);
+        const cover = text(shop.cover_url, text(shop.cover_image_url, ""));
+        const logo = text(shop.photo_url, text(shop.logo_url, ""));
+        const phone = shop.whatsapp || shop.public_phone || shop.phone || shop.owner_phone || "";
+        const wa = waUrl(shop);
+        const url = shopUrl(shop);
+        return `
+          <article class="shop-card">
+            <a class="shop-cover" href="${esc(url)}" aria-label="Voir ${esc(name)}">
+              ${cover ? `<img src="${esc(cover)}" alt="${esc(name)}" loading="lazy" onerror="this.remove();">` : `<div class="fallback">${esc(initials(name))}</div>`}
+              <div class="shop-logo">${logo ? `<img src="${esc(logo)}" alt="${esc(name)}" loading="lazy" onerror="this.parentElement.textContent='${esc(initials(name))}';">` : esc(initials(name))}</div>
+              <div class="shop-status">En ligne</div>
+            </a>
+            <div class="shop-body">
+              <div class="shop-kicker">${esc(cat)}</div>
+              <h3 class="shop-name">${esc(name)}</h3>
+              <p class="shop-desc">${esc(shopDescription(shop))}</p>
+              <div class="shop-meta">
+                <span class="chip">📍 ${esc(zone)}</span>
+                <span class="chip">💬 ${esc(formatPhone(phone))}</span>
+              </div>
+              <div class="shop-actions">
+                <a class="btn btn-main" href="${esc(url)}">Voir la boutique</a>
+                ${wa ? `<a class="btn btn-soft" href="${esc(wa)}" target="_blank" rel="noopener">WhatsApp</a>` : ``}
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
     }
 
-    var voices = synth.getVoices();
-    if (voices && voices.length) {
-      launch();
-      return;
+    function resetFilters(){
+      $("searchInput").value = "";
+      $("cityFilter").value = "all";
+      $("categoryFilter").value = "all";
+      renderShops();
     }
 
-    var launched = false;
+    ["searchInput","cityFilter","categoryFilter"].forEach(id => $(id).addEventListener(id === "searchInput" ? "input" : "change", renderShops));
+    $("btnReset").addEventListener("click", resetFilters);
+    $("btnReload").addEventListener("click", loadShops);
+    loadShops();
+  </script>
 
-    function handleVoicesChanged(){
-      if (launched) return;
-      launched = true;
-      synth.removeEventListener("voiceschanged", handleVoicesChanged);
-      launch();
+  <script>
+  (function(){
+    const text = "Bienvenue sur DIGIY MARKET. Ici, on entre d’abord dans une ambiance de marché vivant, avec des images, des couleurs et une vraie force commerciale. Ensuite, les boutiques réelles apparaissent en galerie. Tu découvres, tu choisis, tu écris directement au commerçant. Zéro commission. Paiement direct au pro.";
+    const btn = document.getElementById("digiy-audio-btn");
+    const ico = document.getElementById("digiyAudioIcon");
+    const lbl = document.getElementById("digiyAudioLabel");
+    const wrap = document.getElementById("digiy-audio-progress-wrap");
+    const bar = document.getElementById("digiy-audio-progress");
+    if(!btn || !("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)){ if(btn) btn.style.display="none"; return; }
+    let playing = false, timer = null, launchId = 0;
+    function voice(){
+      const voices = speechSynthesis.getVoices() || [];
+      return voices.find(v=>/fr[-_]?FR/i.test(v.lang) && /google/i.test(v.name)) || voices.find(v=>/fr[-_]?FR/i.test(v.lang)) || voices.find(v=>/^fr/i.test(v.lang)) || null;
     }
-
-    synth.addEventListener("voiceschanged", handleVoicesChanged);
-
-    setTimeout(function(){
-      if (launched) return;
-      launched = true;
-      synth.removeEventListener("voiceschanged", handleVoicesChanged);
-      launch();
-    }, 700);
-  }
-
-  btn.addEventListener("click", function(){
-    if (playing) stop();
-    else play();
-  });
-
-  window.addEventListener("beforeunload", stop);
-
-  document.addEventListener("visibilitychange", function(){
-    if (document.hidden && playing) stop();
-  });
-
-  setIdle();
-})();
-</script>
-
-<!-- ============================================================
-     FIN DIGIY AUDIO — MARKET
-     ============================================================ -->
-
+    function idle(){
+      playing=false; ico.textContent="▶"; lbl.textContent="Écouter le marché"; clearInterval(timer); timer=null; wrap.style.opacity="0"; bar.style.width="0%";
+    }
+    function stop(){ try{speechSynthesis.cancel()}catch(e){} idle(); }
+    function progress(id){
+      const words = (text.match(/\S+/g)||[]).length;
+      const dur = Math.max(3000, words * 520);
+      let elapsed = 0; wrap.style.opacity="1"; bar.style.width="0%";
+      timer = setInterval(()=>{ if(!playing || id!==launchId){clearInterval(timer);return;} elapsed += 150; bar.style.width = Math.min((elapsed/dur)*100, 97) + "%"; },150);
+    }
+    function launch(){
+      launchId += 1; const id = launchId; try{speechSynthesis.cancel()}catch(e){}
+      const u = new SpeechSynthesisUtterance(text); u.lang="fr-FR"; u.rate=.82; u.pitch=1; u.volume=1; const v=voice(); if(v) u.voice=v;
+      u.onstart=()=>{ if(id!==launchId)return; playing=true; ico.textContent="■"; lbl.textContent="Arrêter"; progress(id); };
+      u.onend=()=>{ if(id!==launchId)return; bar.style.width="100%"; setTimeout(()=>{ if(id===launchId) idle(); },250); };
+      u.onerror=stop; speechSynthesis.speak(u);
+    }
+    btn.addEventListener("click", ()=>{ if(playing) stop(); else launch(); });
+    window.addEventListener("beforeunload", stop); document.addEventListener("visibilitychange", ()=>{ if(document.hidden && playing) stop(); }); idle();
+  })();
+  </script>
 </body>
 </html>
+
