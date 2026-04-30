@@ -202,6 +202,50 @@
     }
     .shop-media.has-img{background:#063b2b}
     .shop-media.has-img .shop-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:saturate(.95) contrast(.95) brightness(.54);opacity:.44}
+
+    .gallery-ribbon{
+      position:absolute;left:14px;top:14px;z-index:4;
+      display:inline-flex;align-items:center;justify-content:center;
+      min-height:36px;padding:0 13px;border-radius:999px;
+      background:rgba(255,250,240,.94);color:var(--green);
+      border:1px solid rgba(244,207,100,.62);
+      box-shadow:0 12px 28px rgba(0,0,0,.18);
+      font-size:.78rem;font-weight:1000;letter-spacing:.04em;text-transform:uppercase;
+    }
+    .status-chip{
+      position:absolute;right:14px;top:14px;z-index:4;
+      display:inline-flex;align-items:center;justify-content:center;
+      min-height:36px;padding:0 12px;border-radius:999px;
+      background:rgba(34,197,94,.92);color:#062418;
+      border:1px solid rgba(255,255,255,.38);
+      box-shadow:0 12px 28px rgba(0,0,0,.18);
+      font-size:.78rem;font-weight:1000;
+    }
+    .live-digiy-hero{
+      display:inline-flex;flex-direction:column;gap:5px;
+      margin-top:18px;padding:14px 16px;border-radius:22px;
+      background:rgba(255,255,255,.12);border:1px solid rgba(244,207,100,.38);
+      box-shadow:0 14px 34px rgba(0,0,0,.18);
+      max-width:620px;
+    }
+    .live-digiy-hero strong{
+      color:#fff7c2;font-size:.95rem;font-weight:1000;letter-spacing:.08em;text-transform:uppercase;
+    }
+    .live-digiy-hero span{
+      color:rgba(255,255,255,.86);font-size:.95rem;font-weight:760;line-height:1.45;
+    }
+    .live-digiy-card{
+      margin:12px 0 14px;padding:12px 13px;border-radius:18px;
+      background:linear-gradient(135deg,rgba(6,59,43,.08),rgba(214,173,57,.13));
+      border:1px solid rgba(6,59,43,.12);display:grid;gap:4px;
+    }
+    .live-digiy-card strong{
+      color:var(--green);font-size:.82rem;font-weight:1000;letter-spacing:.06em;text-transform:uppercase;
+    }
+    .live-digiy-card span{
+      color:#4f5f58;font-size:.84rem;font-weight:820;line-height:1.38;
+    }
+
     .shop-brand-seal{
       position:relative;z-index:3;width:min(62%,190px);aspect-ratio:1/1;border-radius:34px;
       background:#063b2b;display:grid;place-items:center;overflow:hidden;
@@ -304,8 +348,13 @@
               chaque boutique garde son nom, mais la confiance, le cadre et le sceau viennent de DIGIY.
               Le client découvre, regarde, contacte directement et paie le commerçant sans commission.
             </p>
+            <div class="live-digiy-hero">
+              <strong>WhatsApp Visio Live by DIGIY</strong>
+              <span>En vidéo, comme si vous étiez sur place. Malgré les distances, vous gagnez du temps, évitez un trajet inutile et recevez le conseil du commerçant avant de choisir.</span>
+            </div>
             <div class="hero-badges">
               <span class="hero-badge">Galerie DIGIY MARKET</span>
+              <span class="hero-badge">🎥 Live DIGIY</span>
               <span class="hero-badge">💬 Contact direct</span>
               <span class="hero-badge">💳 Paiement au pro</span>
               <span class="hero-badge">0% commission</span>
@@ -326,7 +375,7 @@
           <div class="photo-card big">
             <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80" alt="Galerie commerçante locale"/>
             <div class="seal-card" aria-hidden="true"></div>
-            <div class="photo-layer"><strong>On est chez DIGIY</strong><span>Un lieu commun, des boutiques différentes, une confiance visible.</span></div>
+            <div class="photo-layer"><strong>Galerie DIGIY MARKET</strong><span>Un lieu commun, des boutiques différentes, une confiance visible.</span></div>
           </div>
           <div class="photo-card">
             <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80" alt="Produits en boutique"/>
@@ -334,7 +383,7 @@
           </div>
           <div class="photo-card">
             <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=900&q=80" alt="Boutique vivante"/>
-            <div class="photo-layer"><strong>Contact direct</strong><span>Le client voit, aime, écrit.</span></div>
+            <div class="photo-layer"><strong>Visio en direct</strong><span>Le client voit, demande conseil et choisit sans trajet inutile.</span></div>
           </div>
         </div>
       </div>
@@ -344,7 +393,7 @@
       <div class="wrap quick-scroll">
         <div class="quick-card"><strong>🏬 Esprit galerie</strong><span>Comme une allée commerçante : les boutiques sont réunies sous la signature DIGIY.</span></div>
         <div class="quick-card"><strong>🛍️ Pas un annuaire</strong><span>On attire d’abord par l’ambiance, puis on guide vers les bons commerces.</span></div>
-        <div class="quick-card"><strong>💬 Achat humain</strong><span>WhatsApp, appel, contact direct : le pro garde la main.</span></div>
+        <div class="quick-card"><strong>🎥 Live DIGIY</strong><span>WhatsApp Visio Live : voir les produits en direct, comme si vous étiez sur place.</span></div>
         <div class="quick-card"><strong>💳 Argent direct</strong><span>DIGIY ne garde pas l’argent : paiement direct au commerçant.</span></div>
       </div>
     </section>
@@ -409,7 +458,7 @@
     </div>
   </footer>
 
-  <button class="audio-btn" id="digiyAudioBtn" type="button">▶ Écouter la galerie</button>
+  <button class="audio-btn" id="digiyAudioBtn" type="button">▶ Écouter le Live DIGIY</button>
 
   <script>
     (function(){
@@ -451,7 +500,7 @@
       function whatsappUrl(phone, shopName){
         const p = digits(phone);
         if(!p) return "";
-        const text = encodeURIComponent(`Bonjour 👋 Je vous contacte via DIGIY MARKET au sujet de ${shopName || "votre boutique"}.`);
+        const text = encodeURIComponent(`Bonjour 👋 Je viens de DIGIY MARKET. Je souhaite voir les produits en WhatsApp Visio Live by DIGIY, comme si j’étais sur place, avant de confirmer mon choix avec ${shopName || "votre boutique"}.`);
         return `https://wa.me/${p}?text=${text}`;
       }
 
@@ -554,13 +603,17 @@
                 <div class="shop-cat">${esc(cat)}</div>
                 <h3 class="shop-title">${esc(name)}</h3>
                 <p class="shop-desc">${esc(desc)}</p>
+                <div class="live-digiy-card">
+                  <strong>WhatsApp Visio Live by DIGIY</strong>
+                  <span>Voir en vidéo, comme si vous étiez sur place. Moins de trajet, plus de conseil, choix plus sûr.</span>
+                </div>
                 <div class="shop-meta">
                   <span class="meta-pill">📍 ${esc(city)}</span>
                   <span class="meta-pill">💬 ${esc(phoneDisplay(phone))}</span>
                 </div>
                 <div class="shop-actions">
                   <a class="btn btn-main" href="${esc(url)}">Voir la boutique</a>
-                  ${wa ? `<a class="btn btn-soft" href="${esc(wa)}" target="_blank" rel="noopener">WhatsApp</a>` : ``}
+                  ${wa ? `<a class="btn btn-soft" href="${esc(wa)}" target="_blank" rel="noopener">Visio Live</a>` : ``}
                 </div>
                 <div class="digiy-floor">
                   <img src="${BADGE_URL}" alt="DIGIY" loading="lazy"/>
@@ -609,8 +662,8 @@
         }
         let playing = false;
         let utter = null;
-        const text = "Bienvenue dans DIGIY MARKET. Ici, les boutiques locales entrent dans une vraie galerie digitale. Chaque commerçant garde son identité, son contact et son argent. DIGIY donne la présence, le cadre et la confiance. Contact direct, zéro commission, paiement direct au commerçant.";
-        function stop(){ try{ speechSynthesis.cancel(); }catch(_){} playing=false; btn.textContent="▶ Écouter la galerie"; }
+        const text = "Bienvenue dans DIGIY MARKET. Ici, les boutiques locales entrent dans une vraie galerie marchande digitale. Avec le Live DIGIY, vous pouvez voir les produits en direct, en vidéo, comme si vous étiez sur place. Malgré les distances, vous gagnez du temps et vous évitez un trajet inutile. Le commerçant vous montre les articles, vous conseille, répond à vos questions, et vous aide à choisir. Vous regardez, vous choisissez, vous confirmez directement avec la boutique. Le paiement reste direct au commerçant. DIGIY ne garde pas l’argent et ne prend pas de commission. Selon la zone, la boutique peut aussi organiser une livraison locale. DIGIY MARKET, c’est le contact direct, la vidéo, le conseil et le commerce vivant.";
+        function stop(){ try{ speechSynthesis.cancel(); }catch(_){} playing=false; btn.textContent="▶ Écouter le Live DIGIY"; }
         function play(){
           stop();
           utter = new SpeechSynthesisUtterance(text);
@@ -641,5 +694,4 @@
   </script>
 </body>
 </html>
-
 
