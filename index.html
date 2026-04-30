@@ -3,588 +3,658 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-  <title>DIGIY MARKET — Galeries de boutiques locales</title>
-  <meta name="theme-color" content="#0c4a36"/>
-  <meta name="description" content="DIGIY MARKET — Découvrir les boutiques locales, voir les produits, contacter directement par WhatsApp, zéro commission."/>
+  <meta name="theme-color" content="#063b2b"/>
+  <title>DIGIY MARKET — Galerie locale</title>
+  <meta name="description" content="DIGIY MARKET — Galerie locale de boutiques visibles, contact direct, paiement direct au commerçant, zéro commission."/>
   <meta name="robots" content="index,follow"/>
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
     :root{
-      --bg:#f6f3ea;
-      --bg-2:#fffdf7;
-      --card:#ffffff;
-      --ink:#13261d;
-      --muted:#5a6a63;
-      --line:rgba(19,38,29,.10);
-      --green:#0c4a36;
-      --green-2:#166b50;
-      --gold:#d7a928;
-      --orange:#f59e0b;
-      --sand:#efe4c9;
-      --danger:#dc2626;
-      --shadow:0 18px 50px rgba(12,74,54,.10);
-      --shadow-soft:0 8px 24px rgba(12,74,54,.08);
-      --radius:24px;
+      --bg:#f5efe2;
+      --paper:#fffaf0;
+      --ink:#10251c;
+      --muted:#68746e;
+      --green:#063b2b;
+      --green2:#0b5a41;
+      --green3:#0f7a56;
+      --gold:#d6ad39;
+      --gold2:#f4cf64;
+      --sand:#eadfc7;
+      --cream:#fff7e8;
+      --line:rgba(16,37,28,.12);
+      --lineDark:rgba(255,255,255,.16);
+      --shadow:0 20px 60px rgba(6,59,43,.16);
+      --shadow2:0 10px 30px rgba(6,59,43,.12);
+      --r:28px;
       --max:1180px;
+      --logo:url('https://digiylyfe.net/wp-content/uploads/2026/03/cropped-digiylyfe_logo_qr.jpeg');
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;
+      min-height:100vh;
+      font-family:Outfit,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--ink);
       background:
-        radial-gradient(circle at top left, rgba(245,158,11,.08), transparent 26%),
-        radial-gradient(circle at top right, rgba(12,74,54,.09), transparent 28%),
-        linear-gradient(180deg, #fbf8f0 0%, #f7f2e7 100%);
-      font-family:Outfit,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+        radial-gradient(900px 520px at 6% -8%, rgba(214,173,57,.18), transparent 58%),
+        radial-gradient(900px 520px at 105% 0%, rgba(6,59,43,.14), transparent 54%),
+        linear-gradient(180deg,#fff8ea 0%,#f4ecd9 48%,#efe3cc 100%);
+      overflow-x:hidden;
     }
 
     a{color:inherit;text-decoration:none}
     button,input,select{font:inherit}
     img{display:block;max-width:100%}
+
     .wrap{width:min(var(--max),calc(100% - 28px));margin:0 auto}
-    .section{padding:28px 0}
 
     .topbar{
-      position:sticky;top:0;z-index:40;
+      position:sticky;top:0;z-index:60;
       backdrop-filter:blur(14px);
-      background:rgba(251,248,240,.92);
-      border-bottom:1px solid rgba(19,38,29,.08);
+      background:rgba(255,248,234,.88);
+      border-bottom:1px solid rgba(16,37,28,.10);
     }
     .topbar-inner{
+      min-height:94px;
       display:flex;align-items:center;justify-content:space-between;gap:16px;
-      min-height:92px;padding:10px 0;flex-wrap:wrap;
+      padding:10px 0;
     }
     .brand{display:flex;align-items:center;gap:14px;min-width:0}
     .brand-logo{
-      width:72px;height:72px;object-fit:cover;border-radius:22px;
-      border:1px solid rgba(12,74,54,.12);box-shadow:0 12px 30px rgba(12,74,54,.14);
-      background:#fff;flex:0 0 auto;
+      width:78px;height:78px;border-radius:24px;object-fit:cover;flex:0 0 auto;
+      border:1px solid rgba(6,59,43,.14);background:#fff;box-shadow:0 14px 34px rgba(6,59,43,.18);
     }
-    .brand-title{font-size:1.22rem;font-weight:1000;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .brand-sub{margin-top:5px;color:var(--muted);font-size:.92rem;font-weight:750;line-height:1.25}
-    .top-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .brand-title{font-size:1.45rem;font-weight:1000;letter-spacing:-.02em;line-height:1.05}
+    .brand-sub{margin-top:5px;color:var(--muted);font-size:.98rem;font-weight:850;line-height:1.25}
+    .top-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
 
     .btn{
-      border:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:9px;
-      min-height:46px;padding:0 17px;border-radius:999px;font-weight:900;
-      transition:.18s ease;box-shadow:var(--shadow-soft);white-space:nowrap;
+      border:1px solid rgba(6,59,43,.12);cursor:pointer;
+      display:inline-flex;align-items:center;justify-content:center;gap:9px;
+      min-height:46px;padding:0 17px;border-radius:999px;
+      font-weight:950;font-size:.92rem;white-space:nowrap;
+      background:#fff;color:var(--green);box-shadow:var(--shadow2);
+      transition:transform .16s ease, box-shadow .16s ease, background .16s ease;
     }
-    .btn:hover{transform:translateY(-1px)}
-    .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
-    .btn-main{background:linear-gradient(135deg,var(--green),var(--green-2));color:#fff}
-    .btn-soft{background:#fff;color:var(--green);border:1px solid rgba(12,74,54,.10)}
-    .btn-gold{background:linear-gradient(135deg,#f5c84c,#d7a928);color:#2d2406}
-    .btn-ghost{background:rgba(12,74,54,.06);color:var(--green);border:1px solid rgba(12,74,54,.08);box-shadow:none}
+    .btn:hover{transform:translateY(-1px);box-shadow:0 15px 34px rgba(6,59,43,.16)}
+    .btn-main{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;border:0}
+    .btn-gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#2d2308;border:0}
+    .btn-soft{background:rgba(255,255,255,.76);color:var(--green)}
+    .btn-ghost{background:rgba(6,59,43,.07);box-shadow:none}
 
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;width:max-content;
-      padding:9px 13px;border-radius:999px;background:rgba(12,74,54,.08);
-      border:1px solid rgba(12,74,54,.10);color:var(--green);font-size:.88rem;font-weight:900;
-    }
-
-    .hero{padding:26px 0 18px}
+    .hero{padding:24px 0 16px}
+    .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;align-items:stretch}
     .hero-card{
-      position:relative;overflow:hidden;border-radius:34px;padding:30px;
-      color:#fff;background:linear-gradient(135deg,#0f4f3b 0%, #166b50 100%);
-      box-shadow:var(--shadow);min-height:430px;display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:center;
+      position:relative;overflow:hidden;min-height:560px;border-radius:36px;
+      padding:30px;color:#fff;box-shadow:var(--shadow);
+      background:
+        radial-gradient(circle at 86% 12%, rgba(244,207,100,.32), transparent 22%),
+        radial-gradient(circle at 8% 92%, rgba(255,255,255,.10), transparent 28%),
+        linear-gradient(135deg,#052f22,#0b5a41 58%,#0f7a56);
     }
-    .hero-card::before{content:"";position:absolute;inset:auto auto -80px -80px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.08)}
-    .hero-card::after{content:"";position:absolute;top:-60px;right:-60px;width:190px;height:190px;border-radius:50%;background:rgba(245,200,76,.18)}
-    .hero-copy{position:relative;z-index:1;max-width:720px}
-    .hero h1{margin:14px 0 12px;font-size:clamp(2.2rem,5vw,4.6rem);line-height:.95;letter-spacing:-.04em}
-    .hero p{margin:0;color:rgba(255,255,255,.88);font-size:1.06rem;line-height:1.65;font-weight:650;max-width:66ch}
-    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
-    .hero-badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
-    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.14);font-weight:800}
-    .hero-side{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .hero-mini{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:16px;backdrop-filter:blur(10px)}
-    .hero-mini strong{display:block;font-size:1.35rem;margin-bottom:4px}
-    .hero-mini span{color:rgba(255,255,255,.78);font-size:.92rem;line-height:1.45}
+    .hero-card::before{
+      content:"";position:absolute;inset:-90px -95px auto auto;width:260px;height:260px;border-radius:50%;
+      background:rgba(255,255,255,.07);
+    }
+    .hero-card::after{
+      content:"";position:absolute;right:26px;bottom:22px;width:170px;height:170px;border-radius:38px;
+      background-image:var(--logo);background-size:cover;background-position:center;
+      opacity:.16;filter:saturate(1.1);transform:rotate(-5deg);
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .hero-copy{position:relative;z-index:2;max-width:710px}
+    .kicker{
+      display:inline-flex;align-items:center;gap:9px;width:max-content;max-width:100%;
+      padding:9px 13px;border-radius:999px;
+      background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.18);
+      color:#fff;font-size:.82rem;font-weight:1000;letter-spacing:.08em;text-transform:uppercase;
+    }
+    h1{margin:16px 0 12px;font-size:clamp(2.4rem,5vw,5rem);line-height:.93;letter-spacing:-.055em;font-weight:1000}
+    .hero-lead{margin:0;color:rgba(255,255,255,.88);font-size:1.1rem;line-height:1.68;font-weight:730;max-width:68ch}
+    .hero-badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:8px;padding:10px 13px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.11);
+      font-weight:900;color:#fff;font-size:.9rem;
+    }
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+    .hero-mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px}
+    .hero-mini{
+      padding:16px;border-radius:22px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(10px)
+    }
+    .hero-mini strong{display:block;font-size:1.12rem;margin-bottom:5px}
+    .hero-mini span{display:block;color:rgba(255,255,255,.78);line-height:1.45;font-weight:650;font-size:.92rem}
 
-    .search-panel{
-      margin-top:18px;background:rgba(255,255,255,.86);border:1px solid rgba(19,38,29,.08);
-      border-radius:28px;box-shadow:var(--shadow-soft);padding:16px;
-      display:grid;grid-template-columns:1.4fr .8fr .8fr auto;gap:10px;align-items:center;
+    .showcase{
+      display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1.14fr .86fr;gap:14px;min-height:560px;
     }
+    .photo-card{position:relative;overflow:hidden;border-radius:32px;box-shadow:var(--shadow);background:#ddd;min-height:180px}
+    .photo-card.big{grid-column:1/span 2}
+    .photo-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+    .photo-card:hover img{transform:scale(1.05)}
+    .photo-layer{position:absolute;inset:auto 0 0 0;padding:18px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.68));color:#fff}
+    .photo-layer strong{display:block;font-size:1.05rem;margin-bottom:4px}
+    .photo-layer span{color:rgba(255,255,255,.86);font-weight:650}
+    .seal-card{
+      position:absolute;right:16px;top:16px;width:76px;height:76px;border-radius:24px;
+      background-image:var(--logo);background-size:cover;background-position:center;
+      border:2px solid rgba(244,207,100,.75);box-shadow:0 12px 28px rgba(0,0,0,.25);
+    }
+
+    .quick-strip{padding:4px 0 0}
+    .quick-scroll{display:flex;gap:12px;overflow:auto;padding-bottom:8px;scrollbar-width:none}
+    .quick-scroll::-webkit-scrollbar{display:none}
+    .quick-card{
+      flex:0 0 250px;padding:16px;border-radius:24px;background:rgba(255,255,255,.78);
+      border:1px solid rgba(16,37,28,.08);box-shadow:var(--shadow2);
+    }
+    .quick-card strong{display:block;margin-bottom:6px;font-size:1.02rem}
+    .quick-card span{color:var(--muted);line-height:1.45;font-weight:650}
+
+    .section{padding:28px 0}
+    .panel{background:rgba(255,255,255,.78);border:1px solid rgba(16,37,28,.09);border-radius:32px;box-shadow:var(--shadow2)}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:14px;margin-bottom:16px}
+    .section-head h2{margin:10px 0 0;font-size:clamp(1.8rem,3vw,3rem);line-height:1;letter-spacing:-.035em;font-weight:1000}
+    .section-head p{margin:8px 0 0;color:var(--muted);line-height:1.65;font-weight:700;max-width:760px}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border-radius:999px;
+      color:var(--green);background:rgba(6,59,43,.08);border:1px solid rgba(6,59,43,.11);
+      font-size:.88rem;font-weight:950;
+    }
+
+    .controls{display:grid;grid-template-columns:1.2fr .72fr .72fr auto;gap:10px;margin-top:18px}
     .input,.select{
-      width:100%;min-height:48px;padding:0 14px;border-radius:999px;border:1px solid rgba(19,38,29,.12);
-      background:#fff;color:var(--ink);outline:none;font-weight:800;
+      width:100%;min-height:48px;border-radius:999px;border:1px solid rgba(16,37,28,.12);
+      background:#fff;color:var(--ink);padding:0 16px;outline:none;font-weight:850;box-shadow:var(--shadow2)
     }
-    .input:focus,.select:focus{border-color:rgba(12,74,54,.28);box-shadow:0 0 0 4px rgba(12,74,54,.08)}
+    .input:focus,.select:focus{border-color:rgba(6,59,43,.36);box-shadow:0 0 0 4px rgba(6,59,43,.09)}
 
-    .section-head{display:flex;align-items:end;justify-content:space-between;gap:14px;margin-bottom:16px;flex-wrap:wrap}
-    .section-head h2{margin:0;font-size:clamp(1.55rem,2.4vw,2.35rem);line-height:1.05;letter-spacing:-.02em}
-    .section-head p{margin:8px 0 0;color:var(--muted);max-width:720px;line-height:1.6;font-weight:650}
+    .stats-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .stat-pill{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;background:#fff;border:1px solid rgba(16,37,28,.10);font-weight:900;color:var(--muted)}
+    .stat-pill b{color:var(--green)}
 
-    .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .shops-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:18px}
     .shop-card{
-      overflow:hidden;background:#fff;border:1px solid rgba(19,38,29,.08);border-radius:28px;box-shadow:var(--shadow-soft);
-      display:flex;flex-direction:column;min-height:100%;transition:.18s ease;
+      position:relative;overflow:hidden;border-radius:34px;background:#fff;border:1px solid rgba(16,37,28,.09);
+      box-shadow:var(--shadow);transition:transform .18s ease, box-shadow .18s ease;
     }
-    .shop-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-    .shop-cover{position:relative;aspect-ratio:16/10;background:linear-gradient(135deg,#0f4f3b,#d7a928);overflow:hidden}
-    .shop-cover img{width:100%;height:100%;object-fit:cover}
-    .shop-cover .fallback{position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:3.4rem;font-weight:1000;background:linear-gradient(135deg,#0f4f3b,#166b50)}
-    .shop-logo{
-      position:absolute;left:16px;bottom:14px;width:58px;height:58px;border-radius:19px;background:rgba(255,255,255,.94);
-      border:1px solid rgba(255,255,255,.60);display:grid;place-items:center;box-shadow:0 12px 30px rgba(0,0,0,.16);overflow:hidden;
-      color:var(--green);font-size:1.45rem;font-weight:1000;
+    .shop-card:hover{transform:translateY(-3px);box-shadow:0 26px 70px rgba(6,59,43,.20)}
+    .shop-media{
+      position:relative;min-height:290px;background:
+        radial-gradient(circle at 50% 42%, rgba(244,207,100,.20), transparent 34%),
+        radial-gradient(circle at 78% 14%, rgba(244,207,100,.22), transparent 28%),
+        linear-gradient(135deg,#052d22,#064b36 52%,#0b5a41);
+      color:#fff;display:grid;place-items:center;overflow:hidden;
     }
-    .shop-logo img{width:100%;height:100%;object-fit:cover}
-    .shop-status{position:absolute;right:14px;top:14px;background:rgba(255,255,255,.94);color:var(--green);border-radius:999px;padding:8px 11px;font-size:.78rem;font-weight:1000;box-shadow:var(--shadow-soft)}
-    .shop-body{padding:18px;display:flex;flex-direction:column;gap:10px;flex:1}
-    .shop-kicker{color:var(--green);font-size:.78rem;font-weight:1000;text-transform:uppercase;letter-spacing:.06em}
-    .shop-name{font-size:1.25rem;font-weight:1000;line-height:1.1;margin:0}
-    .shop-desc{margin:0;color:var(--muted);line-height:1.55;font-weight:650;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-    .shop-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
-    .chip{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:rgba(12,74,54,.07);border:1px solid rgba(12,74,54,.08);color:var(--green);font-size:.78rem;font-weight:900}
-    .shop-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:auto;padding-top:8px}
-    .shop-actions .btn{min-height:42px;padding:0 13px;font-size:.9rem;box-shadow:none}
+    .shop-media::before{
+      content:"";position:absolute;inset:0;background:
+        linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.20)),
+        radial-gradient(circle at 50% 50%, transparent 0 34%, rgba(0,0,0,.16) 78%);
+      z-index:1;
+    }
+    .shop-media.has-img{background:#063b2b}
+    .shop-media.has-img .shop-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:saturate(.95) contrast(.95) brightness(.54);opacity:.44}
+    .shop-brand-seal{
+      position:relative;z-index:3;width:min(62%,190px);aspect-ratio:1/1;border-radius:34px;
+      background:#063b2b;display:grid;place-items:center;overflow:hidden;
+      border:3px solid rgba(244,207,100,.85);
+      box-shadow:0 22px 55px rgba(0,0,0,.34), inset 0 0 0 1px rgba(255,255,255,.12);
+      transform:translateY(6px);
+    }
+    .shop-brand-seal img{width:100%;height:100%;object-fit:cover;display:block}
+    .shop-brand-caption{
+      position:absolute;left:50%;bottom:24px;transform:translateX(-50%);z-index:4;
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      padding:9px 13px;border-radius:999px;background:rgba(255,255,255,.92);color:var(--green);
+      font-size:.78rem;font-weight:1000;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;
+      box-shadow:0 12px 28px rgba(0,0,0,.18);
+    }
+    .shop-watermark{display:none}
+    .gallery-ribbon{
+      position:absolute;left:16px;top:16px;z-index:4;display:inline-flex;align-items:center;gap:8px;
+      padding:8px 11px;border-radius:999px;background:rgba(255,255,255,.90);color:var(--green);
+      font-size:.78rem;font-weight:1000;box-shadow:0 10px 24px rgba(0,0,0,.14)
+    }
+    .status-chip{
+      position:absolute;right:16px;top:16px;z-index:4;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.92);color:var(--green);font-weight:1000;font-size:.8rem;box-shadow:0 10px 24px rgba(0,0,0,.14)
+    }
+    .shop-body{padding:18px 18px 17px;background:linear-gradient(180deg,#fff,#fffaf0)}
+    .shop-cat{font-size:.82rem;font-weight:1000;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:7px}
+    .shop-title{font-size:1.6rem;line-height:1.05;font-weight:1000;letter-spacing:-.025em;margin:0 0 8px}
+    .shop-desc{color:#45534d;font-weight:750;line-height:1.48;margin:0 0 12px;min-height:44px}
+    .shop-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+    .meta-pill{display:inline-flex;align-items:center;gap:7px;padding:8px 10px;border-radius:999px;background:rgba(6,59,43,.06);border:1px solid rgba(6,59,43,.08);font-size:.84rem;font-weight:950;color:#263b32}
+    .shop-actions{display:flex;gap:10px;flex-wrap:wrap}
+    .shop-actions .btn{box-shadow:none}
+    .digiy-floor{
+      margin-top:14px;padding:12px;border-radius:20px;background:linear-gradient(135deg,rgba(6,59,43,.07),rgba(214,173,57,.10));
+      border:1px solid rgba(6,59,43,.10);display:flex;gap:10px;align-items:center;
+    }
+    .digiy-floor img{width:40px;height:40px;border-radius:14px;object-fit:cover;flex:0 0 auto;border:1px solid rgba(6,59,43,.10)}
+    .digiy-floor div{font-size:.82rem;color:#4f5f58;font-weight:850;line-height:1.35}
+    .digiy-floor strong{display:block;color:var(--green);font-weight:1000}
 
+    .empty-box{padding:28px;border-radius:26px;border:1px dashed rgba(16,37,28,.18);background:rgba(255,255,255,.58);text-align:center;color:var(--muted);font-weight:850;line-height:1.6;margin-top:18px}
+    .loading-box{padding:28px;border-radius:26px;background:rgba(255,255,255,.66);border:1px solid rgba(16,37,28,.10);text-align:center;color:var(--muted);font-weight:900;margin-top:18px}
 
+    .doctrine{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch}
+    .doctrine-card{padding:24px;border-radius:30px;background:#fff;border:1px solid rgba(16,37,28,.08);box-shadow:var(--shadow2)}
+    .doctrine-card.dark{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;position:relative;overflow:hidden}
+    .doctrine-card.dark::after{content:"";position:absolute;right:20px;bottom:18px;width:118px;height:118px;border-radius:30px;background-image:var(--logo);background-size:cover;background-position:center;opacity:.14;transform:rotate(-5deg)}
+    .doctrine-card h3{margin:0 0 10px;font-size:1.55rem;letter-spacing:-.02em;line-height:1.05}
+    .doctrine-card p{margin:0;color:var(--muted);font-weight:730;line-height:1.7}
+    .doctrine-card.dark p{color:rgba(255,255,255,.82)}
 
-    .inspiration-panel{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns:1.05fr .95fr;
-      gap:16px;
-      align-items:stretch;
-    }
-    .inspiration-main{
-      position:relative;
-      overflow:hidden;
-      min-height:380px;
-      border-radius:32px;
-      box-shadow:var(--shadow);
-      background:#d8d0bd;
-    }
-    .inspiration-main img,
-    .inspiration-tile img{
-      width:100%;height:100%;object-fit:cover;
-      transition:transform .55s ease;
-    }
-    .inspiration-main:hover img,
-    .inspiration-tile:hover img{transform:scale(1.04)}
-    .inspiration-layer{
-      position:absolute;inset:auto 0 0 0;padding:22px;
-      background:linear-gradient(180deg,transparent,rgba(0,0,0,.68));color:#fff;
-    }
-    .inspiration-layer strong{display:block;font-size:1.35rem;font-weight:1000;margin-bottom:6px}
-    .inspiration-layer span{display:block;color:rgba(255,255,255,.86);font-weight:750;line-height:1.45}
-    .inspiration-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .inspiration-tile{position:relative;overflow:hidden;min-height:180px;border-radius:26px;background:#ded6c7;box-shadow:var(--shadow-soft)}
-    .commerce-strip{margin-top:14px;display:flex;gap:12px;overflow:auto;padding-bottom:6px;scrollbar-width:none}
-    .commerce-strip::-webkit-scrollbar{display:none}
-    .commerce-card{flex:0 0 246px;background:#fff;border:1px solid rgba(19,38,29,.08);border-radius:24px;box-shadow:var(--shadow-soft);overflow:hidden}
-    .commerce-card-media{height:150px;background:#e8e1d2;overflow:hidden}
-    .commerce-card-media img{width:100%;height:100%;object-fit:cover}
-    .commerce-card-body{padding:14px}
-    .commerce-card-body strong{display:block;font-size:1rem;font-weight:1000;margin-bottom:5px}
-    .commerce-card-body span{display:block;color:var(--muted);font-size:.9rem;font-weight:700;line-height:1.45}
-    .demo-label{display:inline-flex;margin-top:10px;padding:7px 10px;border-radius:999px;background:rgba(12,74,54,.08);color:var(--green);font-size:.76rem;font-weight:1000;border:1px solid rgba(12,74,54,.08)}
+    footer{padding:24px 0 42px;color:var(--muted)}
+    .footer-box{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:18px 20px;border-radius:28px;background:rgba(255,255,255,.72);border:1px solid rgba(16,37,28,.09);box-shadow:var(--shadow2);font-weight:800}
+    .footer-box strong{color:var(--green);font-weight:1000}
 
-    .empty{
-      padding:26px;border:1px dashed rgba(19,38,29,.16);border-radius:24px;background:rgba(255,255,255,.64);
-      color:var(--muted);font-weight:800;line-height:1.65;text-align:center;grid-column:1/-1;
+    .audio-btn{
+      position:fixed;left:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:90;
+      border:0;border-radius:999px;padding:15px 20px;display:inline-flex;align-items:center;gap:10px;
+      background:linear-gradient(135deg,var(--gold2),var(--gold));color:#1d1605;font-weight:1000;box-shadow:0 16px 40px rgba(6,59,43,.24);cursor:pointer
     }
-
-    .panel{background:rgba(255,255,255,.84);border:1px solid rgba(19,38,29,.08);border-radius:28px;box-shadow:var(--shadow-soft)}
-    .about-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .about-card{padding:18px;border-radius:24px;background:#fff;border:1px solid rgba(19,38,29,.08);box-shadow:var(--shadow-soft)}
-    .about-card strong{display:block;font-size:1.08rem;margin-bottom:7px}
-    .about-card span{display:block;color:var(--muted);line-height:1.55;font-weight:650}
-
-    footer{padding:28px 0 42px;color:var(--muted)}
-    .footer-box{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:18px 20px;border:1px solid rgba(19,38,29,.08);border-radius:24px;background:rgba(255,255,255,.72);box-shadow:var(--shadow-soft)}
-    .footer-box strong{color:var(--ink)}
-
-    #digiy-audio-btn{
-      position:fixed;left:24px;bottom:24px;z-index:99999;display:inline-flex;align-items:center;gap:12px;
-      padding:15px 22px;border:none;border-radius:999px;cursor:pointer;font-weight:950;font-size:16px;
-      background:linear-gradient(135deg,#d4af37,#b78b34);color:#111827;box-shadow:0 10px 30px rgba(0,0,0,.24);
-    }
-    #digiy-audio-progress-wrap{position:fixed;left:0;right:0;bottom:0;height:3px;opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:99998;background:rgba(212,175,55,.2)}
-    #digiy-audio-progress{width:0%;height:100%;transition:width .18s linear;background:linear-gradient(90deg,#d4af37,#b78b34)}
 
     @media(max-width:1080px){
-      .hero-card{grid-template-columns:1fr;min-height:auto}
-      .gallery-grid{grid-template-columns:repeat(2,1fr)}
-      .inspiration-panel{grid-template-columns:1fr}
-      .inspiration-grid{grid-template-columns:1fr 1fr}
-      .inspiration-main{min-height:300px}
-      .about-grid{grid-template-columns:1fr}
-      .search-panel{grid-template-columns:1fr 1fr}
+      .hero-grid,.doctrine{grid-template-columns:1fr}
+      .showcase{min-height:520px}
+      .shops-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .controls{grid-template-columns:1fr 1fr}
+      .controls .input{grid-column:1/-1}
     }
-    @media(max-width:720px){
+    @media(max-width:760px){
       .wrap{width:min(var(--max),calc(100% - 18px))}
-      .topbar-inner{min-height:82px}
-      .brand-logo{width:58px;height:58px;border-radius:18px}
-      .top-actions{width:100%}.top-actions>*{flex:1 1 auto}
-      .hero-card{padding:22px;border-radius:28px}.hero-side{grid-template-columns:1fr}
-      .gallery-grid{grid-template-columns:1fr}.search-panel{grid-template-columns:1fr;border-radius:24px}
-      .inspiration-grid{grid-template-columns:1fr}
-      .commerce-card{flex-basis:82%}
-      #digiy-audio-btn{left:12px;right:12px;bottom:12px;justify-content:center}
+      .topbar-inner{min-height:auto;align-items:flex-start}
+      .brand-logo{width:62px;height:62px;border-radius:20px}
+      .brand-title{font-size:1.15rem}
+      .brand-sub{font-size:.86rem}
+      .top-actions{width:100%;justify-content:flex-start}
+      .top-actions .btn{flex:1 1 auto}
+      .hero-card{min-height:auto;border-radius:30px;padding:23px}
+      .showcase{grid-template-columns:1fr 1fr;min-height:auto}
+      .photo-card.big{min-height:250px}
+      .hero-mini-grid{grid-template-columns:1fr}
+      .shops-grid{grid-template-columns:1fr}
+      .shop-media{min-height:250px}
+      .controls{grid-template-columns:1fr}
+      .section-head{display:block}
+      .audio-btn{left:12px;right:12px;justify-content:center}
     }
   </style>
 </head>
 <body>
-
-  <div class="topbar">
+  <header class="topbar">
     <div class="wrap topbar-inner">
       <a class="brand" href="https://digiylyfe.com/" aria-label="Retour au site DIGIYLYFE">
-        <img class="brand-logo" src="https://digiylyfe.net/wp-content/uploads/2026/03/cropped-digiylyfe_logo_qr.jpeg" alt="DIGIYLYFE — Afrique enracinée, connectée au monde" loading="eager" onerror="this.onerror=null;this.style.display='none';"/>
+        <img class="brand-logo" src="https://digiylyfe.net/wp-content/uploads/2026/03/cropped-digiylyfe_logo_qr.jpeg" alt="DIGIYLYFE" loading="eager"/>
         <div>
           <div class="brand-title">DIGIY MARKET</div>
-          <div class="brand-sub">Galerie locale · boutiques visibles · contact direct</div>
+          <div class="brand-sub">Galerie locale · boutiques visibles · contact direct au commerçant.</div>
         </div>
       </a>
-      <div class="top-actions">
-        <a class="btn btn-soft" href="https://digiylyfe.com/">← Retour au site</a>
-        <a class="btn btn-main" href="https://pro-market.digiylyfe.com/pin.html">Entrer côté vendeur</a>
-      </div>
+      <nav class="top-actions" aria-label="Navigation principale">
+        <a class="btn btn-soft" href="https://digiylyfe.com/">← DIGIYLYFE</a>
+        <a class="btn btn-main" href="#boutiques">Voir les boutiques</a>
+        <a class="btn btn-gold" href="https://pro-market.digiylyfe.com/pin.html">Entrer côté vendeur</a>
+      </nav>
     </div>
-  </div>
+  </header>
 
   <main>
     <section class="hero">
-      <div class="wrap">
+      <div class="wrap hero-grid">
         <div class="hero-card">
           <div class="hero-copy">
-            <span class="pill">🛍️ Marché local vivant</span>
-            <h1>Entre dans une galerie de boutiques locales.</h1>
-            <p>
-              Ici, les boutiques ne restent pas perdues dans le cloud. Elles se regroupent dans une vraie rue digitale :
-              tu regardes, tu découvres, tu contactes directement le commerçant, sans commission.
+            <span class="kicker">🛍️ Galerie marchande DIGIY</span>
+            <h1>Les boutiques locales entrent chez DIGIY.</h1>
+            <p class="hero-lead">
+              DIGIY MARKET n’est pas un moteur froid. C’est une galerie marchande digitale :
+              chaque boutique garde son nom, mais la confiance, le cadre et le sceau viennent de DIGIY.
+              Le client découvre, regarde, contacte directement et paie le commerçant sans commission.
             </p>
             <div class="hero-badges">
-              <span class="hero-badge">📍 Boutiques locales</span>
-              <span class="hero-badge">💬 WhatsApp direct</span>
-              <span class="hero-badge">💳 Paiement direct au pro</span>
+              <span class="hero-badge">♾️ Chez DIGIY</span>
+              <span class="hero-badge">💬 Contact direct</span>
+              <span class="hero-badge">💳 Paiement au pro</span>
+              <span class="hero-badge">0% commission</span>
             </div>
             <div class="hero-actions">
-              <a class="btn btn-gold" href="#boutiques">Voir les boutiques</a>
+              <a class="btn btn-gold" href="#boutiques">Entrer dans la galerie</a>
               <a class="btn btn-soft" href="https://pro-market.digiylyfe.com/pin.html">Ajouter ma boutique</a>
             </div>
-          </div>
-
-          <div class="hero-side">
-            <div class="hero-mini"><strong id="statShops">—</strong><span>Boutiques en galerie</span></div>
-            <div class="hero-mini"><strong id="statCities">—</strong><span>Zones représentées</span></div>
-            <div class="hero-mini"><strong>0%</strong><span>commission DIGIY sur la vente</span></div>
-            <div class="hero-mini"><strong>Direct</strong><span>client → commerçant</span></div>
+            <div class="hero-mini-grid">
+              <div class="hero-mini"><strong>Une galerie</strong><span>On sent le lieu DIGIY, pas une fiche perdue dans le cloud.</span></div>
+              <div class="hero-mini"><strong>Des boutiques</strong><span>Chaque commerçant garde son identité, son contact et ses produits.</span></div>
+              <div class="hero-mini"><strong>Une signature</strong><span>Le sceau DIGIY rassure, rassemble et donne une présence commune.</span></div>
+            </div>
           </div>
         </div>
 
-        <div class="search-panel" id="searchPanel">
-          <input class="input" id="searchInput" type="search" placeholder="Chercher une boutique, une activité, une ville…"/>
-          <select class="select" id="cityFilter"><option value="all">Toutes les villes</option></select>
-          <select class="select" id="categoryFilter"><option value="all">Toutes les activités</option></select>
-          <button class="btn btn-ghost" id="btnReset" type="button">Réinitialiser</button>
+        <div class="showcase" aria-label="Ambiance DIGIY MARKET">
+          <div class="photo-card big">
+            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80" alt="Galerie commerçante locale"/>
+            <div class="seal-card" aria-hidden="true"></div>
+            <div class="photo-layer"><strong>On est chez DIGIY</strong><span>Un lieu commun, des boutiques différentes, une confiance visible.</span></div>
+          </div>
+          <div class="photo-card">
+            <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80" alt="Produits en boutique"/>
+            <div class="photo-layer"><strong>Vendre par les yeux</strong><span>Ambiance, image, présence.</span></div>
+          </div>
+          <div class="photo-card">
+            <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=900&q=80" alt="Boutique vivante"/>
+            <div class="photo-layer"><strong>Contact direct</strong><span>Le client voit, aime, écrit.</span></div>
+          </div>
         </div>
       </div>
     </section>
 
-
-
-    <section class="section" id="ambiance">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <span class="pill">📷 Ambiance commerciale</span>
-            <h2>On attire d’abord le regard, puis on montre les vraies boutiques.</h2>
-            <p>
-              Une galerie doit donner envie avant même la recherche. Ces visuels sont là pour poser l’ambiance,
-              faire sentir le commerce, la couleur, la matière et l’énergie du marché.
-            </p>
-          </div>
-          <a class="btn btn-soft" href="#boutiques">Voir les boutiques réelles</a>
-        </div>
-
-        <div class="inspiration-panel">
-          <div class="inspiration-main">
-            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80" alt="Ambiance de boutique vivante" loading="lazy"/>
-            <div class="inspiration-layer">
-              <strong>Une rue commerçante digitale, pas une page froide.</strong>
-              <span>Le client doit sentir qu’il entre dans un marché vivant : boutiques, produits, couleurs, présence locale.</span>
-            </div>
-          </div>
-
-          <div class="inspiration-grid">
-            <div class="inspiration-tile"><img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80" alt="Articles de mode" loading="lazy"/><div class="inspiration-layer"><strong>Mode</strong><span>Voir, aimer, écrire.</span></div></div>
-            <div class="inspiration-tile"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=900&q=80" alt="Cosmétiques" loading="lazy"/><div class="inspiration-layer"><strong>Beauté</strong><span>Produits visibles, contact direct.</span></div></div>
-            <div class="inspiration-tile"><img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80" alt="Marché local" loading="lazy"/><div class="inspiration-layer"><strong>Local</strong><span>Le terrain entre dans le digital.</span></div></div>
-            <div class="inspiration-tile"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80" alt="Shopping" loading="lazy"/><div class="inspiration-layer"><strong>Découverte</strong><span>Le client circule, la boutique respire.</span></div></div>
-          </div>
-        </div>
-
-        <div class="commerce-strip" aria-label="Exemples d'univers commerciaux">
-          <div class="commerce-card"><div class="commerce-card-media"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80" alt="Exemple vêtement" loading="lazy"/></div><div class="commerce-card-body"><strong>Vêtements & accessoires</strong><span>Une carte visuelle donne envie avant même de lire.</span><span class="demo-label">Exemple visuel</span></div></div>
-          <div class="commerce-card"><div class="commerce-card-media"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=700&q=80" alt="Exemple beauté" loading="lazy"/></div><div class="commerce-card-body"><strong>Cosmétiques & soins</strong><span>Le marché doit parler à l’œil, pas seulement au moteur.</span><span class="demo-label">Exemple visuel</span></div></div>
-          <div class="commerce-card"><div class="commerce-card-media"><img src="https://images.unsplash.com/photo-1607082349566-187342175e2f?auto=format&fit=crop&w=700&q=80" alt="Exemple commerce" loading="lazy"/></div><div class="commerce-card-body"><strong>Petits commerces</strong><span>Chaque boutique réelle arrive ensuite dans la galerie.</span><span class="demo-label">Exemple visuel</span></div></div>
-          <div class="commerce-card"><div class="commerce-card-media"><img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=700&q=80" alt="Exemple artisanat" loading="lazy"/></div><div class="commerce-card-body"><strong>Objets & maison</strong><span>Une ambiance chaude soutient les fiches réelles.</span><span class="demo-label">Exemple visuel</span></div></div>
-        </div>
+    <section class="quick-strip">
+      <div class="wrap quick-scroll">
+        <div class="quick-card"><strong>🏬 Esprit galerie</strong><span>Comme une allée commerçante : les boutiques sont réunies sous la signature DIGIY.</span></div>
+        <div class="quick-card"><strong>🛍️ Pas un annuaire</strong><span>On attire d’abord par l’ambiance, puis on guide vers les bons commerces.</span></div>
+        <div class="quick-card"><strong>💬 Achat humain</strong><span>WhatsApp, appel, contact direct : le pro garde la main.</span></div>
+        <div class="quick-card"><strong>💳 Argent direct</strong><span>DIGIY ne garde pas l’argent : paiement direct au commerçant.</span></div>
       </div>
     </section>
 
     <section class="section" id="boutiques">
-      <div class="wrap">
+      <div class="wrap panel" style="padding:22px">
         <div class="section-head">
           <div>
             <span class="pill">🏪 Galeries de magasins</span>
             <h2>Les boutiques visibles maintenant</h2>
             <p>
-              Chaque carte mène vers une fiche publique claire : produits, contact, ville, WhatsApp et paiement direct au commerçant.
+              Chaque carte porte le sceau DIGIY : le client comprend qu’il entre dans une galerie locale,
+              puis choisit une boutique, voit ses produits et contacte directement le commerçant.
             </p>
           </div>
-          <button class="btn btn-soft" id="btnReload" type="button">↻ Recharger</button>
+          <button class="btn btn-ghost" id="btnReload" type="button">↻ Recharger</button>
         </div>
-        <div class="gallery-grid" id="shopsGrid">
-          <div class="empty">Chargement des boutiques…</div>
+
+        <div class="controls">
+          <input class="input" id="searchInput" type="search" placeholder="Chercher une boutique, une ville, une activité…"/>
+          <select class="select" id="cityFilter"><option value="">Toutes les villes</option></select>
+          <select class="select" id="categoryFilter"><option value="">Toutes les activités</option></select>
+          <button class="btn btn-main" id="btnClear" type="button">Effacer</button>
         </div>
+
+        <div class="stats-row" id="statsRow">
+          <span class="stat-pill"><b id="statShops">0</b> boutiques</span>
+          <span class="stat-pill"><b id="statCities">0</b> zones</span>
+          <span class="stat-pill">Contact direct · 0% commission</span>
+        </div>
+
+        <div id="loadingBox" class="loading-box">Chargement des boutiques DIGIY MARKET…</div>
+        <div id="emptyBox" class="empty-box" style="display:none">Aucune boutique publiée pour le moment.</div>
+        <div id="shopsGrid" class="shops-grid"></div>
       </div>
     </section>
 
     <section class="section">
-      <div class="wrap panel" style="padding:22px;">
-        <div class="section-head">
-          <div>
-            <span class="pill">♾️ Doctrine DIGIY</span>
-            <h2>Une galerie, pas des liens perdus.</h2>
-            <p>
-              La force du marché, c’est de rassembler. Une boutique seule existe ; une galerie attire, rassure et fait circuler les clients.
-            </p>
-          </div>
+      <div class="wrap doctrine">
+        <div class="doctrine-card dark">
+          <h3>Le marché n’est pas froid. Il est vivant.</h3>
+          <p>
+            DIGIY MARKET doit donner la sensation d’une galerie marchande : un lieu, une signature,
+            une confiance. Pas seulement des résultats alignés comme une recherche Google.
+          </p>
         </div>
-        <div class="about-grid">
-          <div class="about-card"><strong>✅ Contact direct</strong><span>Le client écrit au commerçant sans passer par une mécanique lourde.</span></div>
-          <div class="about-card"><strong>💳 Argent direct</strong><span>DIGIY ne garde pas l’argent de la boutique. Le paiement reste direct au pro.</span></div>
-          <div class="about-card"><strong>📍 Présence locale</strong><span>La boutique sort de l’ombre et rejoint une rue digitale ancrée terrain.</span></div>
+        <div class="doctrine-card">
+          <h3>La boutique reste libre.</h3>
+          <p>
+            Chaque commerçant garde son nom, son WhatsApp, ses produits et son argent. DIGIY donne la présence,
+            le cadre et la route vers le client — sans prendre de commission.
+          </p>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="wrap">
-      <div class="footer-box">
-        <div><strong>DIGIY MARKET</strong> — Galerie locale, boutiques visibles, contact direct.</div>
-        <div>Zéro commission • WhatsApp direct • Paiement au pro</div>
-      </div>
+    <div class="wrap footer-box">
+      <div><strong>DIGIY MARKET</strong> — Galerie locale, boutiques visibles, contact direct.</div>
+      <div>0% commission · paiement direct au commerçant · signature DIGIYLYFE</div>
     </div>
   </footer>
 
-  <button id="digiy-audio-btn" type="button" aria-label="Écouter DIGIY MARKET">
-    <span id="digiyAudioIcon">▶</span><span id="digiyAudioLabel">Écouter le marché</span>
-  </button>
-  <div id="digiy-audio-progress-wrap" aria-hidden="true"><div id="digiy-audio-progress"></div></div>
+  <button class="audio-btn" id="digiyAudioBtn" type="button">▶ Écouter la galerie</button>
 
   <script>
-    const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
-    const SUPABASE_ANON_KEY = "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
-    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-      auth:{ persistSession:false, autoRefreshToken:false, detectSessionInUrl:false }
-    });
+    (function(){
+      "use strict";
 
-    const $ = (id) => document.getElementById(id);
-    let SHOPS = [];
-
-    function esc(v){
-      return String(v ?? "")
-        .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
-    }
-    function text(v, fallback=""){
-      const s = String(v || "").trim();
-      return s || fallback;
-    }
-    function normPhone(v){
-      const d = String(v || "").replace(/[^\d]/g, "");
-      if (!d) return "";
-      if (d.startsWith("221") && d.length === 12) return d;
-      if (d.length === 9) return "221" + d;
-      return d;
-    }
-    function formatPhone(v){
-      const d = normPhone(v);
-      if(!d) return "—";
-      if(d.startsWith("221") && d.length === 12) return `+221 ${d.slice(3,5)} ${d.slice(5,8)} ${d.slice(8,10)} ${d.slice(10,12)}`;
-      return "+" + d;
-    }
-    function shopName(shop){ return text(shop.shop_name, text(shop.business_name, "Boutique locale")); }
-    function shopCategory(shop){ return text(shop.categories_text, text(shop.category, "Boutique locale")); }
-    function shopCity(shop){ return text(shop.city, "Ville à définir"); }
-    function shopZone(shop){
-      const city = text(shop.city, "");
-      const zones = text(shop.zones, "");
-      if(city && zones && city.toLowerCase() !== zones.toLowerCase()) return `${city} • ${zones}`;
-      return city || zones || "Zone à définir";
-    }
-    function shopDescription(shop){
-      return text(shop.description, "Boutique locale visible sur DIGIY MARKET. Contact direct avec le commerçant.");
-    }
-    function shopUrl(shop){
-      const slug = text(shop.slug, text(shop.workspace_slug, text(shop.last_slug, "")));
-      const u = new URL("https://market.digiylyfe.com/shop.html");
-      if(slug) u.searchParams.set("slug", slug);
-      return u.toString();
-    }
-    function waUrl(shop){
-      const phone = normPhone(shop.whatsapp || shop.public_phone || shop.phone || shop.owner_phone || "");
-      if(!phone) return "";
-      const label = encodeURIComponent(`Bonjour 👋 Je vous contacte via DIGIY MARKET au sujet de ${shopName(shop)}.`);
-      return `https://wa.me/${phone}?text=${label}`;
-    }
-    function initials(name){
-      const words = String(name || "").trim().split(/\s+/).filter(Boolean).slice(0,2);
-      return words.map(w => w[0] || "").join("").toUpperCase() || "DM";
-    }
-
-    async function loadShops(){
-      $("shopsGrid").innerHTML = `<div class="empty">Chargement des boutiques…</div>`;
-      try{
-        const { data, error } = await sb
-          .from("digiy_market_profiles")
-          .select("id,slug,workspace_slug,last_slug,shop_name,business_name,owner_name,city,zones,address,address_text,description,categories_text,category,whatsapp,public_phone,phone,owner_phone,photo_url,logo_url,cover_url,cover_image_url,is_published,is_active,updated_at")
-          .eq("is_published", true)
-          .eq("is_active", true)
-          .order("updated_at", { ascending:false });
-
-        if(error) throw error;
-        SHOPS = Array.isArray(data) ? data : [];
-        buildFilters();
-        renderShops();
-        updateStats();
-      }catch(err){
-        console.error("DIGIY MARKET galerie KO", err);
-        $("shopsGrid").innerHTML = `<div class="empty">Impossible de charger les boutiques pour le moment.<br>${esc(err.message || String(err))}</div>`;
-        $("statShops").textContent = "—";
-        $("statCities").textContent = "—";
-      }
-    }
-
-    function buildFilters(){
-      const cities = [...new Set(SHOPS.map(shopCity).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"fr"));
-      const cats = [...new Set(SHOPS.map(shopCategory).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"fr"));
-      $("cityFilter").innerHTML = `<option value="all">Toutes les villes</option>` + cities.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
-      $("categoryFilter").innerHTML = `<option value="all">Toutes les activités</option>` + cats.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
-    }
-
-    function updateStats(){
-      const cityCount = new Set(SHOPS.map(s => shopCity(s)).filter(Boolean)).size;
-      $("statShops").textContent = String(SHOPS.length);
-      $("statCities").textContent = String(cityCount);
-    }
-
-    function filteredShops(){
-      const q = String($("searchInput").value || "").trim().toLowerCase();
-      const city = $("cityFilter").value;
-      const cat = $("categoryFilter").value;
-      return SHOPS.filter(shop => {
-        if(city !== "all" && shopCity(shop) !== city) return false;
-        if(cat !== "all" && shopCategory(shop) !== cat) return false;
-        if(q){
-          const hay = [shopName(shop), shopCategory(shop), shopCity(shop), shop.zones, shop.address, shop.description].join(" ").toLowerCase();
-          if(!hay.includes(q)) return false;
-        }
-        return true;
+      const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
+      const SUPABASE_ANON_KEY = "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
+      const MARKET_ORIGIN = "https://market.digiylyfe.com";
+      const PRO_MARKET_URL = "https://pro-market.digiylyfe.com/pin.html";
+      const BADGE_URL = "https://digiylyfe.net/wp-content/uploads/2026/03/cropped-digiylyfe_logo_qr.jpeg";
+      const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        auth:{ persistSession:false, autoRefreshToken:false, detectSessionInUrl:false }
       });
-    }
 
-    function renderShops(){
-      const rows = filteredShops();
-      if(!rows.length){
-        $("shopsGrid").innerHTML = `<div class="empty">Aucune boutique trouvée avec ce filtre.</div>`;
-        return;
+      const $ = (id) => document.getElementById(id);
+      let SHOPS = [];
+      let FILTERED = [];
+
+      function esc(v){
+        return String(v ?? "")
+          .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+          .replace(/"/g,"&quot;").replace(/'/g,"&#039;");
       }
-      $("shopsGrid").innerHTML = rows.map(shop => {
-        const name = shopName(shop);
-        const cat = shopCategory(shop);
-        const zone = shopZone(shop);
-        const cover = text(shop.cover_url, text(shop.cover_image_url, ""));
-        const logo = text(shop.photo_url, text(shop.logo_url, ""));
-        const phone = shop.whatsapp || shop.public_phone || shop.phone || shop.owner_phone || "";
-        const wa = waUrl(shop);
-        const url = shopUrl(shop);
-        return `
-          <article class="shop-card">
-            <a class="shop-cover" href="${esc(url)}" aria-label="Voir ${esc(name)}">
-              ${cover ? `<img src="${esc(cover)}" alt="${esc(name)}" loading="lazy" onerror="this.remove();">` : `<div class="fallback">${esc(initials(name))}</div>`}
-              <div class="shop-logo">${logo ? `<img src="${esc(logo)}" alt="${esc(name)}" loading="lazy" onerror="this.parentElement.textContent='${esc(initials(name))}';">` : esc(initials(name))}</div>
-              <div class="shop-status">En ligne</div>
-            </a>
-            <div class="shop-body">
-              <div class="shop-kicker">${esc(cat)}</div>
-              <h3 class="shop-name">${esc(name)}</h3>
-              <p class="shop-desc">${esc(shopDescription(shop))}</p>
-              <div class="shop-meta">
-                <span class="chip">📍 ${esc(zone)}</span>
-                <span class="chip">💬 ${esc(formatPhone(phone))}</span>
+
+      function norm(v){ return String(v || "").trim(); }
+      function lower(v){ return norm(v).toLowerCase(); }
+      function digits(v){ return String(v || "").replace(/[^\d]/g, ""); }
+      function unique(arr){ return [...new Set(arr.map(norm).filter(Boolean))]; }
+
+      function phoneDisplay(v){
+        const d = digits(v);
+        if(!d) return "Contact";
+        if(d.startsWith("221") && d.length === 12){
+          return "+221 " + d.slice(3,5) + " " + d.slice(5,8) + " " + d.slice(8,10) + " " + d.slice(10,12);
+        }
+        return "+" + d;
+      }
+
+      function whatsappUrl(phone, shopName){
+        const p = digits(phone);
+        if(!p) return "";
+        const text = encodeURIComponent(`Bonjour 👋 Je vous contacte via DIGIY MARKET au sujet de ${shopName || "votre boutique"}.`);
+        return `https://wa.me/${p}?text=${text}`;
+      }
+
+      function shopSlug(shop){ return norm(shop.slug || shop.workspace_slug || shop.last_slug); }
+      function shopName(shop){ return norm(shop.shop_name || shop.business_name || "Boutique DIGIY"); }
+      function shopCategory(shop){ return norm(shop.categories_text || shop.category || "Boutique locale"); }
+      function shopCity(shop){ return norm(shop.city || shop.zones || "Zone à définir"); }
+      function shopZone(shop){
+        const city = norm(shop.city);
+        const zone = norm(shop.zones);
+        if(city && zone && lower(city) !== lower(zone)) return city + " • " + zone;
+        return city || zone || "Zone à définir";
+      }
+      function shopPhone(shop){ return norm(shop.whatsapp || shop.public_phone || shop.phone || shop.owner_phone); }
+      function shopText(shop){ return norm(shop.description || "Boutique locale, contact direct avec le commerçant."); }
+      function shopImage(shop){ return norm(shop.cover_url || shop.cover_image_url || shop.photo_url || shop.logo_url); }
+      function initials(name){
+        const parts = norm(name).split(/\s+/).filter(Boolean).slice(0,2);
+        const letters = parts.map(p => p[0]).join("").toUpperCase();
+        return letters || "DM";
+      }
+      function shopUrl(shop){
+        const slug = shopSlug(shop);
+        const u = new URL("/shop.html", MARKET_ORIGIN);
+        if(slug) u.searchParams.set("slug", slug);
+        return u.toString();
+      }
+
+      function populateFilters(){
+        const citySel = $("cityFilter");
+        const catSel = $("categoryFilter");
+        const currentCity = citySel.value;
+        const currentCat = catSel.value;
+
+        const cities = unique(SHOPS.map(s => shopCity(s))).sort((a,b)=>a.localeCompare(b,"fr"));
+        const cats = unique(SHOPS.map(s => shopCategory(s))).sort((a,b)=>a.localeCompare(b,"fr"));
+
+        citySel.innerHTML = '<option value="">Toutes les villes</option>' + cities.map(v => `<option value="${esc(v)}">${esc(v)}</option>`).join("");
+        catSel.innerHTML = '<option value="">Toutes les activités</option>' + cats.map(v => `<option value="${esc(v)}">${esc(v)}</option>`).join("");
+
+        if(cities.includes(currentCity)) citySel.value = currentCity;
+        if(cats.includes(currentCat)) catSel.value = currentCat;
+      }
+
+      function applyFilters(){
+        const q = lower($("searchInput").value);
+        const city = lower($("cityFilter").value);
+        const cat = lower($("categoryFilter").value);
+
+        FILTERED = SHOPS.filter(shop => {
+          const hay = [shopName(shop), shopCategory(shop), shopCity(shop), shop.zones, shop.address, shop.description].map(lower).join(" ");
+          const okQ = !q || hay.includes(q);
+          const okCity = !city || lower(shopCity(shop)) === city;
+          const okCat = !cat || lower(shopCategory(shop)) === cat;
+          return okQ && okCity && okCat;
+        });
+
+        renderShops();
+      }
+
+      function renderStats(){
+        $("statShops").textContent = String(SHOPS.length);
+        $("statCities").textContent = String(unique(SHOPS.map(shopCity)).length);
+      }
+
+      function renderShops(){
+        const grid = $("shopsGrid");
+        const empty = $("emptyBox");
+
+        if(!FILTERED.length){
+          grid.innerHTML = "";
+          empty.style.display = "block";
+          empty.textContent = SHOPS.length ? "Aucune boutique ne correspond à cette recherche." : "Aucune boutique publiée pour le moment.";
+          return;
+        }
+
+        empty.style.display = "none";
+        grid.innerHTML = FILTERED.map(shop => {
+          const name = shopName(shop);
+          const cat = shopCategory(shop);
+          const city = shopZone(shop);
+          const phone = shopPhone(shop);
+          const desc = shopText(shop);
+          const img = shopImage(shop);
+          const url = shopUrl(shop);
+          const wa = whatsappUrl(phone, name);
+          const mediaClass = img ? "shop-media has-img" : "shop-media";
+
+          return `
+            <article class="shop-card">
+              <div class="${mediaClass}">
+                ${img ? `<img class="shop-bg-img" src="${esc(img)}" alt="${esc(name)}" loading="lazy" onerror="this.remove();this.parentElement.classList.remove('has-img');"/>` : ``}
+                <div class="gallery-ribbon">♾️ Chez DIGIY</div>
+                <div class="status-chip">En ligne</div>
+                <div class="shop-brand-seal" title="Boutique présente dans la galerie DIGIY">
+                  <img src="${BADGE_URL}" alt="DIGIYLYFE" loading="lazy"/>
+                </div>
+                <div class="shop-brand-caption">Galerie DIGIY</div>
               </div>
-              <div class="shop-actions">
-                <a class="btn btn-main" href="${esc(url)}">Voir la boutique</a>
-                ${wa ? `<a class="btn btn-soft" href="${esc(wa)}" target="_blank" rel="noopener">WhatsApp</a>` : ``}
+              <div class="shop-body">
+                <div class="shop-cat">${esc(cat)}</div>
+                <h3 class="shop-title">${esc(name)}</h3>
+                <p class="shop-desc">${esc(desc)}</p>
+                <div class="shop-meta">
+                  <span class="meta-pill">📍 ${esc(city)}</span>
+                  <span class="meta-pill">💬 ${esc(phoneDisplay(phone))}</span>
+                </div>
+                <div class="shop-actions">
+                  <a class="btn btn-main" href="${esc(url)}">Voir la boutique</a>
+                  ${wa ? `<a class="btn btn-soft" href="${esc(wa)}" target="_blank" rel="noopener">WhatsApp</a>` : ``}
+                </div>
+                <div class="digiy-floor">
+                  <img src="${BADGE_URL}" alt="DIGIY" loading="lazy"/>
+                  <div><strong>Galerie DIGIY MARKET</strong>Contact direct · 0% commission · paiement au commerçant.</div>
+                </div>
               </div>
-            </div>
-          </article>
-        `;
-      }).join("");
-    }
+            </article>
+          `;
+        }).join("");
+      }
 
-    function resetFilters(){
-      $("searchInput").value = "";
-      $("cityFilter").value = "all";
-      $("categoryFilter").value = "all";
-      renderShops();
-    }
+      async function loadShops(){
+        $("loadingBox").style.display = "block";
+        $("emptyBox").style.display = "none";
+        $("shopsGrid").innerHTML = "";
 
-    ["searchInput","cityFilter","categoryFilter"].forEach(id => $(id).addEventListener(id === "searchInput" ? "input" : "change", renderShops));
-    $("btnReset").addEventListener("click", resetFilters);
-    $("btnReload").addEventListener("click", loadShops);
-    loadShops();
-  </script>
+        try{
+          const { data, error } = await sb
+            .from("digiy_market_profiles")
+            .select("id,slug,workspace_slug,last_slug,shop_name,business_name,city,zones,address,address_text,categories_text,category,description,whatsapp,public_phone,phone,owner_phone,photo_url,logo_url,cover_url,cover_image_url,is_published,is_active,priority,updated_at")
+            .eq("is_published", true)
+            .eq("is_active", true)
+            .order("priority", { ascending:true, nullsFirst:false })
+            .order("updated_at", { ascending:false });
 
-  <script>
-  (function(){
-    const text = "Bienvenue sur DIGIY MARKET. Ici, on entre d’abord dans une ambiance de marché vivant, avec des images, des couleurs et une vraie force commerciale. Ensuite, les boutiques réelles apparaissent en galerie. Tu découvres, tu choisis, tu écris directement au commerçant. Zéro commission. Paiement direct au pro.";
-    const btn = document.getElementById("digiy-audio-btn");
-    const ico = document.getElementById("digiyAudioIcon");
-    const lbl = document.getElementById("digiyAudioLabel");
-    const wrap = document.getElementById("digiy-audio-progress-wrap");
-    const bar = document.getElementById("digiy-audio-progress");
-    if(!btn || !("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)){ if(btn) btn.style.display="none"; return; }
-    let playing = false, timer = null, launchId = 0;
-    function voice(){
-      const voices = speechSynthesis.getVoices() || [];
-      return voices.find(v=>/fr[-_]?FR/i.test(v.lang) && /google/i.test(v.name)) || voices.find(v=>/fr[-_]?FR/i.test(v.lang)) || voices.find(v=>/^fr/i.test(v.lang)) || null;
-    }
-    function idle(){
-      playing=false; ico.textContent="▶"; lbl.textContent="Écouter le marché"; clearInterval(timer); timer=null; wrap.style.opacity="0"; bar.style.width="0%";
-    }
-    function stop(){ try{speechSynthesis.cancel()}catch(e){} idle(); }
-    function progress(id){
-      const words = (text.match(/\S+/g)||[]).length;
-      const dur = Math.max(3000, words * 520);
-      let elapsed = 0; wrap.style.opacity="1"; bar.style.width="0%";
-      timer = setInterval(()=>{ if(!playing || id!==launchId){clearInterval(timer);return;} elapsed += 150; bar.style.width = Math.min((elapsed/dur)*100, 97) + "%"; },150);
-    }
-    function launch(){
-      launchId += 1; const id = launchId; try{speechSynthesis.cancel()}catch(e){}
-      const u = new SpeechSynthesisUtterance(text); u.lang="fr-FR"; u.rate=.82; u.pitch=1; u.volume=1; const v=voice(); if(v) u.voice=v;
-      u.onstart=()=>{ if(id!==launchId)return; playing=true; ico.textContent="■"; lbl.textContent="Arrêter"; progress(id); };
-      u.onend=()=>{ if(id!==launchId)return; bar.style.width="100%"; setTimeout(()=>{ if(id===launchId) idle(); },250); };
-      u.onerror=stop; speechSynthesis.speak(u);
-    }
-    btn.addEventListener("click", ()=>{ if(playing) stop(); else launch(); });
-    window.addEventListener("beforeunload", stop); document.addEventListener("visibilitychange", ()=>{ if(document.hidden && playing) stop(); }); idle();
-  })();
+          if(error) throw error;
+          SHOPS = Array.isArray(data) ? data : [];
+          FILTERED = SHOPS.slice();
+          populateFilters();
+          renderStats();
+          renderShops();
+        }catch(err){
+          console.error("DIGIY MARKET galerie erreur", err);
+          $("emptyBox").style.display = "block";
+          $("emptyBox").textContent = "Impossible de charger les boutiques pour le moment. " + (err?.message || "");
+        }finally{
+          $("loadingBox").style.display = "none";
+        }
+      }
+
+      function setupAudio(){
+        const btn = $("digiyAudioBtn");
+        if(!btn || !("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)){
+          if(btn) btn.style.display = "none";
+          return;
+        }
+        let playing = false;
+        let utter = null;
+        const text = "Bienvenue dans DIGIY MARKET. Ici, les boutiques locales entrent dans une vraie galerie digitale. Chaque commerçant garde son identité, son contact et son argent. DIGIY donne la présence, le cadre et la confiance. Contact direct, zéro commission, paiement direct au commerçant.";
+        function stop(){ try{ speechSynthesis.cancel(); }catch(_){} playing=false; btn.textContent="▶ Écouter la galerie"; }
+        function play(){
+          stop();
+          utter = new SpeechSynthesisUtterance(text);
+          utter.lang = "fr-FR"; utter.rate = .82; utter.pitch = 1; utter.volume = 1;
+          utter.onstart = () => { playing=true; btn.textContent="■ Arrêter"; };
+          utter.onend = stop; utter.onerror = stop;
+          speechSynthesis.speak(utter);
+        }
+        btn.addEventListener("click", () => playing ? stop() : play());
+        window.addEventListener("beforeunload", stop);
+        document.addEventListener("visibilitychange", () => { if(document.hidden) stop(); });
+      }
+
+      $("searchInput").addEventListener("input", applyFilters);
+      $("cityFilter").addEventListener("change", applyFilters);
+      $("categoryFilter").addEventListener("change", applyFilters);
+      $("btnClear").addEventListener("click", () => {
+        $("searchInput").value = "";
+        $("cityFilter").value = "";
+        $("categoryFilter").value = "";
+        applyFilters();
+      });
+      $("btnReload").addEventListener("click", loadShops);
+
+      setupAudio();
+      loadShops();
+    })();
   </script>
 </body>
 </html>
