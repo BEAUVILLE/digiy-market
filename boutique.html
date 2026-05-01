@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-  <title>DIGIY MARKET — Boutique locale</title>
+  <title>DIGIY MARKET — Boutique</title>
   <meta name="theme-color" content="#07140f"/>
-  <meta name="description" content="Découvrez une boutique DIGIY MARKET sur téléphone : produits, commande, WhatsApp, appel et partage simple."/>
+  <meta name="description" content="Boutique DIGIY MARKET sur téléphone : commander, écrire sur WhatsApp, appeler et partager simplement."/>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -545,7 +545,7 @@
           <div>
             <h1 id="shopName">Astou Market</h1>
             <div class="subtitle" id="shopSubtitle">
-              Produits utiles, commandes simples, contact direct.
+              Produits, commande simple, contact direct.
             </div>
           </div>
 
@@ -580,6 +580,10 @@
 
         <div class="desc" id="shopDescription">
           Boutique locale, produits utiles, contact direct, service simple.
+        </div>
+
+        <div class="notice">
+          🎥 WhatsApp Visio Live by DIGIY : voir les produits en vidéo, poser une question, choisir sans trajet inutile.
         </div>
 
         <div class="notice" id="deliveryNote">
@@ -626,7 +630,7 @@
   <nav class="publicBottomNav" aria-label="Navigation boutique DIGIY MARKET">
     <div class="publicBottomNavInner">
       <a href="./index.html"><span class="icoBottom">←</span><span>Retour</span></a>
-      <a href="./index.html#boutiques"><span class="icoBottom">🛍️</span><span>Produits</span></a>
+      <a id="bottomProducts" href="./index.html#boutiques"><span class="icoBottom">🛍️</span><span>Produits</span></a>
       <a class="active" id="bottomOrder" href="./commander.html"><span class="icoBottom">🛒</span><span>Commander</span></a>
       <a id="bottomWhatsapp" href="#"><span class="icoBottom">💬</span><span>WhatsApp</span></a>
       <button id="bottomShare" type="button"><span class="icoBottom">📤</span><span>Partager</span></button>
@@ -658,7 +662,7 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     function whatsappUrl(phone, shopName){
       const p = normalizePhone(phone);
-      const text = encodeURIComponent(`Salut ${shopName || "DIGIY MARKET"}, je veux des infos sur vos produits.`);
+      const text = encodeURIComponent(`Bonjour ${shopName || "DIGIY MARKET"}, je viens de DIGIY MARKET. Je veux voir vos produits et, si possible, passer en WhatsApp Visio Live by DIGIY.`);
       return p ? `https://wa.me/${p}?text=${text}` : "#";
     }
 
@@ -701,8 +705,14 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     function orderUrl(targetSlug){
       return targetSlug
-        ? `./commander.html?slug=${encodeURIComponent(targetSlug)}`
-        : "./commander.html";
+        ? `./commander.html?slug=${encodeURIComponent(targetSlug)}&from=boutique`
+        : "./commander.html?from=boutique";
+    }
+
+    function productsUrl(targetSlug){
+      return targetSlug
+        ? `./shop.html?slug=${encodeURIComponent(targetSlug)}`
+        : "./shop.html";
     }
 
     function previewData(){
@@ -732,6 +742,10 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         const el = $(id);
         if(el) el.href = orderHref;
       });
+
+      const productsHref = productsUrl(targetSlug);
+      const bottomProducts = $("bottomProducts");
+      if(bottomProducts) bottomProducts.href = productsHref;
 
       ["fastWhatsapp","bottomWhatsapp"].forEach(id => {
         const el = $(id);
@@ -773,8 +787,8 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       $("pillHours").textContent = `🕒 ${hours}`;
 
       $("aboutLead").textContent = liveMode
-        ? "Cette boutique est publiée et visible côté public."
-        : "Aperçu public d’une boutique MARKET avant chargement réel.";
+        ? "Cette boutique est visible côté public."
+        : "Aperçu public d’une boutique MARKET.";
       $("shopDescription").textContent = desc;
       $("deliveryNote").textContent = delivery;
 
@@ -797,8 +811,8 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       $("btnCall").href = callHref;
 
       $("footerText").textContent = liveMode
-        ? `DIGIY MARKET • ${shopName} • Boutique publique vivante`
-        : "DIGIY MARKET • Aperçu boutique publique";
+        ? `DIGIY MARKET • ${shopName} • Boutique publique`
+        : "DIGIY MARKET • Aperçu boutique";
 
       $("heroVisual").textContent = category.toLowerCase().includes("cosm")
         ? "🧴"
