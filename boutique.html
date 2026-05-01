@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-  <title>DIGIY MARKET — Boutique</title>
+  <title>DIGIY MARKET — Boutique locale</title>
   <meta name="theme-color" content="#07140f"/>
-  <meta name="description" content="Découvrez une boutique DIGIY MARKET et passez votre commande simplement."/>
+  <meta name="description" content="Découvrez une boutique DIGIY MARKET sur téléphone : produits, commande, WhatsApp, appel et partage simple."/>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -40,7 +40,7 @@
         linear-gradient(180deg, #07140f, #05100c 55%, #040b08 100%);
       color:var(--text);
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      padding:16px;
+      padding:16px 16px calc(104px + env(safe-area-inset-bottom,0px));
     }
 
     a{color:inherit;text-decoration:none}
@@ -386,6 +386,128 @@
       pointer-events:none;
     }
 
+
+    .hero,.layout{
+      scroll-margin-top:88px;
+    }
+
+    .publicBottomNav{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:99990;
+      padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));
+      background:rgba(7,20,15,.94);
+      border-top:1px solid rgba(255,255,255,.12);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+    }
+
+    .publicBottomNavInner{
+      width:min(100%,760px);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:6px;
+    }
+
+    .publicBottomNav a,
+    .publicBottomNav button{
+      min-height:58px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      align-content:center;
+      gap:3px;
+      color:rgba(236,255,244,.72);
+      font-size:11px;
+      font-weight:950;
+      text-align:center;
+      border:1px solid transparent;
+      text-decoration:none;
+      background:transparent;
+      cursor:pointer;
+      font-family:inherit;
+      padding:0 4px;
+    }
+
+    .publicBottomNav .icoBottom{font-size:18px;line-height:1}
+
+    .publicBottomNav a.active,
+    .publicBottomNav button.active{
+      color:#041b12;
+      background:linear-gradient(135deg,var(--primary),var(--gold));
+      border-color:rgba(250,204,21,.28);
+      box-shadow:0 12px 26px rgba(34,197,94,.18);
+    }
+
+    .mobilePublicFastRow{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .mobilePublicFastRow a,
+    .mobilePublicFastRow button{
+      min-height:46px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      text-decoration:none;
+      font-weight:950;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 12px;
+      cursor:pointer;
+      font-family:inherit;
+    }
+
+    .mobilePublicFastRow .primary{
+      background:linear-gradient(135deg,var(--primary),var(--primary2));
+      color:#041b12;
+      border:none;
+    }
+
+    .shareToast{
+      position:fixed;
+      left:50%;
+      bottom:calc(92px + env(safe-area-inset-bottom,0px));
+      transform:translateX(-50%) translateY(12px);
+      z-index:99999;
+      opacity:0;
+      pointer-events:none;
+      transition:.22s ease;
+      max-width:calc(100vw - 24px);
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid rgba(250,204,21,.28);
+      background:rgba(16,36,27,.96);
+      color:#fff1a8;
+      font-size:13px;
+      font-weight:950;
+      box-shadow:var(--shadow);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .shareToast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(0);
+    }
+
+    @media(max-width:640px){
+      .top-actions{display:none}
+      .mobilePublicFastRow{grid-template-columns:1fr 1fr}
+      .wrap{padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))}
+    }
+
+
     @media(max-width:640px){
       .top-actions,.hero-actions{width:100%}
       .top-actions > *, .hero-actions > *{flex:1 1 auto}
@@ -405,7 +527,7 @@
       </div>
 
       <div class="top-actions">
-        <a class="btn ghost" href="./index.html">← Retour vitrine</a>
+        <a class="btn ghost" href="./index.html">← Retour</a>
         <a class="btn" id="btnOrderTop" href="./commander.html">Commander</a>
       </div>
     </section>
@@ -414,11 +536,11 @@
       <div class="hero-grid">
         <div class="hero-media">
           <div class="hero-visual" id="heroVisual">🧴</div>
-          <div class="hero-badge"><span class="dot"></span> Boutique terrain DIGIY</div>
+          <div class="hero-badge"><span class="dot"></span> Boutique DIGIY MARKET</div>
         </div>
 
         <div class="hero-body">
-          <div class="mode" id="modeBadge">Mode aperçu</div>
+          <div class="mode" id="modeBadge">Aperçu</div>
 
           <div>
             <h1 id="shopName">Astou Market</h1>
@@ -434,9 +556,16 @@
           </div>
 
           <div class="hero-actions">
-            <a class="btn primary" id="btnOrderHero" href="./commander.html">🛒 Commander maintenant</a>
+            <a class="btn primary" id="btnOrderHero" href="./commander.html">🛒 Commander</a>
             <a class="btn gold" id="btnWhatsapp" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
             <a class="btn ghost" id="btnCall" href="#">📞 Appeler</a>
+          </div>
+
+          <div class="mobilePublicFastRow">
+            <a href="./index.html">← Retour</a>
+            <a class="primary" id="fastOrder" href="./commander.html">🛒 Commander</a>
+            <a id="fastWhatsapp" href="#">💬 WhatsApp</a>
+            <button id="fastShare" type="button">📤 Partager</button>
           </div>
         </div>
       </div>
@@ -444,7 +573,7 @@
 
     <section class="layout">
       <section class="card panel">
-        <h2>À propos</h2>
+        <h2>La boutique</h2>
         <div class="muted" id="aboutLead">
           Cette boutique présente ses produits et prend les commandes simplement.
         </div>
@@ -459,9 +588,9 @@
       </section>
 
       <section class="card panel">
-        <h2>Repères utiles</h2>
+        <h2>Infos utiles</h2>
         <div class="muted">
-          Les informations ci-dessous aident le client à commander sans tourner en rond.
+          Contact, adresse, horaires et action directe.
         </div>
 
         <div class="info-grid">
@@ -489,9 +618,22 @@
     </section>
 
     <div class="footer" id="footerText">
-      DIGIY MARKET • Boutique publique
+      DIGIY MARKET • Boutique publique • contact direct
     </div>
   </div>
+
+
+  <nav class="publicBottomNav" aria-label="Navigation boutique DIGIY MARKET">
+    <div class="publicBottomNavInner">
+      <a href="./index.html"><span class="icoBottom">←</span><span>Retour</span></a>
+      <a href="./index.html#boutiques"><span class="icoBottom">🛍️</span><span>Produits</span></a>
+      <a class="active" id="bottomOrder" href="./commander.html"><span class="icoBottom">🛒</span><span>Commander</span></a>
+      <a id="bottomWhatsapp" href="#"><span class="icoBottom">💬</span><span>WhatsApp</span></a>
+      <button id="bottomShare" type="button"><span class="icoBottom">📤</span><span>Partager</span></button>
+    </div>
+  </nav>
+
+  <div class="shareToast" id="shareToast">Lien prêt à partager</div>
 
   <script>
     const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
@@ -503,6 +645,7 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     const $ = (id) => document.getElementById(id);
 
     let IS_PREVIEW = !slug;
+    let CURRENT_PROFILE = null;
 
     function normalizePhone(v){
       return String(v || "").replace(/[^\d]/g, "");
@@ -517,6 +660,38 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       const p = normalizePhone(phone);
       const text = encodeURIComponent(`Salut ${shopName || "DIGIY MARKET"}, je veux des infos sur vos produits.`);
       return p ? `https://wa.me/${p}?text=${text}` : "#";
+    }
+
+    function showShareToast(text){
+      const toast = $("shareToast");
+      if(!toast) return;
+      toast.textContent = text || "Lien prêt à partager";
+      toast.classList.add("show");
+      clearTimeout(showShareToast._t);
+      showShareToast._t = setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    async function shareShop(){
+      const name = CURRENT_PROFILE ? (CURRENT_PROFILE.business_name || CURRENT_PROFILE.shop_name || "cette boutique") : "cette boutique";
+      const title = document.title || "DIGIY MARKET";
+      const text = "Découvre " + name + " sur DIGIY MARKET.";
+      const url = window.location.href;
+
+      try{
+        if(navigator.share){
+          await navigator.share({ title, text, url });
+          return;
+        }
+        await navigator.clipboard.writeText(url);
+        showShareToast("Lien copié pour partager");
+      }catch(_){
+        try{
+          await navigator.clipboard.writeText(url);
+          showShareToast("Lien copié pour partager");
+        }catch(__){
+          showShareToast("Partage indisponible ici");
+        }
+      }
     }
 
     function telUrl(phone){
@@ -547,9 +722,37 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       };
     }
 
+    function wirePublicLinks(profile, liveMode){
+      const p = profile || previewData();
+      const targetSlug = liveMode ? (p.slug || slug) : slug;
+      const orderHref = orderUrl(targetSlug);
+      const waHref = whatsappUrl(p.whatsapp || p.public_phone, p.business_name || p.shop_name || "DIGIY MARKET");
+
+      ["fastOrder","bottomOrder"].forEach(id => {
+        const el = $(id);
+        if(el) el.href = orderHref;
+      });
+
+      ["fastWhatsapp","bottomWhatsapp"].forEach(id => {
+        const el = $(id);
+        if(!el) return;
+        el.href = waHref;
+        if(waHref && waHref.startsWith("http")){
+          el.target = "_blank";
+          el.rel = "noopener";
+        }
+      });
+
+      ["fastShare","bottomShare"].forEach(id => {
+        const el = $(id);
+        if(el) el.onclick = shareShop;
+      });
+    }
+
     function applyData(profile, liveMode){
       const p = profile || previewData();
-      const shopName = p.business_name || "Boutique DIGIY";
+      CURRENT_PROFILE = p;
+      const shopName = p.business_name || p.shop_name || "Boutique DIGIY";
       const category = p.category || "Boutique locale";
       const city = p.city || "Terrain local";
       const hours = p.open_hours || "Horaires à confirmer";
@@ -581,7 +784,7 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       $("hoursText").textContent = hours;
 
       $("modeBadge").className = liveMode ? "mode live" : "mode";
-      $("modeBadge").textContent = liveMode ? "Mode vivant" : "Mode aperçu";
+      $("modeBadge").textContent = liveMode ? "Boutique ouverte" : "Aperçu";
 
       const targetSlug = liveMode ? (p.slug || slug) : slug;
       const orderHref = orderUrl(targetSlug);
@@ -602,6 +805,9 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         : category.toLowerCase().includes("aliment")
         ? "🛒"
         : "🛍️";
+
+      document.title = shopName + " — DIGIY MARKET";
+      wirePublicLinks(p, liveMode);
     }
 
     async function loadLive(){
