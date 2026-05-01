@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-  <title>DIGIY MARKET — Je commande</title>
+  <title>DIGIY MARKET — Commander</title>
   <meta name="theme-color" content="#07140f"/>
-  <meta name="description" content="Passe une commande simplement dans une boutique DIGIY MARKET."/>
+  <meta name="description" content="Passe une commande simplement dans une boutique DIGIY MARKET sur téléphone : produit, WhatsApp, commande et partage."/>
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -45,7 +45,7 @@
         linear-gradient(180deg, #07140f, #05100c 55%, #040b08 100%);
       color:var(--text);
       font-family:"Outfit",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-      padding:16px;
+      padding:16px 16px calc(104px + env(safe-area-inset-bottom,0px));
     }
 
     a{color:inherit;text-decoration:none}
@@ -443,6 +443,128 @@
       pointer-events:none;
     }
 
+
+    .hero,.layout{
+      scroll-margin-top:88px;
+    }
+
+    .publicBottomNav{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:99990;
+      padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));
+      background:rgba(7,20,15,.94);
+      border-top:1px solid rgba(255,255,255,.12);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+    }
+
+    .publicBottomNavInner{
+      width:min(100%,760px);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:6px;
+    }
+
+    .publicBottomNav a,
+    .publicBottomNav button{
+      min-height:58px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      align-content:center;
+      gap:3px;
+      color:rgba(236,255,244,.72);
+      font-size:11px;
+      font-weight:950;
+      text-align:center;
+      border:1px solid transparent;
+      text-decoration:none;
+      background:transparent;
+      cursor:pointer;
+      font-family:inherit;
+      padding:0 4px;
+    }
+
+    .publicBottomNav .icoBottom{font-size:18px;line-height:1}
+
+    .publicBottomNav a.active,
+    .publicBottomNav button.active{
+      color:#041b12;
+      background:linear-gradient(135deg,var(--primary),var(--gold));
+      border-color:rgba(250,204,21,.28);
+      box-shadow:0 12px 26px rgba(34,197,94,.18);
+    }
+
+    .mobilePublicFastRow{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .mobilePublicFastRow a,
+    .mobilePublicFastRow button{
+      min-height:46px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      text-decoration:none;
+      font-weight:950;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 12px;
+      cursor:pointer;
+      font-family:inherit;
+    }
+
+    .mobilePublicFastRow .primary{
+      background:linear-gradient(135deg,var(--primary),var(--primary2));
+      color:#041b12;
+      border:none;
+    }
+
+    .shareToast{
+      position:fixed;
+      left:50%;
+      bottom:calc(92px + env(safe-area-inset-bottom,0px));
+      transform:translateX(-50%) translateY(12px);
+      z-index:99999;
+      opacity:0;
+      pointer-events:none;
+      transition:.22s ease;
+      max-width:calc(100vw - 24px);
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid rgba(250,204,21,.28);
+      background:rgba(16,36,27,.96);
+      color:#fff1a8;
+      font-size:13px;
+      font-weight:950;
+      box-shadow:var(--shadow);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .shareToast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(0);
+    }
+
+    @media(max-width:640px){
+      .top-actions{display:none}
+      .mobilePublicFastRow{grid-template-columns:1fr 1fr}
+      .wrap{padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))}
+    }
+
+
     @media(max-width:640px){
       .top-actions,.actions{width:100%}
       .top-actions > *, .actions > *{flex:1 1 auto}
@@ -456,26 +578,26 @@
         <div class="brand-mark">🛒</div>
         <div class="brand-copy">
           <div class="eyebrow">DIGIY MARKET</div>
-          <div class="brand-title" id="brandTitle">Je commande</div>
-          <div class="brand-sub" id="brandSub">Préparation du formulaire…</div>
+          <div class="brand-title" id="brandTitle">Commander</div>
+          <div class="brand-sub" id="brandSub">Préparation de la commande…</div>
         </div>
       </div>
 
       <div class="top-actions">
-        <a class="btn ghost" id="btnBackShop" href="./boutique.html">← Retour à la boutique</a>
-        <a class="btn" id="btnHome" href="./index.html">🏠 Voir les boutiques</a>
+        <a class="btn ghost" id="btnBackShop" href="./boutique.html">← Retour</a>
+        <a class="btn" id="btnHome" href="./index.html">🏠 Boutiques</a>
       </div>
     </section>
 
     <section class="hero">
       <div class="hero-grid">
         <div class="hero-body">
-          <div class="mode" id="modeBadge">Formulaire prêt</div>
+          <div class="mode" id="modeBadge">Commande prête</div>
 
           <div>
             <h1 id="shopName">Astou Market</h1>
             <div class="subtitle" id="shopSubtitle">
-              Passe ta commande simplement, puis la boutique te répond.
+              Écris l’essentiel, puis la boutique te répond.
             </div>
           </div>
 
@@ -486,7 +608,14 @@
           </div>
 
           <div class="notice" id="heroNotice">
-            Formulaire simple terrain : produit, quantité, téléphone, puis la boutique reçoit la demande.
+            Commande simple : produit, quantité, téléphone, puis la boutique reçoit la demande.
+          </div>
+
+          <div class="mobilePublicFastRow">
+            <a id="fastBackShop" href="./boutique.html">← Boutique</a>
+            <a id="fastWhatsapp" href="#">💬 WhatsApp</a>
+            <a class="primary" href="#customerName">🛒 Commander</a>
+            <button id="fastShare" type="button">📤 Partager</button>
           </div>
         </div>
 
@@ -518,7 +647,7 @@
       <section class="card panel">
         <h2>Ma commande</h2>
         <div class="muted">
-          Remplis juste l’essentiel. La boutique reçoit une demande claire.
+          Remplis l’essentiel. La boutique reçoit une demande claire.
         </div>
 
         <div class="form-grid">
@@ -562,23 +691,23 @@
           </div>
 
           <div class="field">
-            <label for="note">Précision utile</label>
+            <label for="note">Message utile</label>
             <textarea id="note" placeholder="Horaire souhaité, détail important, repère utile..."></textarea>
           </div>
         </div>
 
         <div class="actions">
-          <button class="btn primary" id="btnSubmit" type="button">✅ Envoyer ma commande</button>
-          <a class="btn gold" id="btnWhatsapp" href="#" target="_blank" rel="noopener">💬 Écrire sur WhatsApp</a>
+          <button class="btn primary" id="btnSubmit" type="button">✅ Commander</button>
+          <a class="btn gold" id="btnWhatsapp" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
         </div>
 
         <div id="statusBox" class="statusbox">Prêt.</div>
       </section>
 
       <section class="card panel">
-        <h2>Infos utiles</h2>
+        <h2>Infos boutique</h2>
         <div class="muted">
-          Ici, tout doit rester simple, lisible et direct.
+          Contact, horaires, livraison et repères simples.
         </div>
 
         <div class="facts">
@@ -610,9 +739,22 @@
     </section>
 
     <div class="footer" id="footerText">
-      DIGIY MARKET • Commande simple • Terrain
+      DIGIY MARKET • Commande simple • contact direct
     </div>
   </div>
+
+
+  <nav class="publicBottomNav" aria-label="Navigation commande DIGIY MARKET">
+    <div class="publicBottomNavInner">
+      <a id="bottomBackShop" href="./boutique.html"><span class="icoBottom">←</span><span>Boutique</span></a>
+      <a href="./index.html"><span class="icoBottom">🛍️</span><span>Boutiques</span></a>
+      <a id="bottomWhatsapp" href="#"><span class="icoBottom">💬</span><span>WhatsApp</span></a>
+      <a class="active" href="#customerName"><span class="icoBottom">🛒</span><span>Commander</span></a>
+      <button id="bottomShare" type="button"><span class="icoBottom">📤</span><span>Partager</span></button>
+    </div>
+  </nav>
+
+  <div class="shareToast" id="shareToast">Lien prêt à partager</div>
 
   <script>
     const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
@@ -626,6 +768,74 @@
 
     let IS_PREVIEW = !slug;
     let LIVE_PROFILE = null;
+
+    function showShareToast(text){
+      const toast = $("shareToast");
+      if(!toast) return;
+      toast.textContent = text || "Lien prêt à partager";
+      toast.classList.add("show");
+      clearTimeout(showShareToast._t);
+      showShareToast._t = setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    async function shareOrderPage(){
+      const profile = currentProfile();
+      const shopName = profile.business_name || "cette boutique";
+      const title = document.title || "DIGIY MARKET";
+      const text = "Commande chez " + shopName + " sur DIGIY MARKET.";
+      const url = window.location.href;
+
+      try{
+        if(navigator.share){
+          await navigator.share({ title, text, url });
+          return;
+        }
+        await navigator.clipboard.writeText(url);
+        showShareToast("Lien copié pour partager");
+      }catch(_){
+        try{
+          await navigator.clipboard.writeText(url);
+          showShareToast("Lien copié pour partager");
+        }catch(__){
+          showShareToast("Partage indisponible ici");
+        }
+      }
+    }
+
+    function wirePublicLinks(){
+      const profile = currentProfile();
+      const shopName = profile.business_name || "Boutique DIGIY";
+      const phone = profile.whatsapp || profile.public_phone || "";
+      const wa = whatsappUrl(
+        phone,
+        shopName,
+        $("itemName") ? $("itemName").value.trim() : "",
+        $("quantity") ? String(Math.max(parseInt($("quantity").value || "1", 10) || 1, 1)) : "1",
+        $("unitLabel") ? $("unitLabel").value.trim() : ""
+      );
+
+      const back = orderBackUrl();
+
+      ["fastBackShop","bottomBackShop","btnBackShop"].forEach(id => {
+        const el = $(id);
+        if(el) el.href = back;
+      });
+
+      ["fastWhatsapp","bottomWhatsapp","btnWhatsapp"].forEach(id => {
+        const el = $(id);
+        if(!el) return;
+        el.href = wa || "#";
+        if(wa && wa.startsWith("http")){
+          el.target = "_blank";
+          el.rel = "noopener";
+        }
+      });
+
+      ["fastShare","bottomShare"].forEach(id => {
+        const el = $(id);
+        if(el) el.onclick = shareOrderPage;
+      });
+    }
 
     function normalizePhone(v){
       return String(v || "").replace(/[^\d]/g, "");
@@ -724,6 +934,7 @@
       const unitLabel = $("unitLabel").value.trim();
 
       $("btnWhatsapp").href = whatsappUrl(phone, shopName, itemName, quantity, unitLabel);
+      wirePublicLinks();
     }
 
     function applyData(profile, liveMode){
@@ -767,7 +978,9 @@
 
       $("btnBackShop").href = orderBackUrl();
       $("btnHome").href = buildSafeUrl("./index.html");
+      document.title = "Commander — " + shopName + " — DIGIY MARKET";
       refreshWhatsappLink();
+      wirePublicLinks();
 
       $("heroNotice").textContent = liveMode
         ? "Formulaire direct : la boutique reçoit une demande claire et peut te répondre par téléphone ou WhatsApp."
@@ -903,6 +1116,7 @@
         $("btnSubmit").dataset.busy = "0";
         setBusy(false);
         refreshDeliveryField();
+      wirePublicLinks();
       }
     }
 
