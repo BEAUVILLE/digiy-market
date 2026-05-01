@@ -4,8 +4,8 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
   <meta name="theme-color" content="#063b2b"/>
-  <title>DIGIY MARKET — Galerie locale</title>
-  <meta name="description" content="DIGIY MARKET — Galerie locale de boutiques visibles, contact direct, paiement direct au commerçant, zéro commission."/>
+  <title>DIGIY MARKET — Boutiques locales</title>
+  <meta name="description" content="DIGIY MARKET — Boutiques locales visibles sur téléphone, Visio Live, WhatsApp, partage, paiement direct au commerçant, zéro commission."/>
   <meta name="robots" content="index,follow"/>
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -48,6 +48,7 @@
         radial-gradient(900px 520px at 105% 0%, rgba(6,59,43,.14), transparent 54%),
         linear-gradient(180deg,#fff8ea 0%,#f4ecd9 48%,#efe3cc 100%);
       overflow-x:hidden;
+      padding-bottom:calc(104px + env(safe-area-inset-bottom,0px));
     }
 
     a{color:inherit;text-decoration:none}
@@ -291,6 +292,135 @@
       background:linear-gradient(135deg,var(--gold2),var(--gold));color:#1d1605;font-weight:1000;box-shadow:0 16px 40px rgba(6,59,43,.24);cursor:pointer
     }
 
+
+    #boutiques,.hero,.quick-strip{
+      scroll-margin-top:106px;
+    }
+
+    .publicBottomNav{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:99990;
+      padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));
+      background:rgba(6,59,43,.94);
+      border-top:1px solid rgba(255,255,255,.14);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+    }
+
+    .publicBottomNavInner{
+      width:min(100%,760px);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:6px;
+    }
+
+    .publicBottomNav a,
+    .publicBottomNav button{
+      min-height:58px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      align-content:center;
+      gap:3px;
+      color:rgba(255,247,232,.74);
+      font-size:11px;
+      font-weight:1000;
+      text-align:center;
+      border:1px solid transparent;
+      text-decoration:none;
+      background:transparent;
+      cursor:pointer;
+      font-family:inherit;
+      padding:0 4px;
+    }
+
+    .publicBottomNav .icoBottom{font-size:18px;line-height:1}
+
+    .publicBottomNav a.active,
+    .publicBottomNav button.active{
+      color:#2d2308;
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      border-color:rgba(244,207,100,.30);
+      box-shadow:0 12px 26px rgba(214,173,57,.20);
+    }
+
+    .mobilePublicFastRow{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:10px;
+      margin-top:18px;
+    }
+
+    .mobilePublicFastRow a,
+    .mobilePublicFastRow button{
+      min-height:46px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.10);
+      color:#fff;
+      text-decoration:none;
+      font-weight:1000;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 12px;
+      cursor:pointer;
+      font-family:inherit;
+    }
+
+    .mobilePublicFastRow .primary{
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      color:#2d2308;
+      border:none;
+    }
+
+    .share-toast{
+      position:fixed;
+      left:50%;
+      bottom:calc(92px + env(safe-area-inset-bottom,0px));
+      transform:translateX(-50%) translateY(12px);
+      z-index:99999;
+      opacity:0;
+      pointer-events:none;
+      transition:.22s ease;
+      max-width:calc(100vw - 24px);
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid rgba(244,207,100,.30);
+      background:rgba(6,59,43,.96);
+      color:#fff7c2;
+      font-size:13px;
+      font-weight:1000;
+      box-shadow:var(--shadow);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .share-toast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(0);
+    }
+
+    @media(max-width:760px){
+      .top-actions{display:none}
+      .hero{padding-top:16px}
+      .audio-btn{
+        bottom:calc(92px + env(safe-area-inset-bottom,0px));
+        left:12px;
+        right:12px;
+        justify-content:center;
+      }
+      footer{padding-bottom:calc(120px + env(safe-area-inset-bottom,0px))}
+      .mobilePublicFastRow{grid-template-columns:1fr 1fr}
+    }
+
+
     @media(max-width:1080px){
       .hero-grid,.doctrine{grid-template-columns:1fr}
       .showcase{min-height:520px}
@@ -331,7 +461,7 @@
       <nav class="top-actions" aria-label="Navigation principale">
         <a class="btn btn-soft" href="https://digiylyfe.com/">← DIGIYLYFE</a>
         <a class="btn btn-main" href="#boutiques">Voir les boutiques</a>
-        <a class="btn btn-gold" href="https://pro-market.digiylyfe.com/pin.html">Entrer côté vendeur</a>
+        <a class="btn btn-gold" href="https://pro-market.digiylyfe.com/pin.html">Côté vendeur</a>
       </nav>
     </div>
   </header>
@@ -360,8 +490,14 @@
               <span class="hero-badge">0% commission</span>
             </div>
             <div class="hero-actions">
-              <a class="btn btn-gold" href="#boutiques">Entrer dans la galerie</a>
-              <a class="btn btn-soft" href="https://pro-market.digiylyfe.com/pin.html">Ajouter ma boutique</a>
+              <a class="btn btn-gold" href="#boutiques">Voir les boutiques</a>
+              <a class="btn btn-soft" href="https://pro-market.digiylyfe.com/pin.html">Mon lieu de vente</a>
+            </div>
+            <div class="mobilePublicFastRow">
+              <a class="primary" href="#boutiques">🛍️ Boutiques</a>
+              <a id="fastVisio" href="#boutiques">🎥 Visio</a>
+              <a id="fastWhatsapp" href="#boutiques">💬 WhatsApp</a>
+              <button id="fastShare" type="button">📤 Partager</button>
             </div>
             <div class="hero-mini-grid">
               <div class="hero-mini"><strong>Une galerie</strong><span>On sent le lieu DIGIY, pas une fiche perdue dans le cloud.</span></div>
@@ -460,6 +596,19 @@
 
   <button class="audio-btn" id="digiyAudioBtn" type="button">▶ Écouter le Live DIGIY</button>
 
+  <nav class="publicBottomNav" aria-label="Navigation publique DIGIY MARKET">
+    <div class="publicBottomNavInner">
+      <a class="active" href="#"><span class="icoBottom">🏠</span><span>Accueil</span></a>
+      <a href="#boutiques"><span class="icoBottom">🛍️</span><span>Boutiques</span></a>
+      <a id="bottomVisio" href="#boutiques"><span class="icoBottom">🎥</span><span>Visio</span></a>
+      <a id="bottomWhatsapp" href="#boutiques"><span class="icoBottom">💬</span><span>WhatsApp</span></a>
+      <button id="bottomShare" type="button"><span class="icoBottom">📤</span><span>Partager</span></button>
+    </div>
+  </nav>
+
+  <div class="share-toast" id="shareToast">Lien prêt à partager</div>
+
+
   <script>
     (function(){
       "use strict";
@@ -476,6 +625,64 @@
       const $ = (id) => document.getElementById(id);
       let SHOPS = [];
       let FILTERED = [];
+
+      function showShareToast(text){
+        const toast = $("shareToast");
+        if(!toast) return;
+        toast.textContent = text || "Lien prêt à partager";
+        toast.classList.add("show");
+        clearTimeout(showShareToast._t);
+        showShareToast._t = setTimeout(() => toast.classList.remove("show"), 2200);
+      }
+
+      async function shareMarket(){
+        const title = document.title || "DIGIY MARKET";
+        const text = "Découvre les boutiques locales sur DIGIY MARKET.";
+        const url = window.location.href;
+        try{
+          if(navigator.share){
+            await navigator.share({ title, text, url });
+            return;
+          }
+          await navigator.clipboard.writeText(url);
+          showShareToast("Lien copié pour partager");
+        }catch(_){
+          try{
+            await navigator.clipboard.writeText(url);
+            showShareToast("Lien copié pour partager");
+          }catch(__){
+            showShareToast("Partage indisponible ici");
+          }
+        }
+      }
+
+      function firstVisibleShop(){
+        return (Array.isArray(FILTERED) && FILTERED[0]) || (Array.isArray(SHOPS) && SHOPS[0]) || null;
+      }
+
+      function wirePublicActions(){
+        const first = firstVisibleShop();
+        const phone = first ? shopPhone(first) : "";
+        const name = first ? shopName(first) : "";
+        const wa = phone ? whatsappUrl(phone, name) : "#boutiques";
+
+        ["bottomVisio","bottomWhatsapp","fastVisio","fastWhatsapp"].forEach(id => {
+          const el = $(id);
+          if(!el) return;
+          el.href = wa || "#boutiques";
+          if(wa && wa.startsWith("http")){
+            el.target = "_blank";
+            el.rel = "noopener";
+          }
+        });
+
+        ["bottomShare","fastShare"].forEach(id => {
+          const el = $(id);
+          if(el) el.onclick = shareMarket;
+        });
+      }
+
+
 
       function esc(v){
         return String(v ?? "")
@@ -559,6 +766,7 @@
         });
 
         renderShops();
+        wirePublicActions();
       }
 
       function renderStats(){
@@ -578,6 +786,7 @@
         }
 
         empty.style.display = "none";
+        wirePublicActions();
         grid.innerHTML = FILTERED.map(shop => {
           const name = shopName(shop);
           const cat = shopCategory(shop);
@@ -645,6 +854,7 @@
           populateFilters();
           renderStats();
           renderShops();
+        wirePublicActions();
         }catch(err){
           console.error("DIGIY MARKET galerie erreur", err);
           $("emptyBox").style.display = "block";
@@ -688,6 +898,7 @@
       });
       $("btnReload").addEventListener("click", loadShops);
 
+      wirePublicActions();
       setupAudio();
       loadShops();
     })();
