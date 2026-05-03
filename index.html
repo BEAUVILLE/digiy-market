@@ -288,8 +288,9 @@
 
     .audio-btn{
       position:fixed;left:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:90;
-      border:0;border-radius:999px;padding:15px 20px;display:inline-flex;align-items:center;gap:10px;
-      background:linear-gradient(135deg,var(--gold2),var(--gold));color:#1d1605;font-weight:1000;box-shadow:0 16px 40px rgba(6,59,43,.24);cursor:pointer
+      border:1px solid rgba(34,197,94,.42);border-radius:999px;padding:15px 20px;display:inline-flex;align-items:center;gap:10px;
+      background:linear-gradient(135deg,#16a34a,#34d399);color:#04150d;font-weight:1000;
+      box-shadow:0 16px 40px rgba(34,197,94,.28);cursor:pointer;
     }
 
 
@@ -446,6 +447,21 @@
       .section-head{display:block}
       .audio-btn{left:12px;right:12px;justify-content:center}
     }
+  
+    #digiyAudioBtn{
+      visibility:visible !important;
+      opacity:1 !important;
+      pointer-events:auto !important;
+    }
+    @media(max-width:760px){
+      #digiyAudioBtn{
+        left:12px !important;
+        right:12px !important;
+        bottom:calc(92px + env(safe-area-inset-bottom,0px)) !important;
+        width:calc(100% - 24px) !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -624,7 +640,31 @@
     </div>
   </footer>
 
-  <button class="audio-btn" id="digiyAudioBtn" type="button">▶ Écouter le Live DIGIY</button>
+  <button
+    class="audio-btn"
+    id="digiyAudioBtn"
+    type="button"
+    style="
+      position:fixed;
+      left:18px;
+      bottom:calc(92px + env(safe-area-inset-bottom,0px));
+      z-index:999999;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:54px;
+      padding:15px 20px;
+      border-radius:999px;
+      border:1px solid rgba(34,197,94,.50);
+      background:linear-gradient(135deg,#16a34a,#34d399);
+      color:#04150d;
+      font-weight:1000;
+      box-shadow:0 16px 40px rgba(34,197,94,.32),0 0 0 3px rgba(34,197,94,.10);
+      cursor:pointer;
+      font-family:Outfit,system-ui,sans-serif;
+    "
+  >🎧 Écouter le Live DIGIY</button>
 
   <nav class="publicBottomNav" aria-label="Navigation publique DIGIY MARKET">
     <div class="publicBottomNavInner">
@@ -903,7 +943,7 @@
         let playing = false;
         let utter = null;
         const text = "Bienvenue dans DIGIY MARKET. Ici, les boutiques locales entrent dans une vraie galerie marchande digitale. Avec le Live DIGIY, vous pouvez voir les produits en direct, en vidéo, comme si vous étiez sur place. Malgré les distances, vous gagnez du temps et vous évitez un trajet inutile. Le commerçant vous montre les articles, vous conseille, répond à vos questions, et vous aide à choisir. Vous regardez, vous choisissez, vous confirmez directement avec la boutique. Le paiement reste direct au commerçant. DIGIY ne garde pas l’argent et ne prend pas de commission. Selon la zone, la boutique peut aussi organiser une livraison locale. DIGIY MARKET, c’est le contact direct, la vidéo, le conseil et le commerce vivant.";
-        function stop(){ try{ speechSynthesis.cancel(); }catch(_){} playing=false; btn.textContent="▶ Écouter le Live DIGIY"; }
+        function stop(){ try{ speechSynthesis.cancel(); }catch(_){} playing=false; btn.textContent="🎧 Écouter le Live DIGIY"; }
         function play(){
           stop();
           utter = new SpeechSynthesisUtterance(text);
