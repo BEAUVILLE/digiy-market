@@ -781,9 +781,26 @@
         return `https://wa.me/${p}?text=${text}`;
       }
 
-      function shopSlug(shop){ return norm(shop.slug || shop.workspace_slug || shop.last_slug); }
-      function shopName(shop){ return norm(shop.shop_name || shop.business_name || "Boutique DIGIY"); }
-      function shopCategory(shop){ return norm(shop.categories_text || shop.category || "Boutique locale"); }
+      const ASTOU_MARKET_SLUG = "market-221771342889";
+      const ASTOU_MARKET_PHONE = "221771342889";
+      const ASTOU_NAME = "Astou Boutique";
+      const ASTOU_ACTIVITY = "Linge de maison · plage · hôtels · villas · tenues stylées · beauté";
+      const ASTOU_DESCRIPTION = "Astou Boutique propose du linge de maison, serviettes, draps, peignoirs, foutas pour transats, serviettes de plage, robes, tenues stylées, confection et crèmes de beauté à Saly.";
+
+      function shopSlug(shop){
+        const direct = norm(shop.slug || shop.workspace_slug || shop.last_slug);
+        if(direct) return direct;
+        const p = digits(shop.whatsapp || shop.public_phone || shop.phone || shop.owner_phone);
+        return p ? "market-" + p : "";
+      }
+      function isAstouShop(shop){
+        const slug = shopSlug(shop);
+        const phone = digits(shop.whatsapp || shop.public_phone || shop.phone || shop.owner_phone);
+        const name = lower(shop.shop_name || shop.business_name || shop.name);
+        return slug === ASTOU_MARKET_SLUG || phone === ASTOU_MARKET_PHONE || name.includes("astou");
+      }
+      function shopName(shop){ return isAstouShop(shop) ? ASTOU_NAME : norm(shop.shop_name || shop.business_name || "Boutique DIGIY"); }
+      function shopCategory(shop){ return isAstouShop(shop) ? ASTOU_ACTIVITY : norm(shop.categories_text || shop.category || "Boutique locale"); }
       function shopCity(shop){ return norm(shop.city || shop.zones || "Zone à définir"); }
       function shopZone(shop){
         const city = norm(shop.city);
@@ -792,24 +809,8 @@
         return city || zone || "Zone à définir";
       }
       function shopPhone(shop){ return norm(shop.whatsapp || shop.public_phone || shop.phone || shop.owner_phone); }
-      function shopText(shop){ return norm(shop.description || "Boutique locale, contact direct avec le commerçant."); }
+      function shopText(shop){ return isAstouShop(shop) ? ASTOU_DESCRIPTION : norm(shop.description || "Boutique locale, contact direct avec le commerçant."); }
       function shopImage(shop){ return norm(shop.cover_url || shop.cover_image_url || shop.photo_url || shop.logo_url); }
-      function cleanHttpsUrl(v){
-        const s = norm(v);
-        if(!s) return "";
-        return /^https:\/\/[^\s]+$/i.test(s) ? s : "";
-      }
-      function shopPremiumUrl(shop){
-        return cleanHttpsUrl(
-          shop.public_url ||
-          shop.publicUrl ||
-          shop.website_url ||
-          shop.site_url ||
-          shop.boutique_url ||
-          shop.shop_url ||
-          ""
-        );
-      }
       function initials(name){
         const parts = norm(name).split(/\s+/).filter(Boolean).slice(0,2);
         const letters = parts.map(p => p[0]).join("").toUpperCase();
@@ -881,7 +882,6 @@
           const desc = shopText(shop);
           const img = shopImage(shop);
           const url = shopUrl(shop);
-          const premiumUrl = shopPremiumUrl(shop);
           const wa = whatsappUrl(phone, name);
           const mediaClass = img ? "shop-media has-img" : "shop-media";
 
@@ -908,9 +908,7 @@
                   <span class="meta-pill">💬 ${esc(phoneDisplay(phone))}</span>
                 </div>
                 <div class="shop-actions">
-                  ${premiumUrl
-                    ? `<a class="btn btn-gold" href="${esc(premiumUrl)}" target="_blank" rel="noopener">🌍 Voir la vitrine</a><a class="btn btn-ghost" href="${esc(url)}">Fiche MARKET</a>`
-                    : `<a class="btn btn-main" href="${esc(url)}">Voir la boutique</a>`}
+                  <a class="btn btn-main" href="${esc(url)}">Voir la boutique</a>
                   ${wa ? `<a class="btn btn-soft" href="${esc(wa)}" target="_blank" rel="noopener">Visio Live</a>` : ``}
                 </div>
                 <div class="digiy-floor">
@@ -923,54 +921,12 @@
         }).join("");
       }
 
-      async function enrichPremiumUrls(){
-        /*
-          Lecture optionnelle du lien vitrine premium.
-          Important : cette lecture ne doit jamais casser la galerie publique.
-          Si public_url n'est pas encore exposé côté Supabase, MARKET charge quand même les boutiques.
-        */
-        try{
-          const { data, error } = await sb
-            .from("digiy_market_profiles")
-            .select("id,slug,workspace_slug,last_slug,public_url")
-            .eq("is_published", true)
-            .eq("is_active", true);
-
-          if(error){
-            console.warn("DIGIY MARKET public_url optionnel indisponible :", error.message || error);
-            return;
-          }
-
-          const rows = Array.isArray(data) ? data : [];
-          if(!rows.length) return;
-
-          const byId = new Map();
-          const bySlug = new Map();
-          rows.forEach(r => {
-            if(r && r.id) byId.set(String(r.id), r);
-            [r?.slug, r?.workspace_slug, r?.last_slug].map(norm).filter(Boolean).forEach(s => bySlug.set(s, r));
-          });
-
-          SHOPS = SHOPS.map(shop => {
-            const match = byId.get(String(shop.id || "")) || bySlug.get(shopSlug(shop));
-            if(!match) return shop;
-            return Object.assign({}, shop, { public_url: match.public_url || shop.public_url || "" });
-          });
-        }catch(err){
-          console.warn("DIGIY MARKET public_url optionnel ignoré :", err?.message || err);
-        }
-      }
-
       async function loadShops(){
         $("loadingBox").style.display = "block";
         $("emptyBox").style.display = "none";
         $("shopsGrid").innerHTML = "";
 
         try{
-          /*
-            Requête de base volontairement stable.
-            Ne pas ajouter public_url ici : si la colonne n'est pas exposée, toute la galerie tombe à zéro.
-          */
           const { data, error } = await sb
             .from("digiy_market_profiles")
             .select("id,slug,workspace_slug,last_slug,shop_name,business_name,city,zones,address,address_text,categories_text,category,description,whatsapp,public_phone,phone,owner_phone,photo_url,logo_url,cover_url,cover_image_url,is_published,is_active,priority,updated_at")
@@ -980,23 +936,16 @@
             .order("updated_at", { ascending:false });
 
           if(error) throw error;
-
           SHOPS = Array.isArray(data) ? data : [];
-          await enrichPremiumUrls();
-
           FILTERED = SHOPS.slice();
           populateFilters();
           renderStats();
           renderShops();
-          wirePublicActions();
+        wirePublicActions();
         }catch(err){
-          console.error("DIGIY MARKET galerie erreur :", err?.message || err);
-          SHOPS = [];
-          FILTERED = [];
-          renderStats();
-          $("shopsGrid").innerHTML = "";
+          console.error("DIGIY MARKET galerie erreur", err);
           $("emptyBox").style.display = "block";
-          $("emptyBox").textContent = "Impossible de charger les boutiques pour le moment. " + (err?.message || "Erreur Supabase");
+          $("emptyBox").textContent = "Impossible de charger les boutiques pour le moment. " + (err?.message || "");
         }finally{
           $("loadingBox").style.display = "none";
         }
