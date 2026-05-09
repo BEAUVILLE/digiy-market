@@ -923,31 +923,80 @@
         }).join("");
       }
 
+      async function enrichPremiumUrls(){
+        /*
+          Lecture optionnelle du lien vitrine premium.
+          Important : cette lecture ne doit jamais casser la galerie publique.
+          Si public_url n'est pas encore exposé côté Supabase, MARKET charge quand même les boutiques.
+        */
+        try{
+          const { data, error } = await sb
+            .from("digiy_market_profiles")
+            .select("id,slug,workspace_slug,last_slug,public_url")
+            .eq("is_published", true)
+            .eq("is_active", true);
+
+          if(error){
+            console.warn("DIGIY MARKET public_url optionnel indisponible :", error.message || error);
+            return;
+          }
+
+          const rows = Array.isArray(data) ? data : [];
+          if(!rows.length) return;
+
+          const byId = new Map();
+          const bySlug = new Map();
+          rows.forEach(r => {
+            if(r && r.id) byId.set(String(r.id), r);
+            [r?.slug, r?.workspace_slug, r?.last_slug].map(norm).filter(Boolean).forEach(s => bySlug.set(s, r));
+          });
+
+          SHOPS = SHOPS.map(shop => {
+            const match = byId.get(String(shop.id || "")) || bySlug.get(shopSlug(shop));
+            if(!match) return shop;
+            return Object.assign({}, shop, { public_url: match.public_url || shop.public_url || "" });
+          });
+        }catch(err){
+          console.warn("DIGIY MARKET public_url optionnel ignoré :", err?.message || err);
+        }
+      }
+
       async function loadShops(){
         $("loadingBox").style.display = "block";
         $("emptyBox").style.display = "none";
         $("shopsGrid").innerHTML = "";
 
         try{
+          /*
+            Requête de base volontairement stable.
+            Ne pas ajouter public_url ici : si la colonne n'est pas exposée, toute la galerie tombe à zéro.
+          */
           const { data, error } = await sb
             .from("digiy_market_profiles")
-            .select("id,slug,workspace_slug,last_slug,shop_name,business_name,city,zones,address,address_text,categories_text,category,description,whatsapp,public_phone,phone,owner_phone,photo_url,logo_url,cover_url,cover_image_url,public_url,website_url,site_url,boutique_url,shop_url,is_published,is_active,priority,updated_at")
+            .select("id,slug,workspace_slug,last_slug,shop_name,business_name,city,zones,address,address_text,categories_text,category,description,whatsapp,public_phone,phone,owner_phone,photo_url,logo_url,cover_url,cover_image_url,is_published,is_active,priority,updated_at")
             .eq("is_published", true)
             .eq("is_active", true)
             .order("priority", { ascending:true, nullsFirst:false })
             .order("updated_at", { ascending:false });
 
           if(error) throw error;
+
           SHOPS = Array.isArray(data) ? data : [];
+          await enrichPremiumUrls();
+
           FILTERED = SHOPS.slice();
           populateFilters();
           renderStats();
           renderShops();
-        wirePublicActions();
+          wirePublicActions();
         }catch(err){
-          console.error("DIGIY MARKET galerie erreur", err);
+          console.error("DIGIY MARKET galerie erreur :", err?.message || err);
+          SHOPS = [];
+          FILTERED = [];
+          renderStats();
+          $("shopsGrid").innerHTML = "";
           $("emptyBox").style.display = "block";
-          $("emptyBox").textContent = "Impossible de charger les boutiques pour le moment. " + (err?.message || "");
+          $("emptyBox").textContent = "Impossible de charger les boutiques pour le moment. " + (err?.message || "Erreur Supabase");
         }finally{
           $("loadingBox").style.display = "none";
         }
@@ -994,4 +1043,3 @@
   </script>
 </body>
 </html>
-
