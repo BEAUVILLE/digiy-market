@@ -783,6 +783,7 @@
 
       const ASTOU_MARKET_SLUG = "market-221771342889";
       const ASTOU_MARKET_PHONE = "221771342889";
+      const ASTOU_PREMIUM_URL = "https://astou-boutique.digiylyfe.com/";
       const ASTOU_NAME = "Astou Boutique";
       const ASTOU_ACTIVITY = "Linge de maison · plage · hôtels · villas · tenues stylées · beauté";
       const ASTOU_DESCRIPTION = "Astou Boutique propose du linge de maison, serviettes, draps, peignoirs, foutas pour transats, serviettes de plage, robes, tenues stylées, confection et crèmes de beauté à Saly.";
@@ -821,6 +822,9 @@
         const u = new URL("/shop.html", MARKET_ORIGIN);
         if(slug) u.searchParams.set("slug", slug);
         return u.toString();
+      }
+      function shopMainUrl(shop){
+        return isAstouShop(shop) ? ASTOU_PREMIUM_URL : shopUrl(shop);
       }
 
       function populateFilters(){
@@ -881,7 +885,9 @@
           const phone = shopPhone(shop);
           const desc = shopText(shop);
           const img = shopImage(shop);
-          const url = shopUrl(shop);
+          const isAstou = isAstouShop(shop);
+          const url = shopMainUrl(shop);
+          const ficheUrl = shopUrl(shop);
           const wa = whatsappUrl(phone, name);
           const mediaClass = img ? "shop-media has-img" : "shop-media";
 
@@ -905,11 +911,12 @@
                 </div>
                 <div class="shop-meta">
                   <span class="meta-pill">📍 ${esc(city)}</span>
-                  <span class="meta-pill">💬 ${phone ? "WhatsApp direct" : "Contact à demander"}</span>
+                  <span class="meta-pill">${isAstou ? "🌍 Vitrine immersive" : "💬 " + (phone ? "WhatsApp direct" : "Contact à demander")}</span>
                 </div>
                 <div class="shop-actions">
-                  <a class="btn btn-main" href="${esc(url)}">Voir la boutique</a>
-                  ${wa ? `<a class="btn btn-soft" href="${esc(wa)}" target="_blank" rel="noopener">Visio Live</a>` : ``}
+                  <a class="btn btn-main" href="${esc(url)}" ${isAstou ? 'target="_blank" rel="noopener"' : ''}>${isAstou ? "🌍 Entrer dans la boutique" : "Voir la boutique"}</a>
+                  ${isAstou ? `<a class="btn btn-soft" href="${esc(ficheUrl)}">Fiche MARKET</a>` : ``}
+                  ${wa ? `<a class="btn btn-soft" href="${esc(wa)}" target="_blank" rel="noopener">WhatsApp</a>` : ``}
                 </div>
                 <div class="digiy-floor">
                   <img src="${BADGE_URL}" alt="DIGIY" loading="lazy"/>
