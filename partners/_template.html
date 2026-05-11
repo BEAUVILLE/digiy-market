@@ -1,87 +1,77 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <title>Boutique DIGIY</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="description" content="Fiche boutique DIGIY. Contact direct WhatsApp, appel, photos et repère sur la carte." />
-  <meta name="theme-color" content="#facc15" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <meta name="theme-color" content="#063b2b"/>
+  <title>Boutique partenaire — DIGIY MARKET</title>
+  <meta name="description" content="Boutique partenaire DIGIY MARKET : galerie, contact WhatsApp direct, appel, repère terrain, carte et paiement direct au commerçant."/>
+  <meta name="robots" content="index,follow"/>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 
-  <!-- Leaflet -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
   <style>
     :root{
-      --bg-1:#fffbeb;
-      --bg-2:#fef3c7;
-      --card:#ffffff;
-      --ink:#0f172a;
-      --muted:#475569;
-      --line:rgba(15,23,42,.08);
-      --gold-1:#facc15;
-      --gold-2:#f59e0b;
-      --gold-3:#fde68a;
-      --gold-dark:#a16207;
-      --green:#16a34a;
-      --green-2:#22c55e;
-      --blue:#0ea5e9;
-      --blue-dark:#0284c7;
-      --shadow-xl:0 20px 60px rgba(2,6,23,.12);
-      --shadow-lg:0 14px 40px rgba(2,6,23,.10);
-      --shadow-md:0 10px 26px rgba(2,6,23,.08);
-      --shadow-sm:0 4px 12px rgba(2,6,23,.06);
-      --r-xxl:32px;
-      --r-xl:24px;
-      --r-lg:18px;
-      --r-md:14px;
-      --max:1200px;
+      --bg:#f5efe2;
+      --paper:#fffaf0;
+      --ink:#10251c;
+      --muted:#68746e;
+      --green:#063b2b;
+      --green2:#0b5a41;
+      --gold:#d6ad39;
+      --gold2:#f4cf64;
+      --cream:#fff7e8;
+      --line:rgba(16,37,28,.12);
+      --shadow:0 20px 60px rgba(6,59,43,.16);
+      --shadow2:0 10px 30px rgba(6,59,43,.12);
+      --max:1180px;
+      --logo:url('https://digiylyfe.net/wp-content/uploads/2026/04/icon-512-1.png');
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
+    html,body{margin:0;min-height:100%}
+
     body{
-      margin:0;
-      font-family:Outfit,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      min-height:100vh;
+      font-family:Outfit,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--ink);
       background:
-        radial-gradient(1200px 700px at 10% -5%, rgba(250,204,21,.20), transparent 60%),
-        radial-gradient(1000px 600px at 95% 5%, rgba(22,163,74,.12), transparent 60%),
-        radial-gradient(800px 500px at 50% 100%, rgba(245,158,11,.10), transparent 65%),
-        linear-gradient(180deg, #ffffff 0%, var(--bg-1) 45%, #ffffff 100%);
+        radial-gradient(900px 520px at 6% -8%, rgba(214,173,57,.18), transparent 58%),
+        radial-gradient(900px 520px at 105% 0%, rgba(6,59,43,.14), transparent 54%),
+        linear-gradient(180deg,#fff8ea 0%,#f4ecd9 48%,#efe3cc 100%);
       overflow-x:hidden;
+      padding-bottom:calc(102px + env(safe-area-inset-bottom,0px));
+      font-size:17px;
+      font-weight:760;
     }
 
     a{color:inherit;text-decoration:none}
-    button,input,textarea,select{font:inherit}
+    button{font:inherit;cursor:pointer}
+    img{display:block;max-width:100%}
 
-    .wrap{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:20px 16px 60px;
-    }
+    .wrap{width:min(var(--max),calc(100% - 24px));margin:0 auto}
 
     .topbar{
       position:sticky;
       top:0;
-      z-index:100;
-      background:rgba(255,255,255,.90);
-      backdrop-filter:blur(18px) saturate(150%);
-      border-bottom:1px solid var(--line);
-      box-shadow:var(--shadow-sm);
+      z-index:60;
+      backdrop-filter:blur(14px);
+      background:rgba(255,248,234,.92);
+      border-bottom:1px solid rgba(16,37,28,.10);
     }
 
-    .topbar .inner{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:12px 16px;
+    .topbar-inner{
+      min-height:82px;
       display:flex;
       align-items:center;
-      gap:12px;
-      flex-wrap:wrap;
+      justify-content:space-between;
+      gap:14px;
+      padding:10px 0;
     }
 
     .brand{
@@ -91,634 +81,681 @@
       min-width:0;
     }
 
-    .mark{
-      width:46px;
-      height:46px;
-      border-radius:16px;
+    .brand-mark{
+      width:58px;
+      height:58px;
+      border-radius:20px;
       display:grid;
       place-items:center;
-      font-weight:900;
-      font-size:20px;
-      color:#111827;
-      background:linear-gradient(135deg, rgba(250,204,21,.95), rgba(245,158,11,.85));
-      box-shadow:0 8px 24px rgba(245,158,11,.28), 0 0 0 1px rgba(245,158,11,.35) inset;
-      border:2px solid rgba(255,255,255,.65);
       flex:0 0 auto;
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      color:#2d2308;
+      font-size:28px;
+      font-weight:1000;
+      box-shadow:0 14px 34px rgba(6,59,43,.18);
+      border:1px solid rgba(6,59,43,.10);
     }
 
-    .brand .txt{
-      min-width:0;
-    }
-
-    .brand b{
-      display:block;
-      font-size:14px;
-      letter-spacing:.2px;
-      font-weight:900;
+    .brand-title{
+      font-size:clamp(1.12rem,3vw,1.45rem);
+      font-weight:1000;
+      letter-spacing:-.03em;
+      line-height:1.03;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
     }
 
-    .brand small{
-      display:block;
+    .brand-sub{
+      margin-top:5px;
       color:var(--muted);
-      font-weight:800;
-      font-size:12px;
+      font-size:.92rem;
+      font-weight:850;
+      line-height:1.25;
     }
 
-    .spacer{flex:1}
-
-    .actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
+    .top-actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}
 
     .btn{
+      border:1px solid rgba(6,59,43,.12);
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:8px;
-      padding:11px 16px;
-      min-height:46px;
+      gap:9px;
+      min-height:50px;
+      padding:0 17px;
       border-radius:999px;
-      border:1.5px solid var(--line);
-      background:rgba(255,255,255,.85);
-      box-shadow:var(--shadow-sm);
-      font-weight:900;
-      font-size:13px;
-      cursor:pointer;
-      white-space:nowrap;
-      user-select:none;
-      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
-      -webkit-tap-highlight-color:transparent;
-    }
-
-    .btn:hover{
-      transform:translateY(-2px);
-      box-shadow:var(--shadow-md);
-      border-color:rgba(250,204,21,.45);
-    }
-
-    .btn-dark{
-      background:linear-gradient(135deg, #1e293b, #0f172a);
-      color:#fff;
-      border-color:rgba(15,23,42,.28);
-    }
-
-    .btn-gold{
-      background:linear-gradient(135deg, var(--gold-1), var(--gold-2));
-      border-color:rgba(245,158,11,.40);
-      color:#111827;
-    }
-
-    .btn-wa{
-      background:linear-gradient(135deg, #25D366, var(--green-2));
-      border-color:rgba(22,163,74,.38);
-      color:#052e16;
-    }
-
-    .btn-call{
-      background:linear-gradient(135deg, var(--blue), var(--blue-dark));
-      border-color:rgba(14,165,233,.40);
-      color:#fff;
-    }
-
-    .hero{
-      margin-top:20px;
-      background:var(--card);
-      border:2px solid rgba(250,204,21,.14);
-      border-radius:var(--r-xxl);
-      box-shadow:var(--shadow-xl);
-      overflow:hidden;
-    }
-
-    .heroMedia{
-      position:relative;
-      height:380px;
-      background:
-        radial-gradient(900px 360px at 50% 0%, rgba(250,204,21,.16), transparent 55%),
-        linear-gradient(180deg, #1e293b, #0f172a);
-      overflow:hidden;
-    }
-
-    .heroMedia img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      filter:saturate(1.06) contrast(1.04) brightness(1.02);
-    }
-
-    .heroFallback{
-      position:absolute;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:24px;
-      color:rgba(255,255,255,.86);
-      font-weight:800;
-      line-height:1.6;
-      background:
-        radial-gradient(600px 280px at 50% 0%, rgba(250,204,21,.16), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-    }
-
-    .heroShade{
-      position:absolute;
-      inset:0;
-      background:linear-gradient(180deg, rgba(2,6,23,.02) 0%, rgba(2,6,23,.30) 58%, rgba(2,6,23,.64) 100%);
-      pointer-events:none;
-    }
-
-    .heroBadge{
-      position:absolute;
-      top:18px;
-      right:18px;
-      z-index:2;
-      padding:10px 18px;
-      border-radius:999px;
-      background:linear-gradient(135deg, var(--gold-1), var(--gold-2));
-      font-weight:900;
-      font-size:13px;
-      color:#111;
-      box-shadow:0 8px 24px rgba(245,158,11,.35), 0 0 0 2px rgba(255,255,255,.58) inset;
-    }
-
-    .heroBody{
-      padding:22px 22px 26px;
-      display:grid;
-      grid-template-columns:1.25fr .75fr;
-      gap:18px;
-      align-items:start;
-    }
-
-    .title{
-      margin:0 0 10px;
-      font-size:clamp(26px, 5vw, 36px);
-      line-height:1.05;
-      letter-spacing:.2px;
       font-weight:1000;
-      background:linear-gradient(135deg, var(--ink), var(--gold-dark));
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      background-clip:text;
+      font-size:.94rem;
+      white-space:nowrap;
+      background:#fff;
+      color:var(--green);
+      box-shadow:var(--shadow2);
+      transition:transform .16s ease,box-shadow .16s ease;
     }
 
-    .subtitle{
+    .btn:hover{transform:translateY(-1px);box-shadow:0 15px 34px rgba(6,59,43,.16)}
+    .btn:disabled{opacity:.55;pointer-events:none}
+    .btn-main{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;border:0}
+    .btn-gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#2d2308;border:0}
+    .btn-live{background:linear-gradient(135deg,#16a34a,#34d399);color:#04150d;border:0}
+    .btn-soft{background:rgba(255,255,255,.78);color:var(--green)}
+
+    .hero{padding:18px 0 12px}
+
+    .hero-card{
+      position:relative;
+      overflow:hidden;
+      min-height:470px;
+      border-radius:36px;
+      color:#fff;
+      box-shadow:var(--shadow);
+      background:
+        radial-gradient(circle at 86% 12%,rgba(244,207,100,.30),transparent 22%),
+        radial-gradient(circle at 8% 92%,rgba(255,255,255,.11),transparent 28%),
+        linear-gradient(135deg,#052f22,#0b5a41 58%,#0f7a56);
+    }
+
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      right:24px;
+      bottom:22px;
+      width:160px;
+      height:160px;
+      border-radius:38px;
+      background-image:var(--logo);
+      background-size:cover;
+      background-position:center;
+      opacity:.14;
+      transform:rotate(-5deg);
+      border:1px solid rgba(255,255,255,.10);
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      min-height:470px;
+      position:relative;
+      z-index:2;
+    }
+
+    .hero-main{
+      padding:26px;
+      display:grid;
+      gap:16px;
+      align-content:start;
+    }
+
+    .hero-side{
+      padding:26px;
+      border-left:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.045);
+      display:grid;
+      gap:12px;
+      align-content:start;
+      backdrop-filter:blur(6px);
+    }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      width:max-content;
+      max-width:100%;
+      padding:9px 13px;
+      border-radius:999px;
+      background:rgba(255,255,255,.13);
+      border:1px solid rgba(255,255,255,.18);
+      color:#fff;
+      font-size:.82rem;
+      font-weight:1000;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    h1{
       margin:0;
-      color:var(--muted);
-      font-weight:750;
+      font-size:clamp(2.55rem,6.8vw,5.1rem);
+      line-height:.93;
+      letter-spacing:-.06em;
+      font-weight:1000;
+    }
+
+    .hero-lead{
+      margin:0;
+      color:rgba(255,255,255,.88);
+      font-size:1.08rem;
       line-height:1.65;
-      font-size:15px;
+      font-weight:760;
+      max-width:70ch;
       white-space:pre-line;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:2px;
     }
 
     .chips{
       display:flex;
-      gap:10px;
+      gap:9px;
       flex-wrap:wrap;
-      margin-top:14px;
     }
 
     .chip{
       display:inline-flex;
       align-items:center;
-      gap:8px;
-      padding:9px 14px;
+      gap:7px;
+      padding:9px 12px;
       border-radius:999px;
-      border:1.5px solid rgba(250,204,21,.25);
-      background:linear-gradient(135deg, rgba(250,204,21,.12), rgba(245,158,11,.08));
-      font-weight:900;
-      font-size:12px;
-      box-shadow:var(--shadow-sm);
-    }
-
-    .pillCol{
-      display:grid;
-      gap:14px;
-      align-content:start;
-    }
-
-    .pill{
-      display:flex;
-      gap:14px;
-      align-items:flex-start;
-      padding:18px;
-      border-radius:var(--r-lg);
-      border:1.5px solid var(--line);
-      background:linear-gradient(135deg, rgba(255,255,255,.96), rgba(255,255,255,.88));
-      box-shadow:var(--shadow-md);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .pill::before{
-      content:"";
-      position:absolute;
-      top:0;
-      left:0;
-      width:4px;
-      height:100%;
-      background:linear-gradient(180deg, var(--gold-1), var(--gold-2));
-    }
-
-    .pill .icon{
-      font-size:24px;
-      flex:0 0 auto;
-    }
-
-    .pill b{
-      display:block;
-      font-size:14px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.11);
       font-weight:950;
-      margin-bottom:6px;
+      color:#fff;
+      font-size:.9rem;
     }
 
-    .pill small{
-      display:block;
-      color:var(--muted);
-      font-weight:750;
-      line-height:1.5;
-      font-size:13px;
-      white-space:pre-line;
+    .mini{
+      padding:15px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.16);
     }
 
-    .pill .btns{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-top:12px;
+    .mini .k{
+      color:rgba(255,255,255,.70);
+      font-size:.76rem;
+      font-weight:900;
+      margin-bottom:7px;
+      text-transform:uppercase;
+      letter-spacing:.05em;
     }
 
-    .grid{
-      margin-top:20px;
+    .mini .v{
+      font-size:1rem;
+      line-height:1.45;
+      font-weight:1000;
+      word-break:break-word;
+    }
+
+    .photo{
+      margin-top:14px;
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,.15);
+      overflow:hidden;
+      min-height:220px;
+      background:rgba(0,0,0,.16);
+      position:relative;
+    }
+
+    .photo img{
+      width:100%;
+      height:100%;
+      min-height:220px;
+      object-fit:cover;
+    }
+
+    .photo-fallback{
+      min-height:220px;
       display:grid;
-      grid-template-columns:1.2fr .8fr;
-      gap:20px;
+      place-items:center;
+      padding:20px;
+      text-align:center;
+      color:rgba(255,255,255,.78);
+      font-weight:900;
+      line-height:1.5;
     }
 
-    .card{
-      background:var(--card);
-      border:1.5px solid var(--line);
-      border-radius:var(--r-xl);
-      box-shadow:var(--shadow-lg);
+    .pageSwitch{
+      position:sticky;
+      top:92px;
+      z-index:45;
+      margin:12px auto 0;
+      padding:9px;
+      border-radius:26px;
+      border:1px solid rgba(6,59,43,.12);
+      background:rgba(255,248,234,.92);
+      box-shadow:var(--shadow2);
+      backdrop-filter:blur(14px);
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:8px;
+    }
+
+    .pageBtn{
+      min-height:64px;
+      border-radius:18px;
+      border:1px solid rgba(6,59,43,.10);
+      background:#fff;
+      color:var(--green);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:4px;
+      font-weight:1000;
+      font-size:13px;
+      cursor:pointer;
+      box-shadow:0 8px 18px rgba(6,59,43,.07);
+    }
+
+    .pageBtn b{font-size:24px;line-height:1}
+    .pageBtn.active{
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      color:#2d2308;
+      border-color:transparent;
+      box-shadow:0 12px 28px rgba(214,173,57,.20);
+    }
+
+    .panel{
+      display:none;
+      margin-top:14px;
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(16,37,28,.09);
+      border-radius:32px;
+      box-shadow:var(--shadow2);
       overflow:hidden;
     }
 
-    .card .hd{
-      padding:16px 20px;
-      border-bottom:1.5px solid var(--line);
+    .panel.active{display:block}
+
+    .panel-head{
+      padding:20px 20px 13px;
+      border-bottom:1px solid rgba(16,37,28,.08);
+    }
+
+    .panel-head h2{
+      margin:0;
+      font-size:clamp(1.8rem,4vw,3rem);
+      line-height:1;
+      letter-spacing:-.04em;
+      font-weight:1000;
+    }
+
+    .panel-head p{
+      margin:9px 0 0;
+      color:var(--muted);
+      font-size:1rem;
+      line-height:1.6;
+      font-weight:780;
+      max-width:850px;
+    }
+
+    .panel-body{padding:20px}
+
+    .rows{display:grid;gap:12px}
+
+    .row{
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       justify-content:space-between;
       gap:12px;
       flex-wrap:wrap;
-      background:linear-gradient(135deg, rgba(250,204,21,.08), rgba(245,158,11,.04));
+      padding:15px;
+      border-radius:22px;
+      border:1px solid rgba(16,37,28,.10);
+      background:linear-gradient(180deg,#fff,#fffaf0);
     }
 
-    .card .hd b{
-      font-size:16px;
-      letter-spacing:.2px;
-      font-weight:950;
+    .row-left{display:grid;gap:5px;min-width:0;flex:1}
+    .row-k{
+      font-size:.78rem;
+      color:var(--green);
+      font-weight:1000;
+      text-transform:uppercase;
+      letter-spacing:.06em;
     }
 
-    .card .bd{
-      padding:20px;
+    .row-v{
+      font-size:1.12rem;
+      font-weight:1000;
+      line-height:1.34;
+      word-break:break-word;
     }
 
-    .list{
-      display:grid;
-      gap:14px;
-    }
-
-    .item{
-      padding:18px;
-      border-radius:var(--r-lg);
-      border:1.5px solid rgba(250,204,21,.15);
-      background:linear-gradient(135deg, rgba(250,204,21,.04), rgba(255,255,255,.62));
-      box-shadow:var(--shadow-sm);
-    }
-
-    .item .t{
-      font-weight:950;
-      font-size:15px;
-      margin-bottom:10px;
-    }
-
-    .item .s{
+    .row-sub{
+      font-size:.94rem;
       color:var(--muted);
-      font-weight:750;
-      line-height:1.75;
-      font-size:14px;
+      line-height:1.55;
+      font-weight:780;
       white-space:pre-line;
     }
 
-    .item .s b{
-      color:var(--ink);
-      font-weight:900;
+    .row-actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .note-box{
+      padding:15px;
+      border-radius:22px;
+      border:1px solid rgba(214,173,57,.24);
+      background:rgba(244,207,100,.13);
+      color:#4d3d12;
+      font-size:.98rem;
+      line-height:1.62;
+      font-weight:850;
+      white-space:pre-line;
     }
 
     .gallery{
       display:grid;
-      grid-template-columns:repeat(3, 1fr);
+      grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
       gap:12px;
     }
 
-    .ph{
-      border-radius:var(--r-lg);
+    .galleryItem{
+      border-radius:22px;
       overflow:hidden;
-      border:1.5px solid var(--line);
-      background:#f8fafc;
+      border:1px solid rgba(16,37,28,.10);
+      background:#fff;
+      box-shadow:0 9px 18px rgba(6,59,43,.06);
       aspect-ratio:4/3;
-      position:relative;
+      display:grid;
+      place-items:center;
+      color:var(--muted);
+      font-weight:900;
+      text-align:center;
+      padding:12px;
     }
 
-    .ph img{
+    .galleryItem img{
       width:100%;
       height:100%;
       object-fit:cover;
-      display:block;
-    }
-
-    .ph .placeholder{
-      position:absolute;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:14px;
-      color:var(--muted);
-      font-weight:800;
-      font-size:13px;
-      background:linear-gradient(180deg, rgba(255,255,255,.8), rgba(255,255,255,.95));
-    }
-
-    .note{
-      margin-top:14px;
-      padding:16px 18px;
-      border-radius:var(--r-lg);
-      border:2px dashed rgba(245,158,11,.35);
-      background:linear-gradient(135deg, rgba(250,204,21,.14), rgba(245,158,11,.10));
-      font-weight:850;
-      line-height:1.65;
-      font-size:14px;
-      white-space:pre-line;
-    }
-
-    .note b{
-      font-weight:950;
-      color:var(--gold-dark);
-    }
-
-    .mapCard{
-      margin-top:14px;
-      background:var(--card);
-      border:1.5px solid var(--line);
-      border-radius:var(--r-xl);
-      box-shadow:var(--shadow-lg);
-      overflow:hidden;
-    }
-
-    .mapCard .hd{
-      padding:16px 20px;
-      background:linear-gradient(135deg, rgba(250,204,21,.10), rgba(245,158,11,.06));
-      border-bottom:1.5px solid var(--line);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-
-    .mapCard .hd h3{
-      margin:0;
-      font-size:16px;
-      font-weight:950;
     }
 
     #partnerMap{
       width:100%;
-      height:380px;
-      background:#f8fafc;
+      min-height:360px;
+      border-radius:24px;
+      overflow:hidden;
+      border:1px solid rgba(16,37,28,.10);
+      background:#fff;
     }
 
-    .mapFallback{
-      padding:28px 20px;
-      text-align:center;
-      color:var(--muted);
-      font-weight:800;
-      line-height:1.65;
-      background:linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,251,235,.9));
+    .bottomNav{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:99990;
+      padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));
+      background:rgba(6,59,43,.94);
+      border-top:1px solid rgba(255,255,255,.14);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
     }
 
-    .hidden{display:none !important}
+    .bottomNavInner{
+      width:min(100%,760px);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:6px;
+    }
 
-    .foot{
-      margin-top:28px;
-      padding:20px 16px;
+    .bottomNav a,.bottomNav button{
+      min-height:58px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      align-content:center;
+      gap:3px;
+      color:rgba(255,247,232,.74);
+      font-size:11px;
+      font-weight:1000;
       text-align:center;
-      color:rgba(15,23,42,.50);
-      font-weight:850;
+      border:1px solid transparent;
+      text-decoration:none;
+      background:transparent;
+      cursor:pointer;
+      font-family:inherit;
+      padding:0 4px;
+    }
+
+    .bottomNav .ico{font-size:18px;line-height:1}
+    .bottomNav a.active,.bottomNav button.active{
+      color:#2d2308;
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      border-color:rgba(244,207,100,.30);
+      box-shadow:0 12px 26px rgba(214,173,57,.20);
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:calc(92px + env(safe-area-inset-bottom,0px));
+      transform:translateX(-50%) translateY(12px);
+      z-index:99999;
+      opacity:0;
+      pointer-events:none;
+      transition:.22s ease;
+      max-width:calc(100vw - 24px);
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid rgba(244,207,100,.30);
+      background:rgba(6,59,43,.96);
+      color:#fff7c2;
       font-size:13px;
-      background:linear-gradient(135deg, rgba(250,204,21,.06), rgba(245,158,11,.04));
-      border-radius:var(--r-lg);
-      border:1.5px solid var(--line);
+      font-weight:1000;
+      box-shadow:var(--shadow);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
 
-    @media (max-width:980px){
-      .heroBody{grid-template-columns:1fr}
-      .grid{grid-template-columns:1fr}
-      .heroMedia{height:300px}
-      #partnerMap{height:320px}
-      .gallery{grid-template-columns:repeat(2, 1fr)}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    footer{
+      padding:22px 0 calc(120px + env(safe-area-inset-bottom,0px));
+      color:var(--muted);
+      text-align:center;
+      font-size:.88rem;
+      font-weight:850;
     }
 
-    @media (max-width:640px){
-      .wrap{padding:16px 12px 46px}
-      .topbar .inner{padding:10px 12px}
-      .heroMedia{height:250px}
-      .card .bd,.heroBody{padding:16px}
-      .gallery{grid-template-columns:1fr 1fr}
-      .actions{width:100%}
+    @media(max-width:980px){
+      .hero-grid{grid-template-columns:1fr}
+      .hero-side{border-left:none;border-top:1px solid rgba(255,255,255,.12)}
+    }
+
+    @media(max-width:760px){
+      .top-actions{display:none}
+      .topbar-inner{min-height:74px}
+      .brand-mark{width:54px;height:54px;border-radius:18px}
+      .brand-sub{font-size:.82rem}
+      .hero-card{border-radius:30px}
+      .hero-main,.hero-side{padding:21px}
+      .hero-actions{display:grid;grid-template-columns:1fr 1fr}
+      .hero-actions .btn{width:100%}
+      .pageSwitch{top:80px;grid-template-columns:repeat(4,1fr);gap:6px;padding:8px}
+      .pageBtn{min-height:58px;font-size:11px;border-radius:16px}
+      .pageBtn b{font-size:20px}
+      .row-actions{width:100%;justify-content:flex-start}
+      .row-actions .btn{flex:1}
+      #partnerMap{min-height:310px}
+    }
+
+    @media(max-width:430px){
+      .pageSwitch{grid-template-columns:repeat(2,1fr)}
+      .hero-actions{grid-template-columns:1fr}
     }
   </style>
 </head>
 
 <body>
-  <div class="topbar" role="banner">
-    <div class="inner">
-      <a class="btn" id="btn_back" href="../index.html" aria-label="Retour aux boutiques">
-        <span>← Retour</span>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" id="brandBack" href="../index.html" aria-label="Retour au marché">
+        <div class="brand-mark">∞</div>
+        <div>
+          <div class="brand-title" id="topTitle">Boutique partenaire</div>
+          <div class="brand-sub">DIGIY MARKET · contact direct · 0% commission</div>
+        </div>
       </a>
 
-      <div class="brand" aria-label="Les boutiques DIGIY">
-        <div class="mark">∞</div>
-        <div class="txt">
-          <b>Les boutiques DIGIY</b>
-          <small>Contact direct · sans commission</small>
-        </div>
-      </div>
-
-      <div class="spacer"></div>
-
-      <div class="actions">
-        <a class="btn btn-dark" id="btn_ndimbal" href="https://beauville.github.io/digiy-mdimbal-map/" target="_blank" rel="noopener">
-          <span>🗺️ NDIMBAL Map</span>
-        </a>
-        <a class="btn btn-gold" id="btn_hub" href="https://beauville.github.io/digiy-hub/" target="_blank" rel="noopener">
-          <span>🏠 Accueil DIGIY</span>
-        </a>
-      </div>
+      <nav class="top-actions" aria-label="Actions boutique partenaire">
+        <a class="btn btn-soft" id="btnMarket" href="../index.html">🛍️ Marché</a>
+        <a class="btn btn-soft" id="btnSite" href="https://digiylyfe.com/">🌍 Site</a>
+        <a class="btn btn-gold" id="btnHub" href="https://digiy-hub.digiylyfe.com/">🧭 HUB</a>
+        <button class="btn btn-live" id="btnWhatsTop" type="button">💬 WhatsApp</button>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  <div class="wrap">
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-card">
+          <div class="hero-grid">
+            <div class="hero-main">
+              <span class="kicker" id="heroBadge">Boutique partenaire DIGIY</span>
 
-    <section class="hero" aria-label="Fiche boutique">
-      <div class="heroMedia" aria-label="Photo principale">
-        <div class="heroBadge" id="hero_badge">✨ Boutique mise en avant</div>
+              <div>
+                <h1 id="shopName">Nom de la boutique</h1>
+                <p class="hero-lead" id="shopIntro">Présente ici la boutique, ses produits et son service terrain.</p>
+              </div>
 
-        <img
-          id="hero_img"
-          src=""
-          alt=""
-          loading="eager"
-          decoding="async"
-          class="hidden"
-        />
+              <div class="chips">
+                <span class="chip" id="chipActivity">🛍️ Activité</span>
+                <span class="chip" id="chipCity">📍 Zone</span>
+                <span class="chip">💬 Contact direct</span>
+                <span class="chip">💳 Paiement au commerçant</span>
+              </div>
 
-        <div class="heroFallback" id="hero_fallback">
-          <div>
-            <div style="font-size:22px;font-weight:1000;margin-bottom:8px;">Ajoute une belle photo de couverture</div>
-            <div style="font-size:14px;">Un bon visuel donne confiance tout de suite et aide le client à te reconnaître.</div>
-          </div>
-        </div>
+              <div class="hero-actions">
+                <button class="btn btn-live" id="btnWhats" type="button">💬 WhatsApp</button>
+                <button class="btn btn-soft" id="btnCall" type="button">📞 Appeler</button>
+                <button class="btn btn-gold" id="btnMaps" type="button">🗺️ Repère</button>
+                <button class="btn btn-soft" id="btnShare" type="button">📤 Partager</button>
+              </div>
 
-        <div class="heroShade"></div>
-      </div>
-
-      <div class="heroBody">
-        <div>
-          <h1 class="title" id="title">🛍️ Nom de la boutique</h1>
-          <p class="subtitle" id="subtitle">
-            Catégorie — Présente ici ce que la boutique propose, ce qui la rend utile, et pourquoi on peut te contacter directement.
-          </p>
-
-          <div class="chips" aria-label="Points forts">
-            <span class="chip" id="chip_zone">🏪 Quartier</span>
-            <span class="chip">💬 WhatsApp direct</span>
-            <span class="chip">✅ Sans commission</span>
-            <span class="chip" id="chip_city">📍 Ville</span>
-          </div>
-        </div>
-
-        <div class="pillCol">
-          <div class="pill" aria-label="Contact direct">
-            <div class="icon">⚡</div>
-            <div>
-              <b>Contact direct</b>
-              <small id="contact_text">WhatsApp ou appel selon le moment.</small>
-              <div class="btns">
-                <a class="btn btn-wa" id="btn_wa" href="#" target="_blank" rel="noopener noreferrer">
-                  <span>💬 WhatsApp</span>
-                </a>
-                <a class="btn btn-call" id="btn_call" href="#">
-                  <span>📞 Appeler</span>
-                </a>
+              <div class="photo" id="photoBox">
+                <div class="photo-fallback" id="photoFallback">
+                  Ajoute une belle photo de couverture pour donner confiance.
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="pill" aria-label="Repère et localisation">
-            <div class="icon">🧭</div>
-            <div>
-              <b>Repère</b>
-              <small id="address_hint">Ajoute ici un repère simple pour que le client trouve facilement.</small>
-              <div class="btns">
-                <a class="btn btn-dark" id="btn_maps_search" href="#" target="_blank" rel="noopener noreferrer">
-                  <span>🗺️ Ouvrir sur Maps</span>
-                </a>
-                <a class="btn" id="btn_maps_dir" href="#" target="_blank" rel="noopener noreferrer">
-                  <span>🧭 Itinéraire</span>
-                </a>
+            <aside class="hero-side">
+              <div class="mini">
+                <div class="k">Contact client</div>
+                <div class="v" id="miniContact">WhatsApp ou appel selon disponibilité.</div>
               </div>
-            </div>
-          </div>
 
+              <div class="mini">
+                <div class="k">Zone publique</div>
+                <div class="v" id="miniCity">Zone à préciser</div>
+              </div>
+
+              <div class="mini">
+                <div class="k">Repère terrain</div>
+                <div class="v" id="miniAddress">Repère communiqué par la boutique.</div>
+              </div>
+
+              <div class="mini">
+                <div class="k">Règle DIGIY</div>
+                <div class="v">Le client contacte directement. DIGIY ne garde pas l’argent.</div>
+              </div>
+            </aside>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="grid" aria-label="Contenu de la fiche">
-
-      <article class="card" aria-label="Produits et services">
-        <div class="hd">
-          <b>🧺 Ce que tu proposes</b>
-          <span class="chip" id="valid_chip">✅ Boutique visible sur DIGIY</span>
-        </div>
-
-        <div class="bd">
-          <div class="list">
-            <div class="item">
-              <div class="t">💎 Produits phares</div>
-              <div class="s" id="items_block"></div>
-            </div>
-
-            <div class="item">
-              <div class="t">✨ Services</div>
-              <div class="s" id="services_block"></div>
-            </div>
-
-            <div class="note" id="tip_block">
-              💡 <b>Conseil</b> : Mets ici une info utile qui rassure ou aide le client à passer à l’action.
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <aside class="card" aria-label="Galerie photos">
-        <div class="hd">
-          <b>📸 Galerie</b>
-          <span class="chip">✨ En images</span>
-        </div>
-
-        <div class="bd">
-          <div class="gallery" id="gallery"></div>
-
-          <div class="note" style="margin-top:16px" id="gallery_note">
-            ✅ <b>Conseil</b> : Mets des photos claires, proches du réel, pour que le client sache tout de suite où il met les pieds.
-          </div>
-        </div>
-      </aside>
-
-    </section>
-
-    <section class="mapCard" aria-label="Carte">
-      <div class="hd">
-        <h3>🗺️ Carte & repère</h3>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <span class="chip">📍 GPS</span>
-          <span class="chip">Paiement direct au commerçant</span>
-        </div>
-      </div>
-
-      <div id="partnerMap"></div>
-      <div class="mapFallback hidden" id="map_fallback">
-        Ajoute des coordonnées GPS valides pour afficher la carte ici.
-      </div>
-    </section>
-
-    <div class="foot">
-      © DIGIYLYFE · Sans commission · Paiement direct au commerçant · Pierre par pierre ∞
+    <div class="wrap pageSwitch" aria-label="Navigation partenaire">
+      <button class="pageBtn active" type="button" data-view="infos"><b>ℹ️</b><span>Infos</span></button>
+      <button class="pageBtn" type="button" data-view="photos"><b>📸</b><span>Photos</span></button>
+      <button class="pageBtn" type="button" data-view="carte"><b>🗺️</b><span>Carte</span></button>
+      <button class="pageBtn" type="button" data-view="digiy"><b>♾️</b><span>DIGIY</span></button>
     </div>
 
-  </div>
+    <section class="wrap panel active" data-panel="infos">
+      <div class="panel-head">
+        <h2>Infos utiles</h2>
+        <p>Le client doit comprendre vite ce que la boutique propose et comment passer à l’action.</p>
+      </div>
+      <div class="panel-body">
+        <div class="rows" id="infoRows"></div>
+      </div>
+    </section>
+
+    <section class="wrap panel" data-panel="photos">
+      <div class="panel-head">
+        <h2>Galerie</h2>
+        <p>Quelques photos propres suffisent à donner confiance et rendre la boutique vivante.</p>
+      </div>
+      <div class="panel-body">
+        <div class="gallery" id="gallery"></div>
+      </div>
+    </section>
+
+    <section class="wrap panel" data-panel="carte">
+      <div class="panel-head">
+        <h2>Carte & repère</h2>
+        <p>La carte aide à se situer. Le repère exact se confirme toujours directement avec le commerçant.</p>
+      </div>
+      <div class="panel-body">
+        <div id="partnerMap"></div>
+        <div class="note-box" id="mapFallback" style="display:none;margin-top:12px">
+          Coordonnées GPS non renseignées. Le client peut demander le repère par WhatsApp.
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap panel" data-panel="digiy">
+      <div class="panel-head">
+        <h2>Repère DIGIY</h2>
+        <p>Cette fiche est faite pour donner une présence simple, claire et directe au commerçant.</p>
+      </div>
+      <div class="panel-body">
+        <div class="rows">
+          <div class="note-box">
+            <strong>Le terrain garde la main.</strong><br>
+            DIGIY donne la visibilité. Le client garde le contact direct avec le professionnel.
+          </div>
+
+          <div class="row">
+            <div class="row-left">
+              <div class="row-k">Paiement</div>
+              <div class="row-v">Paiement direct au commerçant</div>
+              <div class="row-sub">DIGIY ne garde pas l’argent et ne prend pas de commission.</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="row-left">
+              <div class="row-k">Relation</div>
+              <div class="row-v">Contact direct</div>
+              <div class="row-sub">WhatsApp, appel, repère terrain : la boutique reste propriétaire de sa relation client.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottomNav" aria-label="Navigation partenaire">
+    <div class="bottomNavInner">
+      <a href="../index.html"><span class="ico">🛍️</span><span>Marché</span></a>
+      <button class="active" type="button" data-go="infos"><span class="ico">ℹ️</span><span>Infos</span></button>
+      <button type="button" data-go="photos"><span class="ico">📸</span><span>Photos</span></button>
+      <button type="button" id="bottomWhats"><span class="ico">💬</span><span>WhatsApp</span></button>
+      <button type="button" id="bottomShare"><span class="ico">📤</span><span>Partager</span></button>
+    </div>
+  </nav>
+
+  <div class="toast" id="toast">Lien prêt à partager</div>
+
+  <footer>
+    <div class="wrap">DIGIY MARKET • Boutique partenaire • contact direct • paiement au commerçant</div>
+  </footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
@@ -727,13 +764,13 @@
       "use strict";
 
       /*
-        REMPLIS ICI
-        Tu peux laisser vide ce que tu n’as pas encore.
+        REMPLIR ICI.
+        Laisse vide ce que tu n’as pas encore.
       */
       const SHOP = {
         emoji: "🛍️",
         name: "PARTNER_NAME",
-        category: "CATEGORY",
+        activity: "CATEGORY",
         city: "CITY",
         zoneLabel: "ZONE_LABEL",
         phone: "+221XXXXXXXXX",
@@ -742,13 +779,13 @@
         lat: 14.0000,
         lng: -16.0000,
         heroImage: "HERO_IMAGE_URL",
-        heroBadge: "✨ Boutique mise en avant",
+        heroBadge: "Boutique partenaire DIGIY",
         description1: "DESCRIPTION_1",
         description2: "DESCRIPTION_2",
-        whatsappText: "Salam, je viens de DIGIY MARKET. Je veux des infos / commander.",
+        whatsappText: "Bonjour, je viens de DIGIY MARKET. Je souhaite avoir des informations.",
         backHref: "../index.html",
-        ndimbalHref: "https://beauville.github.io/digiy-mdimbal-map/",
-        hubHref: "https://beauville.github.io/digiy-hub/",
+        siteHref: "https://digiylyfe.com/",
+        hubHref: "https://digiy-hub.digiylyfe.com/",
         items: [
           { title: "ITEM_1", details: "DETAILS_1" },
           { title: "ITEM_2", details: "DETAILS_2" },
@@ -760,7 +797,6 @@
           "SERVICE_3"
         ],
         tipText: "TIP_TEXT",
-        galleryNote: "GALLERY_NOTE",
         gallery: [
           "GALLERY_1_URL",
           "GALLERY_2_URL",
@@ -773,287 +809,283 @@
 
       const $ = (id) => document.getElementById(id);
 
-      function txt(value, fallback){
-        const v = String(value ?? "").trim();
-        return v ? v : fallback;
+      function clean(v){
+        return String(v == null ? "" : v).trim();
       }
 
-      function isPlaceholder(value){
-        const v = String(value ?? "").trim();
-        if(!v) return true;
-        return /^[A-Z0-9_]+$/i.test(v) && v.includes("_");
+      function isPlaceholder(v){
+        const s = clean(v);
+        return !s || (/^[A-Z0-9_]+$/.test(s) && s.includes("_"));
       }
 
-      function cleanPhone(value){
-        return String(value || "").replace(/[^\d+]/g, "");
+      function safe(v,fallback){
+        const s = clean(v);
+        return isPlaceholder(s) ? (fallback || "") : s;
       }
 
-      function cleanPhoneForWa(value){
-        return cleanPhone(value).replace(/[^\d]/g, "");
+      function digits(v){
+        return clean(v).replace(/[^\d]/g,"");
       }
 
-      function buildWa(phone, message){
-        const p = cleanPhoneForWa(phone);
-        if(!p) return "#";
-        return "https://wa.me/" + p + "?text=" + encodeURIComponent(message || "");
+      function esc(v){
+        return String(v ?? "")
+          .replace(/&/g,"&amp;")
+          .replace(/</g,"&lt;")
+          .replace(/>/g,"&gt;")
+          .replace(/"/g,"&quot;")
+          .replace(/'/g,"&#039;");
       }
 
-      function buildTel(phone){
-        const p = cleanPhone(phone);
-        return p ? "tel:" + p : "#";
+      function toast(msg){
+        const t = $("toast");
+        if(!t) return;
+        t.textContent = msg || "Lien prêt à partager";
+        t.classList.add("show");
+        clearTimeout(toast._t);
+        toast._t = setTimeout(() => t.classList.remove("show"), 2200);
       }
 
-      function buildMapsSearch(query){
-        const q = txt(query, "");
-        return q ? "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q) : "#";
+      function waUrl(){
+        const p = digits(SHOP.phone);
+        if(!p) return "";
+        const msg = safe(SHOP.whatsappText, "Bonjour, je viens de DIGIY MARKET. Je souhaite avoir des informations.");
+        return "https://wa.me/" + p + "?text=" + encodeURIComponent(msg);
       }
 
-      function buildMapsDir(lat, lng){
-        if(!isFinite(lat) || !isFinite(lng)) return "#";
-        return "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(lat + "," + lng);
-      }
-
-      function validLatLng(lat, lng){
-        return typeof lat === "number" && typeof lng === "number" && isFinite(lat) && isFinite(lng) &&
-          lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180;
-      }
-
-      function escapeHtml(str){
-        return String(str)
-          .replaceAll("&", "&amp;")
-          .replaceAll("<", "&lt;")
-          .replaceAll(">", "&gt;")
-          .replaceAll('"', "&quot;")
-          .replaceAll("'", "&#039;");
-      }
-
-      function setHref(el, href){
-        if(!el) return;
-        el.href = href && href !== "#" ? href : "#";
-        if(href === "#"){
-          el.setAttribute("aria-disabled", "true");
-          el.style.opacity = ".65";
-          el.style.pointerEvents = "none";
+      function mapsUrl(){
+        const lat = Number(SHOP.lat);
+        const lng = Number(SHOP.lng);
+        if(Number.isFinite(lat) && Number.isFinite(lng) && lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180){
+          return "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(lat + "," + lng);
         }
+
+        const q = safe(SHOP.mapsQuery, [SHOP.name, SHOP.city].map(clean).filter(Boolean).join(" "));
+        return q ? "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q) : "";
       }
 
-      function fillItems(items){
-        const valid = Array.isArray(items) ? items.filter(it => {
-          return it && !isPlaceholder(it.title) && txt(it.title, "").length;
-        }) : [];
+      function row(label,value,sub,actions){
+        return `
+          <div class="row">
+            <div class="row-left">
+              <div class="row-k">${esc(label)}</div>
+              <div class="row-v">${esc(value)}</div>
+              ${sub ? `<div class="row-sub">${esc(sub)}</div>` : ``}
+            </div>
+            ${actions ? `<div class="row-actions">${actions}</div>` : ``}
+          </div>
+        `;
+      }
+
+      function fillItems(){
+        const arr = Array.isArray(SHOP.items) ? SHOP.items : [];
+        const valid = arr.filter(x => x && !isPlaceholder(x.title));
 
         if(!valid.length){
-          return "• <b>Produit 1</b> : Mets ici ton article fort\n• <b>Produit 2</b> : Ajoute le détail utile\n• <b>Produit 3</b> : Donne envie simplement";
+          return "Produit phare 1\nProduit phare 2\nProduit phare 3";
         }
 
-        return valid.map(it => {
-          const title = escapeHtml(txt(it.title, "Produit"));
-          const details = escapeHtml(txt(it.details, "Détail à compléter"));
-          return "• <b>" + title + "</b> : " + details;
+        return valid.map(x => {
+          const title = safe(x.title, "Produit");
+          const details = safe(x.details, "Détail à préciser");
+          return title + " — " + details;
         }).join("\n");
       }
 
-      function fillServices(services){
-        const valid = Array.isArray(services)
-          ? services.filter(s => txt(s, "") && !isPlaceholder(s))
-          : [];
-
-        if(!valid.length){
-          return "• Conseil\n• Préparation\n• Service sur demande";
-        }
-
-        return valid.map(s => "• <b>" + escapeHtml(txt(s, "Service")) + "</b>").join("\n");
+      function fillServices(){
+        const arr = Array.isArray(SHOP.services) ? SHOP.services : [];
+        const valid = arr.filter(x => !isPlaceholder(x));
+        return valid.length ? valid.join("\n") : "Conseil\nPréparation\nService sur demande";
       }
 
-      function buildSubtitle(){
-        const category = txt(SHOP.category, "Catégorie");
-        const d1 = !isPlaceholder(SHOP.description1) ? txt(SHOP.description1, "") : "";
-        const d2 = !isPlaceholder(SHOP.description2) ? txt(SHOP.description2, "") : "";
-
-        const lines = [];
-        lines.push(category + " — " + (d1 || "Présente ici ce que tu proposes clairement."));
-        if(d2) lines.push(d2);
-        return lines.join("\n\n");
-      }
-
-      function buildGallery(){
-        const host = $("gallery");
-        const list = Array.isArray(SHOP.gallery) ? SHOP.gallery : [];
-
-        host.innerHTML = "";
-
-        const valid = list.filter(url => {
-          const u = txt(url, "");
-          return u && !isPlaceholder(u);
+      function setPanel(view){
+        document.querySelectorAll("[data-panel]").forEach(p => {
+          p.classList.toggle("active", p.getAttribute("data-panel") === view);
         });
 
-        if(!valid.length){
-          for(let i = 0; i < 6; i++){
-            const item = document.createElement("div");
-            item.className = "ph";
-            item.innerHTML = '<div class="placeholder">Ajoute une photo ici</div>';
-            host.appendChild(item);
+        document.querySelectorAll("[data-view]").forEach(b => {
+          b.classList.toggle("active", b.getAttribute("data-view") === view);
+        });
+
+        document.querySelectorAll("[data-go]").forEach(b => {
+          b.classList.toggle("active", b.getAttribute("data-go") === view);
+        });
+      }
+
+      function openWhats(){
+        const url = waUrl();
+        if(!url){ toast("WhatsApp non renseigné."); return; }
+        window.open(url, "_blank", "noopener,noreferrer");
+      }
+
+      function callPhone(){
+        const p = clean(SHOP.phone).replace(/[^\d+]/g,"");
+        if(!p){ toast("Téléphone non renseigné."); return; }
+        location.href = "tel:" + p;
+      }
+
+      function openMaps(){
+        const url = mapsUrl();
+        if(!url){ toast("Repère à demander par WhatsApp."); return; }
+        window.open(url, "_blank", "noopener,noreferrer");
+      }
+
+      async function sharePage(){
+        const title = document.title || "Boutique DIGIY MARKET";
+        const text = "Découvre cette boutique sur DIGIY MARKET.";
+        const url = location.href;
+        try{
+          if(navigator.share){
+            await navigator.share({title,text,url});
+            return;
           }
+          await navigator.clipboard.writeText(url);
+          toast("Lien copié");
+        }catch(_){
+          try{
+            await navigator.clipboard.writeText(url);
+            toast("Lien copié");
+          }catch(__){
+            toast("Partage indisponible ici");
+          }
+        }
+      }
+
+      function renderGallery(){
+        const host = $("gallery");
+        const gallery = Array.isArray(SHOP.gallery) ? SHOP.gallery.filter(x => !isPlaceholder(x)) : [];
+
+        if(!gallery.length){
+          host.innerHTML = `
+            <div class="galleryItem">Photo 1 à ajouter</div>
+            <div class="galleryItem">Photo 2 à ajouter</div>
+            <div class="galleryItem">Photo 3 à ajouter</div>
+            <div class="galleryItem">Photo 4 à ajouter</div>
+          `;
           return;
         }
 
-        valid.forEach((url, index) => {
-          const a = document.createElement("a");
-          a.className = "ph";
-          a.href = url;
-          a.target = "_blank";
-          a.rel = "noopener";
-
-          const img = document.createElement("img");
-          img.src = url;
-          img.alt = "Photo " + (index + 1);
-
-          img.addEventListener("error", function(){
-            a.removeAttribute("href");
-            a.removeAttribute("target");
-            a.removeAttribute("rel");
-            a.innerHTML = '<div class="placeholder">Image non disponible</div>';
-          });
-
-          a.appendChild(img);
-          host.appendChild(a);
-        });
+        host.innerHTML = gallery.map((url,i) => `
+          <a class="galleryItem" href="${esc(url)}" target="_blank" rel="noopener">
+            <img src="${esc(url)}" alt="Photo ${i+1}" loading="lazy" onerror="this.parentElement.textContent='Image non disponible'"/>
+          </a>
+        `).join("");
       }
 
-      function initHeroImage(){
-        const img = $("hero_img");
-        const fallback = $("hero_fallback");
-        const src = txt(SHOP.heroImage, "");
-
-        if(!src || isPlaceholder(src)){
-          img.classList.add("hidden");
-          fallback.classList.remove("hidden");
-          return;
-        }
-
-        img.src = src;
-        img.alt = txt(SHOP.name, "Boutique") + " — " + txt(SHOP.category, "Catégorie") + " à " + txt(SHOP.city, "Ville");
-        img.classList.remove("hidden");
-
-        img.addEventListener("load", function(){
-          fallback.classList.add("hidden");
-        });
-
-        img.addEventListener("error", function(){
-          img.classList.add("hidden");
-          fallback.classList.remove("hidden");
-        });
-      }
-
-      function hydrate(){
-        const name = txt(SHOP.name, "Nom de la boutique");
-        const category = txt(SHOP.category, "Catégorie");
-        const city = txt(SHOP.city, "Ville");
-        const zone = txt(SHOP.zoneLabel, city);
-        const emoji = txt(SHOP.emoji, "🛍️");
-        const addressHint = !isPlaceholder(SHOP.addressHint)
-          ? txt(SHOP.addressHint, "Ajoute ici un repère simple pour que le client trouve facilement.")
-          : "Ajoute ici un repère simple pour que le client trouve facilement.";
-
-        const title = name + " — Boutique DIGIY";
-        const metaDesc = name + " à " + city + " : " + category + ". Contact direct WhatsApp, appel, photos et repère sur la carte.";
-
-        document.title = title;
-        document.querySelector('meta[name="description"]').setAttribute("content", metaDesc);
-
-        $("title").textContent = emoji + " " + name;
-        $("subtitle").textContent = buildSubtitle();
-        $("chip_zone").textContent = "🏪 " + zone;
-        $("chip_city").textContent = "📍 " + city;
-        $("address_hint").textContent = addressHint;
-        $("hero_badge").textContent = txt(SHOP.heroBadge, "✨ Boutique mise en avant");
-        $("contact_text").textContent = "WhatsApp ou appel — réponse directe du commerçant.";
-
-        $("items_block").innerHTML = fillItems(SHOP.items);
-        $("services_block").innerHTML = fillServices(SHOP.services);
-
-        const tip = !isPlaceholder(SHOP.tipText)
-          ? txt(SHOP.tipText, "")
-          : "";
-        $("tip_block").innerHTML = "💡 <b>Conseil</b> : " + escapeHtml(tip || "Ajoute une petite phrase qui rassure, explique ou aide le client à commander plus vite.");
-
-        const galleryNote = !isPlaceholder(SHOP.galleryNote)
-          ? txt(SHOP.galleryNote, "")
-          : "";
-        $("gallery_note").innerHTML = "✅ <b>Conseil</b> : " + escapeHtml(galleryNote || "Mets des photos propres, vraies et proches du réel.");
-
-        setHref($("btn_back"), txt(SHOP.backHref, "../index.html"));
-        setHref($("btn_ndimbal"), txt(SHOP.ndimbalHref, "https://beauville.github.io/digiy-mdimbal-map/"));
-        setHref($("btn_hub"), txt(SHOP.hubHref, "https://beauville.github.io/digiy-hub/"));
-
-        const wa = buildWa(SHOP.phone, txt(SHOP.whatsappText, "Salam, je viens de DIGIY. Je veux plus d'infos."));
-        const tel = buildTel(SHOP.phone);
-
-        const mapsQuery = !isPlaceholder(SHOP.mapsQuery)
-          ? txt(SHOP.mapsQuery, name + " " + city)
-          : (name + " " + city);
-
-        const mapsSearch = buildMapsSearch(mapsQuery);
-        const mapsDir = buildMapsDir(Number(SHOP.lat), Number(SHOP.lng));
-
-        setHref($("btn_wa"), wa);
-        setHref($("btn_call"), tel);
-        setHref($("btn_maps_search"), mapsSearch);
-        setHref($("btn_maps_dir"), mapsDir);
-
-        initHeroImage();
-        buildGallery();
-      }
-
-      let mapReady = false;
-
-      function initMap(){
-        if(mapReady) return;
-        mapReady = true;
-
-        const mapEl = $("partnerMap");
-        const fallback = $("map_fallback");
+      function renderMap(){
         const lat = Number(SHOP.lat);
         const lng = Number(SHOP.lng);
+        const mapEl = $("partnerMap");
+        const fallback = $("mapFallback");
 
-        if(!window.L || !validLatLng(lat, lng)){
-          mapEl.classList.add("hidden");
-          fallback.classList.remove("hidden");
+        if(!window.L || !Number.isFinite(lat) || !Number.isFinite(lng) || lat < -90 || lat > 90 || lng < -180 || lng > 180){
+          mapEl.style.display = "none";
+          fallback.style.display = "block";
           return;
         }
 
-        const map = L.map("partnerMap", {
-          zoomControl: true,
-          scrollWheelZoom: false
-        }).setView([lat, lng], 16);
+        const map = L.map("partnerMap", {scrollWheelZoom:false}).setView([lat,lng], 16);
 
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          attribution: "© OpenStreetMap | DIGIYLYFE ∞",
-          maxZoom: 19
+          attribution:"© OpenStreetMap · DIGIYLYFE ∞",
+          maxZoom:19
         }).addTo(map);
 
-        const marker = L.marker([lat, lng]).addTo(map);
-        marker.bindPopup(
-          "<b>" + escapeHtml(txt(SHOP.name, "Boutique")) + "</b><br>" +
-          escapeHtml(txt(SHOP.addressHint, "Repère à compléter"))
-        ).openPopup();
+        const name = safe(SHOP.name, "Boutique DIGIY");
+        const address = safe(SHOP.addressHint, "Repère à confirmer par WhatsApp");
 
-        L.circle([lat, lng], {
-          color: "#f59e0b",
-          fillColor: "#fde68a",
-          fillOpacity: 0.18,
-          radius: 180
+        L.marker([lat,lng]).addTo(map).bindPopup("<b>" + esc(name) + "</b><br>" + esc(address)).openPopup();
+
+        L.circle([lat,lng], {
+          color:"#d6ad39",
+          fillColor:"#f4cf64",
+          fillOpacity:.18,
+          radius:170
         }).addTo(map);
       }
 
-      hydrate();
+      function render(){
+        const name = safe(SHOP.name, "Boutique partenaire");
+        const activity = safe(SHOP.activity, "Boutique locale");
+        const city = safe(SHOP.city, "Zone à définir");
+        const zone = safe(SHOP.zoneLabel, city);
+        const address = safe(SHOP.addressHint, "Repère communiqué par la boutique.");
+        const desc1 = safe(SHOP.description1, "Boutique locale visible sur DIGIY MARKET.");
+        const desc2 = safe(SHOP.description2, "Contact direct avec le commerçant, sans commission.");
+        const hero = safe(SHOP.heroImage, "");
+        const badge = safe(SHOP.heroBadge, "Boutique partenaire DIGIY");
+        const tip = safe(SHOP.tipText, "Contacte la boutique avant de te déplacer pour confirmer disponibilité, prix et repère.");
+
+        document.title = name + " — DIGIY MARKET";
+        document.querySelector('meta[name="description"]').setAttribute("content", name + " à " + city + " : " + activity + ". Contact direct WhatsApp, appel, galerie et carte.");
+
+        $("topTitle").textContent = name;
+        $("shopName").textContent = name;
+        $("shopIntro").textContent = activity + " — " + desc1 + "\n\n" + desc2;
+        $("heroBadge").textContent = badge;
+        $("chipActivity").textContent = "🛍️ " + activity;
+        $("chipCity").textContent = "📍 " + zone;
+        $("miniContact").textContent = digits(SHOP.phone) ? "WhatsApp et appel disponibles" : "Contact à renseigner";
+        $("miniCity").textContent = zone;
+        $("miniAddress").textContent = address;
+
+        $("brandBack").href = safe(SHOP.backHref, "../index.html");
+        $("btnMarket").href = safe(SHOP.backHref, "../index.html");
+        $("btnSite").href = safe(SHOP.siteHref, "https://digiylyfe.com/");
+        $("btnHub").href = safe(SHOP.hubHref, "https://digiy-hub.digiylyfe.com/");
+
+        if(hero){
+          $("photoBox").innerHTML = `<img src="${esc(hero)}" alt="${esc(name)}" loading="eager" onerror="this.parentElement.innerHTML='<div class=&quot;photo-fallback&quot;>Photo non disponible</div>'"/>`;
+        }
+
+        $("infoRows").innerHTML = [
+          row("Activité", activity, desc1, ""),
+          row("Zone", zone, "Repère utile sans exposer de données internes.", `<button class="btn btn-gold" id="btnMapsRow" type="button">🗺️ Repère</button>`),
+          row("Produits phares", "Ce que la boutique propose", fillItems(), ""),
+          row("Services", "Services disponibles", fillServices(), ""),
+          row("Conseil DIGIY", "Avant de te déplacer", tip, ""),
+          row("Paiement", "Paiement direct au commerçant", "DIGIY ne garde pas l’argent et ne prend pas de commission.", "")
+        ].join("");
+
+        renderGallery();
+
+        ["btnWhatsTop","btnWhats","bottomWhats"].forEach(id => {
+          const el = $(id);
+          if(el) el.onclick = openWhats;
+        });
+
+        ["btnCall"].forEach(id => {
+          const el = $(id);
+          if(el) el.onclick = callPhone;
+        });
+
+        ["btnMaps","btnMapsRow"].forEach(id => {
+          const el = $(id);
+          if(el) el.onclick = openMaps;
+        });
+
+        ["btnShare","bottomShare"].forEach(id => {
+          const el = $(id);
+          if(el) el.onclick = sharePage;
+        });
+
+        document.querySelectorAll("[data-view]").forEach(btn => {
+          btn.onclick = () => setPanel(btn.getAttribute("data-view") || "infos");
+        });
+
+        document.querySelectorAll("[data-go]").forEach(btn => {
+          btn.onclick = () => setPanel(btn.getAttribute("data-go") || "infos");
+        });
+      }
+
+      render();
 
       if(document.readyState === "complete"){
-        initMap();
+        renderMap();
       }else{
-        window.addEventListener("load", initMap, { once:true });
+        window.addEventListener("load", renderMap, {once:true});
       }
     })();
   </script>
 </body>
 </html>
+
