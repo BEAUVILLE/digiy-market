@@ -1,113 +1,1201 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#07140f" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <meta name="theme-color" content="#063b2b"/>
   <title>DIGIY MARKET — Boutique</title>
-  <meta name="description" content="Fiche boutique DIGIY MARKET : produits, contact direct, WhatsApp, appel et accès simple au commerçant." />
-  <meta name="robots" content="index,follow" />
+  <meta name="description" content="Fiche boutique DIGIY MARKET : produits, contact direct, WhatsApp Visio Live, appel et paiement direct au commerçant."/>
+  <meta name="robots" content="index,follow"/>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
-    :root{--bg:#07140f;--bg2:#040b08;--card:rgba(255,255,255,.05);--line:rgba(255,255,255,.11);--text:#ecfff4;--muted:rgba(236,255,244,.70);--gold:#facc15;--ok:#22c55e;--info:#38bdf8;--shadow:0 20px 60px rgba(0,0,0,.38);--r:24px;--max:1160px}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;font-family:Outfit,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:radial-gradient(900px 520px at 10% -10%,rgba(34,197,94,.14),transparent 60%),radial-gradient(900px 520px at 110% 0%,rgba(250,204,21,.10),transparent 55%),linear-gradient(180deg,var(--bg),#05100c 55%,var(--bg2));overflow-x:hidden}a{color:inherit;text-decoration:none}button{font:inherit}.wrap{width:min(var(--max),calc(100% - 28px));margin:0 auto;position:relative;z-index:1}
-    .topbar{position:sticky;top:10px;z-index:30;margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 14px;border:1px solid var(--line);background:rgba(7,20,15,.72);backdrop-filter:blur(12px);border-radius:22px;box-shadow:var(--shadow)}.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:1.2rem;font-weight:900;border:1px solid rgba(255,255,255,.12);background:linear-gradient(135deg,rgba(250,204,21,.18),rgba(56,189,248,.12));flex:0 0 auto}.brand-title{font-size:1rem;font-weight:950;letter-spacing:.02em}.brand-sub{margin-top:3px;color:var(--muted);font-size:.79rem;font-weight:800}.top-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:var(--text);cursor:pointer;font-size:.84rem;font-weight:900;transition:.18s ease;white-space:nowrap;box-shadow:var(--shadow)}.btn:hover{transform:translateY(-1px)}.btn:disabled{opacity:.55;cursor:not-allowed;transform:none}.btn.gold{border-color:rgba(250,204,21,.30);background:rgba(250,204,21,.12);color:#fff1a8}.btn.ok{border-color:rgba(34,197,94,.26);background:rgba(34,197,94,.12);color:#bbf7d0}.btn.ghost{background:rgba(0,0,0,.20);color:var(--muted)}.btn.info{border-color:rgba(56,189,248,.22);background:rgba(56,189,248,.12);color:#bae6fd}
-    .hero{margin-top:14px;border:1px solid var(--line);border-radius:30px;overflow:hidden;box-shadow:var(--shadow);background:radial-gradient(circle at 85% 15%,rgba(250,204,21,.08),transparent 28%),linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.02))}.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:0;min-height:360px}@media(max-width:960px){.hero-grid{grid-template-columns:1fr}}.hero-main{padding:24px;display:grid;gap:16px;align-content:start}.hero-side{padding:24px;border-left:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));display:grid;gap:12px;align-content:start}@media(max-width:960px){.hero-side{border-left:none;border-top:1px solid var(--line)}}
-    .eyebrow{display:inline-flex;align-items:center;gap:8px;width:max-content;padding:8px 12px;border-radius:999px;border:1px solid rgba(250,204,21,.24);background:rgba(250,204,21,.10);color:#fff1a8;font-size:.76rem;font-weight:950;letter-spacing:.06em;text-transform:uppercase}.shop-name{font-size:clamp(2rem,4vw,3.4rem);line-height:.98;font-weight:1000;letter-spacing:-.03em;margin:0}.hero-text{color:var(--muted);font-size:1rem;line-height:1.7;font-weight:700;max-width:60ch}.chips{display:flex;flex-wrap:wrap;gap:10px}.chip{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(0,0,0,.18);color:var(--muted);font-size:.8rem;font-weight:900}.cta-row{display:flex;gap:10px;flex-wrap:wrap}
-    .mini{padding:14px;border-radius:20px;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.18)}.mini .k{color:var(--muted);font-size:.74rem;font-weight:800;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}.mini .v{font-size:.96rem;line-height:1.45;font-weight:900;word-break:break-word}.layout{margin-top:14px;display:grid;grid-template-columns:1.04fr .96fr;gap:14px;align-items:start}@media(max-width:980px){.layout{grid-template-columns:1fr}}
-    .panel{border:1px solid var(--line);background:rgba(255,255,255,.04);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}.panel-head{padding:18px 18px 12px;border-bottom:1px solid rgba(255,255,255,.08)}.panel-head h2{margin:0;font-size:1.15rem;font-weight:1000}.panel-head p{margin-top:6px;color:var(--muted);font-size:.9rem;line-height:1.6;font-weight:700}.panel-body{padding:18px}.rows{display:grid;gap:12px}.row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px;border-radius:18px;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.18)}.row-left{display:grid;gap:4px;min-width:0}.row-k{font-size:.75rem;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.04em}.row-v{font-size:.98rem;font-weight:950;line-height:1.45;word-break:break-word}.row-sub{font-size:.84rem;color:var(--muted);line-height:1.5;font-weight:700}.row-actions{display:flex;gap:8px;flex-wrap:wrap}.note-box{padding:14px;border-radius:18px;border:1px solid rgba(250,204,21,.20);background:rgba(250,204,21,.07);color:#fef3c7;font-size:.9rem;line-height:1.65;font-weight:700}.side{display:grid;gap:14px;position:sticky;top:88px}@media(max-width:980px){.side{position:static}}.cta-card{padding:18px}.cta-card h3{margin:0 0 8px;font-size:1.15rem;font-weight:1000}.cta-card p{color:var(--muted);font-size:.92rem;line-height:1.65;font-weight:700}.bullet-list{display:grid;gap:10px;margin-top:14px}.bullet{display:flex;align-items:flex-start;gap:10px;padding:12px;border-radius:16px;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.16);color:var(--muted);font-size:.9rem;line-height:1.6;font-weight:700}.bullet strong{color:var(--text)}.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:80;background:rgba(0,0,0,.65);border:1px solid rgba(255,255,255,.18);color:rgba(236,255,244,.94);padding:11px 14px;border-radius:999px;backdrop-filter:blur(10px);display:none;max-width:min(94vw,720px);box-shadow:var(--shadow);font-size:.86rem;font-weight:800;text-align:center}.toast.show{display:block}.loading-box{padding:30px 20px;text-align:center;color:var(--muted);font-weight:800;line-height:1.6}footer{padding:18px 0 24px;text-align:center;font-size:.78rem;color:rgba(236,255,244,.52)}@media(max-width:700px){.top-actions{width:100%;justify-content:flex-start}.top-actions>*{flex:1 1 auto}.row-actions{width:100%}.row-actions>*{flex:1 1 auto}.cta-row{width:100%}.cta-row>*{flex:1 1 auto}}
+    :root{
+      --bg:#f5efe2;
+      --paper:#fffaf0;
+      --ink:#10251c;
+      --muted:#68746e;
+      --green:#063b2b;
+      --green2:#0b5a41;
+      --green3:#0f7a56;
+      --gold:#d6ad39;
+      --gold2:#f4cf64;
+      --cream:#fff7e8;
+      --line:rgba(16,37,28,.12);
+      --lineDark:rgba(255,255,255,.16);
+      --shadow:0 20px 60px rgba(6,59,43,.16);
+      --shadow2:0 10px 30px rgba(6,59,43,.12);
+      --r:28px;
+      --max:1120px;
+      --logo:url('https://digiylyfe.net/wp-content/uploads/2026/04/icon-512-1.png');
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Outfit,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(900px 520px at 6% -8%, rgba(214,173,57,.18), transparent 58%),
+        radial-gradient(900px 520px at 105% 0%, rgba(6,59,43,.14), transparent 54%),
+        linear-gradient(180deg,#fff8ea 0%,#f4ecd9 48%,#efe3cc 100%);
+      overflow-x:hidden;
+      padding-bottom:calc(96px + env(safe-area-inset-bottom,0px));
+      font-size:17px;
+      font-weight:760;
+    }
+
+    a{color:inherit;text-decoration:none}
+    button,input{font:inherit}
+    img{display:block;max-width:100%}
+
+    .wrap{width:min(var(--max),calc(100% - 24px));margin:0 auto}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:60;
+      backdrop-filter:blur(14px);
+      background:rgba(255,248,234,.90);
+      border-bottom:1px solid rgba(16,37,28,.10);
+    }
+
+    .topbar-inner{
+      min-height:86px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:10px 0;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand-logo{
+      width:62px;
+      height:62px;
+      border-radius:22px;
+      object-fit:cover;
+      flex:0 0 auto;
+      border:1px solid rgba(6,59,43,.14);
+      background:#fff;
+      box-shadow:0 14px 34px rgba(6,59,43,.18);
+    }
+
+    .brand-title{
+      font-size:clamp(1.16rem,3vw,1.55rem);
+      font-weight:1000;
+      letter-spacing:-.03em;
+      line-height:1.03;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .brand-sub{
+      margin-top:5px;
+      color:var(--muted);
+      font-size:.93rem;
+      font-weight:850;
+      line-height:1.25;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:9px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      border:1px solid rgba(6,59,43,.12);
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:9px;
+      min-height:50px;
+      padding:0 17px;
+      border-radius:999px;
+      font-weight:1000;
+      font-size:.94rem;
+      white-space:nowrap;
+      background:#fff;
+      color:var(--green);
+      box-shadow:var(--shadow2);
+      transition:transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    .btn:hover{transform:translateY(-1px);box-shadow:0 15px 34px rgba(6,59,43,.16)}
+    .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+    .btn-main{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;border:0}
+    .btn-gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#2d2308;border:0}
+    .btn-soft{background:rgba(255,255,255,.78);color:var(--green)}
+    .btn-ghost{background:rgba(6,59,43,.07);box-shadow:none}
+    .btn-live{background:linear-gradient(135deg,#16a34a,#34d399);color:#04150d;border:0}
+
+    .hero{padding:18px 0 12px}
+
+    .hero-card{
+      position:relative;
+      overflow:hidden;
+      min-height:430px;
+      border-radius:36px;
+      color:#fff;
+      box-shadow:var(--shadow);
+      background:
+        radial-gradient(circle at 86% 12%, rgba(244,207,100,.30), transparent 22%),
+        radial-gradient(circle at 8% 92%, rgba(255,255,255,.11), transparent 28%),
+        linear-gradient(135deg,#052f22,#0b5a41 58%,#0f7a56);
+    }
+
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      right:24px;
+      bottom:22px;
+      width:160px;
+      height:160px;
+      border-radius:38px;
+      background-image:var(--logo);
+      background-size:cover;
+      background-position:center;
+      opacity:.14;
+      transform:rotate(-5deg);
+      border:1px solid rgba(255,255,255,.10);
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:0;
+      min-height:430px;
+      position:relative;
+      z-index:2;
+    }
+
+    .hero-main{
+      padding:26px;
+      display:grid;
+      gap:16px;
+      align-content:start;
+    }
+
+    .hero-side{
+      padding:26px;
+      border-left:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.045);
+      display:grid;
+      gap:12px;
+      align-content:start;
+      backdrop-filter:blur(6px);
+    }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      width:max-content;
+      max-width:100%;
+      padding:9px 13px;
+      border-radius:999px;
+      background:rgba(255,255,255,.13);
+      border:1px solid rgba(255,255,255,.18);
+      color:#fff;
+      font-size:.82rem;
+      font-weight:1000;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(2.55rem,6.7vw,5.1rem);
+      line-height:.93;
+      letter-spacing:-.06em;
+      font-weight:1000;
+    }
+
+    .hero-lead{
+      margin:0;
+      color:rgba(255,255,255,.88);
+      font-size:1.08rem;
+      line-height:1.65;
+      font-weight:760;
+      max-width:68ch;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:2px;
+    }
+
+    .chips{
+      display:flex;
+      gap:9px;
+      flex-wrap:wrap;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.11);
+      font-weight:950;
+      color:#fff;
+      font-size:.9rem;
+    }
+
+    .live-box{
+      display:grid;
+      gap:6px;
+      padding:14px 15px;
+      border-radius:22px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(244,207,100,.38);
+      box-shadow:0 14px 34px rgba(0,0,0,.18);
+      max-width:680px;
+    }
+
+    .live-box strong{
+      color:#fff7c2;
+      font-size:.92rem;
+      font-weight:1000;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .live-box span{
+      color:rgba(255,255,255,.88);
+      font-size:.95rem;
+      font-weight:790;
+      line-height:1.45;
+    }
+
+    .mini{
+      padding:15px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.16);
+    }
+
+    .mini .k{
+      color:rgba(255,255,255,.70);
+      font-size:.76rem;
+      font-weight:900;
+      margin-bottom:7px;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+    }
+
+    .mini .v{
+      font-size:1rem;
+      line-height:1.45;
+      font-weight:1000;
+      word-break:break-word;
+    }
+
+    .pageSwitch{
+      position:sticky;
+      top:96px;
+      z-index:45;
+      margin:12px auto 0;
+      padding:9px;
+      border-radius:26px;
+      border:1px solid rgba(6,59,43,.12);
+      background:rgba(255,248,234,.92);
+      box-shadow:var(--shadow2);
+      backdrop-filter:blur(14px);
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:8px;
+    }
+
+    .pageBtn{
+      min-height:64px;
+      border-radius:18px;
+      border:1px solid rgba(6,59,43,.10);
+      background:#fff;
+      color:var(--green);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:4px;
+      font-weight:1000;
+      font-size:13px;
+      cursor:pointer;
+      box-shadow:0 8px 18px rgba(6,59,43,.07);
+    }
+
+    .pageBtn b{font-size:24px;line-height:1}
+    .pageBtn.active{
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      color:#2d2308;
+      border-color:transparent;
+      box-shadow:0 12px 28px rgba(214,173,57,.20);
+    }
+
+    .panel{
+      display:none;
+      margin-top:14px;
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(16,37,28,.09);
+      border-radius:32px;
+      box-shadow:var(--shadow2);
+      overflow:hidden;
+    }
+
+    .panel.active{display:block}
+
+    .panel-head{
+      padding:20px 20px 13px;
+      border-bottom:1px solid rgba(16,37,28,.08);
+    }
+
+    .panel-head h2{
+      margin:0;
+      font-size:clamp(1.8rem,4vw,3rem);
+      line-height:1;
+      letter-spacing:-.04em;
+      font-weight:1000;
+    }
+
+    .panel-head p{
+      margin:9px 0 0;
+      color:var(--muted);
+      font-size:1rem;
+      line-height:1.6;
+      font-weight:780;
+      max-width:850px;
+    }
+
+    .panel-body{padding:20px}
+
+    .rows{display:grid;gap:12px}
+
+    .row{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      padding:15px;
+      border-radius:22px;
+      border:1px solid rgba(16,37,28,.10);
+      background:linear-gradient(180deg,#fff,#fffaf0);
+    }
+
+    .row-left{display:grid;gap:5px;min-width:0;flex:1}
+    .row-k{
+      font-size:.78rem;
+      color:var(--green);
+      font-weight:1000;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .row-v{
+      font-size:1.12rem;
+      font-weight:1000;
+      line-height:1.34;
+      word-break:break-word;
+    }
+
+    .row-sub{
+      font-size:.94rem;
+      color:var(--muted);
+      line-height:1.55;
+      font-weight:780;
+    }
+
+    .row-actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .note-box{
+      padding:15px;
+      border-radius:22px;
+      border:1px solid rgba(214,173,57,.24);
+      background:rgba(244,207,100,.13);
+      color:#4d3d12;
+      font-size:.98rem;
+      line-height:1.62;
+      font-weight:850;
+    }
+
+    .products-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+      gap:12px;
+    }
+
+    .product{
+      padding:15px;
+      border-radius:24px;
+      border:1px solid rgba(16,37,28,.10);
+      background:#fff;
+      box-shadow:0 10px 24px rgba(6,59,43,.08);
+      display:grid;
+      gap:10px;
+    }
+
+    .productCat{
+      color:var(--green);
+      font-size:.78rem;
+      font-weight:1000;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .productTitle{
+      font-size:1.18rem;
+      font-weight:1000;
+      line-height:1.18;
+    }
+
+    .productMeta{
+      color:var(--muted);
+      font-size:.93rem;
+      line-height:1.5;
+      font-weight:780;
+    }
+
+    .bottomNav{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:99990;
+      padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));
+      background:rgba(6,59,43,.94);
+      border-top:1px solid rgba(255,255,255,.14);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+    }
+
+    .bottomNavInner{
+      width:min(100%,760px);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:6px;
+    }
+
+    .bottomNav a,.bottomNav button{
+      min-height:58px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      align-content:center;
+      gap:3px;
+      color:rgba(255,247,232,.74);
+      font-size:11px;
+      font-weight:1000;
+      text-align:center;
+      border:1px solid transparent;
+      text-decoration:none;
+      background:transparent;
+      cursor:pointer;
+      font-family:inherit;
+      padding:0 4px;
+    }
+
+    .bottomNav .ico{font-size:18px;line-height:1}
+    .bottomNav a.active,.bottomNav button.active{
+      color:#2d2308;
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      border-color:rgba(244,207,100,.30);
+      box-shadow:0 12px 26px rgba(214,173,57,.20);
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:calc(92px + env(safe-area-inset-bottom,0px));
+      transform:translateX(-50%) translateY(12px);
+      z-index:99999;
+      opacity:0;
+      pointer-events:none;
+      transition:.22s ease;
+      max-width:calc(100vw - 24px);
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid rgba(244,207,100,.30);
+      background:rgba(6,59,43,.96);
+      color:#fff7c2;
+      font-size:13px;
+      font-weight:1000;
+      box-shadow:var(--shadow);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .toast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(0);
+    }
+
+    footer{
+      padding:22px 0 calc(120px + env(safe-area-inset-bottom,0px));
+      color:var(--muted);
+      text-align:center;
+      font-size:.88rem;
+      font-weight:850;
+    }
+
+    @media(max-width:980px){
+      .hero-grid{grid-template-columns:1fr}
+      .hero-side{
+        border-left:none;
+        border-top:1px solid rgba(255,255,255,.12);
+      }
+    }
+
+    @media(max-width:760px){
+      body{padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))}
+      .top-actions{display:none}
+      .topbar-inner{min-height:74px}
+      .brand-logo{width:54px;height:54px;border-radius:18px}
+      .brand-sub{font-size:.82rem}
+      .hero-card{border-radius:30px}
+      .hero-main,.hero-side{padding:21px}
+      .hero-actions{display:grid;grid-template-columns:1fr 1fr}
+      .hero-actions .btn{width:100%}
+      .pageSwitch{top:80px;grid-template-columns:repeat(4,1fr);gap:6px;padding:8px}
+      .pageBtn{min-height:58px;font-size:11px;border-radius:16px}
+      .pageBtn b{font-size:20px}
+      .row-actions{width:100%;justify-content:flex-start}
+      .row-actions .btn{flex:1}
+    }
+
+    @media(max-width:430px){
+      .pageSwitch{grid-template-columns:repeat(2,1fr)}
+      .hero-actions{grid-template-columns:1fr}
+      .bottomNavInner{grid-template-columns:repeat(5,1fr)}
+    }
   </style>
 </head>
-<body>
-  <div class="wrap">
-    <header class="topbar"><div class="brand"><div class="brand-mark">🛍️</div><div><div class="brand-title">DIGIY MARKET</div><div class="brand-sub">Boutique locale · contact direct · zéro commission</div></div></div><div class="top-actions"><button id="btnBack" class="btn ghost" type="button">⬅️ Retour au marché</button><button id="btnShare" class="btn gold" type="button">🔗 Partager</button><button id="btnWhatsTop" class="btn ok" type="button">💬 WhatsApp</button></div></header>
-    <section class="hero"><div class="hero-grid"><div class="hero-main"><div class="eyebrow" id="heroBadge">Boutique locale</div><div><h1 class="shop-name" id="shopName">Chargement…</h1><div class="hero-text" id="shopIntro">Ouverture de la fiche boutique…</div></div><div class="chips"><div class="chip" id="chipCity">📍 Ville à définir</div><div class="chip" id="chipContact">💬 Contact direct</div><div class="chip" id="chipStatus">✨ Fiche boutique</div></div><div class="cta-row"><a id="btnPremiumHero" class="btn gold" href="#" target="_blank" rel="noopener" style="display:none">🌍 Entrer dans la boutique</a><button id="btnWhats" class="btn ok" type="button">💬 Écrire sur WhatsApp</button><button id="btnCallHero" class="btn" type="button">📞 Appeler</button><button id="btnMapsHero" class="btn info" type="button">🗺️ Itinéraire</button></div></div><aside class="hero-side"><div class="mini"><div class="k">Contact client</div><div class="v" id="miniPhone">Bouton WhatsApp disponible</div></div><div class="mini"><div class="k">Zone publique</div><div class="v" id="miniCity">—</div></div><div class="mini"><div class="k">Repère terrain</div><div class="v" id="miniAddress">Repère précis sur demande</div></div><div class="mini"><div class="k">Repère DIGIY</div><div class="v" id="miniRef">Boutique vérifiée dans DIGIY MARKET</div></div></aside></div></section>
-    <section class="layout"><section class="panel"><div class="panel-head"><h2>Infos utiles</h2><p>Ici, on garde seulement l’essentiel pour qu’un client comprenne vite, voie les produits et contacte directement le commerçant.</p></div><div class="panel-body"><div id="mainContent" class="rows"><div class="loading-box">Chargement de la boutique…</div></div></div></section><aside class="side"><section class="panel cta-card"><h3>Parler au commerçant</h3><p>Pas d’intermédiaire lourd. Pas de commission. Tu contactes directement la boutique.</p><div class="cta-row" style="margin-top:14px"><a id="btnPremiumSide" class="btn gold" href="#" target="_blank" rel="noopener" style="display:none">🌍 Vitrine</a><button id="btnWhatsSide" class="btn ok" type="button">💬 WhatsApp</button><button id="btnCallSide" class="btn" type="button">📞 Appeler</button><button id="btnSmsSide" class="btn gold" type="button">✉️ SMS</button></div></section><section class="panel cta-card"><h3>Repères DIGIY</h3><div class="bullet-list"><div class="bullet"><span>✅</span><span><strong>Contact direct</strong><br/>Le client parle directement au pro.</span></div><div class="bullet"><span>💳</span><span><strong>Paiement direct au pro</strong><br/>DIGIY ne garde pas l’argent de la boutique.</span></div><div class="bullet"><span>♾️</span><span><strong>Présence locale</strong><br/>Une vitrine simple, claire et ancrée terrain.</span></div></div></section></aside></section>
-    <footer>© 2026 DIGIYLYFE • DIGIY MARKET ∞</footer>
-  </div>
-  <div id="toast" class="toast"></div>
-  <script>
-    const SUPABASE_URL="https://wesqmwjjtsefyjnluosj.supabase.co";
-    const SUPABASE_ANON_KEY="sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
-    const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});
-    const ASTOU_PREMIUM_URL="https://astou-boutique.digiylyfe.com/";
-    const ASTOU_MARKET_SLUG="market-221771342889";
-    const ASTOU_MARKET_PHONE="221771342889";
-    const ASTOU_NAME="Astou Boutique";
-    const ASTOU_ACTIVITY="Linge de maison · plage · hôtels · villas · tenues stylées · beauté";
-    const ASTOU_DESCRIPTION="Astou Boutique propose du linge de maison, serviettes, draps, peignoirs, foutas pour transats, serviettes de plage, robes, tenues stylées, confection et crèmes de beauté à Saly.";
-    const $=(s)=>document.querySelector(s);const toastEl=$("#toast");
-    function toast(msg){toastEl.textContent=msg;toastEl.classList.add("show");clearTimeout(toastEl._t);toastEl._t=setTimeout(()=>toastEl.classList.remove("show"),2800)}
-    function qs(k){return new URL(location.href).searchParams.get(k)||""}function normSlug(v){return String(v||"").trim().toLowerCase()}function normalizePhone(p){return String(p||"").trim().replace(/[^\d+]/g,"")}function cleanDigitsForWA(p){return normalizePhone(p).replace(/\+/g,"").replace(/[^\d]/g,"")}function safeText(v,f){const s=String(v||"").trim();return s||(f||"—")}function esc(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;")}function money(v){const n=Number(v||0);return Number.isFinite(n)?n.toLocaleString("fr-FR")+" F CFA":"—"}
-    function formatPhone(p){const raw=cleanDigitsForWA(p);if(!raw)return"—";if(raw.startsWith("221")&&raw.length===12)return`+221 ${raw.slice(3,5)} ${raw.slice(5,8)} ${raw.slice(8,10)} ${raw.slice(10,12)}`;return normalizePhone(p)}
-    function buildWhatsAppLink(phone,shopName,productName){const p=cleanDigitsForWA(phone);if(!p)return"";const base=productName?`Bonjour 👋 Je vous contacte via DIGIY au sujet de "${productName}" chez ${shopName||"votre boutique"}.`:`Bonjour 👋 Je vous contacte via DIGIY au sujet de "${shopName||"votre boutique"}".`;return`https://wa.me/${p}?text=${encodeURIComponent(base)}`}
-    function buildMapsQuery(address,city,zones,country){const parts=[address,zones,city,country].filter(Boolean).map(v=>String(v).trim()).filter(Boolean);return parts.length?`https://www.google.com/maps?q=${encodeURIComponent(parts.join(", "))}`:""}
-    function pageBack(){if(document.referrer&&document.referrer!==location.href){history.back();return}location.href="./index.html"}
-    function isAstouMarketShop(s){const slug=normSlug(s?.slug||s?.workspace_slug||s?.last_slug||qs("slug")||"");const name=String(s?.shop_name||s?.business_name||s?.name||"").trim().toLowerCase();const phone=cleanDigitsForWA(s?.whatsapp||s?.public_phone||s?.phone||s?.owner_phone||"");return slug===ASTOU_MARKET_SLUG||name.includes("astou")||phone===ASTOU_MARKET_PHONE}
-    function premiumUrlForShop(s){return isAstouMarketShop(s)?ASTOU_PREMIUM_URL:""}
-    function wirePremiumButtons(shop){const url=premiumUrlForShop(shop);["btnPremiumHero","btnPremiumSide"].forEach(id=>{const el=document.getElementById(id);if(!el)return;if(url){el.href=url;el.style.display="inline-flex"}else{el.removeAttribute("href");el.style.display="none"}})}
-    function getShopName(s){return isAstouMarketShop(s)?ASTOU_NAME:safeText(s.shop_name||s.business_name||s.name,"Boutique")}
-    function getPhone(s){return normalizePhone(s.whatsapp||s.public_phone||s.phone||s.owner_phone||"")}
-    function getAddress(s){return safeText(s.address||s.address_text,"")}
-    function getCityZone(s){const city=String(s.city||"").trim();const zones=String(s.zones||"").trim();if(city&&zones&&city.toLowerCase()!==zones.toLowerCase())return city+" • "+zones;return city||zones||""}
-    function publicContactLabel(phone){return phone?"Contact WhatsApp disponible":"Contact à demander"}
-    function publicAddressLabel(shop){return isAstouMarketShop(shop)?"Repère précis communiqué par WhatsApp":(getAddress(shop)?"Repère disponible sur demande":"Repère à demander au commerçant")}
-    function publicDigiyRef(shop){return isAstouMarketShop(shop)?"Boutique partenaire · vitrine premium disponible":"Boutique vérifiée dans DIGIY MARKET"}
-    function getActivity(s){return isAstouMarketShop(s)?ASTOU_ACTIVITY:safeText(s.categories_text||s.category,"Boutique locale")}
-    function getDescription(s){return isAstouMarketShop(s)?ASTOU_DESCRIPTION:safeText(s.description,"Boutique locale disponible en contact direct sur DIGIY MARKET.")}
-    function buildIntro(s){const owner=String(s.owner_name||"").trim();const city=getCityZone(s);const act=getActivity(s);const parts=[];if(act)parts.push(act);parts.push(owner?`${owner} te répond directement`:"Contact direct avec la boutique");if(city)parts.push(`à ${city}`);return parts.join(" · ")+"."}
-    function showRow(label,value,sub,actions){return`<div class="row"><div class="row-left"><div class="row-k">${esc(label)}</div><div class="row-v">${esc(value)}</div>${sub?`<div class="row-sub">${esc(sub)}</div>`:""}</div>${actions?`<div class="row-actions">${actions}</div>`:""}</div>`}
-    async function sharePage(name){const url=location.href;const text=`DIGIY MARKET — ${name}\n${url}`;if(navigator.share){try{await navigator.share({title:`DIGIY MARKET — ${name}`,text,url});return}catch(_){}}try{await navigator.clipboard.writeText(text);toast("✅ Lien copié.")}catch(_){toast("Copie impossible sur ce navigateur.")}}
-    function openIf(url,msg){if(!url){toast(msg||"Information manquante.");return}window.open(url,"_blank","noopener,noreferrer")}
-    function setNotFoundState(title,subtitle,detail){$("#shopName").textContent=title;$("#shopIntro").textContent=subtitle;$("#mainContent").innerHTML=`<div class="note-box">Cette boutique n’a pas pu être ouverte avec ce lien. Vérifie le lien reçu ou retourne au marché pour choisir une autre fiche.${detail?`<br><br><small>${esc(detail)}</small>`:""}</div>`;$("#miniRef").textContent="Fiche non disponible"}
-    function normalizeProduct(r){r=r||{};return{id:String(r.id||""),title:String(r.title||r.product_name||r.name||"Produit").trim(),category:String(r.category||r.category_text||"").trim(),price_fcfa:Number(r.price_fcfa??r.price??0)||0,unit_label:String(r.unit_label||"").trim(),description:String(r.description||"").trim(),is_active:r.is_active==null?true:!!r.is_active,is_published:!!(r.is_published??r.published??false),is_featured:!!(r.is_featured??r.featured??false),product_position:Number(r.product_position??r.position??100)||100}}
-    function extractProductRows(p){if(Array.isArray(p))return p;if(Array.isArray(p?.products))return p.products;if(Array.isArray(p?.items))return p.items;if(Array.isArray(p?.data))return p.data;return[]}
-    async function loadPublicProfile(slug){let directError=null;try{const{data,error}=await sb.from("digiy_market_profiles").select("*").or(`slug.eq.${slug},workspace_slug.eq.${slug},last_slug.eq.${slug}`).eq("is_published",true).eq("is_active",true).limit(1).maybeSingle();if(error)directError=error;if(data)return data}catch(e){directError=e}try{const{data,error}=await sb.rpc("digiy_market_get_cockpit_by_slug",{p_slug:slug});if(error)throw error;if(data?.ok&&data.profile){const p=data.profile;if(p.is_published===false||p.is_active===false)return null;return{...p,slug:data.slug||slug,phone:data.phone||p.phone||p.owner_phone||p.whatsapp}}}catch(e){console.warn("fallback cockpit KO",e)}if(directError)console.warn("lecture profil MARKET KO",directError);return null}
-    async function loadProducts(slug){try{const{data,error}=await sb.rpc("digiy_market_list_products_by_slug",{p_slug:slug});if(error)throw error;return extractProductRows(data).map(normalizeProduct).filter(p=>p.is_active).sort((a,b)=>{if(a.is_featured!==b.is_featured)return a.is_featured?-1:1;const pos=a.product_position-b.product_position;if(pos!==0)return pos;return a.title.localeCompare(b.title,"fr")})}catch(e){console.warn("lecture produits MARKET KO",e);return[]}}
-    function renderProducts(products,shopName,phone){if(!products.length)return`<div class="note-box">Les produits de cette boutique seront affichés ici dès qu’ils seront disponibles. Tu peux déjà contacter le commerçant directement.</div>`;return`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px">${products.map(p=>{const wa=buildWhatsAppLink(phone,shopName,p.title);return`<article class="row" style="align-items:flex-start"><div class="row-left"><div class="row-k">${esc(p.category||"Produit")}</div><div class="row-v">${esc(p.title)}</div><div class="row-sub">${p.price_fcfa?esc(money(p.price_fcfa)):"Prix à demander"}${p.unit_label?" · "+esc(p.unit_label):""}${p.description?`<br>${esc(p.description)}`:""}</div></div><div class="row-actions">${wa?`<a class="btn ok" href="${esc(wa)}" target="_blank" rel="noopener">💬 Demander</a>`:`<button class="btn ok" type="button" disabled>💬 Contact</button>`}</div></article>`}).join("")}</div>`}
-    function wireContactButtons(shop){const name=getShopName(shop),phone=getPhone(shop),wa=buildWhatsAppLink(phone,name),maps=buildMapsQuery(getAddress(shop),shop.city,shop.zones,shop.country||"Sénégal");const call=()=>{if(!phone){toast("Téléphone non renseigné.");return}location.href="tel:"+cleanDigitsForWA(phone)};const sms=()=>{if(!phone){toast("Téléphone non renseigné.");return}location.href="sms:"+cleanDigitsForWA(phone)};const waf=()=>openIf(wa,"WhatsApp non disponible.");const mapf=()=>openIf(maps,"Adresse non disponible.");["#btnBack"].forEach(s=>$(s).onclick=pageBack);$("#btnShare").onclick=()=>sharePage(name);["#btnWhatsTop","#btnWhats","#btnWhatsSide"].forEach(s=>$(s).onclick=waf);["#btnCallHero","#btnCallSide"].forEach(s=>$(s).onclick=call);$("#btnMapsHero").onclick=mapf;$("#btnSmsSide").onclick=sms;const by=id=>document.getElementById(id);if(by("btnCall"))by("btnCall").onclick=call;if(by("btnSms"))by("btnSms").onclick=sms;if(by("btnWhatsRow"))by("btnWhatsRow").onclick=waf;if(by("btnMaps"))by("btnMaps").onclick=mapf}
-    function renderShop(shop,products){
-      const name=getShopName(shop),owner=safeText(shop.owner_name,""),phone=getPhone(shop),address=getAddress(shop),cityZone=getCityZone(shop),activity=getActivity(shop),description=getDescription(shop),delivery=safeText(shop.delivery_note,"À voir directement avec la boutique."),payment=safeText(shop.payment_note,"Paiement direct au commerçant."),premiumUrl=premiumUrlForShop(shop);
-      const publicContact=publicContactLabel(phone);
-      const publicAddress=publicAddressLabel(shop);
-      const publicRef=publicDigiyRef(shop);
-      document.title=`DIGIY MARKET — ${name}`;
-      $("#shopName").textContent=name;
-      $("#shopIntro").textContent=buildIntro(shop);
-      $("#heroBadge").textContent=activity;
-      $("#miniPhone").textContent=publicContact;
-      $("#miniCity").textContent=cityZone||"Zone à définir";
-      $("#miniAddress").textContent=publicAddress;
-      $("#miniRef").textContent=publicRef;
-      $("#chipCity").textContent=`📍 ${cityZone||"Zone à définir"}`;
-      $("#chipContact").textContent=phone?"💬 WhatsApp direct":"💬 Contact à demander";
-      $("#chipStatus").textContent=premiumUrl?"🌍 Vitrine premium disponible":"✨ Boutique en ligne";
-      wirePremiumButtons(shop);
 
-      const rows=[];
-      rows.push(showRow("Activité",activity,description,""));
-      if(premiumUrl)rows.push(showRow("Vitrine immersive","Astou Boutique","Entrer dans la boutique complète, comme si vous étiez sur place.",`<a class="btn gold" href="${esc(premiumUrl)}" target="_blank" rel="noopener">🌍 Ouvrir la vitrine</a>`));
-      rows.push(showRow("Contact client",publicContact,phone?"Le client contacte la boutique par bouton WhatsApp, appel ou SMS. Le numéro n’est pas affiché en clair sur la fiche.":"Le contact n’est pas encore renseigné.",`<button id="btnWhatsRow" class="btn ok" type="button">💬 Ouvrir WhatsApp</button><button id="btnCall" class="btn" type="button">📞 Appeler</button><button id="btnSms" class="btn gold" type="button">✉️ SMS</button>`));
-      rows.push(showRow("Zone publique",cityZone||"À préciser","Repère utile sans exposer les identifiants internes ni le contact brut.",`<button id="btnMaps" class="btn info" type="button">🗺️ Demander / itinéraire</button>`));
-      rows.push(showRow("Repère terrain",publicAddress,address?"Le repère précis peut être confirmé directement avec la boutique.":"Demande un repère direct au commerçant.",""));
-      if(owner)rows.push(showRow("Responsable",owner,"Personne de contact associée à cette boutique.",""));
-      rows.push(showRow("Livraison",delivery,"Les conditions peuvent dépendre de la zone et du moment.",""));
-      rows.push(showRow("Paiement",payment,"DIGIY ne garde pas l’argent : le paiement reste direct au pro.",""));
-      rows.push(`<div class="note-box"><strong>DIGIY MARKET</strong> laisse le client parler directement au commerçant. Zéro commission, contact direct, présence locale. Les identifiants internes ne sont pas affichés en public.</div>`);
-      $("#mainContent").innerHTML=rows.join("");
-      let panel=document.getElementById("productsPanelPublic");
-      if(!panel){panel=document.createElement("section");panel.className="panel";panel.id="productsPanelPublic";panel.style.marginTop="14px";document.querySelector(".layout").before(panel)}
-      panel.innerHTML=`<div class="panel-head"><h2>Produits visibles</h2><p>Quelques produits proposés par ${esc(name)}. Pour commander, contacte directement la boutique.</p></div><div class="panel-body">${renderProducts(products,name,phone)}</div>`;
-      wireContactButtons(shop)
-    }
-    async function loadShop(){const slug=normSlug(qs("slug"));$("#btnBack").onclick=pageBack;if(!slug){setNotFoundState("Lien incomplet","Il manque une information pour ouvrir cette boutique.");toast("Lien incomplet.");return}const shop=await loadPublicProfile(slug);if(!shop){setNotFoundState("Boutique introuvable","Cette fiche n’est pas disponible pour le moment.",`slug : ${slug}`);toast("Boutique introuvable.");return}const products=await loadProducts(slug);renderShop(shop,products)}
-    loadShop();
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="./index.html" aria-label="Retour à DIGIY MARKET">
+        <img class="brand-logo" src="https://digiylyfe.net/wp-content/uploads/2026/04/Image-11.jpeg" alt="DIGIYLYFE" loading="eager"/>
+        <div>
+          <div class="brand-title" id="topTitle">DIGIY MARKET</div>
+          <div class="brand-sub">Boutique locale · contact direct · 0% commission</div>
+        </div>
+      </a>
+
+      <nav class="top-actions" aria-label="Actions boutique">
+        <button class="btn btn-soft" id="btnBack" type="button">⬅️ Marché</button>
+        <button class="btn btn-gold" id="btnShare" type="button">📤 Partager</button>
+        <button class="btn btn-live" id="btnWhatsTop" type="button">💬 WhatsApp</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-card">
+          <div class="hero-grid">
+            <div class="hero-main">
+              <span class="kicker" id="heroBadge">Boutique DIGIY MARKET</span>
+
+              <div>
+                <h1 id="shopName">Chargement…</h1>
+                <p class="hero-lead" id="shopIntro">Ouverture de la boutique locale…</p>
+              </div>
+
+              <div class="live-box">
+                <strong>WhatsApp Visio Live by DIGIY</strong>
+                <span>Voir les produits en vidéo, comme si vous étiez sur place. Moins de trajet, plus de conseil, choix plus sûr.</span>
+              </div>
+
+              <div class="chips">
+                <span class="chip" id="chipCity">📍 Zone à définir</span>
+                <span class="chip" id="chipContact">💬 Contact direct</span>
+                <span class="chip" id="chipStatus">✨ Boutique en ligne</span>
+              </div>
+
+              <div class="hero-actions">
+                <a class="btn btn-gold" id="btnPremiumHero" href="#" target="_blank" rel="noopener" style="display:none">🌍 Entrer</a>
+                <button class="btn btn-live" id="btnWhats" type="button">💬 WhatsApp</button>
+                <button class="btn btn-soft" id="btnCallHero" type="button">📞 Appeler</button>
+                <button class="btn btn-soft" id="btnMapsHero" type="button">🗺️ Repère</button>
+              </div>
+            </div>
+
+            <aside class="hero-side">
+              <div class="mini">
+                <div class="k">Contact client</div>
+                <div class="v" id="miniPhone">Bouton WhatsApp disponible</div>
+              </div>
+              <div class="mini">
+                <div class="k">Zone publique</div>
+                <div class="v" id="miniCity">—</div>
+              </div>
+              <div class="mini">
+                <div class="k">Repère terrain</div>
+                <div class="v" id="miniAddress">Repère précis sur demande</div>
+              </div>
+              <div class="mini">
+                <div class="k">Repère DIGIY</div>
+                <div class="v" id="miniRef">Boutique vérifiée dans DIGIY MARKET</div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap pageSwitch" aria-label="Navigation fiche boutique">
+      <button class="pageBtn active" type="button" data-view="infos"><b>ℹ️</b><span>Infos</span></button>
+      <button class="pageBtn" type="button" data-view="produits"><b>🛍️</b><span>Produits</span></button>
+      <button class="pageBtn" type="button" data-view="contact"><b>💬</b><span>Contact</span></button>
+      <button class="pageBtn" type="button" data-view="digiy"><b>♾️</b><span>DIGIY</span></button>
+    </div>
+
+    <section class="wrap panel active" data-panel="infos">
+      <div class="panel-head">
+        <h2>Infos utiles</h2>
+        <p>Le client comprend vite qui vend, où se situe la boutique et comment prendre contact.</p>
+      </div>
+      <div class="panel-body">
+        <div class="rows" id="infoRows">
+          <div class="note-box">Chargement de la boutique…</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap panel" data-panel="produits">
+      <div class="panel-head">
+        <h2>Produits visibles</h2>
+        <p>Les produits affichés par la boutique. Pour commander, le client contacte directement le commerçant.</p>
+      </div>
+      <div class="panel-body" id="productsBox">
+        <div class="note-box">Chargement des produits…</div>
+      </div>
+    </section>
+
+    <section class="wrap panel" data-panel="contact">
+      <div class="panel-head">
+        <h2>Contact direct</h2>
+        <p>Pas de détour. Le client parle directement au commerçant, avec WhatsApp, appel, SMS ou visio.</p>
+      </div>
+      <div class="panel-body">
+        <div class="rows" id="contactRows">
+          <div class="note-box">Chargement des contacts…</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap panel" data-panel="digiy">
+      <div class="panel-head">
+        <h2>Repère DIGIY</h2>
+        <p>DIGIY donne le cadre, la présence et la route vers le client. La relation reste au commerçant.</p>
+      </div>
+      <div class="panel-body">
+        <div class="rows">
+          <div class="note-box">
+            <strong>DIGIY MARKET</strong> laisse le client parler directement au commerçant. Zéro commission, contact direct, présence locale.
+          </div>
+
+          <div class="row">
+            <div class="row-left">
+              <div class="row-k">Paiement</div>
+              <div class="row-v">Paiement direct au professionnel</div>
+              <div class="row-sub">DIGIY ne garde pas l’argent du commerçant.</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="row-left">
+              <div class="row-k">Relation client</div>
+              <div class="row-v">Contact direct</div>
+              <div class="row-sub">Le client arrive chez la boutique, pas dans un tunnel fermé.</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="row-left">
+              <div class="row-k">Confiance</div>
+              <div class="row-v">Galerie DIGIY MARKET</div>
+              <div class="row-sub">Une boutique locale dans une galerie digitale visible, claire et humaine.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottomNav" aria-label="Navigation boutique">
+    <div class="bottomNavInner">
+      <a href="./index.html"><span class="ico">🛍️</span><span>Marché</span></a>
+      <button class="active" type="button" data-go="infos"><span class="ico">ℹ️</span><span>Infos</span></button>
+      <button type="button" data-go="produits"><span class="ico">🧺</span><span>Produits</span></button>
+      <button type="button" id="bottomWhats"><span class="ico">💬</span><span>WhatsApp</span></button>
+      <button type="button" id="bottomShare"><span class="ico">📤</span><span>Partager</span></button>
+    </div>
+  </nav>
+
+  <div class="toast" id="shareToast">Lien prêt à partager</div>
+
+  <footer>
+    <div class="wrap">DIGIY MARKET • Boutique locale • contact direct • paiement au commerçant</div>
+  </footer>
+
+  <script>
+    (function(){
+      "use strict";
+
+      const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
+      const SUPABASE_ANON_KEY = "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
+      const MARKET_ORIGIN = "https://market.digiylyfe.com";
+      const ASTOU_MARKET_SLUG = "market-221771342889";
+      const ASTOU_MARKET_PHONE = "221771342889";
+      const ASTOU_PREMIUM_URL = "https://astou-boutique.digiylyfe.com/";
+      const ASTOU_NAME = "Astou Boutique";
+      const ASTOU_ACTIVITY = "Linge de maison · plage · hôtels · villas · tenues stylées · beauté";
+      const ASTOU_DESCRIPTION = "Astou Boutique propose du linge de maison, serviettes, draps, peignoirs, foutas pour transats, serviettes de plage, robes, tenues stylées, confection et crèmes de beauté à Saly.";
+
+      const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        auth:{ persistSession:false, autoRefreshToken:false, detectSessionInUrl:false }
+      });
+
+      const $ = (id) => document.getElementById(id);
+      let SHOP = null;
+      let PRODUCTS = [];
+
+      function qs(k){
+        try{return new URL(location.href).searchParams.get(k) || "";}catch(_){return "";}
+      }
+
+      function normSlug(v){
+        return String(v || "").trim().toLowerCase().replace(/\s+/g,"-").replace(/[^a-z0-9-]/g,"").replace(/-+/g,"-").replace(/^-|-$/g,"");
+      }
+
+      function digits(v){
+        return String(v || "").replace(/[^\d]/g,"");
+      }
+
+      function esc(v){
+        return String(v ?? "")
+          .replace(/&/g,"&amp;")
+          .replace(/</g,"&lt;")
+          .replace(/>/g,"&gt;")
+          .replace(/"/g,"&quot;")
+          .replace(/'/g,"&#039;");
+      }
+
+      function text(v,fallback){
+        const s = String(v || "").trim();
+        return s || fallback || "";
+      }
+
+      function money(v){
+        const n = Number(v || 0);
+        return Number.isFinite(n) && n > 0 ? n.toLocaleString("fr-FR") + " F CFA" : "Prix à demander";
+      }
+
+      function toast(msg){
+        const t = $("shareToast");
+        if(!t) return;
+        t.textContent = msg || "Lien prêt à partager";
+        t.classList.add("show");
+        clearTimeout(toast._t);
+        toast._t = setTimeout(() => t.classList.remove("show"), 2200);
+      }
+
+      function shopSlug(shop){
+        return normSlug(shop?.slug || shop?.workspace_slug || shop?.last_slug || qs("slug") || "");
+      }
+
+      function isAstou(shop){
+        const slug = shopSlug(shop);
+        const phone = digits(shop?.whatsapp || shop?.public_phone || shop?.phone || shop?.owner_phone);
+        const name = String(shop?.shop_name || shop?.business_name || shop?.name || "").toLowerCase();
+        return slug === ASTOU_MARKET_SLUG || phone === ASTOU_MARKET_PHONE || name.includes("astou");
+      }
+
+      function shopName(shop){
+        return isAstou(shop) ? ASTOU_NAME : text(shop?.shop_name || shop?.business_name || shop?.name, "Boutique DIGIY");
+      }
+
+      function shopActivity(shop){
+        return isAstou(shop) ? ASTOU_ACTIVITY : text(shop?.categories_text || shop?.category || shop?.activity, "Boutique locale");
+      }
+
+      function shopDescription(shop){
+        return isAstou(shop) ? ASTOU_DESCRIPTION : text(shop?.description, "Boutique locale disponible en contact direct sur DIGIY MARKET.");
+      }
+
+      function shopPhone(shop){
+        return digits(shop?.whatsapp || shop?.public_phone || shop?.phone || shop?.owner_phone);
+      }
+
+      function shopCityZone(shop){
+        const city = text(shop?.city,"");
+        const zone = text(shop?.zones,"");
+        if(city && zone && city.toLowerCase() !== zone.toLowerCase()) return city + " • " + zone;
+        return city || zone || "Zone à définir";
+      }
+
+      function shopAddress(shop){
+        return text(shop?.address || shop?.address_text, "");
+      }
+
+      function shopDelivery(shop){
+        return text(shop?.delivery_note, "À voir directement avec la boutique selon la zone.");
+      }
+
+      function shopPayment(shop){
+        return text(shop?.payment_note, "Paiement direct au commerçant.");
+      }
+
+      function shopPremium(shop){
+        return isAstou(shop) ? ASTOU_PREMIUM_URL : "";
+      }
+
+      function whatsappUrl(phone, name, product){
+        const p = digits(phone);
+        if(!p) return "";
+        const base = product
+          ? `Bonjour 👋 Je viens de DIGIY MARKET. Je souhaite voir ou commander : ${product} chez ${name}.`
+          : `Bonjour 👋 Je viens de DIGIY MARKET. Je souhaite voir les produits en WhatsApp Visio Live by DIGIY chez ${name}.`;
+        return "https://wa.me/" + p + "?text=" + encodeURIComponent(base);
+      }
+
+      function mapsUrl(shop){
+        const parts = [shopAddress(shop), shop?.zones, shop?.city, shop?.country || "Sénégal"].filter(Boolean).map(x => String(x).trim()).filter(Boolean);
+        return parts.length ? "https://www.google.com/maps?q=" + encodeURIComponent(parts.join(", ")) : "";
+      }
+
+      function setPanel(view){
+        document.querySelectorAll("[data-panel]").forEach(p => {
+          p.classList.toggle("active", p.getAttribute("data-panel") === view);
+        });
+
+        document.querySelectorAll("[data-view]").forEach(b => {
+          b.classList.toggle("active", b.getAttribute("data-view") === view);
+        });
+
+        document.querySelectorAll("[data-go]").forEach(b => {
+          b.classList.toggle("active", b.getAttribute("data-go") === view);
+        });
+      }
+
+      function row(label,value,sub,actions){
+        return `
+          <div class="row">
+            <div class="row-left">
+              <div class="row-k">${esc(label)}</div>
+              <div class="row-v">${esc(value)}</div>
+              ${sub ? `<div class="row-sub">${esc(sub)}</div>` : ``}
+            </div>
+            ${actions ? `<div class="row-actions">${actions}</div>` : ``}
+          </div>
+        `;
+      }
+
+      function renderProducts(){
+        const box = $("productsBox");
+        const phone = shopPhone(SHOP);
+        const name = shopName(SHOP);
+
+        if(!PRODUCTS.length){
+          box.innerHTML = `
+            <div class="note-box">
+              Les produits seront affichés ici dès que la boutique les publie.
+              Le client peut déjà contacter le commerçant directement.
+            </div>
+          `;
+          return;
+        }
+
+        box.innerHTML = `
+          <div class="products-grid">
+            ${PRODUCTS.map(p => {
+              const title = text(p.title || p.product_name || p.name, "Produit");
+              const cat = text(p.category || p.category_text, "Produit");
+              const unit = text(p.unit_label,"");
+              const desc = text(p.description,"");
+              const price = money(p.price_fcfa ?? p.price);
+              const wa = whatsappUrl(phone, name, title);
+              return `
+                <article class="product">
+                  <div class="productCat">${esc(cat)}</div>
+                  <div class="productTitle">${esc(title)}</div>
+                  <div class="productMeta">${esc(price)}${unit ? " · " + esc(unit) : ""}${desc ? "<br>" + esc(desc) : ""}</div>
+                  ${wa ? `<a class="btn btn-live" href="${esc(wa)}" target="_blank" rel="noopener">💬 Demander</a>` : `<button class="btn btn-live" type="button" disabled>💬 Contact</button>`}
+                </article>
+              `;
+            }).join("")}
+          </div>
+        `;
+      }
+
+      function renderShop(){
+        const name = shopName(SHOP);
+        const activity = shopActivity(SHOP);
+        const desc = shopDescription(SHOP);
+        const city = shopCityZone(SHOP);
+        const address = shopAddress(SHOP);
+        const phone = shopPhone(SHOP);
+        const premium = shopPremium(SHOP);
+        const wa = whatsappUrl(phone, name);
+        const map = mapsUrl(SHOP);
+
+        document.title = "DIGIY MARKET — " + name;
+
+        $("topTitle").textContent = name;
+        $("shopName").textContent = name;
+        $("shopIntro").textContent = desc;
+        $("heroBadge").textContent = activity;
+
+        $("chipCity").textContent = "📍 " + city;
+        $("chipContact").textContent = phone ? "💬 WhatsApp direct" : "💬 Contact à demander";
+        $("chipStatus").textContent = premium ? "🌍 Vitrine premium" : "✨ Boutique en ligne";
+
+        $("miniPhone").textContent = phone ? "WhatsApp disponible" : "Contact à demander";
+        $("miniCity").textContent = city;
+        $("miniAddress").textContent = address ? "Repère disponible sur demande" : "Repère à demander au commerçant";
+        $("miniRef").textContent = premium ? "Boutique partenaire · vitrine premium" : "Boutique vérifiée dans DIGIY MARKET";
+
+        ["btnPremiumHero"].forEach(id => {
+          const el = $(id);
+          if(!el) return;
+          if(premium){
+            el.href = premium;
+            el.style.display = "inline-flex";
+          }else{
+            el.style.display = "none";
+          }
+        });
+
+        $("infoRows").innerHTML = [
+          row("Activité", activity, desc, ""),
+          premium ? row("Vitrine immersive", name, "Entrer dans la vitrine complète, comme si vous étiez sur place.", `<a class="btn btn-gold" href="${esc(premium)}" target="_blank" rel="noopener">🌍 Ouvrir la vitrine</a>`) : "",
+          row("Zone publique", city, "Repère utile sans exposer les identifiants internes.", map ? `<button class="btn btn-soft" id="btnMapsRow" type="button">🗺️ Repère</button>` : ""),
+          row("Repère terrain", address ? "Repère disponible sur demande" : "À demander au commerçant", address ? "Le repère exact se confirme directement avec la boutique." : "Le commerçant donnera le repère utile par WhatsApp.", ""),
+          row("Livraison", shopDelivery(SHOP), "Les conditions peuvent dépendre de la zone et du moment.", ""),
+          row("Paiement", shopPayment(SHOP), "Le paiement reste direct au commerçant. DIGIY ne garde pas l’argent.", "")
+        ].filter(Boolean).join("");
+
+        $("contactRows").innerHTML = [
+          row("WhatsApp Visio Live", phone ? "Disponible" : "À demander", "Voir les produits en vidéo, poser ses questions, confirmer directement avec la boutique.", wa ? `<a class="btn btn-live" href="${esc(wa)}" target="_blank" rel="noopener">💬 Ouvrir WhatsApp</a>` : ""),
+          row("Appel", phone ? "Disponible" : "Non renseigné", "Le numéro n’est pas affiché en clair dans la fiche.", phone ? `<button class="btn btn-soft" id="btnCallRow" type="button">📞 Appeler</button>` : ""),
+          row("SMS", phone ? "Disponible" : "Non renseigné", "Pratique si la connexion est faible.", phone ? `<button class="btn btn-gold" id="btnSmsRow" type="button">✉️ SMS</button>` : "")
+        ].join("");
+
+        renderProducts();
+        wireActions();
+      }
+
+      function wireActions(){
+        const name = SHOP ? shopName(SHOP) : "Boutique DIGIY";
+        const phone = SHOP ? shopPhone(SHOP) : "";
+        const wa = SHOP ? whatsappUrl(phone, name) : "";
+        const map = SHOP ? mapsUrl(SHOP) : "";
+
+        function openWa(){
+          if(!wa){ toast("WhatsApp non disponible pour cette boutique."); return; }
+          window.open(wa, "_blank", "noopener,noreferrer");
+        }
+
+        function call(){
+          if(!phone){ toast("Appel non disponible pour cette boutique."); return; }
+          location.href = "tel:" + phone;
+        }
+
+        function sms(){
+          if(!phone){ toast("SMS non disponible pour cette boutique."); return; }
+          location.href = "sms:" + phone;
+        }
+
+        function maps(){
+          if(!map){ toast("Repère à demander directement au commerçant."); return; }
+          window.open(map, "_blank", "noopener,noreferrer");
+        }
+
+        function back(){
+          if(document.referrer && document.referrer !== location.href){
+            history.back();
+          }else{
+            location.href = "./index.html";
+          }
+        }
+
+        async function share(){
+          const url = location.href;
+          const title = document.title || "DIGIY MARKET";
+          const text = "Découvre cette boutique sur DIGIY MARKET.";
+          try{
+            if(navigator.share){
+              await navigator.share({title,text,url});
+              return;
+            }
+            await navigator.clipboard.writeText(url);
+            toast("Lien copié pour partager");
+          }catch(_){
+            try{
+              await navigator.clipboard.writeText(url);
+              toast("Lien copié pour partager");
+            }catch(__){
+              toast("Partage indisponible ici");
+            }
+          }
+        }
+
+        const backBtn = $("btnBack");
+        if(backBtn) backBtn.onclick = back;
+
+        ["btnWhatsTop","btnWhats","bottomWhats"].forEach(id => {
+          const el = $(id);
+          if(el) el.onclick = openWa;
+        });
+
+        ["btnCallHero","btnCallRow"].forEach(id => {
+          const el = $(id);
+          if(el) el.onclick = call;
+        });
+
+        ["btnSmsRow"].forEach(id => {
+          const el = $(id);
+          if(el) el.onclick = sms;
+        });
+
+        ["btnMapsHero","btnMapsRow"].forEach(id => {
+          const el = $(id);
+          if(el) el.onclick = maps;
+        });
+
+        ["btnShare","bottomShare"].forEach(id => {
+          const el = $(id);
+          if(el) el.onclick = share;
+        });
+      }
+
+      async function loadProfile(slug){
+        const {data,error} = await sb
+          .from("digiy_market_profiles")
+          .select("id,slug,workspace_slug,last_slug,shop_name,business_name,name,owner_name,city,zones,address,address_text,categories_text,category,activity,description,whatsapp,public_phone,phone,owner_phone,delivery_note,payment_note,public_url,website_url,site_url,is_published,is_active,priority,updated_at")
+          .or(`slug.eq.${slug},workspace_slug.eq.${slug},last_slug.eq.${slug}`)
+          .eq("is_published", true)
+          .eq("is_active", true)
+          .limit(1)
+          .maybeSingle();
+
+        if(error) throw error;
+        return data || null;
+      }
+
+      function normalizeProduct(r){
+        return {
+          id:String(r?.id || ""),
+          title:r?.title || r?.product_name || r?.name || "Produit",
+          category:r?.category || r?.category_text || "",
+          price_fcfa:Number(r?.price_fcfa ?? r?.price ?? 0) || 0,
+          unit_label:r?.unit_label || "",
+          description:r?.description || "",
+          is_active:r?.is_active == null ? true : !!r?.is_active,
+          is_published:!!(r?.is_published ?? r?.published ?? false),
+          is_featured:!!(r?.is_featured ?? r?.featured ?? false),
+          product_position:Number(r?.product_position ?? r?.position ?? 100) || 100
+        };
+      }
+
+      function extractRows(payload){
+        if(Array.isArray(payload)) return payload;
+        if(Array.isArray(payload?.products)) return payload.products;
+        if(Array.isArray(payload?.items)) return payload.items;
+        if(Array.isArray(payload?.data)) return payload.data;
+        return [];
+      }
+
+      async function loadProducts(slug){
+        try{
+          const {data,error} = await sb.rpc("digiy_market_list_products_by_slug", {p_slug:slug});
+          if(error) throw error;
+          return extractRows(data)
+            .map(normalizeProduct)
+            .filter(p => p.is_active)
+            .sort((a,b) => {
+              if(a.is_featured !== b.is_featured) return a.is_featured ? -1 : 1;
+              const pos = a.product_position - b.product_position;
+              if(pos !== 0) return pos;
+              return String(a.title || "").localeCompare(String(b.title || ""), "fr");
+            });
+        }catch(e){
+          console.warn("lecture produits MARKET KO", e);
+          return [];
+        }
+      }
+
+      function setNotFound(message){
+        $("shopName").textContent = "Boutique introuvable";
+        $("shopIntro").textContent = message || "Cette fiche n’est pas disponible pour le moment.";
+        $("infoRows").innerHTML = `<div class="note-box">Retourne à la galerie MARKET pour choisir une boutique visible.</div>`;
+        $("productsBox").innerHTML = `<div class="note-box">Aucun produit à afficher.</div>`;
+        $("contactRows").innerHTML = `<div class="note-box">Contact indisponible.</div>`;
+      }
+
+      async function boot(){
+        document.querySelectorAll("[data-view]").forEach(btn => {
+          btn.addEventListener("click", () => setPanel(btn.getAttribute("data-view") || "infos"));
+        });
+
+        document.querySelectorAll("[data-go]").forEach(btn => {
+          btn.addEventListener("click", () => setPanel(btn.getAttribute("data-go") || "infos"));
+        });
+
+        const slug = normSlug(qs("slug"));
+        if(!slug){
+          setNotFound("Le lien ne contient pas de boutique.");
+          return;
+        }
+
+        try{
+          SHOP = await loadProfile(slug);
+          if(!SHOP){
+            setNotFound("Cette boutique n’est pas publiée ou n’est plus active.");
+            return;
+          }
+
+          PRODUCTS = await loadProducts(slug);
+          renderShop();
+        }catch(e){
+          console.error("DIGIY MARKET shop erreur", e);
+          setNotFound("Impossible de charger la boutique pour le moment.");
+        }
+      }
+
+      boot();
+    })();
   </script>
 </body>
 </html>
