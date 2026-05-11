@@ -1170,45 +1170,24 @@
 
       async function loadShop(slug){
         /*
-          Lecture robuste : certaines anciennes tables MARKET n’ont pas encore
-          name / activity / delivery_note / payment_note.
-          On tente d’abord le profil riche, puis on retombe sur le profil sûr.
+          Lecture publique sûre.
+          On ne demande que les colonnes confirmées utilisées par l'index MARKET.
+          Pas de colonne name / activity / delivery_note / payment_note ici :
+          sinon Supabase renvoie 42703 et pollue la console.
         */
         const safeSlug = String(slug || "").replace(/,/g, "");
 
-        const selects = [
-          "id,slug,workspace_slug,last_slug,shop_name,business_name,name,city,zones,categories_text,category,activity,description,whatsapp,public_phone,phone,owner_phone,delivery_note,payment_note,is_published,is_active",
-          "id,slug,workspace_slug,last_slug,shop_name,business_name,city,zones,address,address_text,categories_text,category,description,whatsapp,public_phone,phone,owner_phone,is_published,is_active",
-          "id,slug,workspace_slug,last_slug,shop_name,business_name,city,zones,categories_text,category,description,whatsapp,public_phone,phone,owner_phone,is_published,is_active"
-        ];
+        const {data,error} = await sb
+          .from("digiy_market_profiles")
+          .select("id,slug,workspace_slug,last_slug,shop_name,business_name,city,zones,address,address_text,categories_text,category,description,whatsapp,public_phone,phone,owner_phone,photo_url,logo_url,cover_url,cover_image_url,is_published,is_active,priority,updated_at")
+          .or(`slug.eq.${safeSlug},workspace_slug.eq.${safeSlug},last_slug.eq.${safeSlug}`)
+          .eq("is_published", true)
+          .eq("is_active", true)
+          .limit(1)
+          .maybeSingle();
 
-        let lastError = null;
-
-        for(const select of selects){
-          try{
-            const {data,error} = await sb
-              .from("digiy_market_profiles")
-              .select(select)
-              .or(`slug.eq.${safeSlug},workspace_slug.eq.${safeSlug},last_slug.eq.${safeSlug}`)
-              .eq("is_published", true)
-              .eq("is_active", true)
-              .limit(1)
-              .maybeSingle();
-
-            if(error){
-              lastError = error;
-              console.warn("commande MARKET lecture profil tentative KO", describeError(error));
-              continue;
-            }
-
-            return data || null;
-          }catch(e){
-            lastError = e;
-            console.warn("commande MARKET lecture profil exception", describeError(e));
-          }
-        }
-
-        throw lastError || new Error("market_profile_read_failed");
+        if(error) throw error;
+        return data || null;
       }
 
       function setPreview(){
