@@ -916,8 +916,35 @@
         return text(shop?.delivery_note, "À confirmer directement avec le commerçant.");
       }
 
+      function resolveSlug(){
+        const direct =
+          normSlug(qs("slug")) ||
+          normSlug(qs("market_slug")) ||
+          normSlug(qs("workspace_slug")) ||
+          normSlug(qs("boutique"));
+
+        if(direct) return direct;
+
+        const phone =
+          digits(qs("phone")) ||
+          digits(qs("tel")) ||
+          digits(qs("whatsapp")) ||
+          digits(qs("market_phone"));
+
+        return phone ? "market-" + phone : "";
+      }
+
+      function cleanPublicUrl(slug){
+        if(!slug) return;
+        try{
+          const clean = new URL(location.href);
+          clean.search = "?slug=" + encodeURIComponent(slug);
+          history.replaceState({}, document.title, clean.pathname + clean.search + clean.hash);
+        }catch(_){}
+      }
+
       function boutiqueUrl(){
-        const slug = normSlug(qs("slug"));
+        const slug = resolveSlug();
         return slug ? "./shop.html?slug=" + encodeURIComponent(slug) : "./index.html";
       }
 
@@ -1128,18 +1155,60 @@
         renderSummary();
       }
 
-      async function loadShop(slug){
-        const {data,error} = await sb
-          .from("digiy_market_profiles")
-          .select("id,slug,workspace_slug,last_slug,shop_name,business_name,name,city,zones,categories_text,category,activity,description,whatsapp,public_phone,phone,owner_phone,delivery_note,payment_note,is_published,is_active")
-          .or(`slug.eq.${slug},workspace_slug.eq.${slug},last_slug.eq.${slug}`)
-          .eq("is_published", true)
-          .eq("is_active", true)
-          .limit(1)
-          .maybeSingle();
+      function describeError(error){
+        if(!error) return "erreur inconnue";
+        if(typeof error === "string") return error;
 
-        if(error) throw error;
-        return data || null;
+        const parts = [];
+        if(error.message) parts.push(String(error.message));
+        if(error.code) parts.push("code " + String(error.code));
+        if(error.details) parts.push(String(error.details));
+        if(error.hint) parts.push("indice " + String(error.hint));
+
+        return parts.length ? parts.join(" · ") : "erreur Supabase";
+      }
+
+      async function loadShop(slug){
+        /*
+          Lecture robuste : certaines anciennes tables MARKET n’ont pas encore
+          name / activity / delivery_note / payment_note.
+          On tente d’abord le profil riche, puis on retombe sur le profil sûr.
+        */
+        const safeSlug = String(slug || "").replace(/,/g, "");
+
+        const selects = [
+          "id,slug,workspace_slug,last_slug,shop_name,business_name,name,city,zones,categories_text,category,activity,description,whatsapp,public_phone,phone,owner_phone,delivery_note,payment_note,is_published,is_active",
+          "id,slug,workspace_slug,last_slug,shop_name,business_name,city,zones,address,address_text,categories_text,category,description,whatsapp,public_phone,phone,owner_phone,is_published,is_active",
+          "id,slug,workspace_slug,last_slug,shop_name,business_name,city,zones,categories_text,category,description,whatsapp,public_phone,phone,owner_phone,is_published,is_active"
+        ];
+
+        let lastError = null;
+
+        for(const select of selects){
+          try{
+            const {data,error} = await sb
+              .from("digiy_market_profiles")
+              .select(select)
+              .or(`slug.eq.${safeSlug},workspace_slug.eq.${safeSlug},last_slug.eq.${safeSlug}`)
+              .eq("is_published", true)
+              .eq("is_active", true)
+              .limit(1)
+              .maybeSingle();
+
+            if(error){
+              lastError = error;
+              console.warn("commande MARKET lecture profil tentative KO", describeError(error));
+              continue;
+            }
+
+            return data || null;
+          }catch(e){
+            lastError = e;
+            console.warn("commande MARKET lecture profil exception", describeError(e));
+          }
+        }
+
+        throw lastError || new Error("market_profile_read_failed");
       }
 
       function setPreview(){
@@ -1186,7 +1255,8 @@
 
         $("btnGoForm").onclick = () => {
           setPanel("demande");
-          $("customerName").focus();
+          document.querySelector('[data-panel="demande"]')?.scrollIntoView({behavior:"smooth", block:"start"});
+          setTimeout(() => $("customerName")?.focus(), 250);
         };
 
         $("btnPrepare").onclick = prepare;
@@ -1208,11 +1278,13 @@
       async function boot(){
         wire();
 
-        const slug = normSlug(qs("slug"));
+        const slug = resolveSlug();
         if(!slug){
           setPreview();
           return;
         }
+
+        cleanPublicUrl(slug);
 
         try{
           SHOP = await loadShop(slug);
@@ -1226,8 +1298,9 @@
           setStatus("✅ Boutique chargée. Prépare ta demande puis envoie par WhatsApp.", "ok");
         }catch(e){
           console.error("commande MARKET erreur", e);
+          console.error("commande MARKET détail", describeError(e));
           setPreview();
-          setStatus("❌ Impossible de charger la boutique pour le moment.", "bad");
+          setStatus("❌ Impossible de charger la boutique pour le moment : " + describeError(e), "bad");
         }
       }
 
