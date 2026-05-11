@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <meta name="theme-color" content="#063b2b"/>
   <title>DIGIY MARKET — Commander</title>
-  <meta name="theme-color" content="#07140f"/>
-  <meta name="description" content="Passe une commande simplement dans une boutique DIGIY MARKET sur téléphone : produit, WhatsApp, commande et partage."/>
+  <meta name="description" content="Commander dans une boutique DIGIY MARKET : préparer une demande simple, contacter le commerçant par WhatsApp et payer directement le professionnel."/>
+  <meta name="robots" content="index,follow"/>
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -15,63 +16,68 @@
 
   <style>
     :root{
-      --bg:#07140f;
-      --bg2:#0b1d15;
-      --card:#10241b;
-      --card2:#0d2018;
-      --line:rgba(255,255,255,.10);
-      --text:#ecfff4;
-      --muted:rgba(236,255,244,.72);
-      --primary:#22c55e;
-      --primary2:#16a34a;
-      --gold:#facc15;
-      --goldSoft:rgba(250,204,21,.12);
-      --danger:#ef4444;
-      --info:#38bdf8;
-      --shadow:0 20px 60px rgba(0,0,0,.38);
-      --r:24px;
-      --max:1180px;
+      --bg:#f5efe2;
+      --paper:#fffaf0;
+      --ink:#10251c;
+      --muted:#68746e;
+      --green:#063b2b;
+      --green2:#0b5a41;
+      --green3:#0f7a56;
+      --gold:#d6ad39;
+      --gold2:#f4cf64;
+      --cream:#fff7e8;
+      --line:rgba(16,37,28,.12);
+      --shadow:0 20px 60px rgba(6,59,43,.16);
+      --shadow2:0 10px 30px rgba(6,59,43,.12);
+      --r:28px;
+      --max:1120px;
+      --logo:url('https://digiylyfe.net/wp-content/uploads/2026/04/icon-512-1.png');
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
+    html,body{margin:0;min-height:100%}
 
     body{
-      margin:0;
       min-height:100vh;
+      font-family:Outfit,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink);
       background:
-        radial-gradient(900px 520px at 10% -10%, rgba(34,197,94,.14), transparent 60%),
-        radial-gradient(900px 520px at 110% 0%, rgba(250,204,21,.10), transparent 55%),
-        linear-gradient(180deg, #07140f, #05100c 55%, #040b08 100%);
-      color:var(--text);
-      font-family:"Outfit",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-      padding:16px 16px calc(104px + env(safe-area-inset-bottom,0px));
+        radial-gradient(900px 520px at 6% -8%, rgba(214,173,57,.18), transparent 58%),
+        radial-gradient(900px 520px at 105% 0%, rgba(6,59,43,.14), transparent 54%),
+        linear-gradient(180deg,#fff8ea 0%,#f4ecd9 48%,#efe3cc 100%);
+      overflow-x:hidden;
+      padding-bottom:calc(98px + env(safe-area-inset-bottom,0px));
+      font-size:17px;
+      font-weight:770;
     }
 
     a{color:inherit;text-decoration:none}
+    button,input,textarea,select{font:inherit}
+    button{cursor:pointer}
+    img{display:block;max-width:100%}
 
     .wrap{
-      max-width:var(--max);
-      margin:auto;
-      display:grid;
-      gap:14px;
-    }
-
-    .hero,
-    .card{
-      border:1px solid var(--line);
-      border-radius:var(--r);
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.018));
-      box-shadow:var(--shadow);
+      width:min(var(--max),calc(100% - 24px));
+      margin:0 auto;
     }
 
     .topbar{
+      position:sticky;
+      top:0;
+      z-index:60;
+      backdrop-filter:blur(14px);
+      background:rgba(255,248,234,.92);
+      border-bottom:1px solid rgba(16,37,28,.10);
+    }
+
+    .topbar-inner{
+      min-height:82px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      padding:14px 18px;
+      gap:14px;
+      padding:10px 0;
     }
 
     .brand{
@@ -81,234 +87,288 @@
       min-width:0;
     }
 
-    .brand-mark{
-      width:48px;
-      height:48px;
-      border-radius:16px;
-      display:grid;
-      place-items:center;
-      background:linear-gradient(135deg, rgba(34,197,94,.18), rgba(250,204,21,.14));
-      border:1px solid rgba(255,255,255,.10);
-      font-size:22px;
+    .brand-logo{
+      width:58px;
+      height:58px;
+      border-radius:20px;
+      object-fit:cover;
       flex:0 0 auto;
-    }
-
-    .brand-copy{min-width:0}
-
-    .eyebrow{
-      font-size:12px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      color:var(--gold);
-      font-weight:950;
-      margin-bottom:3px;
+      border:1px solid rgba(6,59,43,.14);
+      background:#fff;
+      box-shadow:0 14px 34px rgba(6,59,43,.18);
     }
 
     .brand-title{
-      font-size:clamp(16px,2vw,20px);
-      font-weight:950;
-      line-height:1.1;
+      font-size:clamp(1.15rem,3vw,1.45rem);
+      font-weight:1000;
+      letter-spacing:-.03em;
+      line-height:1.03;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
     }
 
     .brand-sub{
+      margin-top:5px;
       color:var(--muted);
-      font-size:13px;
-      font-weight:800;
-      margin-top:3px;
+      font-size:.92rem;
+      font-weight:850;
+      line-height:1.25;
     }
 
     .top-actions{
       display:flex;
-      gap:10px;
+      align-items:center;
+      justify-content:flex-end;
+      gap:9px;
       flex-wrap:wrap;
     }
 
     .btn{
-      min-height:46px;
-      padding:11px 15px;
-      border-radius:14px;
-      font-weight:950;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.06);
-      color:var(--text);
+      border:1px solid rgba(6,59,43,.12);
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:8px;
-      cursor:pointer;
-      transition:.18s ease;
-      box-shadow:var(--shadow);
-      font-family:inherit;
+      gap:9px;
+      min-height:50px;
+      padding:0 17px;
+      border-radius:999px;
+      font-weight:1000;
+      font-size:.94rem;
+      white-space:nowrap;
+      background:#fff;
+      color:var(--green);
+      box-shadow:var(--shadow2);
+      transition:transform .16s ease, box-shadow .16s ease, background .16s ease;
     }
 
-    .btn:hover{transform:translateY(-1px)}
-    .btn:disabled{
-      opacity:.58;
-      cursor:not-allowed;
-      transform:none;
-    }
-
-    .btn.primary{
-      background:linear-gradient(135deg, var(--primary), var(--primary2));
-      color:#041b12;
-      border-color:transparent;
-      box-shadow:0 12px 28px rgba(34,197,94,.22);
-    }
-
-    .btn.gold{
-      background:rgba(250,204,21,.12);
-      color:var(--gold);
-      border-color:rgba(250,204,21,.24);
-    }
-
-    .btn.ghost{
-      background:rgba(255,255,255,.04);
-      color:var(--muted);
-    }
+    .btn:hover{transform:translateY(-1px);box-shadow:0 15px 34px rgba(6,59,43,.16)}
+    .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+    .btn-main{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;border:0}
+    .btn-gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#2d2308;border:0}
+    .btn-soft{background:rgba(255,255,255,.78);color:var(--green)}
+    .btn-live{background:linear-gradient(135deg,#16a34a,#34d399);color:#04150d;border:0}
 
     .hero{
+      padding:18px 0 12px;
+    }
+
+    .hero-card{
+      position:relative;
       overflow:hidden;
+      min-height:390px;
+      border-radius:36px;
+      color:#fff;
+      box-shadow:var(--shadow);
+      background:
+        radial-gradient(circle at 86% 12%, rgba(244,207,100,.30), transparent 22%),
+        radial-gradient(circle at 8% 92%, rgba(255,255,255,.11), transparent 28%),
+        linear-gradient(135deg,#052f22,#0b5a41 58%,#0f7a56);
+    }
+
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      right:24px;
+      bottom:22px;
+      width:150px;
+      height:150px;
+      border-radius:38px;
+      background-image:var(--logo);
+      background-size:cover;
+      background-position:center;
+      opacity:.14;
+      transform:rotate(-5deg);
+      border:1px solid rgba(255,255,255,.10);
     }
 
     .hero-grid{
       display:grid;
-      grid-template-columns:1fr 380px;
-      min-height:290px;
+      grid-template-columns:1.08fr .92fr;
+      min-height:390px;
+      position:relative;
+      z-index:2;
     }
 
-    @media(max-width:980px){
-      .hero-grid{grid-template-columns:1fr}
-    }
-
-    .hero-body{
-      padding:24px;
+    .hero-main{
+      padding:25px;
       display:grid;
       gap:16px;
       align-content:start;
     }
 
     .hero-side{
-      padding:24px;
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-      border-left:1px solid var(--line);
+      padding:25px;
+      border-left:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.045);
       display:grid;
       gap:12px;
       align-content:start;
+      backdrop-filter:blur(6px);
     }
 
-    @media(max-width:980px){
-      .hero-side{
-        border-left:none;
-        border-top:1px solid var(--line);
-      }
-    }
-
-    .mode{
+    .kicker{
       display:inline-flex;
       align-items:center;
-      gap:8px;
+      gap:9px;
+      width:max-content;
+      max-width:100%;
       padding:9px 13px;
       border-radius:999px;
-      border:1px solid rgba(250,204,21,.24);
-      background:rgba(250,204,21,.10);
-      color:#fff1a8;
-      font-size:12px;
-      font-weight:950;
-      width:max-content;
-    }
-
-    .mode.live{
-      border-color:rgba(34,197,94,.24);
-      background:rgba(34,197,94,.10);
-      color:#bbf7d0;
+      background:rgba(255,255,255,.13);
+      border:1px solid rgba(255,255,255,.18);
+      color:#fff;
+      font-size:.82rem;
+      font-weight:1000;
+      letter-spacing:.08em;
+      text-transform:uppercase;
     }
 
     h1{
       margin:0;
-      font-size:clamp(28px,4vw,42px);
-      line-height:1.06;
-      letter-spacing:-.02em;
+      font-size:clamp(2.4rem,6.5vw,4.8rem);
+      line-height:.95;
+      letter-spacing:-.055em;
+      font-weight:1000;
     }
 
-    .subtitle{
-      color:var(--muted);
-      font-size:16px;
-      font-weight:800;
-      line-height:1.55;
+    .hero-lead{
+      margin:0;
+      color:rgba(255,255,255,.88);
+      font-size:1.08rem;
+      line-height:1.65;
+      font-weight:760;
+      max-width:68ch;
     }
 
-    .pills{
+    .hero-actions{
       display:flex;
-      flex-wrap:wrap;
       gap:10px;
+      flex-wrap:wrap;
     }
 
-    .pill{
+    .chips{
+      display:flex;
+      gap:9px;
+      flex-wrap:wrap;
+    }
+
+    .chip{
       display:inline-flex;
       align-items:center;
-      gap:8px;
+      gap:7px;
       padding:9px 12px;
       border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.18);
-      color:var(--muted);
-      font-size:12px;
-      font-weight:900;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.11);
+      font-weight:950;
+      color:#fff;
+      font-size:.9rem;
     }
 
     .mini{
-      padding:14px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.10);
+      padding:15px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,.12);
       background:rgba(0,0,0,.16);
     }
 
     .mini .k{
-      font-size:12px;
-      color:var(--muted);
-      font-weight:800;
-      margin-bottom:6px;
+      color:rgba(255,255,255,.70);
+      font-size:.76rem;
+      font-weight:900;
+      margin-bottom:7px;
+      text-transform:uppercase;
+      letter-spacing:.05em;
     }
 
     .mini .v{
-      font-size:15px;
-      font-weight:900;
-      line-height:1.5;
+      font-size:1rem;
+      line-height:1.45;
+      font-weight:1000;
       word-break:break-word;
     }
 
-    .layout{
+    .pageSwitch{
+      position:sticky;
+      top:92px;
+      z-index:45;
+      margin:12px auto 0;
+      padding:9px;
+      border-radius:26px;
+      border:1px solid rgba(6,59,43,.12);
+      background:rgba(255,248,234,.92);
+      box-shadow:var(--shadow2);
+      backdrop-filter:blur(14px);
       display:grid;
-      gap:14px;
+      grid-template-columns:repeat(4,1fr);
+      gap:8px;
     }
 
-    @media(min-width:980px){
-      .layout{grid-template-columns:1.08fr .92fr}
+    .pageBtn{
+      min-height:64px;
+      border-radius:18px;
+      border:1px solid rgba(6,59,43,.10);
+      background:#fff;
+      color:var(--green);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:4px;
+      font-weight:1000;
+      font-size:13px;
+      cursor:pointer;
+      box-shadow:0 8px 18px rgba(6,59,43,.07);
+    }
+
+    .pageBtn b{font-size:24px;line-height:1}
+    .pageBtn.active{
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      color:#2d2308;
+      border-color:transparent;
+      box-shadow:0 12px 28px rgba(214,173,57,.20);
     }
 
     .panel{
-      padding:18px;
+      display:none;
+      margin-top:14px;
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(16,37,28,.09);
+      border-radius:32px;
+      box-shadow:var(--shadow2);
+      overflow:hidden;
     }
 
-    .panel h2{
-      margin:0 0 8px;
-      font-size:22px;
+    .panel.active{display:block}
+
+    .panel-head{
+      padding:20px 20px 13px;
+      border-bottom:1px solid rgba(16,37,28,.08);
     }
 
-    .muted{
+    .panel-head h2{
+      margin:0;
+      font-size:clamp(1.8rem,4vw,3rem);
+      line-height:1;
+      letter-spacing:-.04em;
+      font-weight:1000;
+    }
+
+    .panel-head p{
+      margin:9px 0 0;
       color:var(--muted);
-      font-size:14px;
-      font-weight:800;
-      line-height:1.55;
+      font-size:1rem;
+      line-height:1.6;
+      font-weight:780;
+      max-width:850px;
     }
 
-    .form-grid{
+    .panel-body{padding:20px}
+
+    .formGrid{
       display:grid;
-      gap:12px;
-      margin-top:16px;
+      gap:13px;
     }
 
     .field{
@@ -316,152 +376,130 @@
       gap:8px;
     }
 
-    .field.two{
-      grid-template-columns:1fr 160px;
-      gap:12px;
+    .field label{
+      color:var(--green);
+      font-size:.86rem;
+      font-weight:1000;
+      text-transform:uppercase;
+      letter-spacing:.05em;
     }
 
-    @media(max-width:680px){
-      .field.two{grid-template-columns:1fr}
-    }
-
-    label{
-      font-size:13px;
-      color:var(--muted);
-      font-weight:900;
-    }
-
-    input, textarea, select{
+    .input,.textarea,.select{
       width:100%;
-      min-height:52px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.16);
-      color:var(--text);
-      padding:12px 14px;
+      min-height:56px;
+      border-radius:18px;
+      border:1px solid rgba(16,37,28,.14);
+      background:#fff;
+      color:var(--ink);
+      padding:13px 15px;
       outline:none;
-      font:inherit;
+      font-size:1rem;
+      font-weight:900;
+      box-shadow:0 9px 18px rgba(6,59,43,.06);
     }
 
-    textarea{
-      min-height:120px;
+    .textarea{
+      min-height:124px;
       resize:vertical;
+      line-height:1.5;
     }
 
-    input::placeholder,
-    textarea::placeholder{
-      color:rgba(236,255,244,.38);
+    .input:focus,.textarea:focus,.select:focus{
+      border-color:rgba(6,59,43,.42);
+      box-shadow:0 0 0 4px rgba(6,59,43,.09);
+    }
+
+    .cols2{
+      display:grid;
+      grid-template-columns:1fr 150px;
+      gap:12px;
     }
 
     .actions{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      margin-top:16px;
+      margin-top:15px;
     }
 
-    .statusbox{
-      margin-top:14px;
-      padding:12px 14px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(0,0,0,.16);
-      font-weight:900;
-      color:var(--muted);
-      min-height:48px;
+    .note-box{
+      padding:15px;
+      border-radius:22px;
+      border:1px solid rgba(214,173,57,.24);
+      background:rgba(244,207,100,.13);
+      color:#4d3d12;
+      font-size:.98rem;
+      line-height:1.62;
+      font-weight:850;
+    }
+
+    .rows{display:grid;gap:12px}
+
+    .row{
       display:flex;
-      align-items:center;
-      line-height:1.45;
-    }
-
-    .statusbox.ok{
-      color:#bbf7d0;
-      border-color:rgba(34,197,94,.22);
-      background:rgba(34,197,94,.10);
-    }
-
-    .statusbox.warn{
-      color:#fde68a;
-      border-color:rgba(250,204,21,.22);
-      background:rgba(250,204,21,.08);
-    }
-
-    .statusbox.err{
-      color:#fecaca;
-      border-color:rgba(239,68,68,.22);
-      background:rgba(239,68,68,.08);
-    }
-
-    .facts{
-      display:grid;
+      align-items:flex-start;
+      justify-content:space-between;
       gap:12px;
-      margin-top:14px;
+      flex-wrap:wrap;
+      padding:15px;
+      border-radius:22px;
+      border:1px solid rgba(16,37,28,.10);
+      background:linear-gradient(180deg,#fff,#fffaf0);
     }
 
-    .fact{
-      padding:14px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.09);
-      background:rgba(0,0,0,.16);
+    .row-left{display:grid;gap:5px;min-width:0;flex:1}
+    .row-k{
+      font-size:.78rem;
+      color:var(--green);
+      font-weight:1000;
+      text-transform:uppercase;
+      letter-spacing:.06em;
     }
 
-    .fact .k{
-      font-size:12px;
-      color:var(--muted);
-      font-weight:800;
-      margin-bottom:6px;
-    }
-
-    .fact .v{
-      font-size:15px;
-      font-weight:900;
-      line-height:1.5;
+    .row-v{
+      font-size:1.12rem;
+      font-weight:1000;
+      line-height:1.34;
       word-break:break-word;
     }
 
-    .notice{
-      margin-top:16px;
-      padding:12px 14px;
-      border-radius:16px;
-      border:1px solid rgba(56,189,248,.22);
-      background:rgba(56,189,248,.08);
-      color:#bae6fd;
-      font-weight:900;
-      line-height:1.45;
-    }
-
-    .footer{
-      text-align:center;
+    .row-sub{
+      font-size:.94rem;
       color:var(--muted);
-      font-size:12px;
-      font-weight:800;
-      padding:6px 0 2px;
+      line-height:1.55;
+      font-weight:780;
     }
 
-    .loading{
-      opacity:.72;
-      pointer-events:none;
+    .status{
+      margin-top:14px;
+      padding:14px 15px;
+      border-radius:20px;
+      border:1px solid rgba(16,37,28,.11);
+      background:#fff;
+      color:var(--muted);
+      font-weight:950;
+      line-height:1.5;
+      box-shadow:0 9px 18px rgba(6,59,43,.06);
     }
 
+    .status.ok{color:#14532d;border-color:rgba(34,197,94,.28);background:#ecfdf3}
+    .status.warn{color:#854d0e;border-color:rgba(214,173,57,.28);background:#fff8db}
+    .status.bad{color:#991b1b;border-color:rgba(239,68,68,.25);background:#fff1f1}
 
-    .hero,.layout{
-      scroll-margin-top:88px;
-    }
-
-    .publicBottomNav{
+    .bottomNav{
       position:fixed;
       left:0;
       right:0;
       bottom:0;
       z-index:99990;
       padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));
-      background:rgba(7,20,15,.94);
-      border-top:1px solid rgba(255,255,255,.12);
+      background:rgba(6,59,43,.94);
+      border-top:1px solid rgba(255,255,255,.14);
       backdrop-filter:blur(16px);
       -webkit-backdrop-filter:blur(16px);
     }
 
-    .publicBottomNavInner{
+    .bottomNavInner{
       width:min(100%,760px);
       margin:0 auto;
       display:grid;
@@ -469,17 +507,16 @@
       gap:6px;
     }
 
-    .publicBottomNav a,
-    .publicBottomNav button{
+    .bottomNav a,.bottomNav button{
       min-height:58px;
       border-radius:16px;
       display:grid;
       place-items:center;
       align-content:center;
       gap:3px;
-      color:rgba(236,255,244,.72);
+      color:rgba(255,247,232,.74);
       font-size:11px;
-      font-weight:950;
+      font-weight:1000;
       text-align:center;
       border:1px solid transparent;
       text-decoration:none;
@@ -489,48 +526,15 @@
       padding:0 4px;
     }
 
-    .publicBottomNav .icoBottom{font-size:18px;line-height:1}
-
-    .publicBottomNav a.active,
-    .publicBottomNav button.active{
-      color:#041b12;
-      background:linear-gradient(135deg,var(--primary),var(--gold));
-      border-color:rgba(250,204,21,.28);
-      box-shadow:0 12px 26px rgba(34,197,94,.18);
+    .bottomNav .ico{font-size:18px;line-height:1}
+    .bottomNav a.active,.bottomNav button.active{
+      color:#2d2308;
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      border-color:rgba(244,207,100,.30);
+      box-shadow:0 12px 26px rgba(214,173,57,.20);
     }
 
-    .mobilePublicFastRow{
-      display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:10px;
-      margin-top:14px;
-    }
-
-    .mobilePublicFastRow a,
-    .mobilePublicFastRow button{
-      min-height:46px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.06);
-      color:var(--text);
-      text-decoration:none;
-      font-weight:950;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:10px 12px;
-      cursor:pointer;
-      font-family:inherit;
-    }
-
-    .mobilePublicFastRow .primary{
-      background:linear-gradient(135deg,var(--primary),var(--primary2));
-      color:#041b12;
-      border:none;
-    }
-
-    .shareToast{
+    .toast{
       position:fixed;
       left:50%;
       bottom:calc(92px + env(safe-area-inset-bottom,0px));
@@ -542,637 +546,694 @@
       max-width:calc(100vw - 24px);
       padding:10px 16px;
       border-radius:999px;
-      border:1px solid rgba(250,204,21,.28);
-      background:rgba(16,36,27,.96);
-      color:#fff1a8;
+      border:1px solid rgba(244,207,100,.30);
+      background:rgba(6,59,43,.96);
+      color:#fff7c2;
       font-size:13px;
-      font-weight:950;
+      font-weight:1000;
       box-shadow:var(--shadow);
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
     }
 
-    .shareToast.show{
+    .toast.show{
       opacity:1;
       transform:translateX(-50%) translateY(0);
     }
 
-    @media(max-width:640px){
-      .top-actions{display:none}
-      .mobilePublicFastRow{grid-template-columns:1fr 1fr}
-      .wrap{padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))}
+    footer{
+      padding:22px 0 calc(120px + env(safe-area-inset-bottom,0px));
+      color:var(--muted);
+      text-align:center;
+      font-size:.88rem;
+      font-weight:850;
     }
 
+    @media(max-width:980px){
+      .hero-grid{grid-template-columns:1fr}
+      .hero-side{
+        border-left:none;
+        border-top:1px solid rgba(255,255,255,.12);
+      }
+    }
 
-    @media(max-width:640px){
-      .top-actions,.actions{width:100%}
-      .top-actions > *, .actions > *{flex:1 1 auto}
+    @media(max-width:760px){
+      body{padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))}
+      .top-actions{display:none}
+      .topbar-inner{min-height:74px}
+      .brand-logo{width:54px;height:54px;border-radius:18px}
+      .brand-sub{font-size:.82rem}
+      .hero-card{border-radius:30px}
+      .hero-main,.hero-side{padding:21px}
+      .hero-actions,.actions{display:grid;grid-template-columns:1fr 1fr}
+      .hero-actions .btn,.actions .btn{width:100%}
+      .pageSwitch{top:80px;grid-template-columns:repeat(4,1fr);gap:6px;padding:8px}
+      .pageBtn{min-height:58px;font-size:11px;border-radius:16px}
+      .pageBtn b{font-size:20px}
+      .cols2{grid-template-columns:1fr}
+    }
+
+    @media(max-width:430px){
+      .pageSwitch{grid-template-columns:repeat(2,1fr)}
+      .hero-actions,.actions{grid-template-columns:1fr}
     }
   </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <section class="card topbar">
-      <div class="brand">
-        <div class="brand-mark">🛒</div>
-        <div class="brand-copy">
-          <div class="eyebrow">DIGIY MARKET</div>
-          <div class="brand-title" id="brandTitle">Commander</div>
-          <div class="brand-sub" id="brandSub">Préparation de la commande…</div>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" id="brandBack" href="./index.html" aria-label="Retour à DIGIY MARKET">
+        <img class="brand-logo" src="https://digiylyfe.net/wp-content/uploads/2026/04/Image-11.jpeg" alt="DIGIYLYFE" loading="eager"/>
+        <div>
+          <div class="brand-title" id="topTitle">DIGIY MARKET</div>
+          <div class="brand-sub">Demande simple · WhatsApp direct · paiement au commerçant</div>
         </div>
-      </div>
+      </a>
 
-      <div class="top-actions">
-        <a class="btn ghost" id="btnBackShop" href="./boutique.html">← Retour</a>
-        <a class="btn" id="btnHome" href="./index.html">🏠 Boutiques</a>
-      </div>
-    </section>
+      <nav class="top-actions" aria-label="Actions commande">
+        <button class="btn btn-soft" id="btnBack" type="button">⬅️ Boutique</button>
+        <button class="btn btn-gold" id="btnShare" type="button">📤 Partager</button>
+        <button class="btn btn-live" id="btnWhatsTop" type="button">💬 WhatsApp</button>
+      </nav>
+    </div>
+  </header>
 
+  <main>
     <section class="hero">
-      <div class="hero-grid">
-        <div class="hero-body">
-          <div class="mode" id="modeBadge">Commande prête</div>
+      <div class="wrap">
+        <div class="hero-card">
+          <div class="hero-grid">
+            <div class="hero-main">
+              <span class="kicker" id="heroBadge">Commande DIGIY MARKET</span>
 
-          <div>
-            <h1 id="shopName">Astou Market</h1>
-            <div class="subtitle" id="shopSubtitle">
-              Écris l’essentiel, puis la boutique te répond.
+              <div>
+                <h1 id="heroTitle">Commander simplement</h1>
+                <p class="hero-lead" id="heroLead">
+                  Prépare ta demande. La boutique reçoit un message clair par WhatsApp. Le paiement reste direct au commerçant.
+                </p>
+              </div>
+
+              <div class="chips">
+                <span class="chip" id="chipShop">🛍️ Boutique locale</span>
+                <span class="chip" id="chipCity">📍 Zone à définir</span>
+                <span class="chip">💳 Paiement direct</span>
+              </div>
+
+              <div class="hero-actions">
+                <button class="btn btn-gold" id="btnGoForm" type="button">🛒 Préparer la demande</button>
+                <button class="btn btn-live" id="btnWhatsHero" type="button">💬 WhatsApp</button>
+                <button class="btn btn-soft" id="btnBackHero" type="button">⬅️ Retour boutique</button>
+              </div>
             </div>
-          </div>
 
-          <div class="pills">
-            <div class="pill" id="pillCategory">🏷️ Boutique locale</div>
-            <div class="pill" id="pillCity">📍 Saly</div>
-            <div class="pill" id="pillDelivery">🚚 Livraison selon zone</div>
-          </div>
-
-          <div class="notice" id="heroNotice">
-            Commande simple : produit, quantité, téléphone, puis la boutique reçoit la demande.
-          </div>
-
-          <div class="mobilePublicFastRow">
-            <a id="fastBackShop" href="./boutique.html">← Boutique</a>
-            <a id="fastWhatsapp" href="#">💬 WhatsApp</a>
-            <a class="primary" href="#customerName">🛒 Commander</a>
-            <button id="fastShare" type="button">📤 Partager</button>
-          </div>
-        </div>
-
-        <div class="hero-side">
-          <div class="mini">
-            <div class="k">Boutique</div>
-            <div class="v" id="miniShop">Astou Market</div>
-          </div>
-
-          <div class="mini">
-            <div class="k">Téléphone</div>
-            <div class="v" id="miniPhone">221771342889</div>
-          </div>
-
-          <div class="mini">
-            <div class="k">WhatsApp</div>
-            <div class="v" id="miniWhatsapp">221771342889</div>
-          </div>
-
-          <div class="mini">
-            <div class="k">Adresse</div>
-            <div class="v" id="miniAddress">Saly centre</div>
+            <aside class="hero-side">
+              <div class="mini">
+                <div class="k">Boutique</div>
+                <div class="v" id="miniShop">Lecture…</div>
+              </div>
+              <div class="mini">
+                <div class="k">Contact</div>
+                <div class="v" id="miniContact">Bouton WhatsApp disponible</div>
+              </div>
+              <div class="mini">
+                <div class="k">Réception</div>
+                <div class="v" id="miniDelivery">À confirmer avec le commerçant</div>
+              </div>
+              <div class="mini">
+                <div class="k">Règle DIGIY</div>
+                <div class="v">DIGIY prépare la route. La boutique garde la relation.</div>
+              </div>
+            </aside>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="layout">
-      <section class="card panel">
-        <h2>Ma commande</h2>
-        <div class="muted">
-          Remplis l’essentiel. La boutique reçoit une demande claire.
-        </div>
+    <div class="wrap pageSwitch" aria-label="Navigation commande">
+      <button class="pageBtn active" type="button" data-view="demande"><b>🛒</b><span>Demande</span></button>
+      <button class="pageBtn" type="button" data-view="resume"><b>📋</b><span>Résumé</span></button>
+      <button class="pageBtn" type="button" data-view="contact"><b>💬</b><span>Contact</span></button>
+      <button class="pageBtn" type="button" data-view="digiy"><b>♾️</b><span>DIGIY</span></button>
+    </div>
 
-        <div class="form-grid">
+    <section class="wrap panel active" data-panel="demande">
+      <div class="panel-head">
+        <h2>Préparer la demande</h2>
+        <p>On écrit proprement pour le commerçant. Ensuite, le client confirme directement par WhatsApp.</p>
+      </div>
+
+      <div class="panel-body">
+        <div class="formGrid">
           <div class="field">
             <label for="customerName">Ton nom</label>
-            <input id="customerName" type="text" placeholder="Ex: Moussa Fall" autocomplete="name">
+            <input class="input" id="customerName" type="text" placeholder="Ex : Awa Diop" autocomplete="name"/>
           </div>
 
           <div class="field">
             <label for="customerPhone">Ton téléphone</label>
-            <input id="customerPhone" type="tel" inputmode="tel" placeholder="Ex: 221770000001" autocomplete="tel">
+            <input class="input" id="customerPhone" type="tel" inputmode="tel" placeholder="Ex : 221770000001" autocomplete="tel"/>
           </div>
 
-          <div class="field two">
-            <div>
+          <div class="cols2">
+            <div class="field">
               <label for="itemName">Produit ou demande</label>
-              <input id="itemName" type="text" placeholder="Ex: Huile de moringa">
+              <input class="input" id="itemName" type="text" placeholder="Ex : serviettes de plage, robe, parfum…"/>
             </div>
-            <div>
+            <div class="field">
               <label for="quantity">Quantité</label>
-              <input id="quantity" type="number" min="1" step="1" value="1">
+              <input class="input" id="quantity" type="number" min="1" step="1" value="1"/>
             </div>
           </div>
 
           <div class="field">
-            <label for="unitLabel">Unité</label>
-            <input id="unitLabel" type="text" placeholder="Ex: flacons, pièces, sachets">
+            <label for="unitLabel">Format ou précision</label>
+            <input class="input" id="unitLabel" type="text" placeholder="Ex : pièces, lot, couleur, taille…"/>
           </div>
 
           <div class="field">
             <label for="deliveryMode">Comment recevoir</label>
-            <select id="deliveryMode">
+            <select class="select" id="deliveryMode">
               <option value="pickup">Je viens récupérer</option>
               <option value="delivery">Je veux une livraison</option>
+              <option value="ask">Je veux demander à la boutique</option>
             </select>
           </div>
 
           <div class="field" id="deliveryAddressWrap">
-            <label for="deliveryAddress">Adresse de livraison</label>
-            <input id="deliveryAddress" type="text" placeholder="Ex: Ngaparou, derrière la station">
+            <label for="deliveryAddress">Adresse ou repère de livraison</label>
+            <input class="input" id="deliveryAddress" type="text" placeholder="Ex : Saly centre, derrière la station…"/>
           </div>
 
           <div class="field">
             <label for="note">Message utile</label>
-            <textarea id="note" placeholder="Horaire souhaité, détail important, repère utile..."></textarea>
+            <textarea class="textarea" id="note" placeholder="Horaire souhaité, couleur, taille, repère, question spéciale…"></textarea>
           </div>
         </div>
 
         <div class="actions">
-          <button class="btn primary" id="btnSubmit" type="button">✅ Commander</button>
-          <a class="btn gold" id="btnWhatsapp" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+          <button class="btn btn-gold" id="btnPrepare" type="button">📋 Préparer le message</button>
+          <button class="btn btn-live" id="btnSendWhats" type="button">💬 Envoyer WhatsApp</button>
+          <button class="btn btn-soft" id="btnCopy" type="button">📋 Copier</button>
         </div>
 
-        <div id="statusBox" class="statusbox">Prêt.</div>
-      </section>
-
-      <section class="card panel">
-        <h2>Infos boutique</h2>
-        <div class="muted">
-          Contact, horaires, livraison et repères simples.
-        </div>
-
-        <div class="facts">
-          <div class="fact">
-            <div class="k">Boutique</div>
-            <div class="v" id="factShop">Astou Market</div>
-          </div>
-
-          <div class="fact">
-            <div class="k">Ville</div>
-            <div class="v" id="factCity">Saly</div>
-          </div>
-
-          <div class="fact">
-            <div class="k">Horaires</div>
-            <div class="v" id="factHours">08h - 20h</div>
-          </div>
-
-          <div class="fact">
-            <div class="k">Livraison</div>
-            <div class="v" id="factDelivery">Livraison locale selon zone</div>
-          </div>
-        </div>
-
-        <div class="notice" id="sideNotice">
-          Si la boutique n’est pas reconnue, le formulaire reste visible mais l’envoi n’est pas activé.
-        </div>
-      </section>
+        <div class="status" id="statusBox">Prêt. Remplis la demande, puis prépare le message.</div>
+      </div>
     </section>
 
-    <div class="footer" id="footerText">
-      DIGIY MARKET • Commande simple • contact direct
-    </div>
-  </div>
+    <section class="wrap panel" data-panel="resume">
+      <div class="panel-head">
+        <h2>Résumé</h2>
+        <p>La demande reste simple. Rien n’est encaissé par DIGIY.</p>
+      </div>
+      <div class="panel-body">
+        <div class="rows" id="summaryRows">
+          <div class="note-box">Le résumé apparaîtra ici après préparation.</div>
+        </div>
+      </div>
+    </section>
 
+    <section class="wrap panel" data-panel="contact">
+      <div class="panel-head">
+        <h2>Contact direct</h2>
+        <p>Le client parle directement au commerçant. La relation reste locale et humaine.</p>
+      </div>
+      <div class="panel-body">
+        <div class="rows" id="contactRows">
+          <div class="note-box">Chargement du contact boutique…</div>
+        </div>
+      </div>
+    </section>
 
-  <nav class="publicBottomNav" aria-label="Navigation commande DIGIY MARKET">
-    <div class="publicBottomNavInner">
-      <a id="bottomBackShop" href="./boutique.html"><span class="icoBottom">←</span><span>Boutique</span></a>
-      <a href="./index.html"><span class="icoBottom">🛍️</span><span>Boutiques</span></a>
-      <a id="bottomWhatsapp" href="#"><span class="icoBottom">💬</span><span>WhatsApp</span></a>
-      <a class="active" href="#customerName"><span class="icoBottom">🛒</span><span>Commander</span></a>
-      <button id="bottomShare" type="button"><span class="icoBottom">📤</span><span>Partager</span></button>
+    <section class="wrap panel" data-panel="digiy">
+      <div class="panel-head">
+        <h2>Règle DIGIY</h2>
+        <p>Commander ici veut dire préparer une demande claire, pas enfermer la vente dans une plateforme.</p>
+      </div>
+      <div class="panel-body">
+        <div class="rows">
+          <div class="note-box">
+            <strong>Le terrain garde la main.</strong><br>
+            DIGIY MARKET met la boutique en lumière, prépare le message et ouvre le chemin vers le commerçant.
+          </div>
+
+          <div class="row">
+            <div class="row-left">
+              <div class="row-k">Paiement</div>
+              <div class="row-v">Paiement direct au commerçant</div>
+              <div class="row-sub">DIGIY ne garde pas l’argent et ne prend pas de commission.</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="row-left">
+              <div class="row-k">Relation</div>
+              <div class="row-v">WhatsApp direct</div>
+              <div class="row-sub">Le commerçant répond, confirme les détails, puis organise la vente avec le client.</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="row-left">
+              <div class="row-k">Terrain</div>
+              <div class="row-v">La commande reste humaine</div>
+              <div class="row-sub">Prix, disponibilité, livraison et paiement se confirment avec la boutique.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottomNav" aria-label="Navigation commande">
+    <div class="bottomNavInner">
+      <button type="button" id="bottomBack"><span class="ico">⬅️</span><span>Boutique</span></button>
+      <button class="active" type="button" data-go="demande"><span class="ico">🛒</span><span>Demande</span></button>
+      <button type="button" data-go="resume"><span class="ico">📋</span><span>Résumé</span></button>
+      <button type="button" id="bottomWhats"><span class="ico">💬</span><span>WhatsApp</span></button>
+      <button type="button" id="bottomShare"><span class="ico">📤</span><span>Partager</span></button>
     </div>
   </nav>
 
-  <div class="shareToast" id="shareToast">Lien prêt à partager</div>
+  <div class="toast" id="shareToast">Lien prêt à partager</div>
+
+  <footer>
+    <div class="wrap">DIGIY MARKET • Demande simple • contact direct • paiement au commerçant</div>
+  </footer>
 
   <script>
-    const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
-    const SUPABASE_ANON_KEY = "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
-    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    (function(){
+      "use strict";
 
-    const qs = new URLSearchParams(location.search);
-    const slug = (qs.get("slug") || "").trim();
+      const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
+      const SUPABASE_ANON_KEY = "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
+      const ASTOU_MARKET_SLUG = "market-221771342889";
+      const ASTOU_MARKET_PHONE = "221771342889";
+      const ASTOU_NAME = "Astou Boutique";
+      const ASTOU_PREMIUM_URL = "https://astou-boutique.digiylyfe.com/";
 
-    const $ = (id) => document.getElementById(id);
+      const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        auth:{ persistSession:false, autoRefreshToken:false, detectSessionInUrl:false }
+      });
 
-    let IS_PREVIEW = !slug;
-    let LIVE_PROFILE = null;
+      const $ = (id) => document.getElementById(id);
+      let SHOP = null;
+      let PREPARED_MESSAGE = "";
 
-    function showShareToast(text){
-      const toast = $("shareToast");
-      if(!toast) return;
-      toast.textContent = text || "Lien prêt à partager";
-      toast.classList.add("show");
-      clearTimeout(showShareToast._t);
-      showShareToast._t = setTimeout(() => toast.classList.remove("show"), 2200);
-    }
-
-    async function shareOrderPage(){
-      const profile = currentProfile();
-      const shopName = profile.business_name || "cette boutique";
-      const title = document.title || "DIGIY MARKET";
-      const text = "Commande chez " + shopName + " sur DIGIY MARKET.";
-      const url = window.location.href;
-
-      try{
-        if(navigator.share){
-          await navigator.share({ title, text, url });
-          return;
-        }
-        await navigator.clipboard.writeText(url);
-        showShareToast("Lien copié pour partager");
-      }catch(_){
-        try{
-          await navigator.clipboard.writeText(url);
-          showShareToast("Lien copié pour partager");
-        }catch(__){
-          showShareToast("Partage indisponible ici");
-        }
+      function qs(key){
+        try{return new URL(location.href).searchParams.get(key) || "";}catch(_){return "";}
       }
-    }
 
-    function wirePublicLinks(){
-      const profile = currentProfile();
-      const shopName = profile.business_name || "Boutique DIGIY";
-      const phone = profile.whatsapp || profile.public_phone || "";
-      const wa = whatsappUrl(
-        phone,
-        shopName,
-        $("itemName") ? $("itemName").value.trim() : "",
-        $("quantity") ? String(Math.max(parseInt($("quantity").value || "1", 10) || 1, 1)) : "1",
-        $("unitLabel") ? $("unitLabel").value.trim() : ""
-      );
+      function normSlug(v){
+        return String(v || "").trim().toLowerCase().replace(/\s+/g,"-").replace(/[^a-z0-9-]/g,"").replace(/-+/g,"-").replace(/^-|-$/g,"");
+      }
 
-      const back = orderBackUrl();
+      function digits(v){
+        const d = String(v || "").replace(/[^\d]/g,"");
+        if(!d) return "";
+        if(d.length === 9) return "221" + d;
+        return d;
+      }
 
-      ["fastBackShop","bottomBackShop","btnBackShop"].forEach(id => {
-        const el = $(id);
-        if(el) el.href = back;
-      });
+      function text(v,fallback){
+        const s = String(v || "").trim();
+        return s || fallback || "";
+      }
 
-      ["fastWhatsapp","bottomWhatsapp","btnWhatsapp"].forEach(id => {
-        const el = $(id);
-        if(!el) return;
-        el.href = wa || "#";
-        if(wa && wa.startsWith("http")){
-          el.target = "_blank";
-          el.rel = "noopener";
-        }
-      });
+      function esc(v){
+        return String(v ?? "")
+          .replace(/&/g,"&amp;")
+          .replace(/</g,"&lt;")
+          .replace(/>/g,"&gt;")
+          .replace(/"/g,"&quot;")
+          .replace(/'/g,"&#039;");
+      }
 
-      ["fastShare","bottomShare"].forEach(id => {
-        const el = $(id);
-        if(el) el.onclick = shareOrderPage;
-      });
-    }
+      function toast(msg){
+        const t = $("shareToast");
+        if(!t) return;
+        t.textContent = msg || "Lien prêt à partager";
+        t.classList.add("show");
+        clearTimeout(toast._t);
+        toast._t = setTimeout(() => t.classList.remove("show"), 2200);
+      }
 
-    function normalizePhone(v){
-      return String(v || "").replace(/[^\d]/g, "");
-    }
+      function setStatus(msg,type){
+        const box = $("statusBox");
+        box.textContent = msg;
+        box.className = "status " + (type || "");
+      }
 
-    function formatPhone(v){
-      const p = normalizePhone(v);
-      return p || "—";
-    }
+      function isAstou(shop){
+        const slug = normSlug(shop?.slug || shop?.workspace_slug || shop?.last_slug || qs("slug"));
+        const phone = digits(shop?.whatsapp || shop?.public_phone || shop?.phone || shop?.owner_phone);
+        const name = String(shop?.shop_name || shop?.business_name || shop?.name || "").toLowerCase();
+        return slug === ASTOU_MARKET_SLUG || phone === ASTOU_MARKET_PHONE || name.includes("astou");
+      }
 
-    function buildSafeUrl(path, params = {}){
-      try{
-        const url = new URL(path, location.href);
-        Object.entries(params).forEach(([key, value]) => {
-          const clean = String(value ?? "").trim();
-          if(clean) url.searchParams.set(key, clean);
+      function shopName(shop){
+        return isAstou(shop) ? ASTOU_NAME : text(shop?.shop_name || shop?.business_name || shop?.name, "Boutique DIGIY");
+      }
+
+      function shopPhone(shop){
+        return digits(shop?.whatsapp || shop?.public_phone || shop?.phone || shop?.owner_phone);
+      }
+
+      function shopCity(shop){
+        const city = text(shop?.city,"");
+        const zones = text(shop?.zones,"");
+        if(city && zones && city.toLowerCase() !== zones.toLowerCase()) return city + " • " + zones;
+        return city || zones || "Zone à définir";
+      }
+
+      function shopActivity(shop){
+        if(isAstou(shop)) return "Linge de maison · plage · hôtels · villas · tenues stylées · beauté";
+        return text(shop?.categories_text || shop?.category || shop?.activity, "Boutique locale");
+      }
+
+      function deliveryNote(shop){
+        return text(shop?.delivery_note, "À confirmer directement avec le commerçant.");
+      }
+
+      function boutiqueUrl(){
+        const slug = normSlug(qs("slug"));
+        return slug ? "./shop.html?slug=" + encodeURIComponent(slug) : "./index.html";
+      }
+
+      function premiumUrl(shop){
+        return isAstou(shop) ? ASTOU_PREMIUM_URL : "";
+      }
+
+      function whatsappUrl(message){
+        const phone = shopPhone(SHOP);
+        if(!phone) return "";
+        return "https://wa.me/" + phone + "?text=" + encodeURIComponent(message || buildMessage());
+      }
+
+      function setPanel(view){
+        document.querySelectorAll("[data-panel]").forEach(p => {
+          p.classList.toggle("active", p.getAttribute("data-panel") === view);
         });
-        return url.pathname + url.search + url.hash;
-      }catch{
-        const entries = Object.entries(params)
-          .filter(([, value]) => String(value ?? "").trim())
-          .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(String(value).trim())}`);
-        return entries.length ? `${path}?${entries.join("&")}` : path;
-      }
-    }
 
-    function whatsappUrl(phone, shopName, itemName = "", quantity = "", unitLabel = ""){
-      const p = normalizePhone(phone);
-      if(!p) return "#";
+        document.querySelectorAll("[data-view]").forEach(b => {
+          b.classList.toggle("active", b.getAttribute("data-view") === view);
+        });
 
-      const qtyText = quantity ? ` x${quantity}` : "";
-      const unitText = unitLabel ? ` ${unitLabel}` : "";
-      const itemText = itemName
-        ? `Bonjour ${shopName || "DIGIY MARKET"}, je veux commander : ${itemName}${qtyText}${unitText}.`
-        : `Bonjour ${shopName || "DIGIY MARKET"}, je veux des informations sur vos produits.`;
-
-      return `https://wa.me/${p}?text=${encodeURIComponent(itemText)}`;
-    }
-
-    function previewData(){
-      return {
-        slug: "",
-        business_name: "Astou Market",
-        category: "Cosmétiques / Produits naturels",
-        city: "Saly",
-        public_phone: "221771342889",
-        whatsapp: "221771342889",
-        address_text: "Saly centre",
-        description: "Boutique locale, produits utiles et bons.",
-        open_hours: "08h - 20h",
-        delivery_note: "Livraison locale selon zone."
-      };
-    }
-
-    function setStatus(msg, tone = ""){
-      const box = $("statusBox");
-      box.className = "statusbox" + (tone ? " " + tone : "");
-      box.textContent = msg;
-    }
-
-    function setBusy(isBusy){
-      $("btnSubmit").disabled = isBusy || IS_PREVIEW;
-      [
-        "customerName",
-        "customerPhone",
-        "itemName",
-        "quantity",
-        "unitLabel",
-        "deliveryMode",
-        "deliveryAddress",
-        "note"
-      ].forEach(id => {
-        $(id).disabled = isBusy;
-      });
-    }
-
-    function orderBackUrl(){
-      return buildSafeUrl("./boutique.html", slug ? { slug } : {});
-    }
-
-    function refreshDeliveryField(){
-      const isDelivery = $("deliveryMode").value === "delivery";
-      $("deliveryAddressWrap").style.display = isDelivery ? "grid" : "none";
-    }
-
-    function currentProfile(){
-      return LIVE_PROFILE || previewData();
-    }
-
-    function refreshWhatsappLink(){
-      const profile = currentProfile();
-      const shopName = profile.business_name || "Boutique DIGIY";
-      const phone = profile.whatsapp || profile.public_phone || "";
-      const itemName = $("itemName").value.trim();
-      const quantity = String(Math.max(parseInt($("quantity").value || "1", 10) || 1, 1));
-      const unitLabel = $("unitLabel").value.trim();
-
-      $("btnWhatsapp").href = whatsappUrl(phone, shopName, itemName, quantity, unitLabel);
-      wirePublicLinks();
-    }
-
-    function applyData(profile, liveMode){
-      const p = profile || previewData();
-      const shopName = p.business_name || "Boutique DIGIY";
-      const category = p.category || "Boutique locale";
-      const city = p.city || "Terrain local";
-      const phone = formatPhone(p.public_phone);
-      const whatsapp = formatPhone(p.whatsapp || p.public_phone);
-      const hours = p.open_hours || "Horaires à confirmer";
-      const delivery = p.delivery_note || "Commande simple selon disponibilité.";
-      const address = p.address_text || "Adresse à confirmer";
-
-      $("brandTitle").textContent = shopName;
-      $("brandSub").textContent = liveMode
-        ? "Commande publique prête"
-        : "Formulaire visible, en attente d’activation";
-
-      $("shopName").textContent = shopName;
-      $("shopSubtitle").textContent = `Commande directe • ${category} • ${city}`;
-      $("pillCategory").textContent = `🏷️ ${category}`;
-      $("pillCity").textContent = `📍 ${city}`;
-      $("pillDelivery").textContent = `🚚 ${delivery}`;
-
-      $("miniShop").textContent = shopName;
-      $("miniPhone").textContent = phone;
-      $("miniWhatsapp").textContent = whatsapp;
-      $("miniAddress").textContent = address;
-
-      $("factShop").textContent = shopName;
-      $("factCity").textContent = city;
-      $("factHours").textContent = hours;
-      $("factDelivery").textContent = delivery;
-
-      $("modeBadge").className = liveMode ? "mode live" : "mode";
-      $("modeBadge").textContent = liveMode ? "Commande active" : "Lecture seulement";
-
-      $("footerText").textContent = liveMode
-        ? `DIGIY MARKET • ${shopName} • Commande active`
-        : "DIGIY MARKET • Formulaire visible";
-
-      $("btnBackShop").href = orderBackUrl();
-      $("btnHome").href = buildSafeUrl("./index.html");
-      document.title = "Commander — " + shopName + " — DIGIY MARKET";
-      refreshWhatsappLink();
-      wirePublicLinks();
-
-      $("heroNotice").textContent = liveMode
-        ? "Formulaire direct : la boutique reçoit une demande claire et peut te répondre par téléphone ou WhatsApp."
-        : "Le formulaire est visible pour lecture, mais l’envoi n’est pas encore activé.";
-
-      $("sideNotice").textContent = liveMode
-        ? "On va droit au but : produit, quantité, retrait ou livraison."
-        : "Tu peux lire le formulaire, mais l’envoi ne partira que depuis une boutique active.";
-
-      if(!liveMode){
-        setStatus("Formulaire en lecture seulement. Ouvre-le depuis une boutique active pour envoyer une vraie commande.", "warn");
-      }else{
-        setStatus("Prêt à envoyer la commande.");
-      }
-    }
-
-    async function loadLive(){
-      const { data, error } = await sb.rpc("market_public_profile_by_slug", { p_slug: slug });
-      if(error) throw error;
-      if(!data?.ok || !data?.profile) throw new Error(data?.error || "not_found");
-      return data.profile;
-    }
-
-    async function createOrder(payload){
-      const { data, error } = await sb.rpc("market_create_order_by_slug", payload);
-      if(error) throw error;
-      return data;
-    }
-
-    function loadLocalMemory(){
-      const lastName = localStorage.getItem("digiy_market_customer_name") || "";
-      const lastPhone = localStorage.getItem("digiy_market_customer_phone") || "";
-      if(lastName) $("customerName").value = lastName;
-      if(lastPhone) $("customerPhone").value = lastPhone;
-    }
-
-    function saveLocalMemory(name, phone){
-      localStorage.setItem("digiy_market_customer_name", name);
-      localStorage.setItem("digiy_market_customer_phone", phone);
-    }
-
-    async function submitOrder(){
-      if(IS_PREVIEW){
-        setStatus("Impossible d’envoyer pour le moment depuis ce formulaire.", "warn");
-        return;
+        document.querySelectorAll("[data-go]").forEach(b => {
+          b.classList.toggle("active", b.getAttribute("data-go") === view);
+        });
       }
 
-      const customerName = $("customerName").value.trim();
-      const customerPhone = normalizePhone($("customerPhone").value);
-      const itemName = $("itemName").value.trim();
-      const quantity = Math.max(parseInt($("quantity").value || "1", 10) || 1, 1);
-      const unitLabel = $("unitLabel").value.trim();
-      const deliveryMode = $("deliveryMode").value;
-      const deliveryAddress = $("deliveryAddress").value.trim();
-      const note = $("note").value.trim();
-
-      if(!customerName){
-        setStatus("Ton nom est manquant.", "err");
-        $("customerName").focus();
-        return;
+      function fieldValue(id){
+        return String($(id)?.value || "").trim();
       }
 
-      if(!customerPhone){
-        setStatus("Ton téléphone est manquant.", "err");
-        $("customerPhone").focus();
-        return;
+      function buildMessage(){
+        const name = shopName(SHOP);
+        const customerName = fieldValue("customerName");
+        const customerPhone = fieldValue("customerPhone");
+        const item = fieldValue("itemName") || "vos produits";
+        const qty = Math.max(Number(fieldValue("quantity") || 1), 1);
+        const unit = fieldValue("unitLabel");
+        const mode = fieldValue("deliveryMode");
+        const addr = fieldValue("deliveryAddress");
+        const note = fieldValue("note");
+
+        const deliveryText =
+          mode === "delivery" ? "Je souhaite une livraison." :
+          mode === "pickup" ? "Je peux venir récupérer." :
+          "Je souhaite confirmer avec vous le mode de réception.";
+
+        const lines = [
+          "Bonjour 👋 Je viens de DIGIY MARKET.",
+          "Je souhaite faire une demande chez " + name + ".",
+          "",
+          "Produit / demande : " + item,
+          "Quantité : " + qty + (unit ? " " + unit : ""),
+          "Réception : " + deliveryText
+        ];
+
+        if(addr && mode === "delivery") lines.push("Adresse / repère : " + addr);
+        if(customerName) lines.push("Nom client : " + customerName);
+        if(customerPhone) lines.push("Téléphone client : " + customerPhone);
+        if(note) lines.push("Message : " + note);
+
+        lines.push("");
+        lines.push("Merci de me confirmer la disponibilité, le prix final et les modalités.");
+        lines.push("Paiement direct au commerçant.");
+
+        return lines.join("\n");
       }
 
-      if(customerPhone.length < 8){
-        setStatus("Ton téléphone semble incomplet.", "err");
-        $("customerPhone").focus();
-        return;
+      function renderSummary(){
+        const message = buildMessage();
+        PREPARED_MESSAGE = message;
+
+        $("summaryRows").innerHTML = `
+          <div class="note-box">${esc(message).replace(/\n/g,"<br>")}</div>
+          <div class="row">
+            <div class="row-left">
+              <div class="row-k">Action</div>
+              <div class="row-v">Envoyer au commerçant</div>
+              <div class="row-sub">La boutique confirme disponibilité, prix final, livraison et paiement.</div>
+            </div>
+            <div class="actions" style="margin-top:0">
+              <button class="btn btn-live" id="btnSummaryWhats" type="button">💬 WhatsApp</button>
+              <button class="btn btn-soft" id="btnSummaryCopy" type="button">📋 Copier</button>
+            </div>
+          </div>
+        `;
+
+        $("btnSummaryWhats").onclick = sendWhats;
+        $("btnSummaryCopy").onclick = copyMessage;
       }
 
-      if(!itemName){
-        setStatus("Le produit ou la demande est manquant.", "err");
-        $("itemName").focus();
-        return;
+      function prepare(){
+        renderSummary();
+        setStatus("✅ Message préparé. Tu peux l’envoyer au commerçant par WhatsApp.", "ok");
+        setPanel("resume");
       }
 
-      if(deliveryMode === "delivery" && !deliveryAddress){
-        setStatus("L’adresse de livraison est manquante.", "err");
-        $("deliveryAddress").focus();
-        return;
+      async function copyMessage(){
+        const msg = PREPARED_MESSAGE || buildMessage();
+        try{
+          await navigator.clipboard.writeText(msg);
+          toast("Message copié");
+          setStatus("✅ Message copié.", "ok");
+        }catch(_){
+          setStatus("⚠️ Copie impossible ici. Utilise WhatsApp.", "warn");
+        }
       }
 
-      const payload = {
-        p_slug: slug,
-        p_customer_name: customerName,
-        p_customer_phone: customerPhone,
-        p_item_name: itemName,
-        p_quantity: quantity,
-        p_unit_label: unitLabel || null,
-        p_note: note || null,
-        p_delivery_mode: deliveryMode,
-        p_delivery_address: deliveryMode === "delivery" ? (deliveryAddress || null) : null
-      };
+      function sendWhats(){
+        const msg = PREPARED_MESSAGE || buildMessage();
+        const url = whatsappUrl(msg);
+        if(!url){
+          setStatus("⚠️ WhatsApp non disponible pour cette boutique.", "warn");
+          toast("WhatsApp non disponible");
+          return;
+        }
+        window.open(url, "_blank", "noopener,noreferrer");
+        setStatus("✅ WhatsApp ouvert. Le commerçant confirme la suite.", "ok");
+      }
 
-      if($("btnSubmit").dataset.busy === "1") return;
+      async function sharePage(){
+        const title = document.title || "DIGIY MARKET";
+        const text = "Préparer une commande sur DIGIY MARKET.";
+        const url = location.href;
+        try{
+          if(navigator.share){
+            await navigator.share({title,text,url});
+            return;
+          }
+          await navigator.clipboard.writeText(url);
+          toast("Lien copié pour partager");
+        }catch(_){
+          try{
+            await navigator.clipboard.writeText(url);
+            toast("Lien copié pour partager");
+          }catch(__){
+            toast("Partage indisponible ici");
+          }
+        }
+      }
 
-      $("btnSubmit").dataset.busy = "1";
-      setBusy(true);
-      setStatus("Envoi de la commande...");
+      function renderContact(){
+        const name = shopName(SHOP);
+        const phone = shopPhone(SHOP);
+        const premium = premiumUrl(SHOP);
 
-      try{
-        const data = await createOrder(payload);
+        $("contactRows").innerHTML = `
+          <div class="note-box">
+            Le contact reste direct. DIGIY prépare le message, mais la vente se confirme avec la boutique.
+          </div>
 
-        if(!data?.ok){
-          throw new Error(data?.error || "order_failed");
+          <div class="row">
+            <div class="row-left">
+              <div class="row-k">Boutique</div>
+              <div class="row-v">${esc(name)}</div>
+              <div class="row-sub">${esc(shopActivity(SHOP))}</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="row-left">
+              <div class="row-k">WhatsApp</div>
+              <div class="row-v">${phone ? "Disponible" : "Non renseigné"}</div>
+              <div class="row-sub">Le numéro n’est pas affiché en clair. Le bouton ouvre WhatsApp.</div>
+            </div>
+            <div class="actions" style="margin-top:0">
+              <button class="btn btn-live" id="btnContactWhats" type="button">💬 WhatsApp</button>
+            </div>
+          </div>
+
+          ${premium ? `
+          <div class="row">
+            <div class="row-left">
+              <div class="row-k">Vitrine</div>
+              <div class="row-v">Vitrine premium disponible</div>
+              <div class="row-sub">Entrer dans la boutique immersive.</div>
+            </div>
+            <div class="actions" style="margin-top:0">
+              <a class="btn btn-gold" href="${esc(premium)}" target="_blank" rel="noopener">🌍 Ouvrir</a>
+            </div>
+          </div>` : ``}
+        `;
+
+        $("btnContactWhats").onclick = sendWhats;
+      }
+
+      function applyShop(shop){
+        const name = shopName(shop);
+        const city = shopCity(shop);
+        const activity = shopActivity(shop);
+
+        document.title = "DIGIY MARKET — Commander chez " + name;
+
+        $("topTitle").textContent = "Commander chez " + name;
+        $("heroTitle").textContent = "Commander chez " + name;
+        $("heroLead").textContent = "Prépare ta demande. " + name + " te répond directement. DIGIY ne garde pas l’argent.";
+        $("heroBadge").textContent = "Commande · " + activity;
+        $("chipShop").textContent = "🛍️ " + name;
+        $("chipCity").textContent = "📍 " + city;
+        $("miniShop").textContent = name;
+        $("miniContact").textContent = shopPhone(shop) ? "WhatsApp disponible" : "Contact à demander";
+        $("miniDelivery").textContent = deliveryNote(shop);
+
+        const productFromUrl = text(qs("product") || qs("item") || qs("title"), "");
+        if(productFromUrl && !$("itemName").value) $("itemName").value = productFromUrl;
+
+        renderContact();
+        renderSummary();
+      }
+
+      async function loadShop(slug){
+        const {data,error} = await sb
+          .from("digiy_market_profiles")
+          .select("id,slug,workspace_slug,last_slug,shop_name,business_name,name,city,zones,categories_text,category,activity,description,whatsapp,public_phone,phone,owner_phone,delivery_note,payment_note,is_published,is_active")
+          .or(`slug.eq.${slug},workspace_slug.eq.${slug},last_slug.eq.${slug}`)
+          .eq("is_published", true)
+          .eq("is_active", true)
+          .limit(1)
+          .maybeSingle();
+
+        if(error) throw error;
+        return data || null;
+      }
+
+      function setPreview(){
+        SHOP = {
+          slug:"",
+          shop_name:"Boutique DIGIY",
+          business_name:"Boutique DIGIY",
+          city:"Zone à définir",
+          categories_text:"Boutique locale",
+          delivery_note:"À confirmer avec le commerçant"
+        };
+
+        applyShop(SHOP);
+        setStatus("⚠️ Lien incomplet. La demande peut être préparée, mais WhatsApp dépendra de la boutique.", "warn");
+      }
+
+      function wire(){
+        document.querySelectorAll("[data-view]").forEach(btn => {
+          btn.addEventListener("click", () => setPanel(btn.getAttribute("data-view") || "demande"));
+        });
+
+        document.querySelectorAll("[data-go]").forEach(btn => {
+          btn.addEventListener("click", () => setPanel(btn.getAttribute("data-go") || "demande"));
+        });
+
+        function back(){
+          location.href = boutiqueUrl();
         }
 
-        saveLocalMemory(customerName, customerPhone);
+        ["btnBack","btnBackHero","bottomBack"].forEach(id => {
+          const el = $(id);
+          if(el) el.onclick = back;
+        });
 
-        sessionStorage.setItem("digiy_market_last_order_slug", slug);
-        sessionStorage.setItem("digiy_market_last_order_id", data.order_id || "");
+        ["btnWhatsTop","btnWhatsHero","btnSendWhats","bottomWhats"].forEach(id => {
+          const el = $(id);
+          if(el) el.onclick = sendWhats;
+        });
 
-        setStatus("Commande envoyée. La boutique l’a reçue.", "ok");
+        ["btnShare","bottomShare"].forEach(id => {
+          const el = $(id);
+          if(el) el.onclick = sharePage;
+        });
 
-        $("itemName").value = "";
-        $("quantity").value = "1";
-        $("unitLabel").value = "";
-        $("note").value = "";
+        $("btnGoForm").onclick = () => {
+          setPanel("demande");
+          $("customerName").focus();
+        };
 
-        if($("deliveryMode").value === "delivery"){
-          $("deliveryAddress").value = "";
-        }
+        $("btnPrepare").onclick = prepare;
+        $("btnCopy").onclick = copyMessage;
 
-        refreshWhatsappLink();
-      }catch(err){
-        console.error(err);
-        setStatus("Impossible d’envoyer la commande pour le moment.", "err");
-      }finally{
-        $("btnSubmit").dataset.busy = "0";
-        setBusy(false);
-        refreshDeliveryField();
-      wirePublicLinks();
+        ["customerName","customerPhone","itemName","quantity","unitLabel","deliveryMode","deliveryAddress","note"].forEach(id => {
+          const el = $(id);
+          if(el) el.addEventListener("input", renderSummary);
+        });
+
+        $("deliveryMode").addEventListener("change", () => {
+          $("deliveryAddressWrap").style.display = $("deliveryMode").value === "delivery" ? "grid" : "none";
+          renderSummary();
+        });
+
+        $("deliveryAddressWrap").style.display = $("deliveryMode").value === "delivery" ? "grid" : "none";
       }
-    }
 
-    async function boot(){
-      document.body.classList.add("loading");
-      loadLocalMemory();
-      $("btnBackShop").href = orderBackUrl();
-      $("btnHome").href = buildSafeUrl("./index.html");
-      refreshDeliveryField();
+      async function boot(){
+        wire();
 
-      try{
+        const slug = normSlug(qs("slug"));
         if(!slug){
-          IS_PREVIEW = true;
-          LIVE_PROFILE = null;
-          applyData(previewData(), false);
+          setPreview();
           return;
         }
 
-        LIVE_PROFILE = await loadLive();
-        IS_PREVIEW = false;
-        applyData(LIVE_PROFILE, true);
-      }catch(err){
-        console.error(err);
-        IS_PREVIEW = true;
-        LIVE_PROFILE = null;
-        applyData(previewData(), false);
-        $("brandSub").textContent = "Boutique non reconnue";
-        $("modeBadge").className = "mode";
-        $("modeBadge").textContent = "Lecture seulement";
-      }finally{
-        document.body.classList.remove("loading");
-        setBusy(false);
-        refreshWhatsappLink();
-      }
-    }
+        try{
+          SHOP = await loadShop(slug);
+          if(!SHOP){
+            setPreview();
+            setStatus("⚠️ Boutique non publiée ou introuvable. Retourne à la fiche boutique.", "warn");
+            return;
+          }
 
-    $("deliveryMode").addEventListener("change", () => {
-      refreshDeliveryField();
-    });
-
-    $("btnSubmit").addEventListener("click", submitOrder);
-
-    ["itemName", "quantity", "unitLabel"].forEach((id) => {
-      $(id).addEventListener("input", refreshWhatsappLink);
-    });
-
-    ["customerPhone","itemName","deliveryAddress","note","customerName","unitLabel","quantity"].forEach((id) => {
-      $(id).addEventListener("keydown", (e) => {
-        if(e.key === "Enter" && id !== "note"){
-          e.preventDefault();
-          submitOrder();
+          applyShop(SHOP);
+          setStatus("✅ Boutique chargée. Prépare ta demande puis envoie par WhatsApp.", "ok");
+        }catch(e){
+          console.error("commande MARKET erreur", e);
+          setPreview();
+          setStatus("❌ Impossible de charger la boutique pour le moment.", "bad");
         }
-      });
-    });
+      }
 
-    boot();
+      boot();
+    })();
   </script>
 </body>
 </html>
+
