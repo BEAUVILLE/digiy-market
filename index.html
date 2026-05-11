@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
   <meta name="theme-color" content="#063b2b"/>
   <title>DIGIY MARKET — Boutiques locales</title>
-  <meta name="description" content="DIGIY MARKET — Boutiques locales visibles sur téléphone, Visio Live, WhatsApp, partage, paiement direct au commerçant, zéro commission."/>
+  <meta name="description" content="DIGIY MARKET — galerie locale de boutiques visibles sur téléphone, WhatsApp Visio Live, contact direct, commande simple, paiement direct au commerçant, zéro commission."/>
   <meta name="robots" content="index,follow"/>
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -25,21 +25,19 @@
       --green3:#0f7a56;
       --gold:#d6ad39;
       --gold2:#f4cf64;
-      --sand:#eadfc7;
       --cream:#fff7e8;
       --line:rgba(16,37,28,.12);
-      --lineDark:rgba(255,255,255,.16);
       --shadow:0 20px 60px rgba(6,59,43,.16);
       --shadow2:0 10px 30px rgba(6,59,43,.12);
-      --r:28px;
       --max:1180px;
       --logo:url('https://digiylyfe.net/wp-content/uploads/2026/04/icon-512-1.png');
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
+    html,body{margin:0;min-height:100%}
+
     body{
-      margin:0;
       min-height:100vh;
       font-family:Outfit,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--ink);
@@ -49,254 +47,815 @@
         linear-gradient(180deg,#fff8ea 0%,#f4ecd9 48%,#efe3cc 100%);
       overflow-x:hidden;
       padding-bottom:calc(104px + env(safe-area-inset-bottom,0px));
+      font-size:17px;
+      font-weight:760;
     }
 
     a{color:inherit;text-decoration:none}
     button,input,select{font:inherit}
+    button{cursor:pointer}
     img{display:block;max-width:100%}
 
     .wrap{width:min(var(--max),calc(100% - 28px));margin:0 auto}
 
     .topbar{
-      position:sticky;top:0;z-index:60;
+      position:sticky;
+      top:0;
+      z-index:60;
       backdrop-filter:blur(14px);
-      background:rgba(255,248,234,.88);
+      background:rgba(255,248,234,.90);
       border-bottom:1px solid rgba(16,37,28,.10);
     }
+
     .topbar-inner{
-      min-height:94px;
-      display:flex;align-items:center;justify-content:space-between;gap:16px;
+      min-height:88px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
       padding:10px 0;
     }
-    .brand{display:flex;align-items:center;gap:14px;min-width:0}
-    .brand-logo{
-      width:78px;height:78px;border-radius:24px;object-fit:cover;flex:0 0 auto;
-      border:1px solid rgba(6,59,43,.14);background:#fff;box-shadow:0 14px 34px rgba(6,59,43,.18);
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:13px;
+      min-width:0;
     }
-    .brand-title{font-size:1.45rem;font-weight:1000;letter-spacing:-.02em;line-height:1.05}
-    .brand-sub{margin-top:5px;color:var(--muted);font-size:.98rem;font-weight:850;line-height:1.25}
-    .top-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+
+    .brand-logo{
+      width:68px;
+      height:68px;
+      border-radius:23px;
+      object-fit:cover;
+      flex:0 0 auto;
+      border:1px solid rgba(6,59,43,.14);
+      background:#fff;
+      box-shadow:0 14px 34px rgba(6,59,43,.18);
+    }
+
+    .brand-title{
+      font-size:clamp(1.2rem,3vw,1.55rem);
+      font-weight:1000;
+      letter-spacing:-.03em;
+      line-height:1.04;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .brand-sub{
+      margin-top:5px;
+      color:var(--muted);
+      font-size:.95rem;
+      font-weight:850;
+      line-height:1.25;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:10px;
+      flex-wrap:wrap;
+    }
 
     .btn{
-      border:1px solid rgba(6,59,43,.12);cursor:pointer;
-      display:inline-flex;align-items:center;justify-content:center;gap:9px;
-      min-height:46px;padding:0 17px;border-radius:999px;
-      font-weight:950;font-size:.92rem;white-space:nowrap;
-      background:#fff;color:var(--green);box-shadow:var(--shadow2);
+      border:1px solid rgba(6,59,43,.12);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:9px;
+      min-height:50px;
+      padding:0 17px;
+      border-radius:999px;
+      font-weight:1000;
+      font-size:.94rem;
+      white-space:nowrap;
+      background:#fff;
+      color:var(--green);
+      box-shadow:var(--shadow2);
       transition:transform .16s ease, box-shadow .16s ease, background .16s ease;
+      text-align:center;
+      -webkit-tap-highlight-color:transparent;
     }
+
     .btn:hover{transform:translateY(-1px);box-shadow:0 15px 34px rgba(6,59,43,.16)}
+    .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
     .btn-main{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;border:0}
     .btn-gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#2d2308;border:0}
-    .btn-soft{background:rgba(255,255,255,.76);color:var(--green)}
+    .btn-soft{background:rgba(255,255,255,.78);color:var(--green)}
+    .btn-live{background:linear-gradient(135deg,#16a34a,#34d399);color:#04150d;border:0}
     .btn-ghost{background:rgba(6,59,43,.07);box-shadow:none}
 
-    .hero{padding:24px 0 16px}
-    .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;align-items:stretch}
+    .hero{padding:20px 0 12px}
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.06fr .94fr;
+      gap:16px;
+      align-items:stretch;
+    }
+
     .hero-card{
-      position:relative;overflow:hidden;min-height:560px;border-radius:36px;
-      padding:30px;color:#fff;box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+      min-height:540px;
+      border-radius:36px;
+      padding:28px;
+      color:#fff;
+      box-shadow:var(--shadow);
       background:
         radial-gradient(circle at 86% 12%, rgba(244,207,100,.32), transparent 22%),
         radial-gradient(circle at 8% 92%, rgba(255,255,255,.10), transparent 28%),
         linear-gradient(135deg,#052f22,#0b5a41 58%,#0f7a56);
     }
+
     .hero-card::before{
-      content:"";position:absolute;inset:-90px -95px auto auto;width:260px;height:260px;border-radius:50%;
+      content:"";
+      position:absolute;
+      inset:-90px -95px auto auto;
+      width:260px;
+      height:260px;
+      border-radius:50%;
       background:rgba(255,255,255,.07);
     }
+
     .hero-card::after{
-      content:"";position:absolute;right:26px;bottom:22px;width:170px;height:170px;border-radius:38px;
-      background-image:var(--logo);background-size:cover;background-position:center;
-      opacity:.16;filter:saturate(1.1);transform:rotate(-5deg);
+      content:"";
+      position:absolute;
+      right:26px;
+      bottom:22px;
+      width:168px;
+      height:168px;
+      border-radius:38px;
+      background-image:var(--logo);
+      background-size:cover;
+      background-position:center;
+      opacity:.15;
+      transform:rotate(-5deg);
       border:1px solid rgba(255,255,255,.10);
     }
-    .hero-copy{position:relative;z-index:2;max-width:710px}
+
+    .hero-copy{position:relative;z-index:2;max-width:750px}
+
     .kicker{
-      display:inline-flex;align-items:center;gap:9px;width:max-content;max-width:100%;
-      padding:9px 13px;border-radius:999px;
-      background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.18);
-      color:#fff;font-size:.82rem;font-weight:1000;letter-spacing:.08em;text-transform:uppercase;
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      width:max-content;
+      max-width:100%;
+      padding:9px 13px;
+      border-radius:999px;
+      background:rgba(255,255,255,.13);
+      border:1px solid rgba(255,255,255,.18);
+      color:#fff;
+      font-size:.82rem;
+      font-weight:1000;
+      letter-spacing:.08em;
+      text-transform:uppercase;
     }
-    h1{margin:16px 0 12px;font-size:clamp(2.4rem,5vw,5rem);line-height:.93;letter-spacing:-.055em;font-weight:1000}
-    .hero-lead{margin:0;color:rgba(255,255,255,.88);font-size:1.1rem;line-height:1.68;font-weight:730;max-width:68ch}
-    .hero-badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+
+    h1{
+      margin:16px 0 12px;
+      font-size:clamp(2.45rem,5.2vw,5rem);
+      line-height:.94;
+      letter-spacing:-.058em;
+      font-weight:1000;
+    }
+
+    .hero-lead{
+      margin:0;
+      color:rgba(255,255,255,.88);
+      font-size:1.1rem;
+      line-height:1.68;
+      font-weight:760;
+      max-width:72ch;
+    }
+
+    .live-digiy-hero{
+      display:grid;
+      gap:5px;
+      margin-top:18px;
+      padding:14px 16px;
+      border-radius:22px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(244,207,100,.38);
+      box-shadow:0 14px 34px rgba(0,0,0,.18);
+      max-width:680px;
+    }
+
+    .live-digiy-hero strong{
+      color:#fff7c2;
+      font-size:.95rem;
+      font-weight:1000;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .live-digiy-hero span{
+      color:rgba(255,255,255,.86);
+      font-size:.95rem;
+      font-weight:780;
+      line-height:1.45;
+    }
+
+    .hero-badges{
+      display:flex;
+      gap:9px;
+      flex-wrap:wrap;
+      margin-top:19px;
+    }
+
     .hero-badge{
-      display:inline-flex;align-items:center;gap:8px;padding:10px 13px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.11);
-      font-weight:900;color:#fff;font-size:.9rem;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 13px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.11);
+      font-weight:950;
+      color:#fff;
+      font-size:.9rem;
     }
-    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
-    .hero-mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px}
+
+    .hero-actions{
+      display:flex;
+      gap:11px;
+      flex-wrap:wrap;
+      margin-top:23px;
+    }
+
+    .mobilePublicFastRow{
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:10px;
+      margin-top:18px;
+    }
+
+    .mobilePublicFastRow a,
+    .mobilePublicFastRow button{
+      min-height:48px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.10);
+      color:#fff;
+      text-decoration:none;
+      font-weight:1000;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 12px;
+      cursor:pointer;
+      font-family:inherit;
+    }
+
+    .mobilePublicFastRow .primary{
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      color:#2d2308;
+      border:none;
+    }
+
+    .hero-mini-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:25px;
+    }
+
     .hero-mini{
-      padding:16px;border-radius:22px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(10px)
+      padding:16px;
+      border-radius:22px;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.15);
+      backdrop-filter:blur(10px);
     }
+
     .hero-mini strong{display:block;font-size:1.12rem;margin-bottom:5px}
-    .hero-mini span{display:block;color:rgba(255,255,255,.78);line-height:1.45;font-weight:650;font-size:.92rem}
+    .hero-mini span{display:block;color:rgba(255,255,255,.78);line-height:1.45;font-weight:720;font-size:.92rem}
 
     .showcase{
-      display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1.14fr .86fr;gap:14px;min-height:560px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      grid-template-rows:1.12fr .88fr;
+      gap:13px;
+      min-height:540px;
     }
-    .photo-card{position:relative;overflow:hidden;border-radius:32px;box-shadow:var(--shadow);background:#ddd;min-height:180px}
+
+    .photo-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:32px;
+      box-shadow:var(--shadow);
+      background:#ddd;
+      min-height:180px;
+    }
+
     .photo-card.big{grid-column:1/span 2}
-    .photo-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+
+    .photo-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform .6s ease;
+    }
+
     .photo-card:hover img{transform:scale(1.05)}
-    .photo-layer{position:absolute;inset:auto 0 0 0;padding:18px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.68));color:#fff}
+
+    .photo-layer{
+      position:absolute;
+      inset:auto 0 0 0;
+      padding:18px;
+      background:linear-gradient(180deg,transparent,rgba(0,0,0,.68));
+      color:#fff;
+    }
+
     .photo-layer strong{display:block;font-size:1.05rem;margin-bottom:4px}
-    .photo-layer span{color:rgba(255,255,255,.86);font-weight:650}
+    .photo-layer span{color:rgba(255,255,255,.86);font-weight:720;line-height:1.35}
+
     .seal-card{
-      position:absolute;right:16px;top:16px;width:76px;height:76px;border-radius:24px;
-      background-image:var(--logo);background-size:cover;background-position:center;
-      border:2px solid rgba(244,207,100,.75);box-shadow:0 12px 28px rgba(0,0,0,.25);
+      position:absolute;
+      right:16px;
+      top:16px;
+      width:76px;
+      height:76px;
+      border-radius:24px;
+      background-image:var(--logo);
+      background-size:cover;
+      background-position:center;
+      border:2px solid rgba(244,207,100,.75);
+      box-shadow:0 12px 28px rgba(0,0,0,.25);
     }
 
     .quick-strip{padding:4px 0 0}
-    .quick-scroll{display:flex;gap:12px;overflow:auto;padding-bottom:8px;scrollbar-width:none}
+
+    .quick-scroll{
+      display:flex;
+      gap:12px;
+      overflow:auto;
+      padding-bottom:8px;
+      scrollbar-width:none;
+    }
+
     .quick-scroll::-webkit-scrollbar{display:none}
+
     .quick-card{
-      flex:0 0 250px;padding:16px;border-radius:24px;background:rgba(255,255,255,.78);
-      border:1px solid rgba(16,37,28,.08);box-shadow:var(--shadow2);
+      flex:0 0 250px;
+      padding:16px;
+      border-radius:24px;
+      background:rgba(255,255,255,.80);
+      border:1px solid rgba(16,37,28,.08);
+      box-shadow:var(--shadow2);
     }
-    .quick-card strong{display:block;margin-bottom:6px;font-size:1.02rem}
-    .quick-card span{color:var(--muted);line-height:1.45;font-weight:650}
 
-    .section{padding:28px 0}
-    .panel{background:rgba(255,255,255,.78);border:1px solid rgba(16,37,28,.09);border-radius:32px;box-shadow:var(--shadow2)}
-    .section-head{display:flex;align-items:end;justify-content:space-between;gap:14px;margin-bottom:16px}
-    .section-head h2{margin:10px 0 0;font-size:clamp(1.8rem,3vw,3rem);line-height:1;letter-spacing:-.035em;font-weight:1000}
-    .section-head p{margin:8px 0 0;color:var(--muted);line-height:1.65;font-weight:700;max-width:760px}
+    .quick-card strong{display:block;margin-bottom:6px;font-size:1.02rem;font-weight:1000}
+    .quick-card span{color:var(--muted);line-height:1.45;font-weight:760}
+
+    .section{padding:26px 0}
+
+    .panel{
+      background:rgba(255,255,255,.80);
+      border:1px solid rgba(16,37,28,.09);
+      border-radius:32px;
+      box-shadow:var(--shadow2);
+    }
+
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:16px;
+    }
+
+    .section-head h2{
+      margin:10px 0 0;
+      font-size:clamp(1.85rem,3.2vw,3rem);
+      line-height:1;
+      letter-spacing:-.04em;
+      font-weight:1000;
+    }
+
+    .section-head p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.65;
+      font-weight:780;
+      max-width:790px;
+    }
+
     .pill{
-      display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border-radius:999px;
-      color:var(--green);background:rgba(6,59,43,.08);border:1px solid rgba(6,59,43,.11);
-      font-size:.88rem;font-weight:950;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 13px;
+      border-radius:999px;
+      color:var(--green);
+      background:rgba(6,59,43,.08);
+      border:1px solid rgba(6,59,43,.11);
+      font-size:.88rem;
+      font-weight:1000;
     }
 
-    .controls{display:grid;grid-template-columns:1.2fr .72fr .72fr auto;gap:10px;margin-top:18px}
+    .controls{
+      display:grid;
+      grid-template-columns:1.2fr .72fr .72fr auto;
+      gap:10px;
+      margin-top:18px;
+    }
+
     .input,.select{
-      width:100%;min-height:48px;border-radius:999px;border:1px solid rgba(16,37,28,.12);
-      background:#fff;color:var(--ink);padding:0 16px;outline:none;font-weight:850;box-shadow:var(--shadow2)
+      width:100%;
+      min-height:52px;
+      border-radius:999px;
+      border:1px solid rgba(16,37,28,.12);
+      background:#fff;
+      color:var(--ink);
+      padding:0 16px;
+      outline:none;
+      font-weight:900;
+      box-shadow:var(--shadow2);
     }
-    .input:focus,.select:focus{border-color:rgba(6,59,43,.36);box-shadow:0 0 0 4px rgba(6,59,43,.09)}
 
-    .stats-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .stat-pill{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;background:#fff;border:1px solid rgba(16,37,28,.10);font-weight:900;color:var(--muted)}
+    .input:focus,.select:focus{
+      border-color:rgba(6,59,43,.36);
+      box-shadow:0 0 0 4px rgba(6,59,43,.09);
+    }
+
+    .stats-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
+    .stat-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 12px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid rgba(16,37,28,.10);
+      font-weight:950;
+      color:var(--muted);
+    }
+
     .stat-pill b{color:var(--green)}
 
-    .shops-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:18px}
-    .shop-card{
-      position:relative;overflow:hidden;border-radius:34px;background:#fff;border:1px solid rgba(16,37,28,.09);
-      box-shadow:var(--shadow);transition:transform .18s ease, box-shadow .18s ease;
+    .shops-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+      margin-top:18px;
     }
-    .shop-card:hover{transform:translateY(-3px);box-shadow:0 26px 70px rgba(6,59,43,.20)}
+
+    .shop-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:34px;
+      background:#fff;
+      border:1px solid rgba(16,37,28,.09);
+      box-shadow:var(--shadow);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+
+    .shop-card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 26px 70px rgba(6,59,43,.20);
+    }
+
     .shop-media{
-      position:relative;min-height:290px;background:
+      position:relative;
+      min-height:286px;
+      background:
         radial-gradient(circle at 50% 42%, rgba(244,207,100,.20), transparent 34%),
         radial-gradient(circle at 78% 14%, rgba(244,207,100,.22), transparent 28%),
         linear-gradient(135deg,#052d22,#064b36 52%,#0b5a41);
-      color:#fff;display:grid;place-items:center;overflow:hidden;
+      color:#fff;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
     }
+
     .shop-media::before{
-      content:"";position:absolute;inset:0;background:
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
         linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.20)),
         radial-gradient(circle at 50% 50%, transparent 0 34%, rgba(0,0,0,.16) 78%);
       z-index:1;
     }
+
     .shop-media.has-img{background:#063b2b}
-    .shop-media.has-img .shop-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:saturate(.95) contrast(.95) brightness(.54);opacity:.44}
+
+    .shop-bg-img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:0;
+      filter:saturate(.98) contrast(.96) brightness(.54);
+      opacity:.48;
+    }
 
     .gallery-ribbon{
-      position:absolute;left:14px;top:14px;z-index:4;
-      display:inline-flex;align-items:center;justify-content:center;
-      min-height:36px;padding:0 13px;border-radius:999px;
-      background:rgba(255,250,240,.94);color:var(--green);
+      position:absolute;
+      left:14px;
+      top:14px;
+      z-index:4;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:36px;
+      padding:0 13px;
+      border-radius:999px;
+      background:rgba(255,250,240,.94);
+      color:var(--green);
       border:1px solid rgba(244,207,100,.62);
       box-shadow:0 12px 28px rgba(0,0,0,.18);
-      font-size:.78rem;font-weight:1000;letter-spacing:.04em;text-transform:uppercase;
+      font-size:.76rem;
+      font-weight:1000;
+      letter-spacing:.04em;
+      text-transform:uppercase;
     }
+
     .status-chip{
-      position:absolute;right:14px;top:14px;z-index:4;
-      display:inline-flex;align-items:center;justify-content:center;
-      min-height:36px;padding:0 12px;border-radius:999px;
-      background:rgba(34,197,94,.92);color:#062418;
+      position:absolute;
+      right:14px;
+      top:14px;
+      z-index:4;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:36px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(34,197,94,.92);
+      color:#062418;
       border:1px solid rgba(255,255,255,.38);
       box-shadow:0 12px 28px rgba(0,0,0,.18);
-      font-size:.78rem;font-weight:1000;
-    }
-    .live-digiy-hero{
-      display:inline-flex;flex-direction:column;gap:5px;
-      margin-top:18px;padding:14px 16px;border-radius:22px;
-      background:rgba(255,255,255,.12);border:1px solid rgba(244,207,100,.38);
-      box-shadow:0 14px 34px rgba(0,0,0,.18);
-      max-width:620px;
-    }
-    .live-digiy-hero strong{
-      color:#fff7c2;font-size:.95rem;font-weight:1000;letter-spacing:.08em;text-transform:uppercase;
-    }
-    .live-digiy-hero span{
-      color:rgba(255,255,255,.86);font-size:.95rem;font-weight:760;line-height:1.45;
-    }
-    .live-digiy-card{
-      margin:12px 0 14px;padding:12px 13px;border-radius:18px;
-      background:linear-gradient(135deg,rgba(6,59,43,.08),rgba(214,173,57,.13));
-      border:1px solid rgba(6,59,43,.12);display:grid;gap:4px;
-    }
-    .live-digiy-card strong{
-      color:var(--green);font-size:.82rem;font-weight:1000;letter-spacing:.06em;text-transform:uppercase;
-    }
-    .live-digiy-card span{
-      color:#4f5f58;font-size:.84rem;font-weight:820;line-height:1.38;
+      font-size:.78rem;
+      font-weight:1000;
     }
 
     .shop-brand-seal{
-      position:relative;z-index:3;width:min(62%,190px);aspect-ratio:1/1;border-radius:34px;
-      background:#063b2b;display:grid;place-items:center;overflow:hidden;
+      position:relative;
+      z-index:3;
+      width:min(62%,190px);
+      aspect-ratio:1/1;
+      border-radius:34px;
+      background:#063b2b;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
       border:3px solid rgba(244,207,100,.85);
       box-shadow:0 22px 55px rgba(0,0,0,.34), inset 0 0 0 1px rgba(255,255,255,.12);
       transform:translateY(6px);
     }
+
     .shop-brand-seal img{width:100%;height:100%;object-fit:cover;display:block}
-    .shop-body{padding:18px 18px 17px;background:linear-gradient(180deg,#fff,#fffaf0)}
-    .shop-cat{font-size:.82rem;font-weight:1000;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:7px}
-    .shop-title{font-size:1.6rem;line-height:1.05;font-weight:1000;letter-spacing:-.025em;margin:0 0 8px}
-    .shop-desc{color:#45534d;font-weight:750;line-height:1.48;margin:0 0 12px;min-height:44px}
-    .shop-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-    .meta-pill{display:inline-flex;align-items:center;gap:7px;padding:8px 10px;border-radius:999px;background:rgba(6,59,43,.06);border:1px solid rgba(6,59,43,.08);font-size:.84rem;font-weight:950;color:#263b32}
-    .shop-actions{display:flex;gap:10px;flex-wrap:wrap}
-    .shop-actions .btn{box-shadow:none}
-    .digiy-floor{
-      margin-top:14px;padding:12px;border-radius:20px;background:linear-gradient(135deg,rgba(6,59,43,.07),rgba(214,173,57,.10));
-      border:1px solid rgba(6,59,43,.10);display:flex;gap:10px;align-items:center;
+
+    .shop-body{
+      padding:18px 18px 17px;
+      background:linear-gradient(180deg,#fff,#fffaf0);
     }
-    .digiy-floor img{width:40px;height:40px;border-radius:14px;object-fit:cover;flex:0 0 auto;border:1px solid rgba(6,59,43,.10)}
-    .digiy-floor div{font-size:.82rem;color:#4f5f58;font-weight:850;line-height:1.35}
-    .digiy-floor strong{display:block;color:var(--green);font-weight:1000}
 
-    .empty-box{padding:28px;border-radius:26px;border:1px dashed rgba(16,37,28,.18);background:rgba(255,255,255,.58);text-align:center;color:var(--muted);font-weight:850;line-height:1.6;margin-top:18px}
-    .loading-box{padding:28px;border-radius:26px;background:rgba(255,255,255,.66);border:1px solid rgba(16,37,28,.10);text-align:center;color:var(--muted);font-weight:900;margin-top:18px}
+    .shop-cat{
+      font-size:.82rem;
+      font-weight:1000;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--green);
+      margin-bottom:7px;
+    }
 
-    .doctrine{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch}
-    .doctrine-card{padding:24px;border-radius:30px;background:#fff;border:1px solid rgba(16,37,28,.08);box-shadow:var(--shadow2)}
-    .doctrine-card.dark{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;position:relative;overflow:hidden}
-    .doctrine-card.dark::after{content:"";position:absolute;right:20px;bottom:18px;width:118px;height:118px;border-radius:30px;background-image:var(--logo);background-size:cover;background-position:center;opacity:.14;transform:rotate(-5deg)}
-    .doctrine-card h3{margin:0 0 10px;font-size:1.55rem;letter-spacing:-.02em;line-height:1.05}
-    .doctrine-card p{margin:0;color:var(--muted);font-weight:730;line-height:1.7}
+    .shop-title{
+      font-size:1.62rem;
+      line-height:1.05;
+      font-weight:1000;
+      letter-spacing:-.03em;
+      margin:0 0 8px;
+    }
+
+    .shop-desc{
+      color:#45534d;
+      font-weight:780;
+      line-height:1.48;
+      margin:0 0 12px;
+      min-height:46px;
+    }
+
+    .live-digiy-card{
+      margin:12px 0 14px;
+      padding:12px 13px;
+      border-radius:18px;
+      background:linear-gradient(135deg,rgba(6,59,43,.08),rgba(214,173,57,.13));
+      border:1px solid rgba(6,59,43,.12);
+      display:grid;
+      gap:4px;
+    }
+
+    .live-digiy-card strong{
+      color:var(--green);
+      font-size:.82rem;
+      font-weight:1000;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+
+    .live-digiy-card span{
+      color:#4f5f58;
+      font-size:.84rem;
+      font-weight:850;
+      line-height:1.38;
+    }
+
+    .shop-meta{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+
+    .meta-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:8px 10px;
+      border-radius:999px;
+      background:rgba(6,59,43,.06);
+      border:1px solid rgba(6,59,43,.08);
+      font-size:.84rem;
+      font-weight:950;
+      color:#263b32;
+    }
+
+    .shop-actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:9px;
+    }
+
+    .shop-actions .btn{
+      box-shadow:none;
+      min-height:48px;
+      padding:0 12px;
+      font-size:.9rem;
+    }
+
+    .digiy-floor{
+      margin-top:14px;
+      padding:12px;
+      border-radius:20px;
+      background:linear-gradient(135deg,rgba(6,59,43,.07),rgba(214,173,57,.10));
+      border:1px solid rgba(6,59,43,.10);
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .digiy-floor img{
+      width:40px;
+      height:40px;
+      border-radius:14px;
+      object-fit:cover;
+      flex:0 0 auto;
+      border:1px solid rgba(6,59,43,.10);
+    }
+
+    .digiy-floor div{
+      font-size:.82rem;
+      color:#4f5f58;
+      font-weight:850;
+      line-height:1.35;
+    }
+
+    .digiy-floor strong{
+      display:block;
+      color:var(--green);
+      font-weight:1000;
+    }
+
+    .empty-box,.loading-box{
+      padding:28px;
+      border-radius:26px;
+      text-align:center;
+      color:var(--muted);
+      font-weight:900;
+      line-height:1.6;
+      margin-top:18px;
+    }
+
+    .empty-box{
+      border:1px dashed rgba(16,37,28,.18);
+      background:rgba(255,255,255,.58);
+    }
+
+    .loading-box{
+      background:rgba(255,255,255,.66);
+      border:1px solid rgba(16,37,28,.10);
+    }
+
+    .doctrine{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .doctrine-card{
+      padding:24px;
+      border-radius:30px;
+      background:#fff;
+      border:1px solid rgba(16,37,28,.08);
+      box-shadow:var(--shadow2);
+    }
+
+    .doctrine-card.dark{
+      background:linear-gradient(135deg,var(--green),var(--green2));
+      color:#fff;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .doctrine-card.dark::after{
+      content:"";
+      position:absolute;
+      right:20px;
+      bottom:18px;
+      width:118px;
+      height:118px;
+      border-radius:30px;
+      background-image:var(--logo);
+      background-size:cover;
+      background-position:center;
+      opacity:.14;
+      transform:rotate(-5deg);
+    }
+
+    .doctrine-card h3{
+      margin:0 0 10px;
+      font-size:1.55rem;
+      letter-spacing:-.02em;
+      line-height:1.05;
+      font-weight:1000;
+    }
+
+    .doctrine-card p{
+      margin:0;
+      color:var(--muted);
+      font-weight:760;
+      line-height:1.7;
+    }
+
     .doctrine-card.dark p{color:rgba(255,255,255,.82)}
 
-    footer{padding:24px 0 42px;color:var(--muted)}
-    .footer-box{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:18px 20px;border-radius:28px;background:rgba(255,255,255,.72);border:1px solid rgba(16,37,28,.09);box-shadow:var(--shadow2);font-weight:800}
-    .footer-box strong{color:var(--green);font-weight:1000}
+    footer{padding:22px 0 calc(120px + env(safe-area-inset-bottom,0px));color:var(--muted)}
+
+    .footer-box{
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+      padding:18px 20px;
+      border-radius:28px;
+      background:rgba(255,255,255,.72);
+      border:1px solid rgba(16,37,28,.09);
+      box-shadow:var(--shadow2);
+      font-weight:850;
+    }
+
+    .footer-box strong{
+      color:var(--green);
+      font-weight:1000;
+    }
 
     .audio-btn{
-      position:fixed;left:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:90;
-      border:1px solid rgba(34,197,94,.42);border-radius:999px;padding:15px 20px;display:inline-flex;align-items:center;gap:10px;
-      background:linear-gradient(135deg,#16a34a,#34d399);color:#04150d;font-weight:1000;
-      box-shadow:0 16px 40px rgba(34,197,94,.28);cursor:pointer;
+      position:fixed;
+      left:18px;
+      bottom:calc(92px + env(safe-area-inset-bottom,0px));
+      z-index:99999;
+      border:1px solid rgba(34,197,94,.42);
+      border-radius:999px;
+      padding:15px 20px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      background:linear-gradient(135deg,#16a34a,#34d399);
+      color:#04150d;
+      font-weight:1000;
+      box-shadow:0 16px 40px rgba(34,197,94,.28);
+      cursor:pointer;
+      font-family:inherit;
     }
 
-
-    #boutiques,.hero,.quick-strip{
-      scroll-margin-top:106px;
-    }
+    #boutiques,.hero,.quick-strip{scroll-margin-top:104px}
 
     .publicBottomNav{
       position:fixed;
@@ -349,43 +908,12 @@
       box-shadow:0 12px 26px rgba(214,173,57,.20);
     }
 
-    .mobilePublicFastRow{
-      display:grid;
-      grid-template-columns:repeat(5,minmax(0,1fr));
-      gap:10px;
-      margin-top:18px;
-    }
-
-    .mobilePublicFastRow a,
-    .mobilePublicFastRow button{
-      min-height:46px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.16);
-      background:rgba(255,255,255,.10);
-      color:#fff;
-      text-decoration:none;
-      font-weight:1000;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:10px 12px;
-      cursor:pointer;
-      font-family:inherit;
-    }
-
-    .mobilePublicFastRow .primary{
-      background:linear-gradient(135deg,var(--gold2),var(--gold));
-      color:#2d2308;
-      border:none;
-    }
-
     .share-toast{
       position:fixed;
       left:50%;
       bottom:calc(92px + env(safe-area-inset-bottom,0px));
       transform:translateX(-50%) translateY(12px);
-      z-index:99999;
+      z-index:999999;
       opacity:0;
       pointer-events:none;
       transition:.22s ease;
@@ -408,20 +936,6 @@
       transform:translateX(-50%) translateY(0);
     }
 
-    @media(max-width:760px){
-      .top-actions{display:none}
-      .hero{padding-top:16px}
-      .audio-btn{
-        bottom:calc(92px + env(safe-area-inset-bottom,0px));
-        left:12px;
-        right:12px;
-        justify-content:center;
-      }
-      footer{padding-bottom:calc(120px + env(safe-area-inset-bottom,0px))}
-      .mobilePublicFastRow{grid-template-columns:1fr 1fr}
-    }
-
-
     @media(max-width:1080px){
       .hero-grid,.doctrine{grid-template-columns:1fr}
       .showcase{min-height:520px}
@@ -429,41 +943,42 @@
       .controls{grid-template-columns:1fr 1fr}
       .controls .input{grid-column:1/-1}
     }
+
     @media(max-width:760px){
+      body{padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))}
       .wrap{width:min(var(--max),calc(100% - 18px))}
       .topbar-inner{min-height:auto;align-items:flex-start}
-      .brand-logo{width:62px;height:62px;border-radius:20px}
-      .brand-title{font-size:1.15rem}
-      .brand-sub{font-size:.86rem}
-      .top-actions{width:100%;justify-content:flex-start}
-      .top-actions .btn{flex:1 1 auto}
+      .brand-logo{width:58px;height:58px;border-radius:20px}
+      .brand-title{font-size:1.12rem}
+      .brand-sub{font-size:.84rem}
+      .top-actions{display:none}
+      .hero{padding-top:16px}
       .hero-card{min-height:auto;border-radius:30px;padding:23px}
       .showcase{grid-template-columns:1fr 1fr;min-height:auto}
       .photo-card.big{min-height:250px}
       .hero-mini-grid{grid-template-columns:1fr}
+      .hero-actions{display:grid;grid-template-columns:1fr 1fr}
+      .hero-actions .btn{width:100%}
+      .mobilePublicFastRow{grid-template-columns:1fr 1fr}
       .shops-grid{grid-template-columns:1fr}
-      .shop-media{min-height:250px}
+      .shop-media{min-height:252px}
       .controls{grid-template-columns:1fr}
       .section-head{display:block}
-      .audio-btn{left:12px;right:12px;justify-content:center}
-    }
-  
-    #digiyAudioBtn{
-      visibility:visible !important;
-      opacity:1 !important;
-      pointer-events:auto !important;
-    }
-    @media(max-width:760px){
-      #digiyAudioBtn{
-        left:12px !important;
-        right:12px !important;
-        bottom:calc(92px + env(safe-area-inset-bottom,0px)) !important;
-        width:calc(100% - 24px) !important;
+      .audio-btn{
+        left:12px;
+        right:12px;
+        width:calc(100% - 24px);
+        bottom:calc(92px + env(safe-area-inset-bottom,0px));
       }
     }
 
+    @media(max-width:430px){
+      .hero-actions{grid-template-columns:1fr}
+      .shop-actions{grid-template-columns:1fr}
+    }
   </style>
 </head>
+
 <body>
   <header class="topbar">
     <div class="wrap topbar-inner">
@@ -471,15 +986,16 @@
         <img class="brand-logo" src="https://digiylyfe.net/wp-content/uploads/2026/04/Image-11.jpeg" alt="DIGIYLYFE" loading="eager"/>
         <div>
           <div class="brand-title">DIGIY MARKET</div>
-          <div class="brand-sub">Galerie locale · boutiques visibles · contact direct au commerçant.</div>
+          <div class="brand-sub">Galerie locale · boutiques visibles · contact direct.</div>
         </div>
       </a>
+
       <nav class="top-actions" aria-label="Navigation principale">
-        <a class="btn btn-soft" href="https://digiylyfe.com/">🌍 Site DIGIYLYFE</a>
-        <a class="btn btn-soft" href="https://digiy-hub.digiylyfe.com/">🧭 HUB DIGIY</a>
+        <a class="btn btn-soft" href="https://digiylyfe.com/">🌍 Site</a>
+        <a class="btn btn-soft" href="https://digiy-hub.digiylyfe.com/">🧭 HUB</a>
         <a class="btn btn-soft" href="https://tarifs.digiylyfe.com/" target="_blank" rel="noopener noreferrer">📦 Tarifs</a>
-        <a class="btn btn-main" href="#boutiques">Voir les boutiques</a>
-        <a class="btn btn-gold" href="https://pro-market.digiylyfe.com/pin.html">Côté vendeur</a>
+        <a class="btn btn-main" href="#boutiques">🛍️ Boutiques</a>
+        <a class="btn btn-gold" href="https://pro-market.digiylyfe.com/pin.html">🔑 Côté vendeur</a>
       </nav>
     </div>
   </header>
@@ -493,13 +1009,15 @@
             <h1>Les boutiques locales entrent chez DIGIY.</h1>
             <p class="hero-lead">
               DIGIY MARKET n’est pas un moteur froid. C’est une galerie marchande digitale :
-              chaque boutique garde son nom, mais la confiance, le cadre et le sceau viennent de DIGIY.
-              Le client découvre, regarde, contacte directement et paie le commerçant sans commission.
+              chaque boutique garde son nom, son contact, ses produits et son argent.
+              Le client regarde, choisit, contacte directement et paie le commerçant sans commission.
             </p>
+
             <div class="live-digiy-hero">
               <strong>WhatsApp Visio Live by DIGIY</strong>
-              <span>En vidéo, comme si vous étiez sur place. Malgré les distances, vous gagnez du temps, évitez un trajet inutile et recevez le conseil du commerçant avant de choisir.</span>
+              <span>Voir les produits en vidéo, comme si vous étiez sur place. Moins de trajet, plus de conseil, choix plus sûr.</span>
             </div>
+
             <div class="hero-badges">
               <span class="hero-badge">Galerie DIGIY MARKET</span>
               <span class="hero-badge">🎥 Live DIGIY</span>
@@ -507,19 +1025,22 @@
               <span class="hero-badge">💳 Paiement au pro</span>
               <span class="hero-badge">0% commission</span>
             </div>
+
             <div class="hero-actions">
-              <a class="btn btn-gold" href="#boutiques">Voir les boutiques</a>
-              <a class="btn btn-soft" href="https://pro-market.digiylyfe.com/pin.html">Mon lieu de vente</a>
-              <a class="btn btn-soft" href="https://digiy-hub.digiylyfe.com/">🧭 HUB DIGIY</a>
-              <a class="btn btn-soft" href="https://tarifs.digiylyfe.com/" target="_blank" rel="noopener noreferrer">📦 Tarifs</a>
+              <a class="btn btn-gold" href="#boutiques">🛍️ Voir les boutiques</a>
+              <button class="btn btn-live" id="btnHeroWhats" type="button">💬 WhatsApp</button>
+              <button class="btn btn-soft" id="btnHeroShare" type="button">📤 Partager</button>
+              <a class="btn btn-soft" href="https://pro-market.digiylyfe.com/pin.html">🔑 Mon lieu de vente</a>
             </div>
+
             <div class="mobilePublicFastRow">
               <a href="https://digiylyfe.com/">🌍 Site</a>
               <a href="https://digiy-hub.digiylyfe.com/">🧭 HUB</a>
               <a class="primary" href="#boutiques">🛍️ Boutiques</a>
-              <a id="fastWhatsapp" href="#boutiques">💬 WhatsApp</a>
+              <button id="fastWhatsapp" type="button">💬 WhatsApp</button>
               <button id="fastShare" type="button">📤 Partager</button>
             </div>
+
             <div class="hero-mini-grid">
               <div class="hero-mini"><strong>Une galerie</strong><span>On sent le lieu DIGIY, pas une fiche perdue dans le cloud.</span></div>
               <div class="hero-mini"><strong>Des boutiques</strong><span>Chaque commerçant garde son identité, son contact et ses produits.</span></div>
@@ -534,13 +1055,15 @@
             <div class="seal-card" aria-hidden="true"></div>
             <div class="photo-layer"><strong>Galerie DIGIY MARKET</strong><span>Un lieu commun, des boutiques différentes, une confiance visible.</span></div>
           </div>
+
           <div class="photo-card">
             <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80" alt="Produits en boutique"/>
-            <div class="photo-layer"><strong>Vendre par les yeux</strong><span>Ambiance, image, présence.</span></div>
+            <div class="photo-layer"><strong>Vendre par les yeux</strong><span>Image, ambiance, présence.</span></div>
           </div>
+
           <div class="photo-card">
             <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=900&q=80" alt="Boutique vivante"/>
-            <div class="photo-layer"><strong>Visio en direct</strong><span>Le client voit, demande conseil et choisit sans trajet inutile.</span></div>
+            <div class="photo-layer"><strong>Visio en direct</strong><span>Le client voit, demande conseil et confirme.</span></div>
           </div>
         </div>
       </div>
@@ -549,7 +1072,7 @@
     <section class="quick-strip">
       <div class="wrap quick-scroll">
         <div class="quick-card"><strong>🏬 Esprit galerie</strong><span>Comme une allée commerçante : les boutiques sont réunies sous la signature DIGIY.</span></div>
-        <div class="quick-card"><strong>🛍️ Pas un annuaire</strong><span>On attire d’abord par l’ambiance, puis on guide vers les bons commerces.</span></div>
+        <div class="quick-card"><strong>🛍️ Pas un annuaire</strong><span>On attire par l’ambiance, puis on guide vers les bons commerces.</span></div>
         <div class="quick-card"><strong>🎥 Live DIGIY</strong><span>WhatsApp Visio Live : voir les produits en direct, comme si vous étiez sur place.</span></div>
         <div class="quick-card"><strong>💳 Argent direct</strong><span>DIGIY ne garde pas l’argent : paiement direct au commerçant.</span></div>
       </div>
@@ -562,8 +1085,7 @@
             <span class="pill">🏪 Galeries de magasins</span>
             <h2>Les boutiques visibles maintenant</h2>
             <p>
-              Chaque carte porte le sceau DIGIY : le client comprend qu’il entre dans une galerie locale,
-              puis choisit une boutique, voit ses produits et contacte directement le commerçant.
+              Le client entre dans la galerie, choisit une boutique, voit ses produits, puis contacte directement le commerçant.
             </p>
           </div>
           <button class="btn btn-ghost" id="btnReload" type="button">↻ Recharger</button>
@@ -593,10 +1115,11 @@
         <div class="doctrine-card dark">
           <h3>Le marché n’est pas froid. Il est vivant.</h3>
           <p>
-            DIGIY MARKET doit donner la sensation d’une galerie marchande : un lieu, une signature,
-            une confiance. Pas seulement des résultats alignés comme une recherche Google.
+            DIGIY MARKET donne la sensation d’une galerie marchande : un lieu, une signature,
+            une confiance. Pas seulement des résultats alignés comme une recherche.
           </p>
         </div>
+
         <div class="doctrine-card">
           <h3>La boutique reste libre.</h3>
           <p>
@@ -606,15 +1129,13 @@
         </div>
       </div>
     </section>
-  </main>
-
 
     <section class="section" id="retours-digiy">
       <div class="wrap doctrine">
         <div class="doctrine-card">
           <h3>Revenir dans la maison DIGIY</h3>
           <p>
-            Cette page présente les boutiques. Pour comprendre DIGIYLYFE, revenir au HUB ou voir les tarifs officiels,
+            Pour comprendre DIGIYLYFE, revenir au HUB ou voir les tarifs officiels,
             utilise les portes ci-dessous.
           </p>
           <div class="hero-actions" style="margin-top:16px">
@@ -623,6 +1144,7 @@
             <a class="btn btn-gold" href="https://tarifs.digiylyfe.com/" target="_blank" rel="noopener noreferrer">📦 Tarifs</a>
           </div>
         </div>
+
         <div class="doctrine-card dark">
           <h3>Le commerce reste direct.</h3>
           <p>
@@ -632,6 +1154,7 @@
         </div>
       </div>
     </section>
+  </main>
 
   <footer>
     <div class="wrap footer-box">
@@ -640,44 +1163,19 @@
     </div>
   </footer>
 
-  <button
-    class="audio-btn"
-    id="digiyAudioBtn"
-    type="button"
-    style="
-      position:fixed;
-      left:18px;
-      bottom:calc(92px + env(safe-area-inset-bottom,0px));
-      z-index:999999;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      min-height:54px;
-      padding:15px 20px;
-      border-radius:999px;
-      border:1px solid rgba(34,197,94,.50);
-      background:linear-gradient(135deg,#16a34a,#34d399);
-      color:#04150d;
-      font-weight:1000;
-      box-shadow:0 16px 40px rgba(34,197,94,.32),0 0 0 3px rgba(34,197,94,.10);
-      cursor:pointer;
-      font-family:Outfit,system-ui,sans-serif;
-    "
-  >🎧 Écouter le Live DIGIY</button>
+  <button class="audio-btn" id="digiyAudioBtn" type="button">🎧 Écouter le Live DIGIY</button>
 
   <nav class="publicBottomNav" aria-label="Navigation publique DIGIY MARKET">
     <div class="publicBottomNavInner">
       <a href="https://digiylyfe.com/"><span class="icoBottom">🌍</span><span>Site</span></a>
       <a href="https://digiy-hub.digiylyfe.com/"><span class="icoBottom">🧭</span><span>HUB</span></a>
       <a class="active" href="#boutiques"><span class="icoBottom">🛍️</span><span>Boutiques</span></a>
-      <a id="bottomWhatsapp" href="#boutiques"><span class="icoBottom">💬</span><span>WhatsApp</span></a>
+      <button id="bottomWhatsapp" type="button"><span class="icoBottom">💬</span><span>WhatsApp</span></button>
       <button id="bottomShare" type="button"><span class="icoBottom">📤</span><span>Partager</span></button>
     </div>
   </nav>
 
   <div class="share-toast" id="shareToast">Lien prêt à partager</div>
-
 
   <script>
     (function(){
@@ -686,15 +1184,42 @@
       const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
       const SUPABASE_ANON_KEY = "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
       const MARKET_ORIGIN = "https://market.digiylyfe.com";
-      const PRO_MARKET_URL = "https://pro-market.digiylyfe.com/pin.html";
       const BADGE_URL = "https://digiylyfe.net/wp-content/uploads/2026/04/icon-512-1.png";
-      const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-        auth:{ persistSession:false, autoRefreshToken:false, detectSessionInUrl:false }
-      });
+
+      const ASTOU_MARKET_SLUG = "market-221771342889";
+      const ASTOU_MARKET_PHONE = "221771342889";
+      const ASTOU_PREMIUM_URL = "https://astou-boutique.digiylyfe.com/";
+      const ASTOU_NAME = "Astou Boutique";
+      const ASTOU_ACTIVITY = "Linge de maison · plage · hôtels · villas · tenues stylées · beauté";
+      const ASTOU_DESCRIPTION = "Astou Boutique propose du linge de maison, serviettes, draps, peignoirs, foutas pour transats, serviettes de plage, robes, tenues stylées, confection et crèmes de beauté à Saly.";
 
       const $ = (id) => document.getElementById(id);
       let SHOPS = [];
       let FILTERED = [];
+      let SB = null;
+
+      function client(){
+        if(SB) return SB;
+        if(!window.supabase) throw new Error("Supabase indisponible.");
+        SB = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+          auth:{ persistSession:false, autoRefreshToken:false, detectSessionInUrl:false }
+        });
+        return SB;
+      }
+
+      function esc(v){
+        return String(v ?? "")
+          .replace(/&/g,"&amp;")
+          .replace(/</g,"&lt;")
+          .replace(/>/g,"&gt;")
+          .replace(/"/g,"&quot;")
+          .replace(/'/g,"&#039;");
+      }
+
+      function norm(v){ return String(v || "").trim(); }
+      function lower(v){ return norm(v).toLowerCase(); }
+      function digits(v){ return String(v || "").replace(/[^\d]/g, ""); }
+      function unique(arr){ return [...new Set(arr.map(norm).filter(Boolean))]; }
 
       function showShareToast(text){
         const toast = $("shareToast");
@@ -709,11 +1234,13 @@
         const title = document.title || "DIGIY MARKET";
         const text = "Découvre les boutiques locales sur DIGIY MARKET.";
         const url = window.location.href;
+
         try{
           if(navigator.share){
             await navigator.share({ title, text, url });
             return;
           }
+
           await navigator.clipboard.writeText(url);
           showShareToast("Lien copié pour partager");
         }catch(_){
@@ -726,105 +1253,108 @@
         }
       }
 
-      function firstVisibleShop(){
-        return (Array.isArray(FILTERED) && FILTERED[0]) || (Array.isArray(SHOPS) && SHOPS[0]) || null;
-      }
-
-      function wirePublicActions(){
-        const first = firstVisibleShop();
-        const phone = first ? shopPhone(first) : "";
-        const name = first ? shopName(first) : "";
-        const wa = phone ? whatsappUrl(phone, name) : "#boutiques";
-
-        ["bottomVisio","bottomWhatsapp","fastVisio","fastWhatsapp"].forEach(id => {
-          const el = $(id);
-          if(!el) return;
-          el.href = wa || "#boutiques";
-          if(wa && wa.startsWith("http")){
-            el.target = "_blank";
-            el.rel = "noopener";
-          }
-        });
-
-        ["bottomShare","fastShare"].forEach(id => {
-          const el = $(id);
-          if(el) el.onclick = shareMarket;
-        });
-      }
-
-
-
-      function esc(v){
-        return String(v ?? "")
-          .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
-          .replace(/"/g,"&quot;").replace(/'/g,"&#039;");
-      }
-
-      function norm(v){ return String(v || "").trim(); }
-      function lower(v){ return norm(v).toLowerCase(); }
-      function digits(v){ return String(v || "").replace(/[^\d]/g, ""); }
-      function unique(arr){ return [...new Set(arr.map(norm).filter(Boolean))]; }
-
-      function phoneDisplay(v){
-        const d = digits(v);
-        if(!d) return "Contact";
-        if(d.startsWith("221") && d.length === 12){
-          return "+221 " + d.slice(3,5) + " " + d.slice(5,8) + " " + d.slice(8,10) + " " + d.slice(10,12);
-        }
-        return "+" + d;
-      }
-
-      function whatsappUrl(phone, shopName){
-        const p = digits(phone);
-        if(!p) return "";
-        const text = encodeURIComponent(`Bonjour 👋 Je viens de DIGIY MARKET. Je souhaite voir les produits en WhatsApp Visio Live by DIGIY, comme si j’étais sur place, avant de confirmer mon choix avec ${shopName || "votre boutique"}.`);
-        return `https://wa.me/${p}?text=${text}`;
-      }
-
-      const ASTOU_MARKET_SLUG = "market-221771342889";
-      const ASTOU_MARKET_PHONE = "221771342889";
-      const ASTOU_PREMIUM_URL = "https://astou-boutique.digiylyfe.com/";
-      const ASTOU_NAME = "Astou Boutique";
-      const ASTOU_ACTIVITY = "Linge de maison · plage · hôtels · villas · tenues stylées · beauté";
-      const ASTOU_DESCRIPTION = "Astou Boutique propose du linge de maison, serviettes, draps, peignoirs, foutas pour transats, serviettes de plage, robes, tenues stylées, confection et crèmes de beauté à Saly.";
-
       function shopSlug(shop){
         const direct = norm(shop.slug || shop.workspace_slug || shop.last_slug);
         if(direct) return direct;
+
         const p = digits(shop.whatsapp || shop.public_phone || shop.phone || shop.owner_phone);
         return p ? "market-" + p : "";
       }
+
       function isAstouShop(shop){
         const slug = shopSlug(shop);
         const phone = digits(shop.whatsapp || shop.public_phone || shop.phone || shop.owner_phone);
         const name = lower(shop.shop_name || shop.business_name || shop.name);
         return slug === ASTOU_MARKET_SLUG || phone === ASTOU_MARKET_PHONE || name.includes("astou");
       }
-      function shopName(shop){ return isAstouShop(shop) ? ASTOU_NAME : norm(shop.shop_name || shop.business_name || "Boutique DIGIY"); }
-      function shopCategory(shop){ return isAstouShop(shop) ? ASTOU_ACTIVITY : norm(shop.categories_text || shop.category || "Boutique locale"); }
-      function shopCity(shop){ return norm(shop.city || shop.zones || "Zone à définir"); }
+
+      function shopName(shop){
+        return isAstouShop(shop) ? ASTOU_NAME : norm(shop.shop_name || shop.business_name || "Boutique DIGIY");
+      }
+
+      function shopCategory(shop){
+        return isAstouShop(shop) ? ASTOU_ACTIVITY : norm(shop.categories_text || shop.category || "Boutique locale");
+      }
+
+      function shopCity(shop){
+        return norm(shop.city || shop.zones || "Zone à définir");
+      }
+
       function shopZone(shop){
         const city = norm(shop.city);
         const zone = norm(shop.zones);
         if(city && zone && lower(city) !== lower(zone)) return city + " • " + zone;
         return city || zone || "Zone à définir";
       }
-      function shopPhone(shop){ return norm(shop.whatsapp || shop.public_phone || shop.phone || shop.owner_phone); }
-      function shopText(shop){ return isAstouShop(shop) ? ASTOU_DESCRIPTION : norm(shop.description || "Boutique locale, contact direct avec le commerçant."); }
-      function shopImage(shop){ return norm(shop.cover_url || shop.cover_image_url || shop.photo_url || shop.logo_url); }
-      function initials(name){
-        const parts = norm(name).split(/\s+/).filter(Boolean).slice(0,2);
-        const letters = parts.map(p => p[0]).join("").toUpperCase();
-        return letters || "DM";
+
+      function shopPhone(shop){
+        return norm(shop.whatsapp || shop.public_phone || shop.phone || shop.owner_phone);
       }
+
+      function shopText(shop){
+        return isAstouShop(shop) ? ASTOU_DESCRIPTION : norm(shop.description || "Boutique locale, contact direct avec le commerçant.");
+      }
+
+      function shopImage(shop){
+        return norm(shop.cover_url || shop.cover_image_url || shop.photo_url || shop.logo_url);
+      }
+
       function shopUrl(shop){
         const slug = shopSlug(shop);
         const u = new URL("/shop.html", MARKET_ORIGIN);
         if(slug) u.searchParams.set("slug", slug);
         return u.toString();
       }
+
+      function commanderUrl(shop){
+        const slug = shopSlug(shop);
+        const u = new URL("/commander.html", MARKET_ORIGIN);
+        if(slug) u.searchParams.set("slug", slug);
+        return u.toString();
+      }
+
       function shopMainUrl(shop){
         return isAstouShop(shop) ? ASTOU_PREMIUM_URL : shopUrl(shop);
+      }
+
+      function whatsappUrl(phone, shopNameValue){
+        const p = digits(phone);
+        if(!p) return "";
+        const text = encodeURIComponent(
+          `Bonjour 👋 Je viens de DIGIY MARKET. Je souhaite voir les produits en WhatsApp Visio Live by DIGIY, comme si j’étais sur place, avant de confirmer mon choix avec ${shopNameValue || "votre boutique"}.`
+        );
+        return `https://wa.me/${p}?text=${text}`;
+      }
+
+      function firstVisibleShop(){
+        return (Array.isArray(FILTERED) && FILTERED[0]) || (Array.isArray(SHOPS) && SHOPS[0]) || null;
+      }
+
+      function openFirstWhatsapp(){
+        const first = firstVisibleShop();
+        const phone = first ? shopPhone(first) : "";
+        const name = first ? shopName(first) : "";
+        const wa = phone ? whatsappUrl(phone, name) : "";
+
+        if(!wa){
+          location.hash = "#boutiques";
+          showShareToast("Choisis une boutique pour ouvrir WhatsApp");
+          return;
+        }
+
+        window.open(wa, "_blank", "noopener,noreferrer");
+      }
+
+      function wirePublicActions(){
+        ["bottomShare","fastShare","btnHeroShare"].forEach(id => {
+          const el = $(id);
+          if(el) el.onclick = shareMarket;
+        });
+
+        ["bottomWhatsapp","fastWhatsapp","btnHeroWhats"].forEach(id => {
+          const el = $(id);
+          if(el) el.onclick = openFirstWhatsapp;
+        });
       }
 
       function populateFilters(){
@@ -849,7 +1379,16 @@
         const cat = lower($("categoryFilter").value);
 
         FILTERED = SHOPS.filter(shop => {
-          const hay = [shopName(shop), shopCategory(shop), shopCity(shop), shop.zones, shop.address, shop.description].map(lower).join(" ");
+          const hay = [
+            shopName(shop),
+            shopCategory(shop),
+            shopCity(shop),
+            shop.zones,
+            shop.address,
+            shop.address_text,
+            shop.description
+          ].map(lower).join(" ");
+
           const okQ = !q || hay.includes(q);
           const okCity = !city || lower(shopCity(shop)) === city;
           const okCat = !cat || lower(shopCategory(shop)) === cat;
@@ -857,7 +1396,6 @@
         });
 
         renderShops();
-        wirePublicActions();
       }
 
       function renderStats(){
@@ -873,11 +1411,12 @@
           grid.innerHTML = "";
           empty.style.display = "block";
           empty.textContent = SHOPS.length ? "Aucune boutique ne correspond à cette recherche." : "Aucune boutique publiée pour le moment.";
+          wirePublicActions();
           return;
         }
 
         empty.style.display = "none";
-        wirePublicActions();
+
         grid.innerHTML = FILTERED.map(shop => {
           const name = shopName(shop);
           const cat = shopCategory(shop);
@@ -888,6 +1427,7 @@
           const isAstou = isAstouShop(shop);
           const url = shopMainUrl(shop);
           const ficheUrl = shopUrl(shop);
+          const cmdUrl = commanderUrl(shop);
           const wa = whatsappUrl(phone, name);
           const mediaClass = img ? "shop-media has-img" : "shop-media";
 
@@ -898,34 +1438,42 @@
                 <div class="gallery-ribbon">Galerie DIGIY MARKET</div>
                 <div class="status-chip">En ligne</div>
                 <div class="shop-brand-seal" title="Boutique présente dans la galerie DIGIY">
-                  <img src="${BADGE_URL}" alt="DIGIY" loading="lazy"/>
+                  <img src="${esc(BADGE_URL)}" alt="DIGIY" loading="lazy"/>
                 </div>
               </div>
+
               <div class="shop-body">
                 <div class="shop-cat">${esc(cat)}</div>
                 <h3 class="shop-title">${esc(name)}</h3>
                 <p class="shop-desc">${esc(desc)}</p>
+
                 <div class="live-digiy-card">
                   <strong>WhatsApp Visio Live by DIGIY</strong>
                   <span>Voir en vidéo, comme si vous étiez sur place. Moins de trajet, plus de conseil, choix plus sûr.</span>
                 </div>
+
                 <div class="shop-meta">
                   <span class="meta-pill">📍 ${esc(city)}</span>
                   <span class="meta-pill">${isAstou ? "🌍 Vitrine immersive" : "💬 " + (phone ? "WhatsApp direct" : "Contact à demander")}</span>
                 </div>
+
                 <div class="shop-actions">
-                  <a class="btn btn-main" href="${esc(url)}" ${isAstou ? 'target="_blank" rel="noopener"' : ''}>${isAstou ? "🌍 Entrer dans la boutique" : "Voir la boutique"}</a>
-                  ${isAstou ? `<a class="btn btn-soft" href="${esc(ficheUrl)}">Fiche MARKET</a>` : ``}
-                  ${wa ? `<a class="btn btn-soft" href="${esc(wa)}" target="_blank" rel="noopener">WhatsApp</a>` : ``}
+                  <a class="btn btn-main" href="${esc(url)}" ${isAstou ? 'target="_blank" rel="noopener"' : ""}>${isAstou ? "🌍 Entrer" : "Voir"}</a>
+                  ${isAstou ? `<a class="btn btn-soft" href="${esc(ficheUrl)}">Fiche</a>` : `<a class="btn btn-gold" href="${esc(cmdUrl)}">Commander</a>`}
+                  ${wa ? `<a class="btn btn-live" href="${esc(wa)}" target="_blank" rel="noopener">WhatsApp</a>` : ``}
+                  ${isAstou ? `<a class="btn btn-gold" href="${esc(cmdUrl)}">Commander</a>` : ``}
                 </div>
+
                 <div class="digiy-floor">
-                  <img src="${BADGE_URL}" alt="DIGIY" loading="lazy"/>
+                  <img src="${esc(BADGE_URL)}" alt="DIGIY" loading="lazy"/>
                   <div><strong>Galerie DIGIY MARKET</strong>Contact direct · 0% commission · paiement au commerçant</div>
                 </div>
               </div>
             </article>
           `;
         }).join("");
+
+        wirePublicActions();
       }
 
       async function loadShops(){
@@ -934,7 +1482,7 @@
         $("shopsGrid").innerHTML = "";
 
         try{
-          const { data, error } = await sb
+          const { data, error } = await client()
             .from("digiy_market_profiles")
             .select("id,slug,workspace_slug,last_slug,shop_name,business_name,city,zones,address,address_text,categories_text,category,description,whatsapp,public_phone,phone,owner_phone,photo_url,logo_url,cover_url,cover_image_url,is_published,is_active,priority,updated_at")
             .eq("is_published", true)
@@ -943,18 +1491,22 @@
             .order("updated_at", { ascending:false });
 
           if(error) throw error;
+
           SHOPS = Array.isArray(data) ? data : [];
           FILTERED = SHOPS.slice();
           populateFilters();
           renderStats();
           renderShops();
-        wirePublicActions();
         }catch(err){
           console.error("DIGIY MARKET galerie erreur", err);
+          SHOPS = [];
+          FILTERED = [];
+          renderStats();
           $("emptyBox").style.display = "block";
           $("emptyBox").textContent = "Impossible de charger les boutiques pour le moment. " + (err?.message || "");
         }finally{
           $("loadingBox").style.display = "none";
+          wirePublicActions();
         }
       }
 
@@ -964,19 +1516,54 @@
           if(btn) btn.style.display = "none";
           return;
         }
+
         let playing = false;
         let utter = null;
+
         const text = "Bienvenue dans DIGIY MARKET. Ici, les boutiques locales entrent dans une vraie galerie marchande digitale. Avec le Live DIGIY, vous pouvez voir les produits en direct, en vidéo, comme si vous étiez sur place. Malgré les distances, vous gagnez du temps et vous évitez un trajet inutile. Le commerçant vous montre les articles, vous conseille, répond à vos questions, et vous aide à choisir. Vous regardez, vous choisissez, vous confirmez directement avec la boutique. Le paiement reste direct au commerçant. DIGIY ne garde pas l’argent et ne prend pas de commission. Selon la zone, la boutique peut aussi organiser une livraison locale. DIGIY MARKET, c’est le contact direct, la vidéo, le conseil et le commerce vivant.";
-        function stop(){ try{ speechSynthesis.cancel(); }catch(_){} playing=false; btn.textContent="🎧 Écouter le Live DIGIY"; }
+
+        function getVoice(){
+          try{
+            const voices = window.speechSynthesis.getVoices() || [];
+            return voices.find(v => /^fr/i.test(v.lang || "") && /thomas|paul|french|français|francais/i.test(v.name || ""))
+              || voices.find(v => /^fr/i.test(v.lang || ""))
+              || null;
+          }catch(_){
+            return null;
+          }
+        }
+
+        function stop(){
+          try{ speechSynthesis.cancel(); }catch(_){}
+          playing = false;
+          btn.textContent = "🎧 Écouter le Live DIGIY";
+        }
+
         function play(){
           stop();
           utter = new SpeechSynthesisUtterance(text);
-          utter.lang = "fr-FR"; utter.rate = .82; utter.pitch = 1; utter.volume = 1;
-          utter.onstart = () => { playing=true; btn.textContent="■ Arrêter"; };
-          utter.onend = stop; utter.onerror = stop;
+          utter.lang = "fr-FR";
+          utter.rate = .82;
+          utter.pitch = 1.02;
+          utter.volume = 1;
+
+          const voice = getVoice();
+          if(voice) utter.voice = voice;
+
+          utter.onstart = () => {
+            playing = true;
+            btn.textContent = "■ Arrêter le Live DIGIY";
+          };
+          utter.onend = stop;
+          utter.onerror = stop;
+
           speechSynthesis.speak(utter);
         }
+
         btn.addEventListener("click", () => playing ? stop() : play());
+        if(window.speechSynthesis && typeof window.speechSynthesis.onvoiceschanged !== "undefined"){
+          window.speechSynthesis.onvoiceschanged = getVoice;
+        }
         window.addEventListener("beforeunload", stop);
         document.addEventListener("visibilitychange", () => { if(document.hidden) stop(); });
       }
