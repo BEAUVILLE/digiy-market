@@ -855,6 +855,111 @@
       font-family:inherit;
     }
 
+
+    /* ===== DIGIY MARKET — Lecteur public audio doctrine ===== */
+    body{
+      padding-bottom:calc(232px + env(safe-area-inset-bottom,0px));
+    }
+
+    .digiy-audio-panel{
+      position:fixed;
+      left:18px;
+      bottom:calc(92px + env(safe-area-inset-bottom,0px));
+      width:min(560px, calc(100vw - 36px));
+      z-index:99999;
+      border-radius:26px;
+      padding:14px;
+      background:rgba(255,250,240,.96);
+      color:var(--ink);
+      border:1px solid rgba(6,59,43,.14);
+      box-shadow:0 18px 48px rgba(6,59,43,.24);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+    }
+
+    .digiy-audio-panel.is-hidden{
+      display:none;
+    }
+
+    .digiy-audio-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:10px;
+    }
+
+    .digiy-audio-title{
+      font-weight:1000;
+      color:var(--green);
+      font-size:1rem;
+      line-height:1.1;
+    }
+
+    .digiy-audio-sub{
+      margin-top:4px;
+      color:#4f5f58;
+      font-size:.82rem;
+      line-height:1.35;
+      font-weight:850;
+    }
+
+    .digiy-audio-pill{
+      flex:0 0 auto;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:30px;
+      padding:0 10px;
+      border-radius:999px;
+      background:rgba(214,173,57,.14);
+      border:1px solid rgba(214,173,57,.28);
+      color:#6b4d09;
+      font-size:.72rem;
+      font-weight:1000;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+
+    .digiy-audio-actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:9px;
+    }
+
+    .digiy-audio-actions button{
+      min-height:48px;
+      border-radius:18px;
+      border:1px solid rgba(6,59,43,.12);
+      font-weight:1000;
+      font-family:inherit;
+      cursor:pointer;
+    }
+
+    .digiy-audio-play{
+      background:linear-gradient(135deg,var(--green),var(--green2));
+      color:#fff;
+    }
+
+    .digiy-audio-stop{
+      background:rgba(6,59,43,.08);
+      color:var(--green);
+    }
+
+    .digiy-audio-actions button:disabled{
+      opacity:.52;
+      cursor:not-allowed;
+    }
+
+    .digiy-audio-status{
+      margin-top:9px;
+      color:#4f5f58;
+      font-size:.78rem;
+      font-weight:850;
+      line-height:1.35;
+    }
+
+
     #boutiques,.hero,.quick-strip{scroll-margin-top:104px}
 
     .publicBottomNav{
@@ -874,7 +979,7 @@
       width:min(100%,760px);
       margin:0 auto;
       display:grid;
-      grid-template-columns:repeat(5,1fr);
+      grid-template-columns:repeat(6,1fr);
       gap:6px;
     }
 
@@ -1029,6 +1134,7 @@
             <div class="hero-actions">
               <a class="btn btn-gold" href="#boutiques">🛍️ Voir les boutiques</a>
               <button class="btn btn-live" id="btnHeroWhats" type="button">💬 WhatsApp</button>
+              <button class="btn btn-soft" id="btnHeroSms" type="button">📩 SMS</button>
               <button class="btn btn-soft" id="btnHeroShare" type="button">📤 Partager</button>
               <a class="btn btn-soft" href="https://pro-market.digiylyfe.com/pin.html">🔑 Mon lieu de vente</a>
             </div>
@@ -1038,6 +1144,7 @@
               <a href="https://digiy-hub.digiylyfe.com/">🧭 HUB</a>
               <a class="primary" href="#boutiques">🛍️ Boutiques</a>
               <button id="fastWhatsapp" type="button">💬 WhatsApp</button>
+              <button id="fastSms" type="button">📩 SMS</button>
               <button id="fastShare" type="button">📤 Partager</button>
             </div>
 
@@ -1163,7 +1270,24 @@
     </div>
   </footer>
 
-  <button class="audio-btn" id="digiyAudioBtn" type="button">🎧 Écouter le Live DIGIY</button>
+  <section class="digiy-audio-panel" id="digiyAudioPanel" aria-label="Lecteur public DIGIY MARKET">
+    <div class="digiy-audio-head">
+      <div>
+        <div class="digiy-audio-title">🎧 Lecteur DIGIY MARKET</div>
+        <div class="digiy-audio-sub">
+          Une voix explique la galerie, le Live vidéo, WhatsApp, SMS, paiement direct et zéro commission.
+        </div>
+      </div>
+      <div class="digiy-audio-pill">Public</div>
+    </div>
+
+    <div class="digiy-audio-actions">
+      <button class="digiy-audio-play" id="digiyAudioPlayBtn" type="button">▶️ Lecture</button>
+      <button class="digiy-audio-stop" id="digiyAudioStopBtn" type="button">⏹ Arrêt</button>
+    </div>
+
+    <div class="digiy-audio-status" id="digiyAudioStatus">Prêt à lire la présentation MARKET.</div>
+  </section>
 
   <nav class="publicBottomNav" aria-label="Navigation publique DIGIY MARKET">
     <div class="publicBottomNavInner">
@@ -1171,6 +1295,7 @@
       <a href="https://digiy-hub.digiylyfe.com/"><span class="icoBottom">🧭</span><span>HUB</span></a>
       <a class="active" href="#boutiques"><span class="icoBottom">🛍️</span><span>Boutiques</span></a>
       <button id="bottomWhatsapp" type="button"><span class="icoBottom">💬</span><span>WhatsApp</span></button>
+      <button id="bottomSms" type="button"><span class="icoBottom">📩</span><span>SMS</span></button>
       <button id="bottomShare" type="button"><span class="icoBottom">📤</span><span>Partager</span></button>
     </div>
   </nav>
@@ -1326,6 +1451,15 @@
         return `https://wa.me/${p}?text=${text}`;
       }
 
+      function smsUrl(phone, shopNameValue){
+        const p = digits(phone);
+        if(!p) return "";
+        const text = encodeURIComponent(
+          `Bonjour, je viens de DIGIY MARKET. Je souhaite des informations sur ${shopNameValue || "votre boutique"} et vos produits.`
+        );
+        return `sms:+${p}?body=${text}`;
+      }
+
       function firstVisibleShop(){
         return (Array.isArray(FILTERED) && FILTERED[0]) || (Array.isArray(SHOPS) && SHOPS[0]) || null;
       }
@@ -1345,6 +1479,21 @@
         window.open(wa, "_blank", "noopener,noreferrer");
       }
 
+      function openFirstSms(){
+        const first = firstVisibleShop();
+        const phone = first ? shopPhone(first) : "";
+        const name = first ? shopName(first) : "";
+        const sms = phone ? smsUrl(phone, name) : "";
+
+        if(!sms){
+          location.hash = "#boutiques";
+          showShareToast("Choisis une boutique pour ouvrir SMS");
+          return;
+        }
+
+        window.location.href = sms;
+      }
+
       function wirePublicActions(){
         ["bottomShare","fastShare","btnHeroShare"].forEach(id => {
           const el = $(id);
@@ -1354,6 +1503,11 @@
         ["bottomWhatsapp","fastWhatsapp","btnHeroWhats"].forEach(id => {
           const el = $(id);
           if(el) el.onclick = openFirstWhatsapp;
+        });
+
+        ["bottomSms","fastSms","btnHeroSms"].forEach(id => {
+          const el = $(id);
+          if(el) el.onclick = openFirstSms;
         });
       }
 
@@ -1461,6 +1615,7 @@
                   <a class="btn btn-main" href="${esc(url)}" ${isAstou ? 'target="_blank" rel="noopener"' : ""}>${isAstou ? "🌍 Entrer" : "Voir"}</a>
                   ${isAstou ? `<a class="btn btn-soft" href="${esc(ficheUrl)}">Fiche</a>` : `<a class="btn btn-gold" href="${esc(cmdUrl)}">Commander</a>`}
                   ${wa ? `<a class="btn btn-live" href="${esc(wa)}" target="_blank" rel="noopener">WhatsApp</a>` : ``}
+                  ${phone ? `<a class="btn btn-soft" href="${esc(smsUrl(phone, name))}">SMS</a>` : ``}
                   ${isAstou ? `<a class="btn btn-gold" href="${esc(cmdUrl)}">Commander</a>` : ``}
                 </div>
 
@@ -1511,21 +1666,39 @@
       }
 
       function setupAudio(){
-        const btn = $("digiyAudioBtn");
-        if(!btn || !("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)){
-          if(btn) btn.style.display = "none";
+        const panel = $("digiyAudioPanel");
+        const playBtn = $("digiyAudioPlayBtn");
+        const stopBtn = $("digiyAudioStopBtn");
+        const status = $("digiyAudioStatus");
+
+        if(!panel || !playBtn || !stopBtn || !("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)){
+          if(panel) panel.classList.add("is-hidden");
           return;
         }
 
+        const synth = window.speechSynthesis;
         let playing = false;
         let utter = null;
+        let launchId = 0;
 
-        const text = "Bienvenue dans DIGIY MARKET. Ici, les boutiques locales entrent dans une vraie galerie marchande digitale. Avec le Live DIGIY, vous pouvez voir les produits en direct, en vidéo, comme si vous étiez sur place. Malgré les distances, vous gagnez du temps et vous évitez un trajet inutile. Le commerçant vous montre les articles, vous conseille, répond à vos questions, et vous aide à choisir. Vous regardez, vous choisissez, vous confirmez directement avec la boutique. Le paiement reste direct au commerçant. DIGIY ne garde pas l’argent et ne prend pas de commission. Selon la zone, la boutique peut aussi organiser une livraison locale. DIGIY MARKET, c’est le contact direct, la vidéo, le conseil et le commerce vivant.";
+        const visibleText = "Bienvenue dans DIGIY MARKET. Ici, les boutiques locales entrent dans une vraie galerie marchande digitale. Avec le Live DIGIY, vous pouvez voir les produits en direct, en vidéo, comme si vous étiez sur place. Vous gagnez du temps, vous évitez un trajet inutile et vous choisissez avec plus de confiance. Le commerçant montre les articles, conseille, répond aux questions et aide à confirmer le bon choix. La demande peut se faire par WhatsApp ou par SMS selon ce qui arrange le client. Le paiement reste direct au commerçant. DIGIY ne garde pas l’argent et ne prend pas de commission. DIGIY MARKET, c’est le contact direct, la vidéo, le conseil et le commerce vivant.";
+
+        function prepareForSpeech(raw){
+          return String(raw || "")
+            .replace(/\bDIGIYLYFE\b/g, "diji i laïfe")
+            .replace(/\bDIGIY\b/g, "diji i")
+            .replace(/\bWhatsApp\b/g, "Ouatsap")
+            .replace(/\bSMS\b/g, "S M S")
+            .replace(/\bQR\b/g, "Q R")
+            .replace(/\bWave\b/g, "Ouève")
+            .replace(/0\s*%/g, "zéro pour cent");
+        }
 
         function getVoice(){
           try{
-            const voices = window.speechSynthesis.getVoices() || [];
-            return voices.find(v => /^fr/i.test(v.lang || "") && /thomas|paul|french|français|francais/i.test(v.name || ""))
+            const voices = synth.getVoices() || [];
+            return voices.find(v => /^fr[-_]?FR/i.test(v.lang || "") && /google|thomas|paul|french|français|francais/i.test(v.name || ""))
+              || voices.find(v => /^fr[-_]?FR/i.test(v.lang || ""))
               || voices.find(v => /^fr/i.test(v.lang || ""))
               || null;
           }catch(_){
@@ -1533,15 +1706,40 @@
           }
         }
 
-        function stop(){
-          try{ speechSynthesis.cancel(); }catch(_){}
-          playing = false;
-          btn.textContent = "🎧 Écouter le Live DIGIY";
+        function setStatus(text){
+          if(status) status.textContent = text;
         }
 
-        function play(){
-          stop();
-          utter = new SpeechSynthesisUtterance(text);
+        function setIdle(){
+          playing = false;
+          playBtn.disabled = false;
+          stopBtn.disabled = true;
+          playBtn.textContent = "▶️ Lecture";
+          setStatus("Prêt à lire la présentation MARKET.");
+        }
+
+        function setPlaying(){
+          playing = true;
+          playBtn.disabled = true;
+          stopBtn.disabled = false;
+          playBtn.textContent = "🔊 Lecture en cours";
+          setStatus("Lecture en cours. La voix présente la galerie MARKET.");
+        }
+
+        function stop(){
+          launchId += 1;
+          try{ synth.cancel(); }catch(_){}
+          utter = null;
+          setIdle();
+        }
+
+        function launch(){
+          launchId += 1;
+          const currentId = launchId;
+
+          try{ synth.cancel(); }catch(_){}
+
+          utter = new SpeechSynthesisUtterance(prepareForSpeech(visibleText));
           utter.lang = "fr-FR";
           utter.rate = .82;
           utter.pitch = 1.02;
@@ -1551,21 +1749,58 @@
           if(voice) utter.voice = voice;
 
           utter.onstart = () => {
-            playing = true;
-            btn.textContent = "■ Arrêter le Live DIGIY";
+            if(currentId !== launchId) return;
+            setPlaying();
           };
-          utter.onend = stop;
-          utter.onerror = stop;
 
-          speechSynthesis.speak(utter);
+          utter.onend = () => {
+            if(currentId !== launchId) return;
+            setIdle();
+          };
+
+          utter.onerror = () => {
+            if(currentId !== launchId) return;
+            setIdle();
+          };
+
+          synth.speak(utter);
         }
 
-        btn.addEventListener("click", () => playing ? stop() : play());
-        if(window.speechSynthesis && typeof window.speechSynthesis.onvoiceschanged !== "undefined"){
-          window.speechSynthesis.onvoiceschanged = getVoice;
+        function play(){
+          if(playing) return;
+
+          const voices = synth.getVoices();
+          if(voices && voices.length){
+            launch();
+            return;
+          }
+
+          setStatus("Chargement de la voix française…");
+
+          let launched = false;
+          function onVoices(){
+            if(launched) return;
+            launched = true;
+            synth.removeEventListener("voiceschanged", onVoices);
+            launch();
+          }
+
+          synth.addEventListener("voiceschanged", onVoices);
+
+          setTimeout(() => {
+            if(launched) return;
+            launched = true;
+            synth.removeEventListener("voiceschanged", onVoices);
+            launch();
+          }, 700);
         }
+
+        playBtn.addEventListener("click", play);
+        stopBtn.addEventListener("click", stop);
         window.addEventListener("beforeunload", stop);
-        document.addEventListener("visibilitychange", () => { if(document.hidden) stop(); });
+        document.addEventListener("visibilitychange", () => { if(document.hidden && playing) stop(); });
+
+        setIdle();
       }
 
       $("searchInput").addEventListener("input", applyFilters);
@@ -1586,3 +1821,4 @@
   </script>
 </body>
 </html>
+
