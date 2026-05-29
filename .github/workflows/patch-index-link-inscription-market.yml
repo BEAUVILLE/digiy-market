@@ -1,0 +1,65 @@
+name: Patch MARKET index inscription link
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/patch-index-link-inscription-market.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Link public MARKET index to inscription page
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          html = p.read_text(encoding='utf-8')
+          before = html
+          target = './inscription-market.html'
+
+          html = html.replace('href="https://pro-market.digiylyfe.com/pin.html">🔑 Côté vendeur</a>', f'href="{target}">📝 Inscription vendeur</a>')
+          html = html.replace('href="https://pro-market.digiylyfe.com/pin.html">🔑 Mon lieu de vente</a>', f'href="{target}">📝 Inscription vendeur</a>')
+          html = html.replace('href="https://pro-market.digiylyfe.com/pin.html"', f'href="{target}"')
+
+          # Ajout d'une porte visible si elle n'existe pas déjà dans les actions héro.
+          marker = '<a class="btn btn-gold" href="#boutiques">🛍️ Voir les boutiques</a>'
+          insert = marker + '\n              <a class="btn btn-main" href="./inscription-market.html">📝 Inscription MARKET</a>'
+          if marker in html and 'Inscription MARKET' not in html:
+              html = html.replace(marker, insert, 1)
+
+          mobile_marker = '<a class="primary" href="#boutiques">🛍️ Boutiques</a>'
+          mobile_insert = mobile_marker + '\n              <a class="primary" href="./inscription-market.html">📝 Inscrire</a>'
+          if mobile_marker in html and 'href="./inscription-market.html">📝 Inscrire</a>' not in html:
+              html = html.replace(mobile_marker, mobile_insert, 1)
+
+          html = html.replace('<title>DIGIY MARKET — Boutiques locales</title>', '<title>DIGIY MARKET — Boutiques locales · inscription vendeur</title>')
+
+          if html != before:
+              p.write_text(html, encoding='utf-8')
+              print('index.html relié à inscription-market.html')
+          else:
+              print('Aucun changement détecté')
+          PY
+
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Link MARKET index to inscription page"
+          git push
