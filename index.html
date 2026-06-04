@@ -1041,6 +1041,134 @@
       transform:translateX(-50%) translateY(0);
     }
 
+
+
+    /* ===== DIGIY MARKET — 5 exemples à prendre pour nourrir la page ===== */
+    .market-examples-panel{
+      padding:22px;
+      border-radius:32px;
+      background:rgba(255,255,255,.82);
+      border:1px solid rgba(16,37,28,.09);
+      box-shadow:var(--shadow2);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .market-examples-panel::before{
+      content:"";
+      position:absolute;
+      inset:-90px auto auto -80px;
+      width:220px;
+      height:220px;
+      border-radius:999px;
+      background:rgba(214,173,57,.16);
+      pointer-events:none;
+    }
+
+    .market-examples-grid{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .market-example-card{
+      min-height:286px;
+      padding:15px;
+      border-radius:26px;
+      background:
+        linear-gradient(180deg,#fff,#fffaf0),
+        radial-gradient(circle at top left,rgba(214,173,57,.16),transparent 42%);
+      border:1px solid rgba(16,37,28,.09);
+      box-shadow:0 14px 34px rgba(6,59,43,.10);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .market-example-visual{
+      height:92px;
+      border-radius:22px;
+      display:grid;
+      place-items:center;
+      font-size:40px;
+      background:
+        radial-gradient(circle at 70% 0%,rgba(244,207,100,.34),transparent 45%),
+        linear-gradient(135deg,#063b2b,#0f7a56);
+      color:#fff;
+      border:1px solid rgba(6,59,43,.10);
+    }
+
+    .market-example-badge{
+      display:inline-flex;
+      width:max-content;
+      max-width:100%;
+      min-height:30px;
+      align-items:center;
+      padding:0 10px;
+      border-radius:999px;
+      background:rgba(214,173,57,.13);
+      border:1px solid rgba(214,173,57,.25);
+      color:#6b4d09;
+      font-size:.72rem;
+      font-weight:1000;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+
+    .market-example-card h3{
+      margin:0;
+      color:var(--green);
+      font-size:1.28rem;
+      line-height:1.05;
+      letter-spacing:-.025em;
+      font-weight:1000;
+    }
+
+    .market-example-card p{
+      margin:0;
+      color:#4f5f58;
+      font-size:.92rem;
+      line-height:1.48;
+      font-weight:780;
+      flex:1;
+    }
+
+    .market-example-meta{
+      display:flex;
+      gap:7px;
+      flex-wrap:wrap;
+    }
+
+    .market-example-meta span{
+      display:inline-flex;
+      align-items:center;
+      min-height:30px;
+      padding:0 9px;
+      border-radius:999px;
+      background:rgba(6,59,43,.06);
+      border:1px solid rgba(6,59,43,.08);
+      color:#31483d;
+      font-size:.75rem;
+      font-weight:950;
+    }
+
+    .market-example-actions{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:8px;
+      margin-top:auto;
+    }
+
+    .market-example-actions .btn{
+      min-height:44px;
+      padding:0 12px;
+      font-size:.84rem;
+      box-shadow:none;
+    }
+
     @media(max-width:1080px){
       .hero-grid,.doctrine{grid-template-columns:1fr}
       .showcase{min-height:520px}
@@ -1133,6 +1261,7 @@
 
             <div class="hero-actions">
               <a class="btn btn-gold" href="#boutiques">🛍️ Voir les boutiques</a>
+              <a class="btn btn-soft" href="#exemples-market">🧩 5 exemples</a>
               <a class="btn btn-main" href="./inscription-market.html">📝 Inscription MARKET</a>
               <button class="btn btn-live" id="btnHeroWhats" type="button">💬 WhatsApp</button>
               <button class="btn btn-soft" id="btnHeroSms" type="button">📩 SMS</button>
@@ -1144,6 +1273,7 @@
               <a href="https://digiylyfe.com/">🌍 Site</a>
               <a href="https://digiy-hub.digiylyfe.com/">🧭 HUB</a>
               <a class="primary" href="#boutiques">🛍️ Boutiques</a>
+              <a href="#exemples-market">🧩 Exemples</a>
               <a class="primary" href="./inscription-market.html">📝 Inscrire</a>
               <button id="fastWhatsapp" type="button">💬 WhatsApp</button>
               <button id="fastSms" type="button">📩 SMS</button>
@@ -1184,6 +1314,80 @@
         <div class="quick-card"><strong>🛍️ Pas un annuaire</strong><span>On attire par l’ambiance, puis on guide vers les bons commerces.</span></div>
         <div class="quick-card"><strong>🎥 Live DIGIY</strong><span>WhatsApp Visio Live : voir les produits en direct, comme si vous étiez sur place.</span></div>
         <div class="quick-card"><strong>💳 Argent direct</strong><span>DIGIY ne garde pas l’argent : paiement direct au commerçant.</span></div>
+      </div>
+    </section>
+
+
+    <section class="section" id="exemples-market">
+      <div class="wrap market-examples-panel">
+        <div class="section-head">
+          <div>
+            <span class="pill">🧩 Exemples à prendre</span>
+            <h2>5 modèles pour nourrir la galerie</h2>
+            <p>
+              Avant que toutes les vraies boutiques arrivent, la page montre déjà les formats possibles.
+              Ces cartes sont des exemples de présentation : elles guident le commerçant sans créer de fausses annonces.
+            </p>
+          </div>
+          <a class="btn btn-gold" href="./inscription-market.html">📝 Inscrire une vraie boutique</a>
+        </div>
+
+        <div class="market-examples-grid" aria-label="Exemples de boutiques DIGIY MARKET">
+          <article class="market-example-card">
+            <div class="market-example-visual">🧺</div>
+            <span class="market-example-badge">Exemple réel / modèle</span>
+            <h3>Linge maison & plage</h3>
+            <p>Serviettes, draps, peignoirs, foutas, articles villas et hôtels. Image propre, contact direct, commande simple.</p>
+            <div class="market-example-meta"><span>Saly</span><span>WhatsApp Live</span><span>0%</span></div>
+            <div class="market-example-actions">
+              <a class="btn btn-main" href="https://wa.me/221771342889?text=Bonjour%20DIGIY,%20je%20veux%20prendre%20le%20mod%C3%A8le%20MARKET%20linge%20maison%20et%20plage%20pour%20ma%20boutique." target="_blank" rel="noopener noreferrer">Prendre ce modèle</a>
+            </div>
+          </article>
+
+          <article class="market-example-card">
+            <div class="market-example-visual">👗</div>
+            <span class="market-example-badge">Exemple à prendre</span>
+            <h3>Tenues, tissus & retouches</h3>
+            <p>Robes, boubous, ensembles, pagnes, couture, retouches et conseils taille en vidéo avant confirmation.</p>
+            <div class="market-example-meta"><span>Boutique mode</span><span>Visio conseil</span><span>Direct</span></div>
+            <div class="market-example-actions">
+              <a class="btn btn-main" href="https://wa.me/221771342889?text=Bonjour%20DIGIY,%20je%20veux%20prendre%20le%20mod%C3%A8le%20MARKET%20tenues%20tissus%20et%20retouches%20pour%20ma%20boutique." target="_blank" rel="noopener noreferrer">Prendre ce modèle</a>
+            </div>
+          </article>
+
+          <article class="market-example-card">
+            <div class="market-example-visual">💄</div>
+            <span class="market-example-badge">Exemple à prendre</span>
+            <h3>Beauté & soins</h3>
+            <p>Crèmes, parfums, huiles, accessoires beauté et packs cadeaux. Le client demande conseil sans se déplacer.</p>
+            <div class="market-example-meta"><span>Beauté</span><span>Conseil</span><span>WhatsApp</span></div>
+            <div class="market-example-actions">
+              <a class="btn btn-main" href="https://wa.me/221771342889?text=Bonjour%20DIGIY,%20je%20veux%20prendre%20le%20mod%C3%A8le%20MARKET%20beaut%C3%A9%20et%20soins%20pour%20ma%20boutique." target="_blank" rel="noopener noreferrer">Prendre ce modèle</a>
+            </div>
+          </article>
+
+          <article class="market-example-card">
+            <div class="market-example-visual">🥭</div>
+            <span class="market-example-badge">Exemple à prendre</span>
+            <h3>Produits locaux</h3>
+            <p>Épices, jus, miel, paniers, produits du terroir et petites commandes de proximité avec paiement au vendeur.</p>
+            <div class="market-example-meta"><span>Terroir</span><span>Panier</span><span>Local</span></div>
+            <div class="market-example-actions">
+              <a class="btn btn-main" href="https://wa.me/221771342889?text=Bonjour%20DIGIY,%20je%20veux%20prendre%20le%20mod%C3%A8le%20MARKET%20produits%20locaux%20pour%20ma%20boutique." target="_blank" rel="noopener noreferrer">Prendre ce modèle</a>
+            </div>
+          </article>
+
+          <article class="market-example-card">
+            <div class="market-example-visual">🪑</div>
+            <span class="market-example-badge">Exemple à prendre</span>
+            <h3>Déco & artisanat</h3>
+            <p>Paniers, sacs, objets, déco maison, pièces artisanales et commandes personnalisées avec échange direct.</p>
+            <div class="market-example-meta"><span>Artisanat</span><span>Sur mesure</span><span>QR</span></div>
+            <div class="market-example-actions">
+              <a class="btn btn-main" href="https://wa.me/221771342889?text=Bonjour%20DIGIY,%20je%20veux%20prendre%20le%20mod%C3%A8le%20MARKET%20d%C3%A9co%20et%20artisanat%20pour%20ma%20boutique." target="_blank" rel="noopener noreferrer">Prendre ce modèle</a>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -1823,4 +2027,5 @@
   </script>
 </body>
 </html>
+
 
