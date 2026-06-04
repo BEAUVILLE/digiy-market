@@ -1412,13 +1412,13 @@
         </div>
 
         <div class="stats-row" id="statsRow">
-          <span class="stat-pill"><b id="statShops">0</b> boutiques</span>
-          <span class="stat-pill"><b id="statCities">0</b> zones</span>
-          <span class="stat-pill">Contact direct · 0% commission · paiement au commerçant</span>
+          <span class="stat-pill"><b id="statShops">5</b> <span id="statShopsLabel">exemples visibles</span></span>
+          <span class="stat-pill"><b id="statCities">5</b> <span id="statCitiesLabel">formats</span></span>
+          <span class="stat-pill" id="statMarketMood">Galerie nourrie · vraies boutiques dès publication</span>
         </div>
 
-        <div id="loadingBox" class="loading-box">Chargement des boutiques DIGIY MARKET…</div>
-        <div id="emptyBox" class="empty-box" style="display:none">Aucune boutique publiée pour le moment.</div>
+        <div id="loadingBox" class="loading-box" style="display:none">Les exemples ci-dessus restent visibles. Les vraies boutiques publiées apparaissent ici automatiquement.</div>
+        <div id="emptyBox" class="empty-box" style="display:none">Les vraies boutiques publiées apparaîtront ici. Les 5 modèles ci-dessus montrent déjà les formats MARKET.</div>
         <div id="shopsGrid" class="shops-grid"></div>
       </div>
     </section>
@@ -1759,8 +1759,21 @@
       }
 
       function renderStats(){
-        $("statShops").textContent = String(SHOPS.length);
-        $("statCities").textContent = String(unique(SHOPS.map(shopCity)).length);
+        const shopCount = Array.isArray(SHOPS) ? SHOPS.length : 0;
+        const cityCount = unique(SHOPS.map(shopCity)).length;
+
+        $("statShops").textContent = String(shopCount || 5);
+        $("statCities").textContent = String(shopCount ? cityCount : 5);
+
+        const shopsLabel = $("statShopsLabel");
+        const citiesLabel = $("statCitiesLabel");
+        const mood = $("statMarketMood");
+
+        if(shopsLabel) shopsLabel.textContent = shopCount ? "boutiques" : "exemples visibles";
+        if(citiesLabel) citiesLabel.textContent = shopCount ? "zones" : "formats";
+        if(mood) mood.textContent = shopCount
+          ? "Contact direct · 0% commission · paiement au commerçant"
+          : "Galerie nourrie · vraies boutiques dès publication";
       }
 
       function renderShops(){
@@ -1770,7 +1783,9 @@
         if(!FILTERED.length){
           grid.innerHTML = "";
           empty.style.display = "block";
-          empty.textContent = SHOPS.length ? "Aucune boutique ne correspond à cette recherche." : "Aucune boutique publiée pour le moment.";
+          empty.textContent = SHOPS.length
+            ? "Aucune boutique ne correspond à cette recherche."
+            : "Les vraies boutiques publiées apparaîtront ici. Les 5 modèles ci-dessus montrent déjà les formats MARKET.";
           wirePublicActions();
           return;
         }
@@ -1838,7 +1853,7 @@
       }
 
       async function loadShops(){
-        $("loadingBox").style.display = "block";
+        $("loadingBox").style.display = "none";
         $("emptyBox").style.display = "none";
         $("shopsGrid").innerHTML = "";
 
@@ -1864,7 +1879,7 @@
           FILTERED = [];
           renderStats();
           $("emptyBox").style.display = "block";
-          $("emptyBox").textContent = "Impossible de charger les boutiques pour le moment. " + (err?.message || "");
+          $("emptyBox").textContent = "Les exemples MARKET restent visibles. Les boutiques publiées reviendront ici dès que la base répond.";
         }finally{
           $("loadingBox").style.display = "none";
           wirePublicActions();
@@ -1891,7 +1906,7 @@
 
         function prepareForSpeech(raw){
           return String(raw || "")
-            .replace(/\bDIGIYLYFE\b/g, "diji i laïfe")
+            .replace(/\bDIGIYLYFE\b/g, "diji laïfe")
             .replace(/\bDIGIY\b/g, "diji i")
             .replace(/\bWhatsApp\b/g, "Ouatsap")
             .replace(/\bSMS\b/g, "S M S")
@@ -2027,5 +2042,7 @@
   </script>
 </body>
 </html>
+
+
 
 
