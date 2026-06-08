@@ -437,6 +437,70 @@
         line-height: 1.45;
         font-weight: 950;
       }
+
+      .proInfoBox {
+        margin-top: 12px;
+        border: 1px solid rgba(6, 59, 43, 0.18);
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.72);
+        padding: 14px;
+      }
+      .proInfoBox h3 {
+        margin: 0 0 6px;
+        color: var(--green);
+        font-size: 20px;
+        font-weight: 1000;
+      }
+      .proInfoBox p {
+        margin: 0 0 12px;
+        color: var(--muted);
+        line-height: 1.45;
+        font-size: 14px;
+        font-weight: 850;
+      }
+      .proInfoGrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .proField label {
+        display: block;
+        margin-bottom: 6px;
+        color: #6b4d09;
+        font-size: 12px;
+        font-weight: 1000;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .proField input {
+        width: 100%;
+        min-height: 46px;
+        border-radius: 14px;
+        border: 1px solid rgba(214, 173, 57, 0.38);
+        background: rgba(255, 255, 255, 0.88);
+        color: var(--ink);
+        padding: 10px 12px;
+        font: inherit;
+        font-size: 15px;
+        font-weight: 850;
+        outline: none;
+      }
+      .proField input:focus {
+        border-color: rgba(214, 173, 57, 0.9);
+        box-shadow: 0 0 0 3px rgba(214, 173, 57, 0.16);
+      }
+      .proInfoActions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+      }
+      .proInfoActions button {
+        min-height: 42px;
+        font-size: 13px;
+        box-shadow: none;
+      }
+
       .paymentNote {
         margin-top: 12px;
       }
@@ -601,6 +665,9 @@
         .pills {
           grid-template-columns: 1fr;
         }
+        .proInfoGrid {
+          grid-template-columns: 1fr;
+        }
         .choiceLine,
         .totalLine,
         .payLine {
@@ -703,6 +770,36 @@
               ><strong id="totalText">0 FCFA</strong>
             </div>
           </div>
+
+          <div class="proInfoBox" id="proInfoBox">
+            <h3>Infos pro pour le paiement</h3>
+            <p>
+              Ces infos servent seulement à identifier le pro dans le message WhatsApp / SMS.
+              La fiche complète se construit ailleurs dans DIGIY.
+            </p>
+            <div class="proInfoGrid">
+              <div class="proField">
+                <label for="proName">Nom / responsable</label>
+                <input id="proName" type="text" autocomplete="name" placeholder="Ex : Mamadou Diop" />
+              </div>
+              <div class="proField">
+                <label for="proPhone">Téléphone / WhatsApp</label>
+                <input id="proPhone" type="tel" autocomplete="tel" placeholder="Ex : +221 77 000 00 00" />
+              </div>
+              <div class="proField">
+                <label for="proZone">Zone / ville</label>
+                <input id="proZone" type="text" autocomplete="address-level2" placeholder="Ex : Saly, Mbour, Dakar" />
+              </div>
+              <div class="proField">
+                <label for="proActivity">Boutique / activité</label>
+                <input id="proActivity" type="text" autocomplete="organization" placeholder="Ex : Boutique Diop, textile, beauté" />
+              </div>
+            </div>
+            <div class="proInfoActions">
+              <button class="btn clear" id="btnClearProInfo" type="button">🧹 Effacer infos pro</button>
+            </div>
+          </div>
+
           <div class="payment">
             <div class="paymentTitle">💳 Paiement Wave</div>
             <div class="waveHero">
@@ -754,8 +851,8 @@
             >
           </div>
           <p class="note">
-            Le message contient uniquement les choix sélectionnés, avec la date,
-            le sous-total et le total.
+            Le message contient les infos pro courtes, les choix sélectionnés, la date,
+            le sous-total, le total et la note/preuve paiement.
           </p>
         </aside>
       </section>
@@ -890,6 +987,13 @@
           btnClear = document.getElementById("btnClear"),
           summary = document.getElementById("summary"),
           paymentNote = document.getElementById("paymentNote");
+        const PRO_MEMORY_KEY = "digiy_market_payment_identity_v1";
+        const proFields = {
+          name: document.getElementById("proName"),
+          phone: document.getElementById("proPhone"),
+          zone: document.getElementById("proZone"),
+          activity: document.getElementById("proActivity"),
+        };
         let selected = new Set();
         function money(n) {
           return new Intl.NumberFormat("fr-FR").format(n) + " FCFA";
@@ -902,6 +1006,46 @@
         }
         function chosen() {
           return PLANS.filter((p) => selected.has(p.code));
+        }
+        function clean(value) {
+          return String(value || "").trim();
+        }
+        function readProMemory() {
+          try {
+            return JSON.parse(localStorage.getItem(PRO_MEMORY_KEY) || "{}");
+          } catch (_) {
+            return {};
+          }
+        }
+        function saveProMemory() {
+          const data = {};
+          Object.keys(proFields).forEach((key) => {
+            const el = proFields[key];
+            if (el && clean(el.value)) data[key] = clean(el.value);
+          });
+          localStorage.setItem(PRO_MEMORY_KEY, JSON.stringify(data));
+        }
+        function loadProMemory() {
+          const data = readProMemory();
+          Object.keys(proFields).forEach((key) => {
+            const el = proFields[key];
+            if (el && data[key] && !clean(el.value)) el.value = data[key];
+          });
+        }
+        function clearProMemory() {
+          localStorage.removeItem(PRO_MEMORY_KEY);
+          Object.keys(proFields).forEach((key) => {
+            if (proFields[key]) proFields[key].value = "";
+          });
+          syncContact();
+        }
+        function proInfoText() {
+          return [
+            "Nom / responsable : " + (clean(proFields.name?.value) || "à compléter"),
+            "Téléphone / WhatsApp : " + (clean(proFields.phone?.value) || "à compléter"),
+            "Zone / ville : " + (clean(proFields.zone?.value) || "à compléter"),
+            "Boutique / activité : " + (clean(proFields.activity?.value) || "à compléter"),
+          ].join("\n");
         }
         function render() {
           grid.innerHTML = PLANS.map(
@@ -1003,6 +1147,17 @@
             "diji i",
           );
         }
+        loadProMemory();
+        Object.keys(proFields).forEach((key) => {
+          const el = proFields[key];
+          if (!el) return;
+          el.addEventListener("input", () => {
+            saveProMemory();
+            syncContact();
+          });
+        });
+        const btnClearProInfo = document.getElementById("btnClearProInfo");
+        if (btnClearProInfo) btnClearProInfo.addEventListener("click", clearProMemory);
         if (paymentNote) paymentNote.addEventListener("input", syncContact);
         document.getElementById("btnAudio").addEventListener("click", () => {
           if (!("speechSynthesis" in window)) return;
@@ -1041,3 +1196,4 @@
     ></script>
   </body>
 </html>
+
