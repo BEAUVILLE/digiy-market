@@ -7,6 +7,7 @@
   <title>DIGIY MARKET — Boutiques locales · inscription vendeur</title>
   <meta name="description" content="DIGIY MARKET — galerie locale de boutiques visibles sur téléphone, WhatsApp Visio Live, contact direct, commande simple, paiement direct au commerçant, zéro commission."/>
   <meta name="robots" content="index,follow"/>
+  <meta name="digiy-fix-lang-retour-fr" content="market-fr-en-retour-fr-par-rechargement-natif-20260620"/>
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -1209,6 +1210,42 @@
       .hero-actions{grid-template-columns:1fr}
       .shop-actions{grid-template-columns:1fr}
     }
+
+    /* ===== DIGIY MARKET — Sélecteur langue FR/EN retour FR natif ===== */
+    .digiy-langbar{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:5px;
+      border-radius:999px;
+      background:rgba(6,59,43,.08);
+      border:1px solid rgba(6,59,43,.12);
+      box-shadow:var(--shadow2);
+      flex:0 0 auto;
+    }
+    .digiy-langbtn{
+      min-height:38px;
+      border:0;
+      border-radius:999px;
+      padding:0 12px;
+      font-weight:1000;
+      background:transparent;
+      color:var(--green);
+      cursor:pointer;
+      font-family:inherit;
+      font-size:.86rem;
+      white-space:nowrap;
+    }
+    .digiy-langbtn.active{
+      color:#2d2308;
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      box-shadow:0 8px 18px rgba(214,173,57,.18);
+    }
+    @media(max-width:760px){
+      .digiy-langbar{order:3;width:100%;justify-content:center;margin-top:4px}
+      .digiy-langbtn{flex:1}
+    }
+
   </style>
 </head>
 
@@ -1231,6 +1268,11 @@
         <a class="btn btn-soft" href="https://market.digiylyfe.com/lexique-market.html?v=lexique-market-v2-mobile-20260607">🇸🇳 Wolof MARKET</a>
         <a class="btn btn-gold" href="./inscription-market.html">📝 Inscription vendeur</a>
       </nav>
+
+      <div class="digiy-langbar" aria-label="Choisir la langue / Choose language">
+        <button class="digiy-langbtn active" type="button" data-digiy-lang="fr" onclick="digiyMarketSetLang('fr')">🇫🇷 FR</button>
+        <button class="digiy-langbtn" type="button" data-digiy-lang="en" onclick="digiyMarketSetLang('en')">🇬🇧 EN</button>
+      </div>
     </div>
   </header>
 
@@ -1248,7 +1290,7 @@
             </p>
 
             <div class="live-digiy-hero">
-              <strong>WhatsApp Visio Live by DIGIY</strong>
+              <strong>${t("WhatsApp Visio Live by DIGIY")}</strong>
               <span>Voir les produits en vidéo, comme si vous étiez sur place. Moins de trajet, plus de conseil, choix plus sûr.</span>
             </div>
 
@@ -1516,9 +1558,241 @@
 
   <div class="share-toast" id="shareToast">Lien prêt à partager</div>
 
+
   <script>
     (function(){
       "use strict";
+      const STORAGE_KEY = "digiy_market_lang_v2";
+      const EN_TEXT = {
+        title:"DIGIY MARKET — Local shops · seller signup",
+        description:"DIGIY MARKET — local gallery of shops visible on mobile, WhatsApp Video Live, direct contact, simple order, direct payment to the seller, zero commission.",
+        selectors:[
+          [".brand-sub", "Local gallery · visible shops · direct contact."],
+          [".top-actions a:nth-child(1)", "🌍 Site"],
+          [".top-actions a:nth-child(2)", "🧭 HUB"],
+          [".top-actions a:nth-child(3)", "📦 Pricing"],
+          [".top-actions a:nth-child(4)", "🛍️ Shops"],
+          [".top-actions a:nth-child(5)", "🇸🇳 Wolof MARKET"],
+          [".top-actions a:nth-child(6)", "📝 Seller signup"],
+          [".kicker", "🛍️ DIGIY shopping gallery"],
+          ["h1", "Local shops enter DIGIY."],
+          [".hero-lead", "DIGIY MARKET is not a cold search engine. It is a digital shopping gallery: every shop keeps its name, contact, products and money. The client looks, chooses, contacts directly and pays the seller with no commission."],
+          [".live-digiy-hero strong", "WhatsApp Video Live by DIGIY"],
+          [".live-digiy-hero span", "See products on video, as if you were there. Less travel, more advice, safer choices."],
+          [".hero-badges .hero-badge:nth-child(1)", "DIGIY MARKET Gallery"],
+          [".hero-badges .hero-badge:nth-child(2)", "🎥 DIGIY Live"],
+          [".hero-badges .hero-badge:nth-child(3)", "💬 Direct contact"],
+          [".hero-badges .hero-badge:nth-child(4)", "💳 Payment to the seller"],
+          [".hero-badges .hero-badge:nth-child(5)", "🇸🇳 Wolof glossary"],
+          [".hero-badges .hero-badge:nth-child(6)", "0% commission"],
+          [".hero-actions a:nth-child(1)", "🛍️ View shops"],
+          [".hero-actions a:nth-child(2)", "🧩 5 examples"],
+          [".hero-actions a:nth-child(3)", "🇸🇳 Wolof MARKET glossary"],
+          [".hero-actions a:nth-child(4)", "📝 MARKET signup"],
+          ["#btnHeroWhats", "💬 WhatsApp"],
+          ["#btnHeroSms", "📩 SMS"],
+          ["#btnHeroShare", "📤 Share"],
+          [".hero-actions a:nth-child(8)", "📝 Seller signup"],
+          [".mobilePublicFastRow a:nth-child(1)", "🌍 Site"],
+          [".mobilePublicFastRow a:nth-child(2)", "🧭 HUB"],
+          [".mobilePublicFastRow a:nth-child(3)", "🛍️ Shops"],
+          [".mobilePublicFastRow a:nth-child(4)", "🇸🇳 Wolof"],
+          [".mobilePublicFastRow a:nth-child(5)", "🧩 Examples"],
+          [".mobilePublicFastRow a:nth-child(6)", "📝 Sign up"],
+          ["#fastWhatsapp", "💬 WhatsApp"],
+          ["#fastSms", "📩 SMS"],
+          ["#fastShare", "📤 Share"],
+          [".hero-mini-grid .hero-mini:nth-child(1) strong", "A gallery"],
+          [".hero-mini-grid .hero-mini:nth-child(1) span", "You feel the DIGIY place, not a lost listing in the cloud."],
+          [".hero-mini-grid .hero-mini:nth-child(2) strong", "Shops"],
+          [".hero-mini-grid .hero-mini:nth-child(2) span", "Every seller keeps identity, contact and products."],
+          [".hero-mini-grid .hero-mini:nth-child(3) strong", "A signature"],
+          [".hero-mini-grid .hero-mini:nth-child(3) span", "The DIGIY seal reassures, gathers and gives a shared presence."],
+          [".photo-card.big .photo-layer strong", "DIGIY MARKET Gallery"],
+          [".photo-card.big .photo-layer span", "One shared place, different shops, visible trust."],
+          [".showcase .photo-card:nth-child(2) .photo-layer strong", "Sell through the eyes"],
+          [".showcase .photo-card:nth-child(2) .photo-layer span", "Image, atmosphere, presence."],
+          [".showcase .photo-card:nth-child(3) .photo-layer strong", "Live video"],
+          [".showcase .photo-card:nth-child(3) .photo-layer span", "The client sees, asks for advice and confirms."],
+          [".quick-scroll .quick-card:nth-child(1) strong", "🏬 Gallery spirit"],
+          [".quick-scroll .quick-card:nth-child(1) span", "Like a shopping alley: shops are gathered under the DIGIY signature."],
+          [".quick-scroll .quick-card:nth-child(2) strong", "🛍️ Not a directory"],
+          [".quick-scroll .quick-card:nth-child(2) span", "We attract through atmosphere, then guide toward the right shops."],
+          [".quick-scroll .quick-card:nth-child(3) strong", "🎥 DIGIY Live"],
+          [".quick-scroll .quick-card:nth-child(3) span", "WhatsApp Video Live: see products live, as if you were there."],
+          [".quick-scroll .quick-card:nth-child(4) strong", "🇸🇳 Wolof MARKET"],
+          [".quick-scroll .quick-card:nth-child(4) span", "Greeting, price, stock, order, delivery and payment in field-ready phrases."],
+          [".quick-scroll .quick-card:nth-child(5) strong", "💳 Direct money"],
+          [".quick-scroll .quick-card:nth-child(5) span", "DIGIY does not hold the money: payment goes directly to the seller."],
+          ["#exemples-market .pill", "🧩 Examples to use"],
+          ["#exemples-market h2", "5 models to feed the gallery"],
+          ["#exemples-market .section-head p", "Before all real shops arrive, the page already shows possible formats. These cards are presentation examples: they guide sellers without creating fake ads."],
+          ["#exemples-market .section-head .btn", "📝 Register a real shop"],
+          [".market-example-card:nth-child(1) .market-example-badge", "Real example / model"],
+          [".market-example-card:nth-child(1) h3", "Home & beach linen"],
+          [".market-example-card:nth-child(1) p", "Towels, sheets, bathrobes, foutas, villa and hotel items. Clean image, direct contact, simple order."],
+          [".market-example-card:nth-child(1) .market-example-actions .btn", "Use this model"],
+          [".market-example-card:nth-child(2) .market-example-badge", "Model to use"],
+          [".market-example-card:nth-child(2) h3", "Outfits, fabrics & alterations"],
+          [".market-example-card:nth-child(2) p", "Dresses, boubous, sets, fabrics, sewing, alterations and size advice on video before confirmation."],
+          [".market-example-card:nth-child(2) .market-example-actions .btn", "Use this model"],
+          [".market-example-card:nth-child(3) .market-example-badge", "Model to use"],
+          [".market-example-card:nth-child(3) h3", "Beauty & care"],
+          [".market-example-card:nth-child(3) p", "Creams, perfumes, oils, beauty accessories and gift packs. The client asks for advice without moving."],
+          [".market-example-card:nth-child(3) .market-example-actions .btn", "Use this model"],
+          [".market-example-card:nth-child(4) .market-example-badge", "Model to use"],
+          [".market-example-card:nth-child(4) h3", "Local products"],
+          [".market-example-card:nth-child(4) p", "Spices, juices, honey, baskets, local goods and small neighborhood orders with payment to the seller."],
+          [".market-example-card:nth-child(4) .market-example-actions .btn", "Use this model"],
+          [".market-example-card:nth-child(5) .market-example-badge", "Model to use"],
+          [".market-example-card:nth-child(5) h3", "Decor & craft"],
+          [".market-example-card:nth-child(5) p", "Baskets, bags, objects, home decor, handmade pieces and custom orders with direct exchange."],
+          [".market-example-card:nth-child(5) .market-example-actions .btn", "Use this model"],
+          ["#boutiques .pill", "🏪 Shop galleries"],
+          ["#boutiques h2", "Shops visible now"],
+          ["#boutiques .section-head p", "The client enters the gallery, chooses a shop, sees its products, then contacts the seller directly."],
+          ["#btnReload", "↻ Reload"],
+          ["#btnClear", "Clear"],
+          ["#statShopsLabel", "visible examples"],
+          ["#statCitiesLabel", "formats"],
+          ["#statMarketMood", "Fed gallery · real shops as soon as published"],
+          ["#loadingBox", "The examples above remain visible. Real published shops appear here automatically."],
+          ["#emptyBox", "Published real shops will appear here. The 5 models above already show MARKET formats."],
+          [".doctrine .doctrine-card:nth-child(1) h3", "The market is not cold. It is alive."],
+          [".doctrine .doctrine-card:nth-child(1) p", "DIGIY MARKET gives the feeling of a shopping gallery: a place, a signature, a trust signal. Not just results lined up like a search page."],
+          [".doctrine .doctrine-card:nth-child(2) h3", "The shop stays free."],
+          [".doctrine .doctrine-card:nth-child(2) p", "Every seller keeps their name, WhatsApp, products and money. DIGIY gives presence, structure and the road to the client — without taking commission."],
+          ["#retours-digiy .doctrine-card:nth-child(1) h3", "Return to the DIGIY house"],
+          ["#retours-digiy .doctrine-card:nth-child(1) p", "To understand DIGIYLYFE, return to the HUB or see official pricing, use the doors below."],
+          ["#retours-digiy .hero-actions a:nth-child(1)", "🌍 DIGIYLYFE Site"],
+          ["#retours-digiy .hero-actions a:nth-child(2)", "🧭 DIGIY HUB"],
+          ["#retours-digiy .hero-actions a:nth-child(3)", "🇸🇳 Wolof MARKET"],
+          ["#retours-digiy .hero-actions a:nth-child(4)", "📦 Pricing"],
+          ["#retours-digiy .doctrine-card:nth-child(2) h3", "Commerce stays direct."],
+          ["#retours-digiy .doctrine-card:nth-child(2) p", "DIGIY gives presence, the gallery and the road to the client. The seller keeps their contact, money and relationship."],
+          ["footer .footer-box div:nth-child(1)", "DIGIY MARKET — Local gallery, visible shops, direct contact."],
+          ["footer .footer-box div:nth-child(2)", "0% commission · direct payment to the seller · DIGIYLYFE signature"],
+          ["footer .footer-box div:nth-child(3) strong", "🇸🇳 Wolof MARKET glossary"],
+          [".digiy-audio-title", "🎧 DIGIY MARKET Reader"],
+          [".digiy-audio-sub", "A voice explains the gallery, Live video, WhatsApp, SMS, direct payment, zero commission and the Wolof MARKET glossary."],
+          [".digiy-audio-pill", "Public"],
+          ["#digiyAudioPlayBtn", "▶️ Play"],
+          ["#digiyAudioStopBtn", "⏹ Stop"],
+          ["#digiyAudioStatus", "Ready to read the MARKET presentation."],
+          [".publicBottomNav a:nth-child(1) span:last-child", "Site"],
+          [".publicBottomNav a:nth-child(2) span:last-child", "HUB"],
+          [".publicBottomNav a:nth-child(3) span:last-child", "Shops"],
+          [".publicBottomNav a:nth-child(4) span:last-child", "Wolof"],
+          ["#bottomShare span:last-child", "Share"],
+          ["#shareToast", "Link ready to share"]
+        ],
+        attrs:[
+          ["#searchInput", "placeholder", "Search for a shop, a city, an activity…"]
+        ],
+        exact:{
+          "Saly":"Saly", "WhatsApp Live":"WhatsApp Live", "0%":"0%", "Boutique mode":"Fashion shop", "Visio conseil":"Video advice", "Direct":"Direct", "Beauté":"Beauty", "Conseil":"Advice", "WhatsApp":"WhatsApp", "Terroir":"Local goods", "Panier":"Basket", "Local":"Local", "Artisanat":"Craft", "Sur mesure":"Custom", "QR":"QR",
+          "Toutes les villes":"All cities", "Toutes les activités":"All activities", "exemples visibles":"visible examples", "formats":"formats", "Galerie nourrie · vraies boutiques dès publication":"Fed gallery · real shops as soon as published",
+          "Galerie DIGIY MARKET":"DIGIY MARKET Gallery", "En ligne":"Online", "Boutique présente dans la galerie DIGIY":"Shop present in the DIGIY gallery", "WhatsApp Visio Live by DIGIY":"WhatsApp Video Live by DIGIY", "Voir en vidéo, comme si vous étiez sur place. Moins de trajet, plus de conseil, choix plus sûr.":"See on video, as if you were there. Less travel, more advice, safer choice.", "🌍 Vitrine immersive":"🌍 Immersive showcase", "WhatsApp direct":"Direct WhatsApp", "Contact à demander":"Contact on request", "🌍 Entrer":"🌍 Enter", "Voir":"View", "Fiche":"Profile", "Commander":"Order", "Contact direct · 0% commission · paiement au commerçant":"Direct contact · 0% commission · payment to the seller",
+          "boutiques":"shops", "zones":"zones", "Contact direct · 0% commission · paiement au commerçant":"Direct contact · 0% commission · payment to the seller", "Aucune boutique ne correspond à cette recherche.":"No shop matches this search.", "Les vraies boutiques publiées apparaîtront ici. Les 5 modèles ci-dessus montrent déjà les formats MARKET.":"Published real shops will appear here. The 5 models above already show MARKET formats.", "Les exemples MARKET restent visibles. Les boutiques publiées reviendront ici dès que la base répond.":"The MARKET examples remain visible. Published shops will return here as soon as the database responds.",
+          "Lien copié pour partager":"Link copied to share", "Partage indisponible ici":"Sharing unavailable here", "Choisis une boutique pour ouvrir WhatsApp":"Choose a shop to open WhatsApp", "Choisis une boutique pour ouvrir SMS":"Choose a shop to open SMS", "Prêt à lire la présentation MARKET.":"Ready to read the MARKET presentation.", "▶️ Lecture":"▶️ Play", "🔊 Lecture en cours":"🔊 Playing", "Lecture en cours. La voix présente la galerie MARKET.":"Playing. The voice presents the MARKET gallery.", "Chargement de la voix française…":"Loading the English voice…"
+        }
+      };
+
+      function getLang(){
+        try{
+          const u = new URL(location.href);
+          const q = u.searchParams.get("lang");
+          if(q === "en" || q === "fr") return q;
+          return localStorage.getItem(STORAGE_KEY) === "en" ? "en" : "fr";
+        }catch(_){ return "fr"; }
+      }
+      function cleanLangUrl(lang){
+        try{
+          const u = new URL(location.href);
+          if(lang === "en") u.searchParams.set("lang","en");
+          else u.searchParams.delete("lang");
+          return u.toString();
+        }catch(_){ return location.href; }
+      }
+      window.digiyMarketSetLang = function(lang){
+        try{ window.speechSynthesis && window.speechSynthesis.cancel(); }catch(_){ }
+        if(lang === "en"){
+          try{ localStorage.setItem(STORAGE_KEY,"en"); }catch(_){ }
+          location.href = cleanLangUrl("en");
+          return;
+        }
+        try{ localStorage.removeItem(STORAGE_KEY); }catch(_){ }
+        location.href = cleanLangUrl("fr");
+      };
+      window.DIGIY_MARKET_GET_LANG = getLang;
+      window.DIGIY_MARKET_T = function(fr){
+        if(getLang() !== "en") return fr;
+        return EN_TEXT.exact[fr] || fr;
+      };
+      window.DIGIY_MARKET_TEXT = EN_TEXT;
+
+      function setText(selector, text){
+        const el = document.querySelector(selector);
+        if(el) el.textContent = text;
+      }
+      function setAttr(selector, attr, value){
+        const el = document.querySelector(selector);
+        if(el) el.setAttribute(attr, value);
+      }
+      function replaceExactText(root){
+        if(!root || getLang() !== "en") return;
+        const map = EN_TEXT.exact;
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+          acceptNode(node){
+            const v = (node.nodeValue || "").trim();
+            if(!v || !map[v]) return NodeFilter.FILTER_REJECT;
+            return NodeFilter.FILTER_ACCEPT;
+          }
+        });
+        const nodes = [];
+        while(walker.nextNode()) nodes.push(walker.currentNode);
+        nodes.forEach(n => {
+          const raw = n.nodeValue;
+          const trimmed = raw.trim();
+          n.nodeValue = raw.replace(trimmed, map[trimmed]);
+        });
+      }
+      function applyEnglish(){
+        if(getLang() !== "en") return;
+        document.documentElement.lang = "en";
+        document.title = EN_TEXT.title;
+        const desc = document.querySelector('meta[name="description"]');
+        if(desc) desc.setAttribute("content", EN_TEXT.description);
+        EN_TEXT.selectors.forEach(([sel, text]) => setText(sel, text));
+        EN_TEXT.attrs.forEach(([sel, attr, value]) => setAttr(sel, attr, value));
+        replaceExactText(document.body);
+        document.querySelectorAll(".digiy-langbtn").forEach(btn => btn.classList.toggle("active", btn.getAttribute("data-digiy-lang") === "en"));
+      }
+      function markFrenchButtons(){
+        document.querySelectorAll(".digiy-langbtn").forEach(btn => btn.classList.toggle("active", btn.getAttribute("data-digiy-lang") === "fr"));
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        if(getLang() === "en"){
+          applyEnglish();
+          const obs = new MutationObserver((muts) => {
+            muts.forEach(m => m.addedNodes && m.addedNodes.forEach(n => { if(n.nodeType === 1) replaceExactText(n); }));
+            replaceExactText(document.getElementById("shopsGrid"));
+          });
+          obs.observe(document.body, {childList:true, subtree:true});
+        }else{
+          document.documentElement.lang = "fr";
+          markFrenchButtons();
+        }
+      });
+    })();
+  </script>
+
+  <script>
+    (function(){
+      "use strict";
+
+      const t = window.DIGIY_MARKET_T || ((v)=>v);
+      const lang = () => (window.DIGIY_MARKET_GET_LANG ? window.DIGIY_MARKET_GET_LANG() : "fr");
 
       const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
       const SUPABASE_ANON_KEY = "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
@@ -1571,7 +1845,7 @@
 
       async function shareMarket(){
         const title = document.title || "DIGIY MARKET";
-        const text = "Découvre les boutiques locales sur DIGIY MARKET.";
+        const text = lang() === "en" ? "Discover local shops on DIGIY MARKET." : "Découvre les boutiques locales sur DIGIY MARKET.";
         const url = window.location.href;
 
         try{
@@ -1581,13 +1855,13 @@
           }
 
           await navigator.clipboard.writeText(url);
-          showShareToast("Lien copié pour partager");
+          showShareToast(t("Lien copié pour partager"));
         }catch(_){
           try{
             await navigator.clipboard.writeText(url);
-            showShareToast("Lien copié pour partager");
+            showShareToast(t("Lien copié pour partager"));
           }catch(__){
-            showShareToast("Partage indisponible ici");
+            showShareToast(t("Partage indisponible ici"));
           }
         }
       }
@@ -1686,7 +1960,7 @@
 
         if(!wa){
           location.hash = "#boutiques";
-          showShareToast("Choisis une boutique pour ouvrir WhatsApp");
+          showShareToast(t("Choisis une boutique pour ouvrir WhatsApp"));
           return;
         }
 
@@ -1701,7 +1975,7 @@
 
         if(!sms){
           location.hash = "#boutiques";
-          showShareToast("Choisis une boutique pour ouvrir SMS");
+          showShareToast(t("Choisis une boutique pour ouvrir SMS"));
           return;
         }
 
@@ -1734,8 +2008,8 @@
         const cities = unique(SHOPS.map(s => shopCity(s))).sort((a,b)=>a.localeCompare(b,"fr"));
         const cats = unique(SHOPS.map(s => shopCategory(s))).sort((a,b)=>a.localeCompare(b,"fr"));
 
-        citySel.innerHTML = '<option value="">Toutes les villes</option>' + cities.map(v => `<option value="${esc(v)}">${esc(v)}</option>`).join("");
-        catSel.innerHTML = '<option value="">Toutes les activités</option>' + cats.map(v => `<option value="${esc(v)}">${esc(v)}</option>`).join("");
+        citySel.innerHTML = `<option value="">${esc(t("Toutes les villes"))}</option>` + cities.map(v => `<option value="${esc(v)}">${esc(v)}</option>`).join("");
+        catSel.innerHTML = `<option value="">${esc(t("Toutes les activités"))}</option>` + cats.map(v => `<option value="${esc(v)}">${esc(v)}</option>`).join("");
 
         if(cities.includes(currentCity)) citySel.value = currentCity;
         if(cats.includes(currentCat)) catSel.value = currentCat;
@@ -1777,11 +2051,11 @@
         const citiesLabel = $("statCitiesLabel");
         const mood = $("statMarketMood");
 
-        if(shopsLabel) shopsLabel.textContent = shopCount ? "boutiques" : "exemples visibles";
-        if(citiesLabel) citiesLabel.textContent = shopCount ? "zones" : "formats";
+        if(shopsLabel) shopsLabel.textContent = shopCount ? t("boutiques") : t("exemples visibles");
+        if(citiesLabel) citiesLabel.textContent = shopCount ? t("zones") : t("formats");
         if(mood) mood.textContent = shopCount
-          ? "Contact direct · 0% commission · paiement au commerçant"
-          : "Galerie nourrie · vraies boutiques dès publication";
+          ? t("Contact direct · 0% commission · paiement au commerçant")
+          : t("Galerie nourrie · vraies boutiques dès publication");
       }
 
       function renderShops(){
@@ -1792,8 +2066,8 @@
           grid.innerHTML = "";
           empty.style.display = "block";
           empty.textContent = SHOPS.length
-            ? "Aucune boutique ne correspond à cette recherche."
-            : "Les vraies boutiques publiées apparaîtront ici. Les 5 modèles ci-dessus montrent déjà les formats MARKET.";
+            ? t("Aucune boutique ne correspond à cette recherche.")
+            : t("Les vraies boutiques publiées apparaîtront ici. Les 5 modèles ci-dessus montrent déjà les formats MARKET.");
           wirePublicActions();
           return;
         }
@@ -1818,9 +2092,9 @@
             <article class="shop-card">
               <div class="${mediaClass}">
                 ${img ? `<img class="shop-bg-img" src="${esc(img)}" alt="${esc(name)}" loading="lazy" onerror="this.remove();this.parentElement.classList.remove('has-img');"/>` : ``}
-                <div class="gallery-ribbon">Galerie DIGIY MARKET</div>
-                <div class="status-chip">En ligne</div>
-                <div class="shop-brand-seal" title="Boutique présente dans la galerie DIGIY">
+                <div class="gallery-ribbon">${t("Galerie DIGIY MARKET")}</div>
+                <div class="status-chip">${t("En ligne")}</div>
+                <div class="shop-brand-seal" title="${esc(t("Boutique présente dans la galerie DIGIY"))}">
                   <img src="${esc(BADGE_URL)}" alt="DIGIY" loading="lazy"/>
                 </div>
               </div>
@@ -1831,26 +2105,26 @@
                 <p class="shop-desc">${esc(desc)}</p>
 
                 <div class="live-digiy-card">
-                  <strong>WhatsApp Visio Live by DIGIY</strong>
-                  <span>Voir en vidéo, comme si vous étiez sur place. Moins de trajet, plus de conseil, choix plus sûr.</span>
+                  <strong>${t("WhatsApp Visio Live by DIGIY")}</strong>
+                  <span>${t("Voir en vidéo, comme si vous étiez sur place. Moins de trajet, plus de conseil, choix plus sûr.")}</span>
                 </div>
 
                 <div class="shop-meta">
                   <span class="meta-pill">📍 ${esc(city)}</span>
-                  <span class="meta-pill">${isAstou ? "🌍 Vitrine immersive" : "💬 " + (phone ? "WhatsApp direct" : "Contact à demander")}</span>
+                  <span class="meta-pill">${isAstou ? t("🌍 Vitrine immersive") : "💬 " + (phone ? t("WhatsApp direct") : t("Contact à demander"))}</span>
                 </div>
 
                 <div class="shop-actions">
-                  <a class="btn btn-main" href="${esc(url)}" ${isAstou ? 'target="_blank" rel="noopener"' : ""}>${isAstou ? "🌍 Entrer" : "Voir"}</a>
-                  ${isAstou ? `<a class="btn btn-soft" href="${esc(ficheUrl)}">Fiche</a>` : `<a class="btn btn-gold" href="${esc(cmdUrl)}">Commander</a>`}
+                  <a class="btn btn-main" href="${esc(url)}" ${isAstou ? 'target="_blank" rel="noopener"' : ""}>${isAstou ? t("🌍 Entrer") : t("Voir")}</a>
+                  ${isAstou ? `<a class="btn btn-soft" href="${esc(ficheUrl)}">${t("Fiche")}</a>` : `<a class="btn btn-gold" href="${esc(cmdUrl)}">${t("Commander")}</a>`}
                   ${wa ? `<a class="btn btn-live" href="${esc(wa)}" target="_blank" rel="noopener">WhatsApp</a>` : ``}
                   ${phone ? `<a class="btn btn-soft" href="${esc(smsUrl(phone, name))}">SMS</a>` : ``}
-                  ${isAstou ? `<a class="btn btn-gold" href="${esc(cmdUrl)}">Commander</a>` : ``}
+                  ${isAstou ? `<a class="btn btn-gold" href="${esc(cmdUrl)}">${t("Commander")}</a>` : ``}
                 </div>
 
                 <div class="digiy-floor">
                   <img src="${esc(BADGE_URL)}" alt="DIGIY" loading="lazy"/>
-                  <div><strong>Galerie DIGIY MARKET</strong>Contact direct · 0% commission · paiement au commerçant</div>
+                  <div><strong>${t("Galerie DIGIY MARKET")}</strong>${t("Contact direct · 0% commission · paiement au commerçant")}</div>
                 </div>
               </div>
             </article>
@@ -1887,7 +2161,7 @@
           FILTERED = [];
           renderStats();
           $("emptyBox").style.display = "block";
-          $("emptyBox").textContent = "Les exemples MARKET restent visibles. Les boutiques publiées reviendront ici dès que la base répond.";
+          $("emptyBox").textContent = t("Les exemples MARKET restent visibles. Les boutiques publiées reviendront ici dès que la base répond.");
         }finally{
           $("loadingBox").style.display = "none";
           wirePublicActions();
@@ -1910,7 +2184,7 @@
         let utter = null;
         let launchId = 0;
 
-        const visibleText = "Bienvenue dans DIGIY MARKET. Ici, les boutiques locales entrent dans une vraie galerie marchande digitale. Avec le Live DIGIY, vous pouvez voir les produits en direct, en vidéo, comme si vous étiez sur place. Vous gagnez du temps, vous évitez un trajet inutile et vous choisissez avec plus de confiance. Le commerçant montre les articles, conseille, répond aux questions et aide à confirmer le bon choix. La demande peut se faire par WhatsApp ou par SMS selon ce qui arrange le client. Le paiement reste direct au commerçant. DIGIY ne garde pas l’argent et ne prend pas de commission. Le lexique Wolof MARKET aide le commerçant à parler prix, stock, commande, livraison et paiement avec des phrases terrain simples. DIGIY MARKET, c’est le contact direct, la vidéo, le conseil et le commerce vivant.";
+        const visibleText = lang() === "en" ? "Welcome to DIGIY MARKET. Here, local shops enter a real digital shopping gallery. With DIGIY Live, you can see products live on video, as if you were there. You save time, avoid unnecessary travel and choose with more confidence. The seller shows the items, gives advice, answers questions and helps confirm the right choice. The request can be made by WhatsApp or SMS depending on what suits the client. Payment stays direct to the seller. DIGIY does not hold the money and takes no commission. The Wolof MARKET glossary helps sellers speak about price, stock, order, delivery and payment with simple field-ready phrases. DIGIY MARKET is direct contact, video, advice and living commerce." : "Bienvenue dans DIGIY MARKET. Ici, les boutiques locales entrent dans une vraie galerie marchande digitale. Avec le Live DIGIY, vous pouvez voir les produits en direct, en vidéo, comme si vous étiez sur place. Vous gagnez du temps, vous évitez un trajet inutile et vous choisissez avec plus de confiance. Le commerçant montre les articles, conseille, répond aux questions et aide à confirmer le bon choix. La demande peut se faire par WhatsApp ou par SMS selon ce qui arrange le client. Le paiement reste direct au commerçant. DIGIY ne garde pas l’argent et ne prend pas de commission. Le lexique Wolof MARKET aide le commerçant à parler prix, stock, commande, livraison et paiement avec des phrases terrain simples. DIGIY MARKET, c’est le contact direct, la vidéo, le conseil et le commerce vivant.";
 
         function prepareForSpeech(raw){
           return String(raw || "")
@@ -1943,16 +2217,16 @@
           playing = false;
           playBtn.disabled = false;
           stopBtn.disabled = true;
-          playBtn.textContent = "▶️ Lecture";
-          setStatus("Prêt à lire la présentation MARKET.");
+          playBtn.textContent = lang() === "en" ? "▶️ Play" : "▶️ Lecture";
+          setStatus(t("Prêt à lire la présentation MARKET."));
         }
 
         function setPlaying(){
           playing = true;
           playBtn.disabled = true;
           stopBtn.disabled = false;
-          playBtn.textContent = "🔊 Lecture en cours";
-          setStatus("Lecture en cours. La voix présente la galerie MARKET.");
+          playBtn.textContent = lang() === "en" ? "🔊 Playing" : "🔊 Lecture en cours";
+          setStatus(t("Lecture en cours. La voix présente la galerie MARKET."));
         }
 
         function stop(){
@@ -1969,7 +2243,7 @@
           try{ synth.cancel(); }catch(_){}
 
           utter = new SpeechSynthesisUtterance(prepareForSpeech(visibleText));
-          utter.lang = "fr-FR";
+          utter.lang = lang() === "en" ? "en-US" : "fr-FR";
           utter.rate = .82;
           utter.pitch = 1.02;
           utter.volume = 1;
@@ -2004,7 +2278,7 @@
             return;
           }
 
-          setStatus("Chargement de la voix française…");
+          setStatus(lang() === "en" ? "Loading English voice…" : "Chargement de la voix française…");
 
           let launched = false;
           function onVoices(){
@@ -2051,6 +2325,7 @@
   <script src="https://pro-action-digiy.digiylyfe.com/assets/js/digiy-retour-voix.js?v=retour-voix-20260606-v4" defer></script>
 </body>
 </html>
+
 
 
 
