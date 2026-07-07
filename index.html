@@ -8,6 +8,7 @@
   <meta name="description" content="DIGIY MARKET — galerie locale de boutiques visibles sur téléphone, WhatsApp Visio Live, contact direct, commande simple, paiement direct au commerçant, zéro commission."/>
   <meta name="robots" content="index,follow"/>
   <meta name="digiy-fix-lang-retour-fr" content="market-fr-en-retour-fr-par-rechargement-natif-20260620"/>
+  <meta name="digiy-strategy-update" content="market-demande-vendeur-gratuite-activation-payante-zero-commission-sendwave-20260707"/>
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -1044,6 +1045,114 @@
 
 
 
+
+    /* ===== DIGIY MARKET — Doctrine commerciale protégée ===== */
+    .market-doctrine-pro{
+      padding:22px;
+      border-radius:32px;
+      background:
+        radial-gradient(circle at top right,rgba(244,207,100,.24),transparent 38%),
+        linear-gradient(135deg,rgba(6,59,43,.96),rgba(11,90,65,.94));
+      border:2px solid rgba(214,173,57,.58);
+      box-shadow:var(--shadow);
+      color:#fff;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .market-doctrine-pro::after{
+      content:"";
+      position:absolute;
+      right:18px;
+      bottom:14px;
+      width:120px;
+      height:120px;
+      border-radius:30px;
+      background-image:var(--logo);
+      background-size:cover;
+      background-position:center;
+      opacity:.12;
+      transform:rotate(-5deg);
+      pointer-events:none;
+    }
+
+    .market-doctrine-pro > *{
+      position:relative;
+      z-index:1;
+    }
+
+    .market-doctrine-tag{
+      display:inline-flex;
+      width:max-content;
+      max-width:100%;
+      min-height:34px;
+      align-items:center;
+      padding:0 12px;
+      border-radius:999px;
+      border:1px solid rgba(244,207,100,.70);
+      background:rgba(244,207,100,.16);
+      color:#fff7c2;
+      font-size:.78rem;
+      font-weight:1000;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+
+    .market-doctrine-pro h2{
+      margin:13px 0 10px;
+      color:#fff7c2;
+      font-size:clamp(1.9rem,3.9vw,3.8rem);
+      line-height:.98;
+      letter-spacing:-.055em;
+      font-weight:1000;
+      max-width:920px;
+    }
+
+    .market-doctrine-pro p{
+      margin:0;
+      color:rgba(255,255,255,.86);
+      font-size:1.02rem;
+      line-height:1.65;
+      font-weight:800;
+      max-width:930px;
+    }
+
+    .market-doctrine-list{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:10px;
+      margin-top:15px;
+    }
+
+    .market-doctrine-list span{
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.10);
+      border-radius:18px;
+      padding:12px;
+      color:#fff;
+      font-size:.88rem;
+      line-height:1.35;
+      font-weight:1000;
+    }
+
+    .market-gold-emphasis{
+      border-color:rgba(244,207,100,.82)!important;
+      background:linear-gradient(135deg,rgba(244,207,100,.30),rgba(214,173,57,.16))!important;
+      color:#fff7c2!important;
+      box-shadow:0 12px 28px rgba(214,173,57,.14);
+    }
+
+    .market-doctrine-quote{
+      margin-top:14px!important;
+      padding:13px 15px;
+      border-left:4px solid var(--gold2);
+      border-radius:18px;
+      background:rgba(0,0,0,.16);
+      color:#fff7c2!important;
+      font-weight:1000!important;
+    }
+
+
     /* ===== DIGIY MARKET — 5 exemples à prendre pour nourrir la page ===== */
     .market-examples-panel{
       padding:22px;
@@ -1194,6 +1303,7 @@
       .hero-actions{display:grid;grid-template-columns:1fr 1fr}
       .hero-actions .btn{width:100%}
       .mobilePublicFastRow{grid-template-columns:1fr 1fr}
+      .market-doctrine-list{grid-template-columns:1fr}
       .shops-grid{grid-template-columns:1fr}
       .shop-media{min-height:252px}
       .controls{grid-template-columns:1fr}
@@ -1265,6 +1375,7 @@
         <a class="btn btn-soft" href="https://digiy-hub.digiylyfe.com/">🧭 HUB</a>
         <a class="btn btn-soft" href="https://tarifs.digiylyfe.com/" target="_blank" rel="noopener noreferrer">📦 Tarifs</a>
         <a class="btn btn-main" href="#boutiques">🛍️ Boutiques</a>
+        <a class="btn btn-soft" href="#doctrine-market-pro">🦅 Doctrine</a>
         <a class="btn btn-soft" href="https://market.digiylyfe.com/lexique-market.html?v=lexique-market-v2-mobile-20260607">🇸🇳 Wolof MARKET</a>
         <a class="btn btn-gold" href="./inscription-market.html">📝 Inscription vendeur</a>
       </nav>
@@ -1290,7 +1401,7 @@
             </p>
 
             <div class="live-digiy-hero">
-              <strong>${t("WhatsApp Visio Live by DIGIY")}</strong>
+              <strong>WhatsApp Visio Live by DIGIY</strong>
               <span>Voir les produits en vidéo, comme si vous étiez sur place. Moins de trajet, plus de conseil, choix plus sûr.</span>
             </div>
 
@@ -1301,17 +1412,18 @@
               <span class="hero-badge">💳 Paiement au pro</span>
               <span class="hero-badge">🇸🇳 Lexique Wolof</span>
               <span class="hero-badge">0% commission</span>
+              <span class="hero-badge market-gold-emphasis">Demande vendeur sans engagement</span>
             </div>
 
             <div class="hero-actions">
               <a class="btn btn-gold" href="#boutiques">🛍️ Voir les boutiques</a>
               <a class="btn btn-soft" href="#exemples-market">🧩 5 exemples</a>
               <a class="btn btn-soft" href="https://market.digiylyfe.com/lexique-market.html?v=lexique-market-v2-mobile-20260607">🇸🇳 Lexique Wolof MARKET</a>
-              <a class="btn btn-main" href="./inscription-market.html">📝 Inscription MARKET</a>
+              <a class="btn btn-main" href="./inscription-market.html">📝 Demande vendeur MARKET</a>
               <button class="btn btn-live" id="btnHeroWhats" type="button">💬 WhatsApp</button>
               <button class="btn btn-soft" id="btnHeroSms" type="button">📩 SMS</button>
               <button class="btn btn-soft" id="btnHeroShare" type="button">📤 Partager</button>
-              <a class="btn btn-soft" href="./inscription-market.html">📝 Inscription vendeur</a>
+              <a class="btn btn-soft" href="./inscription-market.html">📝 Demande vendeur</a>
             </div>
 
             <div class="mobilePublicFastRow">
@@ -1320,7 +1432,7 @@
               <a class="primary" href="#boutiques">🛍️ Boutiques</a>
               <a href="https://market.digiylyfe.com/lexique-market.html?v=lexique-market-v2-mobile-20260607">🇸🇳 Wolof</a>
               <a href="#exemples-market">🧩 Exemples</a>
-              <a class="primary" href="./inscription-market.html">📝 Inscrire</a>
+              <a class="primary" href="./inscription-market.html">📝 Demande</a>
               <button id="fastWhatsapp" type="button">💬 WhatsApp</button>
               <button id="fastSms" type="button">📩 SMS</button>
               <button id="fastShare" type="button">📤 Partager</button>
@@ -1364,6 +1476,26 @@
       </div>
     </section>
 
+    <section class="section" id="doctrine-market-pro">
+      <div class="wrap market-doctrine-pro">
+        <span class="market-doctrine-tag">Demande vendeur gratuite · Activation MARKET payante · 0% commission</span>
+        <h2>Le client regarde gratuitement. Le vendeur demande sans engagement. La présence MARKET s’active clairement.</h2>
+        <p>
+          DIGIY MARKET ne prend pas de commission sur les ventes. Le client consulte la galerie, contacte directement la boutique
+          et paie le commerçant. Pour le vendeur, la demande initiale / orientation est gratuite et sans engagement :
+          le paiement concerne uniquement l’activation d’une présence professionnelle, d’une fiche boutique, d’un QR, d’un BOOST ou d’un pack visibilité.
+        </p>
+        <div class="market-doctrine-list" aria-label="Doctrine commerciale MARKET">
+          <span>✅ Consultation client gratuite</span>
+          <span>📝 Demande vendeur sans engagement</span>
+          <span>🛍️ Activation MARKET payante</span>
+          <span class="market-gold-emphasis">🇫🇷 France / diaspora : Sendwave possible</span>
+        </div>
+        <p class="market-doctrine-quote">
+          Les plateformes attirent avec le gratuit puis prélèvent sur les ventes. DIGIY MARKET construit la visibilité, sans prendre l’argent du commerçant.
+        </p>
+      </div>
+    </section>
 
     <section class="section" id="exemples-market">
       <div class="wrap market-examples-panel">
@@ -1484,7 +1616,7 @@
           <h3>La boutique reste libre.</h3>
           <p>
             Chaque commerçant garde son nom, son WhatsApp, ses produits et son argent. DIGIY donne la présence,
-            le cadre et la route vers le client — sans prendre de commission.
+            le cadre et la route vers le client — sans prendre de commission. La demande vendeur est sans engagement ; seule l’activation professionnelle est payante.
           </p>
         </div>
       </div>
@@ -1520,7 +1652,7 @@
   <footer>
     <div class="wrap footer-box">
       <div><strong>DIGIY MARKET</strong> — Galerie locale, boutiques visibles, contact direct.</div>
-      <div>0% commission · paiement direct au commerçant · signature DIGIYLYFE</div>
+      <div>0% commission · paiement direct au commerçant · demande vendeur sans engagement · activation MARKET payante</div>
       <div><a href="https://market.digiylyfe.com/lexique-market.html?v=lexique-market-v2-mobile-20260607"><strong>🇸🇳 Lexique Wolof MARKET</strong></a></div>
     </div>
   </footer>
@@ -1588,11 +1720,11 @@
           [".hero-actions a:nth-child(1)", "🛍️ View shops"],
           [".hero-actions a:nth-child(2)", "🧩 5 examples"],
           [".hero-actions a:nth-child(3)", "🇸🇳 Wolof MARKET glossary"],
-          [".hero-actions a:nth-child(4)", "📝 MARKET signup"],
+          [".hero-actions a:nth-child(4)", "📝 MARKET seller request"],
           ["#btnHeroWhats", "💬 WhatsApp"],
           ["#btnHeroSms", "📩 SMS"],
           ["#btnHeroShare", "📤 Share"],
-          [".hero-actions a:nth-child(8)", "📝 Seller signup"],
+          [".hero-actions a:nth-child(8)", "📝 Seller request"],
           [".mobilePublicFastRow a:nth-child(1)", "🌍 Site"],
           [".mobilePublicFastRow a:nth-child(2)", "🧭 HUB"],
           [".mobilePublicFastRow a:nth-child(3)", "🛍️ Shops"],
@@ -2105,7 +2237,7 @@
                 <p class="shop-desc">${esc(desc)}</p>
 
                 <div class="live-digiy-card">
-                  <strong>${t("WhatsApp Visio Live by DIGIY")}</strong>
+                  <strong>WhatsApp Visio Live by DIGIY</strong>
                   <span>${t("Voir en vidéo, comme si vous étiez sur place. Moins de trajet, plus de conseil, choix plus sûr.")}</span>
                 </div>
 
@@ -2325,6 +2457,26 @@
   <script src="https://pro-action-digiy.digiylyfe.com/assets/js/digiy-retour-voix.js?v=retour-voix-20260606-v4" defer></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
