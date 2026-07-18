@@ -8,7 +8,7 @@ CORRECTIONS PUBLIC
 1. Suppression de phone / owner_phone de la requête publique.
 2. Contact uniquement via whatsapp ou public_phone explicitement publiés.
 3. Les boutons généraux WhatsApp/SMS demandent désormais de choisir une boutique.
-4. Astou reconnue uniquement par slug ou numéro public exact.
+4. Aucune boutique n’est reconnue en dur : identité et contact viennent des données publiées.
 5. Badge « Boutique visible » au lieu de « En ligne ».
 6. Présentation vidéo formulée « sur demande, si disponible ».
 7. Navigation anglaise stabilisée par identifiants et doctrine traduite.
