@@ -1949,13 +1949,6 @@
       const MARKET_ORIGIN = "https://market.digiylyfe.com";
       const BADGE_URL = "https://digiylyfe.net/wp-content/uploads/2026/04/icon-512-1.png";
 
-      const ASTOU_MARKET_SLUG = "market-221778765785";
-      const ASTOU_MARKET_PHONE = "221778765785";
-      const ASTOU_PREMIUM_URL = "https://astou-boutique.digiylyfe.com/";
-      const ASTOU_NAME = "Astou Boutique";
-      const ASTOU_ACTIVITY = "Linge de maison · plage · hôtels · villas · tenues stylées · beauté";
-      const ASTOU_DESCRIPTION = "Astou Boutique propose du linge de maison, serviettes, draps, peignoirs, foutas pour transats, serviettes de plage, robes, tenues stylées, confection et crèmes de beauté à Saly.";
-
       const $ = (id) => document.getElementById(id);
       let SHOPS = [];
       let FILTERED = [];
@@ -2024,18 +2017,12 @@
         return p ? "market-" + p : "";
       }
 
-      function isAstouShop(shop){
-        const slug = shopSlug(shop);
-        const phone = digits(shop.whatsapp || shop.public_phone);
-        return slug === ASTOU_MARKET_SLUG || phone === ASTOU_MARKET_PHONE;
-      }
-
       function shopName(shop){
-        return isAstouShop(shop) ? ASTOU_NAME : norm(shop.shop_name || shop.business_name || "Boutique DIGIY");
+        return norm(shop.shop_name || shop.business_name || "Boutique DIGIY");
       }
 
       function shopCategory(shop){
-        return isAstouShop(shop) ? ASTOU_ACTIVITY : norm(shop.categories_text || shop.category || "Boutique locale");
+        return norm(shop.categories_text || shop.category || "Boutique locale");
       }
 
       function shopCity(shop){
@@ -2054,7 +2041,7 @@
       }
 
       function shopText(shop){
-        return isAstouShop(shop) ? ASTOU_DESCRIPTION : norm(shop.description || "Boutique locale, contact direct avec le commerçant.");
+        return norm(shop.description || "Boutique locale, contact direct avec le commerçant.");
       }
 
       function shopImage(shop){
@@ -2075,9 +2062,7 @@
         return u.toString();
       }
 
-      function shopMainUrl(shop){
-        return isAstouShop(shop) ? ASTOU_PREMIUM_URL : shopUrl(shop);
-      }
+      function shopMainUrl(shop){ return shopUrl(shop); }
 
       function whatsappUrl(phone, shopNameValue){
         const p = digits(phone);
@@ -2211,9 +2196,7 @@
           const phone = shopPhone(shop);
           const desc = shopText(shop);
           const img = shopImage(shop);
-          const isAstou = isAstouShop(shop);
           const url = shopMainUrl(shop);
-          const ficheUrl = shopUrl(shop);
           const cmdUrl = commanderUrl(shop);
           const wa = whatsappUrl(phone, name);
           const mediaClass = img ? "shop-media has-img" : "shop-media";
@@ -2241,15 +2224,14 @@
 
                 <div class="shop-meta">
                   <span class="meta-pill">📍 ${esc(city)}</span>
-                  <span class="meta-pill">${isAstou ? t("🌍 Vitrine immersive") : "💬 " + (phone ? t("WhatsApp direct") : t("Contact à demander"))}</span>
+                  <span class="meta-pill">💬 ${phone ? t("WhatsApp direct") : t("Contact à demander")}</span>
                 </div>
 
                 <div class="shop-actions">
-                  <a class="btn btn-main" href="${esc(url)}" ${isAstou ? 'target="_blank" rel="noopener"' : ""}>${isAstou ? t("🌍 Entrer") : t("Voir")}</a>
-                  ${isAstou ? `<a class="btn btn-soft" href="${esc(ficheUrl)}">${t("Fiche")}</a>` : `<a class="btn btn-gold" href="${esc(cmdUrl)}">${t("Commander")}</a>`}
+                  <a class="btn btn-main" href="${esc(url)}">${t("Voir")}</a>
+                  <a class="btn btn-gold" href="${esc(cmdUrl)}">${t("Commander")}</a>
                   ${wa ? `<a class="btn btn-live" href="${esc(wa)}" target="_blank" rel="noopener">WhatsApp</a>` : ``}
                   ${phone ? `<a class="btn btn-soft" href="${esc(smsUrl(phone, name))}">SMS</a>` : ``}
-                  ${isAstou ? `<a class="btn btn-gold" href="${esc(cmdUrl)}">${t("Commander")}</a>` : ``}
                 </div>
 
                 <div class="digiy-floor">
@@ -2463,7 +2445,6 @@
   <script src="https://pro-action-digiy.digiylyfe.com/assets/js/digiy-retour-voix.js?v=retour-voix-20260606-v4" defer></script>
 </body>
 </html>
-
 
 
 
