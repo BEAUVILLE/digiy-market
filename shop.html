@@ -5,12 +5,11 @@
   <title>Redirection DIGIY MARKET</title>
   <script>
     const qs = new URLSearchParams(location.search);
-    const slug = qs.get("slug") || "market-221771342889";
-    location.replace("./fiche.html?slug=" + encodeURIComponent(slug));
+    const slug = qs.get("slug") || "";
+    location.replace(slug ? "./fiche.html?slug=" + encodeURIComponent(slug) : "./index.html");
   </script>
 </head>
 <body>
   Redirection vers la fiche boutique…
 </body>
 </html>
-
