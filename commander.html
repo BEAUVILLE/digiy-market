@@ -828,11 +828,6 @@
 
       const SUPABASE_URL = "https://wesqmwjjtsefyjnluosj.supabase.co";
       const SUPABASE_ANON_KEY = "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3";
-      const ASTOU_MARKET_SLUG = "market-221771342889";
-      const ASTOU_MARKET_PHONE = "221771342889";
-      const ASTOU_NAME = "Astou Boutique";
-      const ASTOU_PREMIUM_URL = "https://astou-boutique.digiylyfe.com/";
-
       const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
         auth:{ persistSession:false, autoRefreshToken:false, detectSessionInUrl:false }
       });
@@ -885,15 +880,8 @@
         box.className = "status " + (type || "");
       }
 
-      function isAstou(shop){
-        const slug = normSlug(shop?.slug || shop?.workspace_slug || shop?.last_slug || qs("slug"));
-        const phone = digits(shop?.whatsapp || shop?.public_phone || shop?.phone || shop?.owner_phone);
-        const name = String(shop?.shop_name || shop?.business_name || shop?.name || "").toLowerCase();
-        return slug === ASTOU_MARKET_SLUG || phone === ASTOU_MARKET_PHONE || name.includes("astou");
-      }
-
       function shopName(shop){
-        return isAstou(shop) ? ASTOU_NAME : text(shop?.shop_name || shop?.business_name || shop?.name, "Boutique DIGIY");
+        return text(shop?.shop_name || shop?.business_name || shop?.name, "Boutique DIGIY");
       }
 
       function shopPhone(shop){
@@ -908,7 +896,6 @@
       }
 
       function shopActivity(shop){
-        if(isAstou(shop)) return "Linge de maison · plage · hôtels · villas · tenues stylées · beauté";
         return text(shop?.categories_text || shop?.category || shop?.activity, "Boutique locale");
       }
 
@@ -948,9 +935,7 @@
         return slug ? "./shop.html?slug=" + encodeURIComponent(slug) : "./index.html";
       }
 
-      function premiumUrl(shop){
-        return isAstou(shop) ? ASTOU_PREMIUM_URL : "";
-      }
+      function premiumUrl(shop){ return text(shop?.premium_url || shop?.website_url, ""); }
 
       function whatsappUrl(message){
         const phone = shopPhone(SHOP);
@@ -1288,4 +1273,3 @@
   </script>
 </body>
 </html>
-
