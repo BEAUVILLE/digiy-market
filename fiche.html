@@ -11,7 +11,7 @@
     :root{--bg:#fff8ea;--paper:#fffaf0;--ink:#10251c;--muted:#68746e;--green:#063b2b;--green2:#0b5a41;--gold:#d6ad39;--gold2:#f4cf64;--line:rgba(16,37,28,.12);--shadow:0 20px 60px rgba(6,59,43,.16)}
     *{box-sizing:border-box}html,body{margin:0;min-height:100%}body{font-family:Arial,system-ui,sans-serif;background:radial-gradient(circle at top left,rgba(214,173,57,.18),transparent 34%),linear-gradient(180deg,#fff8ea,#efe3cc);color:var(--ink);font-weight:800;padding:14px}a{text-decoration:none;color:inherit}.wrap{max-width:980px;margin:auto;display:grid;gap:14px}.card{background:rgba(255,255,255,.82);border:1px solid var(--line);border-radius:30px;box-shadow:var(--shadow);overflow:hidden}.hero{background:linear-gradient(135deg,var(--green),var(--green2));color:white;padding:24px;position:relative}.badge{display:inline-flex;padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.18);color:#fff7c2;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:900}.hero h1{font-size:clamp(40px,9vw,72px);line-height:.95;margin:14px 0 10px;letter-spacing:-.05em}.lead{color:rgba(255,255,255,.86);font-size:18px;line-height:1.55;max-width:760px}.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.pill{padding:9px 11px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);font-size:13px;font-weight:900}.actions{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}.btn{min-height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px 14px;font-weight:900;background:white;color:var(--green);border:1px solid rgba(255,255,255,.22)}.btn.main{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#2d2308;border:0}.btn.green{background:#16a34a;color:#04150d;border:0}.section{padding:18px}.section h2{font-size:30px;margin:0 0 8px;letter-spacing:-.03em}.muted{color:var(--muted);line-height:1.55}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}.info{padding:14px;border-radius:20px;background:#fff;border:1px solid var(--line)}.info b{display:block;margin-bottom:6px;color:var(--green)}.products{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}.product{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden}.product img{width:100%;height:170px;object-fit:cover;background:#eee}.product div{padding:12px}.price{color:var(--green);font-weight:900}.footer{text-align:center;color:var(--muted);font-size:13px;padding:10px}.status{padding:12px 14px;border-radius:18px;background:rgba(214,173,57,.13);color:#60480b;margin-top:12px;line-height:1.45}
 
-    /* ASTOU PUBLIC · produits waouh en vitrine */
+    /* Fiche publique générique alimentée par les données MARKET. */
     .products{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
@@ -93,10 +93,10 @@
   <main class="wrap">
     <section class="card hero">
       <span class="badge">DIGIY MARKET · fiche publique</span>
-      <h1 id="name">Astou Boutique</h1>
+      <h1 id="name">Boutique DIGIY</h1>
       <div class="lead" id="desc">Boutique locale visible sur téléphone. Contact direct, WhatsApp, produits, zéro commission.</div>
       <div class="pills">
-        <span class="pill" id="city">📍 Saly</span>
+        <span class="pill" id="city">📍 Zone à préciser</span>
         <span class="pill" id="category">🛍️ Boutique</span>
         <span class="pill">0% commission</span>
         <span class="pill">Paiement direct</span>
@@ -115,7 +115,7 @@
       <div class="muted">Une fiche simple pour comprendre vite, contacter directement et garder la relation humaine.</div>
       <div class="grid">
         <div class="info"><b>Contact direct</b><span id="contactText">WhatsApp disponible</span></div>
-        <div class="info"><b>Adresse / repère</b><span id="addressText">Saly · Sénégal</span></div>
+        <div class="info"><b>Adresse / repère</b><span id="addressText">À préciser par la boutique</span></div>
         <div class="info"><b>Esprit DIGIY</b><span>Le client arrive chez le professionnel.</span></div>
       </div>
     </section>
@@ -136,44 +136,29 @@
     function cleanSlug(v){return String(v||'').trim().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'').replace(/-+/g,'-').replace(/^-|-$/g,'')}
     function cleanPhone(v){let d=String(v||'').replace(/[^\d]/g,'');if(!d)return'';if(d.length===9)d='221'+d;return d}
     function esc(v){return String(v||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]})}
-    const slug = cleanSlug(qs.get('slug') || 'astou-boutique');
-
-    const ASTOU_DEMO_IMG = "https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-11-mai-2026-22_54_37.png";
-    const ASTOU_DEMO_PRODUCTS = [
-      {title:'Parure de drap Royal',category:'Linge de maison',description:'Motif doux, chambre élégante, toucher confortable.',price_text:'25 000 FCFA',photo_url:ASTOU_DEMO_IMG},
-      {title:'Drap housse satin',category:'Linge de maison',description:'Finition lumineuse, belle tenue, pratique au quotidien.',price_text:'15 000 FCFA',photo_url:ASTOU_DEMO_IMG},
-      {title:'Serviette éponge luxe',category:'Salle de bain',description:'Absorbante, douce, disponible en plusieurs couleurs.',price_text:'5 000 FCFA',photo_url:ASTOU_DEMO_IMG},
-      {title:'Peignoir coton hôtel',category:'Salle de bain',description:'Confort hôtel, coupe simple et élégante.',price_text:'20 000 FCFA',photo_url:ASTOU_DEMO_IMG},
-      {title:'Serviette plage XXL',category:'Plage & été',description:'Grande taille, couleurs vivantes, esprit vacances.',price_text:'7 000 FCFA',photo_url:ASTOU_DEMO_IMG},
-      {title:'Rideau plage léger',category:'Plage & maison',description:'Voilage aérien pour terrasse, chambre ou cabane plage.',price_text:'15 000 FCFA',photo_url:ASTOU_DEMO_IMG},
-      {title:'Fouta tunisienne',category:'Plage & maison',description:'Léger, utile, beau sur transat ou sac de plage.',price_text:'9 000 FCFA',photo_url:ASTOU_DEMO_IMG},
-      {title:'Robe longue fluide',category:'Robes stylées',description:'Coupe légère, belle présence, sortie ou bord de mer.',price_text:'22 000 FCFA',photo_url:ASTOU_DEMO_IMG},
-      {title:'Robe été légère',category:'Robes stylées',description:'Fraîche, simple, élégante au quotidien.',price_text:'18 000 FCFA',photo_url:ASTOU_DEMO_IMG}
-    ];
-    function isAstouSlug(){return slug==='market-221771342889'||slug==='astou-boutique'}
-
-    const fallback = {name:'Astou Boutique',city:'Saly',category:'Textile · maison · plage · beauté',description:'Linge, serviettes, draps, foutas, tenues, crèmes de beauté et sélection boutique à Saly.',whatsapp:'',address:'Saly · Sénégal',maps:'https://www.google.com/maps/search/?api=1&query=Astou%20Boutique%20Saly',products:[{title:'Linge maison & hôtel',price:'Sur demande'},{title:'Serviettes · draps · foutas',price:'Sur demande'},{title:'Beauté & sélection boutique',price:'Sur demande'}]};
+    const slug = cleanSlug(qs.get('slug') || '');
+    const FALLBACK_IMG = "https://digiylyfe.net/wp-content/uploads/2026/04/icon-512-1.png";
+    const fallback = {name:'Boutique DIGIY',city:'Zone à préciser',category:'Boutique locale',description:'Fiche boutique en attente de ses informations publiques.',whatsapp:'',address:'À préciser par la boutique',maps:'',products:[]};
     function setText(id,v){const el=document.getElementById(id);if(el)el.textContent=v}
     function setHref(id,v){const el=document.getElementById(id);if(el&&v)el.href=v}
     function waUrl(phone,name){const msg='Bonjour '+name+', je viens de votre fiche DIGIY MARKET.';return phone?'https://wa.me/'+phone+'?text='+encodeURIComponent(msg):'https://wa.me/?text='+encodeURIComponent(msg)}
     function renderProducts(items){
       const box=document.getElementById('products');
-      let arr=Array.isArray(items)&&items.length?items.slice():fallback.products.slice();
-      if(isAstouSlug()){
-        const names=new Set(arr.map(p=>String(p.title||p.name||'').toLowerCase()));
-        ASTOU_DEMO_PRODUCTS.forEach(p=>{if(!names.has(String(p.title).toLowerCase()))arr.push(p)});
-      }
+      let arr=Array.isArray(items)&&items.length?items.slice():[];
+      if(!arr.length){box.innerHTML='<p class="muted">Aucun produit public pour le moment.</p>';return}
       box.innerHTML=arr.slice(0,12).map(p=>{
         const title=esc(p.title||p.name||'Produit');
         const cat=esc(p.category||p.category_text||'Sélection boutique');
         const desc=esc(p.description||'Disponible en boutique.');
         const price=esc(p.price_text||p.price||p.price_fcfa||'Sur demande');
-        const photo=p.photo_url?'<img src="'+esc(p.photo_url)+'" alt="'+title+'" loading="lazy">':'<img src="'+esc(ASTOU_DEMO_IMG)+'" alt="'+title+'" loading="lazy">';
-        const msg=encodeURIComponent('Bonjour Astou Boutique, je veux voir ce produit : '+(p.title||p.name||'produit'));
-        return '<article class="product">'+photo+'<div><span class="productTag">'+cat+'</span><b>'+title+'</b><p class="muted">'+desc+'</p><div class="price">'+price+'</div><a class="waBtn" href="https://wa.me/221771342889?text='+msg+'" target="_blank" rel="noopener">💬 Demander sur WhatsApp</a></div></article>';
+        const photo='<img src="'+esc(p.photo_url||FALLBACK_IMG)+'" alt="'+title+'" loading="lazy">';
+        const phone=cleanPhone(window.__DIGIY_PUBLIC_PHONE||'');
+        const msg=encodeURIComponent('Bonjour, je veux voir ce produit : '+(p.title||p.name||'produit'));
+        const action=phone?'<a class="waBtn" href="https://wa.me/'+phone+'?text='+msg+'" target="_blank" rel="noopener">💬 Demander sur WhatsApp</a>':'';
+        return '<article class="product">'+photo+'<div><span class="productTag">'+cat+'</span><b>'+title+'</b><p class="muted">'+desc+'</p><div class="price">'+price+'</div>'+action+'</div></article>';
       }).join('');
     }
-    function render(data,loaded){const d=Object.assign({},fallback,data||{});let phone=cleanPhone(d.whatsapp||d.phone||d.call_phone||'');if(isAstouSlug()&&!phone)phone='221771342889';const name=d.name||d.shop_name||d.business_name||fallback.name;setText('name',name);setText('desc',d.description||fallback.description);setText('city','📍 '+(d.city||fallback.city));setText('category','🛍️ '+(d.category||d.categories_text||fallback.category));setText('contactText',phone?'WhatsApp direct':'Contact à préciser');setText('addressText',d.address||d.address_label||fallback.address);setHref('whatsappBtn',waUrl(phone,name));setHref('liveBtn',waUrl(phone,name));setHref('mapBtn',d.maps_url||d.google_maps_url||fallback.maps);setText('status',loaded?'Fiche chargée. Contact direct avec la boutique.':'Fiche publique prête. Les données peuvent être enrichies depuis MARKET PRO.');renderProducts(d.products||[]);document.title=name+' — DIGIY MARKET'}
+    function render(data,loaded){const d=Object.assign({},fallback,data||{});let phone=cleanPhone(d.whatsapp||d.phone||d.call_phone||'');window.__DIGIY_PUBLIC_PHONE=phone;const name=d.name||d.shop_name||d.business_name||fallback.name;setText('name',name);setText('desc',d.description||fallback.description);setText('city','📍 '+(d.city||fallback.city));setText('category','🛍️ '+(d.category||d.categories_text||fallback.category));setText('contactText',phone?'WhatsApp direct':'Contact à préciser');setText('addressText',d.address||d.address_label||fallback.address);setHref('whatsappBtn',waUrl(phone,name));setHref('liveBtn',waUrl(phone,name));setHref('mapBtn',d.maps_url||d.google_maps_url||fallback.maps);setText('status',loaded?'Fiche chargée. Contact direct avec la boutique.':'Fiche publique prête. Les données peuvent être enrichies depuis MARKET PRO.');renderProducts(d.products||[]);document.title=name+' — DIGIY MARKET'}
     async function load(){render({},false);try{if(!window.supabase)throw new Error('no_supabase');const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});let profile=null;let products=[];const attempts=[async()=>await sb.rpc('digiy_market_public_shop_by_slug',{p_slug:slug}),async()=>await sb.rpc('digiy_market_get_public_shop_by_slug',{p_slug:slug}),async()=>await sb.rpc('digiy_market_get_cockpit_by_slug',{p_slug:slug})];for(const fn of attempts){try{const r=await fn();if(!r.error&&r.data){profile=Array.isArray(r.data)?r.data[0]:r.data;break}}catch(e){}}
       const prodAttempts=[async()=>await sb.rpc('digiy_market_public_products_by_slug',{p_slug:slug}),async()=>await sb.rpc('digiy_market_list_products_by_slug',{p_slug:slug})];for(const fn of prodAttempts){try{const r=await fn();if(!r.error&&r.data){products=Array.isArray(r.data)?r.data:(r.data.products||[]);break}}catch(e){}}
       if(profile){const p=profile.profile||profile.shop||profile.data||profile;render(Object.assign({},p,{products}),true)}
