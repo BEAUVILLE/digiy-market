@@ -287,10 +287,16 @@
         gap: 8px;
         text-align: left;
         box-shadow: 0 10px 26px rgba(6, 59, 43, 0.08);
+        cursor: pointer;
       }
       .option.active {
         border-color: rgba(214, 173, 57, 0.85);
         background: rgba(244, 207, 100, 0.2);
+      }
+      .option.disabled {
+        opacity: .46;
+        cursor: not-allowed;
+        filter: grayscale(.15);
       }
       .code {
         display: inline-flex;
@@ -761,7 +767,7 @@
       .countryBox{margin:14px 0;border:1px solid rgba(6,59,43,.20);border-radius:20px;padding:13px;background:rgba(6,59,43,.055);display:grid;gap:10px}
       .countryTitle{color:var(--green);font-size:18px;font-weight:1000;line-height:1.15}
       .countryGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
-      .countryBtn{min-height:58px;border-radius:18px;border:1px solid rgba(16,37,28,.13);background:#fff;color:var(--green);display:grid;gap:2px;padding:10px 12px;text-align:left;box-shadow:0 8px 18px rgba(6,59,43,.07)}
+      .countryBtn{min-height:58px;border-radius:18px;border:1px solid rgba(16,37,28,.13);background:#fff;color:var(--green);display:grid;gap:2px;padding:10px 12px;text-align:left;box-shadow:0 8px 18px rgba(6,59,43,.07);cursor:pointer}
       .countryBtn strong{color:var(--green);font-size:16px;font-weight:1000}
       .countryBtn span{color:var(--muted);font-size:12px;line-height:1.25;font-weight:900}
       .countryBtn.active{border-color:rgba(214,173,57,.85);background:rgba(244,207,100,.20)}
@@ -796,12 +802,12 @@
             <p class="lead">
               DIGIY MARKET rend l’offre visible : produits, arrivages,
               promotions, boutique, artisanat, savon, textile, beauté, maison et marché local.
-              Commence avec la Présence MARKET à 19 900 FCFA : carte de visibilité, QR,
+              Commence avec la Présence MARKET à 19 900 FCFA / 45 € : carte de visibilité, QR,
               lien partageable, contact direct et présence sur le site.
-              La fiche produits détaillée et le moteur MARKET restent une option distincte à +8 000 FCFA.
+              La fiche produits détaillée et le moteur MARKET restent une option distincte à +8 000 FCFA / +15 €.
             </p>
             <div class="pills">
-              <span class="pill gold">Présence MARKET · 19 900 FCFA / 29 €</span
+              <span class="pill gold">Présence MARKET · 19 900 FCFA / 45 €</span
               ><span class="pill gold-emphasis">Fiche produits + moteur · +8 000 FCFA / +15 €</span
               ><span class="pill gold-emphasis">0% commission</span
               ><span class="pill">Contact direct</span
@@ -829,19 +835,20 @@
       </section>
 
       <section class="marketDoctrine" aria-label="Doctrine commerciale MARKET">
-        <span class="marketDoctrineTag">PRÉSENCE MARKET 19 900 / 29 € · FICHE PRODUITS + MOTEUR +8 000 / +15 €</span>
+        <span class="marketDoctrineTag">PRÉSENCE MARKET 19 900 / 45 € · FICHE PRODUITS + MOTEUR +8 000 / +15 €</span>
         <h2>Choisir la formule MARKET adaptée à son activité.</h2>
         <p>
-          La Présence MARKET à 19 900 FCFA construit une carte de visibilité numérique,
+          La Présence MARKET à 19 900 FCFA / 45 € construit une carte de visibilité numérique,
           un QR officiel, un lien partageable, le contact direct et la présence sur le site.
           Elle ne comprend ni fiche produits détaillée ni moteur MARKET.
-          L’option à +8 000 FCFA ajoute la fiche produits détaillée et le moteur
+          L’option à +8 000 FCFA / +15 € ajoute la fiche produits détaillée et le moteur
           pour organiser produits, arrivages, demandes et suivi opérationnel.
           PRO CARNET reste séparé. BOOST et RÉSEAU exigent une présence MARKET active.
         </p>
         <div class="marketDoctrineList">
-          <span>Présence MARKET · Carte de visibilité · 19 900 FCFA / 29 €</span>
+          <span>Présence MARKET · Carte de visibilité · 19 900 FCFA / 45 €</span>
           <span>Fiche produits détaillée + moteur MARKET · +8 000 FCFA / +15 €</span>
+          <span>✅ Total complet · 27 900 FCFA / 60 €</span>
           <span class="gold-emphasis">Aucun module supplémentaire imposé</span>
         </div>
         <p class="marketDoctrineQuote">
@@ -870,10 +877,10 @@
             </div>
             <div class="countryNote" id="countryNote">Les tarifs France et Sénégal sont une grille pays : pas une conversion au taux de change.</div>
           </div>
-          <div class="sectionTitle">1 · PRÉSENCE MARKET — CARTE DE VISIBILITÉ · 19 900 FCFA</div>
+          <div class="sectionTitle">1 · PRÉSENCE MARKET — CARTE DE VISIBILITÉ · 19 900 FCFA / 45 €</div>
           <div class="prices" id="presenceOptions"></div>
 
-          <div class="sectionTitle">2 · FICHE PRODUITS DÉTAILLÉE + MOTEUR MARKET — +8 000 FCFA</div>
+          <div class="sectionTitle">2 · FICHE PRODUITS DÉTAILLÉE + MOTEUR MARKET — +8 000 FCFA / +15 €</div>
           <div class="prices" id="metierOptions"></div>
 
           <div class="sectionTitle">✨ BOOST visibilité</div>
@@ -893,7 +900,7 @@
           <p class="sub">La sélection s’additionne ici.</p>
           <div class="selected" id="selectedBox">
             <strong>Aucun choix sélectionné</strong
-            ><span>Rien n’est précoché. Choisis la Présence MARKET à 19 900 FCFA.</span>
+            ><span>Rien n’est précoché. Choisis la Présence MARKET à 19 900 FCFA / 45 €.</span>
           </div>
           <div class="choiceList" id="choiceList"></div>
           <div class="totals">
@@ -957,7 +964,7 @@
               <label for="paymentNote">📝 Note / preuve paiement</label
               ><textarea
                 id="paymentNote"
-                placeholder="Ex : Présence MARKET — 19 900 FCFA ; fiche produits + moteur ajoutés +8 000 FCFA ; total 27 900 FCFA — Mamadou Diop."
+                placeholder="Ex : Présence MARKET — 19 900 FCFA / 45 € ; fiche produits + moteur ajoutés +8 000 FCFA / +15 € ; total 27 900 FCFA / 60 € — Mamadou Diop."
               ></textarea>
             </div>
           </div>
@@ -1014,7 +1021,7 @@
             cat:"presence",
             name:"Présence MARKET · Carte de visibilité",
             fcfa:19900,
-            eur:29,
+            eur:45,
             desc:"Carte de visibilité numérique MARKET, QR, lien partageable, contact direct et présence sur le site. Sans fiche produits détaillée ni moteur métier.",
             bonus:["Carte de visibilité MARKET","QR officiel","Lien partageable","Contact direct","Présence sur le site"]
           },
@@ -1094,7 +1101,7 @@
         function savePro(){const data={};Object.keys(proFields).forEach(k=>{const el=proFields[k];if(el&&clean(el.value))data[k]=clean(el.value)});try{localStorage.setItem(PRO_MEMORY_KEY,JSON.stringify(data))}catch(_){}}
         function loadPro(){try{const data=JSON.parse(localStorage.getItem(PRO_MEMORY_KEY)||"{}");Object.keys(proFields).forEach(k=>{const el=proFields[k];if(el&&data[k]&&!clean(el.value))el.value=data[k]})}catch(_){}}
         function clearPro(){try{localStorage.removeItem(PRO_MEMORY_KEY)}catch(_){}Object.keys(proFields).forEach(k=>{if(proFields[k])proFields[k].value=""});update(false)}
-        function setCountry(next,updateUrl){country=next==="france"?"france":"senegal";document.querySelectorAll("[data-country]").forEach(btn=>btn.classList.toggle("active",btn.getAttribute("data-country")===country));const cn=$("countryNote");if(cn){cn.innerHTML=country==="france"?"🇫🇷 France : Présence MARKET <strong>29 €</strong> · fiche produits + moteur <strong>+15 €</strong> · total complet <strong>44 €</strong>.":"🇸🇳 Sénégal : Présence MARKET <strong>19 900 FCFA</strong> · fiche produits + moteur <strong>+8 000 FCFA</strong> · total complet <strong>27 900 FCFA</strong>."}try{localStorage.setItem(COUNTRY_KEY,country);if(updateUrl){const u=new URL(location.href);u.searchParams.set("pays",country);history.replaceState({},"",u.pathname+u.search+u.hash)}}catch(_){}update(false)}
+        function setCountry(next,updateUrl){country=next==="france"?"france":"senegal";document.querySelectorAll("[data-country]").forEach(btn=>btn.classList.toggle("active",btn.getAttribute("data-country")===country));const cn=$("countryNote");if(cn){cn.innerHTML=country==="france"?"🇫🇷 France : Présence MARKET <strong>45 €</strong> · fiche produits + moteur <strong>+15 €</strong> · total complet <strong>60 €</strong>.":"🇸🇳 Sénégal : Présence MARKET <strong>19 900 FCFA</strong> · fiche produits + moteur <strong>+8 000 FCFA</strong> · total complet <strong>27 900 FCFA</strong>."}try{localStorage.setItem(COUNTRY_KEY,country);if(updateUrl){const u=new URL(location.href);u.searchParams.set("pays",country);history.replaceState({},"",u.pathname+u.search+u.hash)}}catch(_){}update(false)}
         function render(){
           const presenceSelected=selected.has("PRESENCE");
           Object.keys(grids).forEach(cat=>{
@@ -1151,9 +1158,9 @@ Choix :
 ${lines()}
 
 Doctrine MARKET :
-- Présence MARKET : carte de visibilité à 19 900 FCFA
+- Présence MARKET : carte de visibilité à 19 900 FCFA / 45 €
 - Sans fiche produits détaillée ni moteur dans la Présence seule
-- Fiche produits détaillée + moteur MARKET : option facultative à +8 000 FCFA
+- Fiche produits détaillée + moteur MARKET : option facultative à +8 000 FCFA / +15 €
 - PRO CARNET reste séparé
 - BOOST et RÉSEAU exigent une Présence MARKET active
 
@@ -1195,7 +1202,7 @@ Je joins la capture / preuve de paiement à ce message.`}
           const items=chosen(),t=total();
           selectedBox.innerHTML=items.length
             ?`<strong>${items.length} choix sélectionné${items.length>1?"s":""}</strong><span>${selected.has("METIER")?"Présence MARKET + fiche produits détaillée + moteur":selected.has("PRESENCE")?"Présence MARKET sans fiche détaillée ni moteur":"Option complémentaire distincte"}</span>`
-            :`<strong>Aucun choix sélectionné</strong><span>Rien n’est précoché. Choisis la Présence MARKET à 19 900 FCFA.</span>`;
+            :`<strong>Aucun choix sélectionné</strong><span>Rien n’est précoché. Choisis la Présence MARKET à 19 900 FCFA / 45 €.</span>`;
           choiceList.innerHTML=items.length
             ?items.map(p=>`<div class="choiceLine"><span>${p.code} · ${p.name}</span><b>${amount(p)}</b></div>`).join("")
             :`<div class="choiceLine"><span>Aucun choix</span><b>${zero()}</b></div>`;
@@ -1227,7 +1234,7 @@ Je joins la capture / preuve de paiement à ce message.`}
           if(scroll&&matchMedia("(max-width:860px)").matches)summary.scrollIntoView({behavior:"smooth",block:"start"});
         }
         function copySms(){if(!navigator.clipboard)return;navigator.clipboard.writeText(msg()).then(()=>{const old=btnSms.textContent;btnSms.textContent="✅ Message SMS copié";setTimeout(()=>btnSms.textContent=old,1600)})}
-        function speakText(){return `Module DIGIY MARKET. La Présence MARKET coûte 19 900 francs CFA pour la carte de visibilité et la présence sur le site. La fiche produits détaillée et le moteur MARKET coûtent 8 000 francs CFA supplémentaires. Aucun choix n’est précoché. Total affiché : ${totalText.textContent||zero()}.`.replace(/\bDIGIY\b/g,"diji i")}
+        function speakText(){return `Module DIGIY MARKET. La Présence MARKET coûte 19 900 francs CFA / 45 euros pour la carte de visibilité et la présence sur le site. La fiche produits détaillée et le moteur MARKET coûtent 8 000 francs CFA / 15 euros supplémentaires. Aucun choix n’est précoché. Total affiché : ${totalText.textContent||zero()}.`.replace(/\bDIGIY\b/g,"diji i")}
         loadPro();Object.keys(proFields).forEach(k=>{const el=proFields[k];if(el)el.addEventListener("input",()=>{savePro();update(false)})});
         const clearBtn=$("btnClearProInfo");if(clearBtn)clearBtn.addEventListener("click",clearPro);if(paymentNote)paymentNote.addEventListener("input",()=>update(false));
         document.querySelectorAll("[data-country]").forEach(btn=>btn.addEventListener("click",()=>setCountry(btn.getAttribute("data-country"),true)));
@@ -1247,7 +1254,6 @@ Je joins la capture / preuve de paiement à ce message.`}
     ></script>
   </body>
 </html>
-
 
 
 
