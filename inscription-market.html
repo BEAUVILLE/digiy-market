@@ -10,9 +10,9 @@
     <meta name="robots" content="index,follow" />
     <meta
       name="digiy-version"
-      content="market-presence-19900-fiche-moteur-8000-20260723"
+      content="market-direct-sms-coordonnees-obligatoires-en-haut-20260724"
     />
-    <title>Demande vendeur DIGIY MARKET — France · Sénégal</title>
+    <title>Demande vendeur DIGIY MARKET — Coordonnées d’abord · SMS direct</title>
     <meta
       name="description"
       content="Demande vendeur DIGIY MARKET : demande sans engagement, activation MARKET payante, 0% commission, paiement Wave ou Sendwave, preuve WhatsApp, date, WhatsApp et SMS."
@@ -495,6 +495,54 @@
         border-color: rgba(214, 173, 57, 0.9);
         box-shadow: 0 0 0 3px rgba(214, 173, 57, 0.16);
       }
+
+      .proInfoBox.proInfoFirst {
+        margin: 14px 0 18px;
+        border-width: 2px;
+        background:
+          radial-gradient(circle at top right, rgba(244, 207, 100, 0.26), transparent 44%),
+          rgba(255,255,255,.82);
+      }
+
+      .requiredMark {
+        color: #b91c1c;
+        font-weight: 1000;
+      }
+
+      .sendBlocked {
+        opacity: .48 !important;
+        filter: grayscale(.28);
+        cursor: not-allowed !important;
+      }
+
+      .smsDirectHelp {
+        margin: 10px 0 0;
+        padding: 10px 12px;
+        border-radius: 14px;
+        border: 1px solid rgba(6, 59, 43, 0.22);
+        background: rgba(6, 59, 43, 0.07);
+        color: var(--green);
+        font-size: 13px;
+        line-height: 1.45;
+        font-weight: 900;
+        text-align: center;
+      }
+
+      .formWarning {
+        display: none;
+        margin-top: 10px;
+        padding: 11px 12px;
+        border-radius: 14px;
+        border: 1px solid rgba(185, 28, 28, .30);
+        background: rgba(254, 226, 226, .88);
+        color: #991b1b;
+        line-height: 1.45;
+        font-weight: 950;
+      }
+
+      .formWarning.show {
+        display: block;
+      }
       .proInfoActions {
         display: flex;
         gap: 8px;
@@ -863,6 +911,45 @@
             Choisis la Présence MARKET. Ajoute la fiche produits détaillée et le moteur seulement si tu en as besoin.
           </p>
 
+          <div class="proInfoBox proInfoFirst" id="proInfoBox">
+            <h3>1 · Vos coordonnées</h3>
+            <p>
+              Renseignez d’abord ces informations. Aucun SMS, WhatsApp ou envoi de preuve
+              ne peut partir sans elles. Les champs marqués <span class="requiredMark">*</span> sont obligatoires.
+            </p>
+
+            <div class="proInfoGrid">
+              <div class="proField">
+                <label for="proName">Nom / responsable <span class="requiredMark">*</span></label>
+                <input id="proName" name="proName" type="text" autocomplete="name"
+                       placeholder="Ex : Mamadou Diop" required />
+              </div>
+
+              <div class="proField">
+                <label for="proPhone">Téléphone / WhatsApp <span class="requiredMark">*</span></label>
+                <input id="proPhone" name="proPhone" type="tel" inputmode="tel" autocomplete="tel"
+                       placeholder="Ex : +221 77 000 00 00" required minlength="8" />
+              </div>
+
+              <div class="proField">
+                <label for="proZone">Zone / ville <span class="requiredMark">*</span></label>
+                <input id="proZone" name="proZone" type="text" autocomplete="address-level2"
+                       placeholder="Ex : Saly, Mbour, Dakar" required />
+              </div>
+
+              <div class="proField">
+                <label for="proActivity">Boutique / activité <span class="requiredMark">*</span></label>
+                <input id="proActivity" name="proActivity" type="text" autocomplete="organization"
+                       placeholder="Ex : Boutique Diop, textile, beauté" required />
+              </div>
+            </div>
+
+            <div class="proInfoActions">
+              <button class="btn clear" id="btnClearProInfo" type="button">🧹 Effacer mes coordonnées</button>
+            </div>
+          </div>
+
+          <div class="sectionTitle">2 · PAYS ET FORMULE MARKET</div>
           <div class="countryBox" aria-label="Choix pays MARKET">
             <div class="countryTitle">🌍 Choisir le pays de règlement</div>
             <div class="countryGrid">
@@ -877,10 +964,10 @@
             </div>
             <div class="countryNote" id="countryNote">Les tarifs France et Sénégal sont une grille pays : pas une conversion au taux de change.</div>
           </div>
-          <div class="sectionTitle">1 · PRÉSENCE MARKET — CARTE DE VISIBILITÉ · 19 900 FCFA / 45 €</div>
+          <div class="sectionTitle">3 · PRÉSENCE MARKET — CARTE DE VISIBILITÉ · 19 900 FCFA / 45 €</div>
           <div class="prices" id="presenceOptions"></div>
 
-          <div class="sectionTitle">2 · FICHE PRODUITS DÉTAILLÉE + MOTEUR MARKET — +8 000 FCFA / +15 €</div>
+          <div class="sectionTitle">4 · FICHE PRODUITS DÉTAILLÉE + MOTEUR MARKET — +8 000 FCFA / +15 €</div>
           <div class="prices" id="metierOptions"></div>
 
           <div class="sectionTitle">✨ BOOST visibilité</div>
@@ -914,35 +1001,6 @@
             <div class="totalLine final">
               <span>Total à confirmer</span
               ><strong id="totalText">0 FCFA</strong>
-            </div>
-          </div>
-
-          <div class="proInfoBox" id="proInfoBox">
-            <h3>Infos pro pour le paiement</h3>
-            <p>
-              Ces infos servent seulement à identifier le pro dans le message WhatsApp / SMS.
-              Ces informations servent à identifier le paiement et la formule MARKET choisie.
-            </p>
-            <div class="proInfoGrid">
-              <div class="proField">
-                <label for="proName">Nom / responsable</label>
-                <input id="proName" type="text" autocomplete="name" placeholder="Ex : Mamadou Diop" />
-              </div>
-              <div class="proField">
-                <label for="proPhone">Téléphone / WhatsApp</label>
-                <input id="proPhone" type="tel" autocomplete="tel" placeholder="Ex : +221 77 000 00 00" />
-              </div>
-              <div class="proField">
-                <label for="proZone">Zone / ville</label>
-                <input id="proZone" type="text" autocomplete="address-level2" placeholder="Ex : Saly, Mbour, Dakar" />
-              </div>
-              <div class="proField">
-                <label for="proActivity">Boutique / activité</label>
-                <input id="proActivity" type="text" autocomplete="organization" placeholder="Ex : Boutique Diop, textile, beauté" />
-              </div>
-            </div>
-            <div class="proInfoActions">
-              <button class="btn clear" id="btnClearProInfo" type="button">🧹 Effacer infos pro</button>
             </div>
           </div>
 
@@ -984,14 +1042,22 @@
               id="btnWa"
               href="https://wa.me/221771342889?text=Bonjour%20JB%2C%20je%20veux%20avancer%20avec%20DIGIY%20MARKET"
               >💬 WhatsApp</a
-            ><button class="btn green" id="btnSms" type="button">📱 SMS</button
+            ><button class="btn green" id="btnSms" type="button">📱 Ouvrir mon SMS déjà rempli</button
             ><button class="btn clear" id="btnClear" type="button">
               🧹 Effacer
             </button>
           </div>
+
+          <div class="smsDirectHelp">
+            Sur téléphone, aucun copier-coller : Messages s’ouvre avec le numéro DIGIY
+            et une demande MARKET courte déjà remplie. Il reste seulement à appuyer sur Envoyer.
+          </div>
+
+          <div class="formWarning" id="formWarning" role="alert" aria-live="assertive"></div>
+
           <div class="actions">
             <button class="btn" id="btnCopyWave" type="button">
-              📋 Copier Wave</button
+              Autre solution : copier Wave</button
             ><a class="btn gold" id="btnProof">📸 Envoyer preuve</a
             ><a class="btn gold" href="https://pro-market.digiylyfe.com/"
               >🔐 Espace pro</a
@@ -1015,6 +1081,12 @@
         const SENDWAVE_LABEL="Sendwave France → Wave Sénégal : JB BEAUVILLE · +221 77 134 28 89";
         const PRO_MEMORY_KEY="digiy_market_payment_identity_v1";
         const COUNTRY_KEY="digiy_market_payment_country_v1";
+        const IS_IOS_OR_IPADOS=
+          /iPhone|iPad|iPod/i.test(navigator.userAgent)||
+          (navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+        const MOBILE_DEVICE=
+          /Android|Windows Phone|Mobile/i.test(navigator.userAgent)||
+          IS_IOS_OR_IPADOS;
         const PLANS=[
           {
             code:"PRESENCE",
@@ -1082,7 +1154,7 @@
         ];
         const COMMON=["Carte de visibilité numérique","QR et lien partageable","Présence sur le site","Contact direct","Validation humaine","0% commission","Paiement direct avec preuve WhatsApp"];
         const $=id=>document.getElementById(id);
-        const grids={presence:$("presenceOptions"),metier:$("metierOptions"),boost:$("boostOptions"),reseau:$("reseauOptions")},selectedBox=$("selectedBox"),choiceList=$("choiceList"),subtotalText=$("subtotalText"),adjustText=$("adjustText"),totalText=$("totalText"),dateBox=$("dateBox"),benefits=$("benefits"),btnWa=$("btnWa"),btnSms=$("btnSms"),summary=$("summary"),paymentNote=$("paymentNote");
+        const grids={presence:$("presenceOptions"),metier:$("metierOptions"),boost:$("boostOptions"),reseau:$("reseauOptions")},selectedBox=$("selectedBox"),choiceList=$("choiceList"),subtotalText=$("subtotalText"),adjustText=$("adjustText"),totalText=$("totalText"),dateBox=$("dateBox"),benefits=$("benefits"),btnWa=$("btnWa"),btnSms=$("btnSms"),btnClear=$("btnClear"),summary=$("summary"),paymentNote=$("paymentNote");
         const proFields={name:$("proName"),phone:$("proPhone"),zone:$("proZone"),activity:$("proActivity")};
         let selected=new Set();
         let country="senegal";
@@ -1145,6 +1217,53 @@
           });
         }
         function lines(){return chosen().map(p=>`- ${p.code} · ${p.name} · ${amount(p)}`).join("\n")||"Aucun choix sélectionné"}
+        function requiredProFields(){return Object.values(proFields).filter(Boolean)}
+        function hasValidMarketChoice(){return selected.has("PRESENCE")||selected.has("FIRST")}
+        function showFormWarning(message){const w=$("formWarning");if(!w)return;w.textContent=message||"";w.classList.toggle("show",Boolean(message))}
+        function validateBeforeSend(showMessage){
+          const invalid=requiredProFields().find(field=>!clean(field.value)||!field.checkValidity());
+          if(invalid){
+            if(showMessage){
+              showFormWarning("⚠️ Renseigne d’abord le nom, le téléphone, la ville et la boutique / activité.");
+              invalid.focus({preventScroll:true});
+              invalid.scrollIntoView({behavior:"smooth",block:"center"});
+              invalid.reportValidity();
+            }
+            return false;
+          }
+          if(!hasValidMarketChoice()){
+            if(showMessage){
+              showFormWarning("⚠️ Choisis la Présence MARKET ou FIRST avant d’envoyer.");
+              $("presenceOptions")?.scrollIntoView({behavior:"smooth",block:"center"});
+            }
+            return false;
+          }
+          showFormWarning("");
+          return true;
+        }
+        function updateSendState(){
+          const ready=requiredProFields().every(field=>clean(field.value)&&field.checkValidity())&&hasValidMarketChoice();
+          ["btnWa","btnSms","btnProof"].forEach(id=>{const el=$(id);if(!el)return;el.classList.toggle("sendBlocked",!ready);el.setAttribute("aria-disabled",String(!ready))});
+        }
+        function shortText(value,maxLength){const text=clean(value);return text.length>maxLength?text.slice(0,maxLength-1)+"…":text}
+        function smsMsg(){
+          const items=chosen();
+          const codes=items.map(p=>p.code).join(" + ")||"Aucun choix";
+          return [
+            "DEMANDE DIGIY MARKET",
+            "Pays: "+(country==="france"?"France":"Senegal"),
+            "Choix: "+codes,
+            "Total: "+total(),
+            "Nom/responsable: "+shortText(proFields.name&&proFields.name.value,55),
+            "Telephone candidat: "+shortText(proFields.phone&&proFields.phone.value,28),
+            "Zone/ville: "+shortText(proFields.zone&&proFields.zone.value,45),
+            "Boutique/activite: "+shortText(proFields.activity&&proFields.activity.value,75),
+            clean(paymentNote&&paymentNote.value)?"Note: "+shortText(paymentNote.value,130):"",
+            "Je demande a etre recontacte pour valider mon activation MARKET.",
+            "0% commission DIGIY."
+          ].filter(Boolean).join("\n");
+        }
+        function buildSmsHref(message){const separator=IS_IOS_OR_IPADOS?"&":"?";return "sms:+"+TEL+separator+"body="+encodeURIComponent(message)}
         function msg(){const t=total();return `Bonjour JB, je veux avancer avec DIGIY MARKET.
 
 Date de demande : ${date()}
@@ -1231,9 +1350,9 @@ Je joins la capture / preuve de paiement à ce message.`}
             :[];
           benefits.innerHTML=benefitItems.map(x=>`<li>✅ ${x}</li>`).join("");
           sync();
+          updateSendState();
           if(scroll&&matchMedia("(max-width:860px)").matches)summary.scrollIntoView({behavior:"smooth",block:"start"});
         }
-        function copySms(){if(!navigator.clipboard)return;navigator.clipboard.writeText(msg()).then(()=>{const old=btnSms.textContent;btnSms.textContent="✅ Message SMS copié";setTimeout(()=>btnSms.textContent=old,1600)})}
         function speakText(){return `Module DIGIY MARKET. La Présence MARKET coûte 19 900 francs CFA / 45 euros pour la carte de visibilité et la présence sur le site. La fiche produits détaillée et le moteur MARKET coûtent 8 000 francs CFA / 15 euros supplémentaires. Aucun choix n’est précoché. Total affiché : ${totalText.textContent||zero()}.`.replace(/\bDIGIY\b/g,"diji i")}
         loadPro();Object.keys(proFields).forEach(k=>{const el=proFields[k];if(el)el.addEventListener("input",()=>{savePro();update(false)})});
         const clearBtn=$("btnClearProInfo");if(clearBtn)clearBtn.addEventListener("click",clearPro);if(paymentNote)paymentNote.addEventListener("input",()=>update(false));
@@ -1241,8 +1360,38 @@ Je joins la capture / preuve de paiement à ce message.`}
         $("btnAudio").addEventListener("click",()=>{if(!("speechSynthesis" in window))return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(speakText());u.lang="fr-FR";u.rate=.86;u.pitch=1.02;window.speechSynthesis.speak(u)});
         $("btnStop").addEventListener("click",()=>{if("speechSynthesis" in window)window.speechSynthesis.cancel()});
         $("btnFloating").addEventListener("click",()=>{update(false);summary.scrollIntoView({behavior:"smooth",block:"start"})});
-        btnSms.addEventListener("click",copySms);$("btnCopyWave").addEventListener("click",()=>{if(!navigator.clipboard)return;navigator.clipboard.writeText(payLabel()).then(()=>{const b=$("btnCopyWave");b.textContent="✅ Paiement copié";setTimeout(()=>b.textContent="📋 Copier Wave",1600)})});
-        btnClear.addEventListener("click",()=>{selected.clear();if(paymentNote)paymentNote.value="";update(true)});
+
+        btnSms.addEventListener("click",(event)=>{
+          event.preventDefault();
+          if(!validateBeforeSend(true))return;
+          window.location.href=buildSmsHref(smsMsg());
+        });
+
+        btnWa.addEventListener("click",(event)=>{
+          if(!validateBeforeSend(true))event.preventDefault();
+        });
+
+        $("btnProof").addEventListener("click",(event)=>{
+          if(!validateBeforeSend(true))event.preventDefault();
+        });
+
+        $("btnCopyWave").hidden=MOBILE_DEVICE;
+        $("btnCopyWave").addEventListener("click",()=>{
+          if(!navigator.clipboard)return;
+          navigator.clipboard.writeText(payLabel()).then(()=>{
+            const b=$("btnCopyWave");
+            b.textContent="✅ Paiement copié";
+            setTimeout(()=>b.textContent="Autre solution : copier Wave",1600);
+          });
+        });
+
+        btnClear.addEventListener("click",()=>{
+          selected.clear();
+          if(paymentNote)paymentNote.value="";
+          clearPro();
+          showFormWarning("");
+          update(true);
+        });
         let initialCountry="senegal";try{const params=new URLSearchParams(location.search);initialCountry=params.get("pays")||params.get("country")||localStorage.getItem(COUNTRY_KEY)||"senegal"}catch(_){}
         setCountry(initialCountry,false);update(false);
       })();
@@ -1254,6 +1403,66 @@ Je joins la capture / preuve de paiement à ce message.`}
     ></script>
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
