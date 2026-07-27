@@ -1,22 +1,20 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="fr">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-  <meta name="theme-color" content="#063b2b"/>
-  <title>DIGIY MARKET — Boutiques locales · inscription vendeur</title>
-  <meta name="description" content="DIGIY MARKET — galerie locale de boutiques visibles sur téléphone, présentation vidéo sur demande, contact direct, commande simple, paiement direct au commerçant, zéro commission."/>
-  <meta name="robots" content="index,follow"/>
-  <meta name="digiy-fix-lang-retour-fr" content="market-fr-en-retour-fr-par-rechargement-natif-20260620"/>
-  <meta name="digiy-strategy-update" content="market-verite-boutique-confidentialite-routage-i18n-pin-20260710"/>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="#063b2b" name="theme-color"/>
+<title>DIGIY MARKET — Boutiques locales · inscription vendeur</title>
+<meta content="DIGIY MARKET — galerie locale de boutiques visibles sur téléphone, présentation vidéo sur demande, contact direct, commande simple, paiement direct au commerçant, zéro commission." name="description"/>
+<meta content="index,follow" name="robots"/>
+<meta content="market-fr-en-retour-fr-par-rechargement-natif-20260620" name="digiy-fix-lang-retour-fr"/>
+<meta content="market-epure-boutiques-haut-cartouche-20260727" name="digiy-strategy-update"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
     :root{
       --bg:#f5efe2;
       --paper:#fffaf0;
@@ -1365,341 +1363,407 @@
     }
 
   </style>
-</head>
+<style>
+/* === DIGIY MARKET · version épurée boutiques en haut === */
+body{
+  padding-bottom:0!important;
+  font-size:16px;
+}
+.topbar-inner{min-height:70px;padding:8px 0;flex-wrap:nowrap}
+.brand-logo{width:50px;height:50px;border-radius:17px}
+.brand-sub{font-size:.82rem;margin-top:3px}
+.top-actions{gap:7px;flex-wrap:nowrap}
+.top-actions > *{display:none!important}
+#navShops,#navSignup{display:inline-flex!important;min-height:42px;padding:0 13px;font-size:.84rem}
+.hero{padding:14px 0 8px}
+.hero-grid{grid-template-columns:1.08fr .92fr;gap:14px;align-items:stretch}
+.hero-card{min-height:330px;border-radius:28px;padding:23px}
+.hero-card::after{width:112px;height:112px;border-radius:28px}
+.kicker{font-size:.74rem;padding:7px 10px}
+h1{margin:13px 0 10px;font-size:clamp(2.15rem,4.8vw,4.35rem);line-height:.96}
+.hero-lead{font-size:1rem;line-height:1.55;max-width:62ch}
+.live-digiy-hero,.mobilePublicFastRow,.hero-mini-grid{display:none!important}
+.hero-badges{margin-top:15px;gap:7px}
+.hero-badge{display:none!important;padding:8px 10px;font-size:.80rem}
+.hero-badge:nth-child(3),.hero-badge:nth-child(4),.hero-badge:nth-child(6){display:inline-flex!important}
+.hero-actions{margin-top:17px;gap:8px}
+.hero-actions > *{display:none!important}
+.hero-actions > a:nth-child(1),.hero-actions > a:nth-child(4),#btnHeroShare{display:inline-flex!important}
+.hero-actions .btn{min-height:46px;padding:0 15px;font-size:.86rem}
+.showcase{display:block;min-height:330px}
+.showcase .photo-card{display:none}
+.showcase .photo-card.big{display:block;height:100%;min-height:330px;border-radius:28px}
+.photo-layer{padding:15px}
 
+#boutiques{padding:14px 0 16px;scroll-margin-top:82px}
+#boutiques > .panel{padding:18px!important;border-radius:28px}
+#boutiques .section-head{margin-bottom:11px;align-items:center}
+#boutiques .section-head h2{margin-top:7px;font-size:clamp(1.65rem,3vw,2.55rem)}
+#boutiques .section-head p{font-size:.94rem;line-height:1.5}
+.controls{margin-top:13px;grid-template-columns:1.35fr .75fr .75fr auto;gap:8px}
+.input,.select{min-height:46px;font-size:.88rem}
+.stats-row{margin-top:10px}
+.stat-pill{padding:7px 10px;font-size:.82rem}
+.shops-grid{margin-top:13px;gap:13px}
+.shop-card{border-radius:26px}
+.shop-media{min-height:215px}
+.shop-brand-seal{width:min(52%,150px);border-radius:28px}
+.shop-body{padding:15px}
+.shop-title{font-size:1.4rem}
+.shop-desc{font-size:.9rem;min-height:auto}
+.live-digiy-card{padding:10px 11px;margin:9px 0 11px}
+.shop-actions .btn{min-height:44px;font-size:.82rem}
+.digiy-floor{margin-top:10px;padding:9px}
+
+.market-drawer{margin-top:4px;margin-bottom:20px;border-radius:26px;border:1px solid rgba(6,59,43,.13);background:rgba(255,255,255,.76);box-shadow:var(--shadow2);overflow:hidden}
+.market-drawer-summary{list-style:none;cursor:pointer;min-height:70px;padding:15px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;color:var(--green);font-size:1.05rem;font-weight:1000}
+.market-drawer-summary::-webkit-details-marker{display:none}
+.market-drawer-summary::after{content:'＋';font-size:1.35rem;flex:0 0 auto}
+.market-drawer[open] .market-drawer-summary::after{content:'−'}
+.market-drawer-summary span{color:var(--muted);font-size:.82rem;font-weight:850;text-align:right}
+.market-drawer-body{border-top:1px solid rgba(6,59,43,.10);padding:7px 12px 16px}
+.market-drawer-body .section{padding:13px 0}
+.market-drawer-body .quick-strip{padding:12px 0 4px}
+.market-drawer-body .market-doctrine-pro,.market-drawer-body .market-examples-panel,.market-drawer-body .doctrine-card{box-shadow:none}
+.market-drawer-body .market-doctrine-pro{padding:18px;border-radius:24px}
+.market-drawer-body .market-examples-panel{padding:18px;border-radius:24px}
+.market-drawer-body .market-examples-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.market-drawer-body .market-example-card{min-height:auto;border-radius:20px;padding:12px}
+.market-drawer-body .market-example-visual{height:72px;font-size:32px;border-radius:17px}
+.market-drawer-body .doctrine{gap:10px}
+.market-drawer-body .doctrine-card{padding:18px;border-radius:22px}
+.digiy-audio-panel{position:static!important;left:auto!important;bottom:auto!important;width:auto!important;margin:12px 0 0!important;z-index:auto!important;border-radius:22px!important;box-shadow:none!important}
+.publicBottomNav{display:none!important}
+footer{padding:8px 0 24px}
+.footer-box{padding:14px 16px;border-radius:22px;font-size:.86rem}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr .75fr}
+  .controls{grid-template-columns:1fr 1fr}
+  .controls .input{grid-column:1/-1}
+  .market-drawer-body .market-examples-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  body{padding-bottom:0!important}
+  .topbar-inner{align-items:center;flex-wrap:wrap}
+  .top-actions{order:3;width:100%;display:grid;grid-template-columns:1fr 1fr}
+  #navShops,#navSignup{width:100%}
+  .digiy-langbar{order:2;width:auto;margin:0}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-card{min-height:auto;padding:20px;border-radius:25px}
+  .showcase{display:none}
+  .hero-actions{display:grid;grid-template-columns:1fr 1fr}
+  .hero-actions > a:nth-child(1){grid-column:1/-1}
+  .hero-actions .btn{width:100%}
+  #boutiques{padding-top:9px}
+  #boutiques > .panel{padding:14px!important;border-radius:24px}
+  #boutiques .section-head{display:flex;align-items:flex-start}
+  #boutiques .section-head p{font-size:.88rem}
+  .controls{grid-template-columns:1fr}
+  .shops-grid{display:flex;overflow-x:auto;gap:12px;padding:2px 2px 10px;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .shops-grid::-webkit-scrollbar{display:none}
+  .shop-card{flex:0 0 min(86vw,360px);scroll-snap-align:start}
+  .shop-media{min-height:205px}
+  .market-drawer{width:calc(100% - 18px);border-radius:22px}
+  .market-drawer-summary{min-height:64px;padding:13px 15px;align-items:flex-start;flex-wrap:wrap}
+  .market-drawer-summary span{width:100%;text-align:left}
+  .market-drawer-body{padding:5px 8px 13px}
+  .market-drawer-body .market-examples-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+  .market-drawer-body .market-example-card{flex:0 0 min(82vw,330px);scroll-snap-align:start}
+  .market-drawer-body .doctrine{grid-template-columns:1fr}
+  .market-doctrine-list{grid-template-columns:1fr}
+}
+@media(max-width:430px){
+  .brand-sub{display:none}
+  .brand-title{font-size:1.02rem}
+  .hero-actions{grid-template-columns:1fr}
+  .hero-actions > a:nth-child(1){grid-column:auto}
+}
+</style></head>
 <body>
-  <header class="topbar">
-    <div class="wrap topbar-inner">
-      <a class="brand" href="https://digiylyfe.com/" aria-label="Retour au site DIGIYLYFE">
-        <img class="brand-logo" src="https://digiylyfe.net/wp-content/uploads/2026/04/Image-11.jpeg" alt="DIGIYLYFE" loading="eager"/>
-        <div>
-          <div class="brand-title">DIGIY MARKET</div>
-          <div class="brand-sub">Galerie locale · boutiques visibles · contact direct.</div>
-        </div>
-      </a>
-
-      <nav class="top-actions" aria-label="Navigation principale">
-        <a class="btn btn-soft" id="navSite" href="https://digiylyfe.com/">🌍 Site</a>
-        <a class="btn btn-soft" id="navHub" href="https://digiy-hub.digiylyfe.com/">🧭 HUB</a>
-        <a class="btn btn-soft" id="navPricing" href="https://tarifs.digiylyfe.com/" target="_blank" rel="noopener noreferrer">📦 Tarifs</a>
-        <a class="btn btn-main" id="navShops" href="#boutiques">🛍️ Boutiques</a>
-        <a class="btn btn-soft" id="navDoctrine" href="#doctrine-market-pro">🦅 Doctrine</a>
-        <a class="btn btn-soft" id="navWolof" href="https://market.digiylyfe.com/lexique-market.html?v=lexique-market-v2-mobile-20260607">🇸🇳 Wolof MARKET</a>
-        <a class="btn btn-gold" id="navSignup" href="./inscription-market.html">📝 Inscription vendeur</a>
-      </nav>
-
-      <div class="digiy-langbar" aria-label="Choisir la langue / Choose language">
-        <button class="digiy-langbtn active" type="button" data-digiy-lang="fr" onclick="digiyMarketSetLang('fr')">🇫🇷 FR</button>
-        <button class="digiy-langbtn" type="button" data-digiy-lang="en" onclick="digiyMarketSetLang('en')">🇬🇧 EN</button>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <div class="wrap hero-grid">
-        <div class="hero-card">
-          <div class="hero-copy">
-            <span class="kicker">🛍️ Galerie marchande DIGIY</span>
-            <h1>Les boutiques locales entrent chez DIGIY.</h1>
-            <p class="hero-lead">
-              DIGIY MARKET n’est pas un moteur froid. C’est une galerie marchande digitale :
-              chaque boutique garde son nom, son contact, ses produits et son argent.
-              Le client regarde, choisit, contacte directement et paie le commerçant sans commission.
+<header class="topbar">
+<div class="wrap topbar-inner">
+<a aria-label="Retour au site DIGIYLYFE" class="brand" href="https://digiylyfe.com/">
+<img alt="DIGIYLYFE" class="brand-logo" loading="eager" src="https://digiylyfe.net/wp-content/uploads/2026/04/Image-11.jpeg"/>
+<div>
+<div class="brand-title">DIGIY MARKET</div>
+<div class="brand-sub">Galerie locale · boutiques visibles · contact direct.</div>
+</div>
+</a>
+<nav aria-label="Navigation principale" class="top-actions">
+<a class="btn btn-soft" href="https://digiylyfe.com/" id="navSite">🌍 Site</a>
+<a class="btn btn-soft" href="https://digiy-hub.digiylyfe.com/" id="navHub">🧭 HUB</a>
+<a class="btn btn-soft" href="https://tarifs.digiylyfe.com/" id="navPricing" rel="noopener noreferrer" target="_blank">📦 Tarifs</a>
+<a class="btn btn-main" href="#boutiques" id="navShops">🛍️ Boutiques</a>
+<a class="btn btn-soft" href="#doctrine-market-pro" id="navDoctrine">🦅 Doctrine</a>
+<a class="btn btn-soft" href="https://market.digiylyfe.com/lexique-market.html?v=lexique-market-v2-mobile-20260607" id="navWolof">🇸🇳 Wolof MARKET</a>
+<a class="btn btn-gold" href="./inscription-market.html" id="navSignup">📝 Inscription vendeur</a>
+</nav>
+<div aria-label="Choisir la langue / Choose language" class="digiy-langbar">
+<button class="digiy-langbtn active" data-digiy-lang="fr" onclick="digiyMarketSetLang('fr')" type="button">🇫🇷 FR</button>
+<button class="digiy-langbtn" data-digiy-lang="en" onclick="digiyMarketSetLang('en')" type="button">🇬🇧 EN</button>
+</div>
+</div>
+</header>
+<main>
+<section class="hero">
+<div class="wrap hero-grid">
+<div class="hero-card">
+<div class="hero-copy">
+<span class="kicker">🛍️ Galerie marchande DIGIY</span>
+<h1>Les boutiques locales, tout de suite.</h1>
+<p class="hero-lead">Découvre les boutiques visibles, ouvre leur fiche et contacte directement le commerçant. Paiement direct, contact humain et 0% commission DIGIY.</p>
+<div class="live-digiy-hero">
+<strong>Présentation vidéo sur demande</strong>
+<span>Demandez à voir les produits en vidéo si la boutique est disponible. Moins de trajet, plus de conseil, choix plus sûr.</span>
+</div>
+<div class="hero-badges">
+<span class="hero-badge">Galerie DIGIY MARKET</span>
+<span class="hero-badge">🎥 Vidéo si disponible</span>
+<span class="hero-badge">💬 Contact direct</span>
+<span class="hero-badge">💳 Paiement au pro</span>
+<span class="hero-badge">🇸🇳 Lexique Wolof</span>
+<span class="hero-badge">0% commission</span>
+<span class="hero-badge market-gold-emphasis">Demande vendeur sans engagement</span>
+</div>
+<div class="hero-actions">
+<a class="btn btn-gold" href="#boutiques">🛍️ Voir les boutiques</a>
+<a class="btn btn-soft" href="#exemples-market">🧩 5 exemples</a>
+<a class="btn btn-soft" href="https://market.digiylyfe.com/lexique-market.html?v=lexique-market-v2-mobile-20260607">🇸🇳 Lexique Wolof MARKET</a>
+<a class="btn btn-main" href="./inscription-market.html">📝 Demande vendeur MARKET</a>
+<button class="btn btn-live" id="btnHeroWhats" type="button">💬 WhatsApp</button>
+<button class="btn btn-soft" id="btnHeroSms" type="button">📩 SMS</button>
+<button class="btn btn-soft" id="btnHeroShare" type="button">📤 Partager</button>
+<a class="btn btn-soft" href="./inscription-market.html">📝 Demande vendeur</a>
+</div>
+<div class="mobilePublicFastRow">
+<a href="https://digiylyfe.com/">🌍 Site</a>
+<a href="https://digiy-hub.digiylyfe.com/">🧭 HUB</a>
+<a class="primary" href="#boutiques">🛍️ Boutiques</a>
+<a href="https://market.digiylyfe.com/lexique-market.html?v=lexique-market-v2-mobile-20260607">🇸🇳 Wolof</a>
+<a href="#exemples-market">🧩 Exemples</a>
+<a class="primary" href="./inscription-market.html">📝 Demande</a>
+<button id="fastWhatsapp" type="button">💬 WhatsApp</button>
+<button id="fastSms" type="button">📩 SMS</button>
+<button id="fastShare" type="button">📤 Partager</button>
+</div>
+<div class="hero-mini-grid">
+<div class="hero-mini"><strong>Une galerie</strong><span>On sent le lieu DIGIY, pas une fiche perdue dans le cloud.</span></div>
+<div class="hero-mini"><strong>Des boutiques</strong><span>Chaque commerçant garde son identité, son contact et ses produits.</span></div>
+<div class="hero-mini"><strong>Une signature</strong><span>Le sceau DIGIY rassure, rassemble et donne une présence commune.</span></div>
+</div>
+</div>
+</div>
+<div aria-label="Ambiance DIGIY MARKET" class="showcase">
+<div class="photo-card big">
+<img alt="Galerie commerçante locale" src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&amp;fit=crop&amp;w=1400&amp;q=80"/>
+<div aria-hidden="true" class="seal-card"></div>
+<div class="photo-layer"><strong>Galerie DIGIY MARKET</strong><span>Un lieu commun, des boutiques différentes, une confiance visible.</span></div>
+</div>
+<div class="photo-card">
+<img alt="Produits en boutique" src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&amp;fit=crop&amp;w=900&amp;q=80"/>
+<div class="photo-layer"><strong>Vendre par les yeux</strong><span>Image, ambiance, présence.</span></div>
+</div>
+<div class="photo-card">
+<img alt="Boutique vivante" src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&amp;fit=crop&amp;w=900&amp;q=80"/>
+<div class="photo-layer"><strong>Vidéo sur demande</strong><span>La boutique montre les produits si elle est disponible.</span></div>
+</div>
+</div>
+</div>
+</section><section class="section" id="boutiques">
+<div class="wrap panel" style="padding:22px">
+<div class="section-head">
+<div>
+<span class="pill">🏪 Galeries de magasins</span>
+<h2>Les boutiques visibles maintenant</h2>
+<p>
+              Le client entre dans la galerie, choisit une boutique, voit ses produits, puis contacte directement le commerçant.
             </p>
-
-            <div class="live-digiy-hero">
-              <strong>Présentation vidéo sur demande</strong>
-              <span>Demandez à voir les produits en vidéo si la boutique est disponible. Moins de trajet, plus de conseil, choix plus sûr.</span>
-            </div>
-
-            <div class="hero-badges">
-              <span class="hero-badge">Galerie DIGIY MARKET</span>
-              <span class="hero-badge">🎥 Vidéo si disponible</span>
-              <span class="hero-badge">💬 Contact direct</span>
-              <span class="hero-badge">💳 Paiement au pro</span>
-              <span class="hero-badge">🇸🇳 Lexique Wolof</span>
-              <span class="hero-badge">0% commission</span>
-              <span class="hero-badge market-gold-emphasis">Demande vendeur sans engagement</span>
-            </div>
-
-            <div class="hero-actions">
-              <a class="btn btn-gold" href="#boutiques">🛍️ Voir les boutiques</a>
-              <a class="btn btn-soft" href="#exemples-market">🧩 5 exemples</a>
-              <a class="btn btn-soft" href="https://market.digiylyfe.com/lexique-market.html?v=lexique-market-v2-mobile-20260607">🇸🇳 Lexique Wolof MARKET</a>
-              <a class="btn btn-main" href="./inscription-market.html">📝 Demande vendeur MARKET</a>
-              <button class="btn btn-live" id="btnHeroWhats" type="button">💬 WhatsApp</button>
-              <button class="btn btn-soft" id="btnHeroSms" type="button">📩 SMS</button>
-              <button class="btn btn-soft" id="btnHeroShare" type="button">📤 Partager</button>
-              <a class="btn btn-soft" href="./inscription-market.html">📝 Demande vendeur</a>
-            </div>
-
-            <div class="mobilePublicFastRow">
-              <a href="https://digiylyfe.com/">🌍 Site</a>
-              <a href="https://digiy-hub.digiylyfe.com/">🧭 HUB</a>
-              <a class="primary" href="#boutiques">🛍️ Boutiques</a>
-              <a href="https://market.digiylyfe.com/lexique-market.html?v=lexique-market-v2-mobile-20260607">🇸🇳 Wolof</a>
-              <a href="#exemples-market">🧩 Exemples</a>
-              <a class="primary" href="./inscription-market.html">📝 Demande</a>
-              <button id="fastWhatsapp" type="button">💬 WhatsApp</button>
-              <button id="fastSms" type="button">📩 SMS</button>
-              <button id="fastShare" type="button">📤 Partager</button>
-            </div>
-
-            <div class="hero-mini-grid">
-              <div class="hero-mini"><strong>Une galerie</strong><span>On sent le lieu DIGIY, pas une fiche perdue dans le cloud.</span></div>
-              <div class="hero-mini"><strong>Des boutiques</strong><span>Chaque commerçant garde son identité, son contact et ses produits.</span></div>
-              <div class="hero-mini"><strong>Une signature</strong><span>Le sceau DIGIY rassure, rassemble et donne une présence commune.</span></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="showcase" aria-label="Ambiance DIGIY MARKET">
-          <div class="photo-card big">
-            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80" alt="Galerie commerçante locale"/>
-            <div class="seal-card" aria-hidden="true"></div>
-            <div class="photo-layer"><strong>Galerie DIGIY MARKET</strong><span>Un lieu commun, des boutiques différentes, une confiance visible.</span></div>
-          </div>
-
-          <div class="photo-card">
-            <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80" alt="Produits en boutique"/>
-            <div class="photo-layer"><strong>Vendre par les yeux</strong><span>Image, ambiance, présence.</span></div>
-          </div>
-
-          <div class="photo-card">
-            <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=900&q=80" alt="Boutique vivante"/>
-            <div class="photo-layer"><strong>Vidéo sur demande</strong><span>La boutique montre les produits si elle est disponible.</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="quick-strip">
-      <div class="wrap quick-scroll">
-        <div class="quick-card"><strong>🏬 Esprit galerie</strong><span>Comme une allée commerçante : les boutiques sont réunies sous la signature DIGIY.</span></div>
-        <div class="quick-card"><strong>🛍️ Pas un annuaire</strong><span>On attire par l’ambiance, puis on guide vers les bons commerces.</span></div>
-        <div class="quick-card"><strong>🎥 Vidéo sur demande</strong><span>Demander une présentation vidéo à la boutique, si elle est disponible.</span></div>
-        <a class="quick-card" href="https://market.digiylyfe.com/lexique-market.html?v=lexique-market-v2-mobile-20260607"><strong>🇸🇳 Wolof MARKET</strong><span>Accueil, prix, stock, commande, livraison et paiement en phrases terrain.</span></a>
-        <div class="quick-card"><strong>💳 Argent direct</strong><span>DIGIY ne garde pas l’argent : paiement direct au commerçant.</span></div>
-      </div>
-    </section>
-
-    <section class="section" id="doctrine-market-pro">
-      <div class="wrap market-doctrine-pro">
-        <span class="market-doctrine-tag">Demande vendeur gratuite · Activation MARKET payante · 0% commission</span>
-        <h2>Le client regarde gratuitement. Le vendeur demande sans engagement. La présence MARKET s’active clairement.</h2>
-        <p>
+</div>
+<button class="btn btn-ghost" id="btnReload" type="button">↻ Recharger</button>
+</div>
+<div class="controls">
+<input class="input" id="searchInput" placeholder="Chercher une boutique, une ville, une activité…" type="search"/>
+<select class="select" id="cityFilter"><option value="">Toutes les villes</option></select>
+<select class="select" id="categoryFilter"><option value="">Toutes les activités</option></select>
+<button class="btn btn-main" id="btnClear" type="button">Effacer</button>
+</div>
+<div class="stats-row" id="statsRow">
+<span class="stat-pill"><b id="statShops">5</b> <span id="statShopsLabel">exemples visibles</span></span>
+<span class="stat-pill"><b id="statCities">5</b> <span id="statCitiesLabel">formats</span></span>
+<span class="stat-pill" id="statMarketMood">Galerie nourrie · vraies boutiques dès publication</span>
+</div>
+<div class="loading-box" id="loadingBox" style="display:none">Les exemples ci-dessus restent visibles. Les vraies boutiques publiées apparaissent ici automatiquement.</div>
+<div class="empty-box" id="emptyBox" style="display:none">Les vraies boutiques publiées apparaîtront ici. Les 5 modèles ci-dessus montrent déjà les formats MARKET.</div>
+<div class="shops-grid" id="shopsGrid"></div>
+</div>
+</section><details class="market-drawer wrap" id="marketInfoDrawer"><summary class="market-drawer-summary">☰ Découvrir DIGIY MARKET<span>Doctrine · exemples · Wolof · inscription vendeur</span></summary><div class="market-drawer-body"><section class="quick-strip">
+<div class="wrap quick-scroll">
+<div class="quick-card"><strong>🏬 Esprit galerie</strong><span>Comme une allée commerçante : les boutiques sont réunies sous la signature DIGIY.</span></div>
+<div class="quick-card"><strong>🛍️ Pas un annuaire</strong><span>On attire par l’ambiance, puis on guide vers les bons commerces.</span></div>
+<div class="quick-card"><strong>🎥 Vidéo sur demande</strong><span>Demander une présentation vidéo à la boutique, si elle est disponible.</span></div>
+<a class="quick-card" href="https://market.digiylyfe.com/lexique-market.html?v=lexique-market-v2-mobile-20260607"><strong>🇸🇳 Wolof MARKET</strong><span>Accueil, prix, stock, commande, livraison et paiement en phrases terrain.</span></a>
+<div class="quick-card"><strong>💳 Argent direct</strong><span>DIGIY ne garde pas l’argent : paiement direct au commerçant.</span></div>
+</div>
+</section><section class="section" id="doctrine-market-pro">
+<div class="wrap market-doctrine-pro">
+<span class="market-doctrine-tag">Demande vendeur gratuite · Activation MARKET payante · 0% commission</span>
+<h2>Le client regarde gratuitement. Le vendeur demande sans engagement. La présence MARKET s’active clairement.</h2>
+<p>
           DIGIY MARKET ne prend pas de commission sur les ventes. Le client consulte la galerie, contacte directement la boutique
           et paie le commerçant. Pour le vendeur, la demande initiale / orientation est gratuite et sans engagement :
           le paiement concerne uniquement l’activation d’une présence professionnelle, d’une fiche boutique, d’un QR, d’un BOOST ou d’un pack visibilité.
         </p>
-        <div class="market-doctrine-list" aria-label="Doctrine commerciale MARKET">
-          <span>✅ Consultation client gratuite</span>
-          <span>📝 Demande vendeur sans engagement</span>
-          <span>🛍️ Activation MARKET payante</span>
-          <span class="market-gold-emphasis">🇫🇷 France / diaspora : Sendwave possible</span>
-        </div>
-        <p class="market-doctrine-quote">
+<div aria-label="Doctrine commerciale MARKET" class="market-doctrine-list">
+<span>✅ Consultation client gratuite</span>
+<span>📝 Demande vendeur sans engagement</span>
+<span>🛍️ Activation MARKET payante</span>
+<span class="market-gold-emphasis">🇫🇷 France / diaspora : Sendwave possible</span>
+</div>
+<p class="market-doctrine-quote">
           Les plateformes attirent avec le gratuit puis prélèvent sur les ventes. DIGIY MARKET construit la visibilité, sans prendre l’argent du commerçant.
         </p>
-      </div>
-    </section>
-
-    <section class="section" id="exemples-market">
-      <div class="wrap market-examples-panel">
-        <div class="section-head">
-          <div>
-            <span class="pill">🧩 Exemples à prendre</span>
-            <h2>5 modèles pour nourrir la galerie</h2>
-            <p>
+</div>
+</section><section class="section" id="exemples-market">
+<div class="wrap market-examples-panel">
+<div class="section-head">
+<div>
+<span class="pill">🧩 Exemples à prendre</span>
+<h2>5 modèles pour nourrir la galerie</h2>
+<p>
               Avant que toutes les vraies boutiques arrivent, la page montre déjà les formats possibles.
               Ces cartes sont des exemples de présentation : elles guident le commerçant sans créer de fausses annonces.
             </p>
-          </div>
-          <a class="btn btn-gold" href="./inscription-market.html">📝 Inscrire une vraie boutique</a>
-        </div>
-
-        <div class="market-examples-grid" aria-label="Exemples de boutiques DIGIY MARKET">
-          <article class="market-example-card">
-            <div class="market-example-visual">🧺</div>
-            <span class="market-example-badge">Exemple réel / modèle</span>
-            <h3>Linge maison & plage</h3>
-            <p>Serviettes, draps, peignoirs, foutas, articles villas et hôtels. Image propre, contact direct, commande simple.</p>
-            <div class="market-example-meta"><span>Saly</span><span>WhatsApp Live</span><span>0%</span></div>
-            <div class="market-example-actions">
-              <a class="btn btn-main" href="https://wa.me/221771342889?text=Bonjour%20DIGIY,%20je%20veux%20prendre%20le%20mod%C3%A8le%20MARKET%20linge%20maison%20et%20plage%20pour%20ma%20boutique." target="_blank" rel="noopener noreferrer">Prendre ce modèle</a>
-            </div>
-          </article>
-
-          <article class="market-example-card">
-            <div class="market-example-visual">👗</div>
-            <span class="market-example-badge">Exemple à prendre</span>
-            <h3>Tenues, tissus & retouches</h3>
-            <p>Robes, boubous, ensembles, pagnes, couture, retouches et conseils taille en vidéo avant confirmation.</p>
-            <div class="market-example-meta"><span>Boutique mode</span><span>Visio conseil</span><span>Direct</span></div>
-            <div class="market-example-actions">
-              <a class="btn btn-main" href="https://wa.me/221771342889?text=Bonjour%20DIGIY,%20je%20veux%20prendre%20le%20mod%C3%A8le%20MARKET%20tenues%20tissus%20et%20retouches%20pour%20ma%20boutique." target="_blank" rel="noopener noreferrer">Prendre ce modèle</a>
-            </div>
-          </article>
-
-          <article class="market-example-card">
-            <div class="market-example-visual">💄</div>
-            <span class="market-example-badge">Exemple à prendre</span>
-            <h3>Beauté & soins</h3>
-            <p>Crèmes, parfums, huiles, accessoires beauté et packs cadeaux. Le client demande conseil sans se déplacer.</p>
-            <div class="market-example-meta"><span>Beauté</span><span>Conseil</span><span>WhatsApp</span></div>
-            <div class="market-example-actions">
-              <a class="btn btn-main" href="https://wa.me/221771342889?text=Bonjour%20DIGIY,%20je%20veux%20prendre%20le%20mod%C3%A8le%20MARKET%20beaut%C3%A9%20et%20soins%20pour%20ma%20boutique." target="_blank" rel="noopener noreferrer">Prendre ce modèle</a>
-            </div>
-          </article>
-
-          <article class="market-example-card">
-            <div class="market-example-visual">🥭</div>
-            <span class="market-example-badge">Exemple à prendre</span>
-            <h3>Produits locaux</h3>
-            <p>Épices, jus, miel, paniers, produits du terroir et petites commandes de proximité avec paiement au vendeur.</p>
-            <div class="market-example-meta"><span>Terroir</span><span>Panier</span><span>Local</span></div>
-            <div class="market-example-actions">
-              <a class="btn btn-main" href="https://wa.me/221771342889?text=Bonjour%20DIGIY,%20je%20veux%20prendre%20le%20mod%C3%A8le%20MARKET%20produits%20locaux%20pour%20ma%20boutique." target="_blank" rel="noopener noreferrer">Prendre ce modèle</a>
-            </div>
-          </article>
-
-          <article class="market-example-card">
-            <div class="market-example-visual">🪑</div>
-            <span class="market-example-badge">Exemple à prendre</span>
-            <h3>Déco & artisanat</h3>
-            <p>Paniers, sacs, objets, déco maison, pièces artisanales et commandes personnalisées avec échange direct.</p>
-            <div class="market-example-meta"><span>Artisanat</span><span>Sur mesure</span><span>QR</span></div>
-            <div class="market-example-actions">
-              <a class="btn btn-main" href="https://wa.me/221771342889?text=Bonjour%20DIGIY,%20je%20veux%20prendre%20le%20mod%C3%A8le%20MARKET%20d%C3%A9co%20et%20artisanat%20pour%20ma%20boutique." target="_blank" rel="noopener noreferrer">Prendre ce modèle</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="boutiques">
-      <div class="wrap panel" style="padding:22px">
-        <div class="section-head">
-          <div>
-            <span class="pill">🏪 Galeries de magasins</span>
-            <h2>Les boutiques visibles maintenant</h2>
-            <p>
-              Le client entre dans la galerie, choisit une boutique, voit ses produits, puis contacte directement le commerçant.
-            </p>
-          </div>
-          <button class="btn btn-ghost" id="btnReload" type="button">↻ Recharger</button>
-        </div>
-
-        <div class="controls">
-          <input class="input" id="searchInput" type="search" placeholder="Chercher une boutique, une ville, une activité…"/>
-          <select class="select" id="cityFilter"><option value="">Toutes les villes</option></select>
-          <select class="select" id="categoryFilter"><option value="">Toutes les activités</option></select>
-          <button class="btn btn-main" id="btnClear" type="button">Effacer</button>
-        </div>
-
-        <div class="stats-row" id="statsRow">
-          <span class="stat-pill"><b id="statShops">5</b> <span id="statShopsLabel">exemples visibles</span></span>
-          <span class="stat-pill"><b id="statCities">5</b> <span id="statCitiesLabel">formats</span></span>
-          <span class="stat-pill" id="statMarketMood">Galerie nourrie · vraies boutiques dès publication</span>
-        </div>
-
-        <div id="loadingBox" class="loading-box" style="display:none">Les exemples ci-dessus restent visibles. Les vraies boutiques publiées apparaissent ici automatiquement.</div>
-        <div id="emptyBox" class="empty-box" style="display:none">Les vraies boutiques publiées apparaîtront ici. Les 5 modèles ci-dessus montrent déjà les formats MARKET.</div>
-        <div id="shopsGrid" class="shops-grid"></div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="wrap doctrine">
-        <div class="doctrine-card dark">
-          <h3>Le marché n’est pas froid. Il est vivant.</h3>
-          <p>
+</div>
+<a class="btn btn-gold" href="./inscription-market.html">📝 Inscrire une vraie boutique</a>
+</div>
+<div aria-label="Exemples de boutiques DIGIY MARKET" class="market-examples-grid">
+<article class="market-example-card">
+<div class="market-example-visual">🧺</div>
+<span class="market-example-badge">Exemple réel / modèle</span>
+<h3>Linge maison &amp; plage</h3>
+<p>Serviettes, draps, peignoirs, foutas, articles villas et hôtels. Image propre, contact direct, commande simple.</p>
+<div class="market-example-meta"><span>Saly</span><span>WhatsApp Live</span><span>0%</span></div>
+<div class="market-example-actions">
+<a class="btn btn-main" href="https://wa.me/221771342889?text=Bonjour%20DIGIY,%20je%20veux%20prendre%20le%20mod%C3%A8le%20MARKET%20linge%20maison%20et%20plage%20pour%20ma%20boutique." rel="noopener noreferrer" target="_blank">Prendre ce modèle</a>
+</div>
+</article>
+<article class="market-example-card">
+<div class="market-example-visual">👗</div>
+<span class="market-example-badge">Exemple à prendre</span>
+<h3>Tenues, tissus &amp; retouches</h3>
+<p>Robes, boubous, ensembles, pagnes, couture, retouches et conseils taille en vidéo avant confirmation.</p>
+<div class="market-example-meta"><span>Boutique mode</span><span>Visio conseil</span><span>Direct</span></div>
+<div class="market-example-actions">
+<a class="btn btn-main" href="https://wa.me/221771342889?text=Bonjour%20DIGIY,%20je%20veux%20prendre%20le%20mod%C3%A8le%20MARKET%20tenues%20tissus%20et%20retouches%20pour%20ma%20boutique." rel="noopener noreferrer" target="_blank">Prendre ce modèle</a>
+</div>
+</article>
+<article class="market-example-card">
+<div class="market-example-visual">💄</div>
+<span class="market-example-badge">Exemple à prendre</span>
+<h3>Beauté &amp; soins</h3>
+<p>Crèmes, parfums, huiles, accessoires beauté et packs cadeaux. Le client demande conseil sans se déplacer.</p>
+<div class="market-example-meta"><span>Beauté</span><span>Conseil</span><span>WhatsApp</span></div>
+<div class="market-example-actions">
+<a class="btn btn-main" href="https://wa.me/221771342889?text=Bonjour%20DIGIY,%20je%20veux%20prendre%20le%20mod%C3%A8le%20MARKET%20beaut%C3%A9%20et%20soins%20pour%20ma%20boutique." rel="noopener noreferrer" target="_blank">Prendre ce modèle</a>
+</div>
+</article>
+<article class="market-example-card">
+<div class="market-example-visual">🥭</div>
+<span class="market-example-badge">Exemple à prendre</span>
+<h3>Produits locaux</h3>
+<p>Épices, jus, miel, paniers, produits du terroir et petites commandes de proximité avec paiement au vendeur.</p>
+<div class="market-example-meta"><span>Terroir</span><span>Panier</span><span>Local</span></div>
+<div class="market-example-actions">
+<a class="btn btn-main" href="https://wa.me/221771342889?text=Bonjour%20DIGIY,%20je%20veux%20prendre%20le%20mod%C3%A8le%20MARKET%20produits%20locaux%20pour%20ma%20boutique." rel="noopener noreferrer" target="_blank">Prendre ce modèle</a>
+</div>
+</article>
+<article class="market-example-card">
+<div class="market-example-visual">🪑</div>
+<span class="market-example-badge">Exemple à prendre</span>
+<h3>Déco &amp; artisanat</h3>
+<p>Paniers, sacs, objets, déco maison, pièces artisanales et commandes personnalisées avec échange direct.</p>
+<div class="market-example-meta"><span>Artisanat</span><span>Sur mesure</span><span>QR</span></div>
+<div class="market-example-actions">
+<a class="btn btn-main" href="https://wa.me/221771342889?text=Bonjour%20DIGIY,%20je%20veux%20prendre%20le%20mod%C3%A8le%20MARKET%20d%C3%A9co%20et%20artisanat%20pour%20ma%20boutique." rel="noopener noreferrer" target="_blank">Prendre ce modèle</a>
+</div>
+</article>
+</div>
+</div>
+</section><section class="section">
+<div class="wrap doctrine">
+<div class="doctrine-card dark">
+<h3>Le marché n’est pas froid. Il est vivant.</h3>
+<p>
             DIGIY MARKET donne la sensation d’une galerie marchande : un lieu, une signature,
             une confiance. Pas seulement des résultats alignés comme une recherche.
           </p>
-        </div>
-
-        <div class="doctrine-card">
-          <h3>La boutique reste libre.</h3>
-          <p>
+</div>
+<div class="doctrine-card">
+<h3>La boutique reste libre.</h3>
+<p>
             Chaque commerçant garde son nom, son WhatsApp, ses produits et son argent. DIGIY donne la présence,
             le cadre et la route vers le client — sans prendre de commission. La demande vendeur est sans engagement ; seule l’activation professionnelle est payante.
           </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="retours-digiy">
-      <div class="wrap doctrine">
-        <div class="doctrine-card">
-          <h3>Revenir dans la maison DIGIY</h3>
-          <p>
+</div>
+</div>
+</section><section class="section" id="retours-digiy">
+<div class="wrap doctrine">
+<div class="doctrine-card">
+<h3>Revenir dans la maison DIGIY</h3>
+<p>
             Pour comprendre DIGIYLYFE, revenir au HUB ou voir les tarifs officiels,
             utilise les portes ci-dessous.
           </p>
-          <div class="hero-actions" style="margin-top:16px">
-            <a class="btn btn-soft" href="https://digiylyfe.com/">🌍 Site DIGIYLYFE</a>
-            <a class="btn btn-main" href="https://digiy-hub.digiylyfe.com/">🧭 HUB DIGIY</a>
-            <a class="btn btn-soft" href="https://market.digiylyfe.com/lexique-market.html?v=lexique-market-v2-mobile-20260607">🇸🇳 Wolof MARKET</a>
-            <a class="btn btn-gold" href="https://tarifs.digiylyfe.com/" target="_blank" rel="noopener noreferrer">📦 Tarifs</a>
-          </div>
-        </div>
-
-        <div class="doctrine-card dark">
-          <h3>Le commerce reste direct.</h3>
-          <p>
+<div class="hero-actions" style="margin-top:16px">
+<a class="btn btn-soft" href="https://digiylyfe.com/">🌍 Site DIGIYLYFE</a>
+<a class="btn btn-main" href="https://digiy-hub.digiylyfe.com/">🧭 HUB DIGIY</a>
+<a class="btn btn-soft" href="https://market.digiylyfe.com/lexique-market.html?v=lexique-market-v2-mobile-20260607">🇸🇳 Wolof MARKET</a>
+<a class="btn btn-gold" href="https://tarifs.digiylyfe.com/" rel="noopener noreferrer" target="_blank">📦 Tarifs</a>
+</div>
+</div>
+<div class="doctrine-card dark">
+<h3>Le commerce reste direct.</h3>
+<p>
             DIGIY donne la présence, la galerie et la route vers le client. Le commerçant garde son contact,
             son argent et sa relation.
           </p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrap footer-box">
-      <div><strong>DIGIY MARKET</strong> — Galerie locale, boutiques visibles, contact direct.</div>
-      <div>0% commission · paiement direct au commerçant · demande vendeur sans engagement · activation MARKET payante</div>
-      <div><a href="https://market.digiylyfe.com/lexique-market.html?v=lexique-market-v2-mobile-20260607"><strong>🇸🇳 Lexique Wolof MARKET</strong></a></div>
-    </div>
-  </footer>
-
-  <section class="digiy-audio-panel" id="digiyAudioPanel" aria-label="Lecteur public DIGIY MARKET">
-    <div class="digiy-audio-head">
-      <div>
-        <div class="digiy-audio-title">🎧 Lecteur DIGIY MARKET</div>
-        <div class="digiy-audio-sub">
+</div>
+</div>
+</section><section aria-label="Lecteur public DIGIY MARKET" class="digiy-audio-panel" id="digiyAudioPanel">
+<div class="digiy-audio-head">
+<div>
+<div class="digiy-audio-title">🎧 Lecteur DIGIY MARKET</div>
+<div class="digiy-audio-sub">
           Une voix explique la galerie, le Live vidéo, WhatsApp, SMS, paiement direct, zéro commission et le lexique Wolof MARKET.
         </div>
-      </div>
-      <div class="digiy-audio-pill">Public</div>
-    </div>
-
-    <div class="digiy-audio-actions">
-      <button class="digiy-audio-play" id="digiyAudioPlayBtn" type="button">▶️ Lecture</button>
-      <button class="digiy-audio-stop" id="digiyAudioStopBtn" type="button">⏹ Arrêt</button>
-    </div>
-
-    <div class="digiy-audio-status" id="digiyAudioStatus">Prêt à lire la présentation MARKET.</div>
-  </section>
-
-  <nav class="publicBottomNav" aria-label="Navigation publique DIGIY MARKET">
-    <div class="publicBottomNavInner">
-      <a href="https://digiylyfe.com/"><span class="icoBottom">🌍</span><span>Site</span></a>
-      <a href="https://digiy-hub.digiylyfe.com/"><span class="icoBottom">🧭</span><span>HUB</span></a>
-      <a class="active" href="#boutiques"><span class="icoBottom">🛍️</span><span>Boutiques</span></a>
-      <a href="https://market.digiylyfe.com/lexique-market.html?v=lexique-market-v2-mobile-20260607"><span class="icoBottom">🇸🇳</span><span>Wolof</span></a>
-      <button id="bottomWhatsapp" type="button"><span class="icoBottom">💬</span><span>WhatsApp</span></button>
-      <button id="bottomSms" type="button"><span class="icoBottom">📩</span><span>SMS</span></button>
-      <button id="bottomShare" type="button"><span class="icoBottom">📤</span><span>Partager</span></button>
-    </div>
-  </nav>
-
-  <div class="share-toast" id="shareToast">Lien prêt à partager</div>
+</div>
+<div class="digiy-audio-pill">Public</div>
+</div>
+<div class="digiy-audio-actions">
+<button class="digiy-audio-play" id="digiyAudioPlayBtn" type="button">▶️ Lecture</button>
+<button class="digiy-audio-stop" id="digiyAudioStopBtn" type="button">⏹ Arrêt</button>
+</div>
+<div class="digiy-audio-status" id="digiyAudioStatus">Prêt à lire la présentation MARKET.</div>
+</section></div></details>
 
 
-  <script>
+
+
+
+
+</main>
+<footer>
+<div class="wrap footer-box">
+<div><strong>DIGIY MARKET</strong> — Galerie locale, boutiques visibles, contact direct.</div>
+<div>0% commission · paiement direct au commerçant · demande vendeur sans engagement · activation MARKET payante</div>
+<div><a href="https://market.digiylyfe.com/lexique-market.html?v=lexique-market-v2-mobile-20260607"><strong>🇸🇳 Lexique Wolof MARKET</strong></a></div>
+</div>
+</footer>
+
+
+<div class="share-toast" id="shareToast">Lien prêt à partager</div>
+<script>
     (function(){
       "use strict";
       const STORAGE_KEY = "digiy_market_lang_v2";
@@ -1716,8 +1780,8 @@
           ["#navWolof", "🇸🇳 Wolof MARKET"],
           ["#navSignup", "📝 Seller signup"],
           [".kicker", "🛍️ DIGIY shopping gallery"],
-          ["h1", "Local shops enter DIGIY."],
-          [".hero-lead", "DIGIY MARKET is not a cold search engine. It is a digital shopping gallery: every shop keeps its name, contact, products and money. The client looks, chooses, contacts directly and pays the seller with no commission."],
+          ["h1", "Local shops, right away."],
+          [".hero-lead", "Discover visible shops, open their profile and contact the seller directly. Direct payment, human contact and 0% DIGIY commission."],
           [".live-digiy-hero strong", "Video presentation on request"],
           [".live-digiy-hero span", "Ask to see products on video when the shop is available. Less travel, more advice, safer choices."],
           [".hero-badges .hero-badge:nth-child(1)", "DIGIY MARKET Gallery"],
@@ -1936,8 +2000,7 @@
       });
     })();
   </script>
-
-  <script>
+<script>
     (function(){
       "use strict";
 
@@ -2442,9 +2505,24 @@
       loadShops();
     })();
   </script>
-  <script src="https://pro-action-digiy.digiylyfe.com/assets/js/digiy-retour-voix.js?v=retour-voix-20260606-v4" defer></script>
-</body>
+<script defer="" src="https://pro-action-digiy.digiylyfe.com/assets/js/digiy-retour-voix.js?v=retour-voix-20260606-v4"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const drawer = document.getElementById('marketInfoDrawer');
+  if(!drawer) return;
+  function openForHash(){
+    if(!location.hash) return;
+    try{
+      const target = document.querySelector(location.hash);
+      if(target && drawer.contains(target)) drawer.open = true;
+    }catch(_){ }
+  }
+  openForHash();
+  window.addEventListener('hashchange', openForHash);
+});
+</script></body>
 </html>
+
 
 
 
