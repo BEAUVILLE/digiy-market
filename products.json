@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "last_updated": "2026-07-29",
+  "brand": {
+    "name": "DIGIY MARKET",
+    "parent_brand": "DIGIYLYFE",
+    "role": "galerie de produits locaux en vente directe",
+    "url": "https://market.digiylyfe.com/",
+    "catalogue_url": "https://market.digiylyfe.com/catalogue.html",
+    "commission_percent_on_sales": 0,
+    "payment_mode": "direct_to_seller"
+  },
+  "active_sellers": [
+    {
+      "id": "astou-boutique-saly",
+      "status": "active",
+      "name": "Astou Boutique",
+      "city": "Saly",
+      "country": "Sénégal",
+      "profile_url": "https://astou-boutique.digiylyfe.com/",
+      "whatsapp_display": "+221 77 876 57 85",
+      "whatsapp_e164": "+221778765785",
+      "whatsapp_url": "https://wa.me/221778765785"
+    }
+  ],
+  "active_products": [
+    {"id":"drap-2-places","status":"published","name":"Drap 2 places","category":"linge de lit","price":12000,"currency":"XOF","seller_id":"astou-boutique-saly","availability":"confirm_with_seller"},
+    {"id":"drap-1-place","status":"published","name":"Drap 1 place","category":"linge de lit","price":7500,"currency":"XOF","seller_id":"astou-boutique-saly","availability":"confirm_with_seller"},
+    {"id":"parure-complete","status":"published","name":"Parure complète","category":"linge de lit","price":25000,"currency":"XOF","seller_id":"astou-boutique-saly","availability":"confirm_with_seller"},
+    {"id":"taie-oreiller","status":"published","name":"Taie d’oreiller","category":"linge de lit","price":2500,"currency":"XOF","seller_id":"astou-boutique-saly","availability":"confirm_with_seller"},
+    {"id":"serviette-bain","status":"published","name":"Serviette de bain","category":"linge de bain","price":8500,"currency":"XOF","seller_id":"astou-boutique-saly","availability":"confirm_with_seller"},
+    {"id":"peignoir","status":"published","name":"Peignoir","category":"linge de bain","price":15000,"currency":"XOF","seller_id":"astou-boutique-saly","availability":"confirm_with_seller"},
+    {"id":"couette","status":"published","name":"Couette","category":"linge de lit","price":30000,"currency":"XOF","seller_id":"astou-boutique-saly","availability":"confirm_with_seller"},
+    {"id":"oreiller","status":"published","name":"Oreiller","category":"linge de lit","price":8000,"currency":"XOF","seller_id":"astou-boutique-saly","availability":"confirm_with_seller"},
+    {"id":"nappe-table","status":"published","name":"Nappe de table","category":"linge de table","price":7000,"currency":"XOF","seller_id":"astou-boutique-saly","availability":"confirm_with_seller"},
+    {"id":"torchon","status":"published","name":"Torchon","category":"linge de cuisine","price":1000,"currency":"XOF","seller_id":"astou-boutique-saly","availability":"confirm_with_seller"}
+  ],
+  "assistant_usage_notes": [
+    "Recommend only products in active_products whose status is published and whose seller is active.",
+    "Use the listed price as the published reference price and state that stock and final conditions must be confirmed with the seller.",
+    "Do not invent stock quantities, colours, sizes, delivery areas, discounts or order confirmation.",
+    "Give the seller profile and direct WhatsApp contact.",
+    "Payment remains direct to the seller and DIGIY takes 0 percent commission on sales."
+  ]
+}
