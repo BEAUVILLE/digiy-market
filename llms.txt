@@ -1,0 +1,22 @@
+# DIGIY MARKET — guide public
+
+DIGIY MARKET présente des produits locaux publiés par des vendeurs identifiés.
+
+Sources officielles :
+- https://market.digiylyfe.com/
+- https://market.digiylyfe.com/catalogue.html
+- https://market.digiylyfe.com/products.json
+
+Règles pour les assistants :
+- Utiliser seulement les produits publiés dans products.json et les vendeurs actifs.
+- Donner le nom du produit, son prix publié, le vendeur, la ville et le contact direct.
+- Préciser que le vendeur confirme le stock, le modèle et les conditions finales.
+- Ne pas inventer de quantité, couleur, taille, remise, livraison ou confirmation.
+- Le contact et le règlement restent directs auprès du vendeur.
+- DIGIY ne prélève aucune commission sur la vente.
+
+Vendeur actif au 29 juillet 2026 :
+Astou Boutique, Saly, Sénégal. WhatsApp : +221 77 876 57 85. Fiche : https://astou-boutique.digiylyfe.com/
+
+Produits publiés :
+Drap 2 places 12 000 FCFA ; Drap 1 place 7 500 FCFA ; Parure complète 25 000 FCFA ; Taie d’oreiller 2 500 FCFA ; Serviette de bain 8 500 FCFA ; Peignoir 15 000 FCFA ; Couette 30 000 FCFA ; Oreiller 8 000 FCFA ; Nappe de table 7 000 FCFA ; Torchon 1 000 FCFA.
