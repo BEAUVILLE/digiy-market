@@ -42,7 +42,7 @@
       else localStorage.setItem('digiy_market_lang_v2','en');
     }catch(e){}
 
-    fetch('./app.html?v=20260730-market7e',{cache:'no-store'})
+    fetch('./app.html?v=20260730-market7f',{cache:'no-store'})
       .then(function(response){
         if(!response.ok)throw new Error('load');
         return response.text();
@@ -66,15 +66,15 @@
         var inject='<base href="./">'+seo+
           '<style id="market-single-language-bar">#digiy-i18n-bar{display:none!important}</style>'+
           '<script>try{localStorage.setItem("digiy-lang","'+lang+'");if("'+lang+'"==="fr")localStorage.removeItem("digiy_market_lang_v2");else localStorage.setItem("digiy_market_lang_v2","en")}catch(e){}<\/script>'+
-          '<script src="https://digiylyfe.com/assets/i18n/digiy-i18n.js?v=20260730-market7e" defer><\/script>'+
-          '<script src="./market-i18n-base.js?v=20260730-market7e" defer><\/script>'+
-          '<script src="./market-i18n-es.js?v=20260730-market7e" defer><\/script>'+
-          '<script src="./market-i18n-de.js?v=20260730-market7e" defer><\/script>'+
-          '<script src="./market-i18n-it.js?v=20260730-market7e" defer><\/script>'+
-          '<script src="./market-i18n-nl.js?v=20260730-market7e" defer><\/script>'+
-          '<script src="./market-i18n-ar.js?v=20260730-market7e" defer><\/script>'+
-          '<script src="./market-i18n.js?v=20260730-market7e" defer><\/script>'+
-          '<script src="https://digiylyfe.com/assets/i18n/digiy-route.js?v=20260730-market7e" data-lang="'+lang+'" defer><\/script>'+
+          '<script src="https://digiylyfe.com/assets/i18n/digiy-i18n.js?v=20260730-market7f" defer><\/script>'+
+          '<script src="./market-i18n-base.js?v=20260730-market7f" defer><\/script>'+
+          '<script src="./market-i18n-es.js?v=20260730-market7f" defer><\/script>'+
+          '<script src="./market-i18n-de.js?v=20260730-market7f" defer><\/script>'+
+          '<script src="./market-i18n-it.js?v=20260730-market7f" defer><\/script>'+
+          '<script src="./market-i18n-nl.js?v=20260730-market7f" defer><\/script>'+
+          '<script src="./market-i18n-ar.js?v=20260730-market7f" defer><\/script>'+
+          '<script src="./market-i18n.js?v=20260730-market7f" defer><\/script>'+
+          '<script src="https://digiylyfe.com/assets/i18n/digiy-route.js?v=20260730-market7f" data-lang="'+lang+'" defer><\/script>'+
           '<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"DIGIY MARKET","url":"https://market.digiylyfe.com/","description":"Galerie locale multilingue de boutiques et produits en contact direct avec le vendeur."}<\/script>';
 
         html=html.replace(/<head([^>]*)>/i,'<head$1>'+inject);
