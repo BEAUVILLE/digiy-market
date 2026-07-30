@@ -32,6 +32,8 @@ var applying=false;
 var registered=false;
 var scheduled=false;
 var clickGuardInstalled=false;
+var officialProfilesLoaded=false;
+var officialProfiles={};
 
 function current(){
   try{
@@ -182,6 +184,40 @@ function patchContacts(){
   });
 }
 
+function profileKey(value){
+  return String(value||'')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9]+/g,' ')
+    .trim();
+}
+
+function loadOfficialProfiles(){
+  if(officialProfilesLoaded)return Promise.resolve(officialProfiles);
+  officialProfilesLoaded=true;
+  return fetch('./products.json?v=20260730-market7f',{cache:'no-store'})
+    .then(function(response){
+      if(!response.ok)throw new Error('products');
+      return response.json();
+    })
+    .then(function(data){
+      var sellers=Array.isArray(data&&data.active_sellers)?data.active_sellers:[];
+      sellers.forEach(function(seller){
+        var url=String(seller.profile_url||'').trim();
+        if(!url)return;
+        var nameKey=profileKey(seller.name);
+        var idKey=profileKey(seller.id);
+        if(nameKey)officialProfiles[nameKey]=url;
+        if(idKey)officialProfiles[idKey]=url;
+      });
+      return officialProfiles;
+    })
+    .catch(function(){
+      return officialProfiles;
+    });
+}
+
 function directProfileUrl(value){
   try{
     var u=new URL(value,location.href);
@@ -196,9 +232,18 @@ function directProfileUrl(value){
   return value||'';
 }
 
+function profileUrlForLink(link){
+  var card=link&&link.closest?link.closest('.shop-card'):null;
+  var name=card&&card.querySelector('.shop-title')
+    ? card.querySelector('.shop-title').textContent
+    : '';
+  var official=officialProfiles[profileKey(name)];
+  return official||directProfileUrl(link.getAttribute('href')||link.href);
+}
+
 function patchProfileLinks(){
   document.querySelectorAll('.shop-card .shop-actions a.btn-main').forEach(function(link){
-    var fixed=directProfileUrl(link.getAttribute('href')||link.href);
+    var fixed=profileUrlForLink(link);
     if(fixed&&link.href!==fixed)link.href=fixed;
     link.target='_self';
     link.dataset.marketProfileDirect='1';
@@ -213,7 +258,7 @@ function installProfileClickGuard(){
       ? event.target.closest('.shop-card .shop-actions a.btn-main')
       : null;
     if(!target)return;
-    var fixed=directProfileUrl(target.getAttribute('href')||target.href);
+    var fixed=profileUrlForLink(target);
     if(!fixed)return;
     event.preventDefault();
     event.stopImmediatePropagation();
@@ -328,6 +373,7 @@ function init(){
   var lang=current();
   injectLayoutFix();
   installProfileClickGuard();
+  loadOfficialProfiles().then(function(){schedulePatch();});
   if(ensureBase(lang))return;
   register();
   patch();
