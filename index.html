@@ -7,7 +7,7 @@
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#063b2b">
   <meta name="description" content="DIGIY MARKET rassemble des boutiques et produits locaux visibles en sept langues. Contact et paiement directs au vendeur, 0 % de commission DIGIY.">
-  <meta name="digiy-build" content="market-vitrine-7-langues-20260730-single-bar">
+  <meta name="digiy-build" content="market-7-langues-fiches-directes-20260730">
   <link rel="canonical" href="https://market.digiylyfe.com/">
   <link rel="alternate" hreflang="fr" href="https://market.digiylyfe.com/fr/">
   <link rel="alternate" hreflang="en" href="https://market.digiylyfe.com/en/">
@@ -41,39 +41,52 @@
       if(lang==='fr')localStorage.removeItem('digiy_market_lang_v2');
       else localStorage.setItem('digiy_market_lang_v2','en');
     }catch(e){}
-    fetch('./app.html?v=20260730-market7d',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('load');return r.text()}).then(function(html){
-      var seo='<meta name="digiy-build" content="market-vitrine-7-langues-20260730-single-bar">'+
-        '<link rel="canonical" href="https://market.digiylyfe.com/">'+
-        '<link rel="alternate" hreflang="fr" href="https://market.digiylyfe.com/fr/">'+
-        '<link rel="alternate" hreflang="en" href="https://market.digiylyfe.com/en/">'+
-        '<link rel="alternate" hreflang="es" href="https://market.digiylyfe.com/es/">'+
-        '<link rel="alternate" hreflang="de" href="https://market.digiylyfe.com/de/">'+
-        '<link rel="alternate" hreflang="it" href="https://market.digiylyfe.com/it/">'+
-        '<link rel="alternate" hreflang="nl" href="https://market.digiylyfe.com/nl/">'+
-        '<link rel="alternate" hreflang="ar" href="https://market.digiylyfe.com/ar/">'+
-        '<link rel="alternate" hreflang="x-default" href="https://market.digiylyfe.com/">'+
-        '<meta property="og:type" content="website">'+
-        '<meta property="og:url" content="https://market.digiylyfe.com/">'+
-        '<meta property="og:title" content="DIGIY MARKET — Galerie locale multilingue">'+
-        '<meta property="og:description" content="Boutiques locales, produits visibles et contact direct avec le vendeur.">';
-      var inject='<base href="./">'+seo+
-        '<style id="market-single-language-bar">#digiy-i18n-bar{display:none!important}.digiy-langbar{position:relative!important;z-index:3!important;flex-wrap:wrap!important}</style>'+
-        '<script>try{localStorage.setItem("digiy-lang","'+lang+'");if("'+lang+'"==="fr")localStorage.removeItem("digiy_market_lang_v2");else localStorage.setItem("digiy_market_lang_v2","en") }catch(e){}<\/script>'+
-        '<script src="https://digiylyfe.com/assets/i18n/digiy-i18n.js?v=20260730-market7d" defer><\/script>'+
-        '<script src="./market-i18n-base.js?v=20260730-market7d" defer><\/script>'+
-        '<script src="./market-i18n-es.js?v=20260730-market7d" defer><\/script>'+
-        '<script src="./market-i18n-de.js?v=20260730-market7d" defer><\/script>'+
-        '<script src="./market-i18n-it.js?v=20260730-market7d" defer><\/script>'+
-        '<script src="./market-i18n-nl.js?v=20260730-market7d" defer><\/script>'+
-        '<script src="./market-i18n-ar.js?v=20260730-market7d" defer><\/script>'+
-        '<script src="./market-i18n.js?v=20260730-market7d" defer><\/script>'+
-        '<script src="https://digiylyfe.com/assets/i18n/digiy-route.js?v=20260730-market7d" data-lang="'+lang+'" defer><\/script>'+
-        '<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"DIGIY MARKET","url":"https://market.digiylyfe.com/","description":"Galerie locale multilingue de boutiques et produits en contact direct avec le vendeur."}<\/script>';
-      html=html.replace(/<head([^>]*)>/i,'<head$1>'+inject);
-      document.open();document.write(html);document.close();
-    }).catch(function(){location.replace('https://market.digiylyfe.com/?lang='+lang)});
+
+    fetch('./app.html?v=20260730-market7e',{cache:'no-store'})
+      .then(function(response){
+        if(!response.ok)throw new Error('load');
+        return response.text();
+      })
+      .then(function(html){
+        var seo='<meta name="digiy-build" content="market-7-langues-fiches-directes-20260730">'+
+          '<link rel="canonical" href="https://market.digiylyfe.com/">'+
+          '<link rel="alternate" hreflang="fr" href="https://market.digiylyfe.com/fr/">'+
+          '<link rel="alternate" hreflang="en" href="https://market.digiylyfe.com/en/">'+
+          '<link rel="alternate" hreflang="es" href="https://market.digiylyfe.com/es/">'+
+          '<link rel="alternate" hreflang="de" href="https://market.digiylyfe.com/de/">'+
+          '<link rel="alternate" hreflang="it" href="https://market.digiylyfe.com/it/">'+
+          '<link rel="alternate" hreflang="nl" href="https://market.digiylyfe.com/nl/">'+
+          '<link rel="alternate" hreflang="ar" href="https://market.digiylyfe.com/ar/">'+
+          '<link rel="alternate" hreflang="x-default" href="https://market.digiylyfe.com/">'+
+          '<meta property="og:type" content="website">'+
+          '<meta property="og:url" content="https://market.digiylyfe.com/">'+
+          '<meta property="og:title" content="DIGIY MARKET — Galerie locale multilingue">'+
+          '<meta property="og:description" content="Boutiques locales, produits visibles et contact direct avec le vendeur.">';
+
+        var inject='<base href="./">'+seo+
+          '<style id="market-single-language-bar">#digiy-i18n-bar{display:none!important}</style>'+
+          '<script>try{localStorage.setItem("digiy-lang","'+lang+'");if("'+lang+'"==="fr")localStorage.removeItem("digiy_market_lang_v2");else localStorage.setItem("digiy_market_lang_v2","en")}catch(e){}<\/script>'+
+          '<script src="https://digiylyfe.com/assets/i18n/digiy-i18n.js?v=20260730-market7e" defer><\/script>'+
+          '<script src="./market-i18n-base.js?v=20260730-market7e" defer><\/script>'+
+          '<script src="./market-i18n-es.js?v=20260730-market7e" defer><\/script>'+
+          '<script src="./market-i18n-de.js?v=20260730-market7e" defer><\/script>'+
+          '<script src="./market-i18n-it.js?v=20260730-market7e" defer><\/script>'+
+          '<script src="./market-i18n-nl.js?v=20260730-market7e" defer><\/script>'+
+          '<script src="./market-i18n-ar.js?v=20260730-market7e" defer><\/script>'+
+          '<script src="./market-i18n.js?v=20260730-market7e" defer><\/script>'+
+          '<script src="https://digiylyfe.com/assets/i18n/digiy-route.js?v=20260730-market7e" data-lang="'+lang+'" defer><\/script>'+
+          '<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"DIGIY MARKET","url":"https://market.digiylyfe.com/","description":"Galerie locale multilingue de boutiques et produits en contact direct avec le vendeur."}<\/script>';
+
+        html=html.replace(/<head([^>]*)>/i,'<head$1>'+inject);
+        document.open();
+        document.write(html);
+        document.close();
+      })
+      .catch(function(){
+        location.replace('https://market.digiylyfe.com/app.html?lang='+encodeURIComponent(lang));
+      });
   })();
   </script>
-  <noscript><a href="https://market.digiylyfe.com/">Ouvrir DIGIY MARKET</a></noscript>
+  <noscript><a href="https://market.digiylyfe.com/app.html">Ouvrir DIGIY MARKET</a></noscript>
 </body>
 </html>
