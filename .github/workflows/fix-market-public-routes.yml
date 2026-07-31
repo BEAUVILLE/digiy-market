@@ -1,0 +1,53 @@
+name: MARKET parcours public complet
+
+on:
+  push:
+    branches:
+      - fix/market-parcours-public-complet-v1
+    paths:
+      - tools/market-public-routes-trigger.txt
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit-and-fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: fix/market-parcours-public-complet-v1
+          fetch-depth: 0
+
+      - name: Vérifier les scripts Python
+        run: |
+          python3 -m py_compile tools/fix_market_public_routes.py
+          python3 -m py_compile tools/audit_market_public_routes.py
+
+      - name: Corriger les routes publiques
+        run: python3 tools/fix_market_public_routes.py
+
+      - name: Auditer tout le parcours
+        run: python3 tools/audit_market_public_routes.py
+
+      - name: Contrôler les marqueurs critiques
+        run: |
+          grep -q 'data-market-target="boutiques"' assets/js/market-portes-cartouche.js
+          grep -q 'shop.subscription_slug' app.html
+          grep -q 'market-public-navigation-fix.js' index.html
+          grep -q 'market-public-navigation-fix.js' inscription-market.html
+          grep -q 'target.hash="boutiques"' shop.html
+
+      - name: Commit du résultat validé
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html app.html fiche.html shop.html commander.html inscription-market.html lexique-market.html assets/js/market-portes-cartouche.js assets/js/market-public-navigation-fix.js
+          if git diff --cached --quiet; then
+            echo "Aucune modification à enregistrer"
+          else
+            git commit -m "MARKET : réparer l’ensemble du parcours public"
+            git push origin HEAD:fix/market-parcours-public-complet-v1
+          fi
