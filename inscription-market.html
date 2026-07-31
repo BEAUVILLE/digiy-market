@@ -1165,7 +1165,7 @@
         function amount(p){return country==="france"?eur(p.eur):fcfa(p.fcfa)}
         function chosen(){return PLANS.filter(p=>selected.has(p.code))}
         function total(){const items=chosen();return country==="france"?eur(items.reduce((s,p)=>s+p.eur,0)):fcfa(items.reduce((s,p)=>s+p.fcfa,0))}
-        function date(){return new Date().toLocaleString("fr-FR",{dateStyle:"full",timeStyle:"short"})}
+        function date(){const locales={fr:"fr-FR",en:"en-US",es:"es-ES",de:"de-DE",it:"it-IT",nl:"nl-NL",ar:"ar-SA"};let code="fr";try{const q=String(new URLSearchParams(location.search).get("lang")||"").toLowerCase();const s=String(localStorage.getItem("digiy-market-lang")||localStorage.getItem("digiy-lang")||"").toLowerCase();code=locales[q]?q:locales[s]?s:"fr"}catch(_){}return new Date().toLocaleString(locales[code],{dateStyle:"full",timeStyle:"short"})}
         function payLabel(){return country==="france"?SENDWAVE_LABEL:WAVE_LABEL}
         function countryLabel(){return country==="france"?"France · Sendwave vers Wave Sénégal":"Sénégal · Wave direct"}
         function note(){return clean(paymentNote&&paymentNote.value)||"à compléter"}
@@ -1357,14 +1357,14 @@ Je joins la capture / preuve de paiement à ce message.`}
         loadPro();Object.keys(proFields).forEach(k=>{const el=proFields[k];if(el)el.addEventListener("input",()=>{savePro();update(false)})});
         const clearBtn=$("btnClearProInfo");if(clearBtn)clearBtn.addEventListener("click",clearPro);if(paymentNote)paymentNote.addEventListener("input",()=>update(false));
         document.querySelectorAll("[data-country]").forEach(btn=>btn.addEventListener("click",()=>setCountry(btn.getAttribute("data-country"),true)));
-        $("btnAudio").addEventListener("click",()=>{if(!("speechSynthesis" in window))return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(speakText());u.lang="fr-FR";u.rate=.86;u.pitch=1.02;window.speechSynthesis.speak(u)});
+        $("btnAudio").addEventListener("click",()=>{if(!("speechSynthesis" in window))return;window.speechSynthesis.cancel();const rawSpeech=speakText();const spoken=typeof window.DIGIY_MARKET_TRANSLATE_MESSAGE==="function"?window.DIGIY_MARKET_TRANSLATE_MESSAGE(rawSpeech):rawSpeech;const u=new SpeechSynthesisUtterance(spoken);u.lang=window.DIGIY_MARKET_LOCALE||"fr-FR";u.rate=.86;u.pitch=1.02;window.speechSynthesis.speak(u)});
         $("btnStop").addEventListener("click",()=>{if("speechSynthesis" in window)window.speechSynthesis.cancel()});
         $("btnFloating").addEventListener("click",()=>{update(false);summary.scrollIntoView({behavior:"smooth",block:"start"})});
 
         btnSms.addEventListener("click",(event)=>{
           event.preventDefault();
           if(!validateBeforeSend(true))return;
-          window.location.href=buildSmsHref(smsMsg());
+          const rawMessage=smsMsg();const translatedMessage=typeof window.DIGIY_MARKET_TRANSLATE_MESSAGE==="function"?window.DIGIY_MARKET_TRANSLATE_MESSAGE(rawMessage):rawMessage;window.location.href=buildSmsHref(translatedMessage);
         });
 
         btnWa.addEventListener("click",(event)=>{
@@ -1401,7 +1401,12 @@ Je joins la capture / preuve de paiement à ce message.`}
       data-module="MARKET"
       defer
     ></script>
-  </body>
+  
+  <!-- DIGIY MARKET — pages secondaires internationales 7 langues -->
+  <script src="./assets/js/market-secondary-i18n-data.js?v=20260731"></script>
+  <script src="./assets/js/market-secondary-i18n-extra.js?v=20260731"></script>
+  <script src="./assets/js/market-secondary-i18n.js?v=20260731"></script>
+</body>
 </html>
 
 
