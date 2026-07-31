@@ -1,0 +1,51 @@
+name: MARKET international complet
+
+on:
+  push:
+    branches:
+      - feature/market-international-complet-v1
+    paths:
+      - tools/market-international-trigger.txt
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: feature/market-international-complet-v1
+          fetch-depth: 0
+
+      - name: Installer les portes et langues
+        run: python3 tools/install_market_international.py
+
+      - name: Vérifier JavaScript
+        run: |
+          node --check assets/js/market-portes-cartouche.js
+          node --check assets/js/market-secondary-i18n-data.js
+          node --check assets/js/market-secondary-i18n.js
+
+      - name: Vérifier les raccords HTML
+        run: |
+          grep -q "market-portes-cartouche.js" app.html
+          grep -q "market-secondary-i18n.js" fiche.html
+          grep -q "market-secondary-i18n.js" inscription-market.html
+          grep -q "DIGIY_MARKET_TRANSLATE_MESSAGE" inscription-market.html
+          grep -q "DIGIY_MARKET_LOCALE" inscription-market.html
+
+      - name: Commit du résultat
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app.html fiche.html inscription-market.html
+          if git diff --cached --quiet; then
+            echo "Aucune modification à enregistrer"
+          else
+            git commit -m "MARKET : raccorder le parcours public aux sept langues"
+            git push origin HEAD:feature/market-international-complet-v1
+          fi
