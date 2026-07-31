@@ -32,8 +32,13 @@
     fetch('./'+page+'?v='+encodeURIComponent(VERSION),{cache:'no-store'})
       .then(function(response){if(!response.ok)throw new Error('load');return response.text()})
       .then(function(html){
-        var inscriptionScripts=page==='inscription-market.html'
-          ? '<script src="https://resa-table-resto.digiylyfe.com/assets/js/resa-secondary-i18n-base.js?v=20260731" defer><\/script>'+ 
+        var pageBoot='<script>window.__DIGIY_MARKET_PAGE__="'+page+'";window.DIGIY_MARKET_PAGE_TRANSLATIONS={};try{localStorage.setItem("digiy-lang","'+lang+'")}catch(e){}<\/script>';
+        var route='<script src="./market-public-route.js?v='+VERSION+'" defer><\/script>';
+        var scripts='';
+
+        if(page==='inscription-market.html'){
+          scripts=
+            '<script src="https://resa-table-resto.digiylyfe.com/assets/js/resa-secondary-i18n-base.js?v=20260731" defer><\/script>'+ 
             '<script src="https://resa-table-resto.digiylyfe.com/assets/js/resa-secondary-i18n-en-es.js?v=20260731" defer><\/script>'+ 
             '<script src="https://resa-table-resto.digiylyfe.com/assets/js/resa-secondary-i18n-de-it.js?v=20260731" defer><\/script>'+ 
             '<script src="https://resa-table-resto.digiylyfe.com/assets/js/resa-secondary-i18n-nl-ar.js?v=20260731" defer><\/script>'+ 
@@ -42,22 +47,21 @@
             '<script src="./assets/js/market-resa-adapter-de-it.js?v='+VERSION+'" defer><\/script>'+ 
             '<script src="./assets/js/market-resa-adapter-nl-ar.js?v='+VERSION+'" defer><\/script>'+ 
             '<script src="https://resa-table-resto.digiylyfe.com/assets/js/resa-secondary-i18n.js?v=20260731" defer><\/script>'+ 
-            '<script src="https://resa-table-resto.digiylyfe.com/assets/js/resa-message-i18n-bridge.js?v=20260731" defer><\/script>'
-          : '';
+            '<script src="https://resa-table-resto.digiylyfe.com/assets/js/resa-message-i18n-bridge.js?v=20260731" defer><\/script>'+route;
+        }else{
+          scripts=
+            '<script src="./market-pages-i18n-en.js?v='+VERSION+'" defer><\/script>'+ 
+            '<script src="./market-pages-i18n-es.js?v='+VERSION+'" defer><\/script>'+ 
+            '<script src="./market-pages-i18n-de.js?v='+VERSION+'" defer><\/script>'+ 
+            '<script src="./market-pages-i18n-it.js?v='+VERSION+'" defer><\/script>'+ 
+            '<script src="./market-pages-i18n-nl.js?v='+VERSION+'" defer><\/script>'+ 
+            '<script src="./market-pages-i18n-ar.js?v='+VERSION+'" defer><\/script>'+ 
+            '<script src="https://digiylyfe.com/assets/i18n/digiy-i18n.js?v='+VERSION+'" defer><\/script>'+ 
+            '<script src="./market-pages-i18n-core.js?v='+VERSION+'" defer><\/script>'+ 
+            '<script src="./market-products-i18n.js?v='+VERSION+'" defer><\/script>'+route;
+        }
 
-        var inject='<base href="./">'+
-          '<script>window.__DIGIY_MARKET_PAGE__="'+page+'";window.DIGIY_MARKET_PAGE_TRANSLATIONS={};try{localStorage.setItem("digiy-lang","'+lang+'")}catch(e){}<\/script>'+
-          '<script src="./market-pages-i18n-en.js?v='+VERSION+'" defer><\/script>'+
-          '<script src="./market-pages-i18n-es.js?v='+VERSION+'" defer><\/script>'+
-          '<script src="./market-pages-i18n-de.js?v='+VERSION+'" defer><\/script>'+
-          '<script src="./market-pages-i18n-it.js?v='+VERSION+'" defer><\/script>'+
-          '<script src="./market-pages-i18n-nl.js?v='+VERSION+'" defer><\/script>'+
-          '<script src="./market-pages-i18n-ar.js?v='+VERSION+'" defer><\/script>'+
-          '<script src="https://digiylyfe.com/assets/i18n/digiy-i18n.js?v='+VERSION+'" defer><\/script>'+
-          inscriptionScripts+
-          '<script src="./market-pages-i18n-core.js?v='+VERSION+'" defer><\/script>'+
-          '<script src="./market-products-i18n.js?v='+VERSION+'" defer><\/script>'+
-          '<script src="./market-public-route.js?v='+VERSION+'" defer><\/script>';
+        var inject='<base href="./">'+pageBoot+scripts;
         html=html.replace(/<head([^>]*)>/i,'<head$1>'+inject);
         document.open();document.write(html);document.close();
       })
