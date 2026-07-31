@@ -13,7 +13,7 @@
   <p class="loading">DIGIY MARKET — chargement…</p>
   <script>
   (function(){
-    var VERSION='20260731-market-inscription-resa-v3';
+    var VERSION='20260731-market-selection-v4';
     var supported=/^(fr|en|es|de|it|nl|ar)$/;
     var allowed=['inscription-market.html','fiche.html','commander.html','shop.html'];
     var params=new URLSearchParams(location.search);
@@ -48,7 +48,8 @@
             '<script src="./assets/js/market-resa-adapter-nl-ar.js?v='+VERSION+'" defer><\/script>'+ 
             '<script src="./assets/js/market-resa-adapter-complete.js?v='+VERSION+'" defer><\/script>'+ 
             '<script src="https://resa-table-resto.digiylyfe.com/assets/js/resa-secondary-i18n.js?v=20260731" defer><\/script>'+ 
-            '<script src="https://resa-table-resto.digiylyfe.com/assets/js/resa-message-i18n-bridge.js?v=20260731" defer><\/script>'+route;
+            '<script src="https://resa-table-resto.digiylyfe.com/assets/js/resa-message-i18n-bridge.js?v=20260731" defer><\/script>'+ 
+            '<script src="./assets/js/market-selection-i18n.js?v='+VERSION+'" defer><\/script>'+route;
         }else{
           scripts=
             '<script src="./market-pages-i18n-en.js?v='+VERSION+'" defer><\/script>'+ 
