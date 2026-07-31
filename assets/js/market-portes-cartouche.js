@@ -36,8 +36,8 @@
     box.innerHTML=`
       <div class="digiy-market-doors-head"><span>${t.kicker}</span><h2>${t.title}</h2><p>${t.sub}</p></div>
       <div class="digiy-market-doors-grid">
-        <a href="${withLang("./index.html")}"><b>🛍️ ${t.gallery}</b><small>MARKET PUBLIC</small></a>
-        <a href="${withLang("./fiche.html")}"><b>🪪 ${t.profile}</b><small>FICHE MARKET</small></a>
+        <a data-market-target="boutiques" href="${withLang("./index.html#boutiques")}"><b>🛍️ ${t.gallery}</b><small>MARKET PUBLIC</small></a>
+        <a data-market-target="boutiques" href="${withLang("./index.html#boutiques")}"><b>🪪 ${t.profile}</b><small>CHOISIR UNE FICHE</small></a>
         <a href="${withLang("./inscription-market.html")}"><b>🧾 ${t.register}</b><small>INSCRIPTION</small></a>
         <a href="${pro.toString()}"><b>🔐 ${t.marketPro}</b><small>PRO MARKET</small></a>
         <a href="${withLang("https://pro-espace.digiylyfe.com/")}"><b>🧰 ${t.proSpace}</b><small>MON ESPACE PRO</small></a>
