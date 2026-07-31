@@ -2073,10 +2073,28 @@ footer{padding:8px 0 24px}
       }
 
       function shopSlug(shop){
-        const direct = norm(shop.slug || shop.workspace_slug || shop.last_slug);
+        const direct = norm(
+          shop.slug ||
+          shop.workspace_slug ||
+          shop.shop_slug ||
+          shop.market_slug ||
+          shop.public_slug ||
+          shop.subscription_slug ||
+          shop.pro_slug ||
+          shop.identifiant ||
+          shop.last_slug
+        );
         if(direct) return direct;
 
-        const p = digits(shop.whatsapp || shop.public_phone);
+        const p = digits(
+          (typeof shopPhone === "function" ? shopPhone(shop) : "") ||
+          shop.whatsapp ||
+          shop.public_phone ||
+          shop.phone ||
+          shop.tel ||
+          shop.contact_phone ||
+          shop.owner_phone
+        );
         return p ? "market-" + p : "";
       }
 
@@ -2111,17 +2129,32 @@ footer{padding:8px 0 24px}
         return norm(shop.cover_url || shop.cover_image_url || shop.photo_url || shop.logo_url);
       }
 
+      function publicRouteLang(){
+        const supported=["fr","en","es","de","it","nl","ar"];
+        try{
+          const q=String(new URLSearchParams(location.search).get("lang")||"").toLowerCase();
+          if(supported.includes(q))return q;
+          const s=String(localStorage.getItem("digiy-market-lang")||localStorage.getItem("digiy-lang")||"").toLowerCase();
+          if(supported.includes(s))return s;
+        }catch(_){}
+        return "fr";
+      }
+
       function shopUrl(shop){
         const slug = shopSlug(shop);
         const u = new URL("/shop.html", MARKET_ORIGIN);
         if(slug) u.searchParams.set("slug", slug);
+        u.searchParams.set("lang", publicRouteLang());
+        if(!slug) u.hash = "boutiques";
         return u.toString();
       }
 
       function commanderUrl(shop){
         const slug = shopSlug(shop);
-        const u = new URL("/commander.html", MARKET_ORIGIN);
+        const u = new URL(slug ? "/commander.html" : "/index.html", MARKET_ORIGIN);
         if(slug) u.searchParams.set("slug", slug);
+        u.searchParams.set("lang", publicRouteLang());
+        if(!slug) u.hash = "boutiques";
         return u.toString();
       }
 
@@ -2523,6 +2556,8 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
   <!-- DIGIY MARKET — menu central multilingue -->
   <script src="./assets/js/market-portes-cartouche.js?v=20260731"></script>
+  <!-- DIGIY MARKET — navigation publique fiabilisée -->
+<script src="./assets/js/market-public-navigation-fix.js?v=20260731-routes-v1"></script>
 </body>
 </html>
 

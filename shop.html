@@ -2,14 +2,27 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,follow">
   <title>Redirection DIGIY MARKET</title>
-  <script>
-    const qs = new URLSearchParams(location.search);
-    const slug = qs.get("slug") || "";
-    location.replace(slug ? "./fiche.html?slug=" + encodeURIComponent(slug) : "./index.html");
-  </script>
 </head>
 <body>
-  Redirection vers la fiche boutique…
+  <p>Redirection vers la fiche boutique…</p>
+  <script>
+  (()=>{
+    const supported=["fr","en","es","de","it","nl","ar"];
+    const params=new URLSearchParams(location.search);
+    const slug=String(params.get("slug")||"").trim();
+    let lang=String(params.get("lang")||"").toLowerCase();
+    try{
+      if(!supported.includes(lang))lang=String(localStorage.getItem("digiy-market-lang")||localStorage.getItem("digiy-lang")||"").toLowerCase();
+    }catch(_){}
+    if(!supported.includes(lang))lang="fr";
+    const target=new URL(slug?"./fiche.html":"./index.html",location.href);
+    target.searchParams.set("lang",lang);
+    if(slug)target.searchParams.set("slug",slug);else target.hash="boutiques";
+    location.replace(target.pathname+target.search+target.hash);
+  })();
+  </script>
 </body>
 </html>
