@@ -28,12 +28,9 @@
     return left + translated + right;
   }
 
-  function translateString(value){
-    const raw = String(value ?? "");
-    if(!raw.trim()) return raw;
-    const compact = raw.replace(/\s+/g," ").trim();
+  function translateCore(compact){
     const key = exact[compact];
-    if(key && translations[key]) return keepSpacing(raw, translations[key]);
+    if(key && translations[key]) return translations[key];
 
     let output = compact;
     for(const [source, partialKey] of partial){
@@ -41,7 +38,28 @@
         output = output.split(source).join(translations[partialKey]);
       }
     }
-    return output === compact ? raw : keepSpacing(raw, output);
+    return output;
+  }
+
+  function translateString(value){
+    const raw = String(value ?? "");
+    if(!raw.trim()) return raw;
+    const compact = raw.replace(/\s+/g," ").trim();
+
+    const direct = translateCore(compact);
+    if(direct !== compact) return keepSpacing(raw, direct);
+
+    const marked = compact.match(/^((?:(?:✅|☑️|✔️|✔|✓|•|[-–—])\s*)+)(.+)$/u);
+    if(marked){
+      const prefix = marked[1];
+      const core = marked[2].trim();
+      const translatedCore = translateCore(core);
+      if(translatedCore !== core){
+        return keepSpacing(raw, prefix + translatedCore);
+      }
+    }
+
+    return raw;
   }
 
   function translateMessage(value){
