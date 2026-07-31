@@ -25,9 +25,12 @@ jobs:
         run: |
           python3 -m py_compile tools/fix_market_public_routes.py
           python3 -m py_compile tools/audit_market_public_routes.py
+          python3 -m py_compile tools/bump_market_cartouche_cache.py
 
       - name: Corriger les routes publiques
-        run: python3 tools/fix_market_public_routes.py
+        run: |
+          python3 tools/fix_market_public_routes.py
+          python3 tools/bump_market_cartouche_cache.py
 
       - name: Auditer tout le parcours
         run: python3 tools/audit_market_public_routes.py
@@ -39,6 +42,7 @@ jobs:
           grep -q 'market-public-navigation-fix.js' index.html
           grep -q 'market-public-navigation-fix.js' inscription-market.html
           grep -q 'target.hash="boutiques"' shop.html
+          grep -q 'market-portes-cartouche.js?v=20260731-routes-v2' index.html
 
       - name: Commit du résultat validé
         run: |
