@@ -32,7 +32,7 @@
 </head>
 <body>
   <!-- DIGIY MARKET — cartouche réellement présent dans index.html -->
-  <script src="./assets/js/market-portes-cartouche.js?v=20260731-index"></script>
+  <script src="./assets/js/market-portes-cartouche.js?v=20260731-routes-v2"></script>
   <script src="./assets/js/market-public-navigation-fix.js?v=20260731-routes-v1"></script>
   <p class="loading">DIGIY MARKET — chargement…</p>
 
@@ -58,7 +58,7 @@
       else localStorage.setItem('digiy_market_lang_v2','en');
     }catch(e){}
 
-    fetch('./app.html?v=20260731-market-index-cartouche',{cache:'no-store'})
+    fetch('./app.html?v=20260731-market-routes-v2',{cache:'no-store'})
       .then(function(response){
         if(!response.ok)throw new Error('load');
         return response.text();
@@ -95,7 +95,7 @@
 
         var indexCartouche=
           '<!-- DIGIY MARKET — cartouche injecté en tête depuis index.html -->'+
-          '<script src="./assets/js/market-portes-cartouche.js?v=20260731-index"><\/script>';
+          '<script src="./assets/js/market-portes-cartouche.js?v=20260731-routes-v2"><\/script>';
 
         html=html.replace(/<head([^>]*)>/i,'<head$1>'+injectHead);
         html=html.replace(/<body([^>]*)>/i,'<body$1>'+indexCartouche);
