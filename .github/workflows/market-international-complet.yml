@@ -21,22 +21,32 @@ jobs:
           ref: feature/market-international-complet-v1
           fetch-depth: 0
 
+      - name: Vérifier les installateurs
+        run: |
+          python3 -m py_compile tools/install_market_international.py
+          python3 -m py_compile tools/finalize_market_public_i18n.py
+
       - name: Installer les portes et langues
-        run: python3 tools/install_market_international.py
+        run: |
+          python3 tools/install_market_international.py
+          python3 tools/finalize_market_public_i18n.py
 
       - name: Vérifier JavaScript
         run: |
           node --check assets/js/market-portes-cartouche.js
           node --check assets/js/market-secondary-i18n-data.js
+          node --check assets/js/market-secondary-i18n-extra.js
           node --check assets/js/market-secondary-i18n.js
 
       - name: Vérifier les raccords HTML
         run: |
           grep -q "market-portes-cartouche.js" app.html
-          grep -q "market-secondary-i18n.js" fiche.html
-          grep -q "market-secondary-i18n.js" inscription-market.html
+          grep -q "market-secondary-i18n-extra.js" fiche.html
+          grep -q "market-secondary-i18n-extra.js" inscription-market.html
           grep -q "DIGIY_MARKET_TRANSLATE_MESSAGE" inscription-market.html
-          grep -q "DIGIY_MARKET_LOCALE" inscription-market.html
+          grep -q "const locales={fr:\"fr-FR\"" inscription-market.html
+          grep -q "rawSpeech" inscription-market.html
+          grep -q "translatedMessage" inscription-market.html
 
       - name: Commit du résultat
         run: |
@@ -46,6 +56,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "Aucune modification à enregistrer"
           else
-            git commit -m "MARKET : raccorder le parcours public aux sept langues"
+            git commit -m "MARKET : finaliser le parcours public en sept langues"
             git push origin HEAD:feature/market-international-complet-v1
           fi
