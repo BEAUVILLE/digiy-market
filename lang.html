@@ -22,26 +22,27 @@
     if(!supported.test(lang))lang=(navigator.language||'fr').slice(0,2).toLowerCase();
     if(!supported.test(lang))lang='fr';
     if(allowed.indexOf(page)<0){
-      location.replace('./?lang='+encodeURIComponent(lang)+'&v=20260731-market-pages-v1');
+      location.replace('./?lang='+encodeURIComponent(lang)+'&v=20260731-market-products-v2');
       return;
     }
     if(page==='shop.html')page='fiche.html';
     try{localStorage.setItem('digiy-lang',lang)}catch(e){}
 
-    fetch('./'+page+'?v=20260731-market-pages-v1',{cache:'no-store'})
+    fetch('./'+page+'?v=20260731-market-products-v2',{cache:'no-store'})
       .then(function(response){if(!response.ok)throw new Error('load');return response.text()})
       .then(function(html){
         var inject='<base href="./">'+
           '<script>window.__DIGIY_MARKET_PAGE__="'+page+'";window.DIGIY_MARKET_PAGE_TRANSLATIONS={};try{localStorage.setItem("digiy-lang","'+lang+'")}catch(e){}<\/script>'+
-          '<script src="./market-pages-i18n-en.js?v=20260731-market-pages-v1" defer><\/script>'+
-          '<script src="./market-pages-i18n-es.js?v=20260731-market-pages-v1" defer><\/script>'+
-          '<script src="./market-pages-i18n-de.js?v=20260731-market-pages-v1" defer><\/script>'+
-          '<script src="./market-pages-i18n-it.js?v=20260731-market-pages-v1" defer><\/script>'+
-          '<script src="./market-pages-i18n-nl.js?v=20260731-market-pages-v1" defer><\/script>'+
-          '<script src="./market-pages-i18n-ar.js?v=20260731-market-pages-v1" defer><\/script>'+
-          '<script src="https://digiylyfe.com/assets/i18n/digiy-i18n.js?v=20260731-market-pages-v1" defer><\/script>'+
-          '<script src="./market-pages-i18n-core.js?v=20260731-market-pages-v1" defer><\/script>'+
-          '<script src="./market-public-route.js?v=20260731-market-pages-v1" defer><\/script>';
+          '<script src="./market-pages-i18n-en.js?v=20260731-market-products-v2" defer><\/script>'+
+          '<script src="./market-pages-i18n-es.js?v=20260731-market-products-v2" defer><\/script>'+
+          '<script src="./market-pages-i18n-de.js?v=20260731-market-products-v2" defer><\/script>'+
+          '<script src="./market-pages-i18n-it.js?v=20260731-market-products-v2" defer><\/script>'+
+          '<script src="./market-pages-i18n-nl.js?v=20260731-market-products-v2" defer><\/script>'+
+          '<script src="./market-pages-i18n-ar.js?v=20260731-market-products-v2" defer><\/script>'+
+          '<script src="https://digiylyfe.com/assets/i18n/digiy-i18n.js?v=20260731-market-products-v2" defer><\/script>'+
+          '<script src="./market-pages-i18n-core.js?v=20260731-market-products-v2" defer><\/script>'+
+          '<script src="./market-products-i18n.js?v=20260731-market-products-v2" defer><\/script>'+
+          '<script src="./market-public-route.js?v=20260731-market-products-v2" defer><\/script>';
         html=html.replace(/<head([^>]*)>/i,'<head$1>'+inject);
         document.open();document.write(html);document.close();
       })
