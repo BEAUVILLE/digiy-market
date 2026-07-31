@@ -13,7 +13,7 @@
   <p class="loading">DIGIY MARKET — chargement…</p>
   <script>
   (function(){
-    var VERSION='20260731-market-benefits-prefix-v4';
+    var VERSION='20260731-market-bcheikh-products-v5';
     var supported=/^(fr|en|es|de|it|nl|ar)$/;
     var allowed=['inscription-market.html','fiche.html','commander.html','shop.html'];
     var params=new URLSearchParams(location.search);
@@ -60,7 +60,8 @@
             '<script src="./market-pages-i18n-ar.js?v='+VERSION+'" defer><\/script>'+ 
             '<script src="https://digiylyfe.com/assets/i18n/digiy-i18n.js?v='+VERSION+'" defer><\/script>'+ 
             '<script src="./market-pages-i18n-core.js?v='+VERSION+'" defer><\/script>'+ 
-            '<script src="./market-products-i18n.js?v='+VERSION+'" defer><\/script>'+route;
+            '<script src="./market-products-i18n.js?v='+VERSION+'" defer><\/script>'+ 
+            '<script src="./market-products-bcheikh-i18n.js?v='+VERSION+'" defer><\/script>'+route;
         }
 
         var inject='<base href="./">'+pageBoot+scripts;
