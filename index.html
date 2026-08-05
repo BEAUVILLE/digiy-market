@@ -7,7 +7,7 @@
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#063b2b">
   <meta name="description" content="DIGIY MARKET rassemble des boutiques et produits locaux visibles en sept langues. Contact et paiement directs au vendeur, 0 % de commission DIGIY.">
-  <meta name="digiy-build" content="market-7-langues-bascule-stable-20260730">
+  <meta name="digiy-build" content="market-fg-nails-20260805">
   <link rel="canonical" href="https://market.digiylyfe.com/">
   <link rel="alternate" hreflang="fr" href="https://market.digiylyfe.com/fr/">
   <link rel="alternate" hreflang="en" href="https://market.digiylyfe.com/en/">
@@ -42,13 +42,13 @@
       else localStorage.setItem('digiy_market_lang_v2','en');
     }catch(e){}
 
-    fetch('./app.html?v=20260730-market7g',{cache:'no-store'})
+    fetch('./app.html?v=20260805-market-fg-nails',{cache:'no-store'})
       .then(function(response){
         if(!response.ok)throw new Error('load');
         return response.text();
       })
       .then(function(html){
-        var seo='<meta name="digiy-build" content="market-7-langues-bascule-stable-20260730">'+
+        var seo='<meta name="digiy-build" content="market-fg-nails-20260805">'+
           '<link rel="canonical" href="https://market.digiylyfe.com/">'+
           '<link rel="alternate" hreflang="fr" href="https://market.digiylyfe.com/fr/">'+
           '<link rel="alternate" hreflang="en" href="https://market.digiylyfe.com/en/">'+
@@ -74,6 +74,7 @@
           '<script src="./market-i18n-nl.js?v=20260730-market7g" defer><\/script>'+
           '<script src="./market-i18n-ar.js?v=20260730-market7g" defer><\/script>'+
           '<script src="./market-public-route.js?v=20260731-market-pages-v1" defer><\/script>'+
+          '<script src="./market-fg-nails.js?v=20260805-fg-nails" defer><\/script>'+
           '<script src="./market-i18n.js?v=20260730-market7g" defer><\/script>'+
           '<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"DIGIY MARKET","url":"https://market.digiylyfe.com/","description":"Galerie locale multilingue de boutiques et produits en contact direct avec le vendeur."}<\/script>';
 
