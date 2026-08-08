@@ -11,7 +11,7 @@
       href: 'https://bcheikh.digiylyfe.com/'
     },
     {
-      match: function(name){ return name.indexOf('astou boutique') !== -1 || name === 'astou'; },
+      match: function(name){ return name.indexOf('astou') !== -1; },
       href: 'https://astou-boutique.digiylyfe.com/?lang=fr'
     }
   ];
