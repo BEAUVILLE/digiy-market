@@ -133,3 +133,13 @@
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once:true });
   else start();
 })();
+
+(function(){
+  'use strict';
+  if(document.querySelector('script[data-digiy-featured-partners]'))return;
+  var s=document.createElement('script');
+  s.src='./market-featured-partners.js?v=20260808-featured-v1';
+  s.defer=true;
+  s.setAttribute('data-digiy-featured-partners','1');
+  document.head.appendChild(s);
+})();
