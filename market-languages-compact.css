@@ -1,70 +1,87 @@
-/* DIGIY MARKET — langues ultra compactes mobile — 2026-08-12 */
+/* DIGIY MARKET — langues ultra compactes mobile — pavé réduit — 2026-08-12 */
 @media (max-width:720px){
-  [data-world8-bar],
-  .language-buttons,
-  .langbar,
-  .langs,
-  .langSwitch,
-  .digiyLangSwitch,
+  /* Le vrai gain : le conteneur ne prend plus toute la largeur. */
+  .topbar-inner{
+    min-height:48px !important;
+    padding:4px 0 !important;
+    gap:5px !important;
+    align-items:center !important;
+  }
+  .brand-logo{
+    width:40px !important;
+    height:40px !important;
+    border-radius:13px !important;
+  }
+  .brand-title{font-size:.96rem !important;}
+  .brand-sub{font-size:.72rem !important;margin-top:1px !important;}
+
   .digiy-langbar,
-  [data-language-bar],
-  nav.lang,
-  nav[aria-label*="lang" i],
-  [aria-label*="choisir la langue" i]{
-    gap:2px !important;
-    padding:2px 3px !important;
-    min-height:25px !important;
-    border-radius:11px !important;
+  [data-world8-bar]{
+    order:2 !important;
+    width:auto !important;
+    max-width:100% !important;
+    flex:0 0 auto !important;
+    justify-content:flex-start !important;
+    gap:1px !important;
+    margin:0 !important;
+    padding:1px 2px !important;
+    min-height:21px !important;
+    border-radius:999px !important;
     overflow-x:auto !important;
     overflow-y:hidden !important;
     flex-wrap:nowrap !important;
     scrollbar-width:none !important;
     -webkit-overflow-scrolling:touch !important;
+    box-shadow:none !important;
   }
-  [data-world8-bar]::-webkit-scrollbar,
-  .language-buttons::-webkit-scrollbar,
-  .langbar::-webkit-scrollbar,
-  .langs::-webkit-scrollbar{display:none !important;}
+  .digiy-langbar::-webkit-scrollbar,
+  [data-world8-bar]::-webkit-scrollbar{display:none !important;}
 
-  [data-world8-lang],
-  .language-buttons a,.language-buttons button,
-  .langbar a,.langbar button,
-  .langs a,.langs button,
-  .langSwitch a,.langSwitch button,
-  .digiyLangSwitch a,.digiyLangSwitch button,
-  .digiy-langbar a,.digiy-langbar button,
-  [data-language-bar] a,[data-language-bar] button,
-  nav.lang a,nav.lang button{
+  /* On garde uniquement les codes FR EN ES PT DE IT NL AR : pas les gros drapeaux. */
+  .digiy-langbar [data-digiy-lang],
+  .digiy-langbar [data-world8-lang],
+  [data-world8-bar] [data-world8-lang]{
     flex:0 0 auto !important;
-    min-width:27px !important;
-    width:auto !important;
-    min-height:21px !important;
-    height:21px !important;
-    padding:0 4px !important;
+    min-width:22px !important;
+    width:22px !important;
+    min-height:18px !important;
+    height:18px !important;
+    padding:0 2px !important;
     border-radius:999px !important;
-    font-size:8.5px !important;
+    font-size:0 !important;
     line-height:1 !important;
-    gap:1px !important;
+    gap:0 !important;
+    box-shadow:none !important;
+  }
+  .digiy-langbar [data-digiy-lang]::after,
+  .digiy-langbar [data-world8-lang]::after,
+  [data-world8-bar] [data-world8-lang]::after{
+    content:attr(data-digiy-lang);
+    font:1000 8px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif !important;
+    text-transform:uppercase;
+  }
+  .digiy-langbar [data-world8-lang]::after,
+  [data-world8-bar] [data-world8-lang]::after{
+    content:attr(data-world8-lang);
   }
 }
+
 @media (max-width:390px){
-  [data-world8-bar],.language-buttons,.langbar,.langs,.langSwitch,.digiyLangSwitch,.digiy-langbar,[data-language-bar],nav.lang{
-    gap:1px !important;
-    padding:2px !important;
+  .topbar-inner{min-height:44px !important;padding:3px 0 !important;}
+  .brand-logo{width:36px !important;height:36px !important;border-radius:12px !important;}
+  .brand-title{font-size:.9rem !important;}
+  .brand-sub{display:none !important;}
+  .digiy-langbar,[data-world8-bar]{gap:0 !important;padding:1px !important;min-height:19px !important;}
+  .digiy-langbar [data-digiy-lang],
+  .digiy-langbar [data-world8-lang],
+  [data-world8-bar] [data-world8-lang]{
+    min-width:20px !important;
+    width:20px !important;
+    min-height:17px !important;
+    height:17px !important;
+    padding:0 1px !important;
   }
-  [data-world8-lang],
-  .language-buttons a,.language-buttons button,
-  .langbar a,.langbar button,
-  .langs a,.langs button,
-  .langSwitch a,.langSwitch button,
-  .digiyLangSwitch a,.digiyLangSwitch button,
-  .digiy-langbar a,.digiy-langbar button,
-  [data-language-bar] a,[data-language-bar] button,
-  nav.lang a,nav.lang button{
-    min-width:25px !important;
-    min-height:20px !important;
-    height:20px !important;
-    padding:0 3px !important;
-    font-size:8px !important;
-  }
+  .digiy-langbar [data-digiy-lang]::after,
+  .digiy-langbar [data-world8-lang]::after,
+  [data-world8-bar] [data-world8-lang]::after{font-size:7.5px !important;}
 }
