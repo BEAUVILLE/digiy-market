@@ -1,0 +1,70 @@
+/* DIGIY MARKET — langues ultra compactes mobile — 2026-08-12 */
+@media (max-width:720px){
+  [data-world8-bar],
+  .language-buttons,
+  .langbar,
+  .langs,
+  .langSwitch,
+  .digiyLangSwitch,
+  .digiy-langbar,
+  [data-language-bar],
+  nav.lang,
+  nav[aria-label*="lang" i],
+  [aria-label*="choisir la langue" i]{
+    gap:2px !important;
+    padding:2px 3px !important;
+    min-height:25px !important;
+    border-radius:11px !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    flex-wrap:nowrap !important;
+    scrollbar-width:none !important;
+    -webkit-overflow-scrolling:touch !important;
+  }
+  [data-world8-bar]::-webkit-scrollbar,
+  .language-buttons::-webkit-scrollbar,
+  .langbar::-webkit-scrollbar,
+  .langs::-webkit-scrollbar{display:none !important;}
+
+  [data-world8-lang],
+  .language-buttons a,.language-buttons button,
+  .langbar a,.langbar button,
+  .langs a,.langs button,
+  .langSwitch a,.langSwitch button,
+  .digiyLangSwitch a,.digiyLangSwitch button,
+  .digiy-langbar a,.digiy-langbar button,
+  [data-language-bar] a,[data-language-bar] button,
+  nav.lang a,nav.lang button{
+    flex:0 0 auto !important;
+    min-width:27px !important;
+    width:auto !important;
+    min-height:21px !important;
+    height:21px !important;
+    padding:0 4px !important;
+    border-radius:999px !important;
+    font-size:8.5px !important;
+    line-height:1 !important;
+    gap:1px !important;
+  }
+}
+@media (max-width:390px){
+  [data-world8-bar],.language-buttons,.langbar,.langs,.langSwitch,.digiyLangSwitch,.digiy-langbar,[data-language-bar],nav.lang{
+    gap:1px !important;
+    padding:2px !important;
+  }
+  [data-world8-lang],
+  .language-buttons a,.language-buttons button,
+  .langbar a,.langbar button,
+  .langs a,.langs button,
+  .langSwitch a,.langSwitch button,
+  .digiyLangSwitch a,.digiyLangSwitch button,
+  .digiy-langbar a,.digiy-langbar button,
+  [data-language-bar] a,[data-language-bar] button,
+  nav.lang a,nav.lang button{
+    min-width:25px !important;
+    min-height:20px !important;
+    height:20px !important;
+    padding:0 3px !important;
+    font-size:8px !important;
+  }
+}
