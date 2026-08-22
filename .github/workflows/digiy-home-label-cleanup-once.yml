@@ -1,0 +1,32 @@
+name: Clean obsolete HUB from MARKET once
+on:
+  push:
+    paths: ['.github/workflows/digiy-home-label-cleanup-once.yml']
+permissions:
+  contents: write
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('inscription-market.html')
+          if p.exists():
+              s=p.read_text(encoding='utf-8'); before=s
+              s=s.replace('https://digiy-hub.digiylyfe.com/','https://digiylyfe.com/').replace('./digiy-hub/','https://digiylyfe.com/')
+              if s.count('href="https://digiylyfe.com/"') > 1:
+                  s=re.sub(r'\s*<a\b[^>]*href="https://digiylyfe\.com/"[^>]*>\s*(?:🧭\s*)?HUB\s*</a>','',s,flags=re.I)
+              elif 'HUB' in s:
+                  s=s.replace('🧭 HUB','🏠 DIGIYLYFE').replace('>HUB<','>DIGIYLYFE<')
+              if s!=before: p.write_text(s,encoding='utf-8')
+          PY
+          git config user.name "DIGIYLYFE maintenance"
+          git config user.email "actions@users.noreply.github.com"
+          git rm .github/workflows/digiy-home-label-cleanup-once.yml
+          git add -A
+          git commit -m "Navigation: remove obsolete HUB from MARKET signup"
+          git push origin HEAD:main
