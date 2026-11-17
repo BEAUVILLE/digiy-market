@@ -1,0 +1,11 @@
+const fs=require('fs'),assert=require('node:assert/strict');
+const html=fs.readFileSync('index.html','utf8');
+assert.ok(html.includes('https://mon-commerce.digiylyfe.com/'));
+assert.ok(html.includes('<noscript><meta http-equiv="refresh"'));
+assert.ok(html.includes("['fr','en','es','pt','it','de','nl','ar','wo','zh']"));
+assert.ok(html.includes("url.searchParams.set('lang',lang)"));
+assert.ok(html.includes("url.searchParams.set('country',country)"));
+const match=html.match(/<script>([\s\S]*?)<\/script>/);
+assert.ok(match);
+new Function(match[1]);
+console.log('DIGIY MARKET: redirection 10 langues vers MON COMMERCE vérifiée');

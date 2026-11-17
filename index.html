@@ -6,8 +6,19 @@
 <title>DIGIYLYFE — MON COMMERCE</title>
 <meta name="robots" content="noindex,follow">
 <link rel="canonical" href="https://mon-commerce.digiylyfe.com/">
-<meta http-equiv="refresh" content="0;url=https://mon-commerce.digiylyfe.com/">
-<script>location.replace('https://mon-commerce.digiylyfe.com/');</script>
+<noscript><meta http-equiv="refresh" content="0;url=https://mon-commerce.digiylyfe.com/"></noscript>
+<script>
+(function(){
+  'use strict';
+  var url=new URL('https://mon-commerce.digiylyfe.com/');
+  var query=new URLSearchParams(location.search);
+  var lang=(query.get('lang')||'').slice(0,2).toLowerCase();
+  if(['fr','en','es','pt','it','de','nl','ar','wo','zh'].includes(lang))url.searchParams.set('lang',lang);
+  var country=(query.get('country')||query.get('pays')||'').toLowerCase();
+  if(['sn','fr','us','ma'].includes(country))url.searchParams.set('country',country);
+  location.replace(url.toString());
+})();
+</script>
 </head>
 <body>
 <p>DIGIY MARKET a évolué vers <a href="https://mon-commerce.digiylyfe.com/">MON COMMERCE</a>.</p>
